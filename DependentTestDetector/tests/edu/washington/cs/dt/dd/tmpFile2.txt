@@ -1,0 +1,1 @@
+edu.washington.cs.dt.samples.TestShareGlobals.testStr5#ERROR
