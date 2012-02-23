@@ -49,6 +49,8 @@ public class TestExecResults {
 class TestExecResult {
 	public final Map<String, RESULT> singleRun;
 
+	protected List<String> allTests = new LinkedList<String>();
+	
 	/* The classified result after running all tests */
 	protected List<String> passingTestsInOrder = new LinkedList<String>();
 	protected List<String> failingTestsInOrder = new LinkedList<String>();
@@ -58,6 +60,8 @@ class TestExecResult {
 		this.singleRun = singleRun;
 		//classify each test
 		for(String test : this.singleRun.keySet()) {
+			allTests.add(test);
+			//check the results
 			RESULT r = this.singleRun.get(test);
 			if(r.equals(RESULT.PASS)) {
 				this.passingTestsInOrder.add(test);
@@ -69,6 +73,14 @@ class TestExecResult {
 				throw new RuntimeException("Unknown results: " + r);
 			}
 		}
+	}
+	
+	public List<String> getAllTests() {
+		return this.allTests;
+	}
+	
+	public RESULT getResult(String test) {
+		return this.singleRun.get(test);
 	}
 	
 	public boolean isTestPassed(String test) {
