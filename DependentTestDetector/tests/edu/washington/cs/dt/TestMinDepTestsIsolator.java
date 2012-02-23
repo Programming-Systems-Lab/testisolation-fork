@@ -25,9 +25,10 @@ public class TestMinDepTestsIsolator extends TestCase {
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.testStr4");
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.testStr5");
 		
-		MinDepTestsSetIsolator isolator = new MinDepTestsSetIsolator(tests, null);
-		Map<String, List<String>> r = isolator.isolateForIsolation();
-		System.out.println(r);
+		DependentTestIdentifier isolator = new DependentTestIdentifier(tests);
+		isolator.setMinimize(true);
+		List<TestExecResultsDelta> l = isolator.findDependenceForIsolation();
+		System.out.println(l);
 	}
 	
 }
