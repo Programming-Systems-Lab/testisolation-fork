@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.washington.cs.dt.TestExecResults;
+import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.Files;
 
 public abstract class AbstractTestRunner {
@@ -22,7 +23,7 @@ public abstract class AbstractTestRunner {
 		this.junitTestList = new LinkedList<String>();
 		this.junitTestList.addAll(tests);
 		this.classPath = System.getProperties().getProperty("java.class.path", null);
-		tmpOutputFile = "." + File.pathSeparator + "tmpOutput.txt";
+		tmpOutputFile = Main.tmpfile; //"." + File.pathSeparator + "tmpOutput.txt";
 	}
 	
 	public AbstractTestRunner(String fileName) {

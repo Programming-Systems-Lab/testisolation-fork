@@ -23,7 +23,7 @@ public class UnitTestFinder {
 	
 	//two options
 	@Option("The output file name for found unit tests")
-	public static String outputFileName = "./allunittests.txt";
+	public static String outputFileName = "." + File.separator + "allunittests.txt";
 	
 	@Option("The jar file name or path (must be in classpath) where to find unit tests")
 	public static String pathOrJarFile; //it can be a path or a jar

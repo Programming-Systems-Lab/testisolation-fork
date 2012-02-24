@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.washington.cs.dt.dd.DependentTestSetMinimizer;
+import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.runners.AbstractTestRunner;
 import edu.washington.cs.dt.runners.CombinatorialRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
@@ -23,8 +24,8 @@ public class DependentTestIdentifier {
 	
 	public final List<String> tests;
 	
-	private String classPath = "";
-	private String tmpOutputFile = "./tmpFile.txt";
+	private String classPath = Main.classpath;
+	private String tmpOutputFile = Main.tmpfile;
 	
 	private boolean minimize = false;
 	
