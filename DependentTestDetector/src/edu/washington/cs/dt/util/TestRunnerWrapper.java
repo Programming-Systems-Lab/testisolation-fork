@@ -1,5 +1,6 @@
 package edu.washington.cs.dt.util;
 
+import java.io.File;
 import java.io.IOException;
 
 import junit.framework.TestResult;
@@ -27,6 +28,7 @@ public class TestRunnerWrapper {
 			/*check the results*/
 			String result = null;
 			try {
+//				System.out.println(Utils.convertArrayToFlatString(junitArgs));
 				TestResult r = aTestRunner.start(junitArgs);
 				if(r.wasSuccessful()) {
 					result = RESULT.PASS.name();
@@ -43,6 +45,19 @@ public class TestRunnerWrapper {
 			}
 			sb.append(test + TestExecUtils.sep + result);
 			sb.append(Globals.lineSep);
+		}
+		//if not exist, create it
+		File f = new File(outputFile);
+		if(!f.exists()) {
+			File dir = f.getParentFile();
+			boolean created = true;
+			if(!dir.exists()) {
+				created = dir.mkdirs();
+			}
+			created = created & f.createNewFile();
+			if(!created) {
+				throw new RuntimeException("Cannot create: " + outputFile);
+			}
 		}
 		Files.writeToFile(sb.toString(), outputFile);
 	}

@@ -70,8 +70,14 @@ public class UnitTestFinder {
 		for(File f : files) {
 			if(f.getName().endsWith(".class")) {
 				String clzName = CodeUtils.pathToClass(f, dir.getAbsolutePath());
-//			    System.out.println(clzName);
-			    Class<?> clz = Class.forName(clzName);
+			    System.out.println(clzName);
+			    Class<?> clz = null;
+			    try {
+			         clz = Class.forName(clzName);
+			    } catch (Throwable e) {
+			    	 System.err.println("Can not load: " + clzName);
+			    	 continue;
+			    }
 			    //skip checking whether it is JUnit class or not
 			    if(!CodeUtils.isInstantiableJUnitClass(clz)) {
 			    	continue;
