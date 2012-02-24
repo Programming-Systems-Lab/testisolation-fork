@@ -1,12 +1,15 @@
 package edu.washington.cs.dt;
 
+import java.io.IOException;
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
 import edu.washington.cs.dt.util.RESULT;
 
-class TestExecResultsDelta {
+public class TestExecResultsDelta {
 	public final String testName;
 	public final RESULT intendedResult;
 	public final List<String> intendedPreTests;
@@ -38,5 +41,18 @@ class TestExecResultsDelta {
 		sb.append("when executed after: " + dependentTests.toString());
 		sb.append(Globals.lineSep);
 		return sb.toString();
+	}
+	
+	public static void writeToFile(Collection<TestExecResultsDelta> deltas, String fileName) {
+		StringBuilder sb = new StringBuilder();
+		for(TestExecResultsDelta delta : deltas) {
+			sb.append(delta.toString());
+			sb.append(Globals.lineSep);
+		}
+		try {
+			Files.writeToFile(sb.toString(), fileName);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

@@ -4,7 +4,10 @@ import java.io.File;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.washington.cs.dt.DependentTestIdentifier;
+import edu.washington.cs.dt.TestExecResultsDelta;
 import edu.washington.cs.dt.tools.UnitTestFinder;
+import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Utils;
 import plume.Option;
 import plume.Options;
@@ -52,6 +55,7 @@ public class Main {
 	@Option("The length of each combination")
 	public static int k = -1;
 	
+	/* see lanuchDetector for details about how to initialize the detector*/
 	public static void main(String[] args) {
 		new Main().nonStaticMain(args);
 	}
@@ -84,7 +88,7 @@ public class Main {
 	    if(reverse) { chosenOptions++; }
 	    if(combination) {
 	    	if(k < 1) {
-	    		errorMsg.add("The option k must > 1, when --combination is specified");
+	    		errorMsg.add("The option k must be specified via --k, when --combination is specified");
 	    	}
 	    	chosenOptions++;
 	    }
@@ -103,9 +107,24 @@ public class Main {
 	    }
 	}
 	
-
-	
 	private void lanchDetector() {
-		
+		List<String> allTests = Files.readWholeNoExp(tests);
+		DependentTestIdentifier detector = new DependentTestIdentifier(allTests);
+		detector.setClasspath(classpath);
+		detector.setTmpOutputFile(tmpfile);
+		detector.setMinimize(minimize);
+		//keep all test execution differences
+		List<TestExecResultsDelta> diffs = new LinkedList<TestExecResultsDelta>();
+		if(isolate) {
+		    diffs = detector.findDependenceForIsolation();
+		} else if (reverse) {
+			diffs = detector.findDependenceForReverse();
+		} else if (combination) {
+			diffs = detector.findDependenceForCombination(k);
+		} else {
+			throw new RuntimeException("Bugs in argument processing.");
+		}
+		//write the result to file
+		TestExecResultsDelta.writeToFile(diffs, report);
 	}
 }
