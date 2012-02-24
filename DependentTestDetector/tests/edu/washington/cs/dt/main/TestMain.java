@@ -48,6 +48,14 @@ public class TestMain extends TestCase {
 	}
 	
 	public void testSimpleExamples3() throws ZipException, ClassNotFoundException, IOException {
+		long start = System.currentTimeMillis();
 		Main.main(new String[]{"--minimize=true", "--combination", "--k=2", "--tests=./exampletests.txt"});
+		System.out.println("With cache: " + (System.currentTimeMillis() - start));
+	}
+	
+	public void testSimpleExamples3WithoutCache() throws ZipException, ClassNotFoundException, IOException {
+		long start = System.currentTimeMillis();
+		Main.main(new String[]{"--minimize=true", "--combination", "--k=2", "--tests=./exampletests.txt", "--enablecache=false"});
+		System.out.println("Without cache: " + (System.currentTimeMillis() - start));
 	}
 }

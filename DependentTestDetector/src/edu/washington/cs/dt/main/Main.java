@@ -43,6 +43,9 @@ public class Main {
 	@Option("Use delta debugging to minize tests")
 	public static boolean minimize = false;
 	
+	@Option("Enable cache to improve performance in minimzing tests")
+	public static boolean enablecache = true;
+	
 	@Option("Remove redundant reports after minimizing dependent tests")
 	public static boolean removeredundancy = true;
 	
