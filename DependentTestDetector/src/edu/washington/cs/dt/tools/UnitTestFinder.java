@@ -8,6 +8,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.ZipException;
 
+import plume.Option;
+import plume.Options;
+
 import edu.washington.cs.dt.util.CodeUtils;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
@@ -15,8 +18,14 @@ import edu.washington.cs.dt.util.JarViewer;
 import edu.washington.cs.dt.util.Utils;
 
 public class UnitTestFinder {
+	@Option("Show all options")
+	public static boolean help = false;
+	
 	//two options
+	@Option("The output file name for found unit tests")
 	public static String outputFileName = "./allunittests.txt";
+	
+	@Option("The jar file name or path (must be in classpath) where to find unit tests")
 	public static String pathOrJarFile; //it can be a path or a jar
 	
 	public List<String> findAllTests() throws ClassNotFoundException, ZipException, IOException {
@@ -94,8 +103,31 @@ public class UnitTestFinder {
 	}
 	
 	public static void main(String[] args) throws ClassNotFoundException, ZipException, IOException {
+		parse_and_validate_args(args);
 		UnitTestFinder finder = new UnitTestFinder();
 		List<String> allTests = finder.findAllTests();
 		finder.saveToFile(allTests);
+	}
+	
+	private static void parse_and_validate_args(String[] args) {
+		Options options = new Options("UnitTestFinder usage: ", UnitTestFinder.class);
+	    String[] file_args = options.parse_or_usage(args);
+	    if(file_args.length != 0) {
+	        Utils.flushToStd(file_args);
+	        System.exit(1);
+	    }
+	    if(help) {
+	    	Utils.flushToStd(options.usage());
+	        System.exit(1);
+	    }
+	    List<String> errorMsg = new LinkedList<String>();
+	    if(pathOrJarFile == null) {
+	    	errorMsg.add("You must specify either a jar file or a path via --pathOrJarFile");
+	    }
+	    if(!errorMsg.isEmpty()) {
+	    	Utils.flushToStd(errorMsg.toArray(new String[0]));
+	    	Utils.flushToStd(options.usage());
+	        System.exit(1);
+	    }
 	}
 }

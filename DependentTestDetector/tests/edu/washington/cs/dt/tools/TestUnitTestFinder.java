@@ -24,6 +24,18 @@ public class TestUnitTestFinder extends TestCase {
 		finder.saveToFile(allTests);
 	}
 	
+	public void testArgs1() throws ZipException, ClassNotFoundException, IOException {
+		UnitTestFinder.main(new String[]{"--help"});
+	}
+	
+	public void testArgs2() throws ZipException, ClassNotFoundException, IOException {
+		UnitTestFinder.main(new String[]{"--outputFileName=./text"});
+	}
+	
+	public void testArgs3() throws ZipException, ClassNotFoundException, IOException {
+		UnitTestFinder.main(new String[]{"--pathOrJarFile=./a.jar"});
+	}
+	
 	public void tearDown() {
 		UnitTestFinder.pathOrJarFile = null;
 	}
