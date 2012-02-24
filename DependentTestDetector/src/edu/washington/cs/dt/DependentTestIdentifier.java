@@ -63,16 +63,7 @@ public class DependentTestIdentifier {
 			return deltas;
 		}
 		
-		List<TestExecResultsDelta> minimized = new LinkedList<TestExecResultsDelta>();
-		for(TestExecResultsDelta d : deltas) {
-			Utils.checkTrue(d.dependentTests.size() == 0, "");
-			DependentTestSetMinimizer minimizer = new DependentTestSetMinimizer(d.intendedPreTests, d.testName,
-					d.intendedResult, this.classPath, this.tmpOutputFile);
-			List<String> minList = minimizer.minimize();
-			TestExecResultsDelta simplifiedDelta = new TestExecResultsDelta(d.testName, d.intendedResult, minList,
-					d.divergentResult, d.dependentTests);
-			minimized.add(simplifiedDelta);
-		}
+		List<TestExecResultsDelta> minimized = this.minimizeDependentTests(deltas);
 		
 		return minimized;
 	}
@@ -98,33 +89,6 @@ public class DependentTestIdentifier {
 		}
 		
 		List<TestExecResultsDelta> minimized = this.minimizeDependentTests(deltas);
-//			new LinkedList<TestExecResultsDelta>();
-//		for(TestExecResultsDelta d : deltas) {
-//			String testName = d.testName;
-//			RESULT ir = d.intendedResult;
-//			List<String> intendedPreTests = d.intendedPreTests;
-//			RESULT dr = d.divergentResult;
-//			List<String> dependentTests = d.dependentTests;
-//			//minimize both intendedPreTests and dependentTests
-//			List<String> minimizedPreTests = new LinkedList<String>();
-//			List<String> minimizedDependentTests = new LinkedList<String>();
-//			//first try to remove all to see the result
-//			List<String> onlyOneTest = Collections.singletonList(testName);
-//			RESULT singleResult = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, onlyOneTest).get(testName);
-//			if(!singleResult.equals(ir)) {
-//				DependentTestSetMinimizer minimizer = new DependentTestSetMinimizer(intendedPreTests, testName,
-//						ir, this.classPath, this.tmpOutputFile);
-//				minimizedPreTests = minimizer.minimize();
-//			}
-//			if(!singleResult.equals(dr)) {
-//				DependentTestSetMinimizer minimizer = new DependentTestSetMinimizer(dependentTests, testName,
-//						dr, this.classPath, this.tmpOutputFile);
-//				minimizedDependentTests = minimizer.minimize();
-//			}
-//			TestExecResultsDelta simplifiedDelta = new TestExecResultsDelta(testName, ir, minimizedPreTests,
-//					dr, minimizedDependentTests);
-//			minimized.add(simplifiedDelta);
-//		}
 		
 		return minimized;
 	}
