@@ -42,10 +42,12 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 		Map<String, RESULT> results = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, exec_tests);
 		//check the result
 		RESULT r = results.get(this.dependentTest);
+//		System.out.println(r);
+//		System.out.println("intended: " + intendedResult);
 		if(r.equals(intendedResult)) {
-			return false;  //the same as the intended result (i.e., executed in a fixed order)
+			return true;  //the same as the intended result (i.e., executed in a fixed order)
 		} else {
-			return true;   //still have different behaviors
+			return false;   //still have different behaviors
 		}
 	}
 
