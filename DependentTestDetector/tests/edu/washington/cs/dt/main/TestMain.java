@@ -2,10 +2,8 @@ package edu.washington.cs.dt.main;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 import java.util.zip.ZipException;
 
-import edu.washington.cs.dt.tools.UnitTestFinder;
 import edu.washington.cs.dt.util.Utils;
 
 import junit.framework.TestCase;

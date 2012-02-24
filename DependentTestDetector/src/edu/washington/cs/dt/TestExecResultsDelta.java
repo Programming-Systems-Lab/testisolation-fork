@@ -2,8 +2,10 @@ package edu.washington.cs.dt;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
@@ -54,5 +56,21 @@ public class TestExecResultsDelta {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+	
+	public static List<TestExecResultsDelta> removeRedundancy(Collection<TestExecResultsDelta> deltas) {
+		List<TestExecResultsDelta> noRedundnacy = new LinkedList<TestExecResultsDelta>();
+		
+		Set<String> uniqueSig = new HashSet<String>();
+		for(TestExecResultsDelta delta : deltas) {
+			String s = delta.toString();
+			if(uniqueSig.contains(s)) {
+				continue;
+			}
+			noRedundnacy.add(delta);
+			uniqueSig.add(s);
+		}
+		
+		return noRedundnacy;
 	}
 }

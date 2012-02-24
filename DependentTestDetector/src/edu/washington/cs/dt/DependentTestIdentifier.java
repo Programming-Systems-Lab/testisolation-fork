@@ -28,6 +28,7 @@ public class DependentTestIdentifier {
 	private String tmpOutputFile = Main.tmpfile;
 	
 	private boolean minimize = false;
+	private boolean removeredundancy = Main.removeredundancy;
 	
 	public DependentTestIdentifier(List<String> tests) {
 		this.tests = tests;
@@ -173,6 +174,12 @@ public class DependentTestIdentifier {
 			TestExecResultsDelta simplifiedDelta = new TestExecResultsDelta(testName, ir, minimizedPreTests,
 					dr, minimizedDependentTests);
 			minimized.add(simplifiedDelta);
+		}
+		
+		if(this.removeredundancy) {
+			Utils.stdln("Number of dependent tests before removing redundancy: " + minimized.size());
+			minimized = TestExecResultsDelta.removeRedundancy(minimized);
+			Utils.stdln("Number of dependent tests after removing redundancy: " + minimized.size());
 		}
 		
 		return minimized;

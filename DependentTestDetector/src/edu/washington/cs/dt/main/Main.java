@@ -43,6 +43,9 @@ public class Main {
 	@Option("Use delta debugging to minize tests")
 	public static boolean minimize = false;
 	
+	@Option("Remove redundant reports after minimizing dependent tests")
+	public static boolean removeredundancy = true;
+	
 	@Option("Execute tests in isolation to check the results")
 	public static boolean isolate = false;
 	
