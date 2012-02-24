@@ -20,7 +20,7 @@ public class TestDependentTestsMinimizer extends TestCase {
 		
 		
 		String dependentTest = "edu.washington.cs.dt.samples.TestShareGlobals.test5";
-		RESULT intendedResult = RESULT.PASS;
+		RESULT intendedResult = RESULT.FAILURE;
 		String classPath = "";
 		String tmpOutputFile = "./tests/edu/washington/cs/dt/dd/tmpFile1.txt";
 		
@@ -39,7 +39,7 @@ public class TestDependentTestsMinimizer extends TestCase {
 		
 		
 		String dependentTest = "edu.washington.cs.dt.samples.TestShareGlobals.testStr5";
-		RESULT intendedResult = RESULT.ERROR;
+		RESULT intendedResult = RESULT.PASS;
 		String classPath = "";
 		String tmpOutputFile = "./tests/edu/washington/cs/dt/dd/tmpFile2.txt";
 		
