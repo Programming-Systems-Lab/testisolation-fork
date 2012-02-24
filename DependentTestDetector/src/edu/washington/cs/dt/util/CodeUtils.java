@@ -44,17 +44,21 @@ public class CodeUtils {
 		    && method.getReturnType().equals(void.class);
 	}
 	
+	public static boolean isInstantiableJUnitClass(Class<?> c) {
+		return true;
+	}
+	
 	public static String pathToClass(File f, String dir) {
 		String absoluteFilePath = f.getAbsolutePath();
 		if(!dir.endsWith(File.separator)) {
 			dir = dir + File.separator;
 		}
-		if(!absoluteFilePath.startsWith(dir) || !absoluteFilePath.endsWith(".java")) {
+		if(!absoluteFilePath.startsWith(dir) || !absoluteFilePath.endsWith(".class")) {
 			throw new RuntimeException("File: " + f + " must start with: " + dir
 					+ ". Or it is not a java file.");
 		}
 		String clazzName = absoluteFilePath.substring(dir.length(),
-				absoluteFilePath.length() - ".java".length());
+				absoluteFilePath.length() - ".class".length());
 		
 	    return clazzName.replace(File.separatorChar, '.');
 	}
