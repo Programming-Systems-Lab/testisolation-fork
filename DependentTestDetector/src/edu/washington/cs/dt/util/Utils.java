@@ -52,6 +52,12 @@ public class Utils {
 		System.out.print(obj);
 	}
 	
+	public static void flushToStd(String[] msgs) {
+	    for(String msg : msgs) {
+	      System.out.println(msg);
+	    }
+	}
+	
 	public static<T> List<T> createList(T...ints) {
 		List<T> list = new LinkedList<T>();
 		for(T i : ints) {
