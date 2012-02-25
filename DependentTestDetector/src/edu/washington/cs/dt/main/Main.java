@@ -28,6 +28,9 @@ public class Main {
 	@Option("Show all options")
 	public static boolean help = false;
 	
+	@Option("Print out all progress messages")
+	public static boolean verbose = true;
+	
 	@Option("The classpath for executing the tests")
 	public static String classpath = "";
 	
@@ -111,6 +114,8 @@ public class Main {
 	    	Utils.flushToStd(options.usage());
 	        System.exit(1);
 	    }
+	    //set the 
+	    Utils.VERBOSE = verbose;
 	}
 	
 	private void lanchDetector() {
