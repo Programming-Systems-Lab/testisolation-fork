@@ -11,6 +11,7 @@ import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Utils;
 import plume.Option;
 import plume.Options;
+import plume.Unpublicized;
 
 /*
  * The entry point
@@ -64,6 +65,10 @@ public class Main {
 	@Option("The length of each combination")
 	public static int k = -1;
 	
+	@Unpublicized
+	@Option("Remove the temp file")
+	public static boolean removetempfile = true;
+	
 	/* see lanuchDetector for details about how to initialize the detector*/
 	public static void main(String[] args) {
 		new Main().nonStaticMain(args);
@@ -75,6 +80,13 @@ public class Main {
 	private void nonStaticMain(String[] args) {
 		this.parse_and_validate_args(args);
 		lanchDetector();
+		//clean up
+		if(removetempfile) {
+			File f = new File(tmpfile);
+			if(f.exists()) {
+			    Files.deleteFile(tmpfile);
+			}
+		}
 	}
 	
 	private void parse_and_validate_args(String[] args) {
