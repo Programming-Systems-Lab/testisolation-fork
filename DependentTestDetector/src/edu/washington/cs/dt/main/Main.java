@@ -8,6 +8,7 @@ import edu.washington.cs.dt.DependentTestIdentifier;
 import edu.washington.cs.dt.TestExecResultsDelta;
 import edu.washington.cs.dt.tools.UnitTestFinder;
 import edu.washington.cs.dt.util.Files;
+import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 import plume.Option;
 import plume.Options;
@@ -90,7 +91,7 @@ public class Main {
 	}
 	
 	private void parse_and_validate_args(String[] args) {
-		Options options = new Options("Dependent Unit Tests Detector usage: ", Main.class);
+		Options options = new Options("Dependent Unit Tests Detector usage: ", Main.class, TestExecUtils.class);
 	    String[] file_args = options.parse_or_usage(args);
 	    if(file_args.length != 0) {
 	        Utils.flushToStd(file_args);

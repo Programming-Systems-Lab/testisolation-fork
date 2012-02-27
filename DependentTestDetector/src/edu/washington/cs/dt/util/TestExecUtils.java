@@ -5,10 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import plume.Option;
+
 
 public class TestExecUtils {
 	
 	public static String sep = "#";
+	
+	@Option("The temp file to store all tests to execute")
+	public static String testsfile = "./tmptestfiles.txt";
+	
+	@Option("The min number of tests when using ./tmptestfiles")
+	public static int threshhold = 120;
 	
 	/*
 	 * Executes a list of tests in order by launching a fresh JVM, and
@@ -22,9 +30,19 @@ public class TestExecUtils {
 		commandList.add("java");
 		commandList.add("-cp");
 		commandList.add(classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
-		commandList.add("edu.washington.cs.dt.util.TestRunnerWrapper");
-		commandList.add(outputFile);
-		commandList.addAll(tests);
+		
+		if(tests.size() < threshhold) {
+		    commandList.add("edu.washington.cs.dt.util.TestRunnerWrapper");
+		    commandList.add(outputFile);
+		    commandList.addAll(tests);
+		} else {
+			Files.createIfNotExistNoExp(testsfile);
+			Files.writeToFileWithNoExp(tests, testsfile);
+			
+			commandList.add("edu.washington.cs.dt.util.TestRunnerWrapperFileInputs");
+		    commandList.add(outputFile);
+		    commandList.add(testsfile);
+		}
 		
 		String[] args = commandList.toArray(new String[0]);
 		

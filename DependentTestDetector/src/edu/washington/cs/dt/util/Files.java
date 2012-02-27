@@ -23,6 +23,14 @@ public final class Files {
     throw new IllegalStateException("no instances");
   }
   
+  public static boolean createIfNotExistNoExp(String path) {
+	  try {
+		return createIfNotExist(new File(path));
+	} catch (IOException e) {
+		throw new RuntimeException(e);
+	}
+  }
+  
   public static boolean createIfNotExist(String path) throws IOException {
 	  return createIfNotExist(new File(path));
   }
@@ -115,6 +123,19 @@ public final class Files {
 				return files;
 			}
 
+  public static void writeToFileWithNoExp(Collection<String> list, String fileName) {
+	  StringBuilder sb = new StringBuilder();
+	  for(String t : list) {
+		  sb.append(t);
+		  sb.append(Globals.lineSep);
+	  }
+	  try {
+		writeToFile(sb.toString(), fileName);
+	} catch (IOException e) {
+		throw new RuntimeException(e);
+	}
+  }
+  
   public static void writeToFile(String s, File file) throws IOException {
     writeToFile(s, file, false);
   }
