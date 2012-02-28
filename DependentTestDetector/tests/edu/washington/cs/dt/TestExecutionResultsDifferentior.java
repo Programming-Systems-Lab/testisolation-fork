@@ -8,11 +8,17 @@ import edu.washington.cs.dt.runners.CombinatorialRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
 import edu.washington.cs.dt.runners.IsolationRunner;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class TestExecutionResultsDifferentior extends TestCase {
 	
 	List<String> tests = new LinkedList<String>();
+	
+	public static Test suite() {
+		return new TestSuite(TestExecutionResultsDifferentior.class);
+	}
 	
 	public void setUp() {
 		tests = new LinkedList<String>();
@@ -44,19 +50,45 @@ public class TestExecutionResultsDifferentior extends TestCase {
 		for(TestExecResultsDelta d : deltas) {
 			System.out.println(d);
 		}
+		assertEquals(deltas.size(), 4);
 	}
 
 	public void testCombinatorialDiffs() {
 		AbstractTestRunner fixedOrderRunner = new FixedOrderRunner(tests);
-		AbstractTestRunner isolationRunner = new CombinatorialRunner(tests, 2);
+		AbstractTestRunner combineRunner = new CombinatorialRunner(tests, 2);
 		
 		TestExecResult foR = fixedOrderRunner.run().getExecutionRecords().get(0);
-		TestExecResults isoRs = isolationRunner.run();
+		TestExecResults isoRs = combineRunner.run();
 		
 		TestExecResultsDifferentior differ = new TestExecResultsDifferentior(foR, isoRs);
 		List<TestExecResultsDelta> deltas = differ.diffResults();
 		for(TestExecResultsDelta d : deltas) {
 			System.out.println(d);
 		}
+		assertEquals(54, deltas.size());
+	}
+	
+	public void testCombinatorialDiffsOnDiffExceptions() {
+		
+		tests = new LinkedList<String>();
+		tests.add("edu.washington.cs.dt.samples.TestDifferentException.testSetA");
+		tests.add("edu.washington.cs.dt.samples.TestDifferentException.testSetB");
+		tests.add("edu.washington.cs.dt.samples.TestDifferentException.testUseAB");
+		
+		AbstractTestRunner fixedOrderRunner = new FixedOrderRunner(tests);
+		AbstractTestRunner combineRunner = new CombinatorialRunner(tests, 3);
+		
+		TestExecResult foR = fixedOrderRunner.run().getExecutionRecords().get(0);
+		TestExecResults isoRs = combineRunner.run();
+		
+		System.out.println(isoRs);
+		
+		TestExecResultsDifferentior differ = new TestExecResultsDifferentior(foR, isoRs);
+		List<TestExecResultsDelta> deltas = differ.diffResults();
+		for(TestExecResultsDelta d : deltas) {
+			System.out.println(d);
+		}
+		
+		assertEquals(3, deltas.size());
 	}
 }

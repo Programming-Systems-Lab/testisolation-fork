@@ -5,6 +5,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import junit.framework.TestFailure;
+
+import edu.washington.cs.dt.OneTestExecResult;
 import edu.washington.cs.dt.RESULT;
 
 import plume.Option;
@@ -12,7 +15,11 @@ import plume.Option;
 
 public class TestExecUtils {
 	
-	public static String sep = "#";
+	public static String testResultSep = "#";
+	
+	public static String resultExcepSep = "%#%#";
+	
+	public static String noStackTrace = "NO_STACK_TRACE_FOR_A_PASSING_TEST";
 	
 	@Option("The temp file to store all tests to execute")
 	public static String testsfile = "./tmptestfiles.txt";
@@ -26,7 +33,7 @@ public class TestExecUtils {
 	 * 
 	 * The test is in the form of packageName.className.methodName
 	 * */
-	public static Map<String, RESULT> executeTestsInFreshJVM(String classPath, String outputFile, List<String> tests) {
+	public static Map<String, OneTestExecResult> executeTestsInFreshJVM(String classPath, String outputFile, List<String> tests) {
 		
 		List<String> commandList = new LinkedList<String>();
 		commandList.add("java");
@@ -50,34 +57,52 @@ public class TestExecUtils {
 		
 		Command.exec(args);
 		
-		Map<String, RESULT> testResults = parseTestResults(outputFile);
+		Map<String, OneTestExecResult> testResults = parseTestResults(outputFile);
 		
 		Utils.checkTrue(tests.size() == testResults.size(), "Test num not equal.");
 		
 		return testResults;
 	}
 	
-	public static Map<String, RESULT> parseTestResults(String outputFile) {
-		Map<String, RESULT> ret = new LinkedHashMap<String, RESULT>();
+	public static Map<String, OneTestExecResult> parseTestResults(String outputFile) {
+		Map<String, OneTestExecResult> ret = new LinkedHashMap<String, OneTestExecResult>();
 		
 		List<String> lines = Files.readWholeNoExp(outputFile);
 		
 		for(String line : lines) {
-			int sepIndex = line.indexOf(TestExecUtils.sep);
-			String testCase = line.substring(0, sepIndex);
-			String result = line.substring(sepIndex + TestExecUtils.sep.length());
+			int resultSepIndex = line.indexOf(TestExecUtils.testResultSep);
+			int excepSepIndex = line.indexOf(TestExecUtils.resultExcepSep);
+			Utils.checkTrue(resultSepIndex != -1, "resultSepIndex != -1");
+			Utils.checkTrue(excepSepIndex != -1, "excepSepIndex != -1");
+			
+			String testCase = line.substring(0, resultSepIndex);
+			String result = line.substring(resultSepIndex + TestExecUtils.testResultSep.length(), excepSepIndex);
+			String stacktrace = line.substring(excepSepIndex + TestExecUtils.resultExcepSep.length(), line.length());
 			if(result.equals(RESULT.PASS.name())) {
-				ret.put(testCase, RESULT.PASS);
+				OneTestExecResult r = new OneTestExecResult(RESULT.PASS, stacktrace);
+				ret.put(testCase, r);
 			} else if (result.equals(RESULT.FAILURE.name())) {
-				ret.put(testCase, RESULT.FAILURE);
+				OneTestExecResult r = new OneTestExecResult(RESULT.FAILURE, stacktrace);
+				ret.put(testCase, r);
 			} else if (result.equals(RESULT.ERROR.name())) {
-				ret.put(testCase, RESULT.ERROR);
+				OneTestExecResult r = new OneTestExecResult(RESULT.ERROR, stacktrace);
+				ret.put(testCase, r);
 			} else {
 				throw new RuntimeException("Unknown result: " + result);
 			}
 		}
 		
 		return ret;
+	}
+	
+	public static String flatStackTrace(TestFailure failure) {
+		Throwable t = failure.thrownException();
+		StringBuilder sb = new StringBuilder();
+		for(StackTraceElement element : t.getStackTrace()) {
+			sb.append(element.toString());
+			sb.append(" - ");
+		}
+		return sb.toString();
 	}
 	
 }

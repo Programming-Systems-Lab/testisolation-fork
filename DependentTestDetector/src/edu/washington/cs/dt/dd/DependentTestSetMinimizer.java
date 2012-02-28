@@ -5,9 +5,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import edu.washington.cs.dt.RESULT;
+import edu.washington.cs.dt.OneTestExecResult;
 import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.TestExecUtils;
+import edu.washington.cs.dt.util.Utils;
 
 public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 
@@ -15,9 +16,9 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 	public final String tmpOutputFile;
 	
 	public final String dependentTest;
-	public final RESULT intendedResult;
+	public final OneTestExecResult intendedResult;
 	
-	private Map<List<String>, RESULT> cachedResults = new HashMap<List<String>, RESULT>();
+	private Map<List<String>, OneTestExecResult> cachedResults = new HashMap<List<String>, OneTestExecResult>();
 	private boolean enablecache = Main.enablecache;
 
 	/**
@@ -29,7 +30,7 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 	 * running tests + dependentTest
 	 * */
 	public DependentTestSetMinimizer(List<String> tests,
-			String dependentTest, RESULT intendedResult,
+			String dependentTest, OneTestExecResult intendedResult,
 			String classPath, String tmpOutputFile) {
 		super(tests);
 		this.classPath = classPath;
@@ -45,21 +46,23 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 		exec_tests.add(dependentTest);
 		
 		//first check the cache if enabled
-		RESULT r = null;
+		OneTestExecResult r = null;
 		if(this.enablecache && this.cachedResults.containsKey(exec_tests)) {
 			r = cachedResults.get(exec_tests);
 		} else {
 			//execute tests in an isolated JVM
-			Map<String, RESULT> results = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, exec_tests);
+			Map<String, OneTestExecResult> results = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, exec_tests);
 			//check the result
 			r = results.get(this.dependentTest);
 			//put into cache
 			if(this.enablecache) {
+				Utils.checkNull(r, "can not be null");
 			    this.cachedResults.put(exec_tests, r);
 			}
 		}
 //		System.out.println(r);
 //		System.out.println("intended: " + intendedResult);
+		Utils.checkNull(r, "r should not be null.");
 		if(r.equals(intendedResult)) {
 			return true;  //the same as the intended result (i.e., executed in a fixed order)
 		} else {

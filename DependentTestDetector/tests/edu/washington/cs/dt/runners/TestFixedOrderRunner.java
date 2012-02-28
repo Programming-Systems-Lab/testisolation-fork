@@ -5,9 +5,15 @@ import java.util.List;
 
 import edu.washington.cs.dt.TestExecResults;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class TestFixedOrderRunner extends TestCase {
+	
+	public static Test suite() {
+		return new TestSuite(TestFixedOrderRunner.class);
+	}
 	
 	public void test1() {
 		List<String> tests = new LinkedList<String>();
@@ -30,6 +36,8 @@ public class TestFixedOrderRunner extends TestCase {
 		TestExecResults results = runner.run();
 		
 		System.out.println(results);
+		
+		assertEquals(1, results.getExecutionRecords().size());
 	}
 	
 }

@@ -19,5 +19,8 @@ public class TestDifferentException extends TestCase {
 	public void testUseAB() {
 		a.hashCode();
 		b.hashCode();
+		if(a != null && b != null) {
+			throw new RuntimeException();
+		}
 	}
 }

@@ -2,12 +2,21 @@ package edu.washington.cs.dt.util;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import edu.washington.cs.dt.OneTestExecResult;
+
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class TestSampleTestsInFreshJVM extends TestCase {
 	
 	static final String className = "edu.washington.cs.dt.samples.TestShareGlobals";
+	
+	public static Test suite() {
+		return new TestSuite(TestSampleTestsInFreshJVM.class);
+	}
 	
 	public void testAllPass() {
 		
@@ -22,7 +31,8 @@ public class TestSampleTestsInFreshJVM extends TestCase {
 		tests.add(className + ".test4");
 		tests.add(className + ".test5");
 		
-		TestExecUtils.executeTestsInFreshJVM(classPath, outputFile, tests);
+		Map<String, OneTestExecResult> result = TestExecUtils.executeTestsInFreshJVM(classPath, outputFile, tests);
+		assertEquals(result.size(), 5);
 	}
 
 	public void testFail() {
@@ -36,7 +46,8 @@ public class TestSampleTestsInFreshJVM extends TestCase {
 		tests.add(className + ".test4");
 		tests.add(className + ".test5");
 		
-		TestExecUtils.executeTestsInFreshJVM(classPath, outputFile, tests);
+		Map<String, OneTestExecResult> result = TestExecUtils.executeTestsInFreshJVM(classPath, outputFile, tests);
+		assertEquals(result.size(), 4);
 	}
 	
 	public void testException() {
@@ -50,7 +61,8 @@ public class TestSampleTestsInFreshJVM extends TestCase {
 		tests.add(className + ".test4");
 		tests.add(className + ".test3");
 		
-		TestExecUtils.executeTestsInFreshJVM(classPath, outputFile, tests);
+		Map<String, OneTestExecResult> result = TestExecUtils.executeTestsInFreshJVM(classPath, outputFile, tests);
+		assertEquals(result.size(), 4);
 	}
 	
 }

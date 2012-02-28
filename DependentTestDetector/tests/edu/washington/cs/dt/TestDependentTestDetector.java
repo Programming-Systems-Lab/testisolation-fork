@@ -5,11 +5,17 @@ import java.util.List;
 
 import edu.washington.cs.dt.util.Globals;
 
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class TestDependentTestDetector extends TestCase {
 	
 	List<String> tests = new LinkedList<String>();
+	
+	public static Test suite() {
+		return new TestSuite(TestDependentTestDetector.class);
+	}
 	
 	public void setUp() {
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.test1");
@@ -33,6 +39,11 @@ public class TestDependentTestDetector extends TestCase {
 		identifier.setMinimize(true);
 		List<TestExecResultsDelta> l = identifier.findDependenceForIsolation();
 		System.out.println(l);
+		assertEquals(4, l.size());
+		assertEquals(l.get(0).testName, "edu.washington.cs.dt.samples.TestShareGlobals.testStr2");
+		assertEquals(l.get(1).testName, "edu.washington.cs.dt.samples.TestShareGlobals.testStr3");
+		assertEquals(l.get(2).testName, "edu.washington.cs.dt.samples.TestShareGlobals.testStr4");
+		assertEquals(l.get(3).testName, "edu.washington.cs.dt.samples.TestShareGlobals.testStr5");
 	}
 	
 	public void testReverse() {
@@ -40,6 +51,7 @@ public class TestDependentTestDetector extends TestCase {
 		identifier.setMinimize(true);
 		List<TestExecResultsDelta> l = identifier.findDependenceForReverse();
 		System.out.println(l);
+		assertEquals(4, l.size());
 	}
 	
 	public void testCombine() {
@@ -58,5 +70,6 @@ public class TestDependentTestDetector extends TestCase {
 		    System.out.println(d);
 		    System.out.println(Globals.lineSep);
 		}
+		assertEquals(8, l.size());
 	}
 }

@@ -4,9 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.washington.cs.dt.TestExecResults;
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class TestCombinatorialRunner extends TestCase {
+	
+	public static Test suite() {
+		return new TestSuite(TestCombinatorialRunner.class);
+	}
 	
 	public void test1() {
 		List<String> tests = new LinkedList<String>();
@@ -29,6 +35,21 @@ public class TestCombinatorialRunner extends TestCase {
 		TestExecResults results = runner.run();
 		
 		System.out.println(results);
+		
+		assertEquals(182, results.getExecutionRecords().size());
+	}
+	
+	public void testDifferentExceptions() {
+		List<String> tests = new LinkedList<String>();
+		tests.add("edu.washington.cs.dt.samples.TestDifferentException.testSetA");
+		tests.add("edu.washington.cs.dt.samples.TestDifferentException.testSetB");
+		tests.add("edu.washington.cs.dt.samples.TestDifferentException.testUseAB");
+		
+		AbstractTestRunner runner = new CombinatorialRunner(tests, 3);
+		TestExecResults results = runner.run();
+		
+		System.out.println(results);
+		assertEquals(6, results.getExecutionRecords().size());
 	}
 	
 }

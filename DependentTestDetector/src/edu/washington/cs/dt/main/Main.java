@@ -45,6 +45,12 @@ public class Main {
 	@Option("A file containing the final report")
 	public static String report = "." + File.separator + "report.txt";
 	
+	@Option("Print stack trace for inspection")
+	public static boolean printstacktrace = false;
+	
+	@Option("Compare stack trace")
+	public static boolean comparestacktrace = true;
+	
 	@Option("Use delta debugging to minize tests")
 	public static boolean minimize = false;
 	

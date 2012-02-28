@@ -10,6 +10,10 @@ import edu.washington.cs.dt.RESULT;
 import junit.framework.TestResult;
 import junit.textui.TestRunner;
 
+/**
+ * Beaware, also need to change TestRunnerWrapper
+ * */
+
 public class TestRunnerWrapperFileInputs {
 	/*
 	 * args[0]: the result output file
@@ -39,6 +43,7 @@ public class TestRunnerWrapperFileInputs {
 			String[] junitArgs = new String[]{"-m", test};
 			/*check the results*/
 			String result = null;
+			String stackTrace = TestExecUtils.noStackTrace;
 			try {
 //				System.out.println(Utils.convertArrayToFlatString(junitArgs));
 				TestResult r = aTestRunner.start(junitArgs);
@@ -46,16 +51,24 @@ public class TestRunnerWrapperFileInputs {
 					result = RESULT.PASS.name();
 				} else {
 					if(r.errorCount() > 0) {
+						Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test");
 						result = RESULT.ERROR.name();
+						stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement());
 					}
 					if(r.failureCount() > 0) {
+						Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test");
 						result = RESULT.FAILURE.name();
+						stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement());
 					}
 				}
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
-			sb.append(test + TestExecUtils.sep + result);
+			sb.append(test);
+			sb.append(TestExecUtils.testResultSep);
+			sb.append(result);
+			sb.append(TestExecUtils.resultExcepSep);
+			sb.append(stackTrace);
 			sb.append(Globals.lineSep);
 		}
 		//if not exist, create it

@@ -4,9 +4,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.washington.cs.dt.TestExecResults;
+import junit.framework.Test;
 import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 public class TestIsolationRunner extends TestCase {
+	public static Test suite() {
+		return new TestSuite(TestIsolationRunner.class);
+	}
+	
 	public void test1() {
 		List<String> tests = new LinkedList<String>();
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.test1");
@@ -28,5 +34,7 @@ public class TestIsolationRunner extends TestCase {
 		TestExecResults results = runner.run();
 		
 		System.out.println(results);
+		
+		assertEquals(14, results.getExecutionRecords().size());
 	}
 }

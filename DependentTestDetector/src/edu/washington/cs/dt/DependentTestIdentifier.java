@@ -27,10 +27,11 @@ public class DependentTestIdentifier {
 	private String tmpOutputFile = Main.tmpfile;
 	
 	private boolean minimize = false;
-	private boolean removeredundancy = Main.removeredundancy;
+	private final boolean removeredundancy;
 	
 	public DependentTestIdentifier(List<String> tests) {
 		this.tests = tests;
+		removeredundancy = Main.removeredundancy;
 	}
 	
 	public void setMinimize(boolean minimize) {
@@ -150,16 +151,17 @@ public class DependentTestIdentifier {
 		List<TestExecResultsDelta> minimized = new LinkedList<TestExecResultsDelta>();
 		for(TestExecResultsDelta d : deltas) {
 			String testName = d.testName;
-			RESULT ir = d.intendedResult;
+			OneTestExecResult ir = d.intendedResult;
 			List<String> intendedPreTests = d.intendedPreTests;
-			RESULT dr = d.divergentResult;
+			OneTestExecResult dr = d.divergentResult;
 			List<String> dependentTests = d.dependentTests;
 			//minimize both intendedPreTests and dependentTests
 			List<String> minimizedPreTests = new LinkedList<String>();
 			List<String> minimizedDependentTests = new LinkedList<String>();
 			//first try to remove all to see the result
 			List<String> onlyOneTest = Collections.singletonList(testName);
-			RESULT singleResult = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, onlyOneTest).get(testName);
+			OneTestExecResult singleResult = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, onlyOneTest).get(testName);
+			//if the outcome of execute a test is diffferent from executing a batch of tests, we need to do minimization
 			if(!singleResult.equals(ir)) {
 				DependentTestSetMinimizer minimizer = new DependentTestSetMinimizer(intendedPreTests, testName,
 						ir, this.classPath, this.tmpOutputFile);

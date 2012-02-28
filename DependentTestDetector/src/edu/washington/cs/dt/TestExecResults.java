@@ -19,7 +19,7 @@ public class TestExecResults {
 	}
 	
 	/*add the result from one JVM run*/
-	public void addExecutionResults(Map<String, RESULT> result) {
+	public void addExecutionResults(Map<String, OneTestExecResult> result) {
 		TestExecResult r = new TestExecResult(result);
 		this.executionRecords.add(r);
 	}
@@ -50,7 +50,7 @@ public class TestExecResults {
  * to see the exactly error has been thrown
  * */
 class TestExecResult {
-	public final Map<String, RESULT> singleRun;
+	public final Map<String, OneTestExecResult> singleRun;
 
 	protected List<String> allTests = new LinkedList<String>();
 	
@@ -59,18 +59,18 @@ class TestExecResult {
 	protected List<String> failingTestsInOrder = new LinkedList<String>();
 	protected List<String> errorTestsInOrder = new LinkedList<String>();
 	
-	public TestExecResult(Map<String, RESULT> singleRun) {
+	public TestExecResult(Map<String, OneTestExecResult> singleRun) {
 		this.singleRun = singleRun;
 		//classify each test
 		for(String test : this.singleRun.keySet()) {
 			allTests.add(test);
 			//check the results
-			RESULT r = this.singleRun.get(test);
-			if(r.equals(RESULT.PASS)) {
+			OneTestExecResult r = this.singleRun.get(test);
+			if(r.result.equals(RESULT.PASS)) {
 				this.passingTestsInOrder.add(test);
-			} else if (r.equals(RESULT.FAILURE)) {
+			} else if (r.result.equals(RESULT.FAILURE)) {
 				this.failingTestsInOrder.add(test);
-			} else if (r.equals(RESULT.ERROR)) {
+			} else if (r.result.equals(RESULT.ERROR)) {
 				this.errorTestsInOrder.add(test);
 			} else {
 				throw new RuntimeException("Unknown results: " + r);
@@ -82,7 +82,7 @@ class TestExecResult {
 		return this.allTests;
 	}
 	
-	public RESULT getResult(String test) {
+	public OneTestExecResult getResult(String test) {
 		return this.singleRun.get(test);
 	}
 	
