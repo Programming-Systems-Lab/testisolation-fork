@@ -1,0 +1,23 @@
+package edu.washington.cs.dt.samples;
+
+import junit.framework.TestCase;
+
+public class TestDifferentException extends TestCase {
+	
+	public static Object a = null;
+	
+	public static Object b = null;
+	
+	public void testSetA() {
+		a = new Object();
+	}
+	
+	public void testSetB() {
+		b = new Object();
+	}
+	
+	public void testUseAB() {
+		a.hashCode();
+		b.hashCode();
+	}
+}
