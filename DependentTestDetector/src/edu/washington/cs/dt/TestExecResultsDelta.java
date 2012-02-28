@@ -9,7 +9,6 @@ import java.util.Set;
 
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
-import edu.washington.cs.dt.util.RESULT;
 
 public class TestExecResultsDelta {
 	public final String testName;

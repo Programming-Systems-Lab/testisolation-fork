@@ -3,8 +3,8 @@ package edu.washington.cs.dt.runners;
 import java.util.List;
 import java.util.Map;
 
+import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.TestExecResults;
-import edu.washington.cs.dt.util.RESULT;
 import edu.washington.cs.dt.util.TestExecUtils;
 
 public class FixedOrderRunner extends AbstractTestRunner {

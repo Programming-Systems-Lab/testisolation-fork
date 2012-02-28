@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.main.Main;
-import edu.washington.cs.dt.util.RESULT;
 import edu.washington.cs.dt.util.TestExecUtils;
 
 public class DependentTestSetMinimizer extends AbstractMinimizer<String>{

@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import edu.washington.cs.dt.util.RESULT;
 import edu.washington.cs.dt.util.Utils;
 
 public class TestExecResultsDifferentior {

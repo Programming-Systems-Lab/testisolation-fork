@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import edu.washington.cs.dt.util.Globals;
-import edu.washington.cs.dt.util.RESULT;
 
 public class TestExecResults {
 	
@@ -46,6 +45,10 @@ public class TestExecResults {
 	}
 }
 
+/**
+ * TODO should add an exception stack trace here
+ * to see the exactly error has been thrown
+ * */
 class TestExecResult {
 	public final Map<String, RESULT> singleRun;
 

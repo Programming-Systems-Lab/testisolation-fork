@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.washington.cs.dt.RESULT;
+
 import junit.framework.TestResult;
 import junit.textui.TestRunner;
 

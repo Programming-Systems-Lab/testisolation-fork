@@ -3,6 +3,8 @@ package edu.washington.cs.dt.util;
 import java.io.File;
 import java.io.IOException;
 
+import edu.washington.cs.dt.RESULT;
+
 import junit.framework.TestResult;
 import junit.textui.TestRunner;
 

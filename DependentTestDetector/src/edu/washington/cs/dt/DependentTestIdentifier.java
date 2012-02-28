@@ -13,7 +13,6 @@ import edu.washington.cs.dt.runners.CombinatorialRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
 import edu.washington.cs.dt.runners.IsolationRunner;
 import edu.washington.cs.dt.runners.ReversedOrderRunner;
-import edu.washington.cs.dt.util.RESULT;
 import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 

@@ -3,7 +3,7 @@ package edu.washington.cs.dt.dd;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.washington.cs.dt.util.RESULT;
+import edu.washington.cs.dt.RESULT;
 
 import junit.framework.TestCase;
 
