@@ -33,6 +33,12 @@ public class TestSequenceSimplifier {
 	@Option("Log file for recording delta debugging steps")
 	public static String logfile = null;
 	
+	@Option("Use cache or not")
+	public static boolean enablecache = false;
+	
+	@Option("Compare stack trace or not")
+	public static boolean comparestacktrace = false;
+	
 	public static void main(String[] args) throws IOException {
 		new TestSequenceSimplifier().nonStaticMain(args);
 	}
@@ -94,6 +100,8 @@ public class TestSequenceSimplifier {
 	    if(logfile != null) {
 	    	Log.logConfig(logfile);
 	    }
+	    Main.enablecache = enablecache;
+	    Main.comparestacktrace = comparestacktrace;
 	    List<String> errorMsg = new LinkedList<String>();
 	    if(testFile == null) {
 	    	errorMsg.add("You must specify either a file containing all tests via --testFile");

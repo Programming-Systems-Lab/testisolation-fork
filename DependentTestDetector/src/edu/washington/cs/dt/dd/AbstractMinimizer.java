@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.washington.cs.dt.util.Log;
 import edu.washington.cs.dt.util.Utils;
 
 public abstract class AbstractMinimizer<T> {
@@ -47,6 +48,15 @@ public abstract class AbstractMinimizer<T> {
 		}
 		count++;
 		return is_still_fail(list);
+	}
+	
+	protected List<T> getData(int[] data_indices) {
+		List<T> list = new LinkedList<T>();
+		for(int index : data_indices) {
+			check_index(index);
+			list.add(get(index));
+		}
+		return list;
 	}
 	
 	public List<T> minimize() {
@@ -101,10 +111,16 @@ public abstract class AbstractMinimizer<T> {
 	 * "r leads test pass"
 	 * */
 	private int[] dd2(int[] c, int[] r) {
+		Log.logln("c size: " + c.length + ", r size: " + r.length);
 		checkNoOverlap(c, r);
 		boolean result_cr = this.apply_data(merge(c, r));
 		boolean result_r = this.apply_data(r);
+		Log.logln("result of c + r: " + result_cr + ",  length: " + (c.length + r.length));
+		Log.logln("result of r: " + result_r + ", length: " + r.length);
 		Utils.checkTrue(result_cr, "Test should fail.");
+		if(result_r) {
+			Log.logln(this.getData(r).toString());
+		}
 		Utils.checkTrue(!result_r, "Test should pass.");
 		if(c.length == 1) {
 			//found the erroouneous configuration
@@ -114,7 +130,9 @@ public abstract class AbstractMinimizer<T> {
 		int[] c1 = firstHalf(c);
 		int[] c2 = secondHalf(c);
 		Utils.stdln("c1 after divide: " + Utils.convertArrayToFlatString(c1));
+		Log.logln("c1 size: " + c1.length);
 		Utils.stdln("c2 after divide: " + Utils.convertArrayToFlatString(c2));
+		Log.logln("c2 size: " + c2.length);
 		checkSubArrays(c, c1, c2);
 		int[] rc1 = merge(r, c1);
 		int[] rc2 = merge(r, c2);
@@ -122,6 +140,8 @@ public abstract class AbstractMinimizer<T> {
 		boolean result_rc2 = this.apply_data(rc2);
 		Utils.stdln("result of c1 and r, fails: " + result_rc1 + ": " + Utils.convertArrayToFlatString(rc1));
 		Utils.stdln("result of c2 and r, fails: " + result_rc2 + ": " + Utils.convertArrayToFlatString(rc2));
+		Log.logln("result of c1 and r, fail?  " + result_rc1 + ", size: " + rc1.length);
+		Log.logln("result of c2 and r, fail?  " + result_rc2 + ", size: " + rc2.length);
 		//has a failure
 		if(result_rc1 || result_rc2) {
 			//pass
@@ -132,11 +152,13 @@ public abstract class AbstractMinimizer<T> {
 			int[] ret = new int[0];
 			if(result_rc1 /*&& !result_rc2*/) { //multiple answer
 				Utils.stdln("** c1 and r fails, calling dd2(c1, r)");
+				Log.logln("search c1 and r, c1 size: " + c1.length + ", r size: " + r.length);
 				int[] rc1_result = dd2(c1, r);
 				ret = merge(ret, rc1_result);
 			}
 			if(result_rc2 ) {  //multiple answers
 				Utils.stdln("** c2 and r fails, calling dd2(c2, r)");
+				Log.logln("search c2 and r, c2 size: " + c2.length + ", r size: " + r.length);
 				int[] rc2_result = dd2(c2, r);
 				ret = merge(ret, rc2_result);
 			}
@@ -146,8 +168,14 @@ public abstract class AbstractMinimizer<T> {
 			return ret;
 		} else {
 			Utils.stdln("-- interference, search dd2(c1, rc2) and dd2(c2, rc1) ");
+			Log.logln("interference case.");
+			Log.logln("call dd2 recursively: c1: " + c1.length + ", rc2: " + rc2.length + " result of rc2: "
+					+ result_rc2);
 			int[] result1 = dd2(c1, rc2);
+			Log.logln("call dd2 recursively: c2: " + c2.length + ", rc1: " + rc1.length + " result of rc1: "
+					+ result_rc1);
 			int[] result2 = dd2(c2, rc1);
+			Log.logln("merge result: result1: " + result1.length + ", result2: " + result2.length);
 			int[] ret = merge(result1, result2);
 //			FDUtils.checkTrue(this.apply_data(ret), "The result of dd interference should fail: "
 //					+ FDUtils.convertArrayToFlatString(ret));

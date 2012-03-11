@@ -50,6 +50,7 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 		OneTestExecResult r = null;
 		if(this.enablecache && this.cachedResults.containsKey(exec_tests)) {
 			r = cachedResults.get(exec_tests);
+			Log.logln("* Get from cache for r: " + exec_tests.size());
 		} else {
 			//execute tests in an isolated JVM
 			Map<String, OneTestExecResult> results = TestExecUtils.executeTestsInFreshJVM(this.classPath, this.tmpOutputFile, exec_tests);
@@ -58,6 +59,7 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 			//put into cache
 			if(this.enablecache) {
 				Utils.checkNull(r, "can not be null");
+				Utils.checkTrue(!this.cachedResults.containsKey(exec_tests), "");
 			    this.cachedResults.put(exec_tests, r);
 			}
 		}
@@ -65,7 +67,8 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 //		System.out.println("intended: " + intendedResult);
 		
 		Utils.checkNull(r, "r should not be null.");
-		Log.logln("Result: " + r.result + ", intended: " + intendedResult + " Executed: " + exec_tests);
+		Log.logln("* Result: " + r.result + ", intended: " + intendedResult + " Executed tests:  \n"  + exec_tests.size()//);
+				+ " : "+ exec_tests);
 		if(r.equals(intendedResult)) {
 			return true;  //the same as the intended result (i.e., executed in a fixed order)
 		} else {
