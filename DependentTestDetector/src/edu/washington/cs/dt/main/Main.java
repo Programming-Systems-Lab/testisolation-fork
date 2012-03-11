@@ -72,6 +72,9 @@ public class Main {
 	@Option("Execute tests in all possible combinations")
 	public static boolean combination = false;
 	
+	@Option("Execute tests in a randomized order")
+	public static boolean randomize = false;
+	
 	@Option("The length of each combination")
 	public static int k = -1;
 	
@@ -117,6 +120,7 @@ public class Main {
 	    int chosenOptions = 0;
 	    if(isolate) { chosenOptions++; }
 	    if(reverse) { chosenOptions++; }
+	    if(randomize) {chosenOptions++;}
 	    if(combination) {
 	    	if(k < 1) {
 	    		errorMsg.add("The option k must be specified via --k, when --combination is specified");
@@ -154,6 +158,8 @@ public class Main {
 			diffs = detector.findDependenceForReverse();
 		} else if (combination) {
 			diffs = detector.findDependenceForCombination(k);
+		} else if (randomize) {
+			diffs = detector.findDependenceForRandomization();
 		} else {
 			throw new RuntimeException("Bugs in argument processing.");
 		}

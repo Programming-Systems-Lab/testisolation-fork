@@ -54,6 +54,13 @@ public class TestDependentTestDetector extends TestCase {
 		assertEquals(4, l.size());
 	}
 	
+	public void testRandom() {
+		DependentTestIdentifier identifier = new DependentTestIdentifier(tests);
+		identifier.setMinimize(true);
+		List<TestExecResultsDelta> l = identifier.findDependenceForRandomization();
+		System.out.println(l);
+	}
+	
 	public void testCombine() {
 		tests.clear();
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.test1");

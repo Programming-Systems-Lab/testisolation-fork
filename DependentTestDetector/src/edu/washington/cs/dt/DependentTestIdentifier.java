@@ -12,6 +12,7 @@ import edu.washington.cs.dt.runners.AbstractTestRunner;
 import edu.washington.cs.dt.runners.CombinatorialRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
 import edu.washington.cs.dt.runners.IsolationRunner;
+import edu.washington.cs.dt.runners.RandomOrderRunner;
 import edu.washington.cs.dt.runners.ReversedOrderRunner;
 import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
@@ -95,6 +96,31 @@ public class DependentTestIdentifier {
 		return minimized;
 	}
 	
+	public List<TestExecResultsDelta> findDependenceForRandomization() {
+		AbstractTestRunner fixedOrderRunner = createFixedOrderRunner();
+		AbstractTestRunner randomOrderRunner = createRandomOrderRunner();
+		
+		TestExecResults fixedOrderResults = fixedOrderRunner.run();
+		TestExecResults randomOrderResults = randomOrderRunner.run();
+		
+		List<TestExecResult> foRecords = fixedOrderResults.getExecutionRecords();
+		Utils.checkTrue(foRecords.size() == 1, "The fixed order runner only launches JVM once!");
+		List<TestExecResult> randRecords = randomOrderResults.getExecutionRecords();
+		Utils.checkTrue(randRecords.size() == 1, "The random order runner only launches JVM once!");
+		
+		TestExecResult intendedResult = fixedOrderResults.getExecutionRecords().get(0);
+		TestExecResultsDifferentior differ = new TestExecResultsDifferentior(intendedResult, randomOrderResults);
+		List<TestExecResultsDelta> deltas = differ.diffResults();
+		
+		if(!this.minimize) {
+			return deltas;
+		}
+		
+		List<TestExecResultsDelta> minimized = this.minimizeDependentTests(deltas);
+		
+		return minimized;
+	}
+	
 	public List<TestExecResultsDelta> findDependenceForCombination(int k) {
 		AbstractTestRunner fixedOrderRunner = createFixedOrderRunner();
 		AbstractTestRunner combRunner = createCombinatorialRunner(k);
@@ -131,6 +157,13 @@ public class DependentTestIdentifier {
 		reversedOrderRunner.setClassPath(this.classPath);
 		reversedOrderRunner.setTmpOutputFile(this.tmpOutputFile);
 		return reversedOrderRunner;
+	}
+	
+	protected RandomOrderRunner createRandomOrderRunner() {
+		RandomOrderRunner randomOrderRunner = new RandomOrderRunner(this.tests);
+		randomOrderRunner.setClassPath(this.classPath);
+		randomOrderRunner.setTmpOutputFile(this.tmpOutputFile);
+		return randomOrderRunner;
 	}
 	
 	protected IsolationRunner createIsolationRunner() {

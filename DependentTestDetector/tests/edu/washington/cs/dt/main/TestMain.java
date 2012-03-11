@@ -47,6 +47,14 @@ public class TestMain extends TestCase {
 		Main.main(new String[]{"--minimize=true", "--reverse", "--tests=./exampletests.txt"});
 	}
 	
+	public void testSimpleExamplesRandom() throws ZipException, ClassNotFoundException, IOException {
+		Main.main(new String[]{"--minimize=true", "--randomize", "--tests=./exampletests.txt"});
+	}
+	
+	public void testSimpleExamplesRandomNoExecSeq() throws ZipException, ClassNotFoundException, IOException {
+		Main.main(new String[]{"--minimize=true", "--randomize", "--printexecseq=false", "--tests=./exampletests.txt"});
+	}
+	
 	public void testSimpleExamples3() throws ZipException, ClassNotFoundException, IOException {
 		long start = System.currentTimeMillis();
 		Main.main(new String[]{"--minimize=true", "--combination", "--k=2", "--tests=./exampletests.txt"});

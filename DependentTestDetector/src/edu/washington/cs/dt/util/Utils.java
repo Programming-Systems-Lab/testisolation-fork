@@ -1,8 +1,14 @@
 package edu.washington.cs.dt.util;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 public class Utils {
 	
@@ -64,6 +70,17 @@ public class Utils {
 			list.add(i);
 		}
 		return list;
+	}
+	
+	public static<T> List<T> randomList(Collection<T> coll) {
+		List<T> randomizedList = new ArrayList<T>();
+		randomizedList.addAll(coll);
+		//do randomization
+		Collections.shuffle(randomizedList, new Random(System.currentTimeMillis()));
+		
+		checkTrue(randomizedList.size() == coll.size(), "");
+		
+		return randomizedList;
 	}
 	
 	public static String convertArrayToFlatString(Object array) {
