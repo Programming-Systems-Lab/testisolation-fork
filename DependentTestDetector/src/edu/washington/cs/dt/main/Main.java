@@ -48,6 +48,9 @@ public class Main {
 	@Option("Print stack trace for inspection")
 	public static boolean printstacktrace = false;
 	
+	@Option("Print the test sequence executed before a test")
+	public static boolean printexecseq = true;
+	
 	@Option("Compare stack trace")
 	public static boolean comparestacktrace = true;
 	

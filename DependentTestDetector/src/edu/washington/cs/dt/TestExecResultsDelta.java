@@ -19,6 +19,7 @@ public class TestExecResultsDelta {
 	public final List<String> dependentTests; /*the tests executed before testName */
 	
 	private final boolean printstacktrace;
+	private final boolean printexecseq;
 	
 	public TestExecResultsDelta(String testName, OneTestExecResult intendedResult,
 			List<String> intendedPreTests, OneTestExecResult divergentResult, List<String> dependentTests) {
@@ -30,6 +31,7 @@ public class TestExecResultsDelta {
 		this.dependentTests = new LinkedList<String>();
 		this.dependentTests.addAll(dependentTests);
 		this.printstacktrace = Main.printstacktrace;
+		this.printexecseq = Main.printexecseq;
 	}
 	
 	@Override
@@ -43,16 +45,20 @@ public class TestExecResultsDelta {
 		    sb.append("Stack trace: " + intendedResult.exceptionStackTrace);
 		    sb.append(Globals.lineSep);
 		}
-		sb.append("when executed after: " + intendedPreTests.toString());
-		sb.append(Globals.lineSep);
+		if(printexecseq) {
+		    sb.append("when executed after: " + intendedPreTests.toString());
+		    sb.append(Globals.lineSep);
+		}
 		sb.append("The revealed different behavior: " + divergentResult.result);
 		sb.append(Globals.lineSep);
 		if(printstacktrace) {
 		    sb.append("Stack trace: " + divergentResult.exceptionStackTrace);
 		    sb.append(Globals.lineSep);
 		}
-		sb.append("when executed after: " + dependentTests.toString());
-		sb.append(Globals.lineSep);
+		if(printexecseq) {
+		    sb.append("when executed after: " + dependentTests.toString());
+		    sb.append(Globals.lineSep);
+		}
 		return sb.toString();
 	}
 	
