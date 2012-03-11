@@ -1,4 +1,4 @@
-package edu.washington.cs.dt.main;
+package edu.washington.cs.dt.tools;
 
 import edu.washington.cs.dt.tools.RunTestInFixedOrder;
 import junit.framework.TestCase;

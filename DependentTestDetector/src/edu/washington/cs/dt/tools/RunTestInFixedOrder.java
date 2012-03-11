@@ -54,7 +54,7 @@ public class RunTestInFixedOrder {
 	}
 	
 	private void parse_and_valid_args(String[] args) {
-		Options options = new Options("UnitTestFinder usage: ", RunTestInFixedOrder.class);
+		Options options = new Options("RunTestInFixedOrder usage: ", RunTestInFixedOrder.class);
 	    String[] file_args = options.parse_or_usage(args);
 	    if(file_args.length != 0) {
 	        Utils.flushToStd(file_args);
