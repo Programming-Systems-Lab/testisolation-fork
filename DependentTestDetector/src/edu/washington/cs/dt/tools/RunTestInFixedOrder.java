@@ -10,6 +10,7 @@ import edu.washington.cs.dt.TestExecResult;
 import edu.washington.cs.dt.TestExecResults;
 import edu.washington.cs.dt.runners.AbstractTestRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
+import edu.washington.cs.dt.runners.RandomOrderRunner;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
 import edu.washington.cs.dt.util.Utils;
@@ -27,13 +28,22 @@ public class RunTestInFixedOrder {
 	@Option("The output file for test results")
 	public static String outputFile = "./fixed_order_results.txt";
 	
+	@Option("Randomize the order")
+	public static boolean randomized = false;
+	
 	public static void main(String[] args) {
 		new RunTestInFixedOrder().nonStaticMain(args);
 	}
 	
 	private void nonStaticMain(String[] args) {
 		parse_and_valid_args(args);
-		AbstractTestRunner runner = new FixedOrderRunner(testFile);
+		AbstractTestRunner runner = null;
+		if(!randomized) {
+		    runner = new FixedOrderRunner(testFile);
+		} else {
+			runner = new RandomOrderRunner(testFile);
+		}
+		
 		TestExecResults results = runner.run();
 		Utils.checkTrue(results.getExecutionRecords().size() == 1, "Just a single run");
 		
