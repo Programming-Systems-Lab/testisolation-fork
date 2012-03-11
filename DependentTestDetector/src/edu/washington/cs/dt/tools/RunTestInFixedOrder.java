@@ -29,7 +29,7 @@ public class RunTestInFixedOrder {
 	public static String outputFile = "./fixed_order_results.txt";
 	
 	@Option("Randomize the order")
-	public static boolean randomized = false;
+	public static boolean random = false;
 	
 	public static void main(String[] args) {
 		new RunTestInFixedOrder().nonStaticMain(args);
@@ -38,7 +38,7 @@ public class RunTestInFixedOrder {
 	private void nonStaticMain(String[] args) {
 		parse_and_valid_args(args);
 		AbstractTestRunner runner = null;
-		if(!randomized) {
+		if(!random) {
 		    runner = new FixedOrderRunner(testFile);
 		} else {
 			runner = new RandomOrderRunner(testFile);
