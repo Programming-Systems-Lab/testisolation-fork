@@ -7,6 +7,7 @@ import java.util.Map;
 
 import edu.washington.cs.dt.OneTestExecResult;
 import edu.washington.cs.dt.main.Main;
+import edu.washington.cs.dt.util.Log;
 import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 
@@ -62,7 +63,9 @@ public class DependentTestSetMinimizer extends AbstractMinimizer<String>{
 		}
 //		System.out.println(r);
 //		System.out.println("intended: " + intendedResult);
+		
 		Utils.checkNull(r, "r should not be null.");
+		Log.logln("Result: " + r.result + ", intended: " + intendedResult + " Executed: " + exec_tests);
 		if(r.equals(intendedResult)) {
 			return true;  //the same as the intended result (i.e., executed in a fixed order)
 		} else {

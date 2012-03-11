@@ -11,6 +11,7 @@ import edu.washington.cs.dt.dd.DependentTestSetMinimizer;
 import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
+import edu.washington.cs.dt.util.Log;
 import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 import plume.Option;
@@ -28,6 +29,9 @@ public class TestSequenceSimplifier {
 	
 	@Option("A file containing all simplified test list")
 	public static String outputFile = "./simplified_testlist.txt";
+	
+	@Option("Log file for recording delta debugging steps")
+	public static String logfile = null;
 	
 	public static void main(String[] args) throws IOException {
 		new TestSequenceSimplifier().nonStaticMain(args);
@@ -86,6 +90,9 @@ public class TestSequenceSimplifier {
 	    if(help) {
 	    	Utils.flushToStd(options.usage());
 	        System.exit(1);
+	    }
+	    if(logfile != null) {
+	    	Log.logConfig(logfile);
 	    }
 	    List<String> errorMsg = new LinkedList<String>();
 	    if(testFile == null) {
