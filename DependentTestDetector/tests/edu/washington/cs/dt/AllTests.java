@@ -7,6 +7,7 @@ import edu.washington.cs.dt.runners.TestCombinatorialRunner;
 import edu.washington.cs.dt.runners.TestFixedOrderRunner;
 import edu.washington.cs.dt.runners.TestIsolationRunner;
 import edu.washington.cs.dt.util.TestPermutationGenerator;
+import edu.washington.cs.dt.util.TestRandomization;
 import edu.washington.cs.dt.util.TestSampleTestsInFreshJVM;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -28,6 +29,7 @@ public class AllTests extends TestCase {
 		suite.addTest(TestFixedOrderRunner.suite());
 		suite.addTest(TestIsolationRunner.suite());
 		
+		suite.addTest(TestRandomization.suite());
 		suite.addTest(TestPermutationGenerator.suite());
 		suite.addTest(TestSampleTestsInFreshJVM.suite());
 		
