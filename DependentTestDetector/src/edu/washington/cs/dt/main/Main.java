@@ -1,8 +1,10 @@
 package edu.washington.cs.dt.main;
 
 import java.io.File;
+import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import edu.washington.cs.dt.DependentTestIdentifier;
 import edu.washington.cs.dt.TestExecResultsDelta;
@@ -167,12 +169,18 @@ public class Main {
 			if(round == 1) {
 			    diffs = detector.findDependenceForRandomization();
 			} else {
+				Set<String> dependentTests = new LinkedHashSet<String>();
 				//randomize for a few times
 				for(int i = 0; i < round; i++) {
 					diffs = detector.findDependenceForRandomization();
 					TestExecResultsDelta.writeToFile(diffs,
 							new File(report).getParentFile().getAbsolutePath() + Globals.fileSep + "randomize_" + i+ ".txt");
+					for(TestExecResultsDelta diff : diffs) {
+						dependentTests.add(diff.testName);
+					}
 				}
+				Files.writeToFileWithNoExp(dependentTests,
+						new File(report).getParentFile().getAbsolutePath() + Globals.fileSep + "all_tests.txt");
 				return;
 			}
 		} else {
