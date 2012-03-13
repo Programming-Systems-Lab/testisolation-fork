@@ -34,4 +34,11 @@ public class JarViewer {
     	}
     	return strs;
     }
+    
+    public static void main(String[] args) throws ZipException, IOException {
+    	Collection<String> content = getContentsAsStr(new File(args[0]));
+    	for(String c : content) {
+    		System.out.println(c);
+    	}
+    }
 }
