@@ -8,6 +8,7 @@ import edu.washington.cs.dt.DependentTestIdentifier;
 import edu.washington.cs.dt.TestExecResultsDelta;
 import edu.washington.cs.dt.tools.UnitTestFinder;
 import edu.washington.cs.dt.util.Files;
+import edu.washington.cs.dt.util.Globals;
 import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 import plume.Option;
@@ -75,6 +76,9 @@ public class Main {
 	@Option("Execute tests in a randomized order")
 	public static boolean randomize = false;
 	
+	@Option("How many rounds to randomize the test list")
+	public static int round = 1;
+	
 	@Option("The length of each combination")
 	public static int k = -1;
 	
@@ -127,14 +131,15 @@ public class Main {
 	    	}
 	    	chosenOptions++;
 	    }
-	    
 	    if(chosenOptions == 0) {
 	    	errorMsg.add("You must chose one option for detecting dependent tests: --isolate, --reverse, or --combination.");
 	    }
 	    if(chosenOptions > 1) {
 	    	errorMsg.add("You can only chose one option for detecting dependent tests: --isolate, --reverse, or --combination.");
 	    }
-	    
+	    if(round < 1) {
+	    	errorMsg.add("You should at least specifiy 1 round via --round");
+	    }
 	    if(!errorMsg.isEmpty()) {
 	    	Utils.flushToStd(errorMsg.toArray(new String[0]));
 	    	Utils.flushToStd(options.usage());
@@ -159,7 +164,17 @@ public class Main {
 		} else if (combination) {
 			diffs = detector.findDependenceForCombination(k);
 		} else if (randomize) {
-			diffs = detector.findDependenceForRandomization();
+			if(round == 1) {
+			    diffs = detector.findDependenceForRandomization();
+			} else {
+				//randomize for a few times
+				for(int i = 0; i < round; i++) {
+					diffs = detector.findDependenceForRandomization();
+					TestExecResultsDelta.writeToFile(diffs,
+							new File(report).getParentFile().getAbsolutePath() + Globals.fileSep + "randomize_" + i+ ".txt");
+				}
+				return;
+			}
 		} else {
 			throw new RuntimeException("Bugs in argument processing.");
 		}

@@ -38,7 +38,9 @@ public class JarViewer {
     public static void main(String[] args) throws ZipException, IOException {
     	Collection<String> content = getContentsAsStr(new File(args[0]));
     	for(String c : content) {
-    		System.out.println(c);
+    		if(c.endsWith(".class")) {
+    		    System.out.println(c);
+    		}
     	}
     }
 }
