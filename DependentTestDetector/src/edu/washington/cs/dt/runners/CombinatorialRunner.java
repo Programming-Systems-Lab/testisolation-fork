@@ -7,6 +7,7 @@ import java.util.Map;
 import edu.washington.cs.dt.OneTestExecResult;
 import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.TestExecResults;
+import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.PermutationGenerator;
 import edu.washington.cs.dt.util.TestExecUtils;
 
@@ -33,7 +34,12 @@ public class CombinatorialRunner extends AbstractTestRunner {
 		//finally record all failed tests (with its prefixed tests)
 		int total = super.junitTestList.size();
 		PermutationGenerator generator = new PermutationGenerator(total, this.k);
+		
+		int count = 0;
+		int totalnum = generator.getPermutationNum();
 		while(generator.hasNext()) {
+			long starttime = System.currentTimeMillis();
+			
 			/*get a list of test to run*/
 			int[] testIndices = generator.getNext();
 			List<String> tests = new LinkedList<String>();
@@ -46,6 +52,13 @@ public class CombinatorialRunner extends AbstractTestRunner {
 					super.getTmpOutputFile(), tests);
 			result.addExecutionResults(singleRun);
 			
+			if(Main.showProgress) {
+				long endtime = System.currentTimeMillis();
+				long elpased = endtime - starttime;
+				float seconds = (totalnum - count)*elpased/(1000);
+				System.out.println("Run the: " + count + " / " + totalnum + " test. Still need: " + seconds + " seconds to finish");
+			}
+			count++;
 		}
 		return result;
 	}

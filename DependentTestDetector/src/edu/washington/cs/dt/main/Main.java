@@ -87,6 +87,9 @@ public class Main {
 	@Option("The excluded stack trace regular expression")
 	public static String excludeRegex = "^junit.";
 	
+	@Option("Show progress in terms of percentage. It will make the console messy.")
+	public static boolean showProgress = false;
+	
 	@Unpublicized
 	@Option("Remove the temp file")
 	public static boolean removetempfile = true;

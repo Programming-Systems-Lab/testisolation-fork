@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.washington.cs.dt.TestExecResults;
+import edu.washington.cs.dt.main.Main;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,6 +31,8 @@ public class TestCombinatorialRunner extends TestCase {
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.testStr3");
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.testStr4");
 		tests.add("edu.washington.cs.dt.samples.TestShareGlobals.testStr5");
+		
+		Main.showProgress = true;
 		
 		AbstractTestRunner runner = new CombinatorialRunner(tests, 2);
 		TestExecResults results = runner.run();
