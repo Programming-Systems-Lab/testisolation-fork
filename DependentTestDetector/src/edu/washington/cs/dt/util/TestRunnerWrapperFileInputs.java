@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import edu.washington.cs.dt.RESULT;
+import edu.washington.cs.dt.main.Main;
 
 import junit.framework.TestResult;
 import junit.textui.TestRunner;
@@ -53,12 +54,12 @@ public class TestRunnerWrapperFileInputs {
 					if(r.errorCount() > 0) {
 						Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test");
 						result = RESULT.ERROR.name();
-						stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement());
+						stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
 					}
 					if(r.failureCount() > 0) {
 						Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test");
 						result = RESULT.FAILURE.name();
-						stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement());
+						stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
 					}
 				}
 			} catch (Exception e) {

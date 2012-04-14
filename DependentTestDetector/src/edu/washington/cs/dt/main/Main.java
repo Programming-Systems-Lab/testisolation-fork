@@ -84,6 +84,9 @@ public class Main {
 	@Option("The length of each combination")
 	public static int k = -1;
 	
+	@Option("The excluded stack trace regular expression")
+	public static String excludeRegex = "^junit.";
+	
 	@Unpublicized
 	@Option("Remove the temp file")
 	public static boolean removetempfile = true;

@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import junit.framework.TestFailure;
 
@@ -95,11 +97,19 @@ public class TestExecUtils {
 		return ret;
 	}
 	
-	public static String flatStackTrace(TestFailure failure) {
+	public static String flatStackTrace(TestFailure failure, String excludeRegex) {
+		Pattern p = Pattern.compile(excludeRegex);
+	    Matcher m = null;
+	    
 		Throwable t = failure.thrownException();
 		StringBuilder sb = new StringBuilder();
 		for(StackTraceElement element : t.getStackTrace()) {
-			sb.append(element.toString());
+			String stackFrame = element.toString();
+			m = p.matcher(stackFrame);
+			if(excludeRegex != null && m.find()) {
+				continue;
+			}
+			sb.append(stackFrame);
 			sb.append(" - ");
 		}
 		return sb.toString();
