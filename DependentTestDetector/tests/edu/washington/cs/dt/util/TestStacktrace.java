@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import edu.washington.cs.dt.main.Main;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -24,5 +26,17 @@ public class TestStacktrace extends TestCase {
 				className + ".test5"
 		};
 		TestRunnerWrapper.main(args);
+	}
+	
+	public void testAssertionWrong() {
+		String regex = Main.excludeRegex;
+		
+		String str1 = "junit.framework.TestRunner";
+		
+		Pattern p = Pattern.compile(regex);
+	    assertTrue(TestExecUtils.isMatched(str1, p));
+	    
+	    String str2 = "junit.framework.Assert";;
+	    assertTrue(!TestExecUtils.isMatched(str2, p));
 	}
 }
