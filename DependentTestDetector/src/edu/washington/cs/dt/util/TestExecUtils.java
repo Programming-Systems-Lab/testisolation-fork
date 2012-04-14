@@ -97,6 +97,8 @@ public class TestExecUtils {
 		return ret;
 	}
 	
+	public static final String JUNIT_ASSERT = "junit.framework.Assert";
+	
 	public static String flatStackTrace(TestFailure failure, String excludeRegex) {
 		Pattern p = Pattern.compile(excludeRegex);
 	    Matcher m = null;
@@ -106,7 +108,7 @@ public class TestExecUtils {
 		for(StackTraceElement element : t.getStackTrace()) {
 			String stackFrame = element.toString();
 			m = p.matcher(stackFrame);
-			if(excludeRegex != null && m.find()) {
+			if(excludeRegex != null && m.find() && !(stackFrame.startsWith(JUNIT_ASSERT))) {
 				continue;
 			}
 			sb.append(stackFrame);
@@ -115,4 +117,11 @@ public class TestExecUtils {
 		return sb.toString();
 	}
 	
+	public static boolean isMatched(String target, Pattern p) {
+		Matcher m = p.matcher(target);
+		if( m.find() && !(target.startsWith(JUNIT_ASSERT))) {
+			return true;
+		}
+		return false;
+	}
 }
