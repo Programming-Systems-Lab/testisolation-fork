@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.zip.ZipException;
 
+import edu.washington.cs.dt.samples.junit4x.ExampleForUnitTestFinder;
+
 import junit.framework.TestCase;
 
 public class TestUnitTestFinder extends TestCase {
@@ -36,8 +38,18 @@ public class TestUnitTestFinder extends TestCase {
 		UnitTestFinder.main(new String[]{"--pathOrJarFile=./a.jar"});
 	}
 	
+	public void testFindJUnit4() {
+		UnitTestFinder.junit4 = true;
+		UnitTestFinder finder = new UnitTestFinder();
+		List<String> tests = finder.getUnitTestsFromClass(ExampleForUnitTestFinder.class);
+		System.out.println(tests);
+		assertEquals("[edu.washington.cs.dt.samples.junit4x.ExampleForUnitTestFinder.testX]",
+				tests.toString());
+	}
+	
 	public void tearDown() {
 		UnitTestFinder.pathOrJarFile = null;
+		UnitTestFinder.junit4 = false;
 	}
 	
 }
