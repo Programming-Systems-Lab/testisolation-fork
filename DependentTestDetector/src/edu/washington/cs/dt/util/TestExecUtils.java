@@ -101,25 +101,35 @@ public class TestExecUtils {
 	
 	public static String flatStackTrace(TestFailure failure, String excludeRegex) {
 		Pattern p = Pattern.compile(excludeRegex);
-	    Matcher m = null;
-	    
 		Throwable t = failure.thrownException();
+		String[] stackTraces = extractStackTraces(t);
+		String flatString = flatStrings(stackTraces, p, JUNIT_ASSERT);
+		return flatString;
+	}
+	
+	public static String flatStrings(String[] strs, Pattern excludeRegex, String exceptedPrefix) {
 		StringBuilder sb = new StringBuilder();
-		for(StackTraceElement element : t.getStackTrace()) {
-			String stackFrame = element.toString();
-			m = p.matcher(stackFrame);
-			if(excludeRegex != null && m.find() && !(stackFrame.startsWith(JUNIT_ASSERT))) {
+		for(String str : strs) {
+			if(shouldExclude(str, excludeRegex, exceptedPrefix)) {
 				continue;
 			}
-			sb.append(stackFrame);
+			sb.append(str);
 			sb.append(" - ");
 		}
 		return sb.toString();
 	}
 	
-	public static boolean isMatched(String target, Pattern p) {
+	public static String[] extractStackTraces(Throwable t) {
+		String[] traces = new String[t.getStackTrace().length];
+		for(int i = 0; i < t.getStackTrace().length; i++) {
+			traces[i] = t.getStackTrace()[i].toString().trim();
+		}
+		return traces;
+	}
+	
+	public static boolean shouldExclude(String target, Pattern p, String exceptedPrefix) {
 		Matcher m = p.matcher(target);
-		if( m.find() && !(target.startsWith(JUNIT_ASSERT))) {
+		if( m.find() && !(target.startsWith(exceptedPrefix))) {
 			return true;
 		}
 		return false;

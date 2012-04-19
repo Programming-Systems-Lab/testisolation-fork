@@ -9,6 +9,7 @@ import edu.washington.cs.dt.runners.TestIsolationRunner;
 import edu.washington.cs.dt.util.TestPermutationGenerator;
 import edu.washington.cs.dt.util.TestRandomization;
 import edu.washington.cs.dt.util.TestSampleTestsInFreshJVM;
+import edu.washington.cs.dt.util.TestStacktrace;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -32,6 +33,8 @@ public class AllTests extends TestCase {
 		suite.addTest(TestRandomization.suite());
 		suite.addTest(TestPermutationGenerator.suite());
 		suite.addTest(TestSampleTestsInFreshJVM.suite());
+		
+		suite.addTest(TestStacktrace.suite());
 		
 		return suite;
 	}
