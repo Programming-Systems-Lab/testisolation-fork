@@ -39,6 +39,11 @@ public final class Files {
 	  if(f.exists()) {
 		  return false;
 	  }
+	  //see the parent folder
+	  File parent = f.getParentFile();
+	  if(!parent.exists()) {
+		  parent.mkdirs();
+	  }
 	  return f.createNewFile();
   }
   

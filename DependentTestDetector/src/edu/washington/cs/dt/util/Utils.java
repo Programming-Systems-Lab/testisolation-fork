@@ -23,6 +23,9 @@ public class Utils {
 	
 	public static void checkTrue(boolean condition, String message) {
 		if(!condition) {
+			Log.logln("Violating condition: ");
+			Log.logln(message);
+			Log.log(Globals.lineSep);
 			throw new RuntimeException(message);
 		}
 	}

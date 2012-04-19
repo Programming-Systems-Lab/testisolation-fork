@@ -42,12 +42,14 @@ public class TestRunnerWrapper {
 					result = RESULT.PASS.name();
 				} else {
 					if(r.errorCount() > 0) {
-						Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test");
+						Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test: " + test
+								+ ", two errors: " + CodeUtils.flattenFailrues(r.errors()));
 						result = RESULT.ERROR.name();
 						stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
 					}
 					if(r.failureCount() > 0) {
-						Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test");
+						Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test: " + test
+								+ ", two failures: " + CodeUtils.flattenFailrues(r.failures()));
 						result = RESULT.FAILURE.name();
 						stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
 					}

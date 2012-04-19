@@ -10,6 +10,8 @@ import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.TestExecUtils;
 
 public class IsolationRunner extends AbstractTestRunner {
+	
+	private float executionTime = 0.0f;
 
 	public IsolationRunner(List<String> tests) {
 		super(tests);
@@ -31,14 +33,19 @@ public class IsolationRunner extends AbstractTestRunner {
 					super.getTmpOutputFile(), Collections.singletonList(test));
 			result.addExecutionResults(singleRun);
 			
+			//record the used time
+			long endtime = System.currentTimeMillis();
+			float elapsed = (float)(endtime - starttime) / 1000;
+			executionTime = executionTime + elapsed;
 			if(Main.showProgress) {
-				long endtime = System.currentTimeMillis();
-				long elpased = endtime - starttime;
-				float seconds = (junitTestList.size() - count)*elpased / (1000);
-				System.out.println("Run the: " + count + " / " + junitTestList.size() + " test, still need: " + seconds + " seconds to finish.");
+				float estLeftTime = (executionTime / count)*(junitTestList.size() - count);
+				System.out.println("Run the: " + count + " / " + junitTestList.size() + " test using: "
+						+ executionTime + " seconds, still need: " + estLeftTime + " seconds to finish.");
 			}
 			count++;
 		}
+		
+		System.out.println("Total execution time: " + executionTime + " seconds");
 		
 		return result;
 	}

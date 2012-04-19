@@ -113,6 +113,9 @@ public class TestExecUtils {
 			if(shouldExclude(str, excludeRegex, exceptedPrefix)) {
 				continue;
 			}
+			if(str.startsWith("edu.washington.cs.dt")) {
+				continue;
+			}
 			sb.append(str);
 			sb.append(" - ");
 		}

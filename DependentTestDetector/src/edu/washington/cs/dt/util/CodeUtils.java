@@ -4,6 +4,9 @@ import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.util.Enumeration;
+
+import junit.framework.TestFailure;
 
 public class CodeUtils {
 	public static final String TESTCASE = "junit.framework.TestCase";
@@ -61,5 +64,14 @@ public class CodeUtils {
 				absoluteFilePath.length() - ".class".length());
 		
 	    return clazzName.replace(File.separatorChar, '.');
+	}
+	
+	public static String flattenFailrues(Enumeration<TestFailure> failIt) {
+		StringBuilder sb = new StringBuilder();
+		while(failIt.hasMoreElements()) {
+			sb.append(failIt.nextElement());
+			sb.append(Globals.lineSep);
+		}
+		return sb.toString();
 	}
 }
