@@ -28,6 +28,9 @@ public class UnitTestFinder {
 	@Option("The jar file name or path (must be in classpath) where to find unit tests")
 	public static String pathOrJarFile; //it can be a path or a jar
 	
+	@Option("Support JUnit 4.x tests")
+	public static boolean junit4 = false;
+	
 	public List<String> findAllTests() throws ClassNotFoundException, ZipException, IOException {
 		File f = new File(pathOrJarFile);
 		if(f.isFile()) {
@@ -39,32 +42,23 @@ public class UnitTestFinder {
 		}
 	}
 	
-	private List<String> getAllTestsFromJar(File jarFile) throws ZipException, IOException, ClassNotFoundException {
+	List<String> getAllTestsFromJar(File jarFile) throws ZipException, IOException, ClassNotFoundException {
 		Collection<String> contents = JarViewer.getContentsAsStr(jarFile);
 		List<String> tests = new LinkedList<String>();
 		for(String content : contents) {
 			if(content.endsWith(".class")) {
 				String clzName = content.replace("/", ".").substring(0, content.indexOf(".class"));
 //				System.out.println(clzName);
-				//skip checking whether it is JUnit class or not
 				Class<?> clz = Class.forName(clzName);
-				if(!CodeUtils.isInstantiableJUnitClass(clz)) {
-			    	continue;
-			    }
-			    Method[] methods = clz.getMethods();
-				for(Method method : methods) {
-					if(CodeUtils.isJUnitMethod(method)) {
-//					    System.out.println("   method: " + method.getName());
-					    String testName = clz.getName() + "." + method.getName();
-					    tests.add(testName);
-					}
-				}
+				
+				List<String> junitTests = getUnitTestsFromClass(clz);
+			    tests.addAll(junitTests);
 			}
 		}
 		return tests;
 	}
 	
-	private List<String> getAllTestsFromDir(File dir) throws ClassNotFoundException {
+	List<String> getAllTestsFromDir(File dir) throws ClassNotFoundException {
 		Collection<File> files = Files.listFiles(dir, null, true);
 		List<String> tests = new LinkedList<String>();
 		for(File f : files) {
@@ -78,18 +72,33 @@ public class UnitTestFinder {
 			    	 System.err.println("Can not load: " + clzName);
 			    	 continue;
 			    }
-			    //skip checking whether it is JUnit class or not
-			    if(!CodeUtils.isInstantiableJUnitClass(clz)) {
-			    	continue;
+			    
+			    List<String> junitTests = getUnitTestsFromClass(clz);
+			    tests.addAll(junitTests);
+			    
+			}
+		}
+		return tests;
+	}
+	
+	List<String> getUnitTestsFromClass(Class<?> clz) {
+		List<String> tests = new LinkedList<String>();
+		Method[] methods = clz.getMethods();
+		for(Method method : methods) {
+			boolean isUnitTest = false;
+			if(junit4) {
+				if(CodeUtils.isJUnit4XMethod(method)) {
+					isUnitTest = true;
+			        
 			    }
-			    Method[] methods = clz.getMethods();
-				for(Method method : methods) {
-					if(CodeUtils.isJUnitMethod(method)) {
-//					    System.out.println("   method: " + method.getName());
-					    String testName = clz.getName() + "." + method.getName();
-					    tests.add(testName);
-					}
-				}
+			} else {
+			    if(CodeUtils.isJUnit3XMethod(method)) {
+			    	isUnitTest = true;
+			    }
+			}
+			if(isUnitTest) {
+				String testName = clz.getName() + "." + method.getName();
+		        tests.add(testName);
 			}
 		}
 		return tests;
