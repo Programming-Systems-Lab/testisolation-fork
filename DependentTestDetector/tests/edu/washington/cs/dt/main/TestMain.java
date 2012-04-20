@@ -66,4 +66,8 @@ public class TestMain extends TestCase {
 		Main.main(new String[]{"--minimize=true", "--combination", "--k=2", "--tests=./exampletests.txt", "--enablecache=false"});
 		System.out.println("Without cache: " + (System.currentTimeMillis() - start));
 	}
+	
+	public void testJUnit4DependentTests() {
+		Main.main(new String[]{"--minimize=false", "--junit4=true", "--isolate", "--tests=./tests/edu/washington/cs/dt/samples/junit4x/junit4dependenttests.txt"});
+	}
 }

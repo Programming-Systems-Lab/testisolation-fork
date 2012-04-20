@@ -33,6 +33,9 @@ public class Main {
 	@Option("Show all options")
 	public static boolean help = false;
 	
+	@Option("Execute JUnit4 tests - an experimental option")
+	public static boolean junit4 = false;
+	
 	@Option("Print out all progress messages")
 	public static boolean verbose = true;
 	

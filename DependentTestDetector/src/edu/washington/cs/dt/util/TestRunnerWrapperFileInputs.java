@@ -40,32 +40,42 @@ public class TestRunnerWrapperFileInputs {
 		StringBuilder sb = new StringBuilder();
 		/*create a test runner*/
 		TestRunner aTestRunner= new TestRunner();
-		for(String test : tests) {
-			String[] junitArgs = new String[]{"-m", test};
+		for(String fullTestName : tests) {
+			boolean useJUnit4 = CodeUtils.useJUnit4(fullTestName);
 			/*check the results*/
 			String result = null;
 			String stackTrace = TestExecUtils.noStackTrace;
-			try {
-//				System.out.println(Utils.convertArrayToFlatString(junitArgs));
-				TestResult r = aTestRunner.start(junitArgs);
-				if(r.wasSuccessful()) {
-					result = RESULT.PASS.name();
-				} else {
-					if(r.errorCount() > 0) {
-						Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test");
-						result = RESULT.ERROR.name();
-						stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
+			
+			if(useJUnit4) {
+				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
+				executor.executeJUnit4();
+				result = executor.getResult();
+				stackTrace = executor.getStackTrace();
+			} else {
+				try {
+					String[] junitArgs = new String[]{"-m", fullTestName};
+//					System.out.println(Utils.convertArrayToFlatString(junitArgs));
+					TestResult r = aTestRunner.start(junitArgs);
+					if(r.wasSuccessful()) {
+						result = RESULT.PASS.name();
+					} else {
+						if(r.errorCount() > 0) {
+							Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test");
+							result = RESULT.ERROR.name();
+							stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
+						}
+						if(r.failureCount() > 0) {
+							Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test");
+							result = RESULT.FAILURE.name();
+							stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
+						}
 					}
-					if(r.failureCount() > 0) {
-						Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test");
-						result = RESULT.FAILURE.name();
-						stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
-					}
+				} catch (Exception e) {
+					throw new RuntimeException(e);
 				}
-			} catch (Exception e) {
-				throw new RuntimeException(e);
 			}
-			sb.append(test);
+			
+			sb.append(fullTestName);
 			sb.append(TestExecUtils.testResultSep);
 			sb.append(result);
 			sb.append(TestExecUtils.resultExcepSep);

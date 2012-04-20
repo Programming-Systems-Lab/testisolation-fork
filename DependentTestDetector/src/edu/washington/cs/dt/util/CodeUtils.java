@@ -2,6 +2,7 @@ package edu.washington.cs.dt.util;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Enumeration;
@@ -23,7 +24,7 @@ public class CodeUtils {
 		return has;
 	}
 	
-	public static boolean isJUnitClass(Class<?> clz) {
+	public static boolean isJUnit3Class(Class<?> clz) {
 		Class<?> superClass = clz.getSuperclass();
 		if(superClass == null) {
 			return false;
@@ -41,7 +42,13 @@ public class CodeUtils {
 		return false;
 	}
 	
-	public static boolean isJUnitMethod(Method method) {
+	public static boolean isJUnit4XMethod(Method method) {
+		org.junit.Test testAnn = method.getAnnotation(org.junit.Test.class);
+		org.junit.Ignore ignoreAnn = method.getAnnotation(org.junit.Ignore.class);
+		return testAnn != null && ignoreAnn == null;
+	}
+	
+	public static boolean isJUnit3XMethod(Method method) {
 		return Modifier.isPublic(method.getModifiers()) //&& !Modifier.isStatic(method.getModifiers())
 		    && method.getName().startsWith("test") && method.getParameterTypes().length == 0
 		    && method.getReturnType().equals(void.class);
@@ -73,5 +80,30 @@ public class CodeUtils {
 			sb.append(Globals.lineSep);
 		}
 		return sb.toString();
+	}
+	
+	public static boolean useJUnit4(String fullTestName) {
+		String clzName = fullTestName.substring(0, fullTestName.lastIndexOf("."));
+		try {
+			Class<?> clz = Class.forName(clzName);
+			boolean isJUnit3Class = isJUnit3Class(clz);
+			return !isJUnit3Class;
+		} catch (Throwable e) {
+			e.printStackTrace();
+			throw new Error(e);
+		}
+	}
+	
+	//this is useless
+	public static String getStaticValue(String className, String fieldName) {
+		try {
+			Class<?> clz = CodeUtils.class.getClassLoader().loadClass(className);
+			Field f = clz.getField(fieldName);
+			Object v = f.get(null);
+			return v == null ? null : v.toString();
+		} catch (Throwable e) {
+			e.printStackTrace();
+			throw new Error(e);
+		}
 	}
 }
