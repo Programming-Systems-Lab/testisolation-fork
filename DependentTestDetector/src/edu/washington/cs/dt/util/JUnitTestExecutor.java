@@ -60,13 +60,20 @@ class JUnitTestExecutor {
         JUnitCore core = new JUnitCore();
 		Request r = Request.method(this.junitTest, this.junitMethod);
 		Result re = core.run(r);
-		Utils.checkTrue(re.getRunCount() == 1, "Running: " + this.junitMethod);
+		//FIXME the run count can be > 1, e.g., testLazy in hibernate
+		if(re.getRunCount() > 1) {
+			Log.logln("FIXME: Running: " + this.junitMethod + ", count: " + re.getRunCount());
+		}
 		
 		if(re.getFailureCount() == 0) {
 			result = RESULT.PASS.name();
 		} else {
-			Utils.checkTrue(re.getFailureCount() == 1,
-					"Running: " + this.fullMethodName + ", failure count: " + re.getFailureCount());
+			if(re.getFailureCount() > 1) {
+				//FIXME is there any nested test? so getFailureCount() will > 1
+				//e.g., running org.hibernate.test.annotations.id.sequences.JoinColumnOverrideTest.testBlownPrecision
+				//gives 2 failures
+				Log.logln("FIXME: Running: " + this.fullMethodName + ", failure count: " + re.getFailureCount());
+			}
 			//check whether it is a failure or an error
             Failure f = re.getFailures().get(0);
             Throwable excep = f.getException();

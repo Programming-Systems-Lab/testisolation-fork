@@ -15,6 +15,7 @@ import edu.washington.cs.dt.util.CodeUtils;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
 import edu.washington.cs.dt.util.JarViewer;
+import edu.washington.cs.dt.util.Log;
 import edu.washington.cs.dt.util.Utils;
 
 public class UnitTestFinder {
@@ -30,6 +31,9 @@ public class UnitTestFinder {
 	
 	@Option("Support JUnit 4.x tests")
 	public static boolean junit4 = false;
+	
+	@Option("Log file")
+	public static String log = null;
 	
 	public List<String> findAllTests() throws ClassNotFoundException, ZipException, IOException {
 		File f = new File(pathOrJarFile);
@@ -49,10 +53,14 @@ public class UnitTestFinder {
 			if(content.endsWith(".class")) {
 				String clzName = content.replace("/", ".").substring(0, content.indexOf(".class"));
 //				System.out.println(clzName);
-				Class<?> clz = Class.forName(clzName);
-				
-				List<String> junitTests = getUnitTestsFromClass(clz);
-			    tests.addAll(junitTests);
+				try {
+				   Class<?> clz = Class.forName(clzName);
+				   List<String> junitTests = getUnitTestsFromClass(clz);
+			       tests.addAll(junitTests);
+				} catch (Throwable e) {
+					Log.logln("ERROR in reflectively load class: " + clzName);
+					Log.logln("    An exception: " + e + " is thrown");
+				}
 			}
 		}
 		return tests;
@@ -119,6 +127,10 @@ public class UnitTestFinder {
 	
 	public static void main(String[] args) throws ClassNotFoundException, ZipException, IOException {
 		parse_and_validate_args(args);
+		//set the log option
+		if(log != null) {
+		    Log.logConfig(log);
+		}
 		UnitTestFinder finder = new UnitTestFinder();
 		List<String> allTests = finder.findAllTests();
 		finder.saveToFile(allTests);
