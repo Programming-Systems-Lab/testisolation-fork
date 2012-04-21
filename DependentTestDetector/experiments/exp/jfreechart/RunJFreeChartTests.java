@@ -4,7 +4,7 @@ import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.Log;
 import junit.framework.TestCase;
 
-public class RunJFreeChart extends TestCase {
+public class RunJFreeChartTests extends TestCase {
 	
 	public void testRunInIsolation() {
 		Log.logConfig("./log-jfreechart.txt");
