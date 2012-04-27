@@ -1,3 +1,6 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package exp.hibernate;
 
 import java.io.IOException;

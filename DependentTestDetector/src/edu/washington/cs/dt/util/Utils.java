@@ -1,14 +1,15 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package edu.washington.cs.dt.util;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
 
 public class Utils {
 	

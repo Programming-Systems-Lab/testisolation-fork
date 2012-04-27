@@ -1,7 +1,9 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package edu.washington.cs.dt.util;
 
 import java.io.IOException;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import edu.washington.cs.dt.main.Main;

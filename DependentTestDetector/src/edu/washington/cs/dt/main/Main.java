@@ -1,3 +1,6 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package edu.washington.cs.dt.main;
 
 import java.io.File;
@@ -8,7 +11,6 @@ import java.util.Set;
 
 import edu.washington.cs.dt.DependentTestIdentifier;
 import edu.washington.cs.dt.TestExecResultsDelta;
-import edu.washington.cs.dt.tools.UnitTestFinder;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
 import edu.washington.cs.dt.util.TestExecUtils;

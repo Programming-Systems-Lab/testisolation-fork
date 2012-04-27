@@ -1,4 +1,6 @@
-// Copyright 2010 Google Inc. All Rights Reserved.
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package edu.washington.cs.dt.util;
 
 import java.io.ByteArrayOutputStream;

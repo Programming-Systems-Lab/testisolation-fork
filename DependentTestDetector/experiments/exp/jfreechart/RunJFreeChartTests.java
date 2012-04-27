@@ -1,3 +1,6 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package exp.jfreechart;
 
 import edu.washington.cs.dt.main.Main;

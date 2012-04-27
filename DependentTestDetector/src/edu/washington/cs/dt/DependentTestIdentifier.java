@@ -1,10 +1,11 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */ 
 package edu.washington.cs.dt;
 
 import java.util.Collections;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 
 import edu.washington.cs.dt.dd.DependentTestSetMinimizer;
 import edu.washington.cs.dt.main.Main;

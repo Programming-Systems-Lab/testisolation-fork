@@ -1,10 +1,12 @@
+/** Copyright 2012 University of Washington. All Rights Reserved.
+ *  @author Sai Zhang
+ */
 package edu.washington.cs.dt.runners;
 
 import java.util.List;
 import java.util.Map;
 
 import edu.washington.cs.dt.OneTestExecResult;
-import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.TestExecResults;
 import edu.washington.cs.dt.util.TestExecUtils;
 
