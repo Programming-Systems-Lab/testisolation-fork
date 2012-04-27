@@ -47,10 +47,12 @@ public class UnitTestFinder {
 	}
 	
 	List<String> getAllTestsFromJar(File jarFile) throws ZipException, IOException, ClassNotFoundException {
+		Log.logln("Looking classes in: " + jarFile);
 		Collection<String> contents = JarViewer.getContentsAsStr(jarFile);
 		List<String> tests = new LinkedList<String>();
 		for(String content : contents) {
 			if(content.endsWith(".class")) {
+				Log.logln("processing class: " + content);
 				String clzName = content.replace("/", ".").substring(0, content.indexOf(".class"));
 //				System.out.println(clzName);
 				try {
