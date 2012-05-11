@@ -35,6 +35,9 @@ public class UnitTestFinder {
 	@Option("Support JUnit 4.x tests")
 	public static boolean junit4 = false;
 	
+	@Option("Find both Junit 3.x and 4.x tests")
+	public static boolean junit3and4 = false;
+	
 	@Option("Log file")
 	public static String log = null;
 	
@@ -51,6 +54,8 @@ public class UnitTestFinder {
 	
 	List<String> getAllTestsFromJar(File jarFile) throws ZipException, IOException, ClassNotFoundException {
 		Log.logln("Looking classes in: " + jarFile);
+		int totalTestClassNum = 0;
+		int totalJunitTestsNum = 0;
 		Collection<String> contents = JarViewer.getContentsAsStr(jarFile);
 		List<String> tests = new LinkedList<String>();
 		for(String content : contents) {
@@ -62,12 +67,18 @@ public class UnitTestFinder {
 				   Class<?> clz = Class.forName(clzName);
 				   List<String> junitTests = getUnitTestsFromClass(clz);
 			       tests.addAll(junitTests);
+			       if(!junitTests.isEmpty()) {
+			           Log.logln("   has: " + junitTests.size() + " unit tests");
+			           totalTestClassNum++;
+			           totalJunitTestsNum += junitTests.size();
+			       }
 				} catch (Throwable e) {
 					Log.logln("ERROR in reflectively load class: " + clzName);
 					Log.logln("    An exception: " + e + " is thrown");
 				}
 			}
 		}
+		Log.logln("Number of test class (with >0 tests: " + totalTestClassNum + ", total tests: " + totalJunitTestsNum);
 		return tests;
 	}
 	
@@ -99,16 +110,16 @@ public class UnitTestFinder {
 		Method[] methods = clz.getMethods();
 		for(Method method : methods) {
 			boolean isUnitTest = false;
-			if(junit4) {
-				if(CodeUtils.isJUnit4XMethod(method)) {
-					isUnitTest = true;
-			        
-			    }
+			if(junit3and4) {
+				isUnitTest = (CodeUtils.isJUnit4XMethod(method) || CodeUtils.isJUnit3XMethod(method));
 			} else {
-			    if(CodeUtils.isJUnit3XMethod(method)) {
-			    	isUnitTest = true;
+			    if(junit4) {
+			    	isUnitTest = CodeUtils.isJUnit4XMethod(method);
+			    } else {
+			    	isUnitTest = CodeUtils.isJUnit3XMethod(method);
 			    }
 			}
+			
 			if(isUnitTest) {
 				String testName = clz.getName() + "." + method.getName();
 		        tests.add(testName);
