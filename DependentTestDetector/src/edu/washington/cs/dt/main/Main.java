@@ -32,6 +32,8 @@ public class Main {
 	 * output: a report output file (default by print)
 	 * */
    
+	public static String VERSION = "Dependent Test Detector, Version 0.2, May 18, 2012";
+	
 	@Option("Show all options")
 	public static boolean help = false;
 	
@@ -127,6 +129,7 @@ public class Main {
 	        System.exit(1);
 	    }
 	    if(help) {
+	    	Utils.flushToStd(new String[]{VERSION});
 	    	Utils.flushToStd(options.usage());
 	        System.exit(1);
 	    }
