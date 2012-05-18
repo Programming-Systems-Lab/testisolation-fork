@@ -3,12 +3,20 @@
  */
 package edu.washington.cs.dt.runners;
 
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import edu.washington.cs.dt.OneTestExecResult;
+import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.TestExecResults;
 import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.Files;
+import edu.washington.cs.dt.util.Globals;
+import edu.washington.cs.dt.util.Utils;
 
 public abstract class AbstractTestRunner {
 
@@ -53,4 +61,48 @@ public abstract class AbstractTestRunner {
 	}
 	
 	public abstract TestExecResults run();
+	
+	protected void saveResultsToFile(Collection<Map<String, OneTestExecResult>> results, String fileName) {
+		StringBuilder sb = new StringBuilder();
+		int numOfPass = 0;
+		int numOfError = 0;
+		int numOfFail = 0;
+		for(Map<String, OneTestExecResult> result : results) {
+			for(String test : result.keySet()) {
+				RESULT r = result.get(test).result;
+				sb.append(test);
+				sb.append(" : ");
+				sb.append(r);
+				sb.append(Globals.lineSep);
+				if(r == RESULT.PASS) {
+					numOfPass++;
+				} else if (r == RESULT.ERROR) {
+					numOfError++;
+				} else if (r == RESULT.FAILURE) {
+					numOfFail ++;
+				} else {
+					throw new Error("Unknown: " + r);
+				}
+			}
+//			Utils.checkTrue(numOfPass + numOfError + numOfFail == result.size(),
+//					"Wrong number.");
+		}
+		sb.append("-----------------");
+		sb.append(Globals.lineSep);
+		sb.append("Passing tests: " + numOfPass);
+		sb.append(Globals.lineSep);
+		sb.append("Failing tests: " + numOfFail);
+		sb.append(Globals.lineSep);
+		sb.append("Error tests: " + numOfError);
+		sb.append(Globals.lineSep);
+		try {
+			Files.writeToFile(sb.toString(), fileName);
+		} catch (IOException e) {
+			throw new Error(e);
+		}
+	}
+	
+	protected void saveResultsToFile(Map<String, OneTestExecResult> result, String fileName) {
+		this.saveResultsToFile(Collections.singletonList(result), fileName);
+	}
 }

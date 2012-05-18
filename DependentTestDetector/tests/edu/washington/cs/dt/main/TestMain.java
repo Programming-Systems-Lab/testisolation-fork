@@ -50,6 +50,13 @@ public class TestMain extends TestCase {
 		Main.main(new String[]{"--minimize=true", "--reverse", "--tests=./exampletests.txt"});
 	}
 	
+	public void testSimpleExamplesDumpResults() throws ZipException, ClassNotFoundException, IOException {
+		Main.main(new String[]{"--minimize=false", "--isolate",
+				"--tests=./exampletests.txt",
+				"--fixedOrderReport=./fixed_order_tmp.txt",
+				"--isolationReport=./isolation_tmp.txt"});
+	}
+	
 	public void testSimpleExamplesRandom() throws ZipException, ClassNotFoundException, IOException {
 		Main.main(new String[]{"--minimize=true", "--randomize", "--tests=./exampletests.txt"});
 	}

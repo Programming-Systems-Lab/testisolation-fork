@@ -3,11 +3,14 @@
  */
 package edu.washington.cs.dt.runners;
 
+import java.util.Collection;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import edu.washington.cs.dt.OneTestExecResult;
+import edu.washington.cs.dt.TestExecResult;
 import edu.washington.cs.dt.TestExecResults;
 import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.TestExecUtils;
@@ -49,6 +52,15 @@ public class IsolationRunner extends AbstractTestRunner {
 		}
 		
 		System.out.println("Total execution time: " + executionTime + " seconds");
+		
+		//dump an intermediate results
+		if(Main.isolationReport != null) {
+			Collection<Map<String, OneTestExecResult>> results = new LinkedList<Map<String, OneTestExecResult>>();
+			for(TestExecResult r : result.getExecutionRecords()) {
+				results.add(r.singleRun);
+			}
+			super.saveResultsToFile(results, Main.isolationReport);
+		}
 		
 		return result;
 	}

@@ -55,6 +55,12 @@ public class Main {
 	@Option("A file containing the final report")
 	public static String report = "." + File.separator + "report.txt";
 	
+	@Option("A file containing the execution results of fixed order execution")
+	public static String fixedOrderReport =  null;
+	
+	@Option("A file containing the execution results of isolation execution")
+	public static String isolationReport =  null;
+	
 	@Option("Print stack trace for inspection")
 	public static boolean printstacktrace = false;
 	
