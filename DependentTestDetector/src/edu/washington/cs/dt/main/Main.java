@@ -103,6 +103,9 @@ public class Main {
 	@Option("Show progress in terms of percentage. It will make the console messy.")
 	public static boolean showProgress = false;
 	
+	@Option("Run the tool in multiple processes in a single machine")
+	public static int processnum = 1;
+	
 	@Unpublicized
 	@Option("Remove the temp file")
 	public static boolean removetempfile = true;
@@ -143,6 +146,9 @@ public class Main {
 	    if(tests == null) {
 	    	errorMsg.add("You must specify either a file containing all tests via -tests");
 	    }
+	    if(processnum < 1) {
+	    	errorMsg.add("You must specifiy a positive process num via --processnum");
+	    }
 	    int chosenOptions = 0;
 	    if(isolate) { chosenOptions++; }
 	    if(reverse) { chosenOptions++; }
@@ -167,7 +173,7 @@ public class Main {
 	    	Utils.flushToStd(options.usage());
 	        System.exit(1);
 	    }
-	    //set the 
+	    //set the verbose
 	    Utils.VERBOSE = verbose;
 	}
 	

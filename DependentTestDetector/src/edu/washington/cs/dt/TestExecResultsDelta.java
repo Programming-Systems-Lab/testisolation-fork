@@ -45,7 +45,7 @@ public class TestExecResultsDelta {
 		sb.append("Intended behavior: " + intendedResult.result);
 		sb.append(Globals.lineSep);
 		if(printstacktrace) {
-		    sb.append("Stack trace: " + intendedResult.exceptionStackTrace);
+		    sb.append("Stack trace: " + intendedResult.getFullStackTrace());
 		    sb.append(Globals.lineSep);
 		}
 		if(printexecseq) {
@@ -55,7 +55,7 @@ public class TestExecResultsDelta {
 		sb.append("The revealed different behavior: " + divergentResult.result);
 		sb.append(Globals.lineSep);
 		if(printstacktrace) {
-		    sb.append("Stack trace: " + divergentResult.exceptionStackTrace);
+		    sb.append("Stack trace: " + divergentResult.getFullStackTrace());
 		    sb.append(Globals.lineSep);
 		}
 		if(printexecseq) {

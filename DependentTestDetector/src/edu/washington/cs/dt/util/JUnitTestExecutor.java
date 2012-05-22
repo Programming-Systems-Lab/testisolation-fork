@@ -24,6 +24,7 @@ class JUnitTestExecutor {
 
 	private String result = null;
 	private String stackTrace = TestExecUtils.noStackTrace;
+	private String fullStackTrace = TestExecUtils.noStackTrace;
 	
 	public final Class<?> junitTest;
 	public final String junitMethod;
@@ -87,6 +88,7 @@ class JUnitTestExecutor {
             }
             //get the stack trace
             stackTrace = flatStackTrace(excep);
+            fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(excep));
 		}
 	}
 	
@@ -102,31 +104,33 @@ class JUnitTestExecutor {
 		return flatString;
 	}
 	
-	public void executeJUnit3() {
-		try {
-			TestRunner aTestRunner= new TestRunner();
-			String[] junitArgs = new String[]{"-m", this.fullMethodName};
-			TestResult r = aTestRunner.start(junitArgs);
-			if(r.wasSuccessful()) {
-				result = RESULT.PASS.name();
-			} else {
-				if(r.errorCount() > 0) {
-					Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test: " + this.fullMethodName
-							+ ", two errors: " + CodeUtils.flattenFailrues(r.errors()));
-					result = RESULT.ERROR.name();
-					stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
-				}
-				if(r.failureCount() > 0) {
-					Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test: " + this.fullMethodName
-							+ ", two failures: " + CodeUtils.flattenFailrues(r.failures()));
-					result = RESULT.FAILURE.name();
-					stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
+	
+	
+//	public void executeJUnit3() {
+//		try {
+//			TestRunner aTestRunner= new TestRunner();
+//			String[] junitArgs = new String[]{"-m", this.fullMethodName};
+//			TestResult r = aTestRunner.start(junitArgs);
+//			if(r.wasSuccessful()) {
+//				result = RESULT.PASS.name();
+//			} else {
+//				if(r.errorCount() > 0) {
+//					Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test: " + this.fullMethodName
+//							+ ", two errors: " + CodeUtils.flattenFailrues(r.errors()));
+//					result = RESULT.ERROR.name();
+//					stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
+//				}
+//				if(r.failureCount() > 0) {
+//					Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test: " + this.fullMethodName
+//							+ ", two failures: " + CodeUtils.flattenFailrues(r.failures()));
+//					result = RESULT.FAILURE.name();
+//					stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
+//				}
+//			}
+//		} catch (Exception e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
 	
 	public String getResult() {
 		return this.result;
@@ -134,5 +138,9 @@ class JUnitTestExecutor {
 	
 	public String getStackTrace() {
 		return this.stackTrace;
+	}
+	
+	public String getFullStackTrace() {
+		return this.fullStackTrace;
 	}
 }

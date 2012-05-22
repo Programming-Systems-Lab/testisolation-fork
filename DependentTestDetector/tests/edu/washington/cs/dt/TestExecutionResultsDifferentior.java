@@ -6,6 +6,7 @@ package edu.washington.cs.dt;
 import java.util.LinkedList;
 import java.util.List;
 
+import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.runners.AbstractTestRunner;
 import edu.washington.cs.dt.runners.CombinatorialRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
@@ -91,7 +92,9 @@ public class TestExecutionResultsDifferentior extends TestCase {
 		for(TestExecResultsDelta d : deltas) {
 			System.out.println(d);
 		}
-		
+
+		System.out.println(Main.comparestacktrace);
+		//no need to fix, this will fail
 		assertEquals(3, deltas.size());
 	}
 }

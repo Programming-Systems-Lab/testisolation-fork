@@ -16,6 +16,7 @@ import edu.washington.cs.dt.TestExecResults;
 import edu.washington.cs.dt.main.Main;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
+import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 
 public abstract class AbstractTestRunner {
@@ -73,6 +74,26 @@ public abstract class AbstractTestRunner {
 				sb.append(test);
 				sb.append(" : ");
 				sb.append(r);
+				String fullStackTrace = result.get(test).getFullStackTrace();
+				if(fullStackTrace != null && !fullStackTrace.trim().equals(TestExecUtils.noStackTrace)) {
+					sb.append(Globals.lineSep);
+					String[] sts = fullStackTrace.split(TestExecUtils.stackTraceSep);
+					for(String st : sts) {
+						sb.append("    ");
+						sb.append(st);
+						sb.append(Globals.lineSep);
+					}
+				}
+//				String filteredStack = result.get(test).getFilteredStackTrace();
+//				if(filteredStack != null && !filteredStack.trim().equals(TestExecUtils.noStackTrace)) {
+//					sb.append(Globals.lineSep);
+//					String[] sts = filteredStack.split(TestExecUtils.stackTraceSep);
+//					for(String st : sts) {
+//						sb.append("    ");
+//						sb.append(st);
+//						sb.append(Globals.lineSep);
+//					}
+//				}
 				sb.append(Globals.lineSep);
 				if(r == RESULT.PASS) {
 					numOfPass++;

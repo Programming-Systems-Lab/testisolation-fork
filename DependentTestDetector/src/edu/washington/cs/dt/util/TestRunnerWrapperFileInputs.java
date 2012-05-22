@@ -11,6 +11,7 @@ import java.util.List;
 import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.main.Main;
 
+import junit.framework.TestFailure;
 import junit.framework.TestResult;
 import junit.textui.TestRunner;
 
@@ -47,13 +48,15 @@ public class TestRunnerWrapperFileInputs {
 			boolean useJUnit4 = CodeUtils.useJUnit4(fullTestName);
 			/*check the results*/
 			String result = null;
-			String stackTrace = TestExecUtils.noStackTrace;
+//			String stackTrace = TestExecUtils.noStackTrace;
+			String fullStackTrace = TestExecUtils.noStackTrace;
 			
 			if(useJUnit4) {
 				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
 				executor.executeJUnit4();
 				result = executor.getResult();
-				stackTrace = executor.getStackTrace();
+//				stackTrace = executor.getStackTrace();
+				fullStackTrace = executor.getFullStackTrace();
 			} else {
 				try {
 					String[] junitArgs = new String[]{"-m", fullTestName};
@@ -65,15 +68,20 @@ public class TestRunnerWrapperFileInputs {
 						if(r.errorCount() > 0) {
 							Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test");
 							result = RESULT.ERROR.name();
-							stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
+							TestFailure failure = r.errors().nextElement();
+//							stackTrace = TestExecUtils.flatStackTrace(failure, Main.excludeRegex);
+							fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(failure.thrownException()));
 						}
 						if(r.failureCount() > 0) {
 							Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test");
 							result = RESULT.FAILURE.name();
-							stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
+							TestFailure failure = r.failures().nextElement();
+//							stackTrace = TestExecUtils.flatStackTrace(failure, Main.excludeRegex);
+							fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(failure.thrownException()));
 						}
 					}
 				} catch (Exception e) {
+					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
 			}
@@ -82,7 +90,8 @@ public class TestRunnerWrapperFileInputs {
 			sb.append(TestExecUtils.testResultSep);
 			sb.append(result);
 			sb.append(TestExecUtils.resultExcepSep);
-			sb.append(stackTrace);
+//			sb.append(stackTrace);
+			sb.append(fullStackTrace);
 			sb.append(Globals.lineSep);
 		}
 		//if not exist, create it

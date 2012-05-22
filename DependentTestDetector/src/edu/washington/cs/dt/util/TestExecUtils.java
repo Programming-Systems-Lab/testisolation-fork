@@ -14,6 +14,7 @@ import junit.framework.TestFailure;
 
 import edu.washington.cs.dt.OneTestExecResult;
 import edu.washington.cs.dt.RESULT;
+import edu.washington.cs.dt.main.Main;
 
 import plume.Option;
 
@@ -69,7 +70,7 @@ public class TestExecUtils {
 		return testResults;
 	}
 	
-	public static Map<String, OneTestExecResult> parseTestResults(String outputFile) {
+	static Map<String, OneTestExecResult> parseTestResults(String outputFile) {
 		Map<String, OneTestExecResult> ret = new LinkedHashMap<String, OneTestExecResult>();
 		
 		List<String> lines = Files.readWholeNoExp(outputFile);
@@ -82,15 +83,15 @@ public class TestExecUtils {
 			
 			String testCase = line.substring(0, resultSepIndex);
 			String result = line.substring(resultSepIndex + TestExecUtils.testResultSep.length(), excepSepIndex);
-			String stacktrace = line.substring(excepSepIndex + TestExecUtils.resultExcepSep.length(), line.length());
+			String fullStacktrace = line.substring(excepSepIndex + TestExecUtils.resultExcepSep.length(), line.length());
 			if(result.equals(RESULT.PASS.name())) {
-				OneTestExecResult r = new OneTestExecResult(RESULT.PASS, stacktrace);
+				OneTestExecResult r = new OneTestExecResult(RESULT.PASS, fullStacktrace);
 				ret.put(testCase, r);
 			} else if (result.equals(RESULT.FAILURE.name())) {
-				OneTestExecResult r = new OneTestExecResult(RESULT.FAILURE, stacktrace);
+				OneTestExecResult r = new OneTestExecResult(RESULT.FAILURE, fullStacktrace);
 				ret.put(testCase, r);
 			} else if (result.equals(RESULT.ERROR.name())) {
-				OneTestExecResult r = new OneTestExecResult(RESULT.ERROR, stacktrace);
+				OneTestExecResult r = new OneTestExecResult(RESULT.ERROR, fullStacktrace);
 				ret.put(testCase, r);
 			} else {
 				throw new RuntimeException("Unknown result: " + result);
@@ -110,6 +111,8 @@ public class TestExecUtils {
 		return flatString;
 	}
 	
+	public static String stackTraceSep = " - ";
+	
 	public static String flatStrings(String[] strs, Pattern excludeRegex, String exceptedPrefix) {
 		StringBuilder sb = new StringBuilder();
 		for(String str : strs) {
@@ -120,9 +123,26 @@ public class TestExecUtils {
 				continue;
 			}
 			sb.append(str);
-			sb.append(" - ");
+//			sb.append(" - ");
+			sb.append(stackTraceSep);
 		}
 		return sb.toString();
+	}
+	
+	public static String flatStrings(String[] strs) {
+		StringBuilder sb = new StringBuilder();
+		for(String str : strs) {
+			sb.append(str);
+			sb.append(stackTraceSep);
+		}
+		return sb.toString();
+	}
+	
+	public static String flatFilteredStackTraces(String fullStackTrace) {
+		String[] elements = fullStackTrace.split(stackTraceSep);
+		Pattern p = Pattern.compile(Main.excludeRegex);
+		String flatString = TestExecUtils.flatStrings(elements, p, TestExecUtils.JUNIT_ASSERT);
+		return flatString;
 	}
 	
 	public static String[] extractStackTraces(Throwable t) {

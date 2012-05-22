@@ -4,13 +4,15 @@
 package edu.washington.cs.dt;
 
 import edu.washington.cs.dt.main.Main;
+import edu.washington.cs.dt.util.TestExecUtils;
 import edu.washington.cs.dt.util.Utils;
 
 public class OneTestExecResult {
 	
 	public final RESULT result;
-	
-	public final String exceptionStackTrace;
+
+	private final String fullStackTrace;
+	private final String filteredStackTrace;
 	
 	private final boolean comparestacktrace;
 	
@@ -18,11 +20,27 @@ public class OneTestExecResult {
 		this(result, null);
 	}
 	
-	public OneTestExecResult(RESULT result, String stackTrace) {
+	public OneTestExecResult(RESULT result, String fullStackTrace) {
 		Utils.checkNull(result, "result can not be null.");
 		this.result = result;
-		this.exceptionStackTrace = stackTrace;
+		this.fullStackTrace = fullStackTrace;
+		if(this.fullStackTrace == null) {
+			this.filteredStackTrace = null;
+		} else if(this.fullStackTrace.equals(TestExecUtils.noStackTrace)) {
+			this.filteredStackTrace = fullStackTrace;
+		} else {
+		    this.filteredStackTrace = TestExecUtils.flatFilteredStackTraces(this.fullStackTrace);
+		}
+		
 		this.comparestacktrace = Main.comparestacktrace;
+	}
+	
+	public String getFullStackTrace() {
+		return this.fullStackTrace;
+	}
+	
+	public String getFilteredStackTrace() {
+		return this.filteredStackTrace;
 	}
 	
 	@Override
@@ -42,9 +60,13 @@ public class OneTestExecResult {
 			return r.result.equals(this.result);
 		} else {
 		    return r.result.equals(this.result)
-		        && (this.exceptionStackTrace != null
-		    		? this.exceptionStackTrace.equals(r.exceptionStackTrace)
-		    		: r.exceptionStackTrace == null);
+		        && (this.filteredStackTrace != null
+		    		? this.filteredStackTrace.equals(r.filteredStackTrace)
+		    		: r.filteredStackTrace == null);
+//		    return r.result.equals(this.result)
+//	        && (this.fullStackTrace != null
+//	    		? this.fullStackTrace.equals(r.fullStackTrace)
+//	    		: r.fullStackTrace == null);
 		}
 	}
 	
@@ -54,6 +76,6 @@ public class OneTestExecResult {
 			return 13*result.hashCode();
 		}
 		
-		return 13*result.hashCode() + (this.exceptionStackTrace != null ? 29*this.exceptionStackTrace.hashCode() : 9);
+		return 13*result.hashCode() + (this.filteredStackTrace != null ? 29*this.filteredStackTrace.hashCode() : 9);
 	}
 }
