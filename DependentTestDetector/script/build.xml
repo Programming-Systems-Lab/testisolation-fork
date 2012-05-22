@@ -1,7 +1,7 @@
 <project name="DependentTestDetector" default="release" basedir=".">
     <property name="release.dir" value="."/>
 	<target name="release">
-	    <jar id="all" jarfile="${release.dir}/dt-detector-no-dep-0.1.jar">
+	    <jar id="all" jarfile="${release.dir}/dt-detector-no-dep-0.2.jar">
 	        <zipfileset src="${release.dir}/dt-detector.jar" includes="**/*.java **/*.class"/>
 	        <zipfileset src="${release.dir}/junit4.8.1.jar" includes="**/*.java **/*.class"/>
 	        <zipfileset src="${release.dir}/plume.jar" includes="**/*.java **/*.class"/>
