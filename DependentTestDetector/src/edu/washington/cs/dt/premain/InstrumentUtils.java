@@ -22,6 +22,7 @@ public class InstrumentUtils {
 	    	  "plume/",
 	          "org/junit/",
 	          "junit/",
+	          "org/eclipse/jdt/internal/",
 	          "org/objectweb/asm/",
 	          "org/xmlpull/"
 	   });

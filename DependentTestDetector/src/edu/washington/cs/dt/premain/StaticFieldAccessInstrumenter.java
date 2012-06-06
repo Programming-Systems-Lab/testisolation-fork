@@ -19,6 +19,8 @@ import edu.washington.cs.dt.util.Log;
 public class StaticFieldAccessInstrumenter
     extends AbstractTransformer implements ClassFileTransformer, Opcodes {
 
+	public static boolean verbose = false;
+	
 	@Override
 	protected void transformClassNode(ClassNode cn) {
 		List<MethodNode> methods = cn.methods;
@@ -32,11 +34,12 @@ public class StaticFieldAccessInstrumenter
                 	continue;
                 }
                 //skip those proxy classes created by JVM
-                if(cn.name.startsWith("$")) {
+                if(cn.name.startsWith("$Proxy")) {
                 	continue;
                 }
-//                Log.logln("transforming: " + cn.name + "#" + method.name);
-//                System.out.println("transforming: " + cn.name + "#" + method.name);
+                if(verbose) {
+                    System.out.println("transforming: " + cn.name + "#" + method.name);
+                }
                 this.instrumentMethod(cn, method);
         }
 	}
@@ -95,6 +98,9 @@ public class StaticFieldAccessInstrumenter
             			      INVOKESTATIC, tracerClass, tracerMethod,
             			      "(Ljava/lang/String;)V"));
             		instructionIndex++; //must increase it. the length of mlist is increasing!
+            		if(verbose) {
+            		    System.out.println("  " + fullFieldName);
+            		}
             	} else {
             		continue;
             	}
