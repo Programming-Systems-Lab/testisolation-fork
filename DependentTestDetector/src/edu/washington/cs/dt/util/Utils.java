@@ -3,6 +3,12 @@
  */
 package edu.washington.cs.dt.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -67,6 +73,37 @@ public class Utils {
 	      System.out.println(msg);
 	    }
 	}
+	
+	/**
+	   * Copy stream contents.
+	   * */
+	  public static int copyStream(InputStream in, OutputStream out)
+	          throws IOException {
+	      int size = 0;
+	      // Transfer bytes from in to out
+	      byte[] buf = new byte[1024];
+	      int len;
+
+	      while ((len = in.read(buf)) > 0) {
+	          size += len;
+	          out.write(buf, 0, len);
+	      }
+
+	      return size;
+	  }
+	  
+	  /**
+	     * Copy file contents.
+	     * */
+	    public static int copyFile(File inFile, File outFile) throws IOException {
+	      FileInputStream in = new FileInputStream(inFile);
+	      FileOutputStream out = new FileOutputStream(outFile);
+	      int size = copyStream(in, out);
+	      in.close();
+	      out.close();
+
+	      return size;
+	  }
 	
 	public static<T> List<T> createList(T...ints) {
 		List<T> list = new LinkedList<T>();
