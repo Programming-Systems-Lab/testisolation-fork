@@ -18,11 +18,13 @@ public class SimpleTestRunner {
 			if (useJUnit4) {
 				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
 				executor.executeJUnit4();
+				System.out.println("executing: ? " + fullTestName + ", successfully? " + executor.getResult());
 			} else {
 				try {
 					String[] junitArgs = new String[]{"-m", fullTestName};
 					// System.out.println(Utils.convertArrayToFlatString(junitArgs));
 					TestResult r = aTestRunner.start(junitArgs);
+					System.out.println("executing: ? " + fullTestName + ", successfully? " + r.wasSuccessful());
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException(e);
