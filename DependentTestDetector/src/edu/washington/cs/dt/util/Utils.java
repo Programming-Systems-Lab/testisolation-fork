@@ -105,6 +105,15 @@ public class Utils {
 	      return size;
 	  }
 	
+	public static<T> boolean intersect(Collection<T> t1, Collection<T> t2) {
+		for(T t : t1) {
+			if(t2.contains(t)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	    
 	public static<T> List<T> createList(T...ints) {
 		List<T> list = new LinkedList<T>();
 		for(T i : ints) {
