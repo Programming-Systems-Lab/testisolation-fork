@@ -25,7 +25,7 @@ public class AllTests extends TestCase {
 	public static Test suite() {
 		TestSuite suite = new TestSuite();
 		
-		suite.addTest(TestDependentTestDetector.suite());
+		//suite.addTest(TestDependentTestDetector.suite());
 		suite.addTest(TestExecutionResultsDifferentior.suite());
 		
 		suite.addTest(TesSimplifyDD.suite());

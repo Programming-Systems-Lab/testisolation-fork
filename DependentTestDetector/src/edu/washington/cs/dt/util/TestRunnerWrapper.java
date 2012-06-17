@@ -42,7 +42,7 @@ public class TestRunnerWrapper {
 			String fullStackTrace = TestExecUtils.noStackTrace;
 			if (useJUnit4) {
 				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
-				executor.executeJUnit4();
+				executor.executeWithJUnit4Runner();
 				result = executor.getResult();
 				//stackTrace = executor.getStackTrace();
 				fullStackTrace = executor.getFullStackTrace();

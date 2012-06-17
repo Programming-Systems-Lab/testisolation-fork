@@ -10,8 +10,6 @@ import org.junit.runner.Request;
 import org.junit.runner.Result;
 import org.junit.runner.notification.Failure;
 
-import junit.framework.TestResult;
-import junit.textui.TestRunner;
 import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.main.Main;
 
@@ -60,7 +58,7 @@ class JUnitTestExecutor {
 		this.fullMethodName = this.junitTest.getName() + "." + junitMethod;
 	}
 	
-	public void executeJUnit4() {
+	public void executeWithJUnit4Runner() {
         JUnitCore core = new JUnitCore();
 		Request r = Request.method(this.junitTest, this.junitMethod);
 		Result re = core.run(r);
@@ -103,34 +101,6 @@ class JUnitTestExecutor {
 		String flatString = TestExecUtils.flatStrings(stacktraces, p, TestExecUtils.JUNIT_ASSERT);
 		return flatString;
 	}
-	
-	
-	
-//	public void executeJUnit3() {
-//		try {
-//			TestRunner aTestRunner= new TestRunner();
-//			String[] junitArgs = new String[]{"-m", this.fullMethodName};
-//			TestResult r = aTestRunner.start(junitArgs);
-//			if(r.wasSuccessful()) {
-//				result = RESULT.PASS.name();
-//			} else {
-//				if(r.errorCount() > 0) {
-//					Utils.checkTrue(r.errorCount() == 1, "Only execute 1 test: " + this.fullMethodName
-//							+ ", two errors: " + CodeUtils.flattenFailrues(r.errors()));
-//					result = RESULT.ERROR.name();
-//					stackTrace = TestExecUtils.flatStackTrace(r.errors().nextElement(), Main.excludeRegex);
-//				}
-//				if(r.failureCount() > 0) {
-//					Utils.checkTrue(r.failureCount() == 1, "Only execute 1 test: " + this.fullMethodName
-//							+ ", two failures: " + CodeUtils.flattenFailrues(r.failures()));
-//					result = RESULT.FAILURE.name();
-//					stackTrace = TestExecUtils.flatStackTrace(r.failures().nextElement(), Main.excludeRegex);
-//				}
-//			}
-//		} catch (Exception e) {
-//			throw new RuntimeException(e);
-//		}
-//	}
 	
 	public String getResult() {
 		return this.result;

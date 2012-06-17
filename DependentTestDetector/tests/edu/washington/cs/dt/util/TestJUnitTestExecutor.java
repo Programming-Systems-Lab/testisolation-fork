@@ -4,6 +4,7 @@
 package edu.washington.cs.dt.util;
 
 import edu.washington.cs.dt.RESULT;
+import edu.washington.cs.dt.samples.SampleJUnit3Tests;
 import edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest;
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -15,70 +16,121 @@ public class TestJUnitTestExecutor extends TestCase {
 		return new TestSuite(TestJUnitTestExecutor.class);
 	}
 	
-	public void testPassJUnit4() {
-		JUnitTestExecutor executor = new JUnitTestExecutor(ExampleJunit4xTest.class, "testX");
-		executor.executeJUnit4();
+	public void testPassJUnit3() {
+		JUnitTestExecutor executor = new JUnitTestExecutor(SampleJUnit3Tests.class, "testJUnit3_1");
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.PASS.name(), executor.getResult());
 		assertEquals(TestExecUtils.noStackTrace, executor.getStackTrace());
 		
-		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest.testX");
-		executor.executeJUnit4();
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.SampleJUnit3Tests.testJUnit3_1");
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.PASS.name(), executor.getResult());
 		assertTrue(TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
-		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest", "testX");
-		executor.executeJUnit4();
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.SampleJUnit3Tests", "testJUnit3_1");
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.PASS.name(), executor.getResult());
 		assertTrue(TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 	}
 	
+	public void testPassJUnit4() {
+		JUnitTestExecutor executor = new JUnitTestExecutor(ExampleJunit4xTest.class, "testX");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.PASS.name(), executor.getResult());
+		assertEquals(TestExecUtils.noStackTrace, executor.getStackTrace());
+		
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest.testX");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.PASS.name(), executor.getResult());
+		assertTrue(TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+		
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest", "testX");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.PASS.name(), executor.getResult());
+		assertTrue(TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+	}
+	
+	public void testJUnit3WithException() {
+		JUnitTestExecutor executor = new JUnitTestExecutor(SampleJUnit3Tests.class, "testJUnit3_exception");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.ERROR.name(), executor.getResult());
+		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+		
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.SampleJUnit3Tests.testJUnit3_exception");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.ERROR.name(), executor.getResult());
+		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+		
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.SampleJUnit3Tests", "testJUnit3_exception");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.ERROR.name(), executor.getResult());
+		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+	}
+	
 	public void testFail1JUnit4() {
 		JUnitTestExecutor executor = new JUnitTestExecutor(ExampleJunit4xTest.class, "testE");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.FAILURE.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
 		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest.testE");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.FAILURE.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
 		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest", "testE");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.FAILURE.name(), executor.getResult());
+		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+	}
+	
+	public void testJUnit3WithFailure() {
+		JUnitTestExecutor executor = new JUnitTestExecutor(SampleJUnit3Tests.class, "testJUnit3_fail");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.FAILURE.name(), executor.getResult());
+		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+		
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.SampleJUnit3Tests.testJUnit3_fail");
+		executor.executeWithJUnit4Runner();
+		assertEquals(RESULT.FAILURE.name(), executor.getResult());
+		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
+		
+		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.SampleJUnit3Tests", "testJUnit3_fail");
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.FAILURE.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 	}
 	
 	public void testFail2JUnit4() {
 		JUnitTestExecutor executor = new JUnitTestExecutor(ExampleJunit4xTest.class, "testF");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.FAILURE.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
 		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest.testF");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.FAILURE.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
 		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest", "testF");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.FAILURE.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 	}
 	
 	public void testErrorJUnit4() {
 		JUnitTestExecutor executor = new JUnitTestExecutor(ExampleJunit4xTest.class, "testZ");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.ERROR.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
 		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest.testZ");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.ERROR.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 		
 		executor = new JUnitTestExecutor("edu.washington.cs.dt.samples.junit4x.ExampleJunit4xTest", "testZ");
-		executor.executeJUnit4();
+		executor.executeWithJUnit4Runner();
 		assertEquals(RESULT.ERROR.name(), executor.getResult());
 		assertTrue(!TestExecUtils.noStackTrace.equals(executor.getStackTrace()));
 	}

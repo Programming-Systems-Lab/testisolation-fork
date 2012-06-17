@@ -17,7 +17,7 @@ public class SimpleTestRunner {
 			boolean useJUnit4 = CodeUtils.useJUnit4(fullTestName);
 			if (useJUnit4) {
 				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
-				executor.executeJUnit4();
+				executor.executeWithJUnit4Runner();
 				System.out.println("executing: ? " + fullTestName + ", successfully? " + executor.getResult());
 			} else {
 				try {
