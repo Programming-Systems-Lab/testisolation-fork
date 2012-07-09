@@ -77,7 +77,7 @@
         </junitreport>
     </target>
 	<target name="jar" depends="build">
-		<jar destfile="dt-detector-${version}-deps.jar" manifest="resources/MANIFEST.MF">
+		<jar destfile="dt-detector-${version}-deps.jar" manifest="resources/MANIFEST.MF" filesemanifest="mergewithoutmain">
 			<fileset dir="${class.dir}"/>
 			<fileset dir=".">
 				<include name="resources/VERSION"/>
