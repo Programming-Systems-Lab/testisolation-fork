@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project basedir="." default="build" name="DependentTestDetector">
+    <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.6"/>
+    <property name="source" value="1.6"/>
+	<property name="class.dir" value="bin"/>
+	<property name="lib.dir" value="lib"/>
+	<loadproperties srcFile="resources/VERSION"/>
+	<property name="version" value="${version.major}.${version.minor}.${version.build}"/>
+
+    <path id="JUnit 4.libraryclasspath">
+        <pathelement location="lib/junit-4.8.2.jar"/>
+        <pathelement location="lib/hamcrest-1.1.0.jar"/>
+    </path>
+    <path id="DependentTestDetector.classpath">
+        <pathelement location="bin"/>
+        <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="lib/asm-all-3.1.jar"/>
+        <pathelement location="lib/plume.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="tests">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${class.dir}" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="DependentTestDetector.classpath"/>
+        </javac>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="${class.dir}" source="${source}" target="${target}">
+            <src path="tests"/>
+            <classpath refid="DependentTestDetector.classpath"/>
+        </javac>
+    </target>
+    <target name="TestDependentTestDetector">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="edu.washington.cs.dt.TestDependentTestDetector" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="DependentTestDetector.classpath"/>
+        </junit>
+    </target>
+    <target name="TestJUnitTestExecutor">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="edu.washington.cs.dt.util.TestJUnitTestExecutor" todir="${junit.output.dir}"/>
+            <jvmarg line="-ea"/>
+            <classpath refid="DependentTestDetector.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
+    </target>
+	<target name="jar" depends="build">
+		<jar destfile="dt-detector-${version}-deps.jar" manifest="resources/MANIFEST.MF">
+			<fileset dir="${class.dir}"/>
+			<fileset dir=".">
+				<include name="resources/VERSION"/>
+			</fileset>
+			<archives>
+				<zips>
+					<fileset dir="${lib.dir}" includes="**/*.jar" excludes="**/junit*.jar"/>
+				</zips>
+			</archives>
+		</jar>		
+	</target>
+</project>
