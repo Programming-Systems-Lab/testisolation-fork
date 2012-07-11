@@ -16,18 +16,18 @@
 
 cluster_command=""
 get_test_command="java -cp dt-detector-0.2.0.jar edu.washington.cs.dt.tools.UnitTestFinder --pathOrJarFile $1 --junit3and4=true"
-dt_command="java -cp dt-detector-0.2.0.jar:$1 edu.washington.cs.dt.tools.RunTestInFixedOrder "
+dt_command="java -cp dt-detector-0.2.0.jar:$1 edu.washington.cs.dt.util.TestRunnerWrapperFileInputs"
 c_script=resources/scripts/create_input_files.py
 
 #first, create all the directories and input files
-mkdir input
+#mkdir input
 mkdir output
-$get_test_command
-python $c_script -i allunittests.txt -k $2
+#$get_test_command
+#python $c_script -i allunittests.txt -k $2
 
 #loop over all input files and launch process
 for file in `ls input/`
 do
   echo Running on $file
-  $cluster_command $dt_command --testFile input/$file --outputFile output/`basename $file .input`.output
+  $cluster_command $dt_command output/`basename $file .input`.output input/$file
 done
