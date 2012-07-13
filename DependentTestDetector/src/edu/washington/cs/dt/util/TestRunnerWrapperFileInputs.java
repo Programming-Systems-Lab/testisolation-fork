@@ -60,7 +60,7 @@ public class TestRunnerWrapperFileInputs {
 		if(!f.exists()) {
 			File dir = f.getParentFile();
 			boolean created = true;
-			if(!dir.exists()) {
+			if(dir != null && !dir.exists()) {
 				created = dir.mkdirs();
 			}
 			created = created & f.createNewFile();
