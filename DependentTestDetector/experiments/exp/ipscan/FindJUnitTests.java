@@ -19,10 +19,9 @@ public class FindJUnitTests extends TestCase {
 		 * Make sure all jars under folder: experiments-subjects/ipscan (including those
 		 * in lib) are added to classpath  before running this test.
 		 * */
-		String workspaceDir = "/home/dasxce/workspace/DependentTestDetector/DependentTestDetector";
 		String[] args = new String[]{
-				"--pathOrJarFile=" + workspaceDir + "/experiments-subjects/ipscan/ipscan.jar",
-				"--outputFileName=" + workspaceDir + "/experiments-subjects/ipscan/ipscan-unit-tests.txt"
+				"--pathOrJarFile=./experiments-subjects/ipscan/ipscan.jar",
+				"--outputFileName=./experiments-subjects/ipscan/ipscan-unit-tests.txt"
 		};
 		UnitTestFinder.main(args);
 	}

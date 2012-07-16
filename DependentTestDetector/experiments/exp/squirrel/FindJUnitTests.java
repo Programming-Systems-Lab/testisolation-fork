@@ -19,10 +19,9 @@ public class FindJUnitTests extends TestCase {
 		 * Make sure all jars under folder: experiments-subjects/squirrel (including those
 		 * in lib) are added to classpath  before running this test.
 		 * */
-		String workspaceDir = "/home/dasxce/workspace/DependentTestDetector/DependentTestDetector";
 		String[] args = new String[]{
-				"--pathOrJarFile=" + workspaceDir + "/experiments-subjects/squirrel/squirrel.jar",
-				"--outputFileName=" + workspaceDir + "/experiments-subjects/squirrel/squirrel-unit-tests.txt"
+				"--pathOrJarFile=./experiments-subjects/squirrel/squirrel.jar",
+				"--outputFileName=./experiments-subjects/squirrel/squirrel-unit-tests.txt"
 		};
 		UnitTestFinder.main(args);
 	}

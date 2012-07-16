@@ -4,12 +4,12 @@
 package exp.squirrel;
 
 import edu.washington.cs.dt.main.Main;
+import edu.washington.cs.dt.tools.RunTestInFixedOrder;
 import edu.washington.cs.dt.util.Log;
 import junit.framework.TestCase;
 
 public class RunSquirrelTests extends TestCase {
-	String workspaceDir = "/home/dasxce/workspace/DependentTestDetector/DependentTestDetector";
-	String inputTestFile = workspaceDir + "/experiments-subjects/squirrel/squirrel-unit-tests.txt";
+	String inputTestFile = "./experiments-subjects/squirrel/squirrel-unit-tests.txt";
 	
 	public void testRunInIsolation() {
 		Log.logConfig("./log-squirrel.txt");
@@ -20,7 +20,7 @@ public class RunSquirrelTests extends TestCase {
 		Main.main(new String[]{"--minimize=false", "--isolate",
 				"--tests=" + inputTestFile, "--showProgress", "--printstacktrace"});
 	}
-	
+
 	public void testRunInPairwise() {
 		Log.logConfig("./log-squirrel.txt");
 		/**
@@ -30,5 +30,14 @@ public class RunSquirrelTests extends TestCase {
 		Main.main(new String[]{"--minimize=false",
 				"--combination", "--k=2",
 				"--tests=" + inputTestFile, "--showProgress", "--printstacktrace"});
+	}
+	
+	public void testRunTestsInFixedOrder() {
+		//to see which fails
+		String[] args = new String[] {
+				"--testFile=" + inputTestFile,
+				"--outputFile=./fixedorder-squirrel.txt"
+		};
+		RunTestInFixedOrder.main(args);
 	}
 }

@@ -8,8 +8,7 @@ import edu.washington.cs.dt.util.Log;
 import junit.framework.TestCase;
 
 public class RunIPScanTests extends TestCase {
-	String workspaceDir = "/home/dasxce/workspace/DependentTestDetector/DependentTestDetector";
-	String inputTestFile = workspaceDir + "/experiments-subjects/ipscan/ipscan-unit-tests.txt";
+	String inputTestFile = "./experiments-subjects/ipscan/ipscan-unit-tests.txt";
 	
 	public void testRunInIsolation() {
 		Log.logConfig("./log-ipscan.txt");
