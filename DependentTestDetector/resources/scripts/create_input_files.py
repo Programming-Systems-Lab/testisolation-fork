@@ -21,30 +21,31 @@ def write_file(names, i):
         outfile.write(n)
     outfile.close()
 
-def create_permutations(depth, limit, tests, current, iteration):
+def create_permutations(depth, lower, upper, tests, current, iteration):
     #print "Creating permutations for tests " + str(depth) + ":" + str(limit)
     #print current
     it = iteration
     for t in tests:
         if ( not current.__contains__(t) ): 
-            if ( depth < limit ): 
+            if ( depth < upper ): 
                 current.append(t)
-                write_file(current, it)
-                it = create_permutations(depth+1, limit, tests, current, it + 1 )
+                if ( len(current) >= lower ): write_file(current, it)
+                it = create_permutations(depth+1, lower, upper, tests, current, it + 1 )
                 current.remove(t)
     return it
 
 def parse_arguments():
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input-file", dest="IN_FILE", required=True, help="The file containing all tests to be processed")
-    parser.add_argument("-k", "--permutation-limit", dest="LIMIT", required=True, help="The limit for the length of the computed permutations")
+    parser.add_argument("-K", "--upper-bound", dest="UPPER_BOUND", required=True, help="The limit for the length of the computed permutations")
+    parser.add_argument("-k", "--lower-bound", dest="LOWER_BOUND", required=False, help="The lower limit for the length of the computed permutations", default=1 )
     return parser.parse_args()
 
 def main(args):
     if ( not exists("input") ): os.mkdir("input")
     infile = open(args.IN_FILE, "r")
     tests = infile.readlines()
-    create_permutations(0, int(args.LIMIT), tests, [], 1 )
+    create_permutations(0, int(args.LOWER_BOUND), int(args.UPPER_BOUND), tests, [], 1 )
     return
 
 if __name__ == "__main__":
