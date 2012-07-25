@@ -1,0 +1,257 @@
+Tuple ['edu.umd.cs.findbugs.OpcodeStackItemTest.testMergeIntAndZero'] has differing results
+	edu.umd.cs.findbugs.OpcodeStackItemTest.testMergeIntAndZero: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.UserPreferencesTest.testClone'] has differing results
+	edu.umd.cs.findbugs.config.UserPreferencesTest.testClone: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testPlainPrio'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testPlainPrio: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testPlainCategories'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testPlainCategories: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testAddCategory'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testAddCategory: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testRemoveCategory'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testRemoveCategory: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testSetMinPriority'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testSetMinPriority: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testPropertyIterator'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testPropertyIterator: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testEquals'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testEquals: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testEncodeDecode'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testEncodeDecode: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testDisplayFalseWarnings'] has differing results
+	edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testDisplayFalseWarnings: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.detect.IncompatMaskTest.testGetFlagBits'] has differing results
+	edu.umd.cs.findbugs.detect.IncompatMaskTest.testGetFlagBits: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.filter.NotMatcherTest.invertsResultsFromWrappedMatcher_doesntMatchWhenWrappedDoesMatch'] has differing results
+	edu.umd.cs.findbugs.filter.NotMatcherTest.invertsResultsFromWrappedMatcher_doesntMatchWhenWrappedDoesMatch: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.filter.NotMatcherTest.invertsResultsFromWrappedMatcher_doesMatchWhenWrappedDoesnt'] has differing results
+	edu.umd.cs.findbugs.filter.NotMatcherTest.invertsResultsFromWrappedMatcher_doesMatchWhenWrappedDoesnt: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.filter.NotMatcherTest.writeXMLOutputAddsNotTagsAroundWrappedMatchersOutput'] has differing results
+	edu.umd.cs.findbugs.filter.NotMatcherTest.writeXMLOutputAddsNotTagsAroundWrappedMatchersOutput: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.filter.NotMatcherTest.canReturnChildMatcher'] has differing results
+	edu.umd.cs.findbugs.filter.NotMatcherTest.canReturnChildMatcher: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator1'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator1: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.filter.NotMatcherTest.throwsExceptionWhenTryingToGetNonExistentChildMatcher'] has differing results
+	edu.umd.cs.findbugs.filter.NotMatcherTest.throwsExceptionWhenTryingToGetNonExistentChildMatcher: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.gui2.FilterFactoryTest.invertMatcherShouldNegateTheOriginalMatchingResult'] has differing results
+	edu.umd.cs.findbugs.gui2.FilterFactoryTest.invertMatcherShouldNegateTheOriginalMatchingResult: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.gui2.FilterFactoryTest.shouldReturnTheOriginalMatcherWhenAskedToInvertANotMatcher'] has differing results
+	edu.umd.cs.findbugs.gui2.FilterFactoryTest.shouldReturnTheOriginalMatcherWhenAskedToInvertANotMatcher: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFoo'] has differing results
+	edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFoo: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFooBar'] has differing results
+	edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFooBar: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFoo1Bar2'] has differing results
+	edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFoo1Bar2: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator2'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator2: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator3'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator3: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testIterateTooFar'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testIterateTooFar: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testMultipleRemove'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testMultipleRemove: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.visitclass.DismantleBytecodeTest.testAreOppositeBranches'] has differing results
+	edu.umd.cs.findbugs.visitclass.DismantleBytecodeTest.testAreOppositeBranches: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.test1'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.test1: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.test0'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.test0: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testminusOne'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testminusOne: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testRemoveBeforeNext'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testRemoveBeforeNext: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testminusTwo'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testminusTwo: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testLast'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testLast: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testlastVersion'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testlastVersion: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV1_0'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV1_0: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV1_1'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV1_1: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV2_0'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV2_0: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV2_1'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV2_1: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterMay5'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterMay5: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune5'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune5: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune15'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune15: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testRemoveAndAdd'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testRemoveAndAdd: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune25'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune25: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeMay5'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeMay5: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune5'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune5: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune15'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune15: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune25'] has differing results
+	edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune25: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testRemoveAll1'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testRemoveAll1: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testWriteCloudPropertiesWithoutMessagesEnabled'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testWriteCloudPropertiesWithoutMessagesEnabled: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.BugInstanceTest.testWriteCloudPropertiesWithMessagesEnabled'] has differing results
+	edu.umd.cs.findbugs.BugInstanceTest.testWriteCloudPropertiesWithMessagesEnabled: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ObfuscateTest.testMethodSignature'] has differing results
+	edu.umd.cs.findbugs.ObfuscateTest.testMethodSignature: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ObfuscateTest.testMethodSignatureDoesntChangeForCoreTypes'] has differing results
+	edu.umd.cs.findbugs.ObfuscateTest.testMethodSignatureDoesntChangeForCoreTypes: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsNoReviews'] has differing results
+	edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsNoReviews: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsWithReviews'] has differing results
+	edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsWithReviews: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge1'] has differing results
+	edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge1: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge2'] has differing results
+	edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge2: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge3'] has differing results
+	edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge3: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge5'] has differing results
+	edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge5: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge6'] has differing results
+	edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge6: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsWithReviewsShouldFix'] has differing results
+	edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsWithReviewsShouldFix: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testReadAndThenStoreXmlProps'] has differing results
+	edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testReadAndThenStoreXmlProps: Expected: ERROR	Was: ERROR
+stack difference
+
+
+Summary Report:
+---------------
+Total dependent tests: 62
+Total result mismatch: 0
+Total stack mismatch: 62
+
+Dependent tests:
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune25
+edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFooBar
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV2_1
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testDisplayFalseWarnings
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune5
+edu.umd.cs.findbugs.BugInstanceTest.testIterateTooFar
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.test1
+edu.umd.cs.findbugs.ObfuscateTest.testMethodSignatureDoesntChangeForCoreTypes
+edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge6
+edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsNoReviews
+edu.umd.cs.findbugs.filter.NotMatcherTest.writeXMLOutputAddsNotTagsAroundWrappedMatchersOutput
+edu.umd.cs.findbugs.filter.NotMatcherTest.invertsResultsFromWrappedMatcher_doesMatchWhenWrappedDoesnt
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterJune15
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune25
+edu.umd.cs.findbugs.filter.NotMatcherTest.invertsResultsFromWrappedMatcher_doesntMatchWhenWrappedDoesMatch
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testEquals
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.test0
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV2_0
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testEncodeDecode
+edu.umd.cs.findbugs.visitclass.DismantleBytecodeTest.testAreOppositeBranches
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testlastVersion
+edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsWithReviews
+edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge2
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testPlainPrio
+edu.umd.cs.findbugs.filter.NotMatcherTest.canReturnChildMatcher
+edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testReadAndThenStoreXmlProps
+edu.umd.cs.findbugs.BugInstanceTest.testRemoveAndAdd
+edu.umd.cs.findbugs.BugInstanceTest.testWriteCloudPropertiesWithoutMessagesEnabled
+edu.umd.cs.findbugs.detect.IncompatMaskTest.testGetFlagBits
+edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFoo
+edu.umd.cs.findbugs.BugInstanceTest.testMultipleRemove
+edu.umd.cs.findbugs.BugInstanceTest.testRemoveAll1
+edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge5
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testPlainCategories
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testAfterMay5
+edu.umd.cs.findbugs.BugInstanceTest.testWriteCloudPropertiesWithMessagesEnabled
+edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge3
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testAddCategory
+edu.umd.cs.findbugs.gui2.FilterFactoryTest.shouldReturnTheOriginalMatcherWhenAskedToInvertANotMatcher
+edu.umd.cs.findbugs.gui2.FilterFactoryTest.invertMatcherShouldNegateTheOriginalMatchingResult
+edu.umd.cs.findbugs.ba.npe.IsNullValueTest.testMerge1
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune15
+edu.umd.cs.findbugs.OpcodeStackItemTest.testMergeIntAndZero
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testSetMinPriority
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV1_1
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testLast
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testminusTwo
+edu.umd.cs.findbugs.BugInstanceTest.testPropertyIterator
+edu.umd.cs.findbugs.BugInstanceTest.testRemoveBeforeNext
+edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator2
+edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator3
+edu.umd.cs.findbugs.ObfuscateTest.testMethodSignature
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testV1_0
+edu.umd.cs.findbugs.config.ProjectFilterSettingsTest.testRemoveCategory
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeMay5
+edu.umd.cs.findbugs.SAXBugCollectionHandlerTest.testBugInstanceXmlPropsWithReviewsShouldFix
+edu.umd.cs.findbugs.BugInstanceTest.testRemoveThroughIterator1
+edu.umd.cs.findbugs.config.UserPreferencesTest.testClone
+edu.umd.cs.findbugs.filter.NotMatcherTest.throwsExceptionWhenTryingToGetNonExistentChildMatcher
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testBeforeJune5
+edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest.testFoo1Bar2
+edu.umd.cs.findbugs.workflow.FindSeqNumTest.testminusOne
