@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="BugInstanceTest (1)" project="findbugs" tests="187" started="187" failures="0" errors="2" ignored="0">
+  <testsuite name="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.01">
+    <testcase name="testScanColon" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.003"/>
+    <testcase name="testScanParens" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.001"/>
+    <testcase name="testScanComma" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.0"/>
+    <testcase name="testScanEquals" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.0"/>
+    <testcase name="testScanIdentifier" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.001"/>
+    <testcase name="testScanFloatingPointLiteral" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.0"/>
+    <testcase name="testScanFloatingPointLiteral2" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.001"/>
+    <testcase name="testScanOctalLiteral" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.0"/>
+    <testcase name="testScanHexLiteral" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.0"/>
+    <testcase name="testScanDecimalLiteral" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.002"/>
+    <testcase name="testScanStringLiteral" classname="edu.umd.cs.findbugs.jaif.JAIFScannerTest" time="0.002"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.029">
+    <testcase name="testV1_0" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.008"/>
+    <testcase name="testV1_1" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.0"/>
+    <testcase name="testV2_0" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testV2_1" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.0"/>
+    <testcase name="testAfterMay5" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.01"/>
+    <testcase name="testAfterJune5" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.0"/>
+    <testcase name="testAfterJune15" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testAfterJune25" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testBeforeMay5" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.0"/>
+    <testcase name="testBeforeJune5" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testBeforeJune15" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testBeforeJune25" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="test0" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testminusOne" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testminusTwo" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.0"/>
+    <testcase name="testLast" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="testlastVersion" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+    <testcase name="test1" classname="edu.umd.cs.findbugs.workflow.FindSeqNumTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest" time="0.005">
+    <testcase name="testFoo" classname="edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest" time="0.004"/>
+    <testcase name="testFooBar" classname="edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest" time="0.0"/>
+    <testcase name="testFoo1Bar2" classname="edu.umd.cs.findbugs.internalAnnotations.SlashedClassNameTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.generic.TestGenericSignatureParser" time="0.001">
+    <testcase name="testSignatures" classname="edu.umd.cs.findbugs.ba.generic.TestGenericSignatureParser" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.003">
+    <testcase name="testHashToString" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.002"/>
+    <testcase name="testStringToHash" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.0"/>
+    <testcase name="testSame" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.001"/>
+    <testcase name="testGreater" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.0"/>
+    <testcase name="testLesser" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.0"/>
+    <testcase name="testShorter" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.0"/>
+    <testcase name="testLonger" classname="edu.umd.cs.findbugs.ba.MethodHashTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.detect.FindSqlInjectionTest" time="0.006">
+    <testcase name="testOpenQuote" classname="edu.umd.cs.findbugs.detect.FindSqlInjectionTest" time="0.006"/>
+    <testcase name="testCloseQuote" classname="edu.umd.cs.findbugs.detect.FindSqlInjectionTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.SignatureParserTest" time="0.003">
+    <testcase name="testNoParams" classname="edu.umd.cs.findbugs.ba.SignatureParserTest" time="0.002"/>
+    <testcase name="testManyParams" classname="edu.umd.cs.findbugs.ba.SignatureParserTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.visitclass.GetNumberArgumentsTest" time="0.024">
+    <testcase name="testSimpleWithVoidReturnType" classname="edu.umd.cs.findbugs.visitclass.GetNumberArgumentsTest" time="0.021"/>
+    <testcase name="testSimpleWithVoidIntegerType" classname="edu.umd.cs.findbugs.visitclass.GetNumberArgumentsTest" time="0.003"/>
+    <testcase name="testArrays" classname="edu.umd.cs.findbugs.visitclass.GetNumberArgumentsTest" time="0.0"/>
+    <testcase name="testStringArguments" classname="edu.umd.cs.findbugs.visitclass.GetNumberArgumentsTest" time="0.0"/>
+    <testcase name="testSimpleObjectArgument" classname="edu.umd.cs.findbugs.visitclass.GetNumberArgumentsTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.BugInstanceTest" time="2.334">
+    <testcase name="testRemoveBeforeNext" classname="edu.umd.cs.findbugs.BugInstanceTest" time="2.265"/>
+    <testcase name="testRemoveAndAdd" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+    <testcase name="testRemoveAll1" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+    <testcase name="testWriteCloudPropertiesWithoutMessagesEnabled" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.045"/>
+    <testcase name="testWriteCloudPropertiesWithMessagesEnabled" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.023"/>
+    <testcase name="testPropertyIterator" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+    <testcase name="testRemoveThroughIterator1" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+    <testcase name="testRemoveThroughIterator2" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.001"/>
+    <testcase name="testRemoveThroughIterator3" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+    <testcase name="testIterateTooFar" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+    <testcase name="testMultipleRemove" classname="edu.umd.cs.findbugs.BugInstanceTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.visitclass.DismantleBytecodeTest" time="0.004">
+    <testcase name="testAreOppositeBranches" classname="edu.umd.cs.findbugs.visitclass.DismantleBytecodeTest" time="0.004"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.generic.GenericUtilitiesTest" time="0.01">
+    <testcase name="testUnmatchedRightAngleBracket" classname="edu.umd.cs.findbugs.ba.generic.GenericUtilitiesTest" time="0.001"/>
+    <testcase name="testMapSignature" classname="edu.umd.cs.findbugs.ba.generic.GenericUtilitiesTest" time="0.009"/>
+    <testcase name="testNestedSignatureParser" classname="edu.umd.cs.findbugs.ba.generic.GenericUtilitiesTest" time="0.0"/>
+    <testcase name="testOKSignaturesThatHaveCausedProblems" classname="edu.umd.cs.findbugs.ba.generic.GenericUtilitiesTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.OpcodeStackItemTest" time="0.009">
+    <testcase name="testMergeIntAndZero" classname="edu.umd.cs.findbugs.OpcodeStackItemTest" time="0.009"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.generic.GenericSignatureParserTest" time="0.002">
+    <testcase name="test1" classname="edu.umd.cs.findbugs.ba.generic.GenericSignatureParserTest" time="0.0"/>
+    <testcase name="test2" classname="edu.umd.cs.findbugs.ba.generic.GenericSignatureParserTest" time="0.002"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.filter.NotMatcherTest" time="0.005">
+    <testcase name="canReturnChildMatcher" classname="edu.umd.cs.findbugs.filter.NotMatcherTest" time="0.002"/>
+    <testcase name="throwsExceptionWhenTryingToGetNonExistentChildMatcher" classname="edu.umd.cs.findbugs.filter.NotMatcherTest" time="0.0"/>
+    <testcase name="invertsResultsFromWrappedMatcher_doesMatchWhenWrappedDoesnt" classname="edu.umd.cs.findbugs.filter.NotMatcherTest" time="0.001"/>
+    <testcase name="writeXMLOutputAddsNotTagsAroundWrappedMatchersOutput" classname="edu.umd.cs.findbugs.filter.NotMatcherTest" time="0.002"/>
+    <testcase name="invertsResultsFromWrappedMatcher_doesntMatchWhenWrappedDoesMatch" classname="edu.umd.cs.findbugs.filter.NotMatcherTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.detect.IncompatMaskTest" time="0.001">
+    <testcase name="testGetFlagBits" classname="edu.umd.cs.findbugs.detect.IncompatMaskTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.generic.TestGenericObjectType" time="0.003">
+    <testcase name="testParameterizedList" classname="edu.umd.cs.findbugs.ba.generic.TestGenericObjectType" time="0.003"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="4.869">
+    <testcase name="testArrays" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="1.282"/>
+    <testcase name="testStringSubtypeOfObject" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.699"/>
+    <testcase name="testStringSubtypeOfSerializable" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.365"/>
+    <testcase name="testIdentitySubtype" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.447"/>
+    <testcase name="testInterfaceIsSubtypeOfObject" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.23"/>
+    <testcase name="testUnrelatedTypes" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.357"/>
+    <testcase name="testArraysWrongDimension" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.362"/>
+    <testcase name="testMultidimensionalArrayIsSubtypeOfObjectArray" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.139"/>
+    <testcase name="testArrayOfPrimitiveIsSubtypeOfObject" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.17"/>
+    <testcase name="testSpecialStringSubclasses" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.18"/>
+    <testcase name="testEasyFirstCommonSuperclass" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.12"/>
+    <testcase name="testInterfaceFirstCommonSuperclass" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.125"/>
+    <testcase name="testArrayFirstCommonSuperclass" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.136"/>
+    <testcase name="testArrayFirstCommonSuperclassTricky" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.137"/>
+    <testcase name="testInterfaces" classname="edu.umd.cs.findbugs.ba.ch.Subtypes2Test" time="0.12"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ObfuscateTest" time="0.002">
+    <testcase name="testMethodSignature" classname="edu.umd.cs.findbugs.ObfuscateTest" time="0.002"/>
+    <testcase name="testMethodSignatureDoesntChangeForCoreTypes" classname="edu.umd.cs.findbugs.ObfuscateTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.visitclass.PreorderVisitorTest" time="0.001">
+    <testcase name="testGetNumberArguments" classname="edu.umd.cs.findbugs.visitclass.PreorderVisitorTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.002">
+    <testcase name="testTop" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testCanReturnNormally" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.001"/>
+    <testcase name="testCannotReturnNormally" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testMergeWithTop" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testTopMergeWithNormalReturn" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testTopMergeWithAbnormalReturn" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testNormalMergeWIthAbnormal" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testAbnormalMergeWithNormal" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testNormalMergeWithNormal" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.0"/>
+    <testcase name="testAbnormalMergeWithAbnormal" classname="edu.umd.cs.findbugs.ba.npe.ReturnPathTypeTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.041">
+    <testcase name="testCountReviewersTwo" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.009"/>
+    <testcase name="testCountReviewersNone" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemNoEvals" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.001"/>
+    <testcase name="testOverallClassificationNotAProblemNeedsStudy" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemYes" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemUnanimousYes" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.001"/>
+    <testcase name="testOverallClassificationNotAProblemYesAndNo" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemNo" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemUnanimousNo" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemMostlyNo" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.001"/>
+    <testcase name="testOverallClassificationNotAProblemMostlyYes" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemChangedMindNo" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testOverallClassificationNotAProblemChangedMindYes" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.001"/>
+    <testcase name="testPrintSummaryNoBugs" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testPrintSummaryOneBugNoEvals" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.002"/>
+    <testcase name="testPrintSummaryWithEvaluations" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.002"/>
+    <testcase name="testPrintSummaryWithMoreThan9Reviewers" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.005"/>
+    <testcase name="testPrintSummaryWithMultipleEvaluationsPerBug" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.002"/>
+    <testcase name="testVotingModePropertyNull" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testVotingModePropertyInvalid" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.007"/>
+    <testcase name="testVotingModeProperty" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testSourceLinkPatternNotSpecified" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testSourceLinkPatternInvalid" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.002"/>
+    <testcase name="testSourceLinkFormatInvalid" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.004"/>
+    <testcase name="testSourceLinkURLInvalid" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.002"/>
+    <testcase name="testSourceLinkWithoutLineNumber" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.001"/>
+    <testcase name="testSourceLinkWithLineNumber" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+    <testcase name="testSourceLinkNoMatch" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.001"/>
+    <testcase name="testSourceLinkTooltip" classname="edu.umd.cs.findbugs.cloud.AbstractCloudTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.npe.IsNullValueTest" time="0.003">
+    <testcase name="testMerge1" classname="edu.umd.cs.findbugs.ba.npe.IsNullValueTest" time="0.002"/>
+    <testcase name="testMerge2" classname="edu.umd.cs.findbugs.ba.npe.IsNullValueTest" time="0.0"/>
+    <testcase name="testMerge3" classname="edu.umd.cs.findbugs.ba.npe.IsNullValueTest" time="0.0"/>
+    <testcase name="testMerge5" classname="edu.umd.cs.findbugs.ba.npe.IsNullValueTest" time="0.001"/>
+    <testcase name="testMerge6" classname="edu.umd.cs.findbugs.ba.npe.IsNullValueTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.config.UserPreferencesTest" time="0.0">
+    <testcase name="testClone" classname="edu.umd.cs.findbugs.config.UserPreferencesTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.util.StringsTest" time="0.001">
+    <testcase name="testEscapeXml" classname="edu.umd.cs.findbugs.util.StringsTest" time="0.0"/>
+    <testcase name="testUnescapeXml" classname="edu.umd.cs.findbugs.util.StringsTest" time="0.001"/>
+    <testcase name="testEscapeLFCRBackSlash" classname="edu.umd.cs.findbugs.util.StringsTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.IntAnnotationTest" time="0.001">
+    <testcase name="test" classname="edu.umd.cs.findbugs.IntAnnotationTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.SAXBugCollectionHandlerTest" time="0.051">
+    <testcase name="testBugInstanceXmlPropsWithReviews" classname="edu.umd.cs.findbugs.SAXBugCollectionHandlerTest" time="0.039"/>
+    <testcase name="testBugInstanceXmlPropsWithReviewsShouldFix" classname="edu.umd.cs.findbugs.SAXBugCollectionHandlerTest" time="0.002"/>
+    <testcase name="testBugInstanceXmlPropsNoReviews" classname="edu.umd.cs.findbugs.SAXBugCollectionHandlerTest" time="0.002"/>
+    <testcase name="testReadAndThenStoreXmlProps" classname="edu.umd.cs.findbugs.SAXBugCollectionHandlerTest" time="0.008"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ClassScreenerTest" time="0.002">
+    <testcase name="testEmptyClassScreener" classname="edu.umd.cs.findbugs.ClassScreenerTest" time="0.001"/>
+    <testcase name="testParticularClassScreener" classname="edu.umd.cs.findbugs.ClassScreenerTest" time="0.001"/>
+    <testcase name="testParticularPackageScreener" classname="edu.umd.cs.findbugs.ClassScreenerTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.architecture.PackageDependenciesTest" time="2.602">
+    <testcase name="testGui2Dependencies" classname="edu.umd.cs.findbugs.architecture.PackageDependenciesTest" time="2.602"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.DetectorsTest" time="0.244">
+    <testcase name="testAllRegressionFiles" classname="edu.umd.cs.findbugs.DetectorsTest" time="0.117">
+      <error>edu.umd.cs.findbugs.NoClassesFoundToAnalyzeException: No classes found to analyze in */home/dasxce/workspace/findbugs/lib/junit.jar */home/dasxce/workspace/findbugsTestCases/lib/jcip-annotations.jar */home/dasxce/workspace/findbugsTestCases/lib/intellij-annotations.jar */home/dasxce/workspace/findbugsTestCases/lib/joda-time-1.6.jar */home/dasxce/workspace/findbugsTestCases/lib/j2ee.jar */home/dasxce/workspace/findbugsTestCases/lib/guava.jar */home/dasxce/workspace/findbugsTestCases/lib/jsr305.jar */home/dasxce/workspace/findbugsTestCases/lib/testng-6.3.1.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/resources.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/rt.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/jsse.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/jce.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/charsets.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/rhino.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/sunec.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/sunpkcs11.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/sunjce_provider.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/zipfs.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/gnome-java-bridge.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/localedata.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/dnsns.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/pulse-java.jar 
+	at edu.umd.cs.findbugs.FindBugs2.execute(FindBugs2.java:274)
+	at edu.umd.cs.findbugs.DetectorsTest.testAllRegressionFiles(DetectorsTest.java:73)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:73)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:46)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:180)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:41)
+	at org.junit.runners.ParentRunner$1.evaluate(ParentRunner.java:173)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:220)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+    </testcase>
+    <testcase name="testBug3053867" classname="edu.umd.cs.findbugs.DetectorsTest" time="0.126">
+      <error>edu.umd.cs.findbugs.NoClassesFoundToAnalyzeException: No classes found to analyze in */home/dasxce/workspace/findbugs/lib/junit.jar */home/dasxce/workspace/findbugsTestCases/lib/jcip-annotations.jar */home/dasxce/workspace/findbugsTestCases/lib/intellij-annotations.jar */home/dasxce/workspace/findbugsTestCases/lib/joda-time-1.6.jar */home/dasxce/workspace/findbugsTestCases/lib/j2ee.jar */home/dasxce/workspace/findbugsTestCases/lib/guava.jar */home/dasxce/workspace/findbugsTestCases/lib/jsr305.jar */home/dasxce/workspace/findbugsTestCases/lib/testng-6.3.1.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/resources.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/rt.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/jsse.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/jce.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/charsets.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/rhino.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/sunec.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/sunpkcs11.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/sunjce_provider.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/zipfs.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/gnome-java-bridge.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/localedata.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/dnsns.jar */usr/lib/jvm/java-1.7.0-openjdk-1.7.0.3/jre/lib/ext/pulse-java.jar 
+	at edu.umd.cs.findbugs.FindBugs2.execute(FindBugs2.java:274)
+	at edu.umd.cs.findbugs.DetectorsTest.testBug3053867(DetectorsTest.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:44)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:41)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:73)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:46)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:180)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:41)
+	at org.junit.runners.ParentRunner$1.evaluate(ParentRunner.java:173)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:31)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:220)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.165">
+    <testcase name="testSimplePluginUpdate" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.082"/>
+    <testcase name="testPluginSameVersionDifferentDate" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.008"/>
+    <testcase name="testPluginSameVersionSameDate" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.033"/>
+    <testcase name="testPluginDifferentVersionSameDate" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.014"/>
+    <testcase name="testPluginNotPresent" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.005"/>
+    <testcase name="testRedirectUpdateChecks" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.004"/>
+    <testcase name="testDisableUpdateChecks" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.001"/>
+    <testcase name="testDisableUpdateChecksFalse" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.007"/>
+    <testcase name="testDisableUpdateChecksInvalid" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.0"/>
+    <testcase name="testSubmittedXml" classname="edu.umd.cs.findbugs.updates.UpdateCheckerTest" time="0.011"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.gui2.SaveTypeTest" time="0.0">
+    <testcase name="testSaveTypes" classname="edu.umd.cs.findbugs.gui2.SaveTypeTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.001">
+    <testcase name="testPlainPrio" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+    <testcase name="testPlainCategories" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+    <testcase name="testAddCategory" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+    <testcase name="testRemoveCategory" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+    <testcase name="testSetMinPriority" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+    <testcase name="testEquals" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+    <testcase name="testEncodeDecode" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.001"/>
+    <testcase name="testDisplayFalseWarnings" classname="edu.umd.cs.findbugs.config.ProjectFilterSettingsTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.002">
+    <testcase name="testSplit" classname="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.001"/>
+    <testcase name="testSplit2" classname="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.0"/>
+    <testcase name="testSplitLong" classname="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.0"/>
+    <testcase name="testAllLower" classname="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.001"/>
+    <testcase name="testAllUpper" classname="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.0"/>
+    <testcase name="testCapitalized" classname="edu.umd.cs.findbugs.ml.SplitCamelCaseIdentifierTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.util.ClassNameTest" time="0.001">
+    <testcase name="testExtractPackagePrefix" classname="edu.umd.cs.findbugs.util.ClassNameTest" time="0.0"/>
+    <testcase name="testExtractClassName" classname="edu.umd.cs.findbugs.util.ClassNameTest" time="0.0"/>
+    <testcase name="testExtractClassNameBad" classname="edu.umd.cs.findbugs.util.ClassNameTest" time="0.001"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.gui2.FilterFactoryTest" time="0.029">
+    <testcase name="shouldReturnTheOriginalMatcherWhenAskedToInvertANotMatcher" classname="edu.umd.cs.findbugs.gui2.FilterFactoryTest" time="0.029"/>
+    <testcase name="invertMatcherShouldNegateTheOriginalMatchingResult" classname="edu.umd.cs.findbugs.gui2.FilterFactoryTest" time="0.0"/>
+  </testsuite>
+  <testsuite name="edu.umd.cs.findbugs.ba.npe.NonNullParamPropertyTest" time="0.001">
+    <testcase name="testEmpty" classname="edu.umd.cs.findbugs.ba.npe.NonNullParamPropertyTest" time="0.0"/>
+    <testcase name="testIsEmpty" classname="edu.umd.cs.findbugs.ba.npe.NonNullParamPropertyTest" time="0.0"/>
+    <testcase name="testNonEmpty" classname="edu.umd.cs.findbugs.ba.npe.NonNullParamPropertyTest" time="0.0"/>
+    <testcase name="testExtremes" classname="edu.umd.cs.findbugs.ba.npe.NonNullParamPropertyTest" time="0.0"/>
+    <testcase name="testOutOfBounds" classname="edu.umd.cs.findbugs.ba.npe.NonNullParamPropertyTest" time="0.0"/>
+  </testsuite>
+</testrun>
