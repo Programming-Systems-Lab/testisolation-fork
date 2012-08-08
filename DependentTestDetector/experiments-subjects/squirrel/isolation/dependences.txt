@@ -1,0 +1,297 @@
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertPlusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertPlusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertPlusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertPlusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignWhenSignAllreadyPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignWhenSignAllreadyPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignAtBadLocation'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignAtBadLocation: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignWhenNullValue'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignWhenNullValue: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertPlusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertPlusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertPlusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertPlusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignWhenSignAllreadyPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignWhenSignAllreadyPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignAtBadLocation'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignAtBadLocation: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignWhenNullValue'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignWhenNullValue: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertPlusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertPlusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertPlusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertPlusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignWhenSignAllreadyPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignWhenSignAllreadyPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignAtBadLocation'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignAtBadLocation: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignWhenNullValue'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignWhenNullValue: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertPlusSign'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertPlusSign: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertPlusSignIfANumberIsPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertPlusSignIfANumberIsPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignWhenSignAllreadyPresent'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignWhenSignAllreadyPresent: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignAtBadLocation'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignAtBadLocation: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignWhenNullValue'] has differing results
+	net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignWhenNullValue: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.H2DialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.H2DialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.H2DialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.H2DialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.HSQLDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.HSQLDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.HSQLDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.HSQLDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.McKoiDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.McKoiDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.McKoiDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.McKoiDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.InformixDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.InformixDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.InformixDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.InformixDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.MySQLDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.MySQLDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.MySQLDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.MySQLDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.PostgreSQLDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.PostgreSQLDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.PostgreSQLDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.PostgreSQLDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.FrontBaseDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.FrontBaseDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.FrontBaseDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.FrontBaseDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.AxionDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.AxionDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.AxionDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.AxionDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.PointbaseDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.PointbaseDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.PointbaseDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.PointbaseDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.SQLServerDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.SQLServerDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.SQLServerDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.SQLServerDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.FirebirdDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.FirebirdDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.FirebirdDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.FirebirdDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.DaffodilDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.DaffodilDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.DaffodilDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.DaffodilDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.SybaseDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.SybaseDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.SybaseDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.SybaseDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.DB2DialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.DB2DialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.DB2DialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.DB2DialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.HADBDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.HADBDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.HADBDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.HADBDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.Oracle9iDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.Oracle9iDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.Oracle9iDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.Oracle9iDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.InterbaseDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.InterbaseDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.InterbaseDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.InterbaseDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.IngresDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.IngresDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.IngresDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.IngresDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.DerbyDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.DerbyDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.DerbyDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.DerbyDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.TimesTenDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.TimesTenDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.TimesTenDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.TimesTenDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.ProgressDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.ProgressDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.ProgressDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.ProgressDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.MAXDBDialectTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.MAXDBDialectTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.MAXDBDialectTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.MAXDBDialectTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.MySQL5DialectExtTest.testGetCreateSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.MySQL5DialectExtTest.testGetCreateSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+Tuple ['net.sourceforge.squirrel_sql.fw.dialects.MySQL5DialectExtTest.testGetAlterSequenceSQL'] has differing results
+	net.sourceforge.squirrel_sql.fw.dialects.MySQL5DialectExtTest.testGetAlterSequenceSQL: Expected: ERROR	Was: ERROR
+stack difference
+
+
+Summary Report:
+---------------
+Total dependent tests: 72
+Total result mismatch: 0
+Total stack mismatch: 72
+
+Dependent tests:
+net.sourceforge.squirrel_sql.fw.dialects.FirebirdDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSign
+net.sourceforge.squirrel_sql.fw.dialects.FrontBaseDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.DerbyDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertPlusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.dialects.DB2DialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.McKoiDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.DerbyDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertPlusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignWhenSignAllreadyPresent
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignWhenNullValue
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertPlusSign
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignWhenNullValue
+net.sourceforge.squirrel_sql.fw.dialects.HADBDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertPlusSign
+net.sourceforge.squirrel_sql.fw.dialects.ProgressDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignAtBadLocation
+net.sourceforge.squirrel_sql.fw.dialects.DB2DialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.InformixDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertPlusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignAtBadLocation
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSignWhenNullValue
+net.sourceforge.squirrel_sql.fw.dialects.DaffodilDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.MySQL5DialectExtTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.IngresDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.SybaseDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.TimesTenDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.PointbaseDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.AxionDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.AxionDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.TimesTenDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.FrontBaseDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignAtBadLocation
+net.sourceforge.squirrel_sql.fw.dialects.SQLServerDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.Oracle9iDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSign
+net.sourceforge.squirrel_sql.fw.dialects.Oracle9iDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignAtBadLocation
+net.sourceforge.squirrel_sql.fw.dialects.PointbaseDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertMinusSignWhenSignAllreadyPresent
+net.sourceforge.squirrel_sql.fw.dialects.SybaseDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.HSQLDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.MySQLDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.MySQL5DialectExtTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.MySQLDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.PostgreSQLDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.H2DialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignWhenNullValue
+net.sourceforge.squirrel_sql.fw.dialects.InformixDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertPlusSign
+net.sourceforge.squirrel_sql.fw.dialects.IngresDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.SQLServerDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeBigDecimalUITest.testInsertMinusSignWhenSignAllreadyPresent
+net.sourceforge.squirrel_sql.fw.dialects.InterbaseDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.DaffodilDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertPlusSign
+net.sourceforge.squirrel_sql.fw.dialects.ProgressDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.HADBDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeFloatUITest.testInsertPlusSignIfANumberIsPresent
+net.sourceforge.squirrel_sql.fw.dialects.HSQLDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.PostgreSQLDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeIntegerUITest.testInsertMinusSign
+net.sourceforge.squirrel_sql.fw.dialects.MAXDBDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.H2DialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.FirebirdDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.McKoiDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.MAXDBDialectTest.testGetAlterSequenceSQL
+net.sourceforge.squirrel_sql.fw.dialects.InterbaseDialectTest.testGetCreateSequenceSQL
+net.sourceforge.squirrel_sql.fw.datasetviewer.cellcomponent.DataTypeDoubleUITest.testInsertMinusSignWhenSignAllreadyPresent
