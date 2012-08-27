@@ -1,0 +1,1121 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AllTests" project="JabRef" tests="200" started="200" failures="0" errors="27" ignored="0">
+  <testsuite name="Test for test.net.sf.jabref" time="1.906">
+    <testsuite name="tests.net.sf.jabref.BibtexDatabaseTest" time="0.006">
+      <testcase name="testResolveStrings" classname="tests.net.sf.jabref.BibtexDatabaseTest" time="0.006">
+        <error>java.io.FileNotFoundException: src/tests/net/sf/jabref/util/twente.bib (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:97)
+	at java.io.FileReader.&lt;init&gt;(FileReader.java:58)
+	at tests.net.sf.jabref.BibtexDatabaseTest.testResolveStrings(BibtexDatabaseTest.java:22)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+      </testcase>
+    </testsuite>
+    <testsuite name="tests.net.sf.jabref.JabRefTestCase" time="0.0">
+      <testcase name="testVoid" classname="tests.net.sf.jabref.JabRefTestCase" time="0.0"/>
+    </testsuite>
+    <testsuite name="tests.net.sf.jabref.UtilFindFileTest" time="0.307">
+      <testcase name="testFindAssociatedFiles" classname="tests.net.sf.jabref.UtilFindFileTest" time="0.289">
+        <error>junit.framework.AssertionFailedError: expected:&lt;2&gt; but was:&lt;0&gt;
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.failNotEquals(Assert.java:282)
+	at junit.framework.Assert.assertEquals(Assert.java:64)
+	at junit.framework.Assert.assertEquals(Assert.java:201)
+	at junit.framework.Assert.assertEquals(Assert.java:207)
+	at tests.net.sf.jabref.UtilFindFileTest.testFindAssociatedFiles(UtilFindFileTest.java:79)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+      </testcase>
+      <testcase name="testFindPdfInMultiple" classname="tests.net.sf.jabref.UtilFindFileTest" time="0.005"/>
+      <testcase name="testFindFile" classname="tests.net.sf.jabref.UtilFindFileTest" time="0.004">
+        <error>junit.framework.AssertionFailedError: Expected: /home/dasxce/workspace/JabRef/build.xml but was: null
+	at junit.framework.Assert.fail(Assert.java:47)
+	at tests.net.sf.jabref.FileBasedTestCase.assertEqualPaths(FileBasedTestCase.java:33)
+	at tests.net.sf.jabref.UtilFindFileTest.testFindFile(UtilFindFileTest.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+      </testcase>
+      <testcase name="testFindFileRelative" classname="tests.net.sf.jabref.UtilFindFileTest" time="0.003">
+        <error>junit.framework.AssertionFailedError: Expected: /tmp/UtilFindFileTest4095903957172542037/test/HipKro03.pdf but was: null
+	at junit.framework.Assert.fail(Assert.java:47)
+	at tests.net.sf.jabref.FileBasedTestCase.assertEqualPaths(FileBasedTestCase.java:33)
+	at tests.net.sf.jabref.UtilFindFileTest.testFindFileRelative(UtilFindFileTest.java:41)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+      </testcase>
+      <testcase name="testFindPdf" classname="tests.net.sf.jabref.UtilFindFileTest" time="0.003"/>
+      <testcase name="testVoid" classname="tests.net.sf.jabref.UtilFindFileTest" time="0.002"/>
+    </testsuite>
+    <testsuite name="tests.net.sf.jabref.AuthorListTest" time="0.017">
+      <testcase name="testGetAuthorList" classname="tests.net.sf.jabref.AuthorListTest" time="0.003"/>
+      <testcase name="testFixAuthor_firstNameFirstCommas" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testFixAuthor_firstNameFirst" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testFixAuthor_lastNameFirstCommas" classname="tests.net.sf.jabref.AuthorListTest" time="0.001"/>
+      <testcase name="testFixAuthor_lastNameFirst" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testFixAuthor_lastNameOnlyCommas" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testFixAuthorForAlphabetization" classname="tests.net.sf.jabref.AuthorListTest" time="0.001"/>
+      <testcase name="testSize" classname="tests.net.sf.jabref.AuthorListTest" time="0.009"/>
+      <testcase name="testGetAuthor" classname="tests.net.sf.jabref.AuthorListTest" time="0.001"/>
+      <testcase name="testGetAuthorsNatbib" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testGetAuthorsLastOnly" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testGetAuthorsLastFirst" classname="tests.net.sf.jabref.AuthorListTest" time="0.001"/>
+      <testcase name="testGetAuthorsLastFirstAnds" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testGetAuthorsFirstFirst" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testGetAuthorsFirstFirstAnds" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testGetAuthorsForAlphabetization" classname="tests.net.sf.jabref.AuthorListTest" time="0.0"/>
+      <testcase name="testFixAuthor_Natbib" classname="tests.net.sf.jabref.AuthorListTest" time="0.001"/>
+    </testsuite>
+    <testsuite name="tests.net.sf.jabref.FileBasedTestCase" time="0.002">
+      <testcase name="testVoid" classname="tests.net.sf.jabref.FileBasedTestCase" time="0.002"/>
+    </testsuite>
+    <testsuite name="tests.net.sf.jabref.UtilTest" time="0.149">
+      <testcase name="testNCase" classname="tests.net.sf.jabref.UtilTest" time="0.001"/>
+      <testcase name="testGetPublicationDate" classname="tests.net.sf.jabref.UtilTest" time="0.015"/>
+      <testcase name="testCheckName" classname="tests.net.sf.jabref.UtilTest" time="0.001"/>
+      <testcase name="testCreateNeutralId" classname="tests.net.sf.jabref.UtilTest" time="0.099"/>
+      <testcase name="testPlaceDialog" classname="tests.net.sf.jabref.UtilTest" time="0.014">
+        <error>junit.framework.AssertionFailedError: expected:&lt;125&gt; but was:&lt;775&gt;
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.failNotEquals(Assert.java:282)
+	at junit.framework.Assert.assertEquals(Assert.java:64)
+	at junit.framework.Assert.assertEquals(Assert.java:201)
+	at junit.framework.Assert.assertEquals(Assert.java:207)
+	at tests.net.sf.jabref.UtilTest.testPlaceDialog(UtilTest.java:75)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+      </testcase>
+      <testcase name="testParseField" classname="tests.net.sf.jabref.UtilTest" time="0.002"/>
+      <testcase name="testShaveString" classname="tests.net.sf.jabref.UtilTest" time="0.001"/>
+      <testcase name="testJoin" classname="tests.net.sf.jabref.UtilTest" time="0.001"/>
+      <testcase name="testStripBrackets" classname="tests.net.sf.jabref.UtilTest" time="0.002"/>
+      <testcase name="testParseMethodCalls" classname="tests.net.sf.jabref.UtilTest" time="0.001"/>
+      <testcase name="testExpandBrackets" classname="tests.net.sf.jabref.UtilTest" time="0.004"/>
+      <testcase name="testSanitizeUrl" classname="tests.net.sf.jabref.UtilTest" time="0.002"/>
+      <testcase name="test2to4DigitsYear" classname="tests.net.sf.jabref.UtilTest" time="0.003"/>
+      <testcase name="testToMonthNumber" classname="tests.net.sf.jabref.UtilTest" time="0.002"/>
+      <testcase name="testToUpperCharFirst" classname="tests.net.sf.jabref.UtilTest" time="0.001"/>
+    </testsuite>
+    <testsuite name="tests.net.sf.jabref.SearchTextListenerTest" time="0.159">
+      <testcase name="testHighlighting" classname="tests.net.sf.jabref.SearchTextListenerTest" time="0.141">
+        <error>junit.framework.AssertionFailedError: Expected two highlighting areas  expected:&lt;2&gt; but was:&lt;1&gt;
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.failNotEquals(Assert.java:282)
+	at junit.framework.Assert.assertEquals(Assert.java:64)
+	at junit.framework.Assert.assertEquals(Assert.java:201)
+	at tests.net.sf.jabref.SearchTextListenerTest.testHighlighting(SearchTextListenerTest.java:59)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+      </testcase>
+      <testcase name="testHighlightingContentIndependence" classname="tests.net.sf.jabref.SearchTextListenerTest" time="0.009"/>
+      <testcase name="testHighlightingInvalidParameter" classname="tests.net.sf.jabref.SearchTextListenerTest" time="0.009"/>
+    </testsuite>
+    <testsuite name="Test for test.net.sf.jabref" time="0.023">
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorAbbreviatorTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorAbbreviatorTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorLastFirstTest" time="0.0">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbrOxfordCommasTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbrOxfordCommasTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.BibtexNameLayoutFormatterTest" time="0.003">
+        <testcase name="testFormatStringStringBibtexEntry" classname="tests.net.sf.jabref.export.layout.format.BibtexNameLayoutFormatterTest" time="0.002"/>
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.BibtexNameLayoutFormatterTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorFirstAbbrLastOxfordCommasTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorFirstAbbrLastOxfordCommasTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorOrgSciTest" time="0.002">
+        <testcase name="testOrgSci" classname="tests.net.sf.jabref.export.layout.format.AuthorOrgSciTest" time="0.0"/>
+        <testcase name="testOrgSciPlusAbbreviation" classname="tests.net.sf.jabref.export.layout.format.AuthorOrgSciTest" time="0.002"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorLastFirstOxfordCommasTest" time="0.0">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstOxfordCommasTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorFirstLastCommasTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorFirstLastCommasTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.NoSpaceBetweenAbbreviationsTest" time="0.0">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.NoSpaceBetweenAbbreviationsTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.ResolvePDFTest" time="0.006">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.ResolvePDFTest" time="0.003"/>
+        <testcase name="testVoid" classname="tests.net.sf.jabref.export.layout.format.ResolvePDFTest" time="0.003"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.DOICheckTest" incomplete="true">
+        <testcase name="warning" classname="junit.framework.TestSuite.1" incomplete="true"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorFirstAbbrLastCommasTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorFirstAbbrLastCommasTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorFirstLastOxfordCommasTest" time="0.0">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorFirstLastOxfordCommasTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.CompositeFormatTest" time="0.002">
+        <testcase name="testComposite" classname="tests.net.sf.jabref.export.layout.format.CompositeFormatTest" time="0.002"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorFirstFirstTest" time="0.0">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorFirstFirstTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbrCommasTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbrCommasTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorLastFirstCommasTest" time="0.0">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstCommasTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorAndsReplacerTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorAndsReplacerTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester" time="0.0"/>
+        <testcase name="testOneAuthorSimpleName" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester" time="0.001"/>
+        <testcase name="testOneAuthorCommonName" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester" time="0.0"/>
+        <testcase name="testTwoAuthorsCommonName" classname="tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.HTMLParagraphsTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.HTMLParagraphsTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.AuthorAndsCommaReplacerTest" time="0.001">
+        <testcase name="testFormat" classname="tests.net.sf.jabref.export.layout.format.AuthorAndsCommaReplacerTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.format.RemoveTildeTest" time="0.0">
+        <testcase name="testFormatString" classname="tests.net.sf.jabref.export.layout.format.RemoveTildeTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Test for tests.net.sf.jabref.imports" time="0.051">
+      <testsuite name="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.015">
+        <testcase name="testCorrectLineBreaks" classname="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.009"/>
+        <testcase name="testParse" classname="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.001">
+          <error>java.lang.IllegalArgumentException: InputStream cannot be null
+	at javax.xml.parsers.SAXParser.parse(SAXParser.java:191)
+	at tests.net.sf.jabref.imports.OAI2ImportTest.testParse(OAI2ImportTest.java:52)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testOai22xml" classname="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.001">
+          <error>java.lang.IllegalArgumentException: InputStream cannot be null
+	at javax.xml.parsers.SAXParser.parse(SAXParser.java:191)
+	at tests.net.sf.jabref.imports.OAI2ImportTest.testOai22xml(OAI2ImportTest.java:76)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testOai23xml" classname="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.002">
+          <error>java.lang.IllegalArgumentException: InputStream cannot be null
+	at javax.xml.parsers.SAXParser.parse(SAXParser.java:191)
+	at tests.net.sf.jabref.imports.OAI2ImportTest.testOai23xml(OAI2ImportTest.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testUrlConstructor" classname="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.001"/>
+        <testcase name="testFixKey" classname="tests.net.sf.jabref.imports.OAI2ImportTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.imports.IsiImporterTest" time="0.023">
+        <testcase name="testIsRecognizedFormat" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.003">
+          <error>java.lang.NullPointerException
+	at java.io.Reader.&lt;init&gt;(Reader.java:78)
+	at java.io.InputStreamReader.&lt;init&gt;(InputStreamReader.java:97)
+	at net.sf.jabref.imports.ImportFormatReader.getReaderDefaultEncoding(ImportFormatReader.java:378)
+	at net.sf.jabref.imports.IsiImporter.isRecognizedFormat(IsiImporter.java:66)
+	at tests.net.sf.jabref.imports.IsiImporterTest.testIsRecognizedFormat(IsiImporterTest.java:38)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testProcessSubSup" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.0"/>
+        <testcase name="testImportEntries" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.IsiImporter.importEntries(IsiImporter.java:144)
+	at tests.net.sf.jabref.imports.IsiImporterTest.testImportEntries(IsiImporterTest.java:98)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testImportEntriesINSPEC" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.IsiImporter.importEntries(IsiImporter.java:144)
+	at tests.net.sf.jabref.imports.IsiImporterTest.testImportEntriesINSPEC(IsiImporterTest.java:121)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testImportEntriesWOS" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.IsiImporter.importEntries(IsiImporter.java:144)
+	at tests.net.sf.jabref.imports.IsiImporterTest.testImportEntriesWOS(IsiImporterTest.java:206)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testIsiAuthorsConvert" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001"/>
+        <testcase name="testMonthConvert" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.01"/>
+        <testcase name="testIsiAuthorConvert" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001"/>
+        <testcase name="testGetExtensions" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.0"/>
+        <testcase name="testGetIsCustomImporter" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.0"/>
+        <testcase name="testImportIEEEExport" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.IsiImporter.importEntries(IsiImporter.java:144)
+	at tests.net.sf.jabref.imports.IsiImporterTest.testImportIEEEExport(IsiImporterTest.java:277)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testImportEntriesMedline" classname="tests.net.sf.jabref.imports.IsiImporterTest" time="0.001">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.IsiImporter.importEntries(IsiImporter.java:144)
+	at tests.net.sf.jabref.imports.IsiImporterTest.testImportEntriesMedline(IsiImporterTest.java:328)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.imports.CopacImporterTest" time="0.005">
+        <testcase name="testIsRecognizedFormat" classname="tests.net.sf.jabref.imports.CopacImporterTest" time="0.002">
+          <error>java.lang.NullPointerException
+	at java.io.Reader.&lt;init&gt;(Reader.java:78)
+	at java.io.InputStreamReader.&lt;init&gt;(InputStreamReader.java:97)
+	at net.sf.jabref.imports.ImportFormatReader.getReaderDefaultEncoding(ImportFormatReader.java:378)
+	at net.sf.jabref.imports.CopacImporter.isRecognizedFormat(CopacImporter.java:50)
+	at tests.net.sf.jabref.imports.CopacImporterTest.testIsRecognizedFormat(CopacImporterTest.java:29)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testImportEntries" classname="tests.net.sf.jabref.imports.CopacImporterTest" time="0.002">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.CopacImporter.importEntries(CopacImporter.java:68)
+	at tests.net.sf.jabref.imports.CopacImporterTest.testImportEntries(CopacImporterTest.java:51)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testImportEntries2" classname="tests.net.sf.jabref.imports.CopacImporterTest" time="0.001">
+          <error>java.io.IOException: No stream given.
+	at net.sf.jabref.imports.CopacImporter.importEntries(CopacImporter.java:68)
+	at tests.net.sf.jabref.imports.CopacImporterTest.testImportEntries2(CopacImporterTest.java:69)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.imports.BibtexParserTest" time="0.008">
+        <testcase name="testIsRecognizedFormat" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.0"/>
+        <testcase name="testParse" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.001"/>
+        <testcase name="testFromString" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.002"/>
+        <testcase name="testFromSingle2" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.001"/>
+        <testcase name="testFromStringSingle" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.0"/>
+        <testcase name="testParse2" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.001"/>
+        <testcase name="testBigNumbers" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.0"/>
+        <testcase name="testBigNumbers2" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.001"/>
+        <testcase name="testNewlineHandling" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.001"/>
+        <testcase name="testFileNaming" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.0"/>
+        <testcase name="testFileNaming1" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.001"/>
+        <testcase name="testParseReader" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.0"/>
+        <testcase name="testBibtexParser" classname="tests.net.sf.jabref.imports.BibtexParserTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Test for tests.net.sf.jabref.search" time="0.004">
+      <testsuite name="tests.net.sf.jabref.search.BasicSearchTest" time="0.004">
+        <testcase name="testBasicSearchParsing" classname="tests.net.sf.jabref.search.BasicSearchTest" time="0.004"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Test for tests.net.sf.jabref.util" time="0.984">
+      <testsuite name="tests.net.sf.jabref.util.CaseChangerTest" time="0.001">
+        <testcase name="testNumberOfModes" classname="tests.net.sf.jabref.util.CaseChangerTest" time="0.0"/>
+        <testcase name="testChangeCaseStringArrayInt" classname="tests.net.sf.jabref.util.CaseChangerTest" time="0.0"/>
+        <testcase name="testChangeCaseStringInt" classname="tests.net.sf.jabref.util.CaseChangerTest" time="0.001"/>
+        <testcase name="testPreserveBrackets" classname="tests.net.sf.jabref.util.CaseChangerTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.util.XMPUtilTest" time="0.951">
+        <testcase name="testResolveStrings" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.261"/>
+        <testcase name="testNewlineHandling" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.012"/>
+        <testcase name="testReadXMPSimple" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.011"/>
+        <testcase name="testReadXMPUTF8" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.012"/>
+        <testcase name="testPrivacyFilter" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.044">
+          <error>junit.framework.AssertionFailedError: expected:&lt;8&gt; but was:&lt;6&gt;
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.failNotEquals(Assert.java:282)
+	at junit.framework.Assert.assertEquals(Assert.java:64)
+	at junit.framework.Assert.assertEquals(Assert.java:201)
+	at junit.framework.Assert.assertEquals(Assert.java:207)
+	at tests.net.sf.jabref.util.XMPUtilTest.testPrivacyFilter(XMPUtilTest.java:365)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testReadXMPSeq" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.011"/>
+        <testcase name="testReadXMPEntryType" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.018"/>
+        <testcase name="testWriteReadManually" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.013"/>
+        <testcase name="testReadWriteXMP" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.027"/>
+        <testcase name="testAttributeRead" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.012"/>
+        <testcase name="testEmpty" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.004"/>
+        <testcase name="testSimpleUpdate" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.094"/>
+        <testcase name="testXMLEscape" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.03"/>
+        <testcase name="testXMPreadString" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.032"/>
+        <testcase name="testReadMultiple" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.01"/>
+        <testcase name="testWriteMultiple" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.023"/>
+        <testcase name="testReadWriteDC" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.037"/>
+        <testcase name="testWriteSingleUpdatesDCAndInfo" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.037"/>
+        <testcase name="testReadRawXMP" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.022"/>
+        <testcase name="testCommandLineSingleBib" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.017"/>
+        <testcase name="testCommandLineSinglePdf" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.084"/>
+        <testcase name="testCommandLineByKey" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.099"/>
+        <testcase name="testCommandLineSeveral" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.037"/>
+        <testcase name="testEncryption" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.002">
+          <error>java.io.FileNotFoundException: src/tests/encrypted.pdf (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
+	at net.sf.jabref.util.XMPUtil.readXMP(XMPUtil.java:92)
+	at net.sf.jabref.util.XMPUtil.readXMP(XMPUtil.java:48)
+	at tests.net.sf.jabref.util.XMPUtilTest.testEncryption(XMPUtilTest.java:1516)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testResolveStrings2" classname="tests.net.sf.jabref.util.XMPUtilTest" time="0.001">
+          <error>java.io.FileNotFoundException: src/tests/net/sf/jabref/util/twente.bib (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:97)
+	at java.io.FileReader.&lt;init&gt;(FileReader.java:58)
+	at tests.net.sf.jabref.util.XMPUtilTest.testResolveStrings2(XMPUtilTest.java:1542)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.031">
+        <testcase name="testXMPSchemaBibtexXMPMetadata" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.001"/>
+        <testcase name="testXMPSchemaBibtexElement" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.001"/>
+        <testcase name="testGetSetPersonList" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.002"/>
+        <testcase name="testSetGetTextPropertyString" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.006"/>
+        <testcase name="testSetGetBagListString" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.004"/>
+        <testcase name="testGetSequenceListString" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.006"/>
+        <testcase name="testSetRemoveGetSequenceDateListString" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.0"/>
+        <testcase name="testGetAllProperties" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.002"/>
+        <testcase name="testSetBibtexEntry" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.003"/>
+        <testcase name="testGetTextContent" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.006"/>
+        <testcase name="testVoid" classname="tests.net.sf.jabref.util.XMPSchemaBibtexTest" time="0.0"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Test for test.net.sf.jabref.layout" time="0.006">
+      <testsuite name="tests.net.sf.jabref.export.layout.HTMLCharsTest" time="0.006">
+        <testcase name="testLaTeXHighlighting" classname="tests.net.sf.jabref.export.layout.HTMLCharsTest" time="0.002"/>
+        <testcase name="testBasicFormat" classname="tests.net.sf.jabref.export.layout.HTMLCharsTest" time="0.004"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.LayoutEntryTest" time="0.009">
+        <testcase name="testHighlightingOneWordCaseInsesitive" classname="tests.net.sf.jabref.export.layout.LayoutEntryTest" time="0.008">
+          <error>junit.framework.AssertionFailedError
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertTrue(Assert.java:27)
+	at tests.net.sf.jabref.export.layout.LayoutEntryTest.testHighlightingOneWordCaseInsesitive(LayoutEntryTest.java:132)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testHighlightingTwoWordsCaseInsesitive" classname="tests.net.sf.jabref.export.layout.LayoutEntryTest" time="0.001">
+          <error>junit.framework.AssertionFailedError
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.Assert.assertTrue(Assert.java:20)
+	at junit.framework.Assert.assertTrue(Assert.java:27)
+	at tests.net.sf.jabref.export.layout.LayoutEntryTest.testHighlightingTwoWordsCaseInsesitive(LayoutEntryTest.java:157)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.LayoutTest" time="0.002">
+        <testcase name="testLayoutBibtextype" classname="tests.net.sf.jabref.export.layout.LayoutTest" time="0.001"/>
+        <testcase name="testLayout" classname="tests.net.sf.jabref.export.layout.LayoutTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.export.layout.RTFCharsTest" time="0.0">
+        <testcase name="warning" classname="junit.framework.TestSuite.1" time="0.0">
+          <error>junit.framework.AssertionFailedError: No tests found in tests.net.sf.jabref.export.layout.format.DOICheckTest
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:263)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+junit.framework.AssertionFailedError: No tests found in tests.net.sf.jabref.export.layout.RTFCharsTest
+	at junit.framework.Assert.fail(Assert.java:47)
+	at junit.framework.TestSuite$1.runTest(TestSuite.java:263)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Test for tests.net.sf.jabref.bst.test" time="0.077">
+      <testsuite name="tests.net.sf.jabref.bst.BibtexNameFormatterTest" time="0.005">
+        <testcase name="testConsumeToMatchingBrace" classname="tests.net.sf.jabref.bst.BibtexNameFormatterTest" time="0.0"/>
+        <testcase name="testGetFirstCharOfString" classname="tests.net.sf.jabref.bst.BibtexNameFormatterTest" time="0.0"/>
+        <testcase name="testNumberOfChars" classname="tests.net.sf.jabref.bst.BibtexNameFormatterTest" time="0.0"/>
+        <testcase name="testFormatName" classname="tests.net.sf.jabref.bst.BibtexNameFormatterTest" time="0.004"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.bst.BibtexCaseChangerTest" time="0.002">
+        <testcase name="testChangeCase" classname="tests.net.sf.jabref.bst.BibtexCaseChangerTest" time="0.002"/>
+        <testcase name="testColon" classname="tests.net.sf.jabref.bst.BibtexCaseChangerTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.bst.TestVM" time="0.067">
+        <testcase name="testEmpty" classname="tests.net.sf.jabref.bst.TestVM" time="0.036"/>
+        <testcase name="testChangeCase" classname="tests.net.sf.jabref.bst.TestVM" time="0.002"/>
+        <testcase name="testAbbrv" classname="tests.net.sf.jabref.bst.TestVM" time="0.001">
+          <error>java.io.FileNotFoundException: src/tests/net/sf/jabref/bst/abbrv.bst (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:97)
+	at org.antlr.runtime.ANTLRFileStream.load(ANTLRFileStream.java:59)
+	at org.antlr.runtime.ANTLRFileStream.&lt;init&gt;(ANTLRFileStream.java:47)
+	at org.antlr.runtime.ANTLRFileStream.&lt;init&gt;(ANTLRFileStream.java:42)
+	at net.sf.jabref.bst.VM.&lt;init&gt;(VM.java:84)
+	at tests.net.sf.jabref.bst.TestVM.testAbbrv(TestVM.java:25)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+        <testcase name="testVMSimple" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testLabel" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testQuote" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testVMFunction1" classname="tests.net.sf.jabref.bst.TestVM" time="0.0"/>
+        <testcase name="testVMExecuteSimple" classname="tests.net.sf.jabref.bst.TestVM" time="0.002"/>
+        <testcase name="testVMIfSkipPop" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testVMArithmetic" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testNumNames" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testVMStringOps1" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testSubstring" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testFormatName" classname="tests.net.sf.jabref.bst.TestVM" time="0.003"/>
+        <testcase name="testDuplicateEmptyPopSwapIf" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testTextLength" classname="tests.net.sf.jabref.bst.TestVM" time="0.0"/>
+        <testcase name="testVMIntToStr" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testVMChrToInt" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testSort" classname="tests.net.sf.jabref.bst.TestVM" time="0.0"/>
+        <testcase name="testBuildIn" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testVariables" classname="tests.net.sf.jabref.bst.TestVM" time="0.0"/>
+        <testcase name="testWhile" classname="tests.net.sf.jabref.bst.TestVM" time="0.003"/>
+        <testcase name="testType" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testMissing" classname="tests.net.sf.jabref.bst.TestVM" time="0.002"/>
+        <testcase name="testCallType" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testIterate" classname="tests.net.sf.jabref.bst.TestVM" time="0.001"/>
+        <testcase name="testWidth" classname="tests.net.sf.jabref.bst.TestVM" time="0.003"/>
+        <testcase name="testVMSwap" classname="tests.net.sf.jabref.bst.TestVM" time="0.0"/>
+        <testcase name="testHypthenatedName" classname="tests.net.sf.jabref.bst.TestVM" time="0.0">
+          <error>java.io.FileNotFoundException: src/tests/net/sf/jabref/bst/abbrv.bst (No such file or directory)
+	at java.io.FileInputStream.open(Native Method)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:138)
+	at java.io.FileInputStream.&lt;init&gt;(FileInputStream.java:97)
+	at org.antlr.runtime.ANTLRFileStream.load(ANTLRFileStream.java:59)
+	at org.antlr.runtime.ANTLRFileStream.&lt;init&gt;(ANTLRFileStream.java:47)
+	at org.antlr.runtime.ANTLRFileStream.&lt;init&gt;(ANTLRFileStream.java:42)
+	at net.sf.jabref.bst.VM.&lt;init&gt;(VM.java:84)
+	at tests.net.sf.jabref.bst.TestVM.testHypthenatedName(TestVM.java:638)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at junit.framework.TestCase.runTest(TestCase.java:154)
+	at junit.framework.TestCase.runBare(TestCase.java:127)
+	at junit.framework.TestResult$1.protect(TestResult.java:106)
+	at junit.framework.TestResult.runProtected(TestResult.java:124)
+	at junit.framework.TestResult.run(TestResult.java:109)
+	at junit.framework.TestCase.run(TestCase.java:118)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at junit.framework.TestSuite.runTest(TestSuite.java:208)
+	at junit.framework.TestSuite.run(TestSuite.java:203)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+
+</error>
+        </testcase>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.bst.BibtexWidthTest" time="0.0">
+        <testcase name="testWidth" classname="tests.net.sf.jabref.bst.BibtexWidthTest" time="0.0"/>
+        <testcase name="testGetCharWidth" classname="tests.net.sf.jabref.bst.BibtexWidthTest" time="0.0"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.bst.TextPrefixFunctionTest" time="0.001">
+        <testcase name="testPrefix" classname="tests.net.sf.jabref.bst.TextPrefixFunctionTest" time="0.001"/>
+      </testsuite>
+      <testsuite name="tests.net.sf.jabref.bst.BibtexPurifyTest" time="0.001">
+        <testcase name="testPurify" classname="tests.net.sf.jabref.bst.BibtexPurifyTest" time="0.001"/>
+      </testsuite>
+    </testsuite>
+    <testsuite name="Test for tests.net.sf.jabref.labelPattern" time="0.109">
+      <testsuite name="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.109">
+        <testcase name="testFirstAuthor" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.0"/>
+        <testcase name="testAuthIniN" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.003"/>
+        <testcase name="testFirstPage" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.0"/>
+        <testcase name="testLastPage" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.002"/>
+        <testcase name="testMakeLabelAndCheckLegalKeys" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.042"/>
+        <testcase name="testMakeLabelAndCheckLegalKeysAccentGrave" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.018"/>
+        <testcase name="testCheckLegalKey" classname="tests.net.sf.jabref.labelPattern.LabelPatternUtilTest" time="0.044"/>
+      </testsuite>
+    </testsuite>
+  </testsuite>
+</testrun>
