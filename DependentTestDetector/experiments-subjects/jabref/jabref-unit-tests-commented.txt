@@ -1,13 +1,9 @@
-net.sf.jabref.oo.OOBibBase.testCustomProperties
-net.sf.jabref.oo.OOBibBase.testFootnote
-net.sf.jabref.oo.OOBibBase.testFrameHandling
 tests.net.sf.jabref.UtilFindFileTest.testFindPdfInMultiple
 tests.net.sf.jabref.UtilFindFileTest.testFindFile
 tests.net.sf.jabref.UtilFindFileTest.testFindFileRelative
 tests.net.sf.jabref.UtilFindFileTest.testFindPdf
 tests.net.sf.jabref.UtilFindFileTest.testFindAssociatedFiles
 tests.net.sf.jabref.UtilFindFileTest.testVoid
-tests.net.sf.jabref.DuplicateCheckTest.testDuplicateDetection
 tests.net.sf.jabref.AuthorListTest.testFixAuthor_lastNameOnlyCommas
 tests.net.sf.jabref.AuthorListTest.testFixAuthorForAlphabetization
 tests.net.sf.jabref.AuthorListTest.testSize
@@ -118,13 +114,6 @@ tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester.testFo
 tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester.testOneAuthorCommonName
 tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester.testTwoAuthorsCommonName
 tests.net.sf.jabref.export.layout.format.AuthorLastFirstAbbreviatorTester.testOneAuthorSimpleName
-tests.net.sf.jabref.gui.AutoCompleterTest.testAutoCompleterFactory
-tests.net.sf.jabref.gui.AutoCompleterTest.testDefaultAutoCompleter
-tests.net.sf.jabref.gui.AutoCompleterTest.testCrossRefCompleter
-tests.net.sf.jabref.gui.AutoCompleterTest.testEntireFieldCompleter
-tests.net.sf.jabref.gui.AutoCompleterTest.testNameFieldCompleter
-tests.net.sf.jabref.gui.AutoCompleterTest.testEntryEditorForNameFieldAutoCompleter
-tests.net.sf.jabref.gui.AutoCompleterTest.testEntryEditorForFieldAnotherAutoCompleter
 tests.net.sf.jabref.imports.BibtexParserTest.testParseReader
 tests.net.sf.jabref.imports.BibtexParserTest.testBibtexParser
 tests.net.sf.jabref.imports.BibtexParserTest.testIsRecognizedFormat
@@ -138,9 +127,6 @@ tests.net.sf.jabref.imports.BibtexParserTest.testBigNumbers2
 tests.net.sf.jabref.imports.BibtexParserTest.testNewlineHandling
 tests.net.sf.jabref.imports.BibtexParserTest.testFileNaming
 tests.net.sf.jabref.imports.BibtexParserTest.testFileNaming1
-tests.net.sf.jabref.imports.RISImporterTest.testIsRecognizedFormat
-tests.net.sf.jabref.imports.RISImporterTest.testProcessSubSup
-tests.net.sf.jabref.imports.RISImporterTest.testImportEntries
 tests.net.sf.jabref.imports.IsiImporterTest.testIsRecognizedFormat
 tests.net.sf.jabref.imports.IsiImporterTest.testProcessSubSup
 tests.net.sf.jabref.imports.IsiImporterTest.testImportEntries
