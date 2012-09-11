@@ -1,0 +1,1658 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="MusicIndexServiceTestCase" project="subsonic" tests="78" started="78" failures="0" errors="35" ignored="0">
+  <testsuite name="net.sourceforge.subsonic.dao.MusicFolderDaoTestCase" time="0.099">
+    <testcase name="testCreateMusicFolder" classname="net.sourceforge.subsonic.dao.MusicFolderDaoTestCase" time="0.032">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from music_folder]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.MusicFolderDaoTestCase.setUp(MusicFolderDaoTestCase.java:35)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdateMusicFolder" classname="net.sourceforge.subsonic.dao.MusicFolderDaoTestCase" time="0.031">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from music_folder]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.MusicFolderDaoTestCase.setUp(MusicFolderDaoTestCase.java:35)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeleteMusicFolder" classname="net.sourceforge.subsonic.dao.MusicFolderDaoTestCase" time="0.036">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from music_folder]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.MusicFolderDaoTestCase.setUp(MusicFolderDaoTestCase.java:35)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: MUSIC_FOLDER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.domain.MediaFileComparatorTestCase" time="0.018">
+    <testcase name="testCompareAlbums" classname="net.sourceforge.subsonic.domain.MediaFileComparatorTestCase" time="0.018"/>
+    <testcase name="testCompareDiscNumbers" classname="net.sourceforge.subsonic.domain.MediaFileComparatorTestCase" time="0.0"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.239">
+    <testcase name="testIdentity" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.037">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testPlaylist" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testGetPlayersForUserAndClientId" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdatePlayer" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeletePlayer" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testCreatePlayer" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDefaultValues" classname="net.sourceforge.subsonic.dao.PlayerDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from player]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PlayerDaoTestCase.setUp(PlayerDaoTestCase.java:21)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PLAYER
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.service.SecurityServiceTestCase" time="0.005">
+    <testcase name="testIsFileInFolder" classname="net.sourceforge.subsonic.service.SecurityServiceTestCase" time="0.005"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.service.metadata.MediaFileTestCase" time="0.001">
+    <testcase name="testGetDurationAsString" classname="net.sourceforge.subsonic.service.metadata.MediaFileTestCase" time="0.001"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.402">
+    <testcase name="testCreateChannel" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.072">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testChannelId" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdateChannel" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeleteChannel" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.045">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testCreateEpisode" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.044">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testGetEpisode" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testGetEpisodes" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdateEpisode" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeleteEpisode" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testCascadingDelete" classname="net.sourceforge.subsonic.dao.PodcastDaoTestCase" time="0.039">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from podcast_channel]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.PodcastDaoTestCase.setUp(PodcastDaoTestCase.java:19)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: PODCAST_CHANNEL
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.015">
+    <testcase name="testToHtml" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testRemoveSuffix" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testGetMimeType" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testFormatBytes" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testFormatDuration" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testSplit" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testParseInts" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.004"/>
+    <testcase name="testToHttpUrl" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testParseLocale" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.001"/>
+    <testcase name="testUtf8Hex" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.005"/>
+    <testcase name="testMd5Hex" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testGetUrlFile" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.001"/>
+    <testcase name="testFileSystemSafe" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.0"/>
+    <testcase name="testRewriteUrl" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.001"/>
+    <testcase name="testParseRange" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.002"/>
+    <testcase name="testRemoveMarkup" classname="net.sourceforge.subsonic.util.StringUtilTestCase" time="0.001"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.service.StatusServiceTestCase" time="0.004">
+    <testcase name="testSimpleAddRemove" classname="net.sourceforge.subsonic.service.StatusServiceTestCase" time="0.003"/>
+    <testcase name="testMultipleStreamsSamePlayer" classname="net.sourceforge.subsonic.service.StatusServiceTestCase" time="0.0"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.dao.InternetRadioDaoTestCase" time="0.097">
+    <testcase name="testCreateInternetRadio" classname="net.sourceforge.subsonic.dao.InternetRadioDaoTestCase" time="0.03">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from internet_radio]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.InternetRadioDaoTestCase.setUp(InternetRadioDaoTestCase.java:15)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdateInternetRadio" classname="net.sourceforge.subsonic.dao.InternetRadioDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from internet_radio]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.InternetRadioDaoTestCase.setUp(InternetRadioDaoTestCase.java:15)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeleteInternetRadio" classname="net.sourceforge.subsonic.dao.InternetRadioDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from internet_radio]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.InternetRadioDaoTestCase.setUp(InternetRadioDaoTestCase.java:15)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: INTERNET_RADIO
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.026">
+    <testcase name="testEmpty" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.024"/>
+    <testcase name="testStatus" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testMoveUp" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testMoveDown" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testRemove" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.001"/>
+    <testcase name="testNext" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testPlayAfterEndReached" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testAppend" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testUndo" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.0"/>
+    <testcase name="testOrder" classname="net.sourceforge.subsonic.domain.PlayQueueTestCase" time="0.001"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.197">
+    <testcase name="testCreateTranscoding" classname="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.029">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from transcoding2]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.TranscodingDaoTestCase.setUp(TranscodingDaoTestCase.java:17)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdateTranscoding" classname="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from transcoding2]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.TranscodingDaoTestCase.setUp(TranscodingDaoTestCase.java:17)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeleteTranscoding" classname="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from transcoding2]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.TranscodingDaoTestCase.setUp(TranscodingDaoTestCase.java:17)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testPlayerTranscoding" classname="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from transcoding2]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.TranscodingDaoTestCase.setUp(TranscodingDaoTestCase.java:17)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testCascadingDeletePlayer" classname="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from transcoding2]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.TranscodingDaoTestCase.setUp(TranscodingDaoTestCase.java:17)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testCascadingDeleteTranscoding" classname="net.sourceforge.subsonic.dao.TranscodingDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from transcoding2]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.TranscodingDaoTestCase.setUp(TranscodingDaoTestCase.java:17)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: TRANSCODING2
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.domain.VersionTestCase" time="0.002">
+    <testcase name="testVersion" classname="net.sourceforge.subsonic.domain.VersionTestCase" time="0.002"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.domain.CacheElementTestCase" time="0.001">
+    <testcase name="testCreateId" classname="net.sourceforge.subsonic.domain.CacheElementTestCase" time="0.001"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.199">
+    <testcase name="testCreateUser" classname="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.031">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from user_role]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.UserDaoTestCase.setUp(UserDaoTestCase.java:24)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUpdateUser" classname="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from user_role]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.UserDaoTestCase.setUp(UserDaoTestCase.java:24)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testGetUserByName" classname="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from user_role]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.UserDaoTestCase.setUp(UserDaoTestCase.java:24)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testDeleteUser" classname="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.033">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from user_role]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.UserDaoTestCase.setUp(UserDaoTestCase.java:24)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testGetRolesForUser" classname="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from user_role]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.UserDaoTestCase.setUp(UserDaoTestCase.java:24)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+    <testcase name="testUserSettings" classname="net.sourceforge.subsonic.dao.UserDaoTestCase" time="0.034">
+      <error>org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [delete from user_role]; nested exception is java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.springframework.jdbc.support.SQLExceptionSubclassTranslator.doTranslate(SQLExceptionSubclassTranslator.java:94)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:72)
+	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:80)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:407)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:428)
+	at net.sourceforge.subsonic.dao.UserDaoTestCase.setUp(UserDaoTestCase.java:24)
+	at junit.framework.TestCase.runBare(TestCase.java:132)
+	at junit.framework.TestResult$1.protect(TestResult.java:110)
+	at junit.framework.TestResult.runProtected(TestResult.java:128)
+	at junit.framework.TestResult.run(TestResult.java:113)
+	at junit.framework.TestCase.run(TestCase.java:124)
+	at junit.framework.TestSuite.runTest(TestSuite.java:243)
+	at junit.framework.TestSuite.run(TestSuite.java:238)
+	at org.junit.internal.runners.JUnit38ClassRunner.run(JUnit38ClassRunner.java:83)
+	at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:50)
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:467)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:683)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:390)
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:197)
+Caused by: java.sql.SQLSyntaxErrorException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.Util.sqlException(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.fetchResult(Unknown Source)
+	at org.hsqldb.jdbc.JDBCStatement.execute(Unknown Source)
+	at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:421)
+	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:396)
+	... 16 more
+Caused by: org.hsqldb.HsqlException: user lacks privilege or object not found: USER_ROLE
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.error.Error.error(Unknown Source)
+	at org.hsqldb.SchemaManager.getTable(Unknown Source)
+	at org.hsqldb.ParserDQL.readTableName(Unknown Source)
+	at org.hsqldb.ParserDQL.readRangeVariableForDataChange(Unknown Source)
+	at org.hsqldb.ParserDML.compileDeleteStatement(Unknown Source)
+	at org.hsqldb.ParserCommand.compilePart(Unknown Source)
+	at org.hsqldb.ParserCommand.compileStatements(Unknown Source)
+	at org.hsqldb.Session.executeDirectStatement(Unknown Source)
+	at org.hsqldb.Session.execute(Unknown Source)
+	... 20 more
+
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.service.SettingsServiceTestCase" time="0.006">
+    <testcase name="testDefaultValues" classname="net.sourceforge.subsonic.service.SettingsServiceTestCase" time="0.004"/>
+    <testcase name="testSubsonicHome" classname="net.sourceforge.subsonic.service.SettingsServiceTestCase" time="0.0"/>
+    <testcase name="testChangeSettings" classname="net.sourceforge.subsonic.service.SettingsServiceTestCase" time="0.002"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.service.metadata.MetaDataParserTestCase" time="0.002">
+    <testcase name="testRemoveTrackNumberFromTitle" classname="net.sourceforge.subsonic.service.metadata.MetaDataParserTestCase" time="0.002"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.service.MusicIndexServiceTestCase" time="0.001">
+    <testcase name="testCreateIndexFromExpression" classname="net.sourceforge.subsonic.service.MusicIndexServiceTestCase" time="0.001"/>
+    <testcase name="testCreateIndexesFromExpression" classname="net.sourceforge.subsonic.service.MusicIndexServiceTestCase" time="0.0"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.domain.TranscodeSchemeTestCase" time="0.0">
+    <testcase name="testStrictest" classname="net.sourceforge.subsonic.domain.TranscodeSchemeTestCase" time="0.0"/>
+  </testsuite>
+  <testsuite name="net.sourceforge.subsonic.controller.StreamControllerTestCase" time="0.011">
+    <testcase name="testGetRequestedVideoSize" classname="net.sourceforge.subsonic.controller.StreamControllerTestCase" time="0.01"/>
+    <testcase name="testGetSuitableVideoSize" classname="net.sourceforge.subsonic.controller.StreamControllerTestCase" time="0.001"/>
+  </testsuite>
+</testrun>
