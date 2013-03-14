@@ -43,15 +43,14 @@ public class TestDecorator extends Assert implements Test {
 		return fTest;
 	}
 
-	// WL what we're doing should not need to worry about decorators.
+	// WL added to support passing in generating a list of tests
 	public List<Test> getTests() {
-		// TODO Auto-generated method stub
+		System.err.println("unsupported call to junit.extensions.TestDecorator for getting list of tests");
 		return null;
 	}
 
-	// WL what we're doing should not need to worry about decorators.
+	// WL added to support passing in a list of tests
 	public void run(TestResult fTestResult, List<String> testNames) {
-		// TODO Auto-generated method stub
-		
+		System.err.println("unsupported call to junit.extensions.TestDecorator for running list of tests");
 	}
 }

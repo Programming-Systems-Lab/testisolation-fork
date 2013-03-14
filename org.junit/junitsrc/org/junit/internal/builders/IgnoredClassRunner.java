@@ -30,6 +30,6 @@ public class IgnoredClassRunner extends Runner {
 	// WL added to support passing in a list of tests
 	@Override
 	public void run(RunNotifier notifier, List<String> testNames) {
-		notifier.fireTestIgnored(getDescription());		
+		System.err.println("unsupported call to org.junit.internal.builders.IgnoredClassRunner");	
 	}
 }

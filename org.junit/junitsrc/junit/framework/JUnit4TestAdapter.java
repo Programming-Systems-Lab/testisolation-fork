@@ -85,7 +85,6 @@ public class JUnit4TestAdapter implements Test, Filterable, Sortable, Describabl
 
 	// WL added to support passing in a list of tests
 	public void run(TestResult fTestResult, List<String> testNames) {
-		// TODO Auto-generated method stub
 		fRunner.run(fCache.getNotifier(fTestResult, this), testNames);
 	}
 }

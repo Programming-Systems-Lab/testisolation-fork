@@ -57,4 +57,10 @@ public class ErrorReportingRunner extends Runner {
 		notifier.fireTestFailure(new Failure(description, child));
 		notifier.fireTestFinished(description);
 	}
+
+	// WL added to support passing in a list of tests
+	@Override
+	public void run(RunNotifier notifier, List<String> testNames) {
+		System.err.println("unsupported call to org.junit.internal.runners.ErrorReportingRunner");
+	}
 }

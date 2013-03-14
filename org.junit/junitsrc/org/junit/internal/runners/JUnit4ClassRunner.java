@@ -146,10 +146,6 @@ public class JUnit4ClassRunner extends Runner implements Filterable, Sortable {
 	// WL added to support passing in a list of tests
 	@Override
 	public void run(final RunNotifier notifier, List<String> testNames) {
-		new ClassRoadie(notifier, fTestClass, getDescription(), new Runnable() {
-			public void run() {
-				runMethods(notifier);
-			}
-		}).runProtected();
+		System.err.println("unsupported call to org.junit.internal.runners.JUnit4ClassRunner");
 	}
 }

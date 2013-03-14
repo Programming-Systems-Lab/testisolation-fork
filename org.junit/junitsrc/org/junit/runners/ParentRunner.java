@@ -310,18 +310,7 @@ public abstract class ParentRunner<T> extends Runner implements Filterable,
 	// WL added to support passing in a list of tests
 	@Override
 	public void run(final RunNotifier notifier, List<String> testNames) {
-		EachTestNotifier testNotifier= new EachTestNotifier(notifier,
-				getDescription());
-		try {
-			Statement statement= classBlock(notifier);
-			statement.evaluate();
-		} catch (AssumptionViolatedException e) {
-			testNotifier.fireTestIgnored();
-		} catch (StoppedByUserException e) {
-			throw e;
-		} catch (Throwable e) {
-			testNotifier.addFailure(e);
-		}
+		System.err.println("unsupported call to org.junit.runners.ParentRunner<T>");
 	}
 
 	//
