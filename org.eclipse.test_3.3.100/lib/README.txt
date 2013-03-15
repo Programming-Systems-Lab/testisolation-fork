@@ -1,1 +1,0 @@
-org.apache.ant-v1.8.2.jar is necessary in order to run org.eclipse.ant.tests.core.AutomatedSuite with no errors
