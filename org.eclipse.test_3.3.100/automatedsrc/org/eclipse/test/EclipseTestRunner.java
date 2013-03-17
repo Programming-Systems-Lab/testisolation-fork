@@ -27,6 +27,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.Dictionary;
@@ -166,7 +167,10 @@ public class EclipseTestRunner implements TestListener {
 
 		// WL used to store the name of the output file
 		String outputFile = null;
+		// WL using this argument would imply you are running a list of Tests in the same JVM
 		String inputFile = null;
+		String singleTest = null;
+		List<String> testNames = null;
 		
         boolean haltError = false;
         boolean haltFail = false;
@@ -213,11 +217,15 @@ public class EclipseTestRunner implements TestListener {
             // WL runs tests in the order specified by inputFile
             // the way tests are listed in inputFile should match the format outputted by outputFile
             } else if (args[i].startsWith("inputFile=")) {
-              	inputFile= args[i].substring(10);               	
+              	inputFile = args[i].substring(10);               	
             // WL to extract tests out into a file specified after outputFile=	
             } else if (args[i].startsWith("outputFile=")) {
-            	outputFile= args[i].substring(11);
-           
+            	outputFile = args[i].substring(11);
+        	// WL to setup EclipseTestRunner with a single test	
+            } else if (args[i].startsWith("singleTest=")) {
+            	singleTest = args[i].substring(11); 
+            	singleTest.trim();
+       
             } else if (args[i].equals("-testlistener")) {
             	System.err.println("The -testlistener option is no longer supported\nuse the formatter= option instead");
             	return ERRORS;                 	
@@ -257,7 +265,12 @@ public class EclipseTestRunner implements TestListener {
 					printTests(outputFile, runner);
 				} else {
 					transferFormatters(runner,j);
-					runner.run(inputFile);
+					if (singleTest != null) {
+						testNames = new ArrayList<String>();
+						testNames.add(singleTest);
+					} else if (inputFile != null) 
+						testNames = getTestNames(inputFile);
+					runner.run(testNames);
 				}
 				j++;
 				if(runner.getRetCode()!=0){
@@ -285,8 +298,13 @@ public class EclipseTestRunner implements TestListener {
 	    if (outputFile != null) {
 			printTests(outputFile, runner);
 		} else {
-			transferFormatters(runner);
-			runner.run(inputFile);
+			transferFormatters(runner); 
+			if (singleTest != null) {
+				testNames = new ArrayList<String>();
+				testNames.add(singleTest);
+			} else if (inputFile != null) 
+				testNames = getTestNames(inputFile);
+			runner.run(testNames);
 		}
 		return runner.getRetCode();
 	}
@@ -527,7 +545,9 @@ public class EclipseTestRunner implements TestListener {
 	
 	
 	// WL takes a file as input and returns a List<String> of test names separated by "\n"
-	private List<String> getTestNames(String filename) {
+	private static List<String> getTestNames(String filename) {
+		if (filename == null)
+			return null;
 		List<String> listContents = null;
 	    StringBuilder contentsBuilder = new StringBuilder();
 	    
@@ -563,7 +583,7 @@ public class EclipseTestRunner implements TestListener {
 		return listContents;
 	}
 	
-	public void run(String inputFile) {
+	public void run(List<String> testNames) {
 //		IPerformanceMonitor pm = PerfMsrCorePlugin.getPerformanceMonitor(true);
 		
         fTestResult= new TestResult();
@@ -590,8 +610,7 @@ public class EclipseTestRunner implements TestListener {
 
             try {
 //            	pm.snapshot(1); // before
-            	if (inputFile != null) {
-            		List<String> testNames = getTestNames(inputFile);
+            	if (testNames != null) {
             		fSuite.run(fTestResult, testNames);
             	} else 
             		fSuite.run(fTestResult);
