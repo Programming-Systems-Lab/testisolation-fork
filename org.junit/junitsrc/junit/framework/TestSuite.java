@@ -276,7 +276,7 @@ public class TestSuite implements Test {
 				Test currTest = testMap.get(testList.get(i));
 				currTest.run(result);
 			} else {
-				System.err.println("Input file contained tests that do not exist in this plugin.");
+				System.err.println("Input file contained tests that does not exist in this plugin.");
 				break;
 			}
 		}
