@@ -169,7 +169,7 @@ public class EclipseTestRunner implements TestListener {
 		String outputFile = null;
 		// WL using this argument would imply you are running a list of Tests in the same JVM
 		String inputFile = null;
-		String singleTest = null;
+		String cmdLineTest = null;
 		List<String> testNames = null;
 		
         boolean haltError = false;
@@ -222,9 +222,9 @@ public class EclipseTestRunner implements TestListener {
             } else if (args[i].startsWith("outputFile=")) {
             	outputFile = args[i].substring(11);
         	// WL to setup EclipseTestRunner with a single test	
-            } else if (args[i].startsWith("singleTest=")) {
-            	singleTest = args[i].substring(11); 
-            	singleTest.trim();
+            } else if (args[i].startsWith("cmdLineTest=")) {
+            	cmdLineTest = args[i].substring(12); 
+            	cmdLineTest.trim();
        
             } else if (args[i].equals("-testlistener")) {
             	System.err.println("The -testlistener option is no longer supported\nuse the formatter= option instead");
@@ -265,9 +265,9 @@ public class EclipseTestRunner implements TestListener {
 					printTests(outputFile, runner);
 				} else {
 					transferFormatters(runner,j);
-					if (singleTest != null) {
-						testNames = new ArrayList<String>();
-						testNames.add(singleTest);
+					if (cmdLineTest != null) {
+						String[] testsName = cmdLineTest.split(",");
+						testNames = Arrays.asList(testsName);
 					} else if (inputFile != null) 
 						testNames = getTestNames(inputFile);
 					runner.run(testNames);
@@ -299,9 +299,9 @@ public class EclipseTestRunner implements TestListener {
 			printTests(outputFile, runner);
 		} else {
 			transferFormatters(runner); 
-			if (singleTest != null) {
-				testNames = new ArrayList<String>();
-				testNames.add(singleTest);
+			if (cmdLineTest != null) {
+				String[] testsName = cmdLineTest.split(",");
+				testNames = Arrays.asList(testsName);
 			} else if (inputFile != null) 
 				testNames = getTestNames(inputFile);
 			runner.run(testNames);
