@@ -1,0 +1,2 @@
+If the projects org.eclipse.test or org.junit from our repositories is ever changed, you must replace the copies of those in your eclipse/plugins directory and this folder. 
+Replacing what is in this folder with the updated copy will save other people the need to jar up the projects again when something gets updated.
