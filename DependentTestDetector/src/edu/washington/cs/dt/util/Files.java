@@ -326,4 +326,21 @@ public final class Files {
     }
     return lines;
   }
+  
+	public static void createAndWriteFile(File f, String str) throws IOException {
+		if(!f.exists()) {
+			File dir = f.getParentFile();
+			boolean created = true;
+			if(!dir.exists()) {
+				created = dir.mkdirs();
+			}
+			created = created & f.createNewFile();
+			if(!created) {
+				throw new RuntimeException("Cannot create: " + f.getName());
+			}
+		}
+		Files.writeToFile(str, f);
+
+	}
+
 }

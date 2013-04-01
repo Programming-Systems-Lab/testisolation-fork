@@ -13,6 +13,8 @@ public class OneTestExecResult {
 
 	private final String fullStackTrace;
 	private final String filteredStackTrace;
+	private long execTime = 0;
+	
 	
 	private final boolean comparestacktrace;
 	
@@ -21,6 +23,10 @@ public class OneTestExecResult {
 	}
 	
 	public OneTestExecResult(RESULT result, String fullStackTrace) {
+		this(result, fullStackTrace, -1);
+	}
+	
+	public OneTestExecResult(RESULT result, String fullStackTrace, long time) {
 		Utils.checkNull(result, "result can not be null.");
 		this.result = result;
 		this.fullStackTrace = fullStackTrace;
@@ -33,8 +39,9 @@ public class OneTestExecResult {
 		}
 		
 		this.comparestacktrace = Main.comparestacktrace;
+		this.execTime = time;
 	}
-	
+
 	public String getFullStackTrace() {
 		return this.fullStackTrace;
 	}
@@ -63,10 +70,6 @@ public class OneTestExecResult {
 		        && (this.filteredStackTrace != null
 		    		? this.filteredStackTrace.equals(r.filteredStackTrace)
 		    		: r.filteredStackTrace == null);
-//		    return r.result.equals(this.result)
-//	        && (this.fullStackTrace != null
-//	    		? this.fullStackTrace.equals(r.fullStackTrace)
-//	    		: r.fullStackTrace == null);
 		}
 	}
 	
@@ -75,7 +78,15 @@ public class OneTestExecResult {
 		if(!comparestacktrace) {
 			return 13*result.hashCode();
 		}
-		
 		return 13*result.hashCode() + (this.filteredStackTrace != null ? 29*this.filteredStackTrace.hashCode() : 9);
 	}
+	
+	public long getExecTime() {
+		return execTime;
+	}
+	
+	public void setExecTime(long execTime) {
+		this.execTime = execTime;
+	}
+	
 }

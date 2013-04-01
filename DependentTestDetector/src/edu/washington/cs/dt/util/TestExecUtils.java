@@ -3,10 +3,17 @@
  */
 package edu.washington.cs.dt.util;
 
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,18 +40,15 @@ public class TestExecUtils {
 	@Option("The min number of tests when using ./tmptestfiles")
 	public static int threshhold = 120;
 	
-	/*
-	 * Executes a list of tests in order by launching a fresh JVM, and
-	 * returns the result of each test.
-	 * 
-	 * The test is in the form of packageName.className.methodName
-	 * */
-	public static Map<String, OneTestExecResult> executeTestsInFreshJVM(String classPath, String outputFile, List<String> tests) {
+	
+	public static Map<String, OneTestExecResult> executeTestsInFreshJVM(String classPath, String outputFile,
+			List<String> tests, ProgressCallback progressCallback) {
 		
 		List<String> commandList = new LinkedList<String>();
 		commandList.add("java");
 		commandList.add("-cp");
 		commandList.add(classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
+		commandList.add("-Xmx2G");
 		
 		if(tests.size() < threshhold) {
 		    commandList.add("edu.washington.cs.dt.util.TestRunnerWrapper");
@@ -61,8 +65,18 @@ public class TestExecUtils {
 		
 		String[] args = commandList.toArray(new String[0]);
 		
-		Command.exec(args);
-		
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MonitoringPrintStream ps   = new MonitoringPrintStream(out, true);
+		ps.setCallback(progressCallback);
+		Command.exec(args, ps);
+		ps.close();
+
+		try {
+			out.close();
+			Files.createAndWriteFile(new File(outputFile), ps.getFilteredLines());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		Map<String, OneTestExecResult> testResults = parseTestResults(outputFile);
 		
 		Utils.checkTrue(tests.size() == testResults.size(), "Test num not equal.");
@@ -74,24 +88,24 @@ public class TestExecUtils {
 		Map<String, OneTestExecResult> ret = new LinkedHashMap<String, OneTestExecResult>();
 		
 		List<String> lines = Files.readWholeNoExp(outputFile);
-		
+		Pattern p = Pattern.compile( ("(.*)" + testResultSep + "(\\w+)" + testResultSep + "(\\d+)" + resultExcepSep + "(.*)"));
 		for(String line : lines) {
-			int resultSepIndex = line.indexOf(TestExecUtils.testResultSep);
-			int excepSepIndex = line.indexOf(TestExecUtils.resultExcepSep);
-			Utils.checkTrue(resultSepIndex != -1, "resultSepIndex != -1");
-			Utils.checkTrue(excepSepIndex != -1, "excepSepIndex != -1");
+			Matcher m = p.matcher(line);
+			Utils.checkTrue(m.find(), "Line did not match format");
+		
+			String testCase = m.group(1);
+			String result = m.group(2);
+			long time = Long.parseLong(m.group(3));
+			String fullStacktrace = m.group(4);
 			
-			String testCase = line.substring(0, resultSepIndex);
-			String result = line.substring(resultSepIndex + TestExecUtils.testResultSep.length(), excepSepIndex);
-			String fullStacktrace = line.substring(excepSepIndex + TestExecUtils.resultExcepSep.length(), line.length());
 			if(result.equals(RESULT.PASS.name())) {
-				OneTestExecResult r = new OneTestExecResult(RESULT.PASS, fullStacktrace);
+				OneTestExecResult r = new OneTestExecResult(RESULT.PASS, fullStacktrace, time);
 				ret.put(testCase, r);
 			} else if (result.equals(RESULT.FAILURE.name())) {
-				OneTestExecResult r = new OneTestExecResult(RESULT.FAILURE, fullStacktrace);
+				OneTestExecResult r = new OneTestExecResult(RESULT.FAILURE, fullStacktrace, time);
 				ret.put(testCase, r);
 			} else if (result.equals(RESULT.ERROR.name())) {
-				OneTestExecResult r = new OneTestExecResult(RESULT.ERROR, fullStacktrace);
+				OneTestExecResult r = new OneTestExecResult(RESULT.ERROR, fullStacktrace, time);
 				ret.put(testCase, r);
 			} else {
 				throw new RuntimeException("Unknown result: " + result);
@@ -99,6 +113,16 @@ public class TestExecUtils {
 		}
 		
 		return ret;
+		}
+	
+	/*
+	 * Executes a list of tests in order by launching a fresh JVM, and
+	 * returns the result of each test.
+	 * 
+	 * The test is in the form of packageName.className.methodName
+	 * */
+	public static Map<String, OneTestExecResult> executeTestsInFreshJVM(String classPath, String outputFile, List<String> tests) {
+		return executeTestsInFreshJVM(classPath, outputFile, tests, null);
 	}
 	
 	public static final String JUNIT_ASSERT = "junit.framework.Assert";
@@ -160,4 +184,6 @@ public class TestExecUtils {
 		}
 		return false;
 	}
+
+	
 }

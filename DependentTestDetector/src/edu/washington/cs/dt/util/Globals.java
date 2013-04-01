@@ -16,6 +16,9 @@ public class Globals {
   
   public static final String fileSep = System.getProperty("file.separator"); // / or \
 
+  public static final String stdoutPrefix = ">>>";
+  public static final String stdoutProgressPrefix = "<<<";
+  
   public static PrintStream blackHole;
 
   private static final ByteArrayOutputStream bos;

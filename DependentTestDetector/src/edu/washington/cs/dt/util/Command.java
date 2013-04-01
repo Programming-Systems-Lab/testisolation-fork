@@ -5,6 +5,7 @@ package edu.washington.cs.dt.util;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -191,12 +192,16 @@ public class Command {
   public static int exec(String[] cmd, PrintStream out, String prompt) {
     return exec(cmd, out, prompt, false);
   }
-
+  
   public static int exec(String[] cmd, PrintStream out, String prompt, boolean gobbleChars) {
+	  return exec(cmd,out,prompt,gobbleChars, null);
+  }
+
+  public static int exec(String[] cmd, PrintStream out, String prompt, boolean gobbleChars, File cwd) {
     int exitVal;
     try {
       Runtime rt = Runtime.getRuntime();
-      Process proc = rt.exec(cmd);
+      Process proc = rt.exec(cmd, null, cwd);
 
       // any error message?
       StreamGobbler errorGobbler =

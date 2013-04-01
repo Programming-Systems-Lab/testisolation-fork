@@ -30,28 +30,15 @@ public class IsolationRunner extends AbstractTestRunner {
 	@Override
 	public TestExecResults run() {
 		TestExecResults result = TestExecResults.createInstance();
-		
-		int count = 1;
+		this.setNumberOfTests(this.junitTestList.size());
+		this.testingStarted();
 		for(String test : super.junitTestList) {
-			long starttime = System.currentTimeMillis();
-			
 			Map<String, OneTestExecResult> singleRun = TestExecUtils.executeTestsInFreshJVM(super.getClassPath(),
-					super.getTmpOutputFile(), Collections.singletonList(test));
+					super.getTmpOutputFile(), Collections.singletonList(test), null);
+			this.testCompleted();
 			result.addExecutionResults(singleRun);
-			
-			//record the used time
-			long endtime = System.currentTimeMillis();
-			float elapsed = (float)(endtime - starttime) / 1000;
-			executionTime = executionTime + elapsed;
-			if(Main.showProgress) {
-				float estLeftTime = (executionTime / count)*(junitTestList.size() - count);
-				System.out.println("Run the: " + count + " / " + junitTestList.size() + " test using: "
-						+ executionTime + " seconds, still need: " + estLeftTime + " seconds to finish.");
-			}
-			count++;
 		}
 		
-		System.out.println("Total execution time: " + executionTime + " seconds");
 		
 		//dump an intermediate results
 		if(Main.isolationReport != null) {

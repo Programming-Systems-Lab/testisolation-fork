@@ -7,6 +7,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Beaware, also need to change TestRunnerWrapper
@@ -36,38 +42,32 @@ public class TestRunnerWrapperFileInputs {
 		/*create the StringBuilder to output results*/
 		StringBuilder sb = new StringBuilder();
 		for(String fullTestName : tests) {
+			long start = System.currentTimeMillis();
 			/*check the results*/
 			String result = null;
 			//			String stackTrace = TestExecUtils.noStackTrace;
 			String fullStackTrace = TestExecUtils.noStackTrace;
 
-			JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
-			executor.executeWithJUnit4Runner();
+			final JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
+			executor.executeWithJUnit4Runner();		
+			System.out.println(Globals.stdoutProgressPrefix);
+			System.out.flush();
 			result = executor.getResult();
 			//				stackTrace = executor.getStackTrace();
 			fullStackTrace = executor.getFullStackTrace();
 
+			sb.append(Globals.stdoutPrefix);
 			sb.append(fullTestName);
 			sb.append(TestExecUtils.testResultSep);
 			sb.append(result);
+			sb.append(TestExecUtils.testResultSep);
+			sb.append(System.currentTimeMillis() - start);			
 			sb.append(TestExecUtils.resultExcepSep);
 			//			sb.append(stackTrace);
 			sb.append(fullStackTrace);
 			sb.append(Globals.lineSep);
 		}
-		//if not exist, create it
-		File f = new File(outputFile);
-		if(!f.exists()) {
-			File dir = f.getParentFile();
-			boolean created = true;
-			if(dir != null && !dir.exists()) {
-				created = dir.mkdirs();
-			}
-			created = created & f.createNewFile();
-			if(!created) {
-				throw new RuntimeException("Cannot create: " + outputFile);
-			}
-		}
-		Files.writeToFile(sb.toString(), outputFile);
+		
+		System.out.println(sb.toString());
 	}
 }

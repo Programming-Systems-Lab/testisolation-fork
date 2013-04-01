@@ -35,22 +35,24 @@ public class TestRunnerWrapper {
 		/*create a test runner*/
 		TestRunner aTestRunner= new TestRunner();
 		for(String fullTestName : tests) {
+			long start = System.currentTimeMillis();
 			boolean useJUnit4 = CodeUtils.useJUnit4(fullTestName);
 			/*check the results*/
 			String result = null;
-			//String stackTrace = TestExecUtils.noStackTrace;
 			String fullStackTrace = TestExecUtils.noStackTrace;
 			if (useJUnit4) {
 				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
 				executor.executeWithJUnit4Runner();
+				System.out.println(Globals.stdoutProgressPrefix);
+				System.out.flush();
 				result = executor.getResult();
-				//stackTrace = executor.getStackTrace();
 				fullStackTrace = executor.getFullStackTrace();
 			} else {
 				try {
 					String[] junitArgs = new String[]{"-m", fullTestName};
-					// System.out.println(Utils.convertArrayToFlatString(junitArgs));
 					TestResult r = aTestRunner.start(junitArgs);
+					System.out.println(Globals.stdoutProgressPrefix);
+					System.out.flush();	
 					if (r.wasSuccessful()) {
 						result = RESULT.PASS.name();
 					} else {
@@ -60,7 +62,6 @@ public class TestRunnerWrapper {
 											+ CodeUtils.flattenFailrues(r.errors()));
 							result = RESULT.ERROR.name();
 							TestFailure failure = r.errors().nextElement();
-							//stackTrace = TestExecUtils.flatStackTrace(failure, Main.excludeRegex);
 							fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(failure.thrownException()));
 						}
 						if (r.failureCount() > 0) {
@@ -69,8 +70,7 @@ public class TestRunnerWrapper {
 											+ CodeUtils.flattenFailrues(r.failures()));
 							result = RESULT.FAILURE.name();
 							TestFailure failure = r.failures().nextElement();
-							//stackTrace = TestExecUtils.flatStackTrace(failure,
-							//		Main.excludeRegex);
+
 							fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(failure.thrownException()));
 						}
 					}
@@ -80,28 +80,16 @@ public class TestRunnerWrapper {
 				}
 			}
 			
+			sb.append(Globals.stdoutPrefix);
 			sb.append(fullTestName);
 			sb.append(TestExecUtils.testResultSep);
 			sb.append(result);
+			sb.append(TestExecUtils.testResultSep);
+			sb.append(System.currentTimeMillis() - start);
 			sb.append(TestExecUtils.resultExcepSep);
-//			sb.append(stackTrace);
 			sb.append(fullStackTrace);
 			sb.append(Globals.lineSep);
 		}
-		//if not exist, create it
-		File f = new File(outputFile);
-		if(!f.exists()) {
-			File dir = f.getParentFile();
-			boolean created = true;
-			if(!dir.exists()) {
-				created = dir.mkdirs();
-			}
-			created = created & f.createNewFile();
-			if(!created) {
-				throw new RuntimeException("Cannot create: " + outputFile);
-			}
-		}
-		Files.writeToFile(sb.toString(), outputFile);
+		System.out.println(sb.toString());
 	}
-	
 }

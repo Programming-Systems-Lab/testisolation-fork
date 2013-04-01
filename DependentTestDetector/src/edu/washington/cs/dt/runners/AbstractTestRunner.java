@@ -3,6 +3,8 @@
  */
 package edu.washington.cs.dt.runners;
 
+import hu.ssh.progressbar.console.ConsoleProgressBar;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Collections;
@@ -28,6 +30,12 @@ public abstract class AbstractTestRunner {
 	 * intermediate results*/
 	protected String classPath = null;
 	protected String tmpOutputFile = null;
+
+	protected int numberOfTests;
+	protected long startTime;
+	protected int testsComplete = 0;
+
+	private ConsoleProgressBar progressBar;
 	
 	/* Note that we use List here, since order matters*/
 	public AbstractTestRunner(List<String> tests) {
@@ -74,6 +82,8 @@ public abstract class AbstractTestRunner {
 				sb.append(test);
 				sb.append(" : ");
 				sb.append(r);
+				sb.append(" : ");
+				sb.append(result.get(test).getExecTime() + "ms");
 				String fullStackTrace = result.get(test).getFullStackTrace();
 				if(fullStackTrace != null && !fullStackTrace.trim().equals(TestExecUtils.noStackTrace)) {
 					sb.append(Globals.lineSep);
@@ -84,16 +94,6 @@ public abstract class AbstractTestRunner {
 						sb.append(Globals.lineSep);
 					}
 				}
-//				String filteredStack = result.get(test).getFilteredStackTrace();
-//				if(filteredStack != null && !filteredStack.trim().equals(TestExecUtils.noStackTrace)) {
-//					sb.append(Globals.lineSep);
-//					String[] sts = filteredStack.split(TestExecUtils.stackTraceSep);
-//					for(String st : sts) {
-//						sb.append("    ");
-//						sb.append(st);
-//						sb.append(Globals.lineSep);
-//					}
-//				}
 				sb.append(Globals.lineSep);
 				if(r == RESULT.PASS) {
 					numOfPass++;
@@ -105,8 +105,6 @@ public abstract class AbstractTestRunner {
 					throw new Error("Unknown: " + r);
 				}
 			}
-//			Utils.checkTrue(numOfPass + numOfError + numOfFail == result.size(),
-//					"Wrong number.");
 		}
 		sb.append("-----------------");
 		sb.append(Globals.lineSep);
@@ -126,4 +124,28 @@ public abstract class AbstractTestRunner {
 	protected void saveResultsToFile(Map<String, OneTestExecResult> result, String fileName) {
 		this.saveResultsToFile(Collections.singletonList(result), fileName);
 	}
+	
+	
+	protected void setNumberOfTests(int number) {
+		this.numberOfTests = number;
+	}
+	protected void testingStarted() {
+		this.startTime = System.currentTimeMillis();
+		if (Main.showProgress) {
+			this.progressBar = ConsoleProgressBar.on(System.out).withTotalSteps(this.numberOfTests);
+			this.progressBar.tick(0);
+		}
+	}
+	protected void testCompleted() {
+		this.testsComplete++;
+		if (Main.showProgress) {
+			this.progressBar.tickOne();
+			
+			if (this.testsComplete == this.numberOfTests) {
+				this.progressBar.complete();
+				System.out.println();
+			}
+		}
+	}
+	
 }
