@@ -13,8 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
-import org.eclipse.jdt.core.tests.model.SuiteOfTestCases;
-
 /**
  * <p>A <code>TestSuite</code> is a <code>Composite</code> of Tests.
  * It runs a collection of test cases. Here is an example using
