@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
+import org.eclipse.jdt.core.tests.model.SuiteOfTestCases;
+
 /**
  * <p>A <code>TestSuite</code> is a <code>Composite</code> of Tests.
  * It runs a collection of test cases. Here is an example using
@@ -260,7 +262,7 @@ public class TestSuite implements Test {
 	public void run(TestResult result, List<String> testList) {
 		// build a map of test names to the test
 		HashMap<String, Test> testMap = new HashMap<String, Test>();
-		if (fName == null) 
+		if (this.getClass() == TestSuite.class) 
 			for (int i = 0; i < fTests.size(); i++) {
 				if (fTests.get(i).getClass()== TestSuite.class) 
 					buildTestMap((TestSuite) fTests.get(i), testMap);
@@ -281,14 +283,14 @@ public class TestSuite implements Test {
 			}
 		}
 	}
-	
+
 	private void buildTestMap(TestSuite curr, HashMap<String, Test> testMap) {
 		for (int i = 0; i < curr.fTests.size(); i++) {
 			// not sure if this is needed to recursively get tests
-//						if (curr.fTests.get(i).getClass() == TestSuite.class) 
-//							getEachTest((TestSuite) curr.fTests.get(i), testList);
-//						else 
-							testMap.put(curr.fTests.get(i).toString(), curr.fTests.get(i));
+			if (extendsTestSuite(curr, i)) 
+				buildTestMap((TestSuite) curr.fTests.get(i), testMap);
+			else 
+				testMap.put(curr.fTests.get(i).toString(), curr.fTests.get(i));
 		}		
 	}
 	
@@ -379,10 +381,26 @@ public class TestSuite implements Test {
 	private void getEachTest(TestSuite curr, List<Test> testList) {
 		for (int i = 0; i < curr.fTests.size(); i++) {
 // not sure if this is needed to recursively get tests
-//			if (curr.fTests.get(i).getClass() == TestSuite.class) 
-//				getEachTest((TestSuite) curr.fTests.get(i), testList);
-//			else 
+			if (extendsTestSuite(curr, i)) 
+				getEachTest((TestSuite) curr.fTests.get(i), testList);
+			else 
 				testList.add(curr.fTests.get(i));
 		}
+	}
+	
+	
+	private boolean extendsTestSuite(TestSuite curr, int i) {
+		Class currClass = curr.fTests.get(i).getClass();
+		
+		while (!currClass.equals(Object.class)) {
+		
+			if (currClass.equals(TestSuite.class))
+				return true;
+			else 
+				currClass = currClass.getSuperclass();
+			
+		}
+		
+		return false;
 	}
 }
