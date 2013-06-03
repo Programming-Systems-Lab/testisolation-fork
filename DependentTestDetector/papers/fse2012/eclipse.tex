@@ -1,0 +1,82 @@
+\newcommand{\ite}{\texttt{Invalid\-Thread\-Access\-Exception}}
+
+The Eclipse Standard Widget Toolkit
+(SWT)\footnote{\url{http://eclipse.org/swt/}} is a cross-platform GUI
+library developed within the Eclipse framework.
+%\todo{KM}{Year here\ldots}.
+%It has been developed to combine best parts of Sun's Abstract Window Toolkit (AWT)
+%and Swing: native look and feel and native performance.
+%
+Due to the difficulty of obtaining source, compiling and running
+test suites with the SWT project, we only examined some test cases
+manually, after a bug report indicated test dependence. The
+numbers reported in Figure~\ref{fig:example-summary} are the number
+of tests we manually examined, and the number of dependencies we found
+among those respectively.
+
+As is common practice in GUI toolkits, SWT permits only one
+\texttt{Display} object per thread. Attempting to create multiple
+\texttt{Display}s in a single thread causes an \ite{}. 
+%In other words each thread is responsible of disposing its \texttt{Display} after it is done with it. 
+To permit the reuse of \texttt{Display}s, SWT provides two 
+methods: \texttt{Display.getDefault} and \texttt{new Shell}. These
+methods return the existing \texttt{Display} or create a new one if none exists.
+
+
+In the test suite of SWT, all tests except those in the class \texttt{Test\_org\_eclipse\_swt\_widgets\_Display}
+(\texttt{TestDisplay} for short) retrieve the current \texttt{Display} by using
+one of the latter methods. On the other hand, all tests in
+\texttt{TestDisplay} create their \texttt{Display} at the beginning of the test
+and dispose of it at the end. 
+
+%\texttt{TestDisplay.setup} contains the following
+%comment:
+%\begin{quote}
+%There can only be one Display object per thread. If a second Display is created
+%on the same thread, an InvalidThreadAccessException is thrown. 
+% \\ Each test will create its own Display and must dispose of it before
+% completing.
+%\end{quote}
+
+
+In September 2003, a user reported a
+bug,\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}}
+stating that tests throw an \ite{}
+if she runs any other test before \texttt{DisplayTest}. 
+The cause of this is simple: any other test creates, but does not
+dispose of a \code{Display} object. Then the tests in
+\code{TestDisplay} attempt to create a new object, which fails, as one
+is already associated with the current thread.
+Since this is the expected and desired behavior, the bug report is
+spurious (except maybe it points to a problem in the test suite,
+rather than the code).
+
+
+%Let us examine the bug
+%report: running any other test would create a \texttt{Display} (through one of
+%the latter two methods) and would not dispose it. Thus, when these test
+%complete, the main thread owns a \texttt{Display}. At this moment, when the same
+%thread tries to run \texttt{DisplayTest} and thus tries to create another
+%\texttt{Display}, an \ite{} is thrown. However, note that this is really the
+%intended case when a thread attempts to create multiple \texttt{Display}s. In
+%other words, this dependency leads to a spurious bug: there is a change in the
+%test outcome when the order of tests are changed, however this does not
+%correspond to a bug in the program. Nevertheless, understanding this dependency
+%--- even though the comment on \texttt{DisplayTest.setup} existed --- takes
+%about a month for the developers. One of the developers closes the bug with the
+%following comment:
+%\begin{quote}
+%Turns out that the tests really are order-dependent - the Display tests must 
+%be run first. It's not an SWT bug or anything, it's just the way the tests are 
+%written, and I think it would be weird to code around it. \\
+%\ldots I'm not going to make any code changes, but for the `fix' I have added a big 
+%comment in the AllTests method saying that the Display tests must go first.
+%\end{quote}
+%We believe that the way this bug is handled shows that the
+%dependencies between tests can lead to confusion even when there is no real bug. 
+
+
+% This led to a spurious bug report. This is actually a good example,
+% because it shows how hard it is to tell the difference between a bug
+% and dependent test.
+% So what do we fix? The "bug" or the tests?

@@ -1,0 +1,48 @@
+Crystal\footnote{\url{http://crystalvc.googlecode.com}} is a tool that
+pro-actively examines developers' code and precisely identifies and reports on textual, compilation, and behavioral conflicts.
+
+The latest release of Crystal contains 81 human-written unit tests. 
+Of those, 75 are fully automated, and 18 exhibit
+dependences.
+All these dependencies are caused by incomplete initialization of the
+environment when testing methods of three distinct classes
+(\code{Data\-Source, Lo\-cal\-State\-Re\-sult, Con\-flict\-Daemon}).
+In all cases, one test initializes the environment correctly, and all
+other tests rely on that test executing first. 
+
+A short conversation with the developers confirmed that this was not
+intentional and most likely happened because the developers were not
+aware of the potential dependency caused by the use of global
+variables. Since we pointed out this problem, the developers treat the
+dependencies as undesirable and opened a bug report to have this issue
+resolved.\footnote{\url{https://code.google.com/p/crystalvc/issues/detail?id=57}}
+
+%Dependent tests in Crystal fall into the following three groups, which
+%share the same root cause of global data dependence across multiple tests:
+%
+%\begin{itemize}
+%
+%\item 9 dependent tests come from the \CodeIn{DataSourceTest} class.
+%In that class, a test method \CodeIn{testSetField} initializes a global variable \CodeIn{data}
+%and other test methods read the value of the \CodeIn{data} variable.
+%As a result, when a test using \CodeIn{data} is executed in isolation or executed
+%before the \CodeIn{testSetField} method, a \CodeIn{NullPointerException} is
+%thrown.
+%
+%\item 7 dependent tests come from class \CodeIn{LocalStateResultTest}.
+%In that class, a test method \CodeIn{testLocalStateResult} initializes a global variable
+%\CodeIn{localState} and other test methods use that variable. Therefore,
+%7 tests using the \CodeIn{localState} variable exhibits
+%a \CodeIn{NullPointerException} when they are executed before \CodeIn{testLocalStateResult}.
+%\todo{KM}{I see no difference between the first item and this one. They all
+%seem to happen due to one test initializing a global variable and the others
+%reading the same global variable}
+%
+%\item 1 dependent test comes from class \CodeIn{ConflictDaemonTest}. This
+%test uses a shared global variable which requires other tests in the
+%same test class to initialize, \todo{KM}{Again, the same thing. I believe we
+%should say that all dependencies are due to initialization of a global variable
+%and then explain all of them as three sentences (instead of bullet pointing
+%them as they were really different)}
+%\end{itemize}
+

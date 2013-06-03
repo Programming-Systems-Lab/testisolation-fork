@@ -1,0 +1,135 @@
+\newcommand{\periodType}{\texttt{Period\-Type}}
+\newcommand{\durationFieldType}{\texttt{Duration\-Field\-Type}}
+\newcommand{\forFields}{\texttt{for\-Fields}}
+
+\jodatime{}\footnote{\url{http://joda-time.sourceforge.net/}} is an open source
+date and time library intended to improve upon the weaknesses of the
+date and time facilities provided by the standard JDK.
+%written to enhance the capabilities provided by the standard
+%JDK such as allowing multiple calendar systems. 
+It is a mature project that has been under active development
+for more than eight years.
+
+\jodatime\ uses intricate caching mechanisms that are high\-ly complex
+and coupled.  All dependences we found are complex,
+in two cases even requiring a
+specific ordering of \emph{three} tests to manifest.
+
+In a simple dependence, \jodatime{} caches \periodType{} objects, which 
+% Caching is done by using a
+% global \texttt{HashMap} that holds the \periodType{}s that are created by
+% \forFields{} method. 
+contain an array of
+\durationFieldType{}s (e.g., week, month). 
+The order of \durationFieldType{}s in the array is an
+important of the data representation, and 
+two \periodType{}s with the same \durationFieldType{}s in a different
+order are not equal internally in \jodatime, even though they are equal
+to \jodatime clients.
+%However, this implementation detail should be transparent to the user: As long
+%as two \periodType{} objects have the same \durationFieldType{}s, they should represent
+%the same period. 
+To make this internal detail transparent to users of \jodatime, 
+new \periodType{}s are normalized before they are cached. However, a fault in the code 
+% checking for existing objects
+makes it possible to insert non-normalized \periodType{}s into the
+cache, leading to cache misses when searching for correctly normalized
+\periodType{}s.
+%This is even acknowledged by the developers: \forFields{}
+%method first creates a \periodType{} using method argument \texttt{types} (the
+%ordering provided by the user) and checks whether the cache already contains
+%this ordering. However, if this fails, then another \periodType{} with
+%normalized ordering (\texttt{checkedType}) is created at the end of the method 
+%and the cache is rechecked as shown in Figure~\ref{fig:jodatime_forFields}.
+
+
+%\begin{figure}
+% \lstset{language=Java,numbers=left}
+%%\lstset{language=Java}
+%\begin{lstlisting}
+%PeriodType forFields
+%  (DurationFieldType[] types) {
+%  ...
+%  PeriodType input =
+%    new PeriodType(null, types, null);
+%  ...
+%  // recheck cache in case
+%  // initial array order was wrong
+%  PeriodType check = ...
+%  PeriodType checkedType = cache.get(check);
+%  if (checkedType != null) {
+%    cache.put(input, checkedType);
+%    return checkedType;
+%  }
+%  cache.put(input, type);
+%  return type;
+%}
+%\end{lstlisting}
+%\caption{Fault related code from \code{Pe\-ri\-od\-Type.for\-Fields}
+%\newline (rev. 3937d82f6670e5a30b2809b13cb6d05a7e606037)}
+%\label{fig:jodatime_forFields}
+%\end{figure}
+%
+%
+%In spite to the developers' extra check, a small mistake in
+%Figure~\ref{fig:jodatime_forFields} creates a bug in the program. Note that the
+%developers are putting the \texttt{input} variable (the ordering provided by
+%the user) as the `key' of the cache.
+%As a result, if \forFields{} method is called with a wrongly ordered
+%\texttt{types} parameter first, then a \periodType{} with wrong ordering will be
+%added to the cache. Later, calling the same method with correct ordering of
+%the same content causes a cache miss.
+
+A test that checks for correct normalization when
+caching objects
+%The developers even have a very simple test case that checks for this.
+%\texttt{Test\-Period\-Type.test\-For\-Fields4} method creates two
+%\durationFieldType{}s: first with wrong ordering and the second with correct
+%ordering, both representing the same period. The test creates the corresponding
+%\periodType{}s by calling \forFields{} method with these \durationFieldType{}s.
+%Finally, the objects retrieved from \forFields{} method are asserted for
+%equality. 
+fails in isolation but passes when the entire test suite
+executes in the default order; this happens
+because a prior test creates the expected
+\periodType{}, and thus it is already in the cache for the
+later test.
+This behavior has been reported as a bug and has been fixed by the
+developers.
+%never fails during the development due to a simple dependency with the previous
+%test in the same class. \texttt{test\-For\-Fields3} method creates the same
+%\periodType{} content --- which will be used in the next test --- with the
+%correct ordering for some other purpose. As a result, this \periodType{} is added with
+%the correct ordering to the cache, which guarantees correct retrieval for both
+%the correct and wrong ordering in the next test.
+
+
+%The test case that would catch the bug was written the same revision it is
+%introduced. However, since the developers never ran that test in isolation the
+%bug lived for more than six years. During this time period, there have been 773
+%commits for the project. Even the buggy file (\periodType{}) is
+%changed for nine times and the buggy method (\forFields{}) is changed
+%once. Finally, the bug gets reported by a
+%user\footnote{\url{http://sourceforge.net/mailarchive/message.php?msg_id=28501345}}
+%in December 06, 2011 and is fixed the same
+%day\footnote{\url{https://github.com/JodaOrg/joda-time/compare/b609d7d66d...d6791cb5f9}}.
+%During the same commit, the developers also removed the dependency for
+%the related test by creating a unique
+%\periodType{} for that test. The actual fix contains changing two
+%variables:
+%two instances of variable \texttt{input} (possibly wrong ordering) to variable
+%\texttt{check} (to correct ordering) at the end in
+%Figure~\ref{fig:jodatime_forFields}.
+
+After inspecting the code, we reported the more complex dependence of
+three tests to the developers of \jodatime. They confirmed the
+phenomenon, but contended that it is due to interactions that are not
+intended in the design of the library~\cite{jodatime}. In particular, one of the
+methods, \code{DateTimeZone.setProvider()}, is only supposed to be
+called a single time to initialize the library.  In practice, multiple
+tests initialize the library, which leaves incorrect values in the cache
+and causes other tests to fail under some execution orders.
+%However, the tests call it more
+%than once, which causes at least two cases to %break the caching
+%%mechanism by leaving 
+%leave incorrect values in the cache, causing the tests to fail.

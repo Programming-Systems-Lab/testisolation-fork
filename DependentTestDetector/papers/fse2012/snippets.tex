@@ -1,0 +1,32 @@
+
+
+\begin{itemize}
+
+\item \todo{KM}{I kind of understand what this paragraph is saying.
+However the many minor mistakes in the writing make it very hard to
+follow up.} Patterns of dependent tests.
+In many cases, there is a \textit{N -- 1} \todo{KM}{The first time I read this,
+I read as N minus 1, which is the incorrect way. Maybe write down as ``N to 1''}
+dependence relationship, in which $N$-th \todo{KM}{Is ``th'' really needed?} distinct tests depends\todo{KM}{This should be either ``tests depend on'' (more likely) or ``test depends on'', but I couldn't decide} on the same test, which probably is used to set up the environment. For
+such cases, the 1 depend test \todo{KM}{``1 dependent test'' or ``first
+dependent test''} should be moved to the common \CodeIn{setUp}
+\todo{KM}{Consistency: consider @Before} method.
+Less frequently, there is a \textit{1 -- N} dependence relationship
+\todo{KM}{Have we ever seen this, or is this purely theoretical?}, in which one
+test depends on $N$ tests to set up its testing environment.  In one subject, a newly-added test changes the shared variable state of an existing test. Although the newly-added test is executed after the existing test and reveals the same behavior when executing in isolation, the existing test exhibit different behavior if it is executed after the newly-added test.
+
+
+\item 
+\todo{JW}{If we really want to discuss this, this should be connected
+to the theory section, as all this follows from theory. A ``finding''
+might be that these differences actually matter in practice. And I
+don't think we checked that.}
+Different techniques have their own strength in detecting dependent tests. We
+have investigate three methods (i.e., executing in isolation, executing in a
+reversed order\todo{KM}{Did we (do we) really do this?}, and executing in
+k-permutation) to identify dependent tests, and found each method complements others. There exist certain tests that can only be found by one method
+but missed by the other two.  Executing tests in isolation found more dependent tests
+than executing in a reversed order, and executing every $k$-permutation is
+infeasible in practice due to the exponentially large number of possible combinations.
+
+\end{itemize}

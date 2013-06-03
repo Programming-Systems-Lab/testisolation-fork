@@ -1,0 +1,68 @@
+
+\newcommand{\testlist}[0]{\ensuremath{T^k_i}}
+\newcommand{\executeTestsInOrder}[1]{\result{#1}{\env_0}}
+Since the general form of the dependent test detection problem is
+NP-complete, we do not expect to find an efficient algorithm for it.
+Instead, we developed an algorithm to approximate solutions by
+detecting a subset of dependent
+tests. %, focusing on specific, less-general forms of the problem. 
+For tractability, our algorithm in Figure~\ref{fig:dtalgorithm} bounds the length of
+test execution sequences, and thus the number of permutations to
+execute. Instead of executing all permutations of the
+whole test suite, we execute all possible $k$-tuples for a bounding
+parameter $k$.
+
+Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, our algorithm
+executes $\exec{T}{\env_0}$ to obtain the \emph{expected result}
+$\result{T}{\env_0}$ of each test (line 2). The environment $\env_0$
+is the environment provided by the test execution framework.
+It then executes every $k$-tuple \testlist\ of tests as
+$\exec{\testlist}{\env_0}$, and 
+checks whether any result $\result{\testlist}{\env_0}$ differs
+from the expected result, i.e.
+that there is a dependence in $\testlist$
+(lines 3--10). The algorithm returns the set of all tests $t_i \in T$
+that have at least one dependence.
+
+It is easy to extend this algorithm to return the shortest sequence of
+tests that manifest a dependency for a given test $t_i$, for example
+by reducing manifesting sequences with Delta
+Debugging~\cite{Zeller:2002}.
+
+%\todo{SZ}{david: sorry that I do not quite understand your comments well. why equal
+%to length k if DD is not used? suppose a list of test: t1, t2, t3, t4 all pass
+%in this order, but t2 fails when execute t3, t2, t4 in a 3-permutation order.
+%So preTest = \{t3\}, and the length of it does not equal to k. Do I understand
+%this wrong?  DN: Sai, you are correct about DD, my mistake.  But the Output in the algorithm
+%is at least confusing to me.  Is preTests ordered?  The union statement in line 9 is
+%probably where I'm confused; we are using angle-brackets for suites, and this isn't
+%a suite, correct?}
+%\todo{SZ}{david: sorry that I did not realize angle-brackets have used in the theory part. now correct this issue, and put the "preTests" parts in the practical consideration section}
+
+\begin{figure}[t]
+\textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
+\textbf{Output}: a set of dependent tests $\mathit{depTests}$\\
+\vspace{-5mm}
+\begin{algorithmic}[1]
+\STATE $\mathit{depTests}$ $\leftarrow$ $\emptyset$
+\STATE $\mathit{expectedResults}$ $\leftarrow$
+ \executeTestsInOrder{T}
+\FOR{each $\testlist$ in getPossibleExecOrder($\mathit{T}$, $\mathit{k}$)}
+\STATE $\mathit{execResults}$ $\leftarrow$
+\executeTestsInOrder{\testlist}
+\FOR{each test $\mathit{t}$ in $\testlist$}
+\IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
+\STATE $\mathit{depTests}$ $\leftarrow$ $\mathit{depTests}$ $\cup$ $\mathit{t}$
+\ENDIF
+\ENDFOR
+\ENDFOR
+\RETURN $\mathit{depTests}$
+%\ENDWHILE
+\end{algorithmic}
+\vspace{-3mm}
+\caption{$k$-bounded approximation algorithm to detect dependent
+tests. 
+``getPossibleExecOrder'' returns all permutations of tests from $T$ of length $k$. 
+} 
+\label{fig:dtalgorithm}
+\end{figure}
