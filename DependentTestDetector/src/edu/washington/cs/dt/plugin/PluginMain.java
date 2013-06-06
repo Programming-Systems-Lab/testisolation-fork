@@ -25,10 +25,10 @@ public class PluginMain {
 		
 		// get list of tests
 		if (outputFileIndex != -1) {
-			// get index of input file
+			// get index of output file
 			int outputFileNameIndex = outputFileIndex + 1;
 			if (outputFileNameIndex >= argsList.size()) {
-				System.err.println("Output file argument is specified but a file name is not. Please use the format: outputFile=afilename");
+				System.err.println("Output file argument is specified but a file name is not. Please use the format: -outputFile afilename");
 				System.exit(0);
 			}
 			String outputFileName = "outputFile=" + argsList.get(outputFileNameIndex);
@@ -39,14 +39,14 @@ public class PluginMain {
 			// get index of input file
 			int inputFileNameIndex = inputFileIndex + 1;
 			if (inputFileNameIndex >= argsList.size()) {
-				System.err.println("Input file argument is specified but a file name is not. Please use the format: inputFile=afilename");
+				System.err.println("Input file argument is specified but a file name is not. Please use the format: -inputFile afilename");
 				System.exit(0);
 			}		
 	
 			// get index of k
 			int kNumIndex = kIndex + 1;
 			if (kNumIndex >= argsList.size()) {
-				System.err.println("k argument is specified but a number is not. Please use the format: k=x where x is a number");
+				System.err.println("k argument is specified but a number is not. Please use the format: -k x where x is a number");
 				System.exit(0);
 			}
 			
@@ -59,12 +59,15 @@ public class PluginMain {
 				// get all the tests name
 				List<String> testNames = getTestNames(inputFileName);
 				List<String> permutations = computeAllPermutations(k, testNames);
+				
+				int numOfTests = permutations.size();
 				// for each permutation launch a new JVM
-				for (int i = 0; i < permutations.size(); i++) {
+				for (int i = 0; i < numOfTests; i++) {
 					List<String> argsListCopy = new ArrayList<String>(argsList);
 					argsListCopy.add("cmdLineTest=" + permutations.get(i));
 					Command.exec(argsListCopy.toArray(new String[argsListCopy.size()]));
-					System.out.println("\n----------------------------------------------- Finished Test " + (i + 1) + " -----------------------------------------------\n");
+					System.out.println("\n----------------------------------------------- Finished Test " + (i + 1) + 
+						" of " + numOfTests + " -----------------------------------------------\n");
 				}
 				return;
 			} else 
