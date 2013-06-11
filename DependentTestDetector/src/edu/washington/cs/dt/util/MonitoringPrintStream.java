@@ -1,13 +1,14 @@
 package edu.washington.cs.dt.util;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 
 public class MonitoringPrintStream extends PrintStream {
 
-	ByteOutputStream filtered = new ByteOutputStream();
+	ByteArrayOutputStream filtered = new ByteArrayOutputStream();
 	PrintStream psFiltered = new PrintStream(filtered);
 	ProgressCallback callback = null;
 	
@@ -42,7 +43,10 @@ public class MonitoringPrintStream extends PrintStream {
 	@Override
 	public void close() {
 		super.close();
-		filtered.close();
+		try {
+			filtered.close();
+		} catch (IOException e) {
+		}
 		psFiltered.close();
 	}
 	
