@@ -1,0 +1,53 @@
+
+XML Security\footnote{\url{http://projects.apache.org/projects/xml_security_java.html}}
+is a component library implementing XML signature and encryption
+standards. Each released
+version of XML Security has a human-written JUnit test suite that
+achieves fairly high statement coverage.
+
+Four stable released versions (1.0.2, 1.0.4, 1.0.5d2, and 1.0.71) of XML Security
+have been incorporated in the Soft\-ware-artifact Infrastructure Repository
+(SIR).\footnote{\url{http://sir.unl.edu}}
+We found that at least two out of the four versions contain dependent tests. Specifically, in versions 1.0.4 and 1.0.5d2, \code{test\_Y1}, \code{test\_Y2}, and \code{test\_Y3}
+in class \code{ExclusiveC14NInterop} show dependent behavior.
+Since the dependences are the same in both versions, in the further
+discussion and in Figure~\ref{fig:example-summary}, we consider only
+version 1.0.4.
+
+For all three dependences, the cause of the dependence is the same: before any
+method in the library can be used, the global initialization function 
+\code{Init.init()} has to be called. Internally, it initializes
+the static field that the code tested by the dependent tests rely
+on.
+
+Given that the error when executing the dependent tests clearly explains the
+cause of the error, we speculate that developers either simply forgot to
+initialize the tests properly, or expected that these tests would always execute
+in the order defined
+in the test suite.
+
+%on a global variable. Take \code{test\_Y1} as an example. This test passes when being executed
+%with other tests, but fails by throwing an \code{InvalidCanonicalizerException}
+%when executed individually.
+%The root cause of such behavior difference is that, in XML-security, the \code{Init.init()} method initializes
+%the static field \code{Canonicalizer.canonicalizerHash}, and test \code{test\_Y1} needs to use
+%that static field to create a \code{Canonicalizer} instance. 
+%When executing this test in the programmer-fixed order, method \code{Init.init()} has been called by
+%other tests executed before \code{test\_Y1}, so that test \code{test\_Y1} passes.
+%However, without calling \code{Init.init()} first,
+%\code{test\_Y1} fails to create the \code{Canonicalizer} instance.
+%
+%Based on the dumped error message in the \code{InvalidCano-\\nicalizerException}:
+%
+%\begin{quote}
+%``You must initialize the xml-security library correctly before you use it.
+%Call the static method ``org.apache.xml.security.Init.init()'' to do that before you use any functionality
+%from that library''
+%\end{quote}
+
+%We speculate that programmers should realize this potential dependence, but they
+%overlook to enforce \code{test\_Y1} to be executed in a desirable order. Instead,
+%programmers may have put an implicit assumption that tests in a suite can be executed in isolation
+%and miss to add the necessary preconditions for \code{test\_Y1}. 
+
+% vim:wrap:wm=8:bs=2:expandtab:ts=4:tw=70:

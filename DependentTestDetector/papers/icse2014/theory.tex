@@ -1,0 +1,638 @@
+
+%\section{What's the essence of what causes the dependences?}
+\section{Theory}
+\label{sec:formalism}
+
+%\todo{DN}{I think we will need to go over the paper later on in the process to make
+%really sure we are consistent about test dependence definitions and our writing.
+%If I am clear, we define dependence between two tests; we often (informally?)
+%talk about a suite with dependence(s).}
+%\todo{JW}{Informally, you are correct. I'll make sure to clarify this
+%in the text}
+%\todo{DN}{We are also inconsistency about ``dependence'' vs. ``dependency'' vs. ``dependencies'' and
+%such.  Probably not a big deal, but if we have time...}
+%\todo{DN}{General comment about the intuition below -- it's too long now, which makes it less intuitive.}
+
+A standard textbook 
+states that ``[a] test case includes not only input data but
+also any relevant \emph{execution conditions}
+\dots''~\cite[p.~152, emphasis added]{pezze-young:2007}.   
+This characterization is
+consistent with the example that 
+ piqued our interest in test dependence: we seren\-dip\-itously identified a bug in an open-source
+system when we found that running individual tests one-by-one---each
+in a newly initialized environment---produced different
+results from running the entire test suite normally (\emph{i.e.}, with a single initialized environment followed by
+the sequential execution of each test in order)~\cite{DBLP:conf/sigsoft/MusluSW11}.  These tests
+shared global variables, and the test results varied depending on the
+values stored in these variables.  That is, relevant execution conditions---specifically, pertinent parts
+of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc.---were neglected.
+%As shown in Section~\ref{sec:examples}, most real examples of test dependence we have seen to date relate
+%to mistakes in the initialization of test environments.
+%\footnote{Test frameworks such as JUnit 
+%provide \emph{mechanisms}, such as \code{@Before} and \code{@After} annotations, to help developers more easily
+%establish execution conditions.  They are not intended to, and
+%do not, \emph{enforce} any policies
+%to ensure that developers use these mechanisms consistently and effectively.}
+
+To characterize the relevant execution conditions precisely, 
+our formalism below explicitly represents the notions of
+(a) the order in which test cases are executed and (b) the environment in which a test suite is executed.  
+
+Consider two examples 
+of how test dependences arise in terms of order and environment (Figure~\ref{fig:dep_examples}).
+In the leftmost example, \code{test2} checks
+the value of a variable that has been assigned elsewhere. If the tests
+are executed in the order \suite{\code{test1},\code{test2}}, both tests will pass,
+% Kivanc: Cut: There is no \ldots in test1, so I don't think below explanation
+% is needed.
+% (assuming \code{test1} does not
+% change the value of \code{a} after the initial assignment)
+while running \code{test2} first will make it fail.    The rightmost  example extends this
+principle to multiple tests. While none of the $n-1$ tests prior to
+\code{testn} will fail, they all must execute in this particular order
+for \code{testn} to pass. 
+
+The global variables involved are usually buried deep in
+the program code, and the assertions do not directly check them,
+but rather check values that have been computed from
+them. In any non-trivial real-world program, this
+deep nesting effectively hides potential dependencies from developers,
+and they may only become aware of them when a subtle bug leads them
+there.  Therefore, we explicitly
+distinguish potential test dependences (Definition~\ref{def:dependency})---those that could cause a variation in test suite results 
+under \emph{some} environment and order---and manifest test
+dependences (Definition~\ref{def:manifest})---those that are guaranteed to cause a
+variation in test suite results under a \emph{specific} environment and order.  
+
+%Consider the two examples (Figure~\ref{fig:dep_examples})
+%of the basic
+%way dependencies between tests arise in practice. \code{test2} checks
+%the value of a variable that has been assigned elsewhere. If the tests
+%are executed in the order \code{test1, test2}, both tests will pass (assuming \code{test1} does not
+%change the value of \code{a} after the initial assignment),
+%while running \code{test2} first will make it fail.  To determine
+%potential test dependences would require an analysis of the read/write
+%behavior of the tests (for example, under what conditions, if any, does \code{test1} change the value of \code{a}?); such analyses are well-known to be
+%imprecise and/or incomplete.    
+
+
+% to cleanly set all execution conditions for each test
+%case. Methods marked with the
+%annotations \code{@Before} and \code{@After} are executed before and
+%after each test case and are intended to initialize and clean the
+%execution conditions for each test case.
+%}
+
+%When not all state in the environment is cleanly initialized, test
+%dependences can arise, because then the actual state when a test case
+%executes can change depending on, for example,
+
+
+%Very informally, dependence between tests, like the one described above, arises when test cases do not include all% relevant execution conditions.
+%In particular, when they compute their result based on a shared global data, and this shared global data (we call it \emph{environment}) is initialized external to the test case.
+
+%\todo{DN}{I'd love to see if we can reduce or eliminate the discussion of JUnit here.  The following
+%paragraph, for example, seems confusing in the following sense: if junit has this, why is there a
+%dependence problem?  This is obvious to us, but I don't want people thinking about that here. Moved it
+%to a footnote -- before/after -- and rewrote a little}
+%
+
+%In this section we first give an intuition what causes test
+%dependence and what its consequence may be. Then we formally define
+%our notion of test dependence, and lastly we demonstrate how these
+%notions lead to the \emph{test dependence detection} problem, and how
+%we can solve it.
+
+%\todo{JW}{Find a better section heading or remove the heading}
+%\subsection{Intuition}
+
+
+
+%
+%rely on executing in a
+%particular context, for example some test may assume that global variables have
+%been initialized to specific values, without confirming the expected
+%context before they execute. 
+
+%\todo{DN}{I'm at present inclined to move the example to here, but the test structure/results
+%text.  That is, use the example to describe those rather than vice versa.  Sort of like: (a) here
+%is a simple example; (b) note that a complete analysis of test dependence would require a full
+%analysis of the code in test1 to determine possible values for a; (c) instead of considering that
+%complicated analysis that would describe the potential for dependence, we use the test oracles/results
+%to represent the outcome of the execution, in a given environment.  Or possibly move the
+%potential/actual text up instead, and describe how we address it, then the example?}
+
+
+
+
+%Consider the two examples in Fig.~\ref{fig:dep_examples}. The example
+%in Fig.~\ref{fig:dep_examples:direct} shows the most basic
+%way dependencies between tests arise in practice. \code{test2} checks
+%the value of a variable that has been assigned elsewhere. If the tests
+%are executed in the order \code{test1, test2}, both tests will pass,
+%while running \code{test2} first will make it fail.
+\begin{figure}
+\subfigure[Direct dependence\label{fig:dep_examples:direct}]{
+\begin{minipage}{.47\columnwidth}
+\code{test1 \{ $\mathtt{v_1}$ = 4 \}}
+
+\code{test2 \{
+  assert $\mathtt{v_1}$==4 \}
+}
+
+\mbox{ }\\
+
+\mbox{ } 
+\vspace{0.5em}
+\end{minipage}
+}
+\subfigure[Chain dependence\label{fig:dep_example:chain}]{
+\begin{minipage}{.5\columnwidth}
+\code{test1 \{ $\mathtt{v_1}$ = 1 \}}
+
+\code{test2 \{
+  $\mathtt{v_2}$ = $\mathtt{v_1}$ + 1 \}}
+
+\code{...}
+
+\code{testn \{ \\
+\mbox{}\hspace{1ex} assert $\mathtt{v_{n-1}}$ == n-1 \}}
+\vspace{0.5em}
+\end{minipage}
+}
+\caption{Examples for basic causes of test
+dependences}\label{fig:dep_examples}
+\end{figure}
+%
+
+%\todo{SZ}{for example (b), perphas we can make it more clearer as
+%follows:  test1 \{a++\}, test2\{a++\}, ..., testn \{assert a == n-1\}}
+%
+%\todo{JW}{While this is also a dependence, it does \emph{not} enforce
+%any particular order on the first n-1 tests.}
+%
+%\todo{KM}{I second Jochen. We discussed this quite a bit with him and I think
+%he came up with the most readable and easiest example that forces the execution
+%of only t1-t1-\ldots-tn to pass and all other orders to fail.}
+
+%Test dependences arise when tests rely on state that is generated
+%by other tests. %CLI is a case in point. 
+%Most examples we found are quite direct dependecies on
+%global variables, where one test implicitly relies on a global variable to be in
+%a certain state before executing the sequence of methods to be tested. 
+%At a more abstract level, we can think of test dependence as
+%read/write conflicts between different transactions. Each test reads
+%and writes variables. If a test implicitly assumes a variable to be in
+%a particular state, but does not ensure this state before it executes,
+%the test may fail.
+%\todo{JW}{
+%Thinking of the causes for test dependences as read/write conflicts
+%might go far. Intuitively, I think the cases that cause parallel
+%transactions to abort are the \emph{good} cases for us (because each
+%test ensures that it has written the values it needs). All other cases
+%seem potentially hazardous. I'll dig into this tomorrow}
+
+\subsection{Definitions}
+\label{sec:definitions}
+
+We express test dependences through the results of executing
+\emph{ordered} sequences of tests in a given \emph{environment}.
+
+%This is in strong contrast to most
+%existing work that considers test suites in general as sets, and thus
+%ignores the ordering aspect that is important here.
+%Informally, a test dependence arises when the results of executing
+%test suites in different orders differ. The following formal
+%definitions make our notion of test dependence precise.
+%\todo{DN}{I took out the ``informally'' sentence or so here, since we've done that
+%already a number of times, and now we're going formal!}
+
+\begin{definition}[Environment]
+An \emph{environment} \env for the execution of a test
+consists of all values of global variables, files,
+operating
+system services, etc. that
+can be accessed by the test and program code exercised by the test
+case.
+%
+%The set of all possible environments is denoted $\environs$.
+\end{definition}
+
+\begin{definition}[Test]
+%\todo{DN}{I'm not sure what ``fixed, well-defined inputs means'' and I'm not sure we need it.
+%Why not just ``a sequence of program statements''?}
+%
+%\todo{JW}{Abstractly, all programs take inputs and compute something
+%based on them (unless they are a constant function or
+%non-deterministic). A test case is not complete without well-defined
+%inputs, simply because you can't run the program. The should be
+%well-defined and fixed, so that you can repeatedly run your test,
+%always get the same result, and be sure what that result should be
+%according to your spec. While I agree that this is not well
+%formulated, I think if we ask serious testing people to read this and
+%we ignore the whole input thing (a lot of test generation only deals
+%with generating inputs), we might be in trouble.}
+
+A test is a sequence of program statements, executed with fixed,
+well-defined inputs, and an oracle that
+decides whether a test passes or fails.
+\end{definition}
+
+%\todo{DN}{Should we footnote this next oracle discussion?  And shorten it, since some of the
+%soundness/completeness issues are with respect to specifications, which we don't mention/address.
+%Should we?}
+
+%\todo{JW}{I realized while I wrote this that eventually we will have
+%to include oracles. That's why I at least wanted to mention something
+%here. But I don't think it will be possible (and sensible) to do fully
+%integrate that now. The paragraph below is a summary of why we need to
+%talk about this.}
+
+%Generally, oracles are an important aspect of testing. Here, however,
+%only two facts are relevant. First, Staats et al.\ discuss that oracles are
+%often neither sound nor complete as we
+%define them below often imply unsound oracles. Second, 
+%In particular, that means that an oracle can decide that a
+%test passes, while the program is incorrect. Test dependences
+Simplifying from Staats
+et al.~\cite{staatsetal:ICSE:2011}, and without loss of generality,
+we consider an oracle to be a boolean predicate over tests and environments.
+
+%While oracles in practice, and specifications in theory, play an
+%important role in testing, we do not incorporate them in our
+%formalism, because explicit specifications often do not exist, and for
+%our purposes the oracle judgement, rather than its full definition, is sufficient.
+
+\begin{definition}[Test Suite]
+A test suite\/ $T$ is an $n$-tuple (i.e., ordered sequence) of tests
+\suite{t_1, t_2, \dots, t_n}.
+
+%When it is clear which test suite we are talking about, or the details
+%of the suite are not important, we use $T$ to denote the entire test
+%suite $(t_1, \dots, t_n)$.
+\end{definition}
+
+\begin{definition}[Test Execution]
+Let\/ $T$ be a test suite and\/ \environs\ the set of all possible
+environments.
+The function\/ $\varepsilon: T \times \environs \rightarrow
+\environs$ is called test
+execution. $\varepsilon$ maps the execution of a test\/ $ t \in T$ 
+in an environment\/ $\env \in \environs$ to the new (potentially updated)
+environment\/ $\env'$.
+
+For the execution of test suites\/ $T = \suite{t_1, t_2, \dots, t_n}$
+we use the shorthand\/
+$\exec{T}{\env}$ for $\exec{t_n}{\exec{t_{n-1}}{\dots \exec{t_1}
+{\env} \dots }}$.
+\end{definition}
+
+\begin{definition}[Test Result]
+The result of a test $t$ executed in an environment\/ $\env$,
+denoted\/ \result{t}{\env} (and sometimes referred to 
+as an oracle judgment), is defined by the test's oracle
+and is either \pass or \fail.
+
+The result of a test suite\/ \suite{t_1,\dots,t_n}, executed in an
+environment\/ \env, denoted\/ \result{\suite{t_1,\dots,t_n}}{\env} is a
+sequence of results\/ \suite{o_1,\dots,o_n} with $o_i \in \{\pass,\fail\}$.
+
+%For test outcomes of sequences where all individual outcomes are
+%either \pass or \fail, we use the notation $(\pass^*)$ and $(\fail^*)$,
+%respectively.
+
+For example, $\result{\suite{t_1, t_2}}{\env_1} = \suite{\fail, \pass}$ represents that 
+given the environment\/ $\env_1$, $t_1$ fails and\/ $t_2$ passes.
+\end{definition}
+
+
+%\todo{DN}{Do we need the following paragraph?  I think the dot notation is unnecessary,
+%since it's always a test suite, even if not the ``original'' one that we put in this
+%place.  Also, I would -- again -- like to remove the references to Junit, VMs, etc. here.}
+%
+%The notation \result{\cdot}{\env} implies that only the explicitly specified
+%tests are run in a given VM, execution, and environment \env. 
+%In specific frameworks, such as JUnit, a single test would 
+%include any automatically executed setup and the actual test method.
+
+%The terminology for \pass and \fail is general:
+%a test passes when its outcome is as expected and
+%no assertion is violated; a test fails under all other circumstances.\footnote{In
+%the JUnit framework, for example, this means that the outcomes \emph{failure} and \emph{error}
+%would both be treated as \fail in the formalism.}
+
+%The execution of tests can change the environment if one of the
+%variables in it is modified. We write \exec{T}{\env} for the environment
+%that derives from executing test suite $T$ in the original environment
+%$\env$. $\exec{T}{\env} \neq \env$ is a necessary but not
+%sufficient condition for test order dependencies.
+
+\begin{definition}[Potential Test Dependence] \label{def:dependency}
+Given a test suite\/ $T$,
+a test\/ $t_l \in T$ is \emph{potentially dependent} on test\/ $t_k
+\in T$, if and only if\/
+$\exists \env : \result{T}{\env} = \suite{o_1,\dots, o_n} \wedge
+\result{\suite{t_k,t_l}}{\env} = \suite{o_k, o_l} \wedge
+\result{t_l}{\env} = \neg o_l$.
+We write\/ $t_k \prec t_l$ when\/ $t_l$ is potentially dependent on\/ $t_k$.
+\end{definition}
+
+This definition is \emph{dynamic} because dependence arises only
+if there exists an environment in which actual test results would differ.
+It is \emph{potential} as it only requires the existence of such an
+environment, but does not
+guarantee that the test suite will ever be executed in the context
+of such an environment.
+
+%One direct implication of this definition is that $t_k \prec t_l
+%\rightarrow \exec{t_k}{\env} \neq \env$, that is $t_k$ must modify the
+%environment. Additionally, $t_l$ must read values from the
+%environment.
+%\todo{DN}{I'm not certain if the rightarrow is implication.  I'm not sure
+%why this implication is crucial.}
+
+%\begin{theorem}\label{theorem:pairs}
+%
+%$( t_1, \dots, t_k ) \prec t_n \Rightarrow \exists_{t \in (t_1, \dots,
+%t_k)} : t \prec t_n $
+%
+%\end{theorem}
+%
+%\begin{proof}
+%Proof by contradiction.
+%
+%Let $s = (t_1, \dots, t_k)$ be a test sequence of length greater than
+%one, and let $s$ be the shortest sequence such that $ s \prec t_n$.
+%I.e. there is no real prefix or suffix of $s$ that $t_n$ depends on.
+%
+%That means that there is an environment $\env_x$, such that $R(s,t_n :
+%\env_x) \neq R(s:\env_x) \circ R(t_n:\env_x)$ 
+%and for all environments $\env$
+%$R(t_2, \dots, t_k, t_n:\env) = R(t_2,\dots, t_k:\env) \circ
+%R(t_n:\env)$. In particular, this holds also for the environment
+%$ \env_1 = \gamma(t_1, \env_x)$. 
+%
+%$R(s,t_n :\env_x) \neq R(s:\env_x) \circ R(t_n:\env_x)$
+%and $\env$
+%$R(t_2, \dots, t_k, t_n:\env_1) = R(t_2,\dots, t_k:\env_1) \circ
+%R(t_n:\env_1)$ implies that $R(t_1,t_n:\env_x) \neq R(t_1:\env_x) \circ
+%R(t_n:\env_x)$, which contradicts the
+%hypothesis that there is no prefix of $s$ that $t_n$ depends on.
+%\end{proof}
+%
+%Theorem~\ref{theorem:pairs} is useful for theoretical work because it
+%reduces the complexity of the structures we have to study to pairs of
+%tests. From a practical point of view, however, things are not quite
+%as easy, because the proof only states the existence of environments
+%that will expose the dependency, but does not constructively describe
+%how to find these environments. Further, the whole theoretical
+%framework by its nature cannot relate this to the way environments are
+%constructed by actual testing frameworks such as JUnit. 
+%
+%With the above proof it is easy to see that the following corollary
+%also holds:
+%
+%\begin{corollary}
+%$t_k \prec (t_m, t_n) \Rightarrow t_k \prec t_m \vee t_k \prec t_n$
+%\end{corollary}
+%
+%\begin{proof}
+%Case 1: If the outcome of $t_m$ differs, it directly implies $t_k \prec t_m$.
+%
+%Case 2: The outcome of $t_m$ is the same, but $t_n$ differs.
+%$ t_k \prec (t_m,t_n) \Rightarrow (t_k, t_m) \prec t_n \Rightarrow t_k
+%\prec t_n$ 
+%
+%\end{proof}
+%
+%The above definitions and the properties of order dependencies that
+%follow from these definitions allow some reasoning about order
+%dependencies already. From a practical point of view, however, it
+%would be desirable that the relation implied by the order dependence
+%definition were a partial order. However, I do not think that that is
+%true. The following theorem frames this:
+%
+%\begin{theorem}[Cyclic dependencies]
+%There exist test suites $S$ such that for some $t_m, t_n \in S: t_m
+%\prec t_n \wedge t_n \prec t_m$
+%\end{theorem}
+%
+%This is an artifact of the fact that we allow reordering and our
+%definition of order dependency hinges on the \emph{outcome} of
+%executions.
+%
+%Intuitively, test dependencies $t \prec r$ between two tests $t$ and $r$ arise
+%when $r$ expects some variable $v$ of the environment to have a specific
+%value, but in the environment $\gamma(t,\env)$ $v$ has a different
+%value (for some arbitrary $\env$).
+%This situation can arise either by $r$ assigning an unexpected value
+%to $v$, or $r$ failing to assign the expected value.
+%
+%\subsubsection{Manifest Dependencies}
+%
+%
+%For practical reasons, the pure existence of an environment that
+%exposes dependencies is not sufficient. Most of the time we are more
+%concerned whether or not dependencies will become apparent in the
+%environment we are actually dealing with.
+%
+%\todo{JW}{ We are aiming at defining enough theory for useful
+%algorithms. In practice we derive our environments from some sort of
+%default environment provided by the test framework. While we don't
+%know the exact shape of that environment, assuming deterministic
+%programs and tests, all other environments created through test
+%execution derive from this initial environment. This must have some
+%sort of impact on the complexity of our problem.}
+
+%\begin{definition}[Subsequence]
+%Given an ordered se\-quence $T = \suite{t_1, \dots t_n}$, an ordered
+%sequence $S = \suite{t_i,\dots,t_k}$ is a subsequence of $T$, if and
+%only if the length of $S$ is less than or equal to the length of $T$,
+%the elements of $S$ are also elements of $T$ and 
+%preserve the order of the elements in $T$.
+%Analogously to sets, we write $S \subseteq T$ if $S$ is a subsequence of
+%$T$.
+%\end{definition}
+
+We refine this definition of dependence to require a concrete environment guaranteed
+to \emph{manifest} a dependence:
+\begin{definition}[Manifest Dependence] \label{def:manifest}
+Given a test suite\/ $T$, two dependent tests\/ $t_i, t_j \in T$,
+the dependence\/ $t_i \prec t_j$ \emph{manifests} in a given
+environment\/
+$\env$ if\/ $\exists {S \subseteq T}: t_i, t_j \in S \wedge
+\result{T}{\env}
+= \suite{o_1, \dots, o_n} \wedge \result{S}{\env} =
+\suite{\dots,o_i,o_j} \wedge \result{t_j}{\env} = \neg o_j$. We
+write\/ $t_i \manifest{\env} t_j$ for manifest dependence.\footnote{$S \subseteq T$ means that $S$ is a subsequence of
+$T$.}
+\end{definition}
+
+Note that the dependent tests $t_i$\/ and $t_j$ do not have to be
+adjacent in the original test suite, but that they must be adjacent in
+the shortest test suite that manifests the dependence.
+
+The intuition behind manifest dependences is that in practice we
+do not construct arbitrary environments to execute tests in. Rather,
+we use the natural environment $\env_0$ provided by frameworks such as JUnit,
+and the only modifications of this environment happen through the
+tests and the tested code. Hence, potential dependences manifest only
+if there is a sequence of tests $S^*$ whose execution
+$\exec{S^*}{\env_0}$  produces the
+environment $\env'$ that will reveal the dependency.
+The algorithm we propose in Section~\ref{sec:algorithm-tool} detects
+dependences by running tests and checking for different test results,
+hence it can only detect manifest dependences.
+%
+%Note that this definition defines manifest dependencies with regard to
+%a given test suite $T$ and a given environment $\env$. Thus it
+%reduces the space of possible dependencies considerably. In practice,
+%the given environment $\env$ is what the text execution framework
+%provides \emph{before} it executes the first test.
+To improve algorithms that are affected by test dependences, we are
+interested in the shortest test suite $S^* \subseteq T$ that manifests a
+dependence, because these define the partial order of test execution
+that such techniques must respect.
+
+%\begin{theorem}[Dependency bound]
+%Let $U$ by a true sub-sequence of length $k$ of 
+%a given test suite $T$, and let $U$
+%be the shortest such sub-sequence that manifests a dependency with
+%test t, i.e. $ U \manifest{\env} t$.
+%Then there are at least $k$ variables responsible for manifesting the
+%dependency.
+%\end{theorem}
+%
+%\todo{JW}{ I'm not sure if this theorem actually holds. I'm working on
+%it, but if anyone has ideas and insights, they are certainly welcome.}
+%\todo{KM}{ I don't think this is true, consider the following: \\ 
+%Initial environment: a = 0 \\ 
+%Test1: {assert a == 3} \\
+%Test2: {a = a + 1, assert true} \\
+%Test3: {a = a + 2, assert true} \\
+%In this setup Test1 depends on any order of Test2 and Test3. This is the minimum
+%dependence (i.e., running only Test2 or Test3 won't suffice). However, the
+%dependency only requires one variable, `a'. }
+%
+%\begin{proof}
+%Proof by induction.
+%Let $k=1$. Trivial. By definition there must be at least one variable
+%that creates and manifests the dependency.
+%
+%Let $k=n+1$. Assume there are less than $k$ variables involved. 
+%\end{proof}
+
+In later sections we often talk about executing tests in isolation, or
+executing all tests in a test suite in isolation. This is an important
+approximation to detecting test dependences.
+
+\begin{definition}[Test Isolation]
+The result of executing a test\/ $t$ in isolation, given an
+environment\/
+$\env_0$ is the result\/ \result{t}{\env_0} of executing that test in
+the given environment.  
+
+The result of executing all tests in a test suite\/ \suite{t_1, \dots,
+t_m} in isolation is the
+sequence of results\/ \suite{\result{t_1}{\env_0}, \dots,
+\result{t_n}{\env_0}}.
+\end{definition}
+
+\input{proof}
+
+\subsection{Discussion}
+
+This formalism has dual intents:
+to lay a foundation for reasoning about test dependence
+in a precise way; and
+to be consistent with and to allow for approximate and practical algorithms and tools~(Section~\ref{sec:algorithm-tool}).
+
+This second intent, of course, requires a balance of theory and
+practice.  First, the dynamic nature of our our view on dependences 
+allows us to avoid the complexity issues that come with a static
+approach. With a static approach, it would be essential 
+to decide how to address undecidability. The most
+likely and common approach being to choose soundness with respect to all
+possible executions and accepting the consequent imprecision of the analysis.
+Second, our focus on manifest dependence, when realized in a tool will
+only identify true positives, although it may miss some
+dependences (false negatives).  It is often easier to have tools
+with this kind of property accepted by practitioners than some other
+kinds.  Third, the manifest test dependence problem is NP-complete;
+although that is daunting (but less so than undecidability),
+approximate algorithms can be defined for large classes of NP-complete
+problems.  
+
+The examples in the following section and the algorithm and tool following that
+give a better flavor for
+why we made these decisions.
+The degree to which these are the ``right'' (or at least effective) decisions
+is itself an empirical
+question beyond the scope of this paper.
+
+%.  The following section we will illustrate these factors in action.
+%We discuss several examples in detail,
+%showing how these different factors contribute to test dependence in
+%real-world applications. 
+
+
+%The potential for test dependence arises from the test structure and
+%the oracle:
+%%from the test results: 
+%what
+%global state do the tests read and write, and does that global state contribute
+%to the computed result evaluated by the oracle?  
+%At the same time, the \emph{potential} for a test dependence
+%is realized only if 
+%the values derived from the context \emph{actually} affect the test results.
+%affect program state that
+%is checked by the oracle can a dependence on the environment affect
+%the outcome of a test.
+%This potential \emph{manifests} when test results differ between
+%executions in different environments.
+
+%The fact that manifestation of test dependence depends on both test
+%structures and test results means that dependences can silently propagate
+%through sequences of tests before they become apparent.
+
+%The abstract examples above, and the concrete examples presented 
+%in Section~\ref{sec:examples} share some common features that
+%ultimately lead to dependences. 
+%%All applications and libraries we studied 
+%They rely on global variables to some extent, and the
+%tests that check behavior that depends on these variables usually
+%assume these variables to be in some state. This state is typically
+%defined by the default execution order of the test suite, and rarely
+%established explicitly before each test.
+
+%\todo{sz}{does that make sense to put the following text (needs slight revise)
+% after Section 4. I feel they are more relevant to concrete examples.}
+
+%To summarize, the features that contribute to the test dependences
+%we discuss are:
+%\begin{itemize}
+%\item Test results depend on global state.
+%\item Tests do not check their preconditions explicitly, but rely on
+%the test suite to ensure them.
+%%\item 
+%%\todo{JW}{The following point has lead to a lot of confusion. We have
+%to clarify or remove it}
+%The strength of test oracles. Stronger oracles are more likely
+%to cause dependence than weaker oracles. 
+%%in the sense that they check for concrete
+%%values rather than conditions. 
+%For example, a check for $x = 5$
+%rather than $x > 0$, is more likely to fail, while the latter might
+%still be sufficient to check
+%whether a specific branch of the program was executed. 
+%\todo{KM}{I did not like
+%this argument much. Though I agree that having weak oracles would reduce the
+%dependences, it is still possible (in theory) to write dependent tests with
+%weak oracles.}
+%\end{itemize}
+
+
+
+% vim:wrap:wm=8:bs=2:expandtab:ts=4:tw=70:
+

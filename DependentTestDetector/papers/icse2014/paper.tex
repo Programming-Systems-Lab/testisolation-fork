@@ -1,0 +1,117 @@
+\documentclass[letterpaper]{sig-alternate}
+\usepackage{graphicx}
+\usepackage[draft]{fixme}
+\usepackage{url}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{algorithmic}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{color}
+\usepackage[draft]{hyperref}
+\usepackage{xspace}
+\usepackage{subfigure}
+\usepackage{bold-extra}
+
+\usepackage{color}
+\newcommand{\CodeIn}[1]{{\small\texttt{#1}}}
+
+%\newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
+
+ % Add line between figure and text
+\makeatletter
+\def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+\def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
+\def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+\makeatother
+ % If there is a line, you can get away with reducing the separation between
+ % figures and text.  Don't do this without the line, though.
+\addtolength{\textfloatsep}{-.5\textfloatsep}
+\addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
+\addtolength{\floatsep}{-.5\floatsep}
+\addtolength{\dblfloatsep}{-.5\dblfloatsep}
+
+\newtheorem{definition}{Definition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+%\newtheorem{proof}{Proof}
+\newcommand{\pass}{\ensuremath{\mathit{PASS}}\xspace}
+\newcommand{\fail}{\ensuremath{\mathit{FAIL}}\xspace}
+
+% commands for formalization
+\newcommand{\suites}[0]{\ensuremath{\mathcal{S}\xspace}}
+\newcommand{\environs}[0]{\ensuremath{\mathcal{E}\xspace}}
+\newcommand{\manifest}[1]{\ensuremath{\prec_{#1}}}
+\newcommand{\suite}[1]{\ensuremath{ \langle  #1 \rangle }}
+\newcommand{\env}[0]{\ensuremath{\mathbf{E}}\xspace}
+\newcommand{\exec}[2]{\ensuremath{\varepsilon(#1,#2)}}
+\newcommand{\result}[2]{\ensuremath{R(#1|#2)}}
+
+%commands must be the last package imported
+% This package provides the \todo{Name}{Comment} command
+\usepackage{commands}
+%remove syntax highlighting from Java code
+\lstset{basicstyle=\ttfamily,tabsize=2,keywordstyle=\ttfamily,stringstyle=\ttfamily,commentstyle=\ttfamily,
+captionpos=b,numberstyle=\small\ttfamily,numbersep=1ex,
+keywordstyle=\color{red}}
+
+%\renewcommand{\todo}[2]{}
+
+\author{
+Author names\\ 
+\affaddr{Department of Computer Science \& Engineering}\\ 
+\affaddr{University of Washington, Seattle, USA} \\ 
+\email{\{emails\}@cs.washington.edu}
+}
+
+%\title{Reexamining the Test Independence Assumption}
+%Does Test Execution Order Matter?
+%\title{Test Dependence: Theory and Observations}
+\title{Test Dependence: Theory and Manifestation}
+
+\begin{document}
+\maketitle
+
+\input{abstract}
+
+%\category{D.2.5}{Testing and Debugging}
+%\keywords{Software testing; test dependence; test selection; test prioritization}
+
+
+\input{introduction}
+
+\input{related}
+
+\input{study}
+
+\input{theory}
+
+\input{manifestations}
+
+\input{algorithms}
+
+\input{conclusions}
+
+
+\subsection*{Acknowledgments} Bilge Soran was a participant in the project
+that led to the initial result.  Yuriy Brun and Colin Gordon provided advice about
+the formal notation.  Reid Holmes and Laura Inozemtseva identified the initial \jodatime dependence.  Mark Grechanik, Adam Porter, Michal
+Young, and Reid Holmes provided timely and insightful comments on a draft.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+
+%\subsection{Practical Considerations}
+%\label{sec:practical}
+%\input{practical}
+
+%\section{Unused text snippets}
+%\input{snippets}
+
+\end{document}
+% vim:wrap:wm=8:bs=2:expandtab:ts=4:tw=70:
+
