@@ -18,10 +18,10 @@ public class InstrumentUtils {
 	    	  "com/sun/",
 	    	  "com/oracle/",
 	    	  "org/hamcrest/",
-	    	  "edu/washington/cs/dt",
+	    	  "edu/washington/cs/dt/",
 	    	  "plume/",
-	          "org/junit/",
-	          "junit/",
+	//          "org/junit/",
+	//          "junit/",
 	          "org/eclipse/jdt/internal/",
 	          "org/objectweb/asm/",
 	          "org/xmlpull/"
@@ -59,5 +59,9 @@ public class InstrumentUtils {
 
 	   return true;
 	   }
+
+	public static boolean isSynthetic(String name) {
+		return name.contains("$");
+	}
 	
 }

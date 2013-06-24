@@ -3,27 +3,21 @@
  */
 package edu.washington.cs.dt.util;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import junit.framework.TestFailure;
-
+import plume.Option;
 import edu.washington.cs.dt.OneTestExecResult;
 import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.main.Main;
-
-import plume.Option;
 
 
 public class TestExecUtils {
@@ -37,9 +31,7 @@ public class TestExecUtils {
 	@Option("The temp file to store all tests to execute")
 	public static String testsfile = "./tmptestfiles.txt";
 	
-	@Option("The min number of tests when using ./tmptestfiles")
-	public static int threshhold = 120;
-	
+
 	
 	public static Map<String, OneTestExecResult> executeTestsInFreshJVM(String classPath, String outputFile,
 			List<String> tests, ProgressCallback progressCallback) {
@@ -49,26 +41,18 @@ public class TestExecUtils {
 		commandList.add("-cp");
 		commandList.add(classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
 		commandList.add("-Xmx2G");
-		
-		if(tests.size() < threshhold) {
-		    commandList.add("edu.washington.cs.dt.util.TestRunnerWrapper");
-		    commandList.add(outputFile);
-		    commandList.addAll(tests);
-		} else {
-			Files.createIfNotExistNoExp(testsfile);
-			Files.writeToFileWithNoExp(tests, testsfile);
-			
-			commandList.add("edu.washington.cs.dt.util.TestRunnerWrapperFileInputs");
-		    commandList.add(outputFile);
-		    commandList.add(testsfile);
-		}
+		commandList.add("edu.washington.cs.dt.seperatejvm.TestRunner");
 		
 		String[] args = commandList.toArray(new String[0]);
 		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		MonitoringPrintStream ps   = new MonitoringPrintStream(out, true);
 		ps.setCallback(progressCallback);
-		Command.exec(args, ps);
+		String input = "";
+		for (String test : tests) {
+			input += test  + "\n";
+		}
+		Command.exec(args, ps, input);
 		ps.close();
 
 		try {
@@ -147,7 +131,6 @@ public class TestExecUtils {
 				continue;
 			}
 			sb.append(str);
-//			sb.append(" - ");
 			sb.append(stackTraceSep);
 		}
 		return sb.toString();

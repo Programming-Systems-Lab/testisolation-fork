@@ -6,14 +6,23 @@ package edu.washington.cs.dt.tools;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.ZipException;
 
+import junit.extensions.TestSetup;
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 import plume.Option;
 import plume.Options;
 
+import edu.washington.cs.dt.abstractions.InitializationRep;
+import edu.washington.cs.dt.abstractions.TestRep;
 import edu.washington.cs.dt.util.CodeUtils;
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
@@ -31,6 +40,9 @@ public class UnitTestFinder {
 	
 	@Option("The jar file name or path (must be in classpath) where to find unit tests")
 	public static String pathOrJarFile; //it can be a path or a jar
+	
+	@Option("Juint3 name of suite method. (must be in classpath)")
+	public static String suiteMethod;
 	
 	@Option("Support JUnit 4.x tests")
 	public static boolean junit4 = false;
@@ -62,7 +74,6 @@ public class UnitTestFinder {
 			if(content.endsWith(".class")) {
 				Log.logln("processing class: " + content);
 				String clzName = content.replace("/", ".").substring(0, content.indexOf(".class"));
-//				System.out.println(clzName);
 				try {
 				   Class<?> clz = Class.forName(clzName);
 				   List<String> junitTests = getUnitTestsFromClass(clz);
@@ -128,6 +139,47 @@ public class UnitTestFinder {
 		return tests;
 	}
 	
+	public List<TestRep> getUnitTestsFromJunit3TestSuiteMethod(String methodName) {
+		String classStr = CodeUtils.getClassNameFromMethodName(methodName);
+		String methodStr = CodeUtils.getMethodNameFromMethodName(methodName);
+		try {
+			Class<?> klass = Class.forName(classStr);
+			Method method = klass.getMethod(methodStr);
+			Test test = (Test) method.invoke(null);
+			ArrayList<TestRep> testrepList = new ArrayList<>();
+			LinkedList<InitializationRep> setups = new LinkedList<>();
+			number = 0;
+			flattenSuite(methodName, test, testrepList, setups);
+			return testrepList;
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	int number = 0;
+	
+	private void flattenSuite(String methodName, Test test, ArrayList<TestRep> testrepList, 
+			LinkedList<InitializationRep> setups) {
+		
+		if (test instanceof TestSuite) {
+			TestSuite suite = (TestSuite) test;
+			Enumeration<Test> tests = suite.tests();
+			while (tests.hasMoreElements()) {
+				flattenSuite(methodName, tests.nextElement(), testrepList, setups);
+			}
+		} else if (test instanceof TestCase) {
+			testrepList.add(new TestRep(test, setups, methodName, ++number));
+		} else if (test instanceof TestSetup) {
+			TestSetup setup = (TestSetup) test;
+			InitializationRep rep = new InitializationRep(setup);
+			setups.add(rep);
+			flattenSuite(methodName, setup.getTest(), testrepList, setups);
+			setups.removeLast();
+		} else {
+			throw new RuntimeException("" + test + " " + test.getClass());
+		}
+	}
+
 	public void saveToFile(List<String> allTests) {
 		StringBuilder sb = new StringBuilder();
 		for(String t : allTests) {
@@ -148,8 +200,18 @@ public class UnitTestFinder {
 		    Log.logConfig(log);
 		}
 		UnitTestFinder finder = new UnitTestFinder();
-		List<String> allTests = finder.findAllTests();
-		finder.saveToFile(allTests);
+		if (suiteMethod != null) {
+			List<TestRep> list = finder.getUnitTestsFromJunit3TestSuiteMethod(suiteMethod);
+			ArrayList<String> names = new ArrayList<>();
+			for (TestRep rep : list) {
+				names.add(rep.toString());
+			}
+			finder.saveToFile(names);
+		} else {
+			List<String> allTests = finder.findAllTests();
+			finder.saveToFile(allTests);
+
+		}
 	}
 	
 	private static void parse_and_validate_args(String[] args) {
@@ -164,8 +226,8 @@ public class UnitTestFinder {
 	        System.exit(1);
 	    }
 	    List<String> errorMsg = new LinkedList<String>();
-	    if(pathOrJarFile == null) {
-	    	errorMsg.add("You must specify either a jar file or a path via --pathOrJarFile");
+	    if(pathOrJarFile == null && suiteMethod == null) {
+	    	errorMsg.add("You must specify either a jar file or a path via --pathOrJarFile, or a Junit3 suite method via --suiteMethod");
 	    }
 	    if(!errorMsg.isEmpty()) {
 	    	Utils.flushToStd(errorMsg.toArray(new String[0]));

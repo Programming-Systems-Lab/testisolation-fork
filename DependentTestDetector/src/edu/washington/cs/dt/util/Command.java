@@ -60,10 +60,10 @@ public class Command {
     int exitFlag = 0;
 
     if (verbose) {
-      exitFlag = Command.exec(command, System.out, prompt, gobbleChars);
+      exitFlag = Command.exec(command, System.out, prompt, gobbleChars, "");
     } else {
       out = new ByteArrayOutputStream();
-      exitFlag = Command.exec(command, new PrintStream(out), prompt, gobbleChars);
+      exitFlag = Command.exec(command, new PrintStream(out), prompt, gobbleChars, "");
     }
 
     if (!okToFail && exitFlag != 0) {
@@ -164,14 +164,14 @@ public class Command {
    * Runs cmd, redirecting stdout and stderr to System.out.
    */
   public static int exec(String cmd) {
-    return exec(tokenize(cmd), System.out);
+    return exec(tokenize(cmd), System.out, "");
   }
 
   /**
    * Runs cmd, redirecting stdout and stderr to System.out.
    */
   public static int exec(String[] cmd) {
-    return exec(cmd, System.out);
+    return exec(cmd, System.out, "");
   }
 
   /**
@@ -185,23 +185,29 @@ public class Command {
   //         return exec(cmd,  out, new File(System.getProperty("user.dir")));
   //     }
 
-  public static int exec(String[] cmd, PrintStream out) {
-    return exec(cmd, out, "");
+  public static int exec(String[] cmd, PrintStream out, String input) {
+    return exec(cmd, out, "", input);
   }
 
-  public static int exec(String[] cmd, PrintStream out, String prompt) {
-    return exec(cmd, out, prompt, false);
+  public static int exec(String[] cmd, PrintStream out, String prompt, String input) {
+    return exec(cmd, out, prompt, false, input);
   }
   
-  public static int exec(String[] cmd, PrintStream out, String prompt, boolean gobbleChars) {
-	  return exec(cmd,out,prompt,gobbleChars, null);
+  public static int exec(String[] cmd, PrintStream out, String prompt, boolean gobbleChars, String input) {
+	  return exec(cmd,out,prompt,gobbleChars, null, input);
   }
 
-  public static int exec(String[] cmd, PrintStream out, String prompt, boolean gobbleChars, File cwd) {
+  public static int exec(String[] cmd, PrintStream out, String prompt, boolean gobbleChars, File cwd, String input) {
     int exitVal;
     try {
       Runtime rt = Runtime.getRuntime();
       Process proc = rt.exec(cmd, null, cwd);
+      
+      PrintWriter pw = new PrintWriter(proc.getOutputStream());
+      pw.println(input);
+      pw.close();
+      
+      
 
       // any error message?
       StreamGobbler errorGobbler =
