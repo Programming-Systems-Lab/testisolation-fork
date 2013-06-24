@@ -15,7 +15,6 @@ import edu.washington.cs.dt.util.TestRandomization;
 import edu.washington.cs.dt.util.TestSampleTestsInFreshJVM;
 import edu.washington.cs.dt.util.TestStacktrace;
 import edu.washington.cs.dt.util.TestTestRunnerWrapper;
-import edu.washington.cs.dt.util.TestTestRunnerWrapperFileInputs;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -43,7 +42,6 @@ public class AllTests extends TestCase {
 		suite.addTest(TestStacktrace.suite());
 		suite.addTest(TestJUnitTestExecutor.suite());
 		suite.addTest(TestTestRunnerWrapper.suite());
-		suite.addTest(TestTestRunnerWrapperFileInputs.suite());
 		
 		return suite;
 	}
