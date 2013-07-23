@@ -20,7 +20,9 @@
 \newcommand{\CodeIn}[1]{{\small\texttt{#1}}}
 
 %\newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
-
+\newcommand{\todo}[1]{{\color{red}\bfseries [[{#1}]]}}
+%\newcommand{\CodeIn}[1]{{\small\texttt{#1}}}
+\newcommand{\code}[1]{{\small\texttt{#1}}}
  % Add line between figure and text
 \makeatletter
 \def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
@@ -50,9 +52,15 @@
 \newcommand{\exec}[2]{\ensuremath{\varepsilon(#1,#2)}}
 \newcommand{\result}[2]{\ensuremath{R(#1|#2)}}
 
+\newcommand{\question}[2]{\medskip\noindent\hspace{\parindent}\begin{minipage}{0.9\columnwidth}\textit{#1}
+\textsc{#2}
+\end{minipage}
+\medskip}
+
+
 %commands must be the last package imported
 % This package provides the \todo{Name}{Comment} command
-\usepackage{commands}
+%\usepackage{commands}
 %remove syntax highlighting from Java code
 \lstset{basicstyle=\ttfamily,tabsize=2,keywordstyle=\ttfamily,stringstyle=\ttfamily,commentstyle=\ttfamily,
 captionpos=b,numberstyle=\small\ttfamily,numbersep=1ex,
@@ -70,7 +78,8 @@ Author names\\
 %\title{Reexamining the Test Independence Assumption}
 %Does Test Execution Order Matter?
 %\title{Test Dependence: Theory and Observations}
-\title{Test Dependence: Theory and Manifestation}
+%\title{Test Dependence: Theory and Manifestation}
+\title{Understanding and Detecting Dependent Tests}
 
 \begin{document}
 \maketitle
@@ -83,15 +92,19 @@ Author names\\
 
 \input{introduction}
 
-\input{related}
+\input{formalization}
 
 \input{study}
 
-\input{theory}
+\input{detecting}
 
-\input{manifestations}
+\input{implementation}
 
-\input{algorithms}
+\input{evaluation}
+
+\input{discussion}
+
+\input{related}
 
 \input{conclusions}
 

@@ -1,16 +1,23 @@
 \section{Empirical Evaluation}
 \label{sec:examples}
 
+To show the effectiveness of our proposed
+dependent test detection algorithms, we conducted
+an evaluation on \todo{XXX} open-source programs (Table~\ref{}).
+In our evaluation, we seek to answer the following research questions:
+
+\begin{itemize}
+\item \textbf{RQ1:} How effectively do our algorithms detect
+dependent tests?
+\item \textbf{RQ2:} How do the proposed static and dynamic program analyses
+in \todo{algorithm-name} improve the algorithm efficiency?
+\end{itemize}
+
+\subsection{Subject Programs}
+
 \input{example-table}
 
-Dependent tests reach beyond theory and appear in real-world programs.  
-In some cases, they are intentional, developers are aware of them and
-document them, but in other cases they are inadvertent. 
-Test dependence can cause problems, not only when test suites are reordered,
-but even when they are
-executed in the intended order.
-This section presents concrete examples of test dependence found in
-well-known open source programs. Figure~\ref{fig:example-summary}
+Figure~\ref{fig:example-summary}
 summarizes the projects we studied and the results: The table
 summarizes the number of tests in the suites produced by the
 developers (\emph{MT}), the number of tests we generated automatically
@@ -29,23 +36,57 @@ several classes of dependence-related problems that have practical
 relevance.
 
 
+\subsection{Evaluation Procedure}
 
-\subsection{Masking Faults}\label{sec:mask}
+\todo{including manual tests and auto-generated tests}
+
+We used the prototype to verify the dependent tests reported by
+users, developers, other researchers, and us, and to find new dependent
+tests in the
+example programs in Section~\ref{sec:examples} using isolated execution ($k = 1$)
+and pairwise execution ($k = 2$).
+
+All the dependent tests reported in Figure~\ref{fig:example-summary},
+except for two dependent tests in JodaTime and the dependences in SWT, 
+can already be found by isolated execution. Since we could not run the
+test suite of SWT, we could not check these dependences with our tool.
+During manual bug diagnosis in JodaTime, we identified two test dependences that require
+\emph{three} tests to manifest. While these are easy to reproduce, we
+did not check that our tool finds them, because the time needed to
+run our naive algorithm on JodaTime with $k=3$ is measured in months.
+
+While we believe that most test dependences can be found with small
+$k$. This is in part because the set of dependent tests that can be
+found with a bound $k$ is always a subset of the set of dependent
+tests that can be found with any bound $k' > k$. Additionally, our
+intuition and preliminary exploration seem to indicate that small $k$
+find many dependences, while larger $k$ do not. However, in principle
+it is conceivable
+that any number of chain dependences with chains longer than any tried $k$ exist
+in all the libraries we analyzed.
+
+\subsection{Results}
+
+\todo{show the basic results here, i.e., the num
+of dependent tests found. Its consequence is discussed
+below.}
+
+\subsubsection{RQ1: Algorithm Effectiveness}
+
+\subsubsection{RQ2: Improvement from Program Analyses}
+
+\subsection{Consequences of Dependent Tests}
+
+\todo{The following text is too verbose. Note be
+consistent to the categories used in the study section}
+
+\subsubsection{Masking Faults}\label{sec:mask}
 
 \emph{Masking} is a particularly perplexing problem caused by
 dependence.
 The negative effect of masking is that it hides a fault in the
 program, \emph{exactly} when the test suite is executed in its default
 order. 
-%So while manifest dependences can reveal such a problem, the
-%underlying fault is in the program and affects first-order testing and
-%use of the program.
-%In its simplest form, masking occurs when parts of a program or tests assume that
-%global state has correctly been initialized before these parts can
-%ever execute. When this assumption is incorrect, because
-%initialization is not implemented correctly, the interactions of
-%different parts of the program might jointly modify the global state
-%in ways that lead to intricate and subtle faults.
 Masking occurs when a test case $t$ (a) \emph{should}
 reveal a fault, (b) only does so when executed in a specific environment
 $\env_R$, but (c) tests executed before $t$ in a test suite always
@@ -94,7 +135,7 @@ public final class OptionBuilder {
 \end{figure}
 
 A straightforward example of fault masking occurs in the Apache CLI
-library.\footnote{\url{http://commons.apache.org/cli/}}
+library~\cite{cli}.
 Two test cases fail when run in isolation:
 \code{test13666} and \code{test\-Op\-tion\-With\-out\-Short\-For\-mat2} in test
 classes \code{Bugs\-Test} and \code{Help\-For\-mat\-ter\-Test},
@@ -138,14 +179,6 @@ these dependent tests.
 Thus, the tests that are executed before call \code{create()} at least once, which
 sets the default \code{argName} value, thus masking the fault.
 
-%\todo{JW}{The following paragraph is not really necessary here. We
-%want to illustrate how these things happen. If we have time and space,
-%I think a general discussion section about the relevance of dependence
-%might benefit from this, though}
-%
-%\todo{SZ}{I am on the side of keeping the following text. It is very
-%impressive about the effect of dependent tests, making the whole
-%test dependence story stronger.}
 
 This fault is reported in the bug
 database several times,\footnote{\url{https://issues.apache.org/jira/browse/CLI-26} \url{https://
@@ -163,22 +196,13 @@ About one month later, the bug is duplicated as CLI-187, and the
 actual fix happens one 
 year later on June 19, 2010, about six years after the bug was first reported (and four years
 total on the open-issue list).
-%total ``awareness'' of the fault
-%of years. %The fix consists of adding the following code to \code{OptionBuilder.java}:
-
-%We associated these dependent tests with a bug first reported by a
-%user in 2004, marked as ``resolved''---but not actually resolved---in 2007,
-%reopened in 2009 by another user, and finally identified and
-%fixed in 2010.  This bug sat on the shelf for about six years and
-%would have been identified much earlier and much more easily by
-%considering test dependence.
 
 \newcommand{\jodatime}{JodaTime\xspace}
 \paragraph{\jodatime: Complex interactions that mask faults}
 \label{sec:jodatime}
 \input{jodatime}
 
-\subsection{Poor Test Construction}\label{sec:examples:initialization}
+\subsubsection{Poor Test Construction}\label{sec:examples:initialization}
 
 Based on our interaction with the \jodatime developers, this last
 dependence does not
@@ -230,7 +254,7 @@ a downstream tool, to execute before any other initializing test.
 %any modification from SIR people
 \input{xmlsecurity}
 
-\subsection{Spurious Bug Reports and Bug Fixes}\label{sec:spurious}
+\subsubsection{Spurious Bug Reports and Bug Fixes}\label{sec:spurious}
 Sometimes developers introduce dependent tests intentionally because it is
 easier, more efficient or more convenient to write unit tests for some modules
 in that way~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
@@ -251,9 +275,33 @@ to fix a bug that is not there.
 \paragraph{Eclipse SWT: Causing Spurious Bug Reports}
 \input{eclipse}
 
-\subsection{Dependence in Auto Generated Tests}
+\subsubsection{Dependence in Auto Generated Tests}
 \label{sec:autogen}
 \input{beanutils}
 
 %\section{How does the theory relate to our examples}
 
+\subsection{Experimental Discussion}
+
+\subsubsection{Threats to Validity}
+
+There are two major threats to validity in our evaluation.
+First, the \todo{NUM} open-source
+programs and their test suites may not be
+representative enough. Thus, we can not claim the results
+can be generalized to an arbitrary program.
+Second, in this evaluation, we focus specifically on
+dependence between unit tests.
+\todo{only consider unit tests, no system tests.} 
+
+\subsubsection{Conclusions}
+
+
+We have XXX chief findings: \textbf{(1)}
+\textbf{(2)}, \textbf{(3)} ...
+The examples where dependence identified weaknesses in the tests themselves
+are even less likely to be observed.  
+Our prototype tool shows
+the potential for revealing dependences, allowing
+developers to observe them and make conscious decisions about how, or even whether,
+to deal with the dependences. 

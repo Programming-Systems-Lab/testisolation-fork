@@ -1,0 +1,49 @@
+\section{Tool Implementation}
+\label{sec:impl}
+
+
+We implemented our dependent test detection algorithms in
+a prototype tool. Our tool is fully-automated, and the
+current implementation supports JUnit 3.x/4.x tests.
+For the basic, $k$-bounded dependent test detection algorithm
+(Section~\ref{sec:basic}), our tool takes a test suite
+and the bounding parameter $k$ as inputs, 
+exhaustively executes every $k$-tuple
+of tests, and compares execution results to identify possible dependence cases. When
+comparing the observed result of a test in an execution order with
+its intended result,
+We consider JUnit test results to be the same when the tests either
+both pass, or exactly the same exception or assertion violation leads
+to test failure.
+The tool creates a fresh JVM for each \testlist, thus, ignoring
+external state such as files and OS services, the environment
+that the test suites are executed in is always the same $\env_0$.
+This ensures that there is no interaction between
+different \testlist\ through shared memory.
+
+For the improved algorithm (Section~\ref{sec:advalgorithm}),
+our tool uses ASM \todo{describe the basic implementation details.}
+
+
+Our tool implementation is available at: \\\url{http://testisolation.googlecode.com}.
+
+
+%However, due to the computational complexity of the general dependent test
+%detection problem, it is difficult to know precisely how many dependent
+%tests exist in a test suite. Thus, we do not
+%yet have empirical data that shows how many percentages of dependence tests
+%our tool can catch. Giving a reasonable estimation
+%is one of our future work.
+
+%we do not yet have strong empirical data that shows our algorithm catches X
+%percentage or Y of the worst test dependences. It is one of our future work.
+
+
+% The tool is publicly
+% available\footnote{\url{http://testisolation.googlecode.com}}.
+% The source code and user manual of our tool is publicly available at:
+% \url{http://testisolation.googlecode.com}
+
+
+% vim:wrap:wm=8:bs=2:expandtab:ts=4:tw=70:
+

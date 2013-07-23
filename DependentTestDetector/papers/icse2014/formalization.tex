@@ -1,17 +1,8 @@
 
 %\section{What's the essence of what causes the dependences?}
-\section{Theory}
+%\section{Theory}
+\section{Understanding Dependent Tests: Formalization}
 \label{sec:formalism}
-
-%\todo{DN}{I think we will need to go over the paper later on in the process to make
-%really sure we are consistent about test dependence definitions and our writing.
-%If I am clear, we define dependence between two tests; we often (informally?)
-%talk about a suite with dependence(s).}
-%\todo{JW}{Informally, you are correct. I'll make sure to clarify this
-%in the text}
-%\todo{DN}{We are also inconsistency about ``dependence'' vs. ``dependency'' vs. ``dependencies'' and
-%such.  Probably not a big deal, but if we have time...}
-%\todo{DN}{General comment about the intuition below -- it's too long now, which makes it less intuitive.}
 
 A standard textbook 
 states that ``[a] test case includes not only input data but
@@ -27,13 +18,6 @@ the sequential execution of each test in order)~\cite{DBLP:conf/sigsoft/MusluSW1
 shared global variables, and the test results varied depending on the
 values stored in these variables.  That is, relevant execution conditions---specifically, pertinent parts
 of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc.---were neglected.
-%As shown in Section~\ref{sec:examples}, most real examples of test dependence we have seen to date relate
-%to mistakes in the initialization of test environments.
-%\footnote{Test frameworks such as JUnit 
-%provide \emph{mechanisms}, such as \code{@Before} and \code{@After} annotations, to help developers more easily
-%establish execution conditions.  They are not intended to, and
-%do not, \emph{enforce} any policies
-%to ensure that developers use these mechanisms consistently and effectively.}
 
 To characterize the relevant execution conditions precisely, 
 our formalism below explicitly represents the notions of
@@ -44,10 +28,6 @@ of how test dependences arise in terms of order and environment (Figure~\ref{fig
 In the leftmost example, \code{test2} checks
 the value of a variable that has been assigned elsewhere. If the tests
 are executed in the order \suite{\code{test1},\code{test2}}, both tests will pass,
-% Kivanc: Cut: There is no \ldots in test1, so I don't think below explanation
-% is needed.
-% (assuming \code{test1} does not
-% change the value of \code{a} after the initial assignment)
 while running \code{test2} first will make it fail.    The rightmost  example extends this
 principle to multiple tests. While none of the $n-1$ tests prior to
 \code{testn} will fail, they all must execute in this particular order
@@ -65,73 +45,6 @@ under \emph{some} environment and order---and manifest test
 dependences (Definition~\ref{def:manifest})---those that are guaranteed to cause a
 variation in test suite results under a \emph{specific} environment and order.  
 
-%Consider the two examples (Figure~\ref{fig:dep_examples})
-%of the basic
-%way dependencies between tests arise in practice. \code{test2} checks
-%the value of a variable that has been assigned elsewhere. If the tests
-%are executed in the order \code{test1, test2}, both tests will pass (assuming \code{test1} does not
-%change the value of \code{a} after the initial assignment),
-%while running \code{test2} first will make it fail.  To determine
-%potential test dependences would require an analysis of the read/write
-%behavior of the tests (for example, under what conditions, if any, does \code{test1} change the value of \code{a}?); such analyses are well-known to be
-%imprecise and/or incomplete.    
-
-
-% to cleanly set all execution conditions for each test
-%case. Methods marked with the
-%annotations \code{@Before} and \code{@After} are executed before and
-%after each test case and are intended to initialize and clean the
-%execution conditions for each test case.
-%}
-
-%When not all state in the environment is cleanly initialized, test
-%dependences can arise, because then the actual state when a test case
-%executes can change depending on, for example,
-
-
-%Very informally, dependence between tests, like the one described above, arises when test cases do not include all% relevant execution conditions.
-%In particular, when they compute their result based on a shared global data, and this shared global data (we call it \emph{environment}) is initialized external to the test case.
-
-%\todo{DN}{I'd love to see if we can reduce or eliminate the discussion of JUnit here.  The following
-%paragraph, for example, seems confusing in the following sense: if junit has this, why is there a
-%dependence problem?  This is obvious to us, but I don't want people thinking about that here. Moved it
-%to a footnote -- before/after -- and rewrote a little}
-%
-
-%In this section we first give an intuition what causes test
-%dependence and what its consequence may be. Then we formally define
-%our notion of test dependence, and lastly we demonstrate how these
-%notions lead to the \emph{test dependence detection} problem, and how
-%we can solve it.
-
-%\todo{JW}{Find a better section heading or remove the heading}
-%\subsection{Intuition}
-
-
-
-%
-%rely on executing in a
-%particular context, for example some test may assume that global variables have
-%been initialized to specific values, without confirming the expected
-%context before they execute. 
-
-%\todo{DN}{I'm at present inclined to move the example to here, but the test structure/results
-%text.  That is, use the example to describe those rather than vice versa.  Sort of like: (a) here
-%is a simple example; (b) note that a complete analysis of test dependence would require a full
-%analysis of the code in test1 to determine possible values for a; (c) instead of considering that
-%complicated analysis that would describe the potential for dependence, we use the test oracles/results
-%to represent the outcome of the execution, in a given environment.  Or possibly move the
-%potential/actual text up instead, and describe how we address it, then the example?}
-
-
-
-
-%Consider the two examples in Fig.~\ref{fig:dep_examples}. The example
-%in Fig.~\ref{fig:dep_examples:direct} shows the most basic
-%way dependencies between tests arise in practice. \code{test2} checks
-%the value of a variable that has been assigned elsewhere. If the tests
-%are executed in the order \code{test1, test2}, both tests will pass,
-%while running \code{test2} first will make it fail.
 \begin{figure}
 \subfigure[Direct dependence\label{fig:dep_examples:direct}]{
 \begin{minipage}{.47\columnwidth}
@@ -164,34 +77,6 @@ variation in test suite results under a \emph{specific} environment and order.
 \caption{Examples for basic causes of test
 dependences}\label{fig:dep_examples}
 \end{figure}
-%
-
-%\todo{SZ}{for example (b), perphas we can make it more clearer as
-%follows:  test1 \{a++\}, test2\{a++\}, ..., testn \{assert a == n-1\}}
-%
-%\todo{JW}{While this is also a dependence, it does \emph{not} enforce
-%any particular order on the first n-1 tests.}
-%
-%\todo{KM}{I second Jochen. We discussed this quite a bit with him and I think
-%he came up with the most readable and easiest example that forces the execution
-%of only t1-t1-\ldots-tn to pass and all other orders to fail.}
-
-%Test dependences arise when tests rely on state that is generated
-%by other tests. %CLI is a case in point. 
-%Most examples we found are quite direct dependecies on
-%global variables, where one test implicitly relies on a global variable to be in
-%a certain state before executing the sequence of methods to be tested. 
-%At a more abstract level, we can think of test dependence as
-%read/write conflicts between different transactions. Each test reads
-%and writes variables. If a test implicitly assumes a variable to be in
-%a particular state, but does not ensure this state before it executes,
-%the test may fail.
-%\todo{JW}{
-%Thinking of the causes for test dependences as read/write conflicts
-%might go far. Intuitively, I think the cases that cause parallel
-%transactions to abort are the \emph{good} cases for us (because each
-%test ensures that it has written the values it needs). All other cases
-%seem potentially hazardous. I'll dig into this tomorrow}
 
 \subsection{Definitions}
 \label{sec:definitions}
@@ -199,14 +84,6 @@ dependences}\label{fig:dep_examples}
 We express test dependences through the results of executing
 \emph{ordered} sequences of tests in a given \emph{environment}.
 
-%This is in strong contrast to most
-%existing work that considers test suites in general as sets, and thus
-%ignores the ordering aspect that is important here.
-%Informally, a test dependence arises when the results of executing
-%test suites in different orders differ. The following formal
-%definitions make our notion of test dependence precise.
-%\todo{DN}{I took out the ``informally'' sentence or so here, since we've done that
-%already a number of times, and now we're going formal!}
 
 \begin{definition}[Environment]
 An \emph{environment} \env for the execution of a test

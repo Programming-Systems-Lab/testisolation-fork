@@ -1,6 +1,8 @@
 \section{Related Work}
 \label{sec:related}
 
+\todo{missing related work, JCrasher, the ISSTA'13 paper}
+
 %Much literature on testing omits details about the structure of a
 %test suite; this is reasonable and unsurprising because particulars
 %about test suites are often immaterial to the results or discussions.
@@ -23,6 +25,8 @@ independence is assumed.
 %effect on its result regardless of the ordering of execution.
 
 %example~\cite[\emph{et alia}]{eldredetal:1978,harroldetal:OOPSLA:2001,staatsetal:ICSE:2011}.  
+
+%\todo{xx}
 
 \subsection{Test Dependence}
 
@@ -74,10 +78,10 @@ execution of one or more test cases.''
 
 A few approaches allow developers to annotate dependent tests and
 provide supporting mechanisms to ensure that the test execution framework
-respects those annotations.  DepUnit\footnote{\url{https://code.google.com/p/depunit/}}
+respects those annotations.  DepUnit~\cite{depunit}
 allows developers to define soft and hard dependences. Soft dependences control
 test ordering, while hard dependences in addition control whether specific tests are
-run at all.  TestNG\footnote{\url{http://testng.org/}} is a testing framework intended to improve upon JUnit,
+run at all.  TestNG~\cite{testng} is a testing framework intended to improve upon JUnit,
 and allows dependence annotations and supports a variety of execution policies such as sequential execution
 in a single thread, execution of a single test class per thread, etc.\
 that respect these dependences.

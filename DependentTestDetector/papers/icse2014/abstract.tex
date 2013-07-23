@@ -1,70 +1,31 @@
 \begin{abstract}
-%{\color{red}
-%\noindent Dear friendly pre-reviewer: 
-%
-%\noindent This is a reasonably complete draft that we plan to submit
-%to FSE 2012 on Friday March 16.  There are a few specifics we'd love
-%for you to look at, but you're of course free to comment on other
-%stuff (including typos, grammar, etc.); the conclusion is probably
-%the part we've worked on the least so far, if you need to do something
-%more lightly.  (OK, the abstract has been worked on even less!)  Among
-%the specifics we'd like to hear about are: (a) The related work is
-%reasonable extensive, but isn't done.  If you have any suggestions of
-%work we've missed, or work that would help others put our work in
-%context, or about the ``feel'' of what it says, let us know. (b) The
-%core content is even more important; do we have something here?  Are
-%you interested?  If not, why not?
-%
-%\noindent Thanks in advance for anything you point out!
-%
-%\noindent David, Jochen, Kivanc and Sai
-%}
 Test dependence arises when executing a test in different environments
-causes it to return different results.  In this paper, we
-show through a set of substantive real-world examples that test dependence arises in practice. 
+causes it to return different results. \todo{need a transition sentence here} 
+To understand and detect dependent tests, this paper presents four results. 
+
+First, we formally define test dependence in terms of
+test suites as ordered sequences of tests along with explicit
+environments in which these tests are executed. We use this
+formalization to formulate the problem
+of detecting dependent tests, and prove that a useful special
+case is NP-complete. 
+
+Second, we describe a study of \todo{NUM}
+real-world dependent tests from \todo{NUM} bug repositories
+to show that test dependence arises in practice.
 We also show that test dependence can have potentially costly
-repercussions such as masking program faults, and can be hard to identify
-unless explicitly searched for: We found a dependence
-that only manifests when a sequence of three tests are run in a specified, non-default order.
-%.  For example, we identify several situations where test dependence masks
-%program faults: in these situations, running the test suite in the default order does not expose a fault
-%but running the suite in a different order does.  
-%We also argue that existing
-%tools rarely ``surface'' test dependences in a direct way, making it harder for developers
-%to observe them.
+repercussions such as masking program faults and leading
+to spurious bug reports, and can be hard to identify
+unless explicitly searched for.
 
-We formally define test dependence in terms of test suites as ordered
-sequences of tests along with explicit environments in which these tests are
-executed. We use this formalization to formulate the concrete problem
-of detecting dependence in test suites, prove that a useful special
-case is NP-complete, and propose an initial algorithm that
-approximates solutions to this problem.
+Third, guided by the study, we propose a set of algorithms to detect
+dependent tests. Our algorithms use both static and
+dynamic program analyses to quickly \todo{the goal
+of algorithms here.}
 
-%To a lesser degree, we describe how two trends in software testing may interact
-%with test dependence: one, downstream testing tools such as selection, prioritization,
-%and parallelization are increasingly common, and may assume that the
-%suites they take as input have no test dependences; and, two, automated test
-%generation tools are becoming more common, and we provide some initial
-%evidence that test dependence appears to be orders of magnitude more common
-%in automatically-generated test suites than in manually-produced suites.
-%
-
-%WE show that, in practice,
-%test dependence does occur sometimes and does have grave consequences.
-%We further argue, that given the increasing importance of second-order
-%testing techniques, such as prioritization and parallelization, which
-%are directly affected by test dependence, this topic deserves
-%attention from the research community. As a first step, 
-%
-%
-%\todo{KM}{The abstract was only about the ``theory'' side of our paper, so I
-%tried to start writing one more paragraph about the ``manifestation'' side. It
-%is not perfect (and not complete) but I still think that something like this
-%needed in the abstract.} 
-%In the second half of the paper, we explain the dependences in the manual
-%written and auto-generated test suites of known and popular open source
-%software. We present an initial exploration over six software and report 75
-%(resp. 1975) dependent tests in manual written (resp. auto-ge\-ne\-rated) test
-%suites.
+Fourth, we implement our dependent test detection algorithms
+in a prototype tool, and apply it to \todo{NUM} real-world programs.
+Our tool revealed a large number of dependent tests, suggesting
+that \todo{the implication.}
 
 \end{abstract}

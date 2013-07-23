@@ -1,0 +1,353 @@
+\section{Discussion and Future Work}
+\label{sec:discussion}
+
+%In the introduction we posed several questions why test dependence
+%may have received little attention despite the ease of constructing
+%concrete but contrived examples. Our
+%contributions suggest answers, to differing degrees, to these questions:
+
+%\question{Does test dependence arise in practice?}{Yes.}  
+
+Although we have shown through a substantive set of reproducible examples,
+both from human-written test suites and
+automatically generated test suites, that test dependence
+arises in practice, a broader
+study of how to prevent and eliminate test dependences, and
+what are the impacts of test dependences to other software engineering
+tasks is beyond the scope of this paper. 
+We discuss a set of open questions addressing this and
+other possible concerns resulting from test dependences. 
+Exploring answers to these open questions comprises
+our future work.
+
+
+%show this in
+%six fielded, substantative, open-source systems.
+%``existence proof'' of test dependence is unlikely to surprise anyone,
+%nor does it suggest that test dependence is common
+%across \emph{all} software.
+
+
+\vspace{1mm}
+
+\noindent \textbf{\textit{How to prevent dependent tests?}}
+defensive programming? explicitly state testing oracles?
+
+\vspace{1mm}
+
+\noindent \textbf{\textit{How to eliminate dependent tests?}}
+
+\vspace{1mm}
+
+\noindent \textbf{\textit{How does test dependences
+affect the design of automated test generation
+techniques?}}
+
+Several of our examples identified situations in which test dependence
+masked faults in the underlying program. 
+In another example, developers wasted time tracking down a non-existent
+fault because of a spurious report that was due to an undocumented
+test dependence.
+%Another example identified a
+%situation where developers lost time tracking down a spurious bug
+%report that arose due to an undocumented test dependence.  
+Even though these
+are real and reproducible examples, it is not possible to make any
+general claims about the frequency nor the significance of the
+repercussions of test dependence.  At the same time, it seems unlikely
+that these are the \emph{only} software systems where test dependence
+causes problems.
+
+
+\vspace{1mm}
+
+\noindent \textbf{\textit{What does 
+test dependences affect other software engineering tasks?}}
+In principle, test dependence can compromise
+the application of downstream testing techniques such as selection,
+prioritization, and parallelization.  Like contrived examples of test
+dependence itself, it is easy to produce simple examples where
+downstream techniques produce incorrect output when applied to dependent
+tests.
+%under the assumption that the input tests have no dependences.
+We conjecture, based on intuition and
+very thin evidence, that if and when this happens in practice, it is
+hard to notice in part because tools do not surface the necessary
+information.
+
+The question of the role of test dependence in the real world merits
+more aggressive empirical study.  A better understanding of the 
+frequency and scope of repercussions from test dependence should be
+developed.  Of particular concern is the
+masking of program faults because, unlike weaknesses
+in test suites or spurious bug reports, masking
+faults could be costly to find by other methods or to leave in the program.
+Tools that surface test dependences may help researchers
+and practitioners study and deal with dependences more effectively.
+
+As such deeper knowledge is acquired, we may better understand
+what contributes to creating test dependence. Is this
+  phenomenon linked to particular testing levels (unit, integration,
+  system, etc.), specified testing techniques and frameworks, the programming
+languages and/or the software development process employed, the relationship
+and communication structures between developers and testers on a team, etc.  In turn,
+any insights gained in these dimensions may lead to more systematic
+approaches to dealing with test dependence.
+There is already some work aiming at
+reducing the potential for dependences by refactoring programs to use
+less global state~\cite{wlokaetal:FSE:2009}. 
+
+The question of how second-order testing techniques, like regression test
+selection and prioritization should handle dependences is also open.
+Most current techniques just assume independence and make no statement
+about what happens when this assumption is not true. One
+straightforward way to amend this situation might be to augment such
+techniques to respect a defined partial order among tests. And this partial order
+can be derived from knowledge about dependent tests.
+
+
+%\question{If and when test dependence arises, are there significant repercussions?}{Sometimes, although the extent is unknown.}
+
+%\question{Is dependence easy to notice if-and-when it arises?}{  At present,
+%usually not.}
+%This is a more subtle question, 
+%because the answer depends not only on the tools being used but also on the
+%perceptions and insights of the developers.  If tools always run
+%tests in the same context, and if developers never consider the possibility
+%of test dependence, then it is unlikely that dependence will be observed.
+%Masking of faults in the underlying program is a good illustration of this.
+
+ 
+
+%\medskip
+
+
+%Our 
+%prototype tool shows that even our approximate algorithm
+%can reveal large numbers of important dependences. Faster and more
+%precise approaches are plausible, especially as more understanding
+%of test dependence ``in the field'' is acquired.
+
+%avoiding test dependences, to removing or documenting test dependences that are found, etc.
+
+
+%Given a technique that detects dependence, what further
+%  actions can and should be taken?
+
+
+%also be supported by testimony from practitioners. With regard to the
+%relevance of test dependence, the following questions seem to be of
+%particular interest:
+%\begin{enumerate}
+%  \item Does test dependence occur often enough, and is its impact
+%  critical enough to make further enquiry worthwhile?
+%  \item 
+%\end{enumerate}
+
+%The frequency and consequences of test dependence in our work
+%so far seem to justify further investigation.  We are especially
+%concerned about whether test dependence is masking 
+
+%We strongly believe that both the frequency and the
+%impact of test dependence merit investigation of the phenom\-e\-non. The
+%fact that within our small example set we found a number of masked
+%faults that directly impacted the users of the software, and the
+%observation that any form of test dependence prevents the successful
+%use of many second-order testing techniques are strong
+%indicators that this phenomenon deserves as much attention as any
+%other technique that can improve the bug finding strength of testing.
+
+%Thinking about the higher-level causes of test dependence leads to a large number of different questions,
+%many of which relate not only to technical issues, but also to the social
+%and human environment in which software is created. Exploring this
+%domain, while very difficult to do well, is likely to yield the best
+%explanations for the creation of test dependence.
+
+%How actionable the knowledge of test dependence is, ironically,
+%depends. At this early stage, we suggest inspection of code, tests and
+%specifications to understand what causes the dependence, and where the
+%fault lies. As our examples show, dependence can point to faults in
+%the program, in the tests, or to insufficient documentation and
+%specification. We hope and expect that it will be possible to
+%determine or exclude some of these causes automatically with further
+%analyses of code and tests. 
+%There are also several
+%projects that either augment or replace JUnit with the express goal to
+%declare test dependence
+%explicitly\footnote{\url{https://code.google.com/p/depunit/},\\
+%\url{https://code.google.com/p/junitum/},\\ \url{http://testng.org}}, but not to detect it.
+
+
+
+
+%
+%
+%The key take-aways from this paper are that  prior work and existing
+%tool broadly assume test independence,
+%%is broadly assumed by prior work and by existing tools 
+%and that there is
+%at least incipient empirical evidence that this assumption can lead to
+%unexpected and likely negative repercussions.  
+%%We present an initial
+%formalization of test dependence that embodies both the execution
+%order of a test suite and also the environment in which tests in a
+%suite are executed. % the formalization allows us to prove that the
+%problem of determining if there are dependences among the tests in a
+%test suite is NP-complete.  
+%Substantive examples of test dependences
+%in the field, along with descriptions of the consequences of these
+%dependences, argue the potential practicality of further
+%investigations of test dependence.  
+%Initial algorithms designed with the
+%NP-completeness of the problem in mind, along with an initial tool, allow
+%us to take initial steps towards practical applications, as well as to check
+%the validity of examples of test dependence that we had previously identified
+%in \emph{ad hoc} ways.\todo{JW}{This is all a bit too initial...}  A set of open questions related to test dependence 
+%provides a partial, surely incomplete, roadmap for further work in the area.
+
+%\todo{JW}{I think this section should be about
+%\begin{enumerate}
+%  \item What prompted our research
+%  \item Which research questions did we answer, and which research 
+%  questions remain open.
+%  \item Summary what the reader should take away from the paper.
+%\end{enumerate}
+%The current version falls short of this in several ways. 
+%\begin{enumerate}
+%  \item It doesn't address ``the big picture'' at all.
+%  \item It focuses on minor technical details \emph{and} phrases
+%  minor technical issues as research problems in a way that assumes
+%  answers to interesting questions we didn't even ask (comments in the
+%  text below elaborate on that)
+%  \item It focuses too much on our ``results'', which is wrong,
+%  considering how little actual data we have.
+%\end{enumerate}
+%}
+
+%More concretely, in this paper, we examine the importance of test dependence in theory and practice. 
+%While the
+%research literature usually assumes tests to be independent, or evades
+%the issue entirely, our interest was piqued when we found a number of
+%test dependences in real-world software.
+%This led us to explore in more depth if this is an issue in a broader
+%range of software systems, and whether test dependence causes real
+%problems. 
+%
+
+
+%We found that the human-written test suites of many open-source libraries contain
+% dependent tests, that test suites automatically generated with
+% Randoop contain even larger numbers of dependent tests, and that in
+% both cases these tests cause various
+%kinds of problems, from preventing test prioritization to actually
+%hiding real faults in the programs. However, we must emphasize that
+%our exploration should not be construed as a complete
+%experiment that provides conclusive evidence. Rather we inspected programs that we were familiar with.
+%Hence, before the conclusions drawn from the examples in
+%Section~\ref{sec:examples} can be generalized,
+%a proper controlled experiment should be carried out with a broader
+%range of projects, and with proper control for confounding factors
+%such as project type and programmer expertise, which most likely have
+%a profound impact on test depenendence. Nonetheless, we believe that the anecdotal evidence we
+%presented in this paper makes clear that this is a worthwhile research
+%endeavour.
+
+%As a main contribution of this paper we identify test dependence as
+%an important research subject that so far has been mostly ignored by
+%the software testing community.
+
+%Before summarizing our work and contributions, we outline a set of
+%open research topics that could further improve the way we identify
+%and manage test dependences: 
+%\begin{itemize}
+%
+%\item Our initial algorithms for detecting test dependences 
+%leave room for improvement in efficiency.  Conventional optimizations
+%should apply \todo{JW}{I don't know what this means. We proved that
+%the problem is NP-complete the full algorithm is exponential.
+%``Optimizations'' in the case can only mean approximations, right?}, as should incremental algorithms and/or on-line versions of
+%the algorithms---for when test cases are added to a suite, among other
+%potential performance improvements.\todo{JW}{What's the point here?}
+%
+%\item \todo{JW}{This is a theory paper. I think this is completely
+%irrelevant} Our initial tool for detecting test dependences 
+%leaves room for improvements in applicability (what ``forms'' of test
+%suites/programs do we handle, such as JUnit, etc.?), in user
+%interface, etc.
+%
+%\item We have only scratched the surface of the interaction
+%between test dependence and downstream testing tools like selection,
+%prioritization, and parallelization.  \todo{DN}{We have claimed earlier
+%we will show that dependence can cause these approaches to fail.
+%Where in the paper do we do that, and how do we do that?  I believe it's
+%pretty obvious, but we'll need to be careful about doing it.} \todo{KM}{I think
+%we even have real life examples (from Mike), etc. for this, however I might be
+%mistaken. Generating theoretical example is obvious, but I agree that we lack
+%that example at the moment.} How should these interactions be handled? For
+%example, should a ``test dependence manager'' ensure that suites have no dependences before a downstream tool is invoked or should those tools check that their output test sub-suite has no dependences?
+%
+%\item \todo{JW}{This is an interesting question, as it to some extent
+%asks what is actionable about dependencies. However, I think this
+%should be discussed elsewhere (in the motivation, examples?), because
+%this isn't really a research question or anything. The answer to this
+%seems pretty obvious to me, and is what is described in this
+%paragraph.} What should a development/test team do when a test dependence is identified?
+%It could indicate that there is a problem in the tests themselves, in which case
+%they could be fixed.  It could indicate that there is a problem in the program
+%being tested, in which case it could be fixed.  It could indicate that the
+%dependence is necessary, in which case the test could perhaps be merged together
+%to ensure that the dependence is respected by the test framework and downstream
+%tools.
+%
+%\item \todo{JW}{What?} We argue additional work exploring the interrelationship between
+%individual unit tests should be performed, and show initial examples
+%that test dependencies must be considered when executing a test suite,
+%fixing a regression error, and generating new tests.
+%
+%\item This leads to our next recommendation for further software testing
+%research. Some work in this area, discussed previously, has already
+%attracted attentions. Nevertheless, we strongly beleive that more
+%work exploring open questions on how to integrate \textit{test dependence}
+%to the testing process is necessary to be understood.
+%
+%\todo{JW}{The following two paragraphs are too narrowly focused on
+%test dependences being a bad thing that needs to be avoided. I would
+%at the very least at the meta question asking when, where, how often
+%dependences are bad, intentional, necessary, practical etc.}
+%
+%First, how to eliminate existing dependent tests (or retrofitting
+%dependent tests into tests without inter-dependencies)? A critical
+%part in retrofitting existing dependent tests is to identify test
+%code that may affect the behavior of our tests, and then make the
+%affected tests more ``robust'' to such affecting code. 
+%\todo{DN}{Something especially about initialization code for tests?}
+%
+%\todo{JW}{This is too vague, both the problem description and the
+%solution.}
+%
+%
+%Second, how to prevent new dependent tests being produced?
+%Programmers should be encouraged
+%to encapsulate common test execution environment setting up and destroying
+%code into separate pre- and post-conditions, to ensure each
+%test is executed in a desirable environment and also probably cleared up
+%the environment after its execution. One promising way to achieve
+%this is to extend Design-by-Contract~\cite{Leitner:2007} to human-written unit
+%tests. For an automated tool, it may employ
+%capture-and-replay~\cite{Elbaum:2006} techniques to save the probable environment when a test is created,
+%and then recover the needed environment when executing a
+%test.\todo{JW}{This sounds weird to me. How would that work.}
+%
+%\item Finally, what would be the impact of dependent tests to the whole software testing
+%process?  Most existing research in the fields of regression selection
+%and prioritization has an implicit assumption on test dependence.
+%.\textbf{unfinished}.. \todo{JW}{This could be interesting, but I
+%doubt there is any general conclusion we can draw here.}
+%
+%\end{itemize}
+
+
+%Our formalism provides a precise definition of manifest test dependence,
+%allows reasoning about test dependence, and enables the proof that
+%detecting manifest test
+%dependence in test suites is NP-complete.  

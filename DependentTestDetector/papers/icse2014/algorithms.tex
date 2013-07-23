@@ -3,22 +3,6 @@
 \section{Algorithm and Implementation}
 \label{sec:algorithm-tool}
 
-In this section we present an algorithm and a prototype tool to detect dependent
-tests.
-In the worst case, a naive, exhaustive search would execute all $n!$
-permutations of the test suite to detect dependent tests. While this
-is not feasible for realistic $n$, our approximate algorithm uses 
-our intuition that many dependences can be found by running only short subsequences of
-test suites, and introduces a bound $k$ on the length
-of subsequences. That effectively bounds the execution time to
-$O(n^k)$, which for small $k$ is tractable. At the same time, our
-prototype tool and the experiments we conducted with it, suggest that
-many dependences can be found for small $k$.
-
-\subsection{Algorithm}
-\label{sec:algorithm}
-\input{algorithm}
-
-\subsection{Tool Implementation}
-\label{sec:tool}
-\input{tool}
+%\subsection{Tool Implementation}
+%\label{sec:tool}
+%\input{tool}
