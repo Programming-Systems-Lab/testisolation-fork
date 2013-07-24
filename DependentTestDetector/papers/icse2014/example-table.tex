@@ -4,11 +4,11 @@
 
 \begin{table*}
 \centering
-\setlength{\tabcolsep}{0.5\tabcolsep}
-\begin{tabular}{|l||c|c|l||c|c|}
+\setlength{\tabcolsep}{0.3\tabcolsep}
+\begin{tabular}{|l||c|c|c||c|c|}
 %\toprule
 \hline
-\textbf{Subject} & \multicolumn{3}{|c||}{\textbf{Detected Dependent Tests}} & \multicolumn{2}{|c|}{\textbf{Analysis Cost (s)}}\\
+\textbf{Subject} & \multicolumn{3}{|c||}{\textbf{Detected Dependent Tests}} & \multicolumn{2}{|c|}{\textbf{Analysis Cost (second)}}\\
 \cline{2-6}
 \textbf{Programs} & \textbf{\#Dependent Tests} & \textbf{\#Dependent Auto Tests} &
 \textbf{Kind} &
@@ -37,10 +37,10 @@ Beanutils & 1060 & 0 & \initializaiton{} & 2692 & 299 \\
 \hline
 \end{tabular}
 \caption{Experimental results. Column ``Kind'' refers to the kind
-of problem associated with the dependency. ${}^*$ We only examined 80
-tests in SWT manually, and found 49 dependencies among them.%Dependent tests in human-written tests are described in Sections~\ref{sec:mask} to~\ref{sec:spurious}, and dependent tests in
+of problem associated with the dependency. 
+\todo{The subject program list is out-of-date. donot look at the table content, just check the table format.}
 %automatically-generated test suites are described in Section~\ref{sec:autogen}.
 %\todo{KM}{I think that the last sentence is not necessary}}
 }
-\label{fig:results}
+\label{tab:results}
 \end{table*}

@@ -22,8 +22,13 @@ This ensures that there is no interaction between
 different \testlist\ through shared memory.
 
 For the improved algorithm (Section~\ref{sec:advalgorithm}),
-our tool uses ASM \todo{describe the basic implementation details.}
+our tool uses ASM \todo{describe the Darioush's implementation details
+here.}
 
+
+Our prototype tool also implements the Delta debugging algorithm~\cite{Zeller:2002}
+to return the shortest sequence of tests that manifest a dependency
+for a given test $t_i$.
 
 Our tool implementation is available at: \\\url{http://testisolation.googlecode.com}.
 

@@ -8,7 +8,11 @@ A standard textbook
 states that ``[a] test case includes not only input data but
 also any relevant \emph{execution conditions}
 \dots''~\cite[p.~152, emphasis added]{pezze-young:2007}.   
-This characterization is
+To characterize the relevant execution conditions precisely, 
+our formalism needs to represent the notions of
+(a) the order in which test cases are executed and (b) the environment in which a test suite is executed.  
+
+The characterization of execution conditions is
 consistent with the example that 
  piqued our interest in test dependence: we seren\-dip\-itously identified a bug in an open-source
 system when we found that running individual tests one-by-one---each
@@ -19,19 +23,18 @@ shared global variables, and the test results varied depending on the
 values stored in these variables.  That is, relevant execution conditions---specifically, pertinent parts
 of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc.---were neglected.
 
-To characterize the relevant execution conditions precisely, 
-our formalism below explicitly represents the notions of
-(a) the order in which test cases are executed and (b) the environment in which a test suite is executed.  
-
-Consider two examples 
-of how test dependences arise in terms of order and environment (Figure~\ref{fig:dep_examples}).
-In the leftmost example, \code{test2} checks
-the value of a variable that has been assigned elsewhere. If the tests
-are executed in the order \suite{\code{test1},\code{test2}}, both tests will pass,
-while running \code{test2} first will make it fail.    The rightmost  example extends this
-principle to multiple tests. While none of the $n-1$ tests prior to
-\code{testn} will fail, they all must execute in this particular order
-for \code{testn} to pass. 
+%Consider two examples 
+%of how test dependences arise in terms of order and environment (Figure~\ref{fig:dep_examples}).
+%In the leftmost example, \code{test2} checks
+%the value of a variable that has been assigned elsewhere. If the tests
+%are executed in the order \suite{\code{test1},\code{test2}}, both tests will pass,
+%while running \code{test2} first will make it fail.    The rightmost  example extends this
+%principle to multiple tests. While none of the $n-1$ tests prior to
+%\code{testn} will fail, they all must execute in this particular order
+%for \code{testn} to pass. 
+%\todo{the above examples are not so interesting. I would like to
+%cut it.  replace it with one potential dependent test, and one manifest
+%dependent test.}
 
 The global variables involved are usually buried deep in
 the program code, and the assertions do not directly check them,
@@ -45,38 +48,39 @@ under \emph{some} environment and order---and manifest test
 dependences (Definition~\ref{def:manifest})---those that are guaranteed to cause a
 variation in test suite results under a \emph{specific} environment and order.  
 
-\begin{figure}
-\subfigure[Direct dependence\label{fig:dep_examples:direct}]{
-\begin{minipage}{.47\columnwidth}
-\code{test1 \{ $\mathtt{v_1}$ = 4 \}}
+%\begin{figure}
+%\subfigure[Direct dependence\label{fig:dep_examples:direct}]{
+%\begin{minipage}{.47\columnwidth}
+%\code{test1 \{ $\mathtt{v_1}$ = 4 \}}
 
-\code{test2 \{
-  assert $\mathtt{v_1}$==4 \}
-}
+%\code{test2 \{
+%  assert $\mathtt{v_1}$==4 \}
+%}
 
-\mbox{ }\\
+%\mbox{ }\\
 
-\mbox{ } 
-\vspace{0.5em}
-\end{minipage}
-}
-\subfigure[Chain dependence\label{fig:dep_example:chain}]{
-\begin{minipage}{.5\columnwidth}
-\code{test1 \{ $\mathtt{v_1}$ = 1 \}}
+%\mbox{ } 
+%\vspace{0.5em}
+%\end{minipage}
+%}
+%\subfigure[Chain dependence\label{fig:dep_example:chain}]{
+%\begin{minipage}{.5\columnwidth}
+%\code{test1 \{ $\mathtt{v_1}$ = 1 \}}
 
-\code{test2 \{
-  $\mathtt{v_2}$ = $\mathtt{v_1}$ + 1 \}}
+%\code{test2 \{
+%  $\mathtt{v_2}$ = $\mathtt{v_1}$ + 1 \}}
 
-\code{...}
+%\code{...}
 
-\code{testn \{ \\
-\mbox{}\hspace{1ex} assert $\mathtt{v_{n-1}}$ == n-1 \}}
-\vspace{0.5em}
-\end{minipage}
-}
-\caption{Examples for basic causes of test
-dependences}\label{fig:dep_examples}
-\end{figure}
+%\code{testn \{ \\
+%\mbox{}\hspace{1ex} assert $\mathtt{v_{n-1}}$ == n-1 \}}
+%\vspace{0.5em}
+%\end{minipage}
+%}
+%\caption{Examples for basic causes of test
+%dependences}\label{fig:dep_examples}
+%\end{figure}
+
 
 \subsection{Definitions}
 \label{sec:definitions}
@@ -214,6 +218,12 @@ $\exists \env : \result{T}{\env} = \suite{o_1,\dots, o_n} \wedge
 \result{t_l}{\env} = \neg o_l$.
 We write\/ $t_k \prec t_l$ when\/ $t_l$ is potentially dependent on\/ $t_k$.
 \end{definition}
+
+\todo{I think the above definition of potential test dependence
+is less motivated. It should be two tests whose execution may
+affect each other's state, but does *not* manifest through
+the oracle. The good part is that, using this definition, Definition 7
+is a natural extension.}
 
 This definition is \emph{dynamic} because dependence arises only
 if there exists an environment in which actual test results would differ.
@@ -358,19 +368,20 @@ tests and the tested code. Hence, potential dependences manifest only
 if there is a sequence of tests $S^*$ whose execution
 $\exec{S^*}{\env_0}$  produces the
 environment $\env'$ that will reveal the dependency.
-The algorithm we propose in Section~\ref{sec:algorithm-tool} detects
-dependences by running tests and checking for different test results,
-hence it can only detect manifest dependences.
+
+%The algorithm we propose in Section~\ref{sec:algorithm-tool} detects
+%dependences by running tests and checking for different test results,
+%hence it can only detect manifest dependences.
 %
 %Note that this definition defines manifest dependencies with regard to
 %a given test suite $T$ and a given environment $\env$. Thus it
 %reduces the space of possible dependencies considerably. In practice,
 %the given environment $\env$ is what the text execution framework
 %provides \emph{before} it executes the first test.
-To improve algorithms that are affected by test dependences, we are
-interested in the shortest test suite $S^* \subseteq T$ that manifests a
-dependence, because these define the partial order of test execution
-that such techniques must respect.
+%To improve algorithms that are affected by test dependences, we are
+%interested in the shortest test suite $S^* \subseteq T$ that manifests a
+%dependence, because these define the partial order of test execution
+%that such techniques must respect.
 
 %\begin{theorem}[Dependency bound]
 %Let $U$ by a true sub-sequence of length $k$ of 
@@ -404,6 +415,9 @@ In later sections we often talk about executing tests in isolation, or
 executing all tests in a test suite in isolation. This is an important
 approximation to detecting test dependences.
 
+\todo{I think we need to add an example of potential test dependence
+and manifest test dependence in this section.}
+
 \begin{definition}[Test Isolation]
 The result of executing a test\/ $t$ in isolation, given an
 environment\/
@@ -416,37 +430,130 @@ sequence of results\/ \suite{\result{t_1}{\env_0}, \dots,
 \result{t_n}{\env_0}}.
 \end{definition}
 
-\input{proof}
+
+\subsection{The Dependent Test Detection Problem}
+
+From a practical perspective, techniques that affect the ordering of
+test suites must respect dependences. Otherwise their results cannot
+be interpreted correctly in the presence of dependences. Detecting
+dependences in existing test suites is thus an interesting problem.
+In the following, we first give a precise definition of the problem of
+detecting dependent tests, and then prove that in general this problem
+is NP-complete. 
+
+%In Section~\ref{sec:algorithm-tool} we outline an
+%algorithm that approximates solutions efficiently.
+
+\begin{definition}[Dependent Test Detection Problem]
+Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an environment\/
+$\env_0$, for a given test\/ $t_i \in T$, is there a test suite\/ $S
+\subseteq T$ that manifests a test dependence involving\/ $t_i$? 
+\end{definition}
+
+%To prove that this problem is NP-complete,
+We prove that this problem is NP-hard by reducing the NP-complete Exact Cover problem
+to the Dependent Test Detection
+problem~\cite{karp:NP:1972}. 
+Then we provide a linear time algorithm to verify any answer to the
+question.
+%Then we sketch an exponential
+%time algorithm that can solve the problem.
+Together these two parts prove the the Dependent Test Detection Problem is NP-complete.
+
+\begin{theorem}
+The problem of finding a test suite that manifests a dependence is
+NP-hard.
+\end{theorem}
+
+\begin{proof}
+%We prove this claim by reducing Exact Cover to Dependent Test
+%Detection.
+In the Exact Cover problem,
+we are given a set $X$ = \{$x_1, x_2, x_3, \dots, x_m$\} and a collection $S$ of subsets of $X$.
+The goal is to identify a sub-collection $S^*$ of $S$ such that \textit{each}
+element in $X$ is contained in \textit{exactly} one subset in $S^*$.  
+
+Assume a set $V = \{v_1, v_2, v_3, \dots, v_m\}$ of variables,
+and a set $S = \{S_1, S_2, \dots, S_n\}$ with $S_i \subseteq V$ for $ 1\leq i
+\leq n$. 
+
+We now construct a tested program $P$, and a test suite
+$T = \suite{t_1, t_2, \dots t_n , t_{n+1}}$ as follows:
+
+\begin{itemize}
+
+\item $P$ consists of $m$ global variables 
+$v_1, v_2,\dots, v_m$, each with initial value 1.
+
+\item 
+For $1 \le i \le n$, $t_i$ is constructed as follows:
+for $1 \le j \le m$, if $x_j \in S_i$, then adding a
+single assignment statement \CodeIn{$v_j$ = $v_j$ - 1} to $t_i$.
+
+$t_{n+1}$ consists only of the oracle
+\CodeIn{assert($v_1$ != 0 || $v_2$ != 0 \dots || $v_m$ !=0)}.
+
+\end{itemize}
+
+In the above construction, the tests $t_i$ for $1 \le i \le n$ 
+will always pass. The only
+test that may fail and thus exhibit different behavior is $t_{n+1}$, which 
+\emph{only} fails when each variable $v_i$ appears exactly
+once in a test case.
+
+For the given test $t_{n+1}$, if we can
+find a sequence \suite{t_{i_1}, t_{i_2},\dots, t_{i_j}}
+that makes $t_{n+1}$ fail, the subsets $S^*$ corresponding
+to each $t_{i_j}$ are an exact cover of $V$.
+\end{proof}
+
+In practice, the structure of the proof directly translates to the
+structure of test suites. $t_{n+1}$ is the dependent test, $S$ is
+defined by the tests that write variables used by $t_{n+1}$, and every
+exact cover of $S$ represents an independent shortest test suite that
+is a manifest dependency of $t_{n+1}$.
+
+To complete the proof that Dependent Test Detection is NP-complete, we
+provide an algorithm to verify solutions to the problem, that is
+linear in the size of the test suite.
+Given a test suite $T$ and a test suite $S \subseteq T$ that is said
+to manifest a dependency on $t_i$, we first execute $T$, then $S$, and
+compare the result for $t_i$ in both executions. 
+If the results differ the solution is correct, if they do not differ,
+the solution is rejected.
+Since in the worst case we have to execute $2n$ tests, the complexity
+of this algorithm is linear.
+
+
 
 \subsection{Discussion}
+\label{sec:formaldiscussion}
 
-This formalism has dual intents:
-to lay a foundation for reasoning about test dependence
-in a precise way; and
-to be consistent with and to allow for approximate and practical algorithms and tools~(Section~\ref{sec:algorithm-tool}).
-
-This second intent, of course, requires a balance of theory and
-practice.  First, the dynamic nature of our our view on dependences 
+This formalism aims to lay a foundation for reasoning about
+test dependence in a precise way.
+The dynamic nature of view on dependences 
 allows us to avoid the complexity issues that come with a static
 approach. With a static approach, it would be essential 
 to decide how to address undecidability. The most
 likely and common approach being to choose soundness with respect to all
 possible executions and accepting the consequent imprecision of the analysis.
-Second, our focus on manifest dependence, when realized in a tool will
+Further, our focus on manifest dependence, when realized in a tool will
 only identify true positives, although it may miss some
 dependences (false negatives).  It is often easier to have tools
 with this kind of property accepted by practitioners than some other
-kinds.  Third, the manifest test dependence problem is NP-complete;
-although that is daunting (but less so than undecidability),
-approximate algorithms can be defined for large classes of NP-complete
-problems.  
+kinds.  
 
-The examples in the following section and the algorithm and tool following that
-give a better flavor for
-why we made these decisions.
-The degree to which these are the ``right'' (or at least effective) decisions
-is itself an empirical
-question beyond the scope of this paper.
+%Third, the manifest test dependence problem is NP-complete;
+%although that is daunting (but less so than undecidability),
+%approximate algorithms can be defined for large classes of NP-complete
+%problems.  
+
+%The examples in the following section and the algorithm and tool following that
+%give a better flavor for
+%why we made these decisions.
+%The degree to which these are the ``right'' (or at least effective) decisions
+%is itself an empirical
+%question beyond the scope of this paper.
 
 %.  The following section we will illustrate these factors in action.
 %We discuss several examples in detail,

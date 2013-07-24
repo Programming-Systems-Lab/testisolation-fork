@@ -3,9 +3,11 @@
 
 In this section we present two algorithms to detect dependent
 tests. Section~\ref{sec:basic} describes a basic algorithm that
-execute all $k!$ permutations of the test suite to detect dependent
+exhaustively executes all possible $k$-test for a bounding parameter $k$
+to detect dependent
 tests. Section~\ref{sec:advalgorithm} described an improved algorithm
-that uses program analyses to reduce the search space\todo{be concrete above}.
+that uses program analyses to reduce the search space\todo{should we say more about the
+second algorithm here?}.
 
 
 
@@ -14,10 +16,12 @@ that uses program analyses to reduce the search space\todo{be concrete above}.
 \label{sec:basic}
 
 
-In the worst case, a naive, exhaustive search would execute all $n!$
+%To detect all possible dependent tests, 
+A naive, exhaustive search would execute all $n!$
 permutations of the test suite to detect dependent tests. While this
 is not feasible for realistic $n$, our approximate algorithm uses 
-our intuition that many dependences can be found by running only short subsequences of
+the findings of our study (Section~\ref{sec:study})
+that many dependences can be found by running only short subsequences of
 test suites, and introduces a bound $k$ on the length
 of subsequences. That effectively bounds the execution time to
 $O(n^k)$, which for small $k$ is tractable. At the same time, our
@@ -49,10 +53,6 @@ that there is a dependence in $\testlist$
 (lines 3--10). The algorithm returns the set of all tests $t_i \in T$
 that have at least one dependence.
 
-It is easy to extend this algorithm to return the shortest sequence of
-tests that manifest a dependency for a given test $t_i$, for example
-by reducing manifesting sequences with Delta
-Debugging~\cite{Zeller:2002}.
 
 
 \begin{figure}[t]
@@ -84,7 +84,7 @@ tests.
 \end{figure}
 
 
-\subsection{The \todo{need-a-name} Algorithm}
+\subsection{The Improved Algorithm}
 \label{sec:advalgorithm}
 
 \todo{describe Darioush's algorithm here. This algorithms use

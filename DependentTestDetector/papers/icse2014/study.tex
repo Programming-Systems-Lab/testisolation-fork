@@ -13,11 +13,19 @@ well-known open source programs.
 
 \subsection{Sources}
 
+
+While this list---and associated set of examples---certainly is not exhaustive, it shows that there are
+several classes of dependence-related problems that have practical
+relevance.
+
 \subsection{Study Methodology}
 
 \subsection{Findings}
 
 \subsubsection{Characteristics}
+
+\todo{Illustrate and highlight the major findings here. Emphase what would
+be valuable for designing algorithms.} 
 
 
 \begin{table*}[t]
@@ -62,7 +70,13 @@ well-known open source programs.
 }
 \end{table*}
 
-\subsubsection{Examples}
+\subsubsection{Categories}
+
+Most dependent tests identified in our study fall into a small
+number of categories\todo{how many, be specific}. We describe each category below and give
+concrete examples in Section~\ref{sec:examples}.
+
+\vspace{1mm}
 
 \noindent \textbf{Masking Faults}
 \emph{Masking} is a particularly perplexing problem caused by
@@ -83,8 +97,59 @@ be the test that should reveal the fault in environment $\env_R$. A
 dependency $t_k \prec t_i, k < i$ masks the fault if
 $\exec{\suite{t_1,\dots,t_{i-1}}}{\env_0} \neq \env_R$.
 
-The following two examples illustrate masking in
-practice.
+\vspace{1mm}
+
+\noindent \textbf{Spurious Bug Reports and Bug Fixes}
+Sometimes developers introduce dependent tests intentionally because it is
+easier, more efficient or more convenient to write unit tests for some modules
+in that way~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
+%DB-testing}.
+Even though the developers are aware of these instances
+when they create them, this knowledge can get lost, 
+and other people who are not aware of these dependences can get confused 
+when they run a subset of the test suite that manifests the
+dependences.
+
+As a result, they
+might report bugs backed by the failing tests, although this is exactly the expected
+behavior. If the dependence is not documented clearly and
+correctly, it can take a considerable amount of time to work out that
+these reported failures are spurious. Or worse, the developers may try
+to fix a bug that is not there.
+
+
+\vspace{1mm}
+
+\noindent \textbf{Poor Test Construction.}
+The test dependences in this category arise due to incorrect initialization
+of program state by one or more tests. In the first case,
+tested program code relies on a
+global variable that is a part of the environment, but the test does
+not properly initialize it.  In the second case, a test should but
+does not call
+an initialization function before later invocations to a complex library.
+This flaw in the test code is masked because the default test suite execution
+order includes other tests that initialize the library.  The defect is
+inconsequential until and unless the flawed test is reordered, either manually or by
+a downstream tool, to execute before any other initializing test.
+
+
+\subsubsection{Examples}
+\label{sec:examples}
+
+%The discussion of the examples in this section is distinguished by
+%the problems caused by test dependence (\emph{Kind}): when faults are masked because
+%tests make incorrect assumptions about the global environment (Section~\ref{sec:mask}); 
+%when tests do not
+%respect required initialization protocols (Section~\ref{sec:examples:initialization}); and when
+%undocumented test dependence leads to spurious bug reports (Section~\ref{sec:spurious}).
+%We also describe dependent tests in an automatically-generated test
+%suite (Section~\ref{sec:autogen}).
+
+
+\todo{text below is taken from the original draft, too verbose, should be cut short}
+
+We next give examples for each of the above categories.
 
 \paragraph{CLI: A Long-Standing Bug}
 
@@ -180,25 +245,12 @@ actual fix happens one
 year later on June 19, 2010, about six years after the bug was first reported (and four years
 total on the open-issue list).
 
-\noindent \textbf{Spurious Bug Reports and Bug Fixes}
-Sometimes developers introduce dependent tests intentionally because it is
-easier, more efficient or more convenient to write unit tests for some modules
-in that way~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
-%DB-testing}.
-Even though the developers are aware of these instances
-when they create them, this knowledge can get lost, 
-and other people who are not aware of these dependences can get confused 
-when they run a subset of the test suite that manifests the
-dependences.
-
-As a result, they
-might report bugs backed by the failing tests, although this is exactly the expected
-behavior. If the dependence is not documented clearly and
-correctly, it can take a considerable amount of time to work out that
-these reported failures are spurious. Or worse, the developers may try
-to fix a bug that is not there.
 
 \paragraph{Eclipse SWT: Causing Spurious Bug Reports}
 \input{eclipse}
 
+\todo{need one more example for poor test construction}
+
 \subsection{Caveats}
+
+\todo{for the study}

@@ -37,6 +37,16 @@ defensive programming? explicitly state testing oracles?
 
 \noindent \textbf{\textit{How to eliminate dependent tests?}}
 
+\todo{summarize lessons learned from the study}
+
+\vspace{1mm}
+
+\noindent \textbf{\textit{What about other cases of test dependences?}}
+
+\todo{this paper focuses on manifest test dependence, what about
+potential test dependence, as well as some other cases in the
+study}
+
 \vspace{1mm}
 
 \noindent \textbf{\textit{How does test dependences
@@ -62,19 +72,30 @@ causes problems.
 \vspace{1mm}
 
 \noindent \textbf{\textit{What does 
-test dependences affect other software engineering tasks?}}
+test dependences affect other software testing techniques?}}
 In principle, test dependence can compromise
 the application of downstream testing techniques such as selection,
-prioritization, and parallelization.  Like contrived examples of test
-dependence itself, it is easy to produce simple examples where
-downstream techniques produce incorrect output when applied to dependent
-tests.
+prioritization, and parallelization.  
+%Like contrived examples of test
+%dependence itself, it is easy to produce simple examples where
+%downstream techniques produce incorrect output when applied to dependent
+%tests.
 %under the assumption that the input tests have no dependences.
-We conjecture, based on intuition and
-very thin evidence, that if and when this happens in practice, it is
-hard to notice in part because tools do not surface the necessary
+We conjecture that if and when this happens in practice, it is
+hard to notice in part because current techniques~\cite{} do not surface the necessary
 information.
 
+However, the question of how downstream testing techniques, like regression test
+selection and prioritization should handle dependences is also open.
+Most current techniques just assume independence and make no statement
+about what happens when this assumption is not true. One
+straightforward way to amend this situation might be to augment such
+techniques to respect a defined partial order among tests. And this partial order
+can be derived from knowledge about dependent tests.
+
+\vspace{1mm}
+
+\noindent \textbf{\textit{Other open questions.}}
 The question of the role of test dependence in the real world merits
 more aggressive empirical study.  A better understanding of the 
 frequency and scope of repercussions from test dependence should be
@@ -96,15 +117,6 @@ approaches to dealing with test dependence.
 There is already some work aiming at
 reducing the potential for dependences by refactoring programs to use
 less global state~\cite{wlokaetal:FSE:2009}. 
-
-The question of how second-order testing techniques, like regression test
-selection and prioritization should handle dependences is also open.
-Most current techniques just assume independence and make no statement
-about what happens when this assumption is not true. One
-straightforward way to amend this situation might be to augment such
-techniques to respect a defined partial order among tests. And this partial order
-can be derived from knowledge about dependent tests.
-
 
 %\question{If and when test dependence arises, are there significant repercussions?}{Sometimes, although the extent is unknown.}
 
