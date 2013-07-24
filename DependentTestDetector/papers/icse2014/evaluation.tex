@@ -1,5 +1,5 @@
 \section{Empirical Evaluation}
-\label{sec:examples}
+\label{sec:evaluation}
 
 To show the effectiveness of our proposed
 dependent test detection algorithms, we conducted
@@ -15,6 +15,7 @@ in \todo{algorithm-name} improve the algorithm efficiency?
 
 \subsection{Subject Programs}
 
+\input{subject-table}
 \input{example-table}
 
 Figure~\ref{fig:example-summary}
@@ -75,127 +76,11 @@ below.}
 
 \subsubsection{RQ2: Improvement from Program Analyses}
 
-\subsection{Consequences of Dependent Tests}
+\subsection{Causes of Dependent Tests}
 
 \todo{The following text is too verbose. Note be
 consistent to the categories used in the study section}
 
-\subsubsection{Masking Faults}\label{sec:mask}
-
-\emph{Masking} is a particularly perplexing problem caused by
-dependence.
-The negative effect of masking is that it hides a fault in the
-program, \emph{exactly} when the test suite is executed in its default
-order. 
-Masking occurs when a test case $t$ (a) \emph{should}
-reveal a fault, (b) only does so when executed in a specific environment
-$\env_R$, but (c) tests executed before $t$ in a test suite always
-generate environments different from
-$\env_R$.
-%To express this more
-More precisely and without loss of generality, assume any
-environment with only a single variable. Then let $T =
-\suite{t_1,\dots,t_n}$ be the test suite, and let $t_i, 1 < i \leq n$
-be the test that should reveal the fault in environment $\env_R$. A
-dependency $t_k \prec t_i, k < i$ masks the fault if
-$\exec{\suite{t_1,\dots,t_{i-1}}}{\env_0} \neq \env_R$.
-
-The following two examples illustrate masking in
-practice.
-
-\paragraph{CLI: A Long-Standing Bug}
-
-\begin{figure}
-% \lstset{language=Java,numbers=left}
-%\lstset{language=Java}
-\lstset{belowskip=0ex,escapechar={@},numbers=left,numberstyle=\small\ttfamily}
-\begin{lstlisting}
-public final class OptionBuilder {
-  @\itshape\color{red}
-  private static String argName;@
-  
-  private static void reset() {
-    ...
-    @\itshape\color{red}argName = "arg";@
-    ...
-  }
-   
-  public static Option create(String opt){
-    Option option = 
-      new Option(opt, description);
-    ...
-    option.setArgName(argName);
-    @\itshape\color{red}OptionBuilder.reset();@
-    return option;
-  }
-}
-\end{lstlisting}
-\caption{Fault-related code from \code{Option\-Build\-er.java}}
-\label{fig:option_builder}
-\end{figure}
-
-A straightforward example of fault masking occurs in the Apache CLI
-library~\cite{cli}.
-Two test cases fail when run in isolation:
-\code{test13666} and \code{test\-Op\-tion\-With\-out\-Short\-For\-mat2} in test
-classes \code{Bugs\-Test} and \code{Help\-For\-mat\-ter\-Test},
-respectively.
-
-A detailed study of the code under test revealed that both 
-tests fail due to the same hidden dependence. The fault is located in 
-\code{OptionBuilder.java} and is caused by not initializing a global
-variable early enough.
-Figure~\ref{fig:option_builder} shows code that
-illustrates the fault. 
-%
-By default,
-\code{argName} is initialized to \code{null} (line 2), and only set to
-its intended default value \code{"arg"} by the \code{create()} method
-via calling \code{reset()} (line 15). 
-Consequently, if clients of CLI do not explicitly initialize the value of
-\code{argName}, the first option created will have \code{null} rather
-than \code{"arg"} as its argument name.
-%In CLI, there are two types of options: options with and without
-%argument names. If an option without argument is created first,
-%this fault will not lead to a failure, because the \code{null} value
-%will be ignored. Consecutive calls to \code{create()} can rely on
-%\code{reset()} to establish the desired default value.
-
-Both dependent tests
-% \code{test13666} and \code{test27635} (or \code
-% {test\-Op\-tion\-With\-out\-Short\-For\-mat2}) 
-can reveal this fault, since they create an option with 
-the default argument as the first thing in their execution. However,
-in the default order of test execution, 
-%the test classes \code{BugTest} and \code{Help\-For\-mat\-ter\-Test} both
-%contain other 
-tests that create options with explicit arguments execute \emph{before} 
-these dependent tests.
-% \code{test13666}
-% and \code{test27635} respectively. 
-%Thus, when the tests in these classes are 
-%executed in order, the tests executed before \code{test13666}
-%and \code{test27635} call \code{create()} 
-Thus, the tests that are executed before call \code{create()} at least once, which
-sets the default \code{argName} value, thus masking the fault.
-
-
-This fault is reported in the bug
-database several times,\footnote{\url{https://issues.apache.org/jira/browse/CLI-26} \url{https://
-issues.apache.org/jira/browse/CLI-186} \url{https://issues.apache.org/jira/browse/
-CLI-187}} starting on March 13, 2004 (CLI-26). The report is marked as resolved
-\emph{three years} later on March 15, 2007, but is then reopened as CLI-186 on
-July 31, 2009. On this report, one of the developers commented:
-\begin{quote}
-I reproduced the issue, it requires a dedicated test case since it is tied to the initialization 
-of a static field in OptionBuilder.
-\end{quote}
-Despite the realization that a dedicated test is required, no such
-test was ever created.
-About one month later, the bug is duplicated as CLI-187, and the
-actual fix happens one 
-year later on June 19, 2010, about six years after the bug was first reported (and four years
-total on the open-issue list).
 
 \newcommand{\jodatime}{JodaTime\xspace}
 \paragraph{\jodatime: Complex interactions that mask faults}
@@ -254,26 +139,6 @@ a downstream tool, to execute before any other initializing test.
 %any modification from SIR people
 \input{xmlsecurity}
 
-\subsubsection{Spurious Bug Reports and Bug Fixes}\label{sec:spurious}
-Sometimes developers introduce dependent tests intentionally because it is
-easier, more efficient or more convenient to write unit tests for some modules
-in that way~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
-%DB-testing}.
-Even though the developers are aware of these instances
-when they create them, this knowledge can get lost, 
-and other people who are not aware of these dependences can get confused 
-when they run a subset of the test suite that manifests the
-dependences.
-
-As a result, they
-might report bugs backed by the failing tests, although this is exactly the expected
-behavior. If the dependence is not documented clearly and
-correctly, it can take a considerable amount of time to work out that
-these reported failures are spurious. Or worse, the developers may try
-to fix a bug that is not there.
-
-\paragraph{Eclipse SWT: Causing Spurious Bug Reports}
-\input{eclipse}
 
 \subsubsection{Dependence in Auto Generated Tests}
 \label{sec:autogen}

@@ -1,7 +1,8 @@
 \begin{abstract}
 Test dependence arises when executing a test in different environments
-causes it to return different results. \todo{need a transition sentence here} 
-To understand and detect dependent tests, this paper presents four results. 
+causes it to return different results. It has been broadly assumed
+that two tests in a suite are inherently independent. To investigate
+the validity of this assumption, this paper presents four results. 
 
 First, we formally define test dependence in terms of
 test suites as ordered sequences of tests along with explicit
@@ -18,14 +19,15 @@ repercussions such as masking program faults and leading
 to spurious bug reports, and can be hard to identify
 unless explicitly searched for.
 
-Third, guided by the study, we propose a set of algorithms to detect
-dependent tests. Our algorithms use both static and
-dynamic program analyses to quickly \todo{the goal
-of algorithms here.}
+Third, guided by the study, we propose two algorithms to detect
+dependent tests in a test suite. 
+%Our algorithms use both static and
+%dynamic program analyses to quickly \todo{the goal
+%of algorithms here.}
 
 Fourth, we implement our dependent test detection algorithms
 in a prototype tool, and apply it to \todo{NUM} real-world programs.
-Our tool revealed a large number of dependent tests, suggesting
+Our tool revealed a large number of unknown dependent tests, suggesting
 that \todo{the implication.}
 
 \end{abstract}

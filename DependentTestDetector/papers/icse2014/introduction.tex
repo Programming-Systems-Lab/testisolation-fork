@@ -149,14 +149,26 @@ This paper makes the following contributions:
   environments for test suites, which enables reasoning about test dependence
   as well as a proof that finding \emph{manifest} dependences is an NP-complete
   problem (Section~\ref{sec:formalism}).
-  \item \textbf{Study.} We describe a
-  \item \textbf{Algorithms.} We present \todo{a family} of algorithms
-  to detect dependent tests (Section~\ref{}). \todo{one more sentence}
-  \item \textbf{Evaluation.} We implemented our algorithms, and
-  evaluated them on \todo{NUM} real-world subject programs.
-  \todo{results here} (Section~\ref{}). We finally discuss
-  a set of open questions and other possible impacts of dependent
-  tests in Section~\ref{}.
+
+  \item \textbf{Study.} We describe a study of \todo{NUM} real-world
+  dependent tests from well-known bug repositories to show that test dependence
+  arises in practice. Our study also indicates that test dependence can have
+  potentially costly repercussions, and can be hard to identify unless
+  explicitly searched for (Section~\ref{sec:study}).
+
+  \item \textbf{Algorithms.} We present two algorithms
+  to detect dependent tests (Section~\ref{sec:detecting}). The first
+  basic algorithm exhaustively executes all possible $k$-tests for
+  a bounding parameter $k$ to identify tests exhibiting different results.
+  The second improved algorithm uses static and dynamic program analyses
+  to reduce the search space. \todo{check the above}
+
+  \item \textbf{Evaluation.} We implemented our algorithms in a prototype
+  tool, and applied it to \todo{NUM} real-world subject programs. Our
+  tool detected a large number of important test dependences that have not
+  been discovered before (Section~\ref{sec:evaluation}).
+  We also discuss a set of open questions and other possible impacts of dependent
+  tests in Section~\ref{sec:discussion}.
 \end{itemize}
 
 
