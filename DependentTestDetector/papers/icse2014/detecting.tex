@@ -87,5 +87,15 @@ tests.
 \subsection{The Improved Algorithm}
 \label{sec:advalgorithm}
 
-\todo{describe Darioush's algorithm here. This algorithms use
-static/dynamic program analyses to reduce search space}
+In order to detect tests which depend on each other, the test suite is executed in a given 
+order. During this execution, a dynamic profile of files and memory read or written to by each test
+is recorded. If a test reads from a resource (file or memory location) modified by a previously executed test, 
+this forms a potential \todo{?} dependency. 
+
+In case a test $t_2$ does not potentially \todo{?} depend on a previously executed test $t_1$, this means 
+that all permutations of tests in which $t_2$ follows $t_1$ do not need to be considered for potential \todo{?} dependency
+given that all tests on which $t_1$ potentially \todo{?} depends on are present as a prefix of that permutation, 
+in the same order that the test suite was initially executed, thus reducing the number of permutations which
+need to be explored.
+
+\todo{we still need to figure out how we will use this information in the form of an algorithm.}

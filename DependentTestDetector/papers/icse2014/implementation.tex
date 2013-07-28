@@ -22,8 +22,32 @@ This ensures that there is no interaction between
 different \testlist\ through shared memory.
 
 For the improved algorithm (Section~\ref{sec:advalgorithm}),
-our tool uses ASM \todo{describe the Darioush's implementation details
-here.}
+our tool uses ASM to dynamically instrument bytecode at 
+class loading time. Each field access (read or write) is logged,
+along with the ID of the object which is accessd. For array accesses,
+both the object ID of the array and the index of the cell being accessed
+are logged.
+
+In order to acheive better performance, accesses to objects created
+by the test itself were ignored, as such objects did not exist prior
+to test exection, there could have been no dependency due to them.
+Calls to constructors, .clone(), and also reflection methods which
+return new objects were instrumented to obtain these objects (other ways for creating objects
+may exist in Java, but this approximation sufficed).
+
+Classes of the JDK itself were not instrumented. Rather, the annotated 
+JDK provided with Javari \cite{??} was used as an approximation
+to keep track of mutated objects. A read to an object which has been
+mutated by a JDK call is treated as a potential \todo{?} dependency.
+\todo{explain how this is unsound but we expect the JDK objects abstract
+state not to depend on mutation of returned references.}
+
+
+To log the files accessed by each test, a custom security manager was
+implemented and installed before running the tests. 
+
+File and memory access logs were then processed by a script to determine
+dependencies according to the algorithm explained in \ref{sec:advalgorithm}.
 
 
 Our prototype tool also implements the Delta debugging algorithm~\cite{Zeller:2002}
