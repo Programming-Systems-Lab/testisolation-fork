@@ -56,18 +56,6 @@ interaction tests by identifying the values shared via parameter passing
 between methods
  that two or more test cases share~\cite[p~.69]{mcgregoretal:CACM:1994}.
 
-Steimann et al. define a test suite as a collection of test cases
-whose result is \textit{independent} of the order of their execution~\cite{Steimann:2013}.
-In their evaluation of coverage-based fault locators, they found
-tests failed due to the violation of this basic assumption,
-for example, if a test depends on a static field whose value is
-set by previous test cases.  As a consequence, such spurious 
-failures can have a significant impact on the accuracy
-of coverage-based fault locators.
-
-\todo{The above section may not be in the right place. It
-should be grouped with sections with downstream applications.}
-
 Bergelson and Exman characterize a form of test dependence
 explicitly: given two tests that each pass, the composite
 execution of these tests may still
@@ -88,21 +76,25 @@ They further note that other tests, as well as stubs and drivers, are
 other units that may ``interfere with the straightforward
 execution of one or more test cases.''
 
-A few tools allow developers to annotate dependent tests and
-provide supporting mechanisms to ensure that the test execution framework
-respects those annotations.  DepUnit~\cite{depunit}
-allows developers to define soft and hard dependences. Soft dependences control
-test ordering, while hard dependences in addition control whether specific tests are
-run at all.  TestNG~\cite{testng} is a testing framework intended to improve upon JUnit,
-and allows dependence annotations and supports a variety of execution policies such as sequential execution
-in a single thread, execution of a single test class per thread, etc.\
-that respect these dependences.
-What distinguishes our work from these approaches is that, while they allow dependences
-to be made explicit and respected during execution, they do not help developers
-\emph{identify} dependences.  A tool that finds dependences (Section~\ref{sec:tool}) could co-exist
-with such frameworks by generating annotations for them.
-
-
+Other definitions of test dependence are primarily considered
+to be \textit{syntactic} dependences between program units, for example
+methods calling other methods, and classes using other classes~\cite{bergelsonetal:EEE:2006,briandetal:SEKE:2002}. 
+\emph{Syntactic} dependence here means that a unit \code{A} cannot be
+compiled and executed without unit \code{B} being present. If we test
+such a unit \code{A} without convincing ourselves first that \code{B}
+is correct, a test failure for \code{A} is harder to interpret,
+because it could just as well indicate a fault in \code{B}.
+Zhang and Ryder extend this notion to \emph{semantic} dependences,
+which is closer to our approach~\cite{zhangetal:TR:2006}. 
+They use a notion of
+``test outcome'' to determine whether or not syntactically dependent
+classes or methods can influence each others results, and consider
+only those that can to be semantically dependent.
+They give an informal definition of what it means for the execution of a
+test to influence the outcome of another test.  We define
+this precisely, and we also define manifest test dependence in terms
+of execution environments
+and test execution order rather than in terms of code use.
 
 %Testing frameworks
 %%, and 
@@ -150,23 +142,18 @@ with such frameworks by generating annotations for them.
 %R(\{T1, T2\}, $\Gamma$) = \{fail, *\} and \\
 %R(\{T2, T1\}, $\Gamma$) = \{fail, *\}.}}
 
-\subsection{Test Prioritization}
+\subsection{Techniques Assuming Test Independence}
 
-\todo{this section should be talking about the downstream apps, rather
-than focusing on prioritization}
+The assumption of test independence lies at the heart of most,
+if not all, techniques for automated regression test selection,
+test case prioritization, test generation, testing-based
+fault localization, etc. 
 
-%Test prioritization establishes ``an order for executing test cases in
-%a prioritized manner that is most likely to detect software defects
-%quickly''~\cite[p.~454]{Singh2001453}.  
 
 Test prioritization seeks to reorder a test suite to detect
-software defects more quickly, and is the example of downstream
-testing tools that we focus on most closely both because it is
-characteristic of the other tools (in the dimensions we address)
-and also because of its focus on reordering (perhaps the most common
-way to change the execution environment of a test).
-
-Early work in test
+software defects more quickly. However,
+the reordering is perhaps the most common way to change the
+execution environment of a test. Early work in test
 prioritization~\cite{Wong:1997:SER:851010.856115,Rothermel:1999:TCP:519621.853398}
 laid the foundation for the most commonly used problem definition:
 consider the set of all permutations of a test suite and find the best
@@ -183,13 +170,6 @@ alia}]{Rothermel:1999:TCP:519621.853398,Do:2010:ETC:1907658.1908088}.  These eva
 % \todo{DN}{I can't get the et alia above to look right -- where does that semicolon come from?  I'd like it to be [2,9, et alia] or such.
 % In a pinch, just include the two numbers.}
 
-Kim and Porter proposed a 
-technique that uses the history of test cases run in prior
-regression tests to prioritize those that have not yet run for
-creating new 
-regression test suites~\cite{Kim:2002:HTP:581339.581357}.  Whether
-tests were executed is essential to the technique; the results
-of specific tests are not.
 
 Echelon defines a
 heuristic that exploits both a mapping between tests and
@@ -212,13 +192,53 @@ provides \code{setUp} and \code{tearDown} methods that execute before
 and after a test case and can be used to clear application state~\cite[p.~1500]{Rummel:2005:TPR:1066677.1067016}.
 \end{quote}
 
-\todo{not finished. need to think about the implication}
-Automated test generators~\cite{} are also affected
+Automated test generation techniques~\cite{} are also affected
 by test dependence. As we shown in our study (Section~\ref{}),
 a large number of tests generated by Randoop are dependent.
 It appears that test dependence has not been taken into
 consideration in the design of most test generators.
-To the best of our knowledge, only JCrasher~\cite{Csallner:2004}
+We speculate that these dependences arise because automatic
+test generation techniques generally create new tests
+based on the program state after executing the previous test,
+for the sake of test diversity and efficiency. 
+
+Testing-based fault localization techniques are also impacted
+by test dependence. Steimann et al. define a test suite as a
+collection of test cases whose result is \textit{independent}
+of the order of their execution~\cite{Steimann:2013}.
+In their evaluation of several coverage-based fault locators, they found
+fault locators' accuracy has been significantly affected
+by tests failed due to the violation of the test independence assumption.
+For example, if a test depends on a static field whose value is
+set by previous test cases.  
+
+
+\todo{tune down the sentence a bit, must mention the
+degree of impact is unknown currently.}
+For all above common testing techniques, if the test independence
+assumption does not hold, then techniques that rely on
+the test independence assumption may need to be reformulated.
+
+\subsection{Tools Supporting Test Dependence}
+
+Only a few tools explicitly considers test dependence, by
+allowing developers to annotate dependent tests and
+provide supporting mechanisms to ensure that the test execution framework
+respects those annotations.  DepUnit~\cite{depunit}
+allows developers to define soft and hard dependences. Soft dependences control
+test ordering, while hard dependences in addition control whether specific tests are
+run at all.  TestNG~\cite{testng} is a testing framework intended to improve upon JUnit,
+and allows dependence annotations and supports a variety of execution policies such as sequential execution
+in a single thread, execution of a single test class per thread, etc.\
+that respect these dependences.
+What distinguishes our work from these approaches is that, while they allow dependences
+to be made explicit and respected during execution, they do not help developers
+\emph{identify} dependences.  A tool that finds dependences (Section~\ref{sec:tool}) could co-exist
+with such frameworks by generating annotations for them.
+
+
+In the literature of automated test generation research,
+to the best of our knowledge, only JCrasher~\cite{Csallner:2004}
 provides a mode to clear the environment changes caused
 by a previous test. Such functionality helps eliminate
 potential test dependence, but may make generated
@@ -226,6 +246,11 @@ tests less behaviorally-diverse --- as they cannot be constructed
 on top of previous tests. Exploring how to
 incoporate test dependence into the design of automated
 test generator is one of our future work.
+
+
+
+
+
 
 %
 %when re-executing it in the replay environment. that is the same
@@ -248,36 +273,15 @@ test generator is one of our future work.
 %terminology for containers that group multiple elements together: sets, lists,
 %hash tables, arrays, etc.
 
-\subsection{Syntactic and Semantic Test Dependencies}
+%\subsection{Syntactic and Semantic Test Dependencies}
 
-\emph{Dependences} in testing are most often considered
-to be syntactic dependences between program units, for example
-methods calling other methods, and classes using other classes~\cite{bergelsonetal:EEE:2006,briandetal:SEKE:2002}. 
-\emph{Syntactic} dependence here means that a unit \code{A} cannot be
-compiled and executed without unit \code{B} being present. If we test
-such a unit \code{A} without convincing ourselves first that \code{B}
-is correct, a test failure for \code{A} is harder to interpret,
-because it could just as well indicate a fault in \code{B}.
 
-Zhang and Ryder extend this notion to 
-\emph{semantic} dependences,
-which is closer to our approach~\cite{zhangetal:TR:2006}. 
-They use a notion of
-``test outcome'' to determine whether or not syntactically dependent
-classes or methods can influence each others results, and consider
-only those that can to be semantically dependent.
-They give an informal definition of what it means for the execution of a
-test to influence the outcome of another test.  We define
-this precisely, and we also define manifest test dependence in terms
-of execution environments
-and test execution order rather than in terms of code use.
-
-Santelices et al.\ define a formal model of how changes might interact
-at the source code level and present a technique for detecting such
-interactions that arise at
-run-time~\cite{Santelices:2010:PDR:1828417.1828487}.  In contrast to
-our approach, they identify changes that interact rather than tests
-that depend upon each other.
+%Santelices et al.\ define a formal model of how changes might interact
+%at the source code level and present a technique for detecting such
+%interactions that arise at
+%run-time~\cite{Santelices:2010:PDR:1828417.1828487}.  In contrast to
+%our approach, they identify changes that interact rather than tests
+%that depend upon each other.
 
 %There are results that identify dependences that
 %may surface, for example, when there is aggressive testing of parameter
@@ -295,9 +299,10 @@ that depend upon each other.
 %wrong.  If something finds a good citation or two, please include it and write
 %something here.  If not, delete this entirely.}
 
-Another kind of dependence helps address
-the testing of configurable software, which can be combinatorial with respect to the
-set of configurable options~\cite{Cohen97theaetg,Cohen:2003}.  
+%Another kind of dependence helps address
+%the testing of configurable software, which can be combinatorial with respect to the
+%set of configurable options~\cite{Cohen97theaetg,Cohen:2003}.  
+
 %In
 %practice, there are often far fewer
 %configurations that are used and thus should be tested.  This
@@ -305,8 +310,8 @@ set of configurable options~\cite{Cohen97theaetg,Cohen:2003}.
 %potential dependences to be explored more
 %efficiently, as a test suite that binds multiple configuration option values
 %can test all configurations that share those settings.
-The dependences considered in this approach are not between tests, but rather within
-the configuration option space.
+%The dependences considered in this approach are not between tests, but rather within
+%the configuration option space.
 
 
 %Another set of results searches for

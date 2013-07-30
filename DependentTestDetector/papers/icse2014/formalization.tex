@@ -31,8 +31,9 @@ case.
 %The set of all possible environments is denoted $\environs$.
 \end{definition}
 
-We use $\env_0$ to represent the initial environment, a fresh
-JVM provided by frameworks such as JUnit.
+We use $\env_0$ to represent the initial environment, such
+as a fresh JVM initialized by frameworks like JUnit
+before executing any test.
 
 \todo{check E0 above}
 
@@ -54,8 +55,7 @@ JVM provided by frameworks such as JUnit.
 %we ignore the whole input thing (a lot of test generation only deals
 %with generating inputs), we might be in trouble.}
 
-A test is a sequence of program statements, executed with fixed,
-well-defined inputs, and an oracle that
+A test is a sequence of executable program statements, and an oracle that
 decides whether a test passes or fails.
 \end{definition}
 
@@ -472,12 +472,24 @@ compare the result for $t_i$ in both executions.
 If the results differ the solution is correct, if they do not differ,
 the solution is rejected.
 Since in the worst case we have to execute $2n$ tests, the complexity
-of this algorithm is linear.
+of this algorithm is linear. 
 
 
 
-%\subsection{Discussion}
-%\label{sec:formaldiscussion}
+\subsection{Discussion}
+\label{sec:formaldiscussion}
+
+This formalism aims to lay a foundation for reasoning about
+test dependence in a precise way. It only considers
+deterministic tests, and excludes tests whose results
+might be affected non-determinism such as thread scheduling.
+Our formalism also excludes the case that a test might
+be dependent on itself. That is, executing the same
+test twice may lead to different results.
+\todo{need to justify why ignore this case, based on
+the study?}
+
+
 
 %This formalism aims to lay a foundation for reasoning about
 %test dependence in a precise way.

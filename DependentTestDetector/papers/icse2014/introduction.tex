@@ -56,7 +56,7 @@ requiring a \emph{concrete\/} variant of the test suite that
 \emph{dynamically\/} produces different results from the expected.  Our
 definition differs from that of Kapfhammer and Soffa by considering
 test results rather than program and database states.
-As we discuss later, considering only manifest test dependences allows
+Considering only manifest test dependences allows
 us to more easily situate this research in the empirical domain (Section~\ref{sec:formaldiscussion}).
 
 
@@ -88,7 +88,7 @@ Like with other code, this means that tests in some cases will have
 unintended and unexpected behaviors.  And as programs increase in complexity,
 so may tests, which may increase the frequency of such problems in tests,
 which may in turn increase the frequency of test dependence.
-For example, global variables shared by tests
+The situation is exacerbated by the fact that global variables shared by tests
 %These tests
 %shared global variables, and the test results varied depending on the
 %values stored in these variables.  
@@ -121,7 +121,7 @@ there or a test fails suspciously.
 
 After analyzing \todo{xx} real-world, confirmed dependent
 tests from existing bug repositories (Section~\ref{sec:study}), we identified three
-categories of repercussions that can arise due to the presence of dependent tests.
+major categories of repercussions that can arise due to the presence of dependent tests.
 First, most test suites that unexpectedly contain dependent tests \emph{conceal
 weaknesses in the test suite} itself. Exposing
 dependent tests can detect code smells and identify situations
@@ -135,7 +135,7 @@ Third, even worse, test suites that unexpectedly contain dependent tests can
 \emph{mask faults in a program}. Specifically, executing a test suite in the
 default order does not expose the fault, whereas
 executing the same test suite in a different order does. We found 
-a bug masked two example dependent tests
+a bug masked two dependent tests
 for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{}).
 
 %Second, guided by the findings of our study, we design two algorithms
