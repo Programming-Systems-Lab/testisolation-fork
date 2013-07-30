@@ -4,82 +4,13 @@
 \section{Understanding Dependent Tests: Formalization}
 \label{sec:formalism}
 
-A standard textbook 
-states that ``[a] test case includes not only input data but
+\todo{need a transition sentence here.}
+A standard textbook states that ``[a] test case includes not only input data but
 also any relevant \emph{execution conditions}
 \dots''~\cite[p.~152, emphasis added]{pezze-young:2007}.   
 To characterize the relevant execution conditions precisely, 
 our formalism needs to represent the notions of
 (a) the order in which test cases are executed and (b) the environment in which a test suite is executed.  
-
-The characterization of execution conditions is
-consistent with the example that 
- piqued our interest in test dependence: we seren\-dip\-itously identified a bug in an open-source
-system when we found that running individual tests one-by-one---each
-in a newly initialized environment---produced different
-results from running the entire test suite normally (\emph{i.e.}, with a single initialized environment followed by
-the sequential execution of each test in order)~\cite{DBLP:conf/sigsoft/MusluSW11}.  These tests
-shared global variables, and the test results varied depending on the
-values stored in these variables.  That is, relevant execution conditions---specifically, pertinent parts
-of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc.---were neglected.
-
-%Consider two examples 
-%of how test dependences arise in terms of order and environment (Figure~\ref{fig:dep_examples}).
-%In the leftmost example, \code{test2} checks
-%the value of a variable that has been assigned elsewhere. If the tests
-%are executed in the order \suite{\code{test1},\code{test2}}, both tests will pass,
-%while running \code{test2} first will make it fail.    The rightmost  example extends this
-%principle to multiple tests. While none of the $n-1$ tests prior to
-%\code{testn} will fail, they all must execute in this particular order
-%for \code{testn} to pass. 
-%\todo{the above examples are not so interesting. I would like to
-%cut it.  replace it with one potential dependent test, and one manifest
-%dependent test.}
-
-The global variables involved are usually buried deep in
-the program code, and the assertions do not directly check them,
-but rather check values that have been computed from
-them. In any non-trivial real-world program, this
-deep nesting effectively hides potential dependencies from developers,
-and they may only become aware of them when a subtle bug leads them
-there.  Therefore, we explicitly
-distinguish potential test dependences (Definition~\ref{def:dependency})---those that could cause a variation in test suite results 
-under \emph{some} environment and order---and manifest test
-dependences (Definition~\ref{def:manifest})---those that are guaranteed to cause a
-variation in test suite results under a \emph{specific} environment and order.  
-
-%\begin{figure}
-%\subfigure[Direct dependence\label{fig:dep_examples:direct}]{
-%\begin{minipage}{.47\columnwidth}
-%\code{test1 \{ $\mathtt{v_1}$ = 4 \}}
-
-%\code{test2 \{
-%  assert $\mathtt{v_1}$==4 \}
-%}
-
-%\mbox{ }\\
-
-%\mbox{ } 
-%\vspace{0.5em}
-%\end{minipage}
-%}
-%\subfigure[Chain dependence\label{fig:dep_example:chain}]{
-%\begin{minipage}{.5\columnwidth}
-%\code{test1 \{ $\mathtt{v_1}$ = 1 \}}
-
-%\code{test2 \{
-%  $\mathtt{v_2}$ = $\mathtt{v_1}$ + 1 \}}
-
-%\code{...}
-
-%\code{testn \{ \\
-%\mbox{}\hspace{1ex} assert $\mathtt{v_{n-1}}$ == n-1 \}}
-%\vspace{0.5em}
-%\end{minipage}
-%}
-%\caption{Examples for basic causes of test
-%dependences}\label{fig:dep_examples}
-%\end{figure}
 
 
 \subsection{Definitions}
@@ -99,6 +30,14 @@ case.
 %
 %The set of all possible environments is denoted $\environs$.
 \end{definition}
+
+We use $\env_0$ to represent the initial environment, a fresh
+JVM provided by frameworks such as JUnit.
+
+\todo{check E0 above}
+
+%the natural environment  provided by frameworks such as JUnit,
+%and the only modifications of this environment happen through the
 
 \begin{definition}[Test]
 %\todo{DN}{I'm not sure what ``fixed, well-defined inputs means'' and I'm not sure we need it.
@@ -209,28 +148,35 @@ given the environment\/ $\env_1$, $t_1$ fails and\/ $t_2$ passes.
 %$\env$. $\exec{T}{\env} \neq \env$ is a necessary but not
 %sufficient condition for test order dependencies.
 
-\begin{definition}[Potential Test Dependence] \label{def:dependency}
-Given a test suite\/ $T$,
-a test\/ $t_l \in T$ is \emph{potentially dependent} on test\/ $t_k
-\in T$, if and only if\/
-$\exists \env : \result{T}{\env} = \suite{o_1,\dots, o_n} \wedge
-\result{\suite{t_k,t_l}}{\env} = \suite{o_k, o_l} \wedge
-\result{t_l}{\env} = \neg o_l$.
-We write\/ $t_k \prec t_l$ when\/ $t_l$ is potentially dependent on\/ $t_k$.
+%\begin{definition}[Potential Test Dependence] \label{def:dependency}
+%Given a test suite\/ $T$,
+%a test\/ $t_l \in T$ is \emph{potentially dependent} on test\/ $t_k
+%\in T$, if and only if\/
+%$\exists \env : \result{T}{\env} = \suite{o_1,\dots, o_n} \wedge
+%\result{\suite{t_k,t_l}}{\env} = \suite{o_k, o_l} \wedge
+%\result{t_l}{\env} = \neg o_l$.
+%We write\/ $t_k \prec t_l$ when\/ $t_l$ is potentially dependent on\/ $t_k$.
+%\end{definition}
+
+\begin{definition}[Potential Test Dependence] \label{def:manifest}
+Given a test suite\/ $T$, two tests\/ $t_i, t_j \in T$
+are \textit{potentially} dependent, if\/ $\exists {S \subseteq T}: t_i, t_j \in S \wedge
+$\exec{S, t_i, t_j}{\env}$ \neq $\exec{S, t_j, t_i}{\env_0}$.
+$We write\/ $t_i \prec t_j$ for potential dependence.\footnote{$S \subseteq T$ means that $S$ is a subsequence of
+$T$.}
 \end{definition}
 
-\todo{I think the above definition of potential test dependence
-is less motivated. It should be two tests whose execution may
-affect each other's state, but does *not* manifest through
-the oracle. The good part is that, using this definition, Definition 7
-is a natural extension.}
+\todo{check the above potential test dependence definition.}
+Two tests are potentially dependent when they are accessing the
+same memory location or external file systems during execution.
+Thus, executing them in different orders can lead to different envrionments. However,
+such environment differences may not be checked and then manifest
+through the test code.
 
-This definition is \emph{dynamic} because dependence arises only
-if there exists an environment in which actual test results would differ.
-It is \emph{potential} as it only requires the existence of such an
-environment, but does not
-guarantee that the test suite will ever be executed in the context
-of such an environment.
+%It is \emph{potential} as it only requires the existence of such an
+%environment, but does not
+%guarantee that the test suite will ever be executed in the context
+%of such an environment.
 
 %One direct implication of this definition is that $t_k \prec t_l
 %\rightarrow \exec{t_k}{\env} \neq \env$, that is $t_k$ must modify the
@@ -344,7 +290,7 @@ of such an environment.
 
 We refine this definition of dependence to require a concrete environment guaranteed
 to \emph{manifest} a dependence:
-\begin{definition}[Manifest Dependence] \label{def:manifest}
+\begin{definition}[Manifest Test Dependence] \label{def:manifest}
 Given a test suite\/ $T$, two dependent tests\/ $t_i, t_j \in T$,
 the dependence\/ $t_i \prec t_j$ \emph{manifests} in a given
 environment\/
@@ -352,22 +298,26 @@ $\env$ if\/ $\exists {S \subseteq T}: t_i, t_j \in S \wedge
 \result{T}{\env}
 = \suite{o_1, \dots, o_n} \wedge \result{S}{\env} =
 \suite{\dots,o_i,o_j} \wedge \result{t_j}{\env} = \neg o_j$. We
-write\/ $t_i \manifest{\env} t_j$ for manifest dependence.\footnote{$S \subseteq T$ means that $S$ is a subsequence of
-$T$.}
+write\/ $t_i \manifest{\env} t_j$ for manifest dependence.
+%\footnote{$S \subseteq T$ means that $S$ is a subsequence of $T$.}
 \end{definition}
 
-Note that the dependent tests $t_i$\/ and $t_j$ do not have to be
-adjacent in the original test suite, but that they must be adjacent in
-the shortest test suite that manifests the dependence.
+%Note that the dependent tests $t_i$\/ and $t_j$ do not have to be
+%adjacent in the original test suite, but that they must be adjacent in
+%the shortest test suite that manifests the dependence.
 
-The intuition behind manifest dependences is that in practice we
-do not construct arbitrary environments to execute tests in. Rather,
-we use the natural environment $\env_0$ provided by frameworks such as JUnit,
-and the only modifications of this environment happen through the
-tests and the tested code. Hence, potential dependences manifest only
+%The intuition behind manifest dependences is that in practice we
+%do not construct arbitrary environments to execute tests in. Rather,
+%we use the natural environment $\env_0$ provided by frameworks such as JUnit,
+
+
+This definition of manifest test dependence is \emph{dynamic} because
+dependence arises only if the actual test results differ.
+The manifest test dependence focuses on environment modified
+by the tests and the tested code. Such dependences manifest only
 if there is a sequence of tests $S^*$ whose execution
 $\exec{S^*}{\env_0}$  produces the
-environment $\env'$ that will reveal the dependency.
+environment $\env'$ that will make a test exhibit results.
 
 %The algorithm we propose in Section~\ref{sec:algorithm-tool} detects
 %dependences by running tests and checking for different test results,
@@ -411,24 +361,24 @@ environment $\env'$ that will reveal the dependency.
 %Let $k=n+1$. Assume there are less than $k$ variables involved. 
 %\end{proof}
 
-In later sections we often talk about executing tests in isolation, or
-executing all tests in a test suite in isolation. This is an important
-approximation to detecting test dependences.
+%In later sections we often talk about executing tests in isolation, or
+%executing all tests in a test suite in isolation. This is an important
+%approximation to detecting test dependences.
 
-\todo{I think we need to add an example of potential test dependence
-and manifest test dependence in this section.}
+%\todo{I think we need to add an example of potential test dependence
+%and manifest test dependence in this section.}
 
-\begin{definition}[Test Isolation]
-The result of executing a test\/ $t$ in isolation, given an
-environment\/
-$\env_0$ is the result\/ \result{t}{\env_0} of executing that test in
-the given environment.  
+%\begin{definition}[Test Isolation]
+%The result of executing a test\/ $t$ in isolation, given an
+%environment\/
+%$\env_0$ is the result\/ \result{t}{\env_0} of executing that test in
+%the given environment.  
 
-The result of executing all tests in a test suite\/ \suite{t_1, \dots,
-t_m} in isolation is the
-sequence of results\/ \suite{\result{t_1}{\env_0}, \dots,
-\result{t_n}{\env_0}}.
-\end{definition}
+%The result of executing all tests in a test suite\/ \suite{t_1, \dots,
+%t_m} in isolation is the
+%sequence of results\/ \suite{\result{t_1}{\env_0}, \dots,
+%\result{t_n}{\env_0}}.
+%\end{definition}
 
 
 \subsection{The Dependent Test Detection Problem}
@@ -526,22 +476,22 @@ of this algorithm is linear.
 
 
 
-\subsection{Discussion}
-\label{sec:formaldiscussion}
+%\subsection{Discussion}
+%\label{sec:formaldiscussion}
 
-This formalism aims to lay a foundation for reasoning about
-test dependence in a precise way.
-The dynamic nature of view on dependences 
-allows us to avoid the complexity issues that come with a static
-approach. With a static approach, it would be essential 
-to decide how to address undecidability. The most
-likely and common approach being to choose soundness with respect to all
-possible executions and accepting the consequent imprecision of the analysis.
-Further, our focus on manifest dependence, when realized in a tool will
-only identify true positives, although it may miss some
-dependences (false negatives).  It is often easier to have tools
-with this kind of property accepted by practitioners than some other
-kinds.  
+%This formalism aims to lay a foundation for reasoning about
+%test dependence in a precise way.
+%The dynamic nature of view on dependences 
+%allows us to avoid the complexity issues that come with a static
+%approach. With a static approach, it would be essential 
+%to decide how to address undecidability. The most
+%likely and common approach being to choose soundness with respect to all
+%possible executions and accepting the consequent imprecision of the analysis.
+%Further, our focus on manifest dependence, when realized in a tool will
+%only identify true positives, although it may miss some
+%dependences (false negatives).  It is often easier to have tools
+%with this kind of property accepted by practitioners than some other
+%kinds.  
 
 %Third, the manifest test dependence problem is NP-complete;
 %although that is daunting (but less so than undecidability),

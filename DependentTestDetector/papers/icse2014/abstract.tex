@@ -4,20 +4,20 @@ causes it to return different results. It has been broadly assumed
 that tests in a suite are inherently independent. This paper
 investigates the validity of this assumption, and presents four results. 
 
-First, we formally define test dependence in terms of
+First, we describe a study of \todo{xx}
+real-world dependent tests from \todo{xx} bug repositories
+to show that test dependence arises in practice.
+Our study shows that test dependence can have potentially costly
+repercussions such as masking program faults and leading
+to spurious bug reports, and can be hard to identify
+unless explicitly searched for.
+
+Second, we formally define test dependence in terms of
 test suites as ordered sequences of tests along with explicit
 environments in which these tests are executed. We use this
 formalization to formulate the problem
 of detecting dependent tests, and prove that a useful special
 case is NP-complete. 
-
-Second, we describe a study of \todo{xx}
-real-world dependent tests from \todo{xx} bug repositories
-to show that test dependence arises in practice.
-Our study indicates that test dependence can have potentially costly
-repercussions such as masking program faults and leading
-to spurious bug reports, and can be hard to identify
-unless explicitly searched for.
 
 Third, guided by the study, we propose two algorithms to detect
 dependent tests in a test suite. 

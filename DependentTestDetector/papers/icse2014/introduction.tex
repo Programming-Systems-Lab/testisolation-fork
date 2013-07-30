@@ -13,6 +13,7 @@ of applying the tests, in this case, changes the execution context.
 %~\cite{KapfhammerS03}
 %Chays:2000:FTD:347324.348954,
 %Gray:1994:QGB:191843.191886}, 
+\todo{find a place to emphase unit tests}
 
 Definitions in the testing literature are generally clear that the
 conditions under which a test is executed may affect its result.  The
@@ -87,22 +88,77 @@ Like with other code, this means that tests in some cases will have
 unintended and unexpected behaviors.  And as programs increase in complexity,
 so may tests, which may increase the frequency of such problems in tests,
 which may in turn increase the frequency of test dependence.
+For example, global variables shared by tests
+%These tests
+%shared global variables, and the test results varied depending on the
+%values stored in these variables.  
+%That is, relevant execution conditions---specifically, pertinent parts
+%of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc.---were neglected.
+are usually buried deep in the program code, and the assertions
+do not directly check them,
+but rather check values that have been computed from
+them. In many non-trivial real-world programs, this
+deep nesting effectively hides potential dependencies from developers,
+and they may only become aware of them when a subtle bug leads them
+there or a test fails suspciously.
 
-Another situation in which the underlying test execution context can
+%Therefore, we explicitly
+%distinguish potential test dependences (Definition~\ref{def:dependency})---those that could cause a variation in test suite results 
+%under \emph{some} environment and order---and manifest test
+%dependences (Definition~\ref{def:manifest})---those that are guaranteed to cause a
+%variation in test suite results under a \emph{specific} environment and order.  
+
+
+\subsection{Repercussions of Dependent Tests}
+
+%We have identified a number of substantive examples of test suites
+%from fielded programs that manifest dependences.
+%in fielded programs. 
+%with test suites that manifest test dependence.  
+
+%In this paper, we seek to understand dependent tests and their repercussions
+%in two ways. 
+
+After analyzing \todo{xx} real-world, confirmed dependent
+tests from existing bug repositories (Section~\ref{sec:study}), we identified three
+categories of repercussions that can arise due to the presence of dependent tests.
+First, most test suites that unexpectedly contain dependent tests \emph{conceal
+weaknesses in the test suite} itself. Exposing
+dependent tests can detect code smells and identify situations
+where some tests do not perform proper initialization.
+Second, a test suite containing test dependences can lead
+to \emph{spurious bug reports}. As an example, a dependent test in
+eclipse SWT took the developers
+more than a month to realize that the test dependences were intentional,
+allowing them to close the bug report without a change to the system.
+Third, even worse, test suites that unexpectedly contain dependent tests can
+\emph{mask faults in a program}. Specifically, executing a test suite in the
+default order does not expose the fault, whereas
+executing the same test suite in a different order does. We found 
+a bug masked two example dependent tests
+for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{}).
+
+%Second, guided by the findings of our study, we design two algorithms
+%to detect manifest dependent tests. By applying our algorithms
+%to \todo{xx} open-source programs and their test suites, we 
+%found a large number of unknown dependent tests, .
+
+Another important impact of dependent test is for downstream testing
+techniques, in which the underlying test execution context can
 unexpectedly change is when a tool or technique that takes a test
 suite as input is used.  Examples of such techniques include
 test selection techniques (that identify a subset of
 the input test suite that will guarantee some properties during
-regression testing)~\cite{harroldetal:OOPSLA:2001}, test prioritization techniques (that reorder the
-input to increase the rate of fault detection)~\cite{Elbaum:2000:PTC:347324.348910}, test parallelization
-techniques (that schedule the input for execution across multiple
-CPUs), test factoring~\cite{Saff:2005} and test carving~\cite{Elbaum:2006} (which take system tests as
+regression testing)~\cite{harroldetal:OOPSLA:2001},
+test prioritization techniques (that reorder the
+input to increase the rate of fault detection)~\cite{Elbaum:2000:PTC:347324.348910},
+test parallelization techniques (that schedule the input for execution across multiple
+CPUs), test generation techniques~\cite{PachecoLET2007, SPLAT},
+test factoring~\cite{Saff:2005} and test carving~\cite{Elbaum:2006} (which take system tests as
 input and create unit tests and differential unit tests,
-respectively), etc. 
+respectively), experimental debugging techniques (such as Delta Debugging~\cite{Zeller:2002},
+which requires running a set of tests repeatedly), etc. 
 
-Of these techniques, we are most concerned about
-those that modify the organization of test suites, rather than the tests
-they contain.
 Many such downstream testing techniques implicitly assume that
 there are no test dependences in the input test suite.  Our concern is
 that this assumption can cause \emph{delayed problems} in the face
@@ -110,44 +166,9 @@ of latent test dependence in the input.  As an
 example, test selection may report a subsequence of tests that do not
 return the same results as they do when executed originally, as part of the full suite.
 
-\subsection{Dependent Tests and their Repercussions}
-
-%We have identified a number of substantive examples of test suites
-%from fielded programs that manifest dependences.
-%in fielded programs. 
-%with test suites that manifest test dependence.  
-
-In this paper, we seek to understand dependent tests and their repercussions
-in two ways. 
-
-First, by analyzing \todo{xx} real-world, confirmed dependent
-tests from several bug repositories, we identified three
-categories of problems that can arise due to the presence of dependent tests.
-First, test suites that unexpectedly contain dependent tests can
-\emph{mask faults in a program}. Specifically, executing a test suite in the
-default order does not expose the fault, whereas
-executing the same test suite in a different order does.
-Second, test suites that unexpectedly contain dependent tests can \emph{conceal
-weaknesses in the test suite} itself. Exposing
-dependent tests can identify situations where some tests do not perform
-proper initialization.
-Third, a test suite containing undocumented test dependences can lead
-to \emph{spurious bug reports}. As an example, a dependent test in
-eclipse SWT took the developers
-more than a month to realize that the test dependences were intentional,
-allowing them to close the bug report without a change to the system.
-
-Second, guided by the findings of our study, we design two algorithms
-to detect manifest dependent tests. By applying our algorithms
-to \todo{xx} open-source programs and their test suites, we 
-found a large number of unknown dependent tests, suggesting
-that on average \todo{xx}\% of the human-written tests are dependent and
-\todo{xx}\% of the automatically-generated tests are dependent.
-
-
-In addition, we provide a precise formalism to lay a foundation for
-reasoning about test dependence, and prove the problem of finding
-manifest dependent tests is NP-complete..
+%Of these techniques, we are most concerned about
+%those that modify the organization of test suites, rather than the tests
+%they contain.
 
 \subsection{Contributions}
 
@@ -156,17 +177,18 @@ conventional wisdom about the test independence assumption.
 This paper makes the following contributions:
 
 \begin{itemize}
+
+  \item \textbf{Study.} We describe a study of \todo{NUM} real-world
+  dependent tests from well-known bug repositories to show that test dependence
+  arises in practice. Our study indicates that test dependence can have
+  potentially costly repercussions, and can be hard to identify unless
+  explicitly searched for (Section~\ref{sec:study}).
+
 \item \textbf{Formalization.} We provide a formalization of test dependence
   in terms of test suites as ordered sequences of tests and explicit execution
   environments for test suites, which enables reasoning about test dependence
   as well as a proof that finding \emph{manifest} dependences is an NP-complete
   problem (Section~\ref{sec:formalism}).
-
-  \item \textbf{Study.} We describe a study of \todo{NUM} real-world
-  dependent tests from well-known bug repositories to show that test dependence
-  arises in practice. Our study also indicates that test dependence can have
-  potentially costly repercussions, and can be hard to identify unless
-  explicitly searched for (Section~\ref{sec:study}).
 
   \item \textbf{Algorithms.} We present two algorithms
   to detect dependent tests (Section~\ref{sec:detecting}). The first
@@ -178,7 +200,9 @@ This paper makes the following contributions:
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
   tool, and applied it to \todo{NUM} real-world subject programs. Our
   tool detected a large number of important test dependences that have not
-  been discovered before (Section~\ref{sec:evaluation}).
+  been discovered before, showing that on average \todo{xx}\% of the human-written
+  tests are dependent and \todo{xx}\% of the automatically-generated tests are dependent
+   (Section~\ref{sec:evaluation}).
   Finally, we discuss a set of open questions and other possible impacts of dependent
   tests in Section~\ref{sec:discussion}.
 \end{itemize}
