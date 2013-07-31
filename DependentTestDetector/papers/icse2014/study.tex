@@ -2,79 +2,60 @@
 \section{Understanding Dependent Tests: Characteristic Study}
 \label{sec:study}
 
-Dependent tests reach beyond theory and appear in real-world programs.  
-In some cases, they are intentional, developers are aware of them and
-document them, but in other cases they are inadvertent. 
-Test dependence can cause problems, not only when test suites are reordered,
-but even when they are
-executed in the intended order.
-This section presents a study of concrete examples of test dependence found in
+To investigate whether dependent tests can reach beyond theory
+and appear in real-world programs, this section presents an empirical
+study of concrete examples of test dependence found in
 well-known open source programs. 
 
-\subsection{Sources}
 
+\subsection{Sources and Study Methodology}
 
-While this list---and associated set of examples---certainly is not exhaustive, it shows that there are
-several classes of dependence-related problems that have practical
-relevance.
+We chose five well-known, public-accessible software issue
+tracking systems to examine: Apache~\cite{apachebug},
+Eclipse~\cite{eclipsebug}, JBoss~\cite{jbossbug},
+Hibernate~\cite{hibernatebug}, and Codehuas~\cite{codehuasbug}.
+Each issue tracking system serves for tens of project, and
+keeps thousands of bug reports, feature requests, improvement
+suggestions, etc.
 
-\subsection{Study Methodology}
+For each issue tracking system, we searched for a set of keywords
+(``dependent test'', ``test dependence'', ``test execution order'',
+etc), and manually examined the matched results. For each match, we read the
+description of the issue report, the discussions between reporters
+and developers, and the fixing patches (if available). This information
+indicated to us whether the report is about test dependence
+-- a test manifesting different behaviors under different execution
+environment. Each likely dependent test is examined by
+at least two people and the whole process consists of serveral
+rounds of (re-)study and cross checking. In total,
+we have spent more than half year to collect and inspect all dependent
+tests. 
+
 
 \subsection{Findings}
 
+\input{studyresult}
+
+Table~\ref{tab:studyresults} summarizes all studied dependent tests.
+
+
 \subsubsection{Characteristics}
 
-\todo{Illustrate and highlight the major findings here. Emphase what would
-be valuable for designing algorithms.} 
+Finding on dependence patterns
+
+Findings on dependence manifestation
+
+Findings on dependence resolution
+
+Findings on Dependence avoidance
 
 
-\begin{table*}[t]
-\vspace{1mm}
-\centering
-\small{
-%\setlength{\tabcolsep}{.50\tabcolsep}
-\begin{tabular}{|l|l|}
-\hline
- \textbf{Findings on Dependence Patterns} & \textbf{Implications} \\
- \hline
- \hline
-(1) & xxx \\
- \hline
-(2) & xxx \\
-\hline
- \textbf{Findings on Dependence Manifestation} & \textbf{Implications} \\
- \hline
- \hline
-(1) & xxx \\
- \hline
-(2) & xxx \\
-\hline
- \textbf{Findings on Dependence Resolution} & \textbf{Implications} \\
- \hline
- \hline
-(1) & xxx \\
- \hline
-(2) & xxx \\
-\hline
- \textbf{Findings on Dependence Avoidance} & \textbf{Implications} \\
- \hline
- \hline
-(1) & xxx \\
- \hline
-(2) & xxx \\
-\hline
-\end{tabular}
-}
-\vspace{-2mm}
-\caption{{\label{tab:findings} }
-}
-\end{table*}
 
 \subsubsection{Categories}
 
 Most dependent tests identified in our study fall into a small
 number of categories\todo{how many, be specific}. We describe each category below and give
-concrete examples in Section~\ref{sec:examples}.
+concrete examples. 
 
 \vspace{1mm}
 
@@ -134,8 +115,8 @@ inconsequential until and unless the flawed test is reordered, either manually o
 a downstream tool, to execute before any other initializing test.
 
 
-\subsubsection{Examples}
-\label{sec:examples}
+%\subsubsection{Examples}
+%\label{sec:examples}
 
 %The discussion of the examples in this section is distinguished by
 %the problems caused by test dependence (\emph{Kind}): when faults are masked because
@@ -251,6 +232,45 @@ total on the open-issue list).
 
 \todo{need one more example for poor test construction}
 
+\subsubsection{Implications}
+
+\vspace{1mm}
+\noindent \textbf{Most dependent tests can be revealed by running two tests.}
+In some cases, they are intentional, developers are aware
+of them and document them, but in other cases they are
+inadvertent. Test dependence can cause problems, not only
+when test suites are reordered, but even when they are
+executed in the intended order.
+
+\vspace{1mm}
+\noindent \textbf{Most dependent tests can be revealed by running two tests.}
+
+\vspace{1mm}
+\noindent \textbf{Most dependent tests are not easy to identify unless explicitly searched for.}
+
 \subsection{Caveats}
 
-\todo{for the study}
+Our findings need to be taken with the methodology in mind. The
+bug repositories in our study cover representative and important
+software applications with comprehensive test suites; and
+all studied dependent tests are from well-tested
+applications. Nevertheless, most applications we studied
+are written in Java, and the tests are in the form of JUnit.
+Thus, we do not claim our findings can be extended to
+arbitrary programs.
+
+The dependent tests in our study are collected from bug
+repositories. We have followed the decisions made by
+developers to classify the category, severity, and
+\todo{other characteristics} of a dependent test,
+and did not intentionally ignore
+any test dependence in bug repository. However,
+it is entirely possible that some dependent tests may never
+be identified, or reported to the developers. Unfortunately,
+there is no conceivable way to study these unreported
+dependent tests. We believe the dependent tests in our study
+provide a representative sample in these software applications.
+
+In our study, we do not emphasize any quantitative characteristic
+results, and most of our findings are consistent across
+the examined dependent tests.
