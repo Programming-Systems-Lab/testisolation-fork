@@ -1,0 +1,42 @@
+
+\begin{figure}[t]
+\noindent \textbf{\small{Fault-related code in CLI:}}
+\vspace{-2mm}
+\begin{CodeOut}
+\begin{alltt} 
+public final class OptionBuilder \{
+  \textbf{private static String argName;}
+  private static void reset() \{
+    ...
+    \textbf{argName = "arg";}
+    ...
+  \}
+  public static Option create(String opt) \{
+    ...
+    \textbf{OptionBuilder.reset();}
+    ...
+  \}
+\}
+\end{alltt}
+\end{CodeOut}
+\textbf{\small{Two dependent tests that mask faults:}}
+\vspace{-2mm}
+\begin{CodeOut}
+\begin{alltt} 
+  public void test13666() \{
+    ...
+    OptionBuilder.create("");
+    ...
+  \}
+  public void testOptionWithoutShortFormat2() \{
+    assertEquals(argName, "arg");
+  \}
+\end{alltt}
+\end{CodeOut}
+\vspace*{-13pt}
+\caption{Simplified code and two dependent tests 
+that mask faults in CLI~\cite{cli}. \todo{not finished,
+need explanation here}
+}
+\label{fig:option_builder}
+\end{figure}

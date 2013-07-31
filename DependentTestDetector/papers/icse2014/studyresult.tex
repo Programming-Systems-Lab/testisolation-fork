@@ -3,7 +3,7 @@
 \centering
 \small{
 \setlength{\tabcolsep}{.60\tabcolsep}
-\begin{tabular}{|l||l|l|l|l||l|l|l||l|l|l||l|l|l|}
+\begin{tabular}{|l||l|l|l|l||l|l|l||c|c|c||c|c|c|}
 \hline
 %1&2&3&4&5&6&7&8&9&10&11&12&13&14\\
 \textbf{Issue}&\multicolumn{4}{|c||}{\textbf{Identified Dependent Tests}}&\multicolumn{3}{|c||}{\textbf{Dependence Manifestation}}&\multicolumn{3}{|c||}{\textbf{Dependence Resolution}}&\multicolumn{3}{|c|}{\textbf{Dependence Root Cause}}\\
@@ -29,6 +29,22 @@ Codehuas&2&3&4&5&6&7&8&9&10&11&12&13&14\\
 \end{tabular}
 }
 \vspace{-2mm}
-\caption{{\label{tab:studyresults} }
+\caption{{\label{tab:studyresults} Summary of dependent tests
+found in 5 issue tracking systems. Column ``Total Number'' shows
+the total number of all identified dependent tests. Column ``Severity''
+classifies dependent tests based on its impact to the program,
+as decided by developers in the report. Column ``\#Invovled Tests''
+classifies dependent tests by the the number of tests needed
+to manifest the dependence. Column ``Average Days'' shows the
+average days needed by developers to resolve a dependent test.
+Column ``Patch Location'' shows how developers fix a
+dependent tests. Column ``Code'' shows the number of dependent
+tests fixed by modifying program code, and column ``Test'' shows
+the number or dependent tests fixed by modifying test code.
+Column ``Dependence Root Cause'' classifies dependent tests by
+its root causes, including inappropriate accessing shared static
+variables, file systems, and other execution environment (e.g.,
+language, locale, or other system properties).
+}
 }
 \end{table*}

@@ -1,18 +1,18 @@
 \newcommand{\ite}{\texttt{Invalid\-Thread\-Access\-Exception}}
 
-The Eclipse Standard Widget Toolkit
-(SWT)~\cite{swt} is a cross-platform GUI
-library developed within the Eclipse framework.
+%The Eclipse Standard Widget Toolkit
+%(SWT)~\cite{swt} is a cross-platform GUI
+%library developed within the Eclipse framework.
 %\todo{KM}{Year here\ldots}.
 %It has been developed to combine best parts of Sun's Abstract Window Toolkit (AWT)
 %and Swing: native look and feel and native performance.
 %
-Due to the difficulty of obtaining source, compiling and running
-test suites with the SWT project, we only examined some test cases
-manually, after a bug report indicated test dependence. The
-numbers reported in Figure~\ref{fig:example-summary} are the number
-of tests we manually examined, and the number of dependencies we found
-among those respectively.
+%Due to the difficulty of obtaining source, compiling and running
+%test suites with the SWT project, we only examined some test cases
+%manually, after a bug report indicated test dependence. The
+%numbers reported in Figure~\ref{fig:example-summary} are the number
+%of tests we manually examined, and the number of dependencies we found
+%among those respectively.
 
 As is common practice in GUI toolkits, SWT permits only one
 \texttt{Display} object per thread. Attempting to create multiple
@@ -39,17 +39,31 @@ and dispose of it at the end.
 %\end{quote}
 
 
-In September 2003, a user reported a
+Consider a dependent test in SWT~\cite{swt},
+in September 2003, a user reported a
 bug,\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}}
-stating that tests throw an \ite{}
-if she runs any other test before \texttt{DisplayTest}. 
-The cause of this is simple: any other test creates, but does not
-dispose of a \code{Display} object. Then the tests in
-\code{TestDisplay} attempt to create a new object, which fails, as one
-is already associated with the current thread.
-Since this is the expected and desired behavior, the bug report is
-spurious (except maybe it points to a problem in the test suite,
-rather than the code).
+stating that tests were failing unexpectedly
+if she runs any other test before \texttt{TestDisplay} --
+a test suite creates a new \code{Display} object and tests its
+implementation. However, this bug report was spurious and was
+caused by undocumented test dependence.
+Its root cause is quite simple: in SWT, only one global \texttt{Display}
+object is allowed; the tests that reporters try to run
+creates, but does not dispose of a \code{Display} object, while
+the tests in \code{TestDisplay} attempt to create
+a new \code{Display} object, which fails, as one
+is already created. This is the expected and desired behavior,
+and points to a potential problem in the test suite rather
+than the code.
+
+
+%s any other test creates, but does not
+%dispose of a \code{Display} object. Then the tests in
+%\code{TestDisplay} attempt to create a new object, which fails, as one
+%is already associated with the current thread.
+%Since this is the expected and desired behavior, the bug report is
+%spurious (except maybe it points to a problem in the test suite,
+%rather than the code).
 
 
 %Let us examine the bug

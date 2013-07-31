@@ -1,3 +1,47 @@
+
+
+%A detailed study of the code under test revealed that both 
+%tests fail due to the same hidden dependence. 
+The fault is located in 
+\code{OptionBuilder.java} and is caused by not initializing a global
+variable early enough.
+Figure~\ref{fig:option_builder} shows code that
+illustrates the fault. 
+
+%
+By default,
+\code{argName} is initialized to \code{null} (line 2), and only set to
+its intended default value \code{"arg"} by the \code{create()} method
+via calling \code{reset()} (line 15). 
+Consequently, if clients of CLI do not explicitly initialize the value of
+\code{argName}, the first option created will have \code{null} rather
+than \code{"arg"} as its argument name.
+%In CLI, there are two types of options: options with and without
+%argument names. If an option without argument is created first,
+%this fault will not lead to a failure, because the \code{null} value
+%will be ignored. Consecutive calls to \code{create()} can rely on
+%\code{reset()} to establish the desired default value.
+
+Both dependent tests
+% \code{test13666} and \code{test27635} (or \code
+% {test\-Op\-tion\-With\-out\-Short\-For\-mat2}) 
+can reveal this fault, since they create an option with 
+the default argument as the first thing in their execution. However,
+in the default order of test execution, 
+%the test classes \code{BugTest} and \code{Help\-For\-mat\-ter\-Test} both
+%contain other 
+tests that create options with explicit arguments execute \emph{before} 
+these dependent tests.
+% \code{test13666}
+% and \code{test27635} respectively. 
+%Thus, when the tests in these classes are 
+%executed in order, the tests executed before \code{test13666}
+%and \code{test27635} call \code{create()} 
+Thus, the tests that are executed before call \code{create()} at least once, which
+sets the default \code{argName} value, thus masking the fault.
+
+
+
 %%%this file includes many commented out sentences
 
 %In this paper, we
