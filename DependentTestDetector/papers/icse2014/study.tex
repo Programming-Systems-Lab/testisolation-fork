@@ -43,6 +43,24 @@ Table~\ref{tab:studyresults} summarizes all studied dependent tests.
 
 \subsubsection{Characteristics}
 
+We characterize dependent tests in three
+
+\noindent \textbf{{Dependent tests exists in practice.}}
+Developers treat it as a problem that should be fixed.
+
+\vspace{1mm}
+\noindent \textbf{{At least 82\% of the studied dependent
+tests can be manifested by no more than 2 tests.}} In theory,
+it may enumerate every possible combination.
+
+\vspace{1mm}
+\noindent \textbf{{Developers usually ignore dependent
+tests due to lack of tool support.}}
+
+\vspace{1mm}
+\noindent \textbf{{At least 52\% of the dependent tests arise
+because of accessing shared static variables.}}
+
 Finding on dependence patterns
 
 Findings on dependence manifestation
@@ -163,7 +181,11 @@ total on the open-issue list).
 \subsubsection{Implications}
 
 \vspace{1mm}
-\noindent \textbf{Most dependent tests can be revealed by running two tests.}
+\noindent \textbf{Need to explicit search for, tool support}
+
+\vspace{1mm}
+\noindent \textbf{Tools
+should focus on static variables}
 In some cases, they are intentional, developers are aware
 of them and document them, but in other cases they are
 inadvertent. Test dependence can cause problems, not only
@@ -171,7 +193,8 @@ when test suites are reordered, but even when they are
 executed in the intended order.
 
 \vspace{1mm}
-\noindent \textbf{Most dependent tests can be revealed by running two tests.}
+\noindent \textbf{Bounding the length
+of search}
 
 \vspace{1mm}
 \noindent \textbf{Most dependent tests are not easy to identify unless explicitly searched for.}
