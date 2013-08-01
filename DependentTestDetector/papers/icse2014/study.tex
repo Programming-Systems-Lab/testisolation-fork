@@ -23,12 +23,14 @@ For each issue tracking system, we searched for a set of keywords
 etc), and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
-help us understand whether the report is about test dependence
+helps us understand whether the report is about test dependence
 -- a test manifesting different behaviors under different execution
 environment. Each likely dependent test is examined by
 at least two people and the whole process consists of serveral
-rounds of (re-)study and cross checking. In total,
-we have spent more than half year to collect and analyze all dependent
+rounds of (re-)study and cross checking. We ignored reports
+that are described vaguely, and excluded tests whose results are
+affected by non-determinism (e.g., multi-threading).
+In total, we have spent more than half year to collect and analyze all dependent
 tests. 
 
 
@@ -191,7 +193,8 @@ developers to classify the category, severity, and
 \todo{other characteristics} of a dependent test,
 and did not intentionally ignore
 any test dependence in bug repository. However,
-it is entirely possible that some dependent tests may never
+it is entirely possible, if not almost certainly,
+that some dependent tests may never
 be identified, or reported to the developers. Unfortunately,
 there is no conceivable way to study these unreported
 dependent tests. We believe the dependent tests in our study
