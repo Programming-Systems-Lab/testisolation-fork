@@ -35,6 +35,10 @@ ps-a4: $(MAIN_FILE).pdf
 	latex $(MAIN_FILE)
 	dvips -P cmz -t a4 -o $(MAIN_FILE).ps $(MAIN_FILE).dvi
 
+TAGS: tags
+tags:
+	etags `latex-process-inputs -list paper.tex`
+
 clean:
 	@rm -f *.log
 	@rm -f *.aux
