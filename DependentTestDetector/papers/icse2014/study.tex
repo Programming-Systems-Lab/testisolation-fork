@@ -43,16 +43,31 @@ Table~\ref{tab:studyresults} summarizes the dependent tests.
 
 \subsubsection{Characteristics}
 
+\todo{We may be able to reduce the length of this section.}
+
 We summarize three characteristics of dependent tests:
 manifestation, root cause, and developers' reaction.
 
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least 82\% of the dependent
-tests in the study can be manifested by no more than 2 tests.}} In theory,
-given a $n$-sized test suite, dependent test can occur in any
-length of permutations. However, among \dtnum collected tests,
-86 (82\%) of them can be manifested by running no more than
-2 tests. 
+tests in the study can be manifested by no more than 2 tests.}}
+A dependent test is manifested if we produce a test suite that is a 
+subset of the original suite, such that the test fails.
+We measure the size of the subsuite.
+If the test fails when run in isolation, the number of tests to manifest
+the dependent test is 1.
+If the test fails when run after one other test (often, the subsuite is
+running these two tests in the opposite order as the full original test
+suite), then the number of tests to manifest the dependent test is 2.
+
+% In theory,
+% given a $n$-sized test suite, dependent test can occur in any
+% length of permutations. However, among \dtnum collected tests,
+% 86 (82\%) of them can be manifested by running no more than
+% 2 tests. 
+
+\todo{Discuss the ``unknown'' column.  What happened?  Could we not
+  reproduce it at all?  Why not?}
 
 \vspace{1mm}
 \noindent \textbf{{Root cause: at least 52\% of the dependent tests
@@ -79,9 +94,18 @@ reveal potential flaws in the test code rather than the test code.
 Based on developers' discussion, we found that although
 developers admitted that such test dependence should be removed,
 they often leave the dependence unresolved, sometimes by merging
-two tests or adding explanatory documentation. The primary
+two tests or adding explanatory documentation.
+\todo{It seems to me that merging two tests does resolve the test
+  dependence, in the sense that there is no longer any order in which the
+  new tests can be run such that they fail.  Why do you call this leaving
+  the dependence unresolved?  Also, there are so many items in the
+  ``unfixed'' column that I think you should subdivide it further, for
+  example into ``merged tests'', ``documentation'', and ``unfixed'' (for
+  those the developers really did nothing).  Are there other possibilities?}
+The primary
 reason is that the current JUnit testing framework does not
 support to explicitly specify test dependence in the test code.
+\todo{Does it support specifing an order in which to run all tests?}
 
 
 %Test dependence can cause problems, not only
@@ -95,11 +119,8 @@ support to explicitly specify test dependence in the test code.
 
 \input{categorytable}
 
-The dependent tests identified in our study fall into 3
-categories (Table~\ref{tab:reper}). We describe each category below and give
-concrete examples. 
-%classifies
-%the collected tests into these 3 categories.
+We found three major consequences of dependent tests (Table~\ref{tab:reper}).
+%  We describe each category below and give concrete examples. 
 
 \vspace{1mm}
 
@@ -129,17 +150,16 @@ until the initializing test is reordered to execute
 
 \noindent \textbf{Spurious Bug Reports}
 Sometimes developers introduce dependent tests intentionally because it is
-easier, more efficient or more convenient to write unit tests for some modules
-in that way~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
+easier, more efficient, or more convenient~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
 %DB-testing}.
-Even though the developers are aware of these instances
-when they create them, this knowledge can get lost, 
+Even though the developers are aware of these dependences
+when they create tests, this knowledge can get lost, 
 and other people who are not aware of these dependences can get confused 
 when they run a subset of the test suite that manifests the
 dependences.
 
 As a result, software users or maintainers
-might report bugs backed by the failing tests, although this
+might report bugs about the failing tests, even though this
 is exactly the expected behavior. 
 If the dependence is not documented clearly and
 correctly, it can take a considerable amount of time to work out that
@@ -147,12 +167,12 @@ these reported failures are spurious.
 %Or worse, the developers may try
 %to fix a bug that is not there.
 For example,
-in September 2003, a user fired a
+in September 2003, a user filed a
 bug report in SWT~\cite{swt}\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}},
 stating that tests were failing unexpectedly
 if she runs any other test before \texttt{TestDisplay} --- 
-a test suite creating a new \code{Display} object and testing its
-implementation. However, this bug report was spurious and was
+a test suite creates a new \code{Display} object and tests it.
+However, this bug report was spurious and was
 caused by undocumented test dependence.
 Its root cause is quite simple: in SWT, only one global \texttt{Display}
 object is allowed; the tests that reporters try to run
@@ -163,36 +183,40 @@ is already created. This is the desired behavior,
 and points to a potential problem in the test suite rather
 than the code.
 
+\todo{What is the relationship between the categories?  It seems that the
+  above example belongs in ``poor test construction'' as well as ``spurious
+  bug reports''.  In fact, doesn't \emph{every} dependent test belong in
+  ``poor test construction''?  Why or why not?}
+
+
 \vspace{1mm}
 
 \noindent \textbf{Masking Faults}. In rare cases,
 dependent tests can hide a fault in the
 program, \emph{exactly} when the test suite is executed in its default
-order. Masking occurs when a test case $t$ (a) \emph{should}
-reveal a fault, (b) only does so when executed in a specific environment
-$\env_R$, but (c) tests executed before $t$ in a test suite always
-generate environments different from
-$\env_R$.
+order. Masking occurs when a test case $t$ \emph{should}
+reveal a fault, but tests executed before $t$ in a test suite always
+generate environments in which $t$ does not reveal the fault.
 
 \input{clicode}
 
 We only found two dependent tests in
 the Apache CLI library~\cite{cli} for this category.
-In CLI, two test cases fail when run in isolation:
-\code{test13666} and \code{test\-Op\-tion\-With\-out\-Short\-For\-mat2} in test
-classes \code{Bugs\-Test} and \code{Help\-For\-mat\-ter\-Test},
-respectively, but both pass when running in the default order.
+In CLI, two test cases 
+\code{Bugs\-Test.test13666} and \code{Help\-For\-mat\-ter\-Test.test\-Op\-tion\-With\-out\-Short\-For\-mat2}
+fail when run in isolation,
+but both pass when run in the default order.
 
 Figure~\ref{fig:option_builder} shows the simplified code and
 tests. Both dependent tests can reveal this fault,  but
 the default order of test execution makes both tests pass
 accidentally. Such dependent tests
-make non-trivial impact in practice.
+have a non-trivial impact in practice.
 This fault is reported in the bug
 database several times,\footnote{\url{https://issues.apache.org/jira/browse/CLI-26} \url{https://
 issues.apache.org/jira/browse/CLI-186} \url{https://issues.apache.org/jira/browse/
-CLI-187}} starting on March 13, 2004 (CLI-26). The report is marked as resolved
-\emph{three years} later on March 15, 2007 until developers
+CLI-187}} starting on March 13, 2004 (CLI-26). The report was marked as resolved
+\emph{three years} later on March 15, 2007 when developers
 realized the test dependence.
 
 %, but is then reopened as CLI-186 on
@@ -218,11 +242,11 @@ realized the test dependence.
 
 We summarize the main implications of our findings.
 
-\noindent \textbf{{Dependent tests exists in practice, but
+\noindent \textbf{{Dependent tests exist in practice, but
 they can be hard to identify unless explicitly searched for.}}
 None of the dependent tests we studied is identified by
 running the existing test suite in the default order. Often,
-the test dependence is reported until and unless the
+the test dependence is not reported until and unless the
 test suite is reordered, either manually by a user or
 a maintainer or by a downstream tool. This indicates that
 specialized tools to detect such dependence are needed.
@@ -230,17 +254,13 @@ specialized tools to detect such dependence are needed.
 \vspace{1mm}
 \noindent \textbf{Dependent test detection techniques
 can bound the search space to a small number of tests.}
-In theory, given a $n$-sized test suite, a technique need
-to exhaustively execute all $n!$ permutations of the
-test suite to detect dependent tests. This is
-not feasible for realistic $n$. As indicated by our study,
-most of the dependent tests can be manifested by executing
-no more than 3 tests. This finding suggests that
-many realistic dependent tests might be found by
-running just short subsequences of test suites
-with a bound $k$ on the length of subsequences. That
-effectively bounds the execution time to $O(n^k)$,
-which for small $k$ is tractable.
+In theory, it is necessary
+to exhaustively execute all $n!$ permutations of a $n$-sized
+test suite to detect all dependent tests. This is
+not feasible for realistic $n$.  Our study demonstrates that
+most dependent tests can be manifested by executing
+no more than 2 tests.  Exhaustively executing all 
+short subsequences of a test suite is tractable.
 
 \vspace{1mm}
 \noindent \textbf{Dependent test detection techniques
@@ -261,36 +281,27 @@ tool design. \todo{need to re-write the above}
 %the test code
 
 
-\subsection{Caveats}
+\subsection{Threats to validity}
 
-Our findings need to be taken with the methodology in mind. The
-issue tracking systems in our study cover representative and important
-software applications with comprehensive test suites; and
-all studied dependent tests are from well-tested
-applications. Nevertheless, all applications we studied
-are written in Java, and the tests are in the form of JUnit.
-Thus, we do not claim our findings can be extended to
-arbitrary programs.
+Our findings apply in the context of our study and methodology and may not
+apply to arbitrary programs.
+The applications we studied are widely used and have comprehensive test suites.
+However, a limitation is that they are all written in 
+Java and have JUnit test suites.  
 
-The dependent tests in our study are collected from public-accessible
-issue tracking systems. We have followed the decisions made by
-developers to determine a dependent test, and its severity;
-and did not intentionally ignore
-any test dependence in the issue tracking system. However,
-it is almost certain our methodology will miss
-some dependent tests in the tracking system. This is
-because our search keyword list is not complete. Further,
-some dependent tests may never
-be identified, or reported to the developers. Unfortunately,
-there is no conceivable way to study these unreported
-dependent tests. 
+We accepted the developers' judgment regarding which tests are dependent
+and the severity of each test.  We did not intentionally ignore
+any test dependence in the issue tracking system.
+However, a limitation is that the developers might have made a mistake,
+might not have marked a test dependence in a way we found it, and may not
+have found all the dependent tests in those projects. 
 
 %We believe the dependent tests in our study
 %provide a representative sample in these software applications.
 
-In our study, we do not emphasize any quantitative characteristic
-results, and most of our findings are consistent across
-the examined dependent tests.
+% In our study, we do not emphasize any quantitative characteristic
+% results, and most of our findings are consistent across
+% the examined dependent tests.
 
 %  LocalWords:  JBoss Codehaus reproducibility multi dependences SWT CLI
 %  LocalWords:  TestDisplay test13666 subsequences
