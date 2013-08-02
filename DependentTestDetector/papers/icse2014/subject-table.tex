@@ -9,23 +9,12 @@
 \\
 \hline
 %\midrule
-CLI &  & 206 
-% 206 is number retrieved from dt tool.
-& 2821&  757051\\
 JodaTime & & 3875 
 % 3875 is retrieved by running mvn test on the related revision
 & 2663 &  b609d7d66d\\
 Crystal & & 75 & 2542 & trunk version\\
-XML Security & & 108 & 2947 & version 1.0.4 \\ %, 1.0.5d2\\
-Eclipse SWT & & $80^*$ 
-% 80 is the total number of tests in DisplayTest and MenuItemTest classes.
-& -- 
-% 49 comes from the following: there are 51 places where
-% new Display() is created inside the DisplayTest. All of these places would
-% throw InvalidThreadAccessException. However two methods create two Displays,
-% so there are normally 49 unique methods that create a display object.
-& version 3.0 \\
-Beanutils & & 1060 & 2692 & version 1.8.3 \\
+XML Security & & 108 & 2947 & version 1.0.4 \\ 
+Derby & &  & &  \\ 
 %\bottomrule
 \hline
 \end{tabular}
