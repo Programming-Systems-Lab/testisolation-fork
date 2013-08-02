@@ -1,38 +1,40 @@
 \begin{abstract}
-Test dependence arises when executing a test in different
-orders among existing tests
-%environments
-causes it to return different results. It has been broadly assumed
-that tests in a suite are inherently independent. This paper
-investigates the validity of this assumption, and presents four results. 
 
-First, we describe a study of \dtnum confirmed,
-real-world dependent tests from \repnum
-issue tracking systems to show that test dependence arises in practice.
-Our study identifies common characteristics of
-dependent tests, and shows that test dependence can have potentially costly
-repercussions such as masking program faults and leading
-to spurious bug reports, and can be hard to identify
-unless explicitly searched for.
+In a test suite, all the test cases should be independent:  no test
+should affect any other test, and running the tests in any order
+should produce the same test outcomes.  Techniques such as test selection
+and prioritization assume that the tests in a suite are independent.
+This paper presents four results related to test dependence.
+
+First, we show that test dependence arises in practice.
+We studied \dtnum real-world dependent tests from \repnum
+issue tracking systems.
+Our study identifies common characteristics of dependent tests.
+It shows that test dependence can be hard for programmers to identify.
+It also shows the costly consequences of test dependence, such as masking
+program faults and leading to spurious bug reports.
 
 Second, we formally define test dependence in terms of
 test suites as ordered sequences of tests along with explicit
-environments in which these tests are executed. We use this
-formalization to formulate the problem
-of detecting dependent tests, and prove that a useful special
+environments in which these tests are executed.
+We formulate the problem
+of detecting dependent tests and prove that a useful special
 case is NP-complete. 
 
-Third, guided by the study, we propose two algorithms to detect
+Third, guided by the study of real-world dependent tests, we propose two
+algorithms to detect
 dependent tests in a test suite. 
 %Our algorithms use both static and
 %dynamic program analyses to quickly \todo{the goal
 %of algorithms here.}
 
-Fourth, we implement our dependent test detection algorithms
-in a prototype tool, and apply it to \todo{xx} real-world programs.
+Fourth, we implemented our dependent test detection algorithms
+and applied them to \todo{xx} real-world programs.
 Our tool revealed a large number of previously-unknown dependent tests.
 In our study, on average \todo{xx}\% of the human-written tests are
 dependent and \todo{xx}\% of the automatically-generated tests
 are dependent.
 
 \end{abstract}
+
+\label{dummy-label-for-etags}
