@@ -24,8 +24,8 @@ etc), and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
 helps us understand whether the report is about test dependence
--- a test manifesting different behaviors under different execution
-environment. Each likely dependent test is examined by
+-- a test manifesting different behaviors under different
+test execution orders. Each dependent test is examined by
 at least two people and the whole process consists of serveral
 rounds of (re-)study and cross checking. We ignored reports
 that are described vaguely, and excluded tests whose results are
@@ -38,59 +38,92 @@ tests.
 
 \input{studyresult}
 
-Table~\ref{tab:studyresults} summarizes all studied dependent tests.
+Table~\ref{tab:studyresults} summarizes all collected dependent tests.
 
 
 \subsubsection{Characteristics}
 
-We characterize dependent tests in three
-
-\noindent \textbf{{Dependent tests exists in practice.}}
-Developers treat it as a problem that should be fixed.
+We summarize characteristics of dependent tests in three
+aspects: manifestation, root cause, and developers' reaction.
 
 \vspace{1mm}
-\noindent \textbf{{At least 82\% of the studied dependent
-tests can be manifested by no more than 2 tests.}} In theory,
-it may enumerate every possible combination.
+\noindent \textbf{{Manifestation: at least 82\% of the dependent
+tests in the study can be manifested by no more than 2 tests.}} In theory,
+given a $n$-sized test suite, dependent test can occur in any
+length of permutations. However, among \dtnum collected tests,
+86 (82\%) of them can be manifested by running no more than
+2 tests. 
 
 \vspace{1mm}
-\noindent \textbf{{Developers usually ignore dependent
-tests due to lack of tool support.}}
+\noindent \textbf{{Root cause: at least 52\% of the dependent tests
+in the study arise because of the inproper access to shared static
+variables.}} Among \dtnum dependent tests, 58 (52\%) of them
+arise due to inappriopriate access to
+shared static varialbes; and 13 (12\%) of them arise
+due to inappropriate access to file systems or other
+execution environment. 
 
 \vspace{1mm}
-\noindent \textbf{{At least 52\% of the dependent tests arise
-because of accessing shared static variables.}}
+\noindent \textbf{{Developers' reactions: dependent tests
+often indicate flaws in the test code, and developers usually
+ignore dependent tests due to the lack of tool support.}}
+In some cases, they are intentional, developers are aware
+of them and document them, but in other cases they are
+inadvertent. Among \dtnum collected dependent tests,
+97 (93\%) of them were treated as major or minor problems,
+but only 34 (32\%) of them got fixed by developers. Among
+the 34 fixed dependent tests, only 7 fixes are
+on the program code, while the other fixes are on the
+tested code. This indicates that dependent tests usually
+reveal potential flaws in the test code rather than the test code.
+Based on developers' discussion, we found that although
+developers admitted that such test dependence should be removed,
+they often leave the dependence unresolved, sometimes by merging
+two tests or adding explaintory documentation. The primary
+reason is that the current JUnit testing framework does not
+support to explicitly specify test dependence in the test code.
 
-Finding on dependence patterns
 
-Findings on dependence manifestation
-
-Findings on dependence resolution
-
-Findings on Dependence avoidance
+%Test dependence can cause problems, not only
+%when test suites are reordered, but even when they are
+%executed in the intended order.
 
 
 
 \subsubsection{Repercussions of Dependent Tests}
+\label{sec:repercussion}
 
-Most dependent tests identified in our study fall into a small
-number of categories\todo{how many, be specific}. We describe each category below and give
+\input{categorytable}
+
+The dependent tests identified in our study fall into 3
+categories (Table~\ref{tab:reper}). We describe each category below and give
 concrete examples. 
+%classifies
+%the collected tests into these 3 categories.
 
 \vspace{1mm}
 
-\noindent \textbf{Poor Test Construction.}
-The test dependences in this category arise due to incorrect initialization
-of program state by one or more tests. In the first case,
-tested program code relies on a
-global variable that is a part of the environment, but the test does
-not properly initialize it.  In the second case, a test should but
-does not call
-an initialization function before later invocations to a complex library.
-This flaw in the test code is masked because the default test suite execution
-order includes other tests that initialize the library.  The defect is
-inconsequential until and unless the flawed test is reordered, either manually or by
-a downstream tool, to execute before any other initializing test.
+\noindent \textbf{Poor Test Construction.} Most identified
+dependent tests fall into this category. The test dependences
+arise due to incorrect initialization of program state by one
+or more tests, and reveal flaws in the test suite itself
+rather than the tested code. Typically, one test initializes
+a global variable or the execution envrionment; and another
+test does not perform any initialization, but
+relies on the program state after the first test's execution.
+%global variable that is a part of the environment, but the test does
+%not properly initialize it.  In the second case, a test should but
+%does not call
+%an initialization function before later invocations to a complex library.
+Such dependence in the test code is often masked because
+the initializing test always executes before other tests in the
+default execution order. The dependent tests are revealed
+until the initializing test is reordered to execute
+\textit{after} other tests. 
+
+%the default test execution order includes tests that initialize the library.  The defect is
+%inconsequential until and unless the flawed test is reordered, either manually or by
+%a downstream tool, to execute before any other initializing test.
 
 \vspace{1mm}
 
@@ -113,20 +146,20 @@ correctly, it can take a considerable amount of time to work out that
 these reported failures are spurious.
 %Or worse, the developers may try
 %to fix a bug that is not there.
-Consider a dependent test in SWT~\cite{swt},
-in September 2003, a user reported a
-bug,\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}}
+For example,
+in September 2003, a user fired a
+bug report in SWT~\cite{swt}\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}},
 stating that tests were failing unexpectedly
 if she runs any other test before \texttt{TestDisplay} --
-a test suite creates a new \code{Display} object and tests its
+a test suite creating a new \code{Display} object and testing its
 implementation. However, this bug report was spurious and was
 caused by undocumented test dependence.
 Its root cause is quite simple: in SWT, only one global \texttt{Display}
 object is allowed; the tests that reporters try to run
-creates, but does not dispose of a \code{Display} object, while
+create, but do not dispose of a \code{Display} object, while
 the tests in \code{TestDisplay} attempt to create
 a new \code{Display} object, which fails, as one
-is already created. This is the expected and desired behavior,
+is already created. This is the desired behavior,
 and points to a potential problem in the test suite rather
 than the code.
 
@@ -144,7 +177,7 @@ $\env_R$.
 \input{clicode}
 
 We only found two dependent tests in
-the Apache CLI library~\cite{cli}.
+the Apache CLI library~\cite{cli} for this category.
 In CLI, two test cases fail when run in isolation:
 \code{test13666} and \code{test\-Op\-tion\-With\-out\-Short\-For\-mat2} in test
 classes \code{Bugs\-Test} and \code{Help\-For\-mat\-ter\-Test},
@@ -153,17 +186,20 @@ respectively, but both pass when running in the default order.
 Figure~\ref{fig:option_builder} shows the simplified code and
 tests. Both dependent tests can reveal this fault,  but
 the default order of test execution makes both tests pass
-accidently and then mask the faults. Such dependent tests
+accidently. Such dependent tests
 make non-trivial impact in practice.
 This fault is reported in the bug
 database several times,\footnote{\url{https://issues.apache.org/jira/browse/CLI-26} \url{https://
 issues.apache.org/jira/browse/CLI-186} \url{https://issues.apache.org/jira/browse/
 CLI-187}} starting on March 13, 2004 (CLI-26). The report is marked as resolved
-\emph{three years} later on March 15, 2007, but is then reopened as CLI-186 on
-July 31, 2009. About one month later, the bug is duplicated as
-CLI-187, and the actual fix happens one 
-year later on June 19, 2010, about six years after the bug was first reported (and four years
-total on the open-issue list).
+\emph{three years} later on March 15, 2007 until developers
+realized the test dependence.
+
+%, but is then reopened as CLI-186 on
+%July 31, 2009. About one month later, the bug is duplicated as
+%CLI-187, and the actual fix happens one 
+%year later on June 19, 2010, about six years after the bug was first reported (and four years
+%total on the open-issue list).
 
 
 %On this report, one of the developers commented:
@@ -180,48 +216,77 @@ total on the open-issue list).
 
 \subsubsection{Implications}
 
-\vspace{1mm}
-\noindent \textbf{Need to explicit search for, tool support}
+We summarize the main implications of our findings.
+
+\noindent \textbf{{Dependent tests exists in practice, but
+they can be hard to identify unless explicitly searched for.}}
+None of the dependent tests we studied is identified by
+running the existing test suite in the default order. Often,
+the test dependence is reported until and unless the
+test suite is recordered, either manually by a user or
+a maintainer or by a downstream tool. This indicates that
+specialized tools to detect such dependence are needed.
 
 \vspace{1mm}
-\noindent \textbf{Tools
-should focus on static variables}
-In some cases, they are intentional, developers are aware
-of them and document them, but in other cases they are
-inadvertent. Test dependence can cause problems, not only
-when test suites are reordered, but even when they are
-executed in the intended order.
+\noindent \textbf{Dependent test detection techniques
+can bound the search space to a small number of tests.}
+In theory, given a $n$-sized test suite, a technique need
+to exhaustively execute all $n!$ permutations of the
+test suite to detect dependent tests. This is
+not feasible for realistic $n$. As indicated by our study,
+most of the dependent tests can be manifested by executing
+no more than 3 tests. This finding suggests that
+many realistic dependent tests might be found by
+running just short subsequences of test suites
+with a bound $k$ on the length of subsequences. That
+effectively bounds the execution time to $O(n^k)$,
+which for small $k$ is tractable.
 
 \vspace{1mm}
-\noindent \textbf{Bounding the length
-of search}
+\noindent \textbf{Dependent test detection techniques
+should focus on analyzing static variable accesses.}
+More than half of the studied dependent tests are caused
+by static variable access. Thus, focusing on analyzing
+static variables can be a cost-effective way for a
+tool design. \todo{need to re-write the above}
 
-\vspace{1mm}
-\noindent \textbf{Most dependent tests are not easy to identify unless explicitly searched for.}
+%dependent tests.
+%can bound Tools
+
+
+%\vspace{1mm}
+%\noindent \textbf{Dependent test fixing tool
+%Test dependence reveals flaws in the test code.}
+%This indicates that a potential dependent test fixing tool should target
+%the test code
+
 
 \subsection{Caveats}
 
 Our findings need to be taken with the methodology in mind. The
-bug repositories in our study cover representative and important
+issue tracking systems in our study cover representative and important
 software applications with comprehensive test suites; and
 all studied dependent tests are from well-tested
-applications. Nevertheless, most applications we studied
+applications. Nevertheless, all applications we studied
 are written in Java, and the tests are in the form of JUnit.
 Thus, we do not claim our findings can be extended to
 arbitrary programs.
 
-The dependent tests in our study are collected from bug
-repositories. We have followed the decisions made by
-developers to classify the category, severity, and
-\todo{other characteristics} of a dependent test,
+The dependent tests in our study are collected from public-accessible
+issue tracking systems. We have followed the decisions made by
+developers to determine a dependent test, and its severity;
 and did not intentionally ignore
-any test dependence in bug repository. However,
-it is entirely possible, if not almost certainly,
-that some dependent tests may never
+any test dependence in the issue tracking system. However,
+it is almost certain our methodology will miss
+some dependent tests in the tracking system. This is
+because our search keyword list is not complete. Further,
+some dependent tests may never
 be identified, or reported to the developers. Unfortunately,
 there is no conceivable way to study these unreported
-dependent tests. We believe the dependent tests in our study
-provide a representative sample in these software applications.
+dependent tests. 
+
+%We believe the dependent tests in our study
+%provide a representative sample in these software applications.
 
 In our study, we do not emphasize any quantitative characteristic
 results, and most of our findings are consistent across

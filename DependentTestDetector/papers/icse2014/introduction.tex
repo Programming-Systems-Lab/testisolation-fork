@@ -119,8 +119,9 @@ there or a test fails suspciously.
 %In this paper, we seek to understand dependent tests and their repercussions
 %in two ways. 
 
-After analyzing \todo{xx} real-world, confirmed dependent
-tests from existing bug repositories (Section~\ref{sec:study}), we identified three
+After analyzing \dtnum real-world, confirmed dependent
+tests from \repnum software issue tracking systems
+(Section~\ref{sec:study}), we identified three
 major categories of repercussions that can arise due to the presence of dependent tests.
 First, most test suites that unexpectedly contain dependent tests \emph{conceal
 weaknesses in the test suite} itself. Exposing
@@ -136,7 +137,7 @@ Third, even worse, test suites that unexpectedly contain dependent tests can
 default order does not expose the fault, whereas
 executing the same test suite in a different order does. We found 
 a bug masked two dependent tests
-for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{}).
+for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{sec:repercussion}).
 
 %Second, guided by the findings of our study, we design two algorithms
 %to detect manifest dependent tests. By applying our algorithms
@@ -178,9 +179,12 @@ This paper makes the following contributions:
 
 \begin{itemize}
 
-  \item \textbf{Study.} We describe a study of \todo{NUM} real-world
-  dependent tests from well-known bug repositories to show that test dependence
-  arises in practice. Our study indicates that test dependence can have
+  \item \textbf{Study.} We describe a study of \dtnum real-world
+  dependent tests from \repnum software issue tracking
+  systems to show that test dependence
+  arises in practice. Our study identifies common
+  characteristics of dependent tests, and
+  indicates that test dependence can have
   potentially costly repercussions, and can be hard to identify unless
   explicitly searched for (Section~\ref{sec:study}).
 

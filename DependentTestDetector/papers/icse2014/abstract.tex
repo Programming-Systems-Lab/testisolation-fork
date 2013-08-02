@@ -1,13 +1,16 @@
 \begin{abstract}
-Test dependence arises when executing a test in different environments
+Test dependence arises when executing a test in different
+orders among existing tests
+%environments
 causes it to return different results. It has been broadly assumed
 that tests in a suite are inherently independent. This paper
 investigates the validity of this assumption, and presents four results. 
 
-First, we describe a study of \todo{xx}
-real-world dependent tests from \todo{xx} bug repositories
-to show that test dependence arises in practice.
-Our study shows that test dependence can have potentially costly
+First, we describe a study of \dtnum confirmed,
+real-world dependent tests from \repnum
+issue tracking systems to show that test dependence arises in practice.
+Our study identifies common characteristics of
+dependent tests, and shows that test dependence can have potentially costly
 repercussions such as masking program faults and leading
 to spurious bug reports, and can be hard to identify
 unless explicitly searched for.
@@ -27,8 +30,8 @@ dependent tests in a test suite.
 
 Fourth, we implement our dependent test detection algorithms
 in a prototype tool, and apply it to \todo{xx} real-world programs.
-Our tool revealed a large number of unknown dependent tests, 
-indicating that on average\todo{xx}\% of the human-written tests are
+Our tool revealed a large number of previously-unknown dependent tests.
+In our study, on average \todo{xx}\% of the human-written tests are
 dependent and \todo{xx}\% of the automatically-generated tests
 are dependent.
 
