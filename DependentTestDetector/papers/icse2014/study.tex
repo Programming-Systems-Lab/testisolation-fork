@@ -1,5 +1,5 @@
 %\section{Dependent Tests in Practice}
-\section{Understanding Dependent Tests: Characteristic Study}
+\section{Real-World Dependent Tests}
 \label{sec:study}
 
 To investigate whether dependent tests can reach beyond theory
@@ -13,38 +13,38 @@ well-known open source programs.
 We chose five well-known, public-accessible software issue
 tracking systems to examine: Apache~\cite{apachebug},
 Eclipse~\cite{eclipsebug}, JBoss~\cite{jbossbug},
-Hibernate~\cite{hibernatebug}, and Codehuas~\cite{codehuasbug}.
-Each issue tracking system serves for tens of project, and
-keeps thousands of bug reports, feature requests, improvement
+Hibernate~\cite{hibernatebug}, and Codehaus~\cite{codehausbug}.
+Each issue tracking system serves tens of projects, and
+holds thousands of bug reports, feature requests, improvement
 suggestions, etc.
 
 For each issue tracking system, we searched for a set of keywords
 (``dependent test'', ``test dependence'', ``test execution order'',
-etc), and manually examined the matched results. For each match, we read the
+etc.\todo{for concreteness and reproducibility, list every search term}), and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
-helps us understand whether the report is about test dependence
- --- a test manifesting different behaviors under different
-test execution orders. Each dependent test is examined by
-at least two people and the whole process consists of serveral
-rounds of (re-)study and cross checking. We ignored reports
+helped us understand whether the report is about test dependence
+--- a test manifesting different behaviors under different
+test execution orders. Each dependent test candidate was examined by
+at least two people and the whole process consisted of serveral
+rounds of (re-)study, cross checking, and efforts to reproduce. We ignored reports
 that are described vaguely, and excluded tests whose results are
 affected by non-determinism (e.g., multi-threading).
-In total, we have spent more than half year to collect and analyze all dependent
-tests. 
+In total, we have spent more than 6 person-months to collect and analyze
+the dependent tests. 
 
 
 \subsection{Findings}
 
 \input{studyresult}
 
-Table~\ref{tab:studyresults} summarizes all collected dependent tests.
+Table~\ref{tab:studyresults} summarizes the dependent tests.
 
 
 \subsubsection{Characteristics}
 
-We summarize characteristics of dependent tests in three
-aspects: manifestation, root cause, and developers' reaction.
+We summarize three characteristics of dependent tests:
+manifestation, root cause, and developers' reaction.
 
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least 82\% of the dependent
