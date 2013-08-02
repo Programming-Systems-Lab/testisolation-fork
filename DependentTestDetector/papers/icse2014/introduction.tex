@@ -1,20 +1,34 @@
 \section{Introduction}
 
+\todo{Is ``dependent test'' a term that can be applied to one test in
+  isolation?  Or is a pair of tests dependent on one another if the result
+  of one of them changes if the other one is run first?  The paper doesn't
+  make this clear anywhere in sections 1 and 2, and this leads to some
+  confusion for the reader.}
+
 Informally, \emph{dependent tests} produce different test results when
 executed in different contexts. %, while \emph{independent tests} produce
 %the same test results regardless of execution order.  
-It is easy to
-construct an example of dependence between two tests \code{A}
+An example is two tests \code{A}
 and \code{B}, where running \code{A} and then \code{B} leads
 to both tests passing, while running \code{B} and then
-\code{A} leads to either or both tests failing---the order
-of applying the tests, in this case, changes the execution context.
+\code{A} leads to one or both tests failing.
+
+\todo{Would a better example focus on just one test \code{B}:  it produces
+  a different result (succeed/fail) depending on whether test \code{A} is run
+  before it or not.  I'm not sure whether this would be an improvement or
+  not; it perhaps depends on the intended definition of ``dependent test'',
+  which is not clear.}
+
 
 %~\cite{KapfhammerS03}
 %Chays:2000:FTD:347324.348954,
 %Gray:1994:QGB:191843.191886}, 
 \todo{find a place to emphase unit tests}
 
+\todo{I am inclined to move this paragraph to the related work.  It is
+  relevant, but not so important that it belong as the second paragraph in
+  the paper.}
 Definitions in the testing literature are generally clear that the
 conditions under which a test is executed may affect its result.  The
 importance of context in testing has been explored in some depth in
@@ -22,20 +36,28 @@ some domains including databases~\cite{Gray:1994:QGB:191843.191886,Chays:2000:FT
 kapfhammeretal:FSE:2003}, with results about test
 generation, test adequacy criteria, etc., and mobile
 applications~\cite{Wang:2007:AGC}.
+\todo{I cannot follow the given citation --- I came away from it unsure of
+  the definition of ``non-restricted'' or how this is relevant.  Perhaps
+  reploce the direct quote by a paraphrase.}
 For the database domain, Kapfhammer and Soffa formally
-define and distinguish independent test suites from those that are
-\emph{non-restricted\/} and thus ``can capture more of an application's
+define independent test suites and distinguish them from a
+\emph{non-restricted} suite that ``can capture more of an application's
 interaction with a database while requiring the constant monitoring of
 database state and the potentially frequent re-computations of test
 adequacy''~\cite[p.~101]{kapfhammeretal:FSE:2003}.
 
-At the same time, there is little focus on the core
-issues of
-test dependence itself.
-Is this because test dependence does
-not arise in practice (beyond domains such as databases)?  Is it because, even if-and-when it does arise, there
-are few if any repercussions?  Is it because it is difficult to
-notice if-and-when it arises?
+
+Test independence is a common assumption in testing research and practice:
+theoretical results, algorithms, and tools all fail or behave unexpectedly
+in the presence of dependent tests.
+However, this critical assumption is rarely questioned or investigated.
+\todo{Probably revise the below list.}
+Is this acceptable, because test dependence does
+not arise in practice?
+Is it acceptable because even when test dependence arises, there are few
+negative repercussions?
+Is it because the problem is important but no one has thought to examine it?
+Is it because the problem is important but is too hard to analyze or understand?
 \todo{note, the above questions must be recalled and discussed after
 presentating the study and evaluation. do not forget.}
 
@@ -46,66 +68,97 @@ of test dependence that:
 \begin{itemize}
 \item Adopts the results of the default, usually implicit,
   order of execution of a test suite as the \emph{expected results}. 
-\item Asserts \emph{test dependence\/} when there is a possibly
+\item Asserts \emph{test dependence} when there is a possibly
   reordered subsequence of the original test suite that, when
   executed, has at least one test result that differs from the
   expected result for that test.  
 \end{itemize}
-That is, we focus on a \emph{manifest\/} perspective of test dependence,
-requiring a \emph{concrete\/} variant of the test suite that
-\emph{dynamically\/} produces different results from the expected.  Our
+That is, we focus on a \emph{manifest} perspective of test dependence,
+requiring a \emph{concrete} variant of the test suite that
+\emph{dynamically} produces different results from the expected.  Our
 definition differs from that of Kapfhammer and Soffa by considering
 test results rather than program and database states.
 Considering only manifest test dependences allows
 us to more easily situate this research in the empirical domain (Section~\ref{sec:formaldiscussion}).
 
 
+\todo{We need a consistent set of terminology.  I like the following, 
+adapted from http://en.wikipedia.org/wiki/Dependability:
+\begin{itemize}
+\item
+ Defect:
+      A flaw, failing, or imperfection in a system, such as an
+      incorrect design, algorithm, or implementation.  Also known as a
+      fault or bug.  Typically caused by a human mistake.
+\item
+ Error:
+      An error is a discrepancy between the intended behaviour of a
+      system and its actual behavior inside the system boundary.  Not
+      detectable without assert statements and the like.
+\item
+ Failure:
+      A failure is an instance in time when a system displays
+      behavior that is contrary to its specification.
+\end{itemize}
+but if we use something else (which would be fine), we should define the terms.}
+
 
 \subsection{Test Execution Environment}
 
-Varying execution environments is the unsurprising central
-cause of test dependence. Specifically, when a
-test is executed in different environments---global variables
-with different values, differences in the file system, differences in
-data obtained from web services, etc.---it has the potential to return
+Test dependence results frm interactions with the execution environment.
+Specifically, when a
+test is executed in different environments --- global variables
+with different values, differences in the file system, etc. --- it has the
+potential to yield
 a different result.  
-As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation}, most of the dependences we found
-ultimately stem from incorrect or incomplete initialization
-of the program environment.
 
-Why does this happen? Especially given frameworks such as
-JUnit that facilitate the process of clean setup by providing means to
-automatically execute methods (\code{setUp()} and \code{tearDown()} in JUnit
-3.x, and methods annotated with \code{@Before} and \code{@After} in
-JUnit 4.x) that should handle all common setup and clean-up between
-test cases. 
+Ideally, each test does not depend on its environment, because it
+initializes any resources it will use and/or uses mocked resources.
+Likewise, the test does not modify its environment, because of mocks or
+resetting resources after test execution.
 
-It appears that the answer is that developers are as likely
+In practice, developers are as likely
 to make mistakes when writing tests as when they are writing other code.
-And while frameworks make it easier to get environment setup right, 
-they cannot ensure that it is done properly. 
-Like with other code, this means that tests in some cases will have
-unintended and unexpected behaviors.  And as programs increase in complexity,
-so may tests, which may increase the frequency of such problems in tests,
-which may in turn increase the frequency of test dependence.
-The situation is exacerbated by the fact that global variables shared by tests
+As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation}, most of the dependences we found
+stem from incorrect or incomplete initialization
+of the program environment.
+Programmers made these errors even though frameworks such as
+JUnit provede ways to set up the environment for a test execution and clean
+up the environment afterward.
+
+% that facilitate the process of clean setup by providing means to
+% automatically execute methods (\code{setUp()} and \code{tearDown()} in JUnit
+% 3.x, and methods annotated with \code{@Before} and \code{@After} in
+% JUnit 4.x) that should handle all common setup and clean-up between
+% test cases. 
+
+
+% And while frameworks make it easier to get environment setup right, 
+% they cannot ensure that it is done properly. 
+% Like with other code, this means that tests in some cases will have
+% unintended and unexpected behaviors.  And as programs increase in complexity,
+% so may tests, which may increase the frequency of such problems in tests,
+% which may in turn increase the frequency of test dependence.
+% The situation is exacerbated by the fact that 
+
+Test dependence is usually caused by
+global variables shared by tests.
 %These tests
 %shared global variables, and the test results varied depending on the
 %values stored in these variables.  
-%That is, relevant execution conditions---specifically, pertinent parts
-%of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc.---were neglected.
-are usually buried deep in the program code, and the assertions
-do not directly check them,
+%That is, relevant execution conditions --- specifically, pertinent parts
+%of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc. --- were neglected.
+Buried deep in the program code, and the assertions
+do not directly check the global variables,
 but rather check values that have been computed from
-them. In many non-trivial real-world programs, this
-deep nesting effectively hides potential dependencies from developers,
-and they may only become aware of them when a subtle bug leads them
-there or a test fails suspciously.
+them.
+Developers don't notice the dependencies until they are deep in debugging a
+subtle bug or test failure.
 
 %Therefore, we explicitly
-%distinguish potential test dependences (Definition~\ref{def:dependency})---those that could cause a variation in test suite results 
-%under \emph{some} environment and order---and manifest test
-%dependences (Definition~\ref{def:manifest})---those that are guaranteed to cause a
+%distinguish potential test dependences (Definition~\ref{def:dependency}) --- those that could cause a variation in test suite results 
+%under \emph{some} environment and order --- and manifest test
+%dependences (Definition~\ref{def:manifest}) --- those that are guaranteed to cause a
 %variation in test suite results under a \emph{specific} environment and order.  
 
 
@@ -119,24 +172,29 @@ there or a test fails suspciously.
 %In this paper, we seek to understand dependent tests and their repercussions
 %in two ways. 
 
-After analyzing \dtnum real-world, confirmed dependent
-tests from \repnum software issue tracking systems
-(Section~\ref{sec:study}), we identified three
-major categories of repercussions that can arise due to the presence of dependent tests.
-First, most test suites that unexpectedly contain dependent tests \emph{conceal
-weaknesses in the test suite} itself. Exposing
+Our study of \dtnum real-world, confirmed dependent
+tests 
+% from \repnum software issue tracking systems
+(Section~\ref{sec:study}) identified three
+major consequences of dependent tests.
+%
+First, dependent tests usually indicate a
+\emph{weaknesses in the test suite}. Exposing
 dependent tests can detect code smells and identify situations
 where some tests do not perform proper initialization.
-Second, a test suite containing test dependences can lead
-to \emph{spurious bug reports}. As an example, a dependent test in
-eclipse SWT took the developers
-more than a month to realize that the test dependences were intentional,
+%
+Second, test dependences can lead
+to \emph{spurious bug reports}. As an example, the Eclipse developers
+investigated a dependent test\todo{Give URL or other identifying information} in
+SWT for
+more than a month before realizing that the test dependences were intentional,
 allowing them to close the bug report without a change to the system.
-Third, even worse, test suites that unexpectedly contain dependent tests can
+%
+Third, dependent tests can
 \emph{mask faults in a program}. Specifically, executing a test suite in the
 default order does not expose the fault, whereas
 executing the same test suite in a different order does. We found 
-a bug masked two dependent tests
+a bug\todo{Give URL or other identifying information} that had been masked by two dependent tests
 for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{sec:repercussion}).
 
 %Second, guided by the findings of our study, we design two algorithms
@@ -144,16 +202,15 @@ for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{sec:repercussion}
 %to \todo{xx} open-source programs and their test suites, we 
 %found a large number of unknown dependent tests, .
 
-Another important impact of dependent test is for downstream testing
-techniques, in which the underlying test execution context can
-unexpectedly change is when a tool or technique that takes a test
-suite as input is used.  Examples of such techniques include
+Dependent tests also interfere with downstream testing
+techniques that change a test's execution context.
+Examples of such techniques include
 test selection techniques (that identify a subset of
-the input test suite that will guarantee some properties during
+the input test suite to run during
 regression testing)~\cite{harroldetal:OOPSLA:2001},
 test prioritization techniques (that reorder the
-input to increase the rate of fault detection)~\cite{Elbaum:2000:PTC:347324.348910},
-test parallelization techniques (that schedule the input for execution across multiple
+input to discover defects sooner)~\cite{Elbaum:2000:PTC:347324.348910},
+test parallelization techniques (that schedule the input tests for execution across multiple
 CPUs), test generation techniques~\cite{PachecoLET2007, SPLAT},
 test factoring~\cite{Saff:2005} and test carving~\cite{Elbaum:2006} (which take system tests as
 input and create unit tests and differential unit tests,
@@ -161,10 +218,10 @@ respectively), experimental debugging techniques (such as Delta Debugging~\cite{
 which requires running a set of tests repeatedly), etc. 
 
 Many such downstream testing techniques implicitly assume that
-there are no test dependences in the input test suite.  Our concern is
-that this assumption can cause \emph{delayed problems} in the face
+there are no test dependences in the input test suite.  Violation of
+this assumption, as we show happens in practice, can cause \emph{delayed problems} in the face
 of latent test dependence in the input.  As an
-example, test selection may report a subsequence of tests that do not
+example, test selection may produce a subsequence of tests that do not
 return the same results as they do when executed originally, as part of the full suite.
 
 %Of these techniques, we are most concerned about
@@ -184,13 +241,13 @@ This paper makes the following contributions:
   systems to show that test dependence
   arises in practice. Our study identifies common
   characteristics of dependent tests, and
-  indicates that test dependence can have
-  potentially costly repercussions, and can be hard to identify unless
+  it indicates that test dependence can have
+  potentially costly repercussions and can be hard to identify unless
   explicitly searched for (Section~\ref{sec:study}).
 
-\item \textbf{Formalization.} We provide a formalization of test dependence
+\item \textbf{Formalization.} We formalize test dependence
   in terms of test suites as ordered sequences of tests and explicit execution
-  environments for test suites, which enables reasoning about test dependence
+  environments for test suites.  The formalization enables reasoning about test dependence
   as well as a proof that finding \emph{manifest} dependences is an NP-complete
   problem (Section~\ref{sec:formalism}).
 
@@ -200,6 +257,9 @@ This paper makes the following contributions:
   a bounding parameter $k$ to identify tests exhibiting different results.
   The second improved algorithm uses static and dynamic program analyses
   to reduce the search space. \todo{check the above}
+  \todo{Say something brief about the guarantees.  In particular, the
+    algorithms find test dependences but don't guarantee to find all test
+    dependences.}
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
   tool, and applied it to \todo{NUM} real-world subject programs. Our

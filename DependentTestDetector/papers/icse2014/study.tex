@@ -24,7 +24,7 @@ etc), and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
 helps us understand whether the report is about test dependence
--- a test manifesting different behaviors under different
+ --- a test manifesting different behaviors under different
 test execution orders. Each dependent test is examined by
 at least two people and the whole process consists of serveral
 rounds of (re-)study and cross checking. We ignored reports
@@ -150,7 +150,7 @@ For example,
 in September 2003, a user fired a
 bug report in SWT~\cite{swt}\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}},
 stating that tests were failing unexpectedly
-if she runs any other test before \texttt{TestDisplay} --
+if she runs any other test before \texttt{TestDisplay} --- 
 a test suite creating a new \code{Display} object and testing its
 implementation. However, this bug report was spurious and was
 caused by undocumented test dependence.
