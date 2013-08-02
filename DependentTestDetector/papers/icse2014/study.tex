@@ -26,7 +26,7 @@ and developers, and the fixing patches (if available). This information
 helped us understand whether the report is about test dependence
 --- a test manifesting different behaviors under different
 test execution orders. Each dependent test candidate was examined by
-at least two people and the whole process consisted of serveral
+at least two people and the whole process consisted of several
 rounds of (re-)study, cross checking, and efforts to reproduce. We ignored reports
 that are described vaguely, and excluded tests whose results are
 affected by non-determinism (e.g., multi-threading).
@@ -56,10 +56,10 @@ length of permutations. However, among \dtnum collected tests,
 
 \vspace{1mm}
 \noindent \textbf{{Root cause: at least 52\% of the dependent tests
-in the study arise because of the inproper access to shared static
+in the study arise because of the improper access to shared static
 variables.}} Among \dtnum dependent tests, 58 (52\%) of them
-arise due to inappriopriate access to
-shared static varialbes; and 13 (12\%) of them arise
+arise due to inappropriate access to
+shared static variables; and 13 (12\%) of them arise
 due to inappropriate access to file systems or other
 execution environment. 
 
@@ -79,7 +79,7 @@ reveal potential flaws in the test code rather than the test code.
 Based on developers' discussion, we found that although
 developers admitted that such test dependence should be removed,
 they often leave the dependence unresolved, sometimes by merging
-two tests or adding explaintory documentation. The primary
+two tests or adding explanatory documentation. The primary
 reason is that the current JUnit testing framework does not
 support to explicitly specify test dependence in the test code.
 
@@ -108,7 +108,7 @@ dependent tests fall into this category. The test dependences
 arise due to incorrect initialization of program state by one
 or more tests, and reveal flaws in the test suite itself
 rather than the tested code. Typically, one test initializes
-a global variable or the execution envrionment; and another
+a global variable or the execution environment; and another
 test does not perform any initialization, but
 relies on the program state after the first test's execution.
 %global variable that is a part of the environment, but the test does
@@ -186,7 +186,7 @@ respectively, but both pass when running in the default order.
 Figure~\ref{fig:option_builder} shows the simplified code and
 tests. Both dependent tests can reveal this fault,  but
 the default order of test execution makes both tests pass
-accidently. Such dependent tests
+accidentally. Such dependent tests
 make non-trivial impact in practice.
 This fault is reported in the bug
 database several times,\footnote{\url{https://issues.apache.org/jira/browse/CLI-26} \url{https://
@@ -223,7 +223,7 @@ they can be hard to identify unless explicitly searched for.}}
 None of the dependent tests we studied is identified by
 running the existing test suite in the default order. Often,
 the test dependence is reported until and unless the
-test suite is recordered, either manually by a user or
+test suite is reordered, either manually by a user or
 a maintainer or by a downstream tool. This indicates that
 specialized tools to detect such dependence are needed.
 
@@ -291,3 +291,6 @@ dependent tests.
 In our study, we do not emphasize any quantitative characteristic
 results, and most of our findings are consistent across
 the examined dependent tests.
+
+%  LocalWords:  JBoss Codehaus reproducibility multi dependences SWT CLI
+%  LocalWords:  TestDisplay test13666 subsequences
