@@ -1,11 +1,6 @@
 \section{Related Work}
 \label{sec:related}
 
-%\todo{missing related work, JCrasher~\cite{Csallner:2004}, the ISSTA'13 paper~\cite{Steimann:2013}}
-
-%Much literature on testing omits details about the structure of a
-%test suite; this is reasonable and unsurprising because particulars
-%about test suites are often immaterial to the results or discussions.
 Denoting a group of test cases as a ``suite of test programs'' began around the
 mid-1970's~\cite[p.~217]{brown:CSUR:1974}; similar terms include
 ``testcase dataset''~\cite{milleretal:ICRS:1975} and ``scenario,''
@@ -18,21 +13,9 @@ or informally, suggesting that the potential of executing a given test
 in different contexts is immaterial to those results: that is, test
 independence is assumed. 
 
-%When a test suite is a set, the test suite passes if and only if all
-%the test cases in it pass. 
-%Combined with the unordered property of sets this suggests that the
-%context in which each test is executed must have no
-%effect on its result regardless of the ordering of execution.
-
-%example~\cite[\emph{et alia}]{eldredetal:1978,harroldetal:OOPSLA:2001,staatsetal:ICSE:2011}.  
-
-%\todo{xx}
 
 \subsection{Test Dependence}
 
-%\todo{I am inclined to move this paragraph to the related work.  It is
-%  relevant, but not so important that it belong as the second paragraph in
-%  the paper.}
 Definitions in the testing literature are generally clear that the
 conditions under which a test is executed may affect its result.  The
 importance of context in testing has been explored in some depth in
@@ -40,9 +23,6 @@ some domains including databases~\cite{Gray:1994:QGB:191843.191886,Chays:2000:FT
 kapfhammeretal:FSE:2003}, with results about test
 generation, test adequacy criteria, etc., and mobile
 applications~\cite{Wang:2007:AGC}.
-%\todo{I cannot follow the given citation --- I came away from it unsure of
-%  the definition of ``non-restricted'' or how this is relevant.  Perhaps
-%  replace the direct quote by a paraphrase.}
 For the database domain, Kapfhammer and Soffa formally
 define independent test suites and distinguish them from
 other suites that ``can capture more of an application's
@@ -122,51 +102,6 @@ this precisely, and we also define manifest test dependence in terms
 of execution environments
 and test execution order rather than in terms of code use.
 
-%Testing frameworks
-%%, and 
-%%IBM's Rational tool family, and Microsoft's MSDN --- 
-%provide mechanisms
-%to help developers define the context for tests more effectively.
-%JUnit\footnote{\url{http://junit.org}},
-%for example, provides means to
-%automatically execute methods (\code{setUp()} and \code{tearDown()} in JUnit
-%3.x, and methods annotated with \code{@Before} and \code{@After} in
-%JUnit 4.x) to help handle common setup and clean-up tasks between
-%tests. Ensuring that these mechanisms are used properly, however, is
-%beyond the scope of any framework.
-%\todo{DN}{I stole some of the above paragraph from the intro.  We will have
-%to accommodate that by removing one and forward/backward references or such.}
-
-%\todo{JW}{During my first read, I'm not sure why this is here and how
-%it relates to the previous discussion}\todo{DN}{You're right, I'm taking it
-% out.  And both
-%of these todos.}
-
-
-%Characterizing test suites as ``collections'' of test cases is
-%increasingly common, especially in descriptions of tools.  For example,
-%the Javadoc for the JUnit \code{TestSuite} class includes: ``A TestSuite is a Composite
-%of Tests. It runs a collection of test cases.''
-%Sun's JUnit Primer says: ``A TestSuite contains a collection of
-%tests\dots'', and similar
-%terms are found in literature from IBM for the Rational tool family, from Microsoft's MSDN, etc.
-
-%\todo{DN}{Removed the footnote and comments on fail/fail composing to pass.  I
-%was wrong and I don't think it matters or is worth confusing things to cover
-%it at this point in the paper.}
-%\footnote{They
-%also assert that if $T_{1}$ and $T_{2}$ each fail in isolation, that their composite
-%execution will fail.  This is a variant of the test independence assumption,
-%which we also believe is/show is false.  DN: Any examples of fail/fail to pass?
-%\todo{KM}{David, I don't believe fail/fail can lead to pass with composition.
-%The reason is the following: \\
-%Let $\Gamma$ be the initial environment. \\
-%T1 == fail implies that R(T1, $\Gamma$) = fail \\
-%T2 == fail implies that R(T2, $\Gamma$) = fail \\
-%So, whatever order you choose to run T1 and T2, you will at least get one
-%failure (the first test that is run) because we know that: \\
-%R(\{T1, T2\}, $\Gamma$) = \{fail, *\} and \\
-%R(\{T2, T1\}, $\Gamma$) = \{fail, *\}.}}
 
 \subsection{Techniques Assuming Test Independence}
 
@@ -187,14 +122,10 @@ award value for an objective function over that
 set~\cite{Elbaum:2000:PTC:347324.348910}.  The most common objective
 functions favor permutations where more faults in the underlying
 program  are found with running fewer tests.
-%determine the number of tests from the permutations that need
-%to be run to detect a set of faults in the underlying program.
 A number of results carefully study various prioritization algorithms
 empirically, most by Rothermel and colleagues,
 spanning over a decade~\cite[\emph{et
 alia}]{Rothermel:1999:TCP:519621.853398,Do:2010:ETC:1907658.1908088}.  These evaluations are based in part on the assumption that the set of faults in the underlying program is known beforehand; the possibility that test dependence may unmask additional faults in the program is not studied.
-% \todo{DN}{I can't get the et alia above to look right --- where does that semicolon come from?  I'd like it to be [2,9, et alia] or such.
-% In a pinch, just include the two numbers.}
 
 
 Echelon defines a
@@ -247,6 +178,18 @@ the test independence assumption may need to be reformulated.
 
 \subsection{Tools Supporting Test Dependence}
 
+\todo{not sure whether the following paragraph should be here?}
+Testing frameworks provide mechanisms
+to help developers define the context for tests more effectively.
+JUnit\footnote{\url{http://junit.org}}, for example, provides means to
+automatically execute methods (\code{setUp()} and \code{tearDown()} in JUnit
+3.x, and methods annotated with \code{@Before} and \code{@After} in
+JUnit 4.x) to help handle common setup and clean-up tasks between
+tests. Ensuring that these mechanisms are used properly, however, is
+beyond the scope of any framework. \todo{Add Darioush's finding that
+JUnit can support test dependence, but is not encouraged.}
+
+
 Only a few tools explicitly considers test dependence, by
 allowing developers to annotate dependent tests and
 provide supporting mechanisms to ensure that the test execution framework
@@ -273,107 +216,3 @@ tests less behaviorally-diverse --- as they cannot be constructed
 on top of previous tests. Exploring how to
 incoporate test dependence into the design of automated
 test generator is one of our future work.
-
-
-
-
-
-
-%
-%when re-executing it in the replay environment. that is the same
-%related point as the test factoring work like david's note above.
-%%also, 
-%I suspect that Elbaum may point that out if he is reviewing this
-%paper. I experienced that once, even getting reviews requesting to
-%cite a much less related paper of his.
-
-
-
-%\subsection*{Test Suites as Collections}
-
-
-%and it is even the
-%characterization of test suites used in Wikipedia (which also contradicts the IEEE Standard by stating that
-%``[c]ollections of test cases are sometimes incorrectly termed a test plan, a test script, or even a test scenario.'')~\cite{wiki:test-suites}.
-%It has been difficult --- and seems unnecessary for our results --- to identify precisely when ``collections''
-%came into use for test suites.  It seems likely that this arose from the now-common
-%terminology for containers that group multiple elements together: sets, lists,
-%hash tables, arrays, etc.
-
-%\subsection{Syntactic and Semantic Test Dependencies}
-
-
-%Santelices et al.\ define a formal model of how changes might interact
-%at the source code level and present a technique for detecting such
-%interactions that arise at
-%run-time~\cite{Santelices:2010:PDR:1828417.1828487}.  In contrast to
-%our approach, they identify changes that interact rather than tests
-%that depend upon each other.
-
-%There are results that identify dependences that
-%may surface, for example, when there is aggressive testing of parameter
-%settings by a single test case; one (of many) approaches uses
-%bounded model checking to vary the parameters~\cite{Sullivan:2004:SAB:1013886.1007531}.
-
-
-
-%\todo{DN}{Young says: ``If you are referring to the work I am familiar with, I think what has
-%been treated in some depth is combinations of parameter settings in a
-%single test case.  That's a sort of dependence as well (e.g., the
-%parameters might enable a couple of features that interact in nasty
-%ways), but it doesn't involve variations in the ordering of operations
-%or test cases.''  I can't find anything on this, but I'm probably searching
-%wrong.  If something finds a good citation or two, please include it and write
-%something here.  If not, delete this entirely.}
-
-%Another kind of dependence helps address
-%the testing of configurable software, which can be combinatorial with respect to the
-%set of configurable options~\cite{Cohen97theaetg,Cohen:2003}.  
-
-%In
-%practice, there are often far fewer
-%configurations that are used and thus should be tested.  This
-%often structures the configuration space in a way that allows
-%potential dependences to be explored more
-%efficiently, as a test suite that binds multiple configuration option values
-%can test all configurations that share those settings.
-%The dependences considered in this approach are not between tests, but rather within
-%the configuration option space.
-
-
-%Another set of results searches for
-%efficient (small) test suites that aggressively exercise potentially unexpected
-%interactions --- dependences --- among the components of the
-%program~\cite{Cohen97theaetg,Cohen:2003}.  These approaches are used for configurable software where
-%in principle there are a combinatorial set of instances to test based on variations of the
-%configuration options.  The objective is to temper the combinatorial blow-up by identifying
-%components sharing some configurable option values; for example, 
-%if a block of code is included in such system instances, a test that exercises that block
-%can be used as a proxy for interactions between the shared options.
-%
-%These approaches tend to use covering arrays as a way to determine which of
-%the dependencies among components are/are not exercised.  In the case of configurable
-%software, there may be a combinatorial number of interactions to be considered.
-%These approaches focus on generating a set of effective tests based on program interactions,
-%rather than our focus on identifying dependent tests based on ordering, environment, and the
-%results of the tests.
-%
-%
-%In principle it could be combinatorial, and the idea of covering
-%arrays is that most of the interactions that matter involve just a
-%small number of choices.  If there are things that break only for a
-%single setting of parameters A, B, C, D, E, F, G, H, we're hosed … but
-%if something breaks whenever B has value 1 and G has value 2, then
-%something like covering arrays has a chance.  
-
-
-
-%
-%The research we propose is basic research that impacts most
-%aspects of testing, ranging from (automatic) test generation through
-%regression testing, test case selection and ending with
-%considerations on the right test granularity. 
-%Similar to the distinguished paper of Staats et
-%al.~\cite{staatsetal:ICSE:2011}, we propose to give a rigorous
-%foundation to an important aspect of software testing that is
-%present but rarely examined in detail in current research.

@@ -62,13 +62,13 @@ That is, we focus on a \emph{manifest} perspective of test dependence,
 requiring a \emph{concrete} variant of the test suite that
 \emph{dynamically} produces different results from the expected.  
 
-\edit{Three places particularly require consistence: (1)
+\edit{Several places particularly require consistence: (1)
 test dependence reveals \todo{defect, or flaws, or smells}
 in test code, (2) test dependence can mask \todo{bug, defect,
-or fault}, and (3) test dependence, or dependent tests. seems
+or fault}, (3) test dependence, or dependent tests. seems
 these 2 phrases are used interchangably.
 In addition, should it be test dependence, or test
-dependences?}
+dependences?, (4) test results or test outcomes.}
 
 \todo{We need a consistent set of terminology.  I like the following, 
 adapted from \\
@@ -115,12 +115,6 @@ Programmers made these errors even though frameworks such as
 JUnit provide ways to set up the environment for a test execution and clean
 up the environment afterward.
 
-% that facilitate the process of clean setup by providing means to
-% automatically execute methods (\code{setUp()} and \code{tearDown()} in JUnit
-% 3.x, and methods annotated with \code{@Before} and \code{@After} in
-% JUnit 4.x) that should handle all common setup and clean-up between
-% test cases. 
-
 
 % And while frameworks make it easier to get environment setup right, 
 % they cannot ensure that it is done properly. 
@@ -144,22 +138,9 @@ them.
 Developers don't notice the dependencies until they are deep in debugging a
 subtle bug or test failure.
 
-%Therefore, we explicitly
-%distinguish potential test dependences (Definition~\ref{def:dependency}) --- those that could cause a variation in test suite results 
-%under \emph{some} environment and order --- and manifest test
-%dependences (Definition~\ref{def:manifest}) --- those that are guaranteed to cause a
-%variation in test suite results under a \emph{specific} environment and order.  
-
 
 \subsection{Repercussions of Dependent Tests}
 
-%We have identified a number of substantive examples of test suites
-%from fielded programs that manifest dependences.
-%in fielded programs. 
-%with test suites that manifest test dependence.  
-
-%In this paper, we seek to understand dependent tests and their repercussions
-%in two ways. 
 
 Our study of \dtnum real-world, confirmed dependent
 tests 
@@ -212,9 +193,6 @@ of latent test dependence in the input.  As an
 example, test selection may produce a subsequence of tests that do not
 return the same results as they do when executed originally, as part of the full suite.
 
-%Of these techniques, we are most concerned about
-%those that modify the organization of test suites, rather than the tests
-%they contain.
 
 \subsection{Contributions}
 

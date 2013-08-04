@@ -20,7 +20,7 @@ suggestions, etc.
 
 For each issue tracking system, we searched for a set of keywords
 (``dependent test'', ``test dependence'', ``test execution order'',
-etc.\todo{for concreteness and reproducibility, list every search term}), and manually examined the matched results. For each match, we read the
+etc.), and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
 helped us understand whether the report is about test dependence
@@ -31,7 +31,8 @@ rounds of (re-)study, cross checking, and efforts to reproduce. We ignored repor
 that are described vaguely, and excluded tests whose results are
 affected by non-determinism (e.g., multi-threading).
 In total, we have spent more than 6 person-months to collect and analyze
-the dependent tests. 
+the dependent tests. All collected dependent tests are publicly-accessible
+at: \todo{put url of the online document here}
 
 
 \subsection{Findings}
@@ -120,7 +121,6 @@ support to explicitly specify test dependence in the test code.
 \input{categorytable}
 
 We found three major consequences of dependent tests (Table~\ref{tab:reper}).
-%  We describe each category below and give concrete examples. 
 
 \vspace{1mm}
 
@@ -217,24 +217,6 @@ database several times~\cite{clibug}, starting on March 13, 2004 (CLI-26). The r
 \emph{three years} later on March 15, 2007 when developers
 realized the test dependence.
 
-%, but is then reopened as CLI-186 on
-%July 31, 2009. About one month later, the bug is duplicated as
-%CLI-187, and the actual fix happens one 
-%year later on June 19, 2010, about six years after the bug was first reported (and four years
-%total on the open-issue list).
-
-
-%On this report, one of the developers commented:
-%\begin{quote}
-%I reproduced the issue, it requires a dedicated test case since it is tied to the initialization 
-%of a static field in OptionBuilder.
-%\end{quote}
-
-%Despite the realization that a dedicated test is required, no such
-%test was ever created.
-
-%\paragraph{Eclipse SWT: Causing Spurious Bug Reports}
-
 
 \subsubsection{Implications}
 
@@ -268,10 +250,6 @@ by static variable access. Thus, focusing on analyzing
 static variables can be a cost-effective way for a
 tool design. \todo{need to re-write the above}
 
-%dependent tests.
-%can bound Tools
-
-
 %\vspace{1mm}
 %\noindent \textbf{Dependent test fixing tool
 %Test dependence reveals flaws in the test code.}
@@ -294,12 +272,6 @@ However, a limitation is that the developers might have made a mistake,
 might not have marked a test dependence in a way we found it, and may not
 have found all the dependent tests in those projects. 
 
-%We believe the dependent tests in our study
-%provide a representative sample in these software applications.
-
-% In our study, we do not emphasize any quantitative characteristic
-% results, and most of our findings are consistent across
-% the examined dependent tests.
 
 %  LocalWords:  JBoss Codehaus reproducibility multi dependences SWT CLI
 %  LocalWords:  TestDisplay test13666 subsequences

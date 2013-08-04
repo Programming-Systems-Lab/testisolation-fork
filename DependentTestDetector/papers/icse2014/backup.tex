@@ -1,4 +1,28 @@
 
+%In some sense, dependences that are due to missing initialization are
+%the dual to dependences that mask faults.  Both reveal problems in source code.
+%However, masked faults reside in the program source, while incorrect
+%initialization is a fault that resides in the test suite.
+
+%, but is then reopened as CLI-186 on
+%July 31, 2009. About one month later, the bug is duplicated as
+%CLI-187, and the actual fix happens one 
+%year later on June 19, 2010, about six years after the bug was first reported (and four years
+%total on the open-issue list).
+
+
+%On this report, one of the developers commented:
+%\begin{quote}
+%I reproduced the issue, it requires a dedicated test case since it is tied to the initialization 
+%of a static field in OptionBuilder.
+%\end{quote}
+
+%Despite the realization that a dedicated test is required, no such
+%test was ever created.
+
+%\paragraph{Eclipse SWT: Causing Spurious Bug Reports}
+
+
 As such deeper knowledge is acquired, we may better understand
 what contributes to creating test dependence. Is this
   phenomenon linked to particular testing levels (unit, integration,

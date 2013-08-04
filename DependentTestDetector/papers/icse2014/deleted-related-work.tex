@@ -1,0 +1,88 @@
+%\subsection*{Test Suites as Collections}
+
+
+%and it is even the
+%characterization of test suites used in Wikipedia (which also contradicts the IEEE Standard by stating that
+%``[c]ollections of test cases are sometimes incorrectly termed a test plan, a test script, or even a test scenario.'')~\cite{wiki:test-suites}.
+%It has been difficult --- and seems unnecessary for our results --- to identify precisely when ``collections''
+%came into use for test suites.  It seems likely that this arose from the now-common
+%terminology for containers that group multiple elements together: sets, lists,
+%hash tables, arrays, etc.
+
+%\subsection{Syntactic and Semantic Test Dependencies}
+
+
+%Santelices et al.\ define a formal model of how changes might interact
+%at the source code level and present a technique for detecting such
+%interactions that arise at
+%run-time~\cite{Santelices:2010:PDR:1828417.1828487}.  In contrast to
+%our approach, they identify changes that interact rather than tests
+%that depend upon each other.
+
+%There are results that identify dependences that
+%may surface, for example, when there is aggressive testing of parameter
+%settings by a single test case; one (of many) approaches uses
+%bounded model checking to vary the parameters~\cite{Sullivan:2004:SAB:1013886.1007531}.
+
+
+
+%\todo{DN}{Young says: ``If you are referring to the work I am familiar with, I think what has
+%been treated in some depth is combinations of parameter settings in a
+%single test case.  That's a sort of dependence as well (e.g., the
+%parameters might enable a couple of features that interact in nasty
+%ways), but it doesn't involve variations in the ordering of operations
+%or test cases.''  I can't find anything on this, but I'm probably searching
+%wrong.  If something finds a good citation or two, please include it and write
+%something here.  If not, delete this entirely.}
+
+%Another kind of dependence helps address
+%the testing of configurable software, which can be combinatorial with respect to the
+%set of configurable options~\cite{Cohen97theaetg,Cohen:2003}.  
+
+%In
+%practice, there are often far fewer
+%configurations that are used and thus should be tested.  This
+%often structures the configuration space in a way that allows
+%potential dependences to be explored more
+%efficiently, as a test suite that binds multiple configuration option values
+%can test all configurations that share those settings.
+%The dependences considered in this approach are not between tests, but rather within
+%the configuration option space.
+
+
+%Another set of results searches for
+%efficient (small) test suites that aggressively exercise potentially unexpected
+%interactions --- dependences --- among the components of the
+%program~\cite{Cohen97theaetg,Cohen:2003}.  These approaches are used for configurable software where
+%in principle there are a combinatorial set of instances to test based on variations of the
+%configuration options.  The objective is to temper the combinatorial blow-up by identifying
+%components sharing some configurable option values; for example, 
+%if a block of code is included in such system instances, a test that exercises that block
+%can be used as a proxy for interactions between the shared options.
+%
+%These approaches tend to use covering arrays as a way to determine which of
+%the dependencies among components are/are not exercised.  In the case of configurable
+%software, there may be a combinatorial number of interactions to be considered.
+%These approaches focus on generating a set of effective tests based on program interactions,
+%rather than our focus on identifying dependent tests based on ordering, environment, and the
+%results of the tests.
+%
+%
+%In principle it could be combinatorial, and the idea of covering
+%arrays is that most of the interactions that matter involve just a
+%small number of choices.  If there are things that break only for a
+%single setting of parameters A, B, C, D, E, F, G, H, we're hosed … but
+%if something breaks whenever B has value 1 and G has value 2, then
+%something like covering arrays has a chance.  
+
+
+
+%
+%The research we propose is basic research that impacts most
+%aspects of testing, ranging from (automatic) test generation through
+%regression testing, test case selection and ending with
+%considerations on the right test granularity. 
+%Similar to the distinguished paper of Staats et
+%al.~\cite{staatsetal:ICSE:2011}, we propose to give a rigorous
+%foundation to an important aspect of software testing that is
+%present but rarely examined in detail in current research.
