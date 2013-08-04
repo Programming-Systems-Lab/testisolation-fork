@@ -2,19 +2,12 @@
 \newcommand{\fhm}{\texttt{Fast\-Hash\-Map}}
 \newcommand{\cub}{\texttt{ConvertUtilsBean}}
 
-As shown in Table~\ref{tab:results}, in most
-projects, a large fraction of the remaining tests are dependent, while
-in some projects, there are almost no dependent tests.
-
 Take the Beanutils program as an example, Randoop generates a test suite consisting of
-2692 unit tests for a recent release of Beanutils (version 1.8.3).
-The prototype tool we outline in Section~\ref{sec:impl}
-detected 299 dependent tests in this test
-suite.
+2692 tests, in which \ourtool detected 299 dependent tests.
 
-After a close inspection of the automatically generated test code, we found
+After a close inspection of the automatically-generated test code, we found
 the primary reason for the dependencies is missing initialization 
-(cf.~Sec.~\ref{sec:examples:initialization}).
+(cf.~Sec.~\ref{sec:humantest}).
 %is the unintended program state before test execution.
 Specifically, 248 tests attempt to retrieve values from a cache before
 anything has been added to the cache. This particular dependence could be
@@ -40,11 +33,12 @@ current test generation tools.
 
 
 Given the high ratio of dependent tests in the automatically generated
-test suite, we speculate that the following two phenomena could be
-reasons for this.
+test suite, we speculate more reasons.
+%that the following two phenomena could be
+%reasons for this.
 
-First, developers usually know a lot about the intended purpose of a
-program when they write tests for it. This knowledge helps them to
+First, developers usually have a good understanding
+of the code under test. This knowledge helps them to
 build well-structured and coherent test suites.
 Automated tools, on the other hand, have no such knowledge. One
 possible consequence of this is illustrated by the example: the
@@ -62,11 +56,16 @@ not know that it must add values to the cache first.
 %\todo{JW}{I do not understand this explanation at all. What has this
 %interleaving to do with dependences?}
 
-Second, it is often hard for automated tools to understand that
-specific parts of the code depend on the environment, and thus may not
-explicitly generate code that sets up the environment correctly. If,
-at the same time, other tests are generated that as a side effect
-create the needed environment, test dependence ensues.
+Second, it is often hard for automated tools to
+generate code that sets up the execution environment correctly,
+since doing so requires understanding which specific parts
+of the environment have been affected.
+%to understand that
+%specific parts of the code depend on the environment, and thus may not
+%explicitly . 
+Without proper setup code, if, at the same time, 
+other tests are generated that as a side effect
+create the needed environment, test dependence arises.
 
 %Second, test frameworks like JUnit offer constructs \code{@Before}
 %(\code{@After}) to permit programmers to abstract common execution environment
@@ -84,14 +83,6 @@ create the needed environment, test dependence ensues.
 
 
 
-On the other hand, test dependence in automatically generated test suites is 
-even more troublesome than in human-written suites. The reason for this is
-that all automated test generation tools we are aware of produce tests
-that are hard to read for humans, are undocumented, and their intent
-cannot easily be gleaned from naming conventions and other aids
-developers normally use. While there is some work to alleviate this problem, it
-still remains difficult to determine whether a failed test points to a bug
-in the program or a dependent test~\cite{fraseretal:ISSTA:2011}.
 
 %We already showed some evidence that test dependence is not uncommon
 %in human-written tests. Given the increasing importance of

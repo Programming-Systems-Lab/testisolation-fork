@@ -7,12 +7,18 @@
   confusion for the reader.}
 
 Informally, \emph{dependent tests} produce different test results when
-executed in different contexts. %, while \emph{independent tests} produce
-%the same test results regardless of execution order.  
-An example is two tests \code{A}
-and \code{B}, where running \code{A} and then \code{B} leads
-to both tests passing, while running \code{B} and then
-\code{A} leads to one or both tests failing.
+executed in different contexts. An example is two tests \code{A}
+and \code{B}, where running \code{A} in isolation leads
+to \code{A} passing, while running \code{B} and then
+\code{A} leads to \code{A} failing. We call \code{A}
+a dependent test, since its result depends on
+whether it runs after \code{B} or not.
+
+%and then \code{B} leads
+%to both tests passing, while running \code{B} and then
+%\code{A} leads to one or both tests failing.
+
+\edit{I changed the above example based on the comments below.}
 
 \todo{Would a better example focus on just one test \code{B}:  it produces
   a different result (succeed/fail) depending on whether test \code{A} is run
@@ -25,27 +31,6 @@ to both tests passing, while running \code{B} and then
 %Chays:2000:FTD:347324.348954,
 %Gray:1994:QGB:191843.191886}, 
 \todo{find a place to emphasize unit tests}
-
-\todo{I am inclined to move this paragraph to the related work.  It is
-  relevant, but not so important that it belong as the second paragraph in
-  the paper.}
-Definitions in the testing literature are generally clear that the
-conditions under which a test is executed may affect its result.  The
-importance of context in testing has been explored in some depth in
-some domains including databases~\cite{Gray:1994:QGB:191843.191886,Chays:2000:FTD:347324.348954,
-kapfhammeretal:FSE:2003}, with results about test
-generation, test adequacy criteria, etc., and mobile
-applications~\cite{Wang:2007:AGC}.
-\todo{I cannot follow the given citation --- I came away from it unsure of
-  the definition of ``non-restricted'' or how this is relevant.  Perhaps
-  replace the direct quote by a paraphrase.}
-For the database domain, Kapfhammer and Soffa formally
-define independent test suites and distinguish them from a
-\emph{non-restricted} suite that ``can capture more of an application's
-interaction with a database while requiring the constant monitoring of
-database state and the potentially frequent re-computations of test
-adequacy''~\cite[p.~101]{kapfhammeretal:FSE:2003}.
-
 
 Test independence is a common assumption in testing research and practice:
 theoretical results, algorithms, and tools all fail or behave unexpectedly
@@ -75,12 +60,15 @@ of test dependence that:
 \end{itemize}
 That is, we focus on a \emph{manifest} perspective of test dependence,
 requiring a \emph{concrete} variant of the test suite that
-\emph{dynamically} produces different results from the expected.  Our
-definition differs from that of Kapfhammer and Soffa by considering
-test results rather than program and database states.
-Considering only manifest test dependences allows
-us to more easily situate this research in the empirical domain (Section~\ref{sec:formaldiscussion}).
+\emph{dynamically} produces different results from the expected.  
 
+\edit{Three places particularly require consistence: (1)
+test dependence reveals \todo{defect, or flaws, or smells}
+in test code, (2) test dependence can mask \todo{bug, defect,
+or fault}, and (3) test dependence, or dependent tests. seems
+these 2 phrases are used interchangably.
+In addition, should it be test dependence, or test
+dependences?}
 
 \todo{We need a consistent set of terminology.  I like the following, 
 adapted from \\
@@ -186,8 +174,7 @@ where some tests do not perform proper initialization.
 %
 Second, test dependences can lead
 to \emph{spurious bug reports}. As an example, the Eclipse developers
-investigated a dependent test\todo{Give URL or other identifying information} in
-SWT for
+investigated a dependent test~\cite{eclipsebug} in SWT for
 more than a month before realizing that the test dependences were intentional,
 allowing them to close the bug report without a change to the system.
 %
@@ -195,7 +182,7 @@ Third, dependent tests can
 \emph{mask faults in a program}. Specifically, executing a test suite in the
 default order does not expose the fault, whereas
 executing the same test suite in a different order does. We found 
-a bug\todo{Give URL or other identifying information} that had been masked by two dependent tests
+a bug~\cite{clibug} that had been masked by two dependent tests
 for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{sec:repercussion}).
 
 %Second, guided by the findings of our study, we design two algorithms

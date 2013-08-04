@@ -168,7 +168,7 @@ these reported failures are spurious.
 %to fix a bug that is not there.
 For example,
 in September 2003, a user filed a
-bug report in SWT~\cite{swt}\footnote{\url{https://bugs.eclipse.org/bugs/show_bug.cgi?id=43500}},
+bug report in SWT~\cite{swt}~\cite{eclipsebug},
 stating that tests were failing unexpectedly
 if she runs any other test before \texttt{TestDisplay} --- 
 a test suite creates a new \code{Display} object and tests it.
@@ -213,9 +213,7 @@ the default order of test execution makes both tests pass
 accidentally. Such dependent tests
 have a non-trivial impact in practice.
 This fault is reported in the bug
-database several times,\footnote{\url{https://issues.apache.org/jira/browse/CLI-26} \url{https://
-issues.apache.org/jira/browse/CLI-186} \url{https://issues.apache.org/jira/browse/
-CLI-187}} starting on March 13, 2004 (CLI-26). The report was marked as resolved
+database several times~\cite{clibug}, starting on March 13, 2004 (CLI-26). The report was marked as resolved
 \emph{three years} later on March 15, 2007 when developers
 realized the test dependence.
 

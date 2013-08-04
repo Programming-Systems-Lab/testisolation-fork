@@ -1,4 +1,4 @@
-\section{Discussion and Future Work}
+\section{Open Questions and Future Work}
 \label{sec:discussion}
 
 %In the introduction we posed several questions why test dependence
@@ -8,14 +8,13 @@
 
 %\question{Does test dependence arise in practice?}{Yes.}  
 
-Although we have shown through a substantive set of reproducible examples,
-both from human-written test suites and
-automatically generated test suites, that test dependence
-arises in practice, a broader
+Although we have identified a substantive set of dependent
+tests, from both human-written test suites and
+automatically generated test suites, a broader
 study of how to prevent and eliminate test dependences, and
 what are the impacts of test dependences to other software engineering
 tasks is beyond the scope of this paper. 
-We discuss a set of open questions addressing this and
+We next discuss a set of open questions addressing this and
 other possible concerns resulting from test dependences. 
 Exploring answers to these open questions comprises
 our future work.
@@ -33,6 +32,10 @@ our future work.
 \noindent \textbf{\textit{How to prevent dependent tests?}}
 defensive programming? explicitly state testing oracles?
 
+There is already some work aiming at
+reducing the potential for dependences by refactoring programs to use
+less global state~\cite{wlokaetal:FSE:2009}. 
+
 \vspace{1mm}
 
 \noindent \textbf{\textit{How to eliminate dependent tests?}}
@@ -47,32 +50,25 @@ defensive programming? explicitly state testing oracles?
 potential test dependence, as well as some other cases in the
 study}
 
-\vspace{1mm}
 
-\noindent \textbf{\textit{How does test dependences
-affect the design of automated test generation
-techniques?}}
+%Several of our examples identified situations in which test dependence
+%masked faults in the underlying program. 
+%In another example, developers wasted time tracking down a non-existent
+%fault because of a spurious report that was due to an undocumented
+%test dependence. Even though these
+%are real and reproducible examples,
 
-Several of our examples identified situations in which test dependence
-masked faults in the underlying program. 
-In another example, developers wasted time tracking down a non-existent
-fault because of a spurious report that was due to an undocumented
-test dependence.
-%Another example identified a
-%situation where developers lost time tracking down a spurious bug
-%report that arose due to an undocumented test dependence.  
-Even though these
-are real and reproducible examples, it is not possible to make any
-general claims about the frequency nor the significance of the
-repercussions of test dependence.  At the same time, it seems unlikely
-that these are the \emph{only} software systems where test dependence
-causes problems.
+%It is not possible to make any
+%general claims about the frequency nor the significance of the
+%repercussions of test dependence.  At the same time, it seems unlikely
+%that these are the \emph{only} software systems where test dependence
+%causes problems.
 
 
 \vspace{1mm}
 
-\noindent \textbf{\textit{What does 
-test dependences affect other software testing techniques?}}
+\noindent \textbf{\textit{How does 
+test dependence affect downstream software testing techniques?}}
 In principle, test dependence can compromise
 the application of downstream testing techniques such as selection,
 prioritization, and parallelization.  
@@ -95,6 +91,23 @@ can be derived from knowledge about dependent tests.
 
 \vspace{1mm}
 
+\noindent \textbf{\textit{How does test dependence
+affect the design of automated test generation
+techniques?}}
+
+It appears that test dependence in automatically generated test suites is 
+even more troublesome than in human-written suites. The reason for this is
+that all automated test generation tools we are aware of produce tests
+that are hard to read for humans, are undocumented, and their intent
+cannot easily be gleaned from naming conventions and other aids
+developers normally use. While there is some work to alleviate this problem, it
+still remains difficult to determine whether a failed test points to a bug
+in the program or a dependent test~\cite{fraseretal:ISSTA:2011}.
+
+\todo{How can auto tools consider test dependence?}
+
+\vspace{1mm}
+
 \noindent \textbf{\textit{Other open questions.}}
 The question of the role of test dependence in the real world merits
 more aggressive empirical study.  A better understanding of the 
@@ -106,17 +119,6 @@ faults could be costly to find by other methods or to leave in the program.
 Tools that surface test dependences may help researchers
 and practitioners study and deal with dependences more effectively.
 
-As such deeper knowledge is acquired, we may better understand
-what contributes to creating test dependence. Is this
-  phenomenon linked to particular testing levels (unit, integration,
-  system, etc.), specified testing techniques and frameworks, the programming
-languages and/or the software development process employed, the relationship
-and communication structures between developers and testers on a team, etc.  In turn,
-any insights gained in these dimensions may lead to more systematic
-approaches to dealing with test dependence.
-There is already some work aiming at
-reducing the potential for dependences by refactoring programs to use
-less global state~\cite{wlokaetal:FSE:2009}. 
 
 %\question{If and when test dependence arises, are there significant repercussions?}{Sometimes, although the extent is unknown.}
 

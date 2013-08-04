@@ -14,6 +14,8 @@ in the improved algorithm increase the algorithm efficiency?
 \end{itemize}
 
 \todo{check the research questions above? any more?}
+\todo{should we add human-written tests v.s. automatically-generated tests?
+I prefer not, since it does not lead to much insight.}
 
 \subsection{Subject Programs}
 
@@ -40,40 +42,48 @@ achieves fairly high statement coverage.
 Crystal~\cite{crystal} is a tool that
 pro-actively examines developers' code and precisely identifies and reports on textual, compilation, and behavioral conflicts.
 
-Beanutils~\cite{beanutils}
-is a library that provides services for collections of
-Java beans. 
+\todo{Add Derby, and Synoptic}
 
 \todo{say why choose these subject programs}
 
 \subsection{Evaluation Procedure}
 
-\todo{including manual tests and auto-generated tests}
+We use \ourtool to detect dependent
+tests among the human-written test suite 
+associated with each subject program in Table~\ref{tab:subjects}.
 
-We used the prototype to detect dependent
-tests in the subject programs in Table~\ref{tab:subjects} using isolated execution ($k = 1$)
-and pairwise execution ($k = 2$).
+We also evaluate \ourtool on automatically-generated
+test suites. For each subject program, we use
+Randoop~\cite{PachecoLET2007}, a state-of-the-art automated
+test generation tool, to generate 5,000 tests.
+Randoop drops tests that it considers to be redundant,
+and outputs a subset of the generated tests as
+shown in Table~\ref{tab:subjects}.
+Then, we applied \ourtool to detect dependent tests
+in these automatically-generated test suites.
 
-While we believe that most test dependences can be found with small
-$k$. This is in part because the set of dependent tests that can be
-found with a bound $k$ is always a subset of the set of dependent
-tests that can be found with any bound $k' > k$. Additionally, our
-empirical study (Section~\ref{sec:study}) indicates that small $k$
-find many dependences. 
+For both human-written and automatically-generated
+test suites, we use isolated execution ($k = 1$)
+and pairwise execution ($k = 2$), since our empirical
+study (Section~\ref{sec:study}) indicates that  a small $k$
+can find most test dependences. 
+
+Each output dependent test is examined manually to make
+sure its different results are not caused by non-deterministic
+factors, such as multi-threading.
+
+%While we believe that most test dependences can be found with small
+%$k$. This is in part because the set of dependent tests that can be
+%found with a bound $k$ is always a subset of the set of dependent
+%tests that can be found with any bound $k' > k$. 
+%Additionally, our
+%empirical study 
 
 %, while larger $k$ do not. However, in principle
 %it is conceivable
 %that any number of chain dependences with chains longer than any tried $k$ exist
 %in all the libraries we analyzed.
 
-
-For each subject program, we also used Randoop~\cite{PachecoLET2007}, a state-of-the-art automated
-test generation tool, to generate 5,000 tests
-for each program, and then drop what it considers to be redundant
-tests. Then, we applied our prototype to detect dependent tests in these automatically-generated
-test suites.
-
-\todo{add more about how to identify dependent tests in the tool's output}
 
 %The discussion of the examples in this section is distinguished by
 %the problems caused by test dependence (\emph{Kind}): when faults are masked because
@@ -93,20 +103,28 @@ below.}
 
 \subsubsection{RQ1: Algorithm Effectiveness}
 
-All the dependent tests reported in Figure~\ref{fig:example-summary},
-except for two dependent tests in JodaTime and the dependences in SWT, 
-can already be found by isolated execution.
- 
-During manual bug diagnosis in JodaTime, we identified two test dependences that require
-\emph{three} tests to manifest. While these are easy to reproduce, we
-did not check that our tool finds them, because the time needed to
-run our naive algorithm on JodaTime with $k=3$ is measured in months.
+\todo{How many} dependent tests reported in Table~\ref{fig:example-summary}
+are found by isolated execution, and \todo{how many} dependent
+tests reported in the same are found by pairwise execution.
 
+\todo{does two algorithms find the same number of tests?}
+ 
 \todo{say this concurs with the study findings}
+
+Characteristics of the identified dependent tests are discussed
+in Section~\ref{sec:humantest} and~\ref{sec:autotest} in details.
+
+%During manual bug diagnosis in JodaTime, we identified two test dependences that require
+%\emph{three} tests to manifest. While these are easy to reproduce, we
+%did not check that our tool finds them, because the time needed to
+%run our naive algorithm on JodaTime with $k=3$ is measured in months.
 
 \subsubsection{RQ2: Improvement from Program Analyses}
 
+\todo{How much improvement can we gain?}
+
 \subsection{Dependence in Human-written Tests}
+\label{sec:humantest}
 
 \todo{The following text needs to be re-organized.
 Be consistent to the categories used in the study section}
@@ -114,34 +132,40 @@ Be consistent to the categories used in the study section}
 Most of the test dependences we found in human-written
 test suites arise due to incorrect initialization
 of program state by one or more tests. Such test
-dependence often suggests that a test, or a test suite, 
-has been constructed poorly in some dimension. 
-While test dependences that mask faults
-correspond to a defect in the program source,
-these dependences correspond to defects in the test code.
+dependence often suggests defects in the
+test code. 
+%that a test, or a test suite, 
+%has been constructed poorly in some dimension. 
+
+%While test dependences that mask faults
+%correspond to a defect in the program source,
+%these dependences correspond to defects in the test code.
 
 There are two common patterns where incorrect
 initialization leads to test dependence.
-The first example is probably the most common. 
-The tested program code relies on a
-global variable that is a part of the environment, but the test does
-not properly initialize it.  In the second case, a test should but
-does not call
+The first pattern is probably the most common. 
+The test code relies on a
+global variable, but the test itself does
+not properly initialize it.  In the second pattern,
+a test should but does not call
 an initialization function before later invocations to a complex library.
 This flaw in the test code is masked because the default test suite execution
 order includes other tests that initialize the library.  The defect is
 inconsequential until and unless the flawed test is reordered, either manually or by
 a downstream tool, to execute before any other initializing test.
+We next example dependent tests for these two patterns.
 
-We next show several examples to illustrate test dependence in human-written
-test suites.
+%We next show several examples to illustrate test dependence in human-written
+%test suites.
+
 
 \newcommand{\jodatime}{JodaTime\xspace}
 %\paragraph{\jodatime: Complex interactions that mask faults}
 %\label{sec:jodatime}
 %\input{jodatime}
-\todo{here is a jodatime example commented out in the source, that dependence
-masks faults. It is very verbose, should we discuss that in the paper.}
+
+%\todo{here is a jodatime example commented out in the source, that dependence
+%masks faults. It is very verbose, should we discuss that in the paper.}
 
 %\subsubsection{Poor Test Construction}\label{sec:examples:initialization}
 
@@ -170,19 +194,65 @@ masks faults. It is very verbose, should we discuss that in the paper.}
 %they occur before the dependent tests in the normal execution order,
 %no tests fail under normal circumstances.
 
-\paragraph{Crystal: Global Variables Considered Harmful}
-\input{crystal}
+%\paragraph{Crystal: Global Variables Considered Harmful}
+%The latest release of Crystal contains 81 human-written unit tests. 
+%Of those, 75 are fully automated, and 18 exhibit
+%dependences.
+\ourtool identified 18 dependent tests in Crystal.
+All these dependent tests
+are caused by incomplete initialization of the
+environment when testing methods of three distinct classes
+(\code{Data\-Source, Lo\-cal\-State\-Re\-sult, Con\-flict\-Daemon}).
+In all cases, one test initializes the environment correctly, and all
+other tests rely on that test executing first. 
+Crystal developers confirmed that such test dependence was not
+intentional and most likely happened because they were not
+aware of the potential dependency caused by the use of global
+variables. Since we pointed out this problem, the developers treat the
+dependencies as undesirable and opened a bug report to have this issue
+resolved.\footnote{\url{https://code.google.com/p/crystalvc/issues/detail?id=57}}
 
-\paragraph{XML Security: Global Initialization}
 
+%\paragraph{XML Security: Global Initialization}
 %Are these test dependences realistic, or part of the modifications SIR
 %made? by SZ: they are realistic, we use the original version without
 %any modification from SIR people
-\input{xmlsecurity}
+%\input{xmlsecurity}
+
+The XML Security program is incorporated in the Soft\-ware-artifact
+Infrastructure Repository (SIR)~\cite{sir}. \ourtool identified
+3 dependent tests (\code{test\_Y1}, \code{test\_Y2}, and \code{test\_Y3}
+in class \code{ExclusiveC14NInterop}), which share the same root
+cause of the dependence: before any
+method in the library can be used, the global initialization function 
+\code{Init.init()} has to be called but is not called. The
+\code{Init.init()} method initializes the static field that
+each dependent test relies on.
+
+For dependent tests in a human-written test suite, we speculate that
+developers either simply forgot to
+initialize the tests properly, or expected that these tests would always execute
+in the order defined
+in the test suite.
+
+ %at least two out of the four versions contain dependent tests.
+ %Specifically, in versions 1.0.4 and 1.0.5d2, \code{test\_Y1}, \code{test\_Y2}, and \code{test\_Y3}
+%in class \code{ExclusiveC14NInterop} show dependent behavior.
+%Since the dependences are the same in both versions, in the further
+%discussion and in Figure~\ref{fig:example-summary}, we consider only
+%version 1.0.4.
+
 
 
 \subsection{Dependence in Auto Generated Tests}
-\label{sec:autogen}
+\label{sec:autotest}
+
+Dependent tests in an automatically-generated test suite
+are more common.  As shown in Table~\ref{tab:results}, in most
+projects, a large fraction of the remaining tests are dependent.
+%while
+%in some projects, there are almost no dependent tests.
+
 \input{beanutils}
 
 %\section{How does the theory relate to our examples}

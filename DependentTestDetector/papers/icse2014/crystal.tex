@@ -1,20 +1,3 @@
-
-The latest release of Crystal contains 81 human-written unit tests. 
-Of those, 75 are fully automated, and 18 exhibit
-dependences.
-All these dependencies are caused by incomplete initialization of the
-environment when testing methods of three distinct classes
-(\code{Data\-Source, Lo\-cal\-State\-Re\-sult, Con\-flict\-Daemon}).
-In all cases, one test initializes the environment correctly, and all
-other tests rely on that test executing first. 
-
-A short conversation with the developers confirmed that this was not
-intentional and most likely happened because the developers were not
-aware of the potential dependency caused by the use of global
-variables. Since we pointed out this problem, the developers treat the
-dependencies as undesirable and opened a bug report to have this issue
-resolved.\footnote{\url{https://code.google.com/p/crystalvc/issues/detail?id=57}}
-
 %Dependent tests in Crystal fall into the following three groups, which
 %share the same root cause of global data dependence across multiple tests:
 %
