@@ -52,10 +52,11 @@
 % commands for formalization
 \newcommand{\suites}[0]{\ensuremath{\mathcal{S}\xspace}}
 \newcommand{\environs}[0]{\ensuremath{\mathcal{E}\xspace}}
+\newcommand{\alltests}[0]{\ensuremath{\mathcal{T}\xspace}}
 \newcommand{\manifest}[1]{\ensuremath{\prec_{#1}}}
 \newcommand{\suite}[1]{\ensuremath{ \langle  #1 \rangle }}
 \newcommand{\env}[0]{\ensuremath{\mathbf{E}}\xspace}
-\newcommand{\exec}[2]{\ensuremath{\varepsilon(#1,#2)}}
+\newcommand{\exec}[2]{\ensuremath{f(#1,#2)}}
 \newcommand{\result}[2]{\ensuremath{R(#1|#2)}}
 
 \newcommand{\question}[2]{\medskip\noindent\hspace{\parindent}\begin{minipage}{0.9\columnwidth}\textit{#1}
@@ -81,14 +82,9 @@ Author names\\
 \email{\{emails\}@cs.washington.edu}
 }
 
-\title{Understanding and Detecting Dependent Tests}
-\subtitle{\todo{Is this title good after reading the paper structure?}
-\todo{One issue is that the term ``dependent tests'' may not be known to
-  readers; putting jargon in the title is not a good way to communicate the
-  message nor to draw people into the paper.  Can we think of words that
-  will convey the ideas more effectively?  Something about ``conflicting
-  tests'',  or ``conflicts within a test suite'', or the like?? \edit{other
-alternatives: dependences between tests? conflicts between tests?}}}
+\title{Does Test Execution Order Matter? }
+%\vspace{-2mm}
+\subtitle{Understanding and Detecting Dependent Tests}
 
 \begin{document}
 \maketitle
