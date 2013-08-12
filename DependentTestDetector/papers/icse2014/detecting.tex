@@ -7,9 +7,9 @@
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
 getPossibleExecOrder($T$, $k$): returns all permutations of tests from a test suite $T$ of length $k$.\\
-executeTests($ts$): executes a list of tests $ts$ 
-on the initial environment provided by the test execution framework.
-and returns the execution results.\\
+executeTests($ts$): executes an ordered sequence of tests $ts$ 
+on the initial environment $\env_0$ provided by the test execution framework.
+and returns the execution results \result{ts}{\env_0}.\\
 \textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
 \textbf{Output}: a set of dependent tests $\mathit{depTests}$\\
 \vspace{-5mm}
@@ -36,14 +36,14 @@ test execution. Our experiments uses $k=1$ and $k=2$. }
 
 Since the general form of the dependent test detection problem is
 NP-complete, we do not expect to find an efficient algorithm for it.
-In this section, we present two approximate algorithms to detect
-a subset of dependent tests. 
+To approximate the solution, this section
+presents two approximate algorithms.
 %In this section we present two algorithms to detect dependent
 %tests. 
 Section~\ref{sec:basic} describes a basic algorithm that
 exhaustively executes all possible $k$-test for a bounding parameter $k$
-to detect dependent
-tests. Section~\ref{sec:advalgorithm} described an improved algorithm
+to detect dependent tests.
+Section~\ref{sec:advalgorithm} described an improved algorithm
 that uses program analyses to reduce the search space
 \todo{describe some intuition here.}.
 
@@ -58,13 +58,16 @@ However, this is not feasible for realistic $n$.
 Our basic algorithm uses the findings of our study
 (Section~\ref{sec:study})
 that most dependent tests can be found by running only short
-subsequences of test suites. 
+subsequences of test suites. For example,
+in our study, \todo{}\% of the real-world dependent tests
+can be found by running no more than 2 tests together.
 Instead of executing all permutations of the
 whole test suite, our algorithm (Figure~\ref{fig:dtalgorithm})
 executes all possible $k$-tuples for a bounding
 parameter $k$.
-Thus, the number of permutations to execute
-is $O(n^k)$, which for small $k$ is tractable. 
+By doing so, the algorithm reduces
+the number of permutations to execute
+to $O(n^k)$, which for small $k$ is tractable. 
 
 
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, our algorithm
@@ -72,7 +75,7 @@ first executes $T$ with its default order
 to obtain the \emph{expected result} of each test (line 2). 
 It then executes every $k$-tuple of tests,
 and checks whether the result of any test differs
-from the expected result (lines 3--10). The algorithm returns the set
+from the expected result (lines 3--10). Finally, the algorithm returns the set
 of all tests $t_i \in T$
 that exhibit different results.
 
@@ -85,17 +88,19 @@ that exhibit different results.
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
-recordFieldAccess($ts$): returns fields accessed (including read and write) by each test in a test permutation $ts$. \\
-computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $ts$, identify the test in $ts$ that writes to the field.\\
+recordFieldAccess($ts$): returns fields accessed (i.e., read and write) by each test in an ordered sequence of tests $ts$. \\
+computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $ts$, identify the last test in $ts$ that writes to the field.\\
 \textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
 \textbf{Output}: a set of dependent tests $\mathit{depTests}$\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
 \STATE $\mathit{depTests}$ $\leftarrow$ $\emptyset$
 \STATE $\mathit{expectedResults}$ $\leftarrow$ executeTests($T$)\\
-\COMMENT{$\mathit{reads}$ and $\mathit{writes}$'s data type: Map$\langle$Test, Set$\langle$Field$\rangle$$\rangle$}
+\COMMENT{$\mathit{reads}$ and $\mathit{writes}$'s data type: Map$\langle$Test, Set$\langle$Field$\rangle$$\rangle$, which maps a test
+to a set of fields.}\\
 \STATE $\langle reads, writes\rangle$ $\leftarrow$ recordFieldAccess($T$)
-\\\COMMENT{$\mathit{lastWrites}$'s data type: Map$\langle$Test, Map$\langle$Field, Test$\rangle$$\rangle$}
+\\\COMMENT{$\mathit{lastWrites}$'s data type: Map$\langle$Test, Map$\langle$Field, Test$\rangle$$\rangle$, which maps a test to fields it reads and
+the corresponding last test that writes each field.}
 \STATE $\mathit{lastWrites}$ $\leftarrow$ computeLastWrites($T$, $\mathit{reads}$, $\mathit{writes}$)
 \FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$, $\mathit{k}$)}
 \STATE $\mathit{lastWriteTS}$ $\leftarrow$ computeLastWrites($ts$, $\mathit{reads}$, $\mathit{writes}$)
@@ -117,8 +122,8 @@ computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $
 \caption {The improved algorithm to detect dependent tests.
 Auxiliary methods getPossibleExecOrder and executeTests are
 defined in Figure~\ref{fig:dtalgorithm}.
-Our experiments uses $k=1$, \todo{experiment results.} } 
-\todo{may have some inconsistency not fixed above}
+Our experiments uses $k=1$, \todo{experiment setting, how
+large k it can scale to.}. } 
 \label{fig:impralg}
 \end{figure}
 
@@ -177,13 +182,13 @@ Number of permutations that need to be executed.
 \hline
 1 & 4 & 1\\
 \hline
-2 & 12 & \\
+2 & 12 & 5\\
 \hline
-3 & 24 & \\
+3 & 24 & \todo{xx} \\
 \hline
-4 & 24 & \\
+4 & 24 & \todo{xx} \\
 \hline
-\textbf{Total} & 64 & \\
+\textbf{Total} & 64 & \todo{xx} \\
 \hline
 \end{tabular}
 
@@ -193,11 +198,11 @@ dependent test detection algorithm (Figure~\ref{fig:impralg}).}
 \label{fig:rwexample}
 \end{figure}
 
-Although our basic algorithm bounds the
+Although the basic algorithm bounds the
 number of possible permutations to $O(n^k)$,
 it cannot scale to a realistic test suite.
 For example, using $k=3$, the time for
-executing all possible test permutation
+executing all possible test permutations
 in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects})
 is measured by months.
 
@@ -207,29 +212,34 @@ permutations that are guaranteed to have the
 same results as being executed in the default order.
 The intuition of our algorithm is that,
 given a test permutation, for \textit{each}
-test, if \textit{all shared fields} it reads
+test, if \textit{all shared fields} 
+\todo{is it ok that shared fields are not defined,
+shoiuld we use global fields?} it reads
 are written by the \textit{same} test as
 in the default execution order, all tests in
 the permutation are guaranteed to
 have the same results and the permutation can be safely ignored. 
 
-Our algorithm (Figure~\ref{fig:impralg}) takes the same
+The improved algorithm (Figure~\ref{fig:impralg}) takes the same
 input as the basic algorithm. It first executes the whole
 test suite in its default order
 to record test execution results (line 2) as
 well as fields that each test reads and writes (line 3).
-Then, for every field read by a test,
-the algorithm identifies the last test that write
-to that field (line 4).
+Then, for each field read by a test,
+the algorithm identifies the last test that writes
+that field (line 4).
 After that, the algorithm generates all possible test permutations
 up to length $k$. Before executing each permutation, 
-it checks whether all fields a test may read are written
+the algorithm checks whether all fields a test may read are written
 by the same tests as in the default order (lines 6--9).
-If so, the algorithm concludes that tests in the permutation
+If so, the algorithm concludes that all tests in the permutation
 must reveal the same results. Otherwise,
 it executes the permutation and records the tests with
 different execution results. Lines 10---15 in Figure~\ref{fig:impralg}
 are the same to lines 4---9 in Figure~\ref{fig:dtalgorithm}.
+
+\todo{do we need a proof here.}
+
 %in which every test must
 %reveal the same result to reduce the total number
 %of permutations which need to be explored.
@@ -239,18 +249,30 @@ consisting of 2 shared fields and 4 tests. In the default execution
 order, Test 1 reads the \textit{initial} value of \code{x};
 Test2 reads the \textit{initial} value of \code{y}, and Test4
 reads the value of \code{x} written by Test3.
-Based on this observation, when creating permutations with $k=1$,
-only Test4 needs to be executed, since it will read the
-\textit{initial} value of \code{x} rather than the \code{x}
-value written by Test3. When creating permutations with $k=2$,
-only \todo{how many} need to be executed.
-The number of permutations that need to executed when
-$k=3$ and $k=4$ is shown in Figure~\ref{fig:rwexample}.
+Based on such recorded information, when creating permutations with $k=1$,
+our algorithm determines that only
+Test4 needs to be executed, since Test4, if executed in isolation,
+will read the \textit{initial} value of \code{x} rather than the \code{x}
+value written by Test3. Similarly, when creating permutations with $k=2$,
+only 5 out of 12 permutations ($\langle$Test1, Test4$\rangle$,
+$\langle$Test2, Test4$\rangle$, $\langle$Test4, Test1$\rangle$,
+$\langle$Test4, Test2$\rangle$, and $\langle$Test4, Test3$\rangle$) need to be executed.
+Due to space limitation, we omit details of test executions when
+$k=3$ and $k=4$, and lists the number of permutations that need
+to execute in Figure~\ref{fig:rwexample}.
+
+Another huge saving resulting from this algorithm, as observed in our
+experiments, is that it classifies tests by the fields they
+read and write. Thus, only tests reading or writing at
+least one shared field, rather than \textit{all} tests, are treated as potentially
+dependent.
 
 \todo{should mention that this algorithm is quite conservation,
 and why it is correct. We ignore write}
 
 \todo{illustrate why simply group tests by read/write is incorrect.}
+
+\todo{one improvement space: distinguish different values}
 
 \todo{give an intuition of why it can improve scalability, since
 not every test will overlap with each other.}

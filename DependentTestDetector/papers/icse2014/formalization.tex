@@ -68,8 +68,8 @@ The function\/ ${f}: \alltests \times \environs \rightarrow
 \environs$ is called test
 execution. $f$ maps the execution of a test\/ $ t \in
 \alltests$ 
-in an environment\/ $\env \in \environs$ to the new (potentially updated)
-environment\/ $\env'$.
+in an environment\/ $\env \in \environs$ to a new (potentially updated)
+environment\/ $\env' \in \environs$.
 
 For the execution of a test suite\/ $T = \suite{t_1, t_2, \dots, t_n}$
 we use the shorthand\/
@@ -121,6 +121,9 @@ $t_1$ fails given the environment\/ $\env_1$, and\/ $t_2$ passes.
 %such environment differences may not be checked and then manifest
 %through the test code.
 
+\todo{SZ: I am not satisfied with the following definition. In
+particular, the definition of S1, S2}
+
 \begin{definition}[Manifest Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
 manifest dependent test if $\exists {S_1 \subseteq T - t}$
@@ -155,26 +158,28 @@ and $t \notin S$.}
 %we use the natural environment $\env_0$ provided by frameworks such as JUnit,
 
 The definition of manifest dependent test (for short, dependent test)
-focuses on environment modified reordering test execution.
-Such dependent tests  manifest only
+focuses on environment modified by reordering test execution.
+A dependent test manifests only
 if there is a sequence of tests $S^*$ whose execution
 $\exec{S^*}{\env_0}$  produces the
-environment $\env'$ that will make a test exhibit results.
+environment $\env'$ that will make a test exhibit a
+different result than in its default execution order.
 
 
 \subsection{The Dependent Test Detection Problem}
 
 From a practical perspective, techniques that affect the ordering of
-test suites must respect dependences. Otherwise their results cannot
-be interpreted correctly in the presence of dependences. Detecting
-dependences in existing test suites is thus an interesting problem.
+test suites must respect dependences. Otherwise, their results might
+not be interpreted correctly. Detecting
+dependences in existing test suites, though appears straightforward,
+is actually a non-trivial problem.
 In the following, we first give a precise definition of the problem of
-detecting dependent tests, and then prove that in general this problem
+detecting dependent tests, and then prove that this problem
 is NP-complete. 
 
 
 \begin{definition}[Dependent Test Detection Problem]
-Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an environment\/
+Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an initial environment\/
 $\env_0$, for a given test\/ $t \in T$, is $t$ a dependent test?
 %there a test suite\/ $S
 %\subseteq T$ that manifests a test dependence involving\/ $t_i$? 
@@ -190,8 +195,8 @@ question.
 Together these two parts prove the the Dependent Test Detection Problem is NP-complete.
 
 \begin{theorem}
-The problem of finding a test suite that manifests a dependence is
-NP-hard.
+The problem of determining a dependent test in
+a test suite is NP-hard.
 \end{theorem}
 
 \begin{proof}
