@@ -1,54 +1,144 @@
-\section{Open Questions and Future Work}
+\section{Disucssion and Future Work}
 \label{sec:discussion}
 
 %In the introduction we posed several questions why test dependence
 %may have received little attention despite the ease of constructing
-%concrete but contrived examples. Our
+%concrete but contrived examples. 
 %contributions suggest answers, to differing degrees, to these questions:
 
-%\question{Does test dependence arise in practice?}{Yes.}  
 
-Although we have identified a substantive set of dependent
-tests, from both human-written test suites and
+Although we have studied and detected a substantive set of
+real-world dependent tests, from both human-written test suites and
 automatically generated test suites, a broader
-study of how to prevent and eliminate test dependences, and
-what are the impacts of test dependences to other software engineering
-tasks is beyond the scope of this paper. 
+investigation of the impact of dependent tests,
+how to eliminate and prevent dependent tests
+is beyond the scope of this paper. 
 We next discuss a set of open questions addressing this and
-other possible concerns resulting from test dependences. 
+other possible concerns resulting from dependent teests.
 Exploring answers to these open questions comprises
 our future work.
 
+\vspace{1mm}
 
-%show this in
-%six fielded, substantative, open-source systems.
-%``existence proof'' of test dependence is unlikely to surprise anyone,
-%nor does it suggest that test dependence is common
-%across \emph{all} software.
+\noindent \textbf{{Impact of dependent tests.}}
+Dependent tests can mask faults and lead to
+spurious bug reports; they can also 
+compromise the application of
+testing techniques such as test selection,
+prioritization, and parallelization, since
+most current techniques just assume independence and
+make no statement about what happens when this
+assumption is not true. However, for both perspectives,
+the extent of impact is unknown. This question
+merits more comphrensive empirical studies.  
+
+
+On the other hand, the question of how existing
+testing techniques should
+handle test dependence is also open.
+For downstream testing techniques such as test
+selection, prioritization, and parallelization,
+one straightforward way to amend this situation
+might be to augment such techniques to respect a
+defined partial order among tests. And this partial order
+can be derived from knowledge about dependent tests,
+or be detected by our \ourtool tool.
+%Like contrived examples of test
+%dependence itself, it is easy to produce simple examples where
+%downstream techniques produce incorrect output when applied to dependent
+%tests.
+%under the assumption that the input tests have no dependences.
+%However, 
+
 
 
 \vspace{1mm}
 
-\noindent \textbf{\textit{How to prevent dependent tests?}}
-defensive programming? explicitly state testing oracles?
+\noindent \textbf{{Eliminating dependent tests.}}
+As found in our study (Section~\ref{sec:study}),
+developers often ignore dependent tests due to
+the lack of proper tool support. For some
+dependent tests that get eliminated,
+the practice of eliminating dependent tests
+remains mostly ad hoc --- software developers
+often manually specify test
+execution orders (in a configuration file) or
+simply merge tests, when a dependent test is reported. 
+A systematic and more robust methodology for
+dependent test elimination should be developed.
 
-There is already some work aiming at
-reducing the potential for dependences by refactoring programs to use
+On the other hand, dependent tests in
+an automatically-generated test suite can be 
+more challenging to eliminate.
+As suggested by our experiments, dependent tests are
+more prevalent in automatically-generated test suites
+than in human-written test suites.
+Further, This is even exacerbated by the fact that
+almost all automated test generation
+techniques we are aware of produce tests
+that are hard to read for humans, are undocumented, and their intent
+cannot easily be gleaned from naming conventions and other aids
+developers normally use. Therefore, it makes more difficult
+to identify the root cause of dependence and then remove
+the dependence. While there is some work to alleviate
+this problem~\cite{fraseretal:ISSTA:2011}, the question
+of eliminating  automatically-generated dependent tests
+still remains open.
+
+
+%As discussed in our experiments, it appears that test
+%dependence in automatically generated test suites is 
+%even more troublesome than in human-written suites. 
+
+
+\vspace{1mm}
+
+
+\noindent \textbf{{Preventing dependent tests.}}
+Dependent tests, if occur, may have non-trivial consequences.
+A natural question is how could software developers
+prevent dependent tests at the beginning.
+
+One possible way is asking developers to
+explicitly specify test dependence
+when writing tests in a testing framework that support
+test dependence (see Section~\ref{sec:supporting} for details).
+However, doing so may bring up the compatibility issue
+for the existing tests.
+
+Stylized coding patterns can also be used. Developers
+should be encouraged to write tests ``defensively'' by
+specifying necessary test execution pre-conditions and
+properly mocking global variables or shared resources. 
+There is already some work aiming at automating this
+process to prevent the potential
+for dependences by refactoring programs to use
 less global state~\cite{wlokaetal:FSE:2009}. 
 
-\vspace{1mm}
+%We conjecture that if and when this happens in practice, it is
+%hard to notice in part because current techniques~\cite{} do not surface the necessary information.
 
-\noindent \textbf{\textit{How to eliminate dependent tests?}}
+%defensive programming? explicitly state testing oracles?
 
-\todo{summarize lessons learned from the study}
+%A better understanding of the 
+%frequency and scope of consequences from test dependence should be
+%developed.  
 
-\vspace{1mm}
+%Of particular concern is the
+%masking of program faults because, unlike weaknesses
+%in test suites or spurious bug reports, masking
+%faults could be costly to find by other methods or to leave in the program.
+%Tools that surface test dependences may help researchers
+%and practitioners study and deal with dependences more effectively.
 
-\noindent \textbf{\textit{What about other cases of test dependences?}}
 
-\todo{this paper focuses on manifest test dependence, what about
-potential test dependence, as well as some other cases in the
-study}
+
+
+
+%\vspace{1mm}
+
+%\noindent \textbf{\textit{What about other cases of test dependences?}}
+
 
 
 %Several of our examples identified situations in which test dependence
@@ -65,65 +155,9 @@ study}
 %causes problems.
 
 
-\vspace{1mm}
-
-\noindent \textbf{\textit{How does 
-test dependence affect downstream software testing techniques?}}
-In principle, test dependence can compromise
-the application of downstream testing techniques such as selection,
-prioritization, and parallelization.  
-%Like contrived examples of test
-%dependence itself, it is easy to produce simple examples where
-%downstream techniques produce incorrect output when applied to dependent
-%tests.
-%under the assumption that the input tests have no dependences.
-We conjecture that if and when this happens in practice, it is
-hard to notice in part because current techniques~\cite{} do not surface the necessary
-information.
-
-However, the question of how downstream testing techniques, like regression test
-selection and prioritization should handle dependences is also open.
-Most current techniques just assume independence and make no statement
-about what happens when this assumption is not true. One
-straightforward way to amend this situation might be to augment such
-techniques to respect a defined partial order among tests. And this partial order
-can be derived from knowledge about dependent tests.
-
-\vspace{1mm}
-
-\noindent \textbf{\textit{How does test dependence
-affect the design of automated test generation
-techniques?}}
-
-It appears that test dependence in automatically generated test suites is 
-even more troublesome than in human-written suites. The reason for this is
-that all automated test generation tools we are aware of produce tests
-that are hard to read for humans, are undocumented, and their intent
-cannot easily be gleaned from naming conventions and other aids
-developers normally use. While there is some work to alleviate this problem, it
-still remains difficult to determine whether a failed test points to a bug
-in the program or a dependent test~\cite{fraseretal:ISSTA:2011}.
-
-\todo{How can auto tools consider test dependence?}
-
-\vspace{1mm}
-
-\noindent \textbf{\textit{Other open questions.}}
-The question of the role of test dependence in the real world merits
-more aggressive empirical study.  A better understanding of the 
-frequency and scope of repercussions from test dependence should be
-developed.  Of particular concern is the
-masking of program faults because, unlike weaknesses
-in test suites or spurious bug reports, masking
-faults could be costly to find by other methods or to leave in the program.
-Tools that surface test dependences may help researchers
-and practitioners study and deal with dependences more effectively.
+%\vspace{1mm}
 
 
-%\question{If and when test dependence arises, are there significant repercussions?}{Sometimes, although the extent is unknown.}
-
-%\question{Is dependence easy to notice if-and-when it arises?}{  At present,
-%usually not.}
 %This is a more subtle question, 
 %because the answer depends not only on the tools being used but also on the
 %perceptions and insights of the developers.  If tools always run
