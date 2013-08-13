@@ -59,12 +59,12 @@ As found in our study (Section~\ref{sec:study}),
 developers often ignore dependent tests due to
 the lack of proper tool support. For some
 dependent tests that get eliminated,
-the practice of eliminating dependent tests
-remains mostly ad hoc --- software developers
-often manually specify test
-execution orders (in a configuration file) or
+the practice of eliminating them
+remains mostly manual and ad hoc --- software developers
+usually manually hardcode test
+execution orders in a configuration file or
 simply merge tests, when a dependent test is reported. 
-A systematic and more robust methodology for
+A more flexible and robust methodology for
 dependent test elimination should be developed.
 
 On the other hand, dependent tests in
@@ -73,14 +73,14 @@ more challenging to eliminate.
 As suggested by our experiments, dependent tests are
 more prevalent in automatically-generated test suites
 than in human-written test suites.
-Further, This is even exacerbated by the fact that
+Further, this problem is even exacerbated by the fact that
 almost all automated test generation
 techniques we are aware of produce tests
 that are hard to read for humans, are undocumented, and their intent
 cannot easily be gleaned from naming conventions and other aids
-developers normally use. Therefore, it makes more difficult
-to identify the root cause of dependence and then remove
-the dependence. While there is some work to alleviate
+developers normally use. Therefore, it requires more effort
+from developers to identify the root cause of dependence
+and then remove the dependence. While there is some work to alleviate
 this problem~\cite{fraseretal:ISSTA:2011}, the question
 of eliminating  automatically-generated dependent tests
 still remains open.
@@ -95,21 +95,22 @@ still remains open.
 
 
 \noindent \textbf{{Preventing dependent tests.}}
-Dependent tests, if occur, may have non-trivial consequences.
-A natural question is how could software developers
-prevent dependent tests at the beginning.
+Detecting dependent tests is not obvious in most
+cases. Thus, a natural question is how could
+software developers prevent dependent tests when
+writing testing code.
 
-One possible way is asking developers to
-explicitly specify test dependence
-when writing tests in a testing framework that support
-test dependence (see Section~\ref{sec:supporting} for details).
-However, doing so may bring up the compatibility issue
-for the existing tests.
+One possible way is encouraging developing to
+use advanced testing frameworks that support test dependence,
+so that developers can explicitly specify test
+dependence when writing tests.
+However, using different testing frameworks may
+bring up the compatibility issue to the existing tests.
 
-Stylized coding patterns can also be used. Developers
+Stylized coding patterns can also be useful. Developers
 should be encouraged to write tests ``defensively'' by
 specifying necessary test execution pre-conditions and
-properly mocking global variables or shared resources. 
+using less (or properly mocking) global variables or shared resources. 
 There is already some work aiming at automating this
 process to prevent the potential
 for dependences by refactoring programs to use
