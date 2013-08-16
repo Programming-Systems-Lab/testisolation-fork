@@ -216,8 +216,8 @@ automatically execute methods (\code{setUp()} and \code{tearDown()} in JUnit
 3.x, and methods annotated with \code{@Before} and \code{@After} in
 JUnit 4.x) to help handle common setup and clean-up tasks between
 tests. Ensuring that these mechanisms are used properly, however, is
-beyond the scope of any framework. \todo{Add Darioush's finding that
-JUnit can support test dependence, but is not encouraged.}
+beyond the scope of any framework, even though the latest release of JUnit 4.11
+supports executing tests in lexicographic order by test method name~\cite{junitordering}.
 
 
 Only a few tools explicitly considers test dependence, by
@@ -236,5 +236,12 @@ to be made explicit and respected during execution, they do not help developers
 (Section~\ref{sec:impl}) could co-exist
 with such frameworks by generating annotations for them.
 
-
-%In the literature of automated test generation research,
+In our previous work~\cite{DBLP:conf/sigsoft/MusluSW11}, we proposed
+an algorithm to find program bugs by executing each unit
+test in isolation. With a significantly different focus,
+in this work, we investigate the validity common test independence assumption
+in the testing literature rather than finding new bugs,
+and present four new results (summarized in Section~\ref{sec:contributions}).
+Further, as indicated by our study and experiments, most dependent
+tests reveal weakness in the test code rather than bugs in the program. Thus,
+using test dependence may not achieve a high return in finding program bugs.

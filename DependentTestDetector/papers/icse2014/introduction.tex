@@ -1,14 +1,15 @@
 \section{Introduction}
 
-\todo{Is ``dependent test'' a term that can be applied to one test in
-  isolation?  Or is a pair of tests dependent on one another if the result
-  of one of them changes if the other one is run first?  The paper doesn't
-  make this clear anywhere in sections 1 and 2, and this leads to some
-  confusion for the reader.}
+%\todo{Is ``dependent test'' a term that can be applied to one test in
+%  isolation?  Or is a pair of tests dependent on one another if the result
+%  of one of them changes if the other one is run first?  The paper doesn't
+%  make this clear anywhere in sections 1 and 2, and this leads to some
+%  confusion for the reader.}
 
-Informally, \emph{dependent tests} produce different test results when
-executed in different contexts. An example is two tests \code{A}
-and \code{B}, where running \code{A} in isolation leads
+Informally, a \emph{dependent test} produces different test
+results when executed in different contexts.
+An example is two tests \code{A}
+and \code{B}, where running \code{A} and then \code{B} leads
 to \code{A} passing, while running \code{B} and then
 \code{A} leads to \code{A} failing. We call \code{A}
 a dependent test, since its result depends on
@@ -18,20 +19,22 @@ whether it runs after \code{B} or not.
 %to both tests passing, while running \code{B} and then
 %\code{A} leads to one or both tests failing.
 
-\edit{I changed the above example based on the comments below.}
+\edit{Please check the above paragraph. }
 
-\todo{Would a better example focus on just one test \code{B}:  it produces
-  a different result (succeed/fail) depending on whether test \code{A} is run
-  before it or not.  I'm not sure whether this would be an improvement or
-  not; it perhaps depends on the intended definition of ``dependent test'',
-  which is not clear.}
+%\todo{Would a better example focus on just one test \code{B}:  it produces
+%  a different result (succeed/fail) depending on whether test \code{A} is run
+%  before it or not.  I'm not sure whether this would be an improvement or
+%  not; it perhaps depends on the intended definition of ``dependent test'',
+%  which is not clear.}
 
 
 %~\cite{KapfhammerS03}
 %Chays:2000:FTD:347324.348954,
 %Gray:1994:QGB:191843.191886}, 
-\todo{find a place to emphasize unit tests}
+%\todo{find a place to emphasize unit tests}
 
+In a test suite, all tests should be independent, and
+running the tests in any order should produce the same test results.
 Test independence is a common assumption in testing research and practice:
 theoretical results, algorithms, and tools all fail or behave unexpectedly
 in the presence of dependent tests.
@@ -43,8 +46,7 @@ Is it acceptable because even when test dependence arises, there are few
 negative repercussions?
 Is it because the problem is important but no one has thought to examine it?
 Is it because the problem is important but is too hard to analyze or understand?
-\todo{note, the above questions must be recalled and discussed after
-presenting the study and evaluation. do not forget.}
+\todo{donot forget to recall above questions in the paper.}
 
 \subsection{Manifest Test Dependence}
 
@@ -59,40 +61,13 @@ of test dependence that:
   expected result for that test.  
 \end{itemize}
 That is, we focus on a \emph{manifest} perspective of test dependence,
-requiring a \emph{concrete} variant of the test suite that
-\emph{dynamically} produces different results from the expected.  
-
-\edit{Several places particularly require consistence: (1)
-test dependence reveals \todo{defect, or flaws, or smells}
-in test code, (2) test dependence can mask \todo{bug, defect,
-or fault}, (3) test dependence, or dependent tests. seems
-these 2 phrases are used interchangably.
-In addition, should it be test dependence, or test
-dependences?, (4) test results or test outcomes.}
-
-\todo{We need a consistent set of terminology.  I like the following, 
-adapted from \\
-http://en.wikipedia.org/wiki/Dependability:
-\begin{itemize}
-\item
- Defect:
-      A flaw, failing, or imperfection in a system, such as an
-      incorrect design, algorithm, or implementation.  Also known as a
-      fault or bug.  Typically caused by a human mistake.
-\item
- Error:
-      An error is a discrepancy between the intended behavior of a
-      system and its actual behavior inside the system boundary.  Not
-      detectable without assert statements and the like.
-\item
- Failure:
-      A failure is an instance in time when a system displays
-      behavior that is contrary to its specification.
-\end{itemize}
-but if we use something else (which would be fine), we should define the terms.}
+requiring a \emph{concrete} order of the test suite that
+produces \emph{different} and \emph{user-visible} results from the expected.  
 
 
-\subsection{Test Execution Environment}
+\subsection{Causes of Dependent Tests}
+
+\edit{I changed the subtitle, which was: Test Execution Environment}
 
 Test dependence results from interactions with the execution environment.
 Specifically, when a
@@ -104,9 +79,8 @@ a different result.
 Ideally, each test does not depend on its environment, because it
 initializes any resources it will use and/or uses mocked resources.
 Likewise, the test does not modify its environment, because of mocks or
-resetting resources after test execution.
-
-In practice, developers are as likely
+resetting resources after test execution. However, in practice,
+developers are as likely
 to make mistakes when writing tests as when they are writing other code.
 As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation}, most of the dependences we found
 stem from incorrect or incomplete initialization
@@ -145,21 +119,20 @@ subtle bug or test failure.
 Our study of \dtnum real-world, confirmed dependent
 tests 
 % from \repnum software issue tracking systems
-(Section~\ref{sec:study}) identified three
+(Section~\ref{sec:study}) identified two 
 major consequences of dependent tests.
 %
 First, dependent tests usually indicate a
 \emph{weaknesses in the test suite}. Exposing
-dependent tests can detect code smells and identify situations
+dependent tests can detect test code flaws and identify situations
 where some tests do not perform proper initialization.
-%
-Second, test dependences can lead
+Test dependences can lead
 to \emph{spurious bug reports}. As an example, the Eclipse developers
 investigated a dependent test~\cite{eclipsebug} in SWT for
 more than a month before realizing that the test dependences were intentional,
 allowing them to close the bug report without a change to the system.
 %
-Third, dependent tests can
+Second, dependent tests can
 \emph{mask faults in a program}. Specifically, executing a test suite in the
 default order does not expose the fault, whereas
 executing the same test suite in a different order does. We found 
@@ -195,6 +168,7 @@ return the same results as they do when executed originally, as part of the full
 
 
 \subsection{Contributions}
+\label{sec:contributions}
 
 At its heart, this paper addresses and questions
 conventional wisdom about the test independence assumption. 
@@ -221,22 +195,59 @@ This paper makes the following contributions:
   to detect dependent tests (Section~\ref{sec:detecting}). The first
   basic algorithm exhaustively executes all possible $k$-tests for
   a bounding parameter $k$ to identify tests exhibiting different results.
-  The second improved algorithm uses static and dynamic program analyses
-  to reduce the search space. \todo{check the above}
-  \todo{Say something brief about the guarantees.  In particular, the
-    algorithms find test dependences but don't guarantee to find all test
-    dependences.}
+  The second improved algorithm uses dynamic program analyses
+  to reduce the search space. It records fields read and
+  written by each test, and then safely ignores test execution orders
+  that are guaranteed to produce the same results as in the default
+  order. Both algorithms are \emph{sound} but \emph{incomplete}:
+  every dependent test they identify is real, but the algorithms
+  do not guarantee to find all dependent tests. \edit{check above}
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
-  tool, and applied it to \todo{NUM} real-world subject programs. Our
+  tool (Section~\ref{sec:impl}), and applied it to \subjnum real-world subject programs. Our
   tool detected a large number of important test dependences that have not
   been discovered before, showing that on average \todo{xx}\% of the human-written
-  tests are dependent and \todo{xx}\% of the automatically-generated tests are dependent
+  unit tests are dependent and \todo{xx}\% of the automatically-generated
+  unit tests are dependent
    (Section~\ref{sec:evaluation}).
   Finally, we discuss a set of open questions and other possible impacts of dependent
   tests in Section~\ref{sec:discussion}.
 \end{itemize}
 
 
+%%%%ignore text below, which is commented out
 
+\begin{comment}
+\todo{We need a consistent set of terminology.  I like the following, 
+adapted from \\
+http://en.wikipedia.org/wiki/Dependability:
+\begin{itemize}
+\item
+ Defect:
+      A flaw, failing, or imperfection in a system, such as an
+      incorrect design, algorithm, or implementation.  Also known as a
+      fault or bug.  Typically caused by a human mistake.
+\item
+ Error:
+      An error is a discrepancy between the intended behavior of a
+      system and its actual behavior inside the system boundary.  Not
+      detectable without assert statements and the like.
+\item
+ Failure:
+      A failure is an instance in time when a system displays
+      behavior that is contrary to its specification.
+\end{itemize}
+but if we use something else (which would be fine), we should define the terms.}
+\end{comment}
+
+\begin{comment}
+\edit{Several places particularly require consistence: (1)
+test dependence reveals \todo{defect, or flaws, or smells}
+in test code, (2) test dependence can mask \todo{bug, defect,
+or fault}, (3) test dependence, or dependent tests. seems
+these 2 phrases are used interchangably.
+In addition, should it be test dependence, or test
+dependences?, (4) test results or test outcomes.}
+\end{comment}
 %  LocalWords:  Kapfhammer Soffa subsequence SWT CLI NUM
+
