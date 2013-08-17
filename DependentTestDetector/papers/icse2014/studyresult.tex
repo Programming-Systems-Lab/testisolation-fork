@@ -2,29 +2,29 @@
 \vspace{1mm}
 \centering
 \small{
-\setlength{\tabcolsep}{.10\tabcolsep}
-\begin{tabular}{|c||c|c|c|c||c|c|c|c||c|c|c|c||c|c|c|c|}
+\setlength{\tabcolsep}{.15\tabcolsep}
+\begin{tabular}{|c||c|c|c|c||c|c|c|c|c||c|c|c|c||c|c|c|c|}
 \hline
 %1&2&3&4&5&6&7&8&9&10&11&12&13&14\\
-\textbf{Issue}&\multicolumn{4}{|c||}{\textbf{Dependent Tests}}&\multicolumn{4}{|c||}{\textbf{\#Involved Tests for}}&\multicolumn{4}{|c||}{\textbf{Resolution}}&\multicolumn{4}{|c|}{\textbf{Root Cause}}\\
-\cline{2-5}\cline{10-17}
-\textbf{Tracking} &Total&\multicolumn{3}{|c||}{Severity}&\multicolumn{4}{|c||}{\textbf{Manifestation}}&
-&\multicolumn{3}{|c||}{Patch Location}&Static&File & Other & Unknown\\
-\cline{3-9}\cline{11-13}
-\textbf{System}&Number&Major&Minor&Trivial&1 test&2 test&3 tests & Unknown&Days&Code&Test&Unfixed&Variable&System& &\\
+\textbf{Issue}&\multicolumn{4}{|c||}{\textbf{Dependent Tests}}&\multicolumn{5}{|c||}{\textbf{\#Involved Tests for}}&\multicolumn{4}{|c||}{\textbf{Resolution}}&\multicolumn{4}{|c|}{\textbf{Root Cause}}\\
+\cline{2-5}\cline{11-18}
+\textbf{Tracking} &Total&\multicolumn{3}{|c||}{Severity}&\multicolumn{5}{|c||}{\textbf{Manifestation}}&
+&\multicolumn{3}{|c||}{Patch Location}&Static&File & Database & Unknown\\
+\cline{3-10}\cline{12-14}
+\textbf{System}&Number&Major&Minor&Trivial& Self &1 test&2 tests&3 tests & Unknown&Days&Code&Test&Unfixed&Variable&System& State&\\
 \hline
-Apache&30&23&1&6&3&24&1&2&93&3&17&10&8&4&8 &10\\
+Apache&26&22&3&1&0&5&18&1&2&93&5&20&1&9&3&8 &6\\
 \hline
-Eclipse&60&0&60&0&0&49&0&11&48&2&7&51&49&0&0 &11\\
+Eclipse&59&0&59&0&0&0&49&1&9&48&1&8&50&49&0&0 &10\\
 \hline
-JBoss&7&7&0&0&0&4&0&3&44&0&2&2&1&0& 0 & 6\\
+JBoss&6&6&0&0&0&0&3&0&3&44&0&2&4&1&0& 0 & 5\\
 \hline
-Hibernate&4&2&1&1&0&4&0&0&6&1&1&2&0&0& 1 & 3\\
+Hibernate&3&1&1&1&0&0&3&0&0&6&0&1&2&0&0& 2 & 1\\
 \hline
-Codehaus&3&3&0&0&2&0&0&1&3&1&0&2&0&0&0 &3\\
+Codehaus&2&2&0&0&1&1&0&0&0&3&0&1&1&0&1&0 &1\\
 \hline
 \hline
-\textbf{Total} & 104 &35&62&7&5&81&1&17&194&7&27&70&58&4&9&33\\
+\textbf{Total} & \dtnum &31&63&2&1&6&73&2&\unum&194&6&32&\unfixed&\svnum&4&10&23\\
 \hline
 \end{tabular}
 }
@@ -35,20 +35,13 @@ Column ``Total Number'' shows the total number of identified dependent tests.
 Column ``Severity'' is the developers' assessment of the importance of the
 test dependence.
 Column ``\#Involved Tests for Manifestation'' is the number of tests needed
-to manifest the dependence. Column ``Days'' is the
+to manifest the dependence. Column ``Self'' shows the number of
+tests that depend on themselves. Column ``Days'' is the
 average days taken by developers to resolve a dependent test.
 Column ``Patch Location'' shows how developers fixed the dependent tests:
 by modifying program code, by modifying test code, or not fixed.
-In column ``Dependence Root Cause'', ``other'' execution environment
-differences include language, locale, and databases.\todo{``other'' is over
-  twice as large as ``File system''.  Therefore, I suggest that it be
-  broken down to show at least every column that is at least 3 root
-  causes.  Then, expand the list of ``other'' here in this caption (or, better, move
-  that expansion to the body of the paper, which will keep this caption
-  from being too large), which
-  will emphasize that nothing else is as important as the ones that are
-  listed explicitly in the table.  Also, what is ``N/A'' in the table?  Are
-those unknown, or something else?  It needs a better name and also an explanation.}
+%In column ``Dependence Root Cause'', ``other'' execution environment
+%differences include language, locale, and databases.
 }
 }
 \end{table*}

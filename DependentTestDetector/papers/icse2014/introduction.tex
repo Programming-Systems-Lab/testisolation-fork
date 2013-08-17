@@ -62,7 +62,7 @@ of test dependence that:
 \end{itemize}
 That is, we focus on a \emph{manifest} perspective of test dependence,
 requiring a \emph{concrete} order of the test suite that
-produces \emph{different} and \emph{user-visible} results from the expected.  
+produces \emph{different} and \emph{visible} results from the expected.  
 
 
 \subsection{Causes of Dependent Tests}
@@ -127,7 +127,7 @@ First, dependent tests usually indicate a
 dependent tests can detect test code flaws and identify situations
 where some tests do not perform proper initialization.
 Test dependences can lead
-to \emph{spurious bug reports}. As an example, the Eclipse developers
+to {spurious bug reports}. As an example, the Eclipse developers
 investigated a dependent test~\cite{eclipsebug} in SWT for
 more than a month before realizing that the test dependences were intentional,
 allowing them to close the bug report without a change to the system.

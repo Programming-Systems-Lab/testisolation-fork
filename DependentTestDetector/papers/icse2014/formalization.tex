@@ -267,11 +267,10 @@ This formalism aims to lay a foundation for reasoning about
 test dependence in a precise way. It only considers
 deterministic tests, and excludes tests whose results
 might be affected non-determinism such as thread scheduling.
-Our formalism also excludes the case that a test might
-be dependent on itself. That is, executing the same
-test twice may lead to different results.
-\todo{need to justify why ignore this case, based on
-the study?}
+For the sake of simplicity, our formalism excludes the case that a test 
+can depend on itself. Further, our study of real-world dependent
+tests indicate that self-dependent tests occur very rare
+in practice.
 
 
 %Third, the manifest test dependence problem is NP-complete;
