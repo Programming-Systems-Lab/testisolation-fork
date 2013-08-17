@@ -33,7 +33,7 @@ helped us understand whether the report is about test dependence
 --- a test manifesting different results under different
 test execution orders. Each dependent test candidate was examined by
 at least two people and the whole process consisted of several
-rounds of (re-)study, cross checking, and efforts to reproduce. We ignored reports
+rounds of (re-)study and cross checking. We ignored reports
 that are described vaguely, and excluded tests whose results are
 affected by non-determinism (e.g., multi-threading).
 %In total, we have spent more than 6 person-months to collect and analyze
@@ -58,22 +58,27 @@ manifestation, root cause, and developers' reaction.
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least 82\% of the dependent
 tests in the study can be manifested by no more than 2 tests.}}
-A dependent test is manifested if we produce a test suite that is a 
-subset of the original suite, such that the test fails.
+A dependent test is manifested if we produce a suite that is a 
+subset of the original suite, such that the test produces a different
+result than run in its default order.
 We measure the size of the subsuite.
-If the test fails when run in isolation, the number of tests to manifest
+If the test produces a different result when run
+in isolation, the number of tests to manifest
 the dependent test is 1.
-If the test fails when run after one other test (often, the subsuite is
+If the test produces a different result
+when run after one other test (often, the subsuite is
 running these two tests in the opposite order as the full original test
 suite), then the number of tests to manifest the dependent test is 2.
-In our study, we also found 1 test depending on itself:
+Among the \dtnum studied dependent tests, only 2 of them
+require 3 tests to manifest the dependence.
+One test depends on itself:
 running the test twice produces different results than running it once,
-since this test has side-effect on the database it reads.
+because this test has side-effect on the database it reads.
 We count this special case separately in the ``Self'' column
 of Table~\ref{tab:studyresults}.
 
-For \unum dependent tests, the number of involved tests
-is unknown, since the relevant information is not described
+For remaining \unum dependent tests, the number of involved tests
+is unknown, since the relevant information is missing
 or vaguely described in the issue tracking systems. For example,
 some reports simply stated that ``running \textit{all} tests in one class before
 test \emph{t} makes \emph{t} fail'' or ``randomizing the test execution order
@@ -101,11 +106,11 @@ arise due to inappropriate access to
 shared static variables; 4 (4\%) of them arise
 due to inappropriate access to file systems, and 10 (10\%) of them arise
 due to inappropriate access to database.
-The root cause for the remaining 23 (25\%) tests is not described clearly
+The root cause for the remaining 23 (25\%) tests is not illustrated 
 in the issue tracking system.
 
 \vspace{1mm}
-\noindent \textbf{{Developers' reactions: dependent tests
+\noindent \textbf{{Developers' action: dependent tests
 often indicate flaws in the test code, and developers usually
 modify the test code to remove them.}}
 In some cases, dependent tests are intentional, developers are aware
@@ -116,18 +121,18 @@ but only 38 (39\%) of them got fixed by developers. Among
 the 38 fixed dependent tests, only 6 fixes are
 on the program code, while the other fixes are on the
 test code. This indicates that dependent tests usually
-reveal potential flaws in the test code rather than the test code.
+reveal potential flaws in the test code rather than the program code.
 Based on developers' discussion, we found that although
 developers admitted that such test dependence should be removed,
 they often leave the dependence unresolved.
 The primary reason is that developers often \textit{intentionally}
 introduce test dependence because it is
-easier and more convenient to write the test code. When a dependent
-test is reported, developers simply add comments to the test code
+easier and more convenient to write the test code. When such a dependent
+test is reported, developers may just add comments to the test code
 to document the existing dependency. This applies to 49 (84\%) out
 of the \unfixed unfixed tests. For the rest 9 (16\%) unfixed tests,
-developers thought they were not important enough given their limited
-development time, and simply closed the issue report without taking
+developers thought they were not important enough given the limited
+development time, so they simply closed the issue report without taking
 any action.
 
 %Second, many popular testing
@@ -139,8 +144,8 @@ any action.
 When fixing a dependent test, developers used
 four strategies. For all the 6 dependent tests
 fixed on the program code, developers changed the relevant
-code that performs static variable initialization, to ensure
-the dependent tests will not read an undesired value.
+code that performs static variable initialization, to ensure that
+each dependent test will not read an undesired value.
 Section~\ref{sec:repercussion} gives an example.
 Among the other 32 dependent tests fixed on the test code,
 28 (87\%) of them were fixed by manually specifying
