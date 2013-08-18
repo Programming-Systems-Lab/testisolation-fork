@@ -6,31 +6,44 @@
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
-getPossibleExecOrder($T$, $k$): returns all permutations of tests from a test suite $T$ of length $k$.\\
-executeTests($ts$): executes an ordered sequence of tests $ts$ 
-on the initial environment $\env_0$ provided by the test execution framework.
-and returns the execution results \result{ts}{\env_0}.\\
+kPermutations($T$, $k$): returns all $k$-permutations of $T$; that is, all
+sequences of $k$ elements of $T$ without repetition
+
+\medskip
+
 \textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
-\textbf{Output}: a set of dependent tests $\mathit{depTests}$\\
+\textbf{Output}: a set of dependent tests $\mathit{dependentTests}$\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
-\STATE $\mathit{depTests}$ $\leftarrow$ $\emptyset$
-\STATE $\mathit{expectedResults}$ $\leftarrow$ executeTests($T$)
+\STATE $\mathit{dependentTests}$ $\leftarrow$ $\emptyset$
+\STATE $\mathit{expectedResults}$ $\leftarrow$ $\result{T}{\env_0}$
 \FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$, $\mathit{k}$)}
-\STATE $\mathit{execResults}$ $\leftarrow$ executeTests($ts$)
+\STATE $\mathit{execResults}$ $\leftarrow$ $\result{ts}{\env_0}$
 \FOR{each test $\mathit{t}$ in $\mathit{ts}$}
 \IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
-\STATE $\mathit{depTests}$ $\leftarrow$ $\mathit{depTests}$ $\cup$ $\mathit{t}$
+\STATE $\mathit{dependentTests}$ $\leftarrow$ $\mathit{dependentTests}$ $\cup$ $\mathit{t}$
 \ENDIF
 \ENDFOR
 \ENDFOR
-\RETURN $\mathit{depTests}$
+\RETURN $\mathit{dependentTests}$
 %\ENDWHILE
 \end{algorithmic}
+
+% getPossibleExecOrder($T$, $k$): returns a set of test suites, each of size
+% $\le k$; each suite is composed of tests selected from $T$ without replacement.\\
+
+\medskip
+
+getPossibleExecOrder($T$, $k$):\\
+\vspace{-5mm}
+\begin{algorithmic}[1]
+\RETURN kPermutations($T$, $k$)
+\end{algorithmic}
+
 \vspace{-3mm}
-\caption {The basic algorithm to detect dependent tests.
-It introduces a parameter $k$ to bound the length of
-test execution. Our experiments uses $k=1$ and $k=2$. } 
+\caption {The exhaustive $k$-bounded algorithm to detect dependent tests.
+Our experiments use $k=1$ and $k=2$ to bound the length of
+test execution. } 
 \label{fig:dtalgorithm}
 \end{figure}
 
@@ -86,45 +99,45 @@ that exhibit different results.
 
 
 
-\subsection{The Improved Algorithm}
+\subsection{The Improved $k$-Bounded Algorithm}
 \label{sec:advalgorithm}
+
+\todo{I don't like ``improved'', which doesn't convey intuition.  Use a
+  more descriptive term.}
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
-recordFieldAccess($ts$): returns fields accessed (i.e., read and write) by each test in an ordered sequence of tests $ts$. \\
+recordFieldAccess($ts$): returns fields accessed (i.e., read and written) by each test in an ordered sequence of tests $ts$. \\
 computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $ts$, identify the last test in $ts$ that writes to the field.\\
-\textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
-\textbf{Output}: a set of dependent tests $\mathit{depTests}$\\
+
+
+getPossibleExecOrder($T$, $k$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
-\STATE $\mathit{depTests}$ $\leftarrow$ $\emptyset$
-\STATE $\mathit{expectedResults}$ $\leftarrow$ executeTests($T$)\\
-\COMMENT{$\mathit{reads}$ and $\mathit{writes}$'s data type: Map$\langle$Test, Set$\langle$Field$\rangle$$\rangle$, which maps a test
-to a set of fields.}\\
+\STATE $\mathit{expectedResults}$ $\leftarrow$ $\result{T}{\env_0}$\\
+\COMMENT{$\mathit{reads}$ and $\mathit{writes}$'s data type:
+  Map$\langle$Test, Set$\langle$Field$\rangle$$\rangle$
+% which maps a test to a set of fields.
+}\\
 \STATE $\langle reads, writes\rangle$ $\leftarrow$ recordFieldAccess($T$)
 \\\COMMENT{$\mathit{lastWrites}$'s data type: Map$\langle$Test, Map$\langle$Field, Test$\rangle$$\rangle$, which maps a test to fields it reads and
 the corresponding last test that writes each field.}
 \STATE $\mathit{lastWrites}$ $\leftarrow$ computeLastWrites($T$, $\mathit{reads}$, $\mathit{writes}$)
-\FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$, $\mathit{k}$)}
+\STATE $\mathit{result}$ $\leftarrow$ $\emptyset$
+\FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
 \STATE $\mathit{lastWriteTS}$ $\leftarrow$ computeLastWrites($ts$, $\mathit{reads}$, $\mathit{writes}$)
 \vspace{-3mm}
-\IF{$\exists$ Test $\mathit{t} \in ts$ that $\mathit{lastWrite}$[$t$] $\neq$ $\mathit{lastWriteTS}$[$t$]  }
-\STATE \textbf{continue}
-\ENDIF
-\STATE $\mathit{execResults}$ $\leftarrow$ executeTests($\mathit{ts}$)
-\FOR{each test $\mathit{t}$ in $\mathit{ts}$}
-\IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
-\STATE $\mathit{depTests}$ $\leftarrow$ $\mathit{depTests}$ $\cup$ $\mathit{t}$
+\IF{$\exists$ Test $\mathit{t} \in ts$ such that $\mathit{lastWrite}$[$t$] $\neq$ $\mathit{lastWriteTS}$[$t$]  }
+\STATE $\mathit{result}$ $\leftarrow$ $\mathit{result} \cup \mathit{ts}$
 \ENDIF
 \ENDFOR
-\ENDFOR
-\RETURN $\mathit{depTests}$
-%\ENDWHILE
+\RETURN $\mathit{result}$
 \end{algorithmic}
+
 \vspace{-3mm}
 \caption {The improved algorithm to detect dependent tests.
-Auxiliary methods getPossibleExecOrder and executeTests are
-defined in Figure~\ref{fig:dtalgorithm}.
+It uses the algorithm of Figure~\ref{fig:dtalgorithm}, re-defining the
+getPossibleExecOrder function.
 Our experiments uses $k=1$, \todo{experiment setting, how
 large k it can scale to.}. } 
 \label{fig:impralg}
