@@ -2,10 +2,6 @@
 \section{Formalizing Test Dependence}
 \label{sec:formalism}
 
-%\todo{need a transition sentence here.}
-%A standard textbook states that ``[a] test case includes not only input data but
-%also any relevant \emph{execution conditions}
-%\dots''~\cite[p.~152, emphasis added]{pezze-young:2007}.   
 
 The result of a test not only depends on
 its input data but also its \emph{execution conditions}.
@@ -39,17 +35,13 @@ before executing any test.
 
 A test is a sequence of executable program statements, and an oracle
 --- a boolean predicate that
-decides whether a test passes or fails.
+decides whether the test passes or fails.
 \end{definition}
 
-%Simplifying from Staats
-%et al.~\cite{staatsetal:ICSE:2011}, and without loss of generality,
-%we consider an oracle to be a boolean predicate over tests and environments.
+For simplicity, our definition does not consider non-determinstic
+tests, non-terminating tests, and tests aborting the JVM.
+\edit{I added the above sentence}
 
-%While oracles in practice, and specifications in theory, play an
-%important role in testing, we do not incorporate them in our
-%formalism, because explicit specifications often do not exist, and for
-%our purposes the oracle judgement, rather than its full definition, is sufficient.
 
 \begin{definition}[Test Suite]
 A test suite\/ $T$ is an $n$-tuple (i.e., ordered sequence) of tests
@@ -95,92 +87,36 @@ $t_1$ fails given the environment\/ $\env_1$, and\/ $t_2$ passes.
 \end{definition}
 
 
-
-%\begin{definition}[Potential Test Dependence] \label{def:dependency}
-%Given a test suite\/ $T$,
-%a test\/ $t_l \in T$ is \emph{potentially dependent} on test\/ $t_k
-%\in T$, if and only if\/
-%$\exists \env : \result{T}{\env} = \suite{o_1,\dots, o_n} \wedge
-%\result{\suite{t_k,t_l}}{\env} = \suite{o_k, o_l} \wedge
-%\result{t_l}{\env} = \neg o_l$.
-%We write\/ $t_k \prec t_l$ when\/ $t_l$ is potentially dependent on\/ $t_k$.
-%\end{definition}
-
-%\begin{definition}[Potential Test Dependence] \label{def:manifest}
-%Given a test suite\/ $T$, two tests\/ $t_i, t_j \in T$
-%are \textit{potentially} dependent, if\/ $\exists {S \subseteq T}: t_i, t_j \in S \wedge
-%$\exec{S, t_i, t_j}{\env}$ \neq $\exec{S, t_j, t_i}{\env_0}$.
-%$We write\/ $t_i \prec t_j$ for potential dependence.\footnote{$S \subseteq T$ means that $S$ is a subsequence of
-%$T$.}
-%\end{definition}
-
-%\todo{check the above potential test dependence definition.}
-%Two tests are potentially dependent when they are accessing the
-%same memory location or external file systems during execution.
-%Thus, executing them in different orders can lead to different envrionments. However,
-%such environment differences may not be checked and then manifest
-%through the test code.
-
-\todo{SZ: I am not satisfied with the following definition. In
-particular, the definition of S1, S2}
+\edit{SZ: I edited the following definition including the footnote, please have a check}
 
 \begin{definition}[Manifest Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
-manifest dependent test if $\exists {S_1 \subseteq T - t}$
+manifest dependent test if $\exists$ two ordered test sequences ${S_1 \subseteq T - t}$
 and ${S_2 \subseteq T - t}$: \result{t}{f(S_1, \env_0)} $\neq$
 \result{t}{f(S_2, \env_0)}.
-\footnote{$S \subseteq T - t$ means that $S$ is a subsequence of $T$
-\todo{need to emphasize S is an ordered tuple}
-and $t \notin S$.}
+\footnote{$S \subseteq T - t$ represents that $S$ does not
+contain repetitive tests, and for each
+test $t' \in S$ such that $t' \in T$ and $t' \neq t$.}
 \end{definition}
-
-%We refine this definition of dependence to require a concrete environment guaranteed
-%to \emph{manifest} a dependence:
-
-%\begin{definition}[Manifest Test Dependence] \label{def:manifest}
-%Given a test suite\/ $T$, two tests\/ $t_i, t_j \in T$,
-%the dependence\/ $t_i \prec t_j$ \emph{manifests} in a given
-%environment\/
-%$\env$ if\/ $\exists {S \subseteq T}: t_i, t_j \in S \wedge
-%\result{T}{\env}
-%= \suite{o_1, \dots, o_n} \wedge \result{S}{\env} =
-%\suite{\dots,o_i,o_j} \wedge \result{t_j}{\env} = \neg o_j$. We
-%write\/ $t_i \manifest{\env} t_j$ for manifest dependence.
-%%\footnote{$S \subseteq T$ means that $S$ is a subsequence of $T$.}
-%\end{definition}
-
-%Note that the dependent tests $t_i$\/ and $t_j$ do not have to be
-%adjacent in the original test suite, but that they must be adjacent in
-%the shortest test suite that manifests the dependence.
-
-%The intuition behind manifest dependences is that in practice we
-%do not construct arbitrary environments to execute tests in. Rather,
-%we use the natural environment $\env_0$ provided by frameworks such as JUnit,
 
 The definition of manifest dependent test (for short, dependent test)
 focuses on environment modified by reordering test execution.
-A dependent test manifests only
-if there is a sequence of tests $S^*$ whose execution
-$\exec{S^*}{\env_0}$  produces the
-environment $\env'$ that will make a test exhibit a
-different result than in its default execution order.
+A dependent test $t$ manifests only
+if there are two sequences of tests $S_1$ and $S_2$, in which the execution
+$\exec{S_1}{\env_0}$  produces an
+environment that will make $t$ exhibit a
+different result than in the environment produced by $\exec{S_2}{\env_0}$.
 
 
 \subsection{The Dependent Test Detection Problem}
 
-From a practical perspective, techniques that affect the ordering of
-test suites must respect dependences. Otherwise, their results might
-not be interpreted correctly. Detecting
-dependences in existing test suites, though appears straightforward,
-is actually a non-trivial problem.
-In the following, we first give a precise definition of the problem of
-detecting dependent tests, and then prove that this problem
-is NP-complete. 
+We prove that the problem of detecting manifest dependent tests (for
+short, dependent tests) is NP-complete.
 
 
 \begin{definition}[Dependent Test Detection Problem]
 Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an initial environment\/
-$\env_0$, for a given test\/ $t \in T$, is $t$ a dependent test?
+$\env_0$, for a given test\/ $t \in T$, is $t$ a manifest dependent test?
 %there a test suite\/ $S
 %\subseteq T$ that manifests a test dependence involving\/ $t_i$? 
 \end{definition}
@@ -221,7 +157,7 @@ $v_1, v_2,\dots, v_m$, each with initial value 1.
 
 \item 
 For $1 \le i \le n$, $t_i$ is constructed as follows:
-for $1 \le j \le m$, if $x_j \in S_i$, then adding a
+for $1 \le j \le m$, if $x_j \in S_i$, then add a
 single assignment statement \CodeIn{$v_j$ = $v_j$ - 1} to $t_i$.
 
 $t_{n+1}$ consists only of the oracle
@@ -239,16 +175,16 @@ For the given test $t_{n+1}$, if we can
 find a sequence \suite{t_{i_1}, t_{i_2},\dots, t_{i_j}}
 that makes $t_{n+1}$ fail, the subsets $S^*$ corresponding
 to each $t_{i_j}$ are an exact cover of $V$.
-\end{proof}
 
 In practice, the structure of the proof directly translates to the
 structure of test suites. $t_{n+1}$ is the dependent test, $S$ is
 defined by the tests that write variables used by $t_{n+1}$, and every
 exact cover of $S$ represents an independent shortest test suite that
 is a manifest dependency of $t_{n+1}$.
+\end{proof}
 
 To complete the proof that Dependent Test Detection is NP-complete, we
-provide an algorithm to verify solutions to the problem, that is
+provide an algorithm to verify a solution to the problem, that is
 linear in the size of the test suite.
 Given a test suite $T$, a test $t \in T$ and a sequence
 $S \subseteq T$ that manifests a dependency on $t$, we first execute $T$, then $S$, and
@@ -263,49 +199,16 @@ of this algorithm is linear.
 \subsection{Discussion}
 \label{sec:formaldiscussion}
 
-This formalism aims to lay a foundation for reasoning about
-test dependence in a precise way. It only considers
-deterministic tests, and excludes tests whose results
-might be affected non-determinism such as thread scheduling.
+Our formalism only considers deterministic tests,
+and excludes tests whose results might be affected non-determinism such as thread scheduling.
 For the sake of simplicity, our formalism excludes the case that a test 
-can depend on itself. Further, our study of real-world dependent
-tests indicate that self-dependent tests occur very rare
-in practice.
+can depend on itself. That is, executing the same test twice
+may lead to different results. Our empirical study of
+real-world dependent tests indicate that self-dependent tests
+occur very rare in practice. In addition, typical
+downstream testing techniques such as test selection and
+prioritization do not usually execute a test twice within the same JVM.
 
-
-%Third, the manifest test dependence problem is NP-complete;
-%although that is daunting (but less so than undecidability),
-%approximate algorithms can be defined for large classes of NP-complete
-%problems.  
-
-
-%The potential for test dependence arises from the test structure and
-%the oracle:
-%%from the test results: 
-%what
-%global state do the tests read and write, and does that global state contribute
-%to the computed result evaluated by the oracle?  
-%At the same time, the \emph{potential} for a test dependence
-%is realized only if 
-%the values derived from the context \emph{actually} affect the test results.
-%affect program state that
-%is checked by the oracle can a dependence on the environment affect
-%the outcome of a test.
-%This potential \emph{manifests} when test results differ between
-%executions in different environments.
-
-%The fact that manifestation of test dependence depends on both test
-%structures and test results means that dependences can silently propagate
-%through sequences of tests before they become apparent.
-
-%The abstract examples above, and the concrete examples presented 
-%in Section~\ref{sec:examples} share some common features that
-%ultimately lead to dependences. 
-%%All applications and libraries we studied 
-%They rely on global variables to some extent, and the
-%tests that check behavior that depends on these variables usually
-%assume these variables to be in some state. This state is typically
-%defined by the default execution order of the test suite, and rarely
-%established explicitly before each test.
+\edit{I editted the above text}
 
 % vim:wrap:wm=8:bs=2:expandtab:ts=4:tw=70:
