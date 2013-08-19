@@ -46,31 +46,34 @@ Our experiments use $k=1$ and $k=2$ to bound the length of
 test execution. } 
 \label{fig:dtalgorithm}
 \end{figure}
-
+An exhaustive search would execute all $n!$
+permutations of the test suite to detect dependent tests.
+However, this is not feasible for realistic $n$.
 Since the general form of the dependent test detection problem is
 NP-complete, we do not expect to find an efficient algorithm for it.
-To approximate the solution, this section
-presents two approximate algorithms.
+
+To approximate the exact solution, this section
+presents two approximate algorithms that find a \textit{subset} of
+all dependent tests.
 %In this section we present two algorithms to detect dependent
 %tests. 
-Section~\ref{sec:basic} describes a basic algorithm that
-exhaustively executes all possible $k$-test for a bounding parameter $k$
+Section~\ref{sec:basic} describes an exhaustive $k-$bounded algorithm that
+executes all possible $k$-test for a bounding parameter $k$
 to detect dependent tests.
-Section~\ref{sec:advalgorithm} described an improved algorithm
-that uses program analyses to reduce the search space
-\todo{describe some intuition here.}.
+Section~\ref{sec:advalgorithm} describes an improved $k-$bounded algorithm.
+The improved algorithm dynamically collected the fields that each test
+reads or writes, and uses such collected information to reduce the search space.
+\edit{I edit the above sentence.}
 Both algorithms are \textit{sound} but \textit{incomplete}:
 every dependent test they find is real, but they do not
 any guarantee to find every dependent test.
 
 
-\subsection{Basic Algorithm}
+\subsection{Exhausitive $k-$bounded Algorithm}
 \label{sec:basic}
 
 %To detect all possible dependent tests, 
-An exhaustive search would execute all $n!$
-permutations of the test suite to detect dependent tests.
-However, this is not feasible for realistic $n$.
+
 Our basic algorithm uses the findings of our study
 (Section~\ref{sec:study})
 that most dependent tests can be found by running only short
@@ -79,7 +82,7 @@ in our study, \todo{}\% of the real-world dependent tests
 can be found by running no more than 2 tests together.
 Instead of executing all permutations of the
 whole test suite, our algorithm (Figure~\ref{fig:dtalgorithm})
-executes all possible $k$-tuples for a bounding
+executes all $k$-permutations for a bounding
 parameter $k$.
 By doing so, the algorithm reduces
 the number of permutations to execute
@@ -89,7 +92,7 @@ to $O(n^k)$, which for small $k$ is tractable.
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, our algorithm
 first executes $T$ with its default order
 to obtain the \emph{expected result} of each test (line 2). 
-It then executes every $k$-tuple of tests,
+It then executes every $k$-permutations of tests,
 and checks whether the result of any test differs
 from the expected result (lines 3--10). Finally, the algorithm returns the set
 of all tests $t_i \in T$
@@ -99,11 +102,12 @@ that exhibit different results.
 
 
 
-\subsection{The Improved $k$-Bounded Algorithm}
+\subsection{Improved $k$-Bounded Algorithm}
 \label{sec:advalgorithm}
 
 \todo{I don't like ``improved'', which doesn't convey intuition.  Use a
   more descriptive term.}
+\edit{What about "Guided $k$-bounded algorithm"}
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
@@ -214,13 +218,10 @@ dependent test detection algorithm (Figure~\ref{fig:impralg}).}
 \label{fig:rwexample}
 \end{figure}
 
-Although the basic algorithm bounds the
-number of possible permutations to $O(n^k)$,
-it cannot scale to a realistic test suite.
-For example, using $k=3$, the time for
-executing all possible test permutations
-in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects})
-is measured by months.
+The exhaustive $k-$bounded algorithm cannot scale to a realistic test suite.
+For example, it would take months to 
+execute all 3-permutations
+in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects}).
 
 To reduce the search space, our improved algorithm
 uses dynamic analyses to avoid executing test
@@ -236,6 +237,7 @@ in the default execution order, all tests in
 the permutation are guaranteed to
 have the same results and the permutation can be safely ignored. 
 
+\todo{I did not edit text below, need to simplfiy the text}
 The improved algorithm (Figure~\ref{fig:impralg}) takes the same
 input as the basic algorithm. It first executes the whole
 test suite in its default order
@@ -251,8 +253,8 @@ by the same tests as in the default order (lines 6--9).
 If so, the algorithm concludes that all tests in the permutation
 must reveal the same results. Otherwise,
 it executes the permutation and records the tests with
-different execution results. Lines 10---15 in Figure~\ref{fig:impralg}
-are the same to lines 4---9 in Figure~\ref{fig:dtalgorithm}.
+different execution results. Lines 10--15 in Figure~\ref{fig:impralg}
+are the same as lines 4--9 in Figure~\ref{fig:dtalgorithm}.
 
 \todo{do we need a proof here.}
 
@@ -277,6 +279,7 @@ Due to space limitation, we omit details of test executions when
 $k=3$ and $k=4$, and lists the number of permutations that need
 to execute in Figure~\ref{fig:rwexample}.
 
+\todo{need to edit the text below}
 Another huge saving resulting from this algorithm, as observed in our
 experiments, is that it classifies tests by the fields they
 read and write. Thus, only tests reading or writing at
