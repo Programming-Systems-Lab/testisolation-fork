@@ -7,44 +7,27 @@
 %  confusion for the reader.}
 
 Informally, a \emph{dependent test} produces different test
-results when executed in different contexts.
-An example is two tests \code{A}
+results when executed in different contexts. Consider a test
+suite containing two tests \code{A}
 and \code{B}, where running \code{A} and then \code{B} leads
 to \code{A} passing, while running \code{B} and then
 \code{A} leads to \code{A} failing. We call \code{A}
-a dependent test, since its result depends on
+a dependent test (in the context of this suite), since its result depends on
 whether it runs after \code{B} or not.
 
-%and then \code{B} leads
-%to both tests passing, while running \code{B} and then
-%\code{A} leads to one or both tests failing.
-
-\edit{Please check the above paragraph. }
-
-%\todo{Would a better example focus on just one test \code{B}:  it produces
-%  a different result (succeed/fail) depending on whether test \code{A} is run
-%  before it or not.  I'm not sure whether this would be an improvement or
-%  not; it perhaps depends on the intended definition of ``dependent test'',
-%  which is not clear.}
-
-
-%~\cite{KapfhammerS03}
-%Chays:2000:FTD:347324.348954,
-%Gray:1994:QGB:191843.191886}, 
-%\todo{find a place to emphasize unit tests}
 
 In a test suite, all tests should be independent, and
 running the tests in any order should produce the same test results.
 Test independence is a common assumption in testing research and practice:
 theoretical results, algorithms, and tools all fail or behave unexpectedly
 in the presence of dependent tests.
-However, this critical assumption is rarely questioned or investigated.
-\todo{Probably revise the below list.}
+However, this critical assumption is rarely questioned or investigated. Test
+independence is generally ignored.
 Is this acceptable, because test dependence does
 not arise in practice?
 Is it acceptable because even when test dependence arises, there are few
 negative repercussions?
-Is it because the problem is important but no one has thought to examine it?
+Is it because no one has noticed this problem or thought to examine it?
 Is it because the problem is important but is too hard to analyze or understand?
 \todo{donot forget to recall above questions in the paper.}
 
@@ -67,18 +50,18 @@ produces \emph{different} and \emph{visible} results from the expected.
 
 \subsection{Causes of Dependent Tests}
 
-\edit{I changed the subtitle, which was: Test Execution Environment}
 
-Test dependence results from interactions with the execution environment.
+Test dependence results from interactions with other tests, as reflected
+in the execution environment.
 Specifically, when a
 test is executed in different environments --- global variables
-with different values, differences in the file system, etc. --- it has the
+with different values, differences in the file system, etc: --- it has the
 potential to yield
 a different result.  
 
-Ideally, each test does not depend on its environment, because it
+Ideally, each test should not depend on its environment, because it
 initializes any resources it will use and/or uses mocked resources.
-Likewise, the test does not modify its environment, because of mocks or
+Likewise, the test should not modify its environment, because of mocks or
 resetting resources after test execution. However, in practice,
 developers are as likely
 to make mistakes when writing tests as when they are writing other code.
@@ -98,14 +81,8 @@ up the environment afterward.
 % which may in turn increase the frequency of test dependence.
 % The situation is exacerbated by the fact that 
 
-Test dependence is usually caused by
-global variables shared by tests.
-%These tests
-%shared global variables, and the test results varied depending on the
-%values stored in these variables.  
-%That is, relevant execution conditions --- specifically, pertinent parts
-%of the implicit \emph{environment} comprising global variables, the file system, operating system services, etc. --- were neglected.
-Buried deep in the program code, and the assertions
+Test dependence is usually caused by global variables shared by tests.
+Assertions in the program code
 do not directly check the global variables,
 but rather check values that have been computed from
 them.
@@ -154,9 +131,9 @@ test prioritization techniques (that reorder the
 input to discover defects sooner)~\cite{Elbaum:2000:PTC:347324.348910},
 test parallelization techniques (that schedule the input tests for execution across multiple
 CPUs), test generation techniques~\cite{PachecoLET2007, SPLAT},
-test factoring~\cite{Saff:2005} and test carving~\cite{Elbaum:2006} (which take system tests as
-input and create unit tests and differential unit tests,
-respectively), experimental debugging techniques (such as Delta Debugging~\cite{Zeller:2002},
+test factoring~\cite{Saff:2005} and test carving~\cite{Elbaum:2006} (which
+convert large system tests into smaller unit tests),
+experimental debugging techniques (such as Delta Debugging~\cite{Zeller:2002},
 which requires running a set of tests repeatedly), etc. 
 
 Many such downstream testing techniques implicitly assume that
@@ -170,7 +147,7 @@ return the same results as they do when executed originally, as part of the full
 \subsection{Contributions}
 \label{sec:contributions}
 
-At its heart, this paper addresses and questions
+This paper addresses and questions
 conventional wisdom about the test independence assumption. 
 This paper makes the following contributions:
 
@@ -192,7 +169,7 @@ This paper makes the following contributions:
   problem (Section~\ref{sec:formalism}).
 
   \item \textbf{Algorithms.} We present two algorithms
-  to detect dependent tests (Section~\ref{sec:detecting}). The first
+  to detect dependent tests (Section~\ref{sec:detecting}). The first \todo{use more descriptive termns}
   basic algorithm exhaustively executes all possible $k$-tests for
   a bounding parameter $k$ to identify tests exhibiting different results.
   The second improved algorithm uses dynamic program analyses
@@ -204,12 +181,13 @@ This paper makes the following contributions:
   do not guarantee to find all dependent tests. \edit{check above}
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
-  tool (Section~\ref{sec:impl}), and applied it to \subjnum real-world subject programs. Our
-  tool detected a large number of important test dependences that have not
-  been discovered before, showing that on average \todo{xx}\% of the human-written
-  unit tests are dependent and \todo{xx}\% of the automatically-generated
-  unit tests are dependent
-   (Section~\ref{sec:evaluation}).
+  tool, called \ourtool (Section~\ref{sec:impl}), and applied it to \subjnum real-world subject programs.
+  \ourtool detected previously-unknown dependent tests in \textit{every}
+  subject program we studied, from both human-written unit tests and automatically-generated
+  unit tests (Section~\ref{sec:evaluation}).
+  %been discovered before, showing that on average \todo{xx}\% of the human-written
+  %unit tests are dependent and \todo{xx}\% of the automatically-generated
+  %unit tests are dependent
   Finally, we discuss a set of open questions and other possible impacts of dependent
   tests in Section~\ref{sec:discussion}.
 \end{itemize}
