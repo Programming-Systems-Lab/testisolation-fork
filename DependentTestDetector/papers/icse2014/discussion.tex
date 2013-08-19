@@ -7,16 +7,17 @@
 %contributions suggest answers, to differing degrees, to these questions:
 
 
-Although we have studied and detected a substantive set of
+We have detected and studied a substantive set of
 real-world dependent tests, from both human-written test suites and
-automatically generated test suites, a broader
+automatically generated test suites. This motivates
+the need for a broader
 investigation of the impact of dependent tests,
-how to eliminate and prevent dependent tests
-is beyond the scope of this paper. 
-We next discuss a set of open questions addressing this and
-other possible concerns resulting from dependent teests.
-Exploring answers to these open questions comprises
-our future work.
+how to eliminate and prevent dependent tests.
+%is beyond the scope of this paper. 
+%We next discuss a set of open questions addressing this and
+%other possible concerns resulting from dependent teests.
+%Exploring answers to these open questions comprises
+%our future work.
 
 \vspace{1mm}
 
@@ -28,19 +29,18 @@ testing techniques such as test selection,
 prioritization, and parallelization, since
 most current techniques just assume independence and
 make no statement about what happens when this
-assumption is not true. However, for both perspectives,
-the extent of impact is unknown. This question
-merits more comphrensive empirical studies.  
+assumption is not true. However,
+more comphrensive empirical studies should measure  
+the extent of this impact.
 
 
-On the other hand, the question of how existing
-testing techniques should
-handle test dependence is also open.
-For downstream testing techniques such as test
-selection, prioritization, and parallelization,
-one straightforward way to amend this situation
+Another open question is how should
+testing techniques such as test
+selection, prioritization, and parallelization
+handle test dependence.
+One straightforward way 
 might be to augment such techniques to respect a
-defined partial order among tests. And this partial order
+defined partial order among tests. This partial order
 can be derived from knowledge about dependent tests,
 or be detected by our \ourtool tool.
 %Like contrived examples of test
@@ -56,14 +56,14 @@ or be detected by our \ourtool tool.
 
 \noindent \textbf{{Eliminating dependent tests.}}
 As found in our study (Section~\ref{sec:study}),
-developers often ignore dependent tests due to
-the lack of proper tool support. For some
-dependent tests that get eliminated,
+developers sometimes intentionally introduce dependent tests,
+and do not fix many dependent reported tests.
+For some dependent tests that get eliminated,
 the practice of eliminating them
 remains mostly manual and ad hoc --- software developers
 usually manually hardcode test
 execution orders in a configuration file or
-simply merge tests, when a dependent test is reported. 
+simply merge or remove tests, when a dependent test is reported. 
 A more flexible and robust methodology for
 dependent test elimination should be developed.
 
