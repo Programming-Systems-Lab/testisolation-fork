@@ -29,23 +29,34 @@ Is it acceptable because even when test dependence arises, there are few
 negative repercussions?
 Is it because no one has noticed this problem or thought to examine it?
 Is it because the problem is important but is too hard to analyze or understand?
-\todo{donot forget to recall above questions in the paper.}
+\todo{donot forget to recall above questions in the paper later.}
 
 \subsection{Manifest Test Dependence}
 
-To explore these questions, we consider a narrow characterization
-of test dependence that:
-\begin{itemize}
-\item Adopts the results of the default, usually implicit,
-  order of execution of a test suite as the \emph{expected results}. 
-\item Asserts \emph{test dependence} when there is a possibly
-  reordered subsequence of the original test suite that, when
-  executed, has at least one test result that differs from the
-  expected result for that test.  
-\end{itemize}
+\edit{I edited the following 3 paragraphs}
+
+This paper focuses on test dependence that manifests as a \textit{user-visible}
+difference. We adopt the results of the default, usually
+implicit, order of execution of a test suite as the
+\textit{expected results}. A test is dependent when there is a possibly
+reordered subsequence of the original test suite, in which
+the test's result (determined by its existing testing
+oracles) \textit{differs} from its expected result in the
+original test suite.
+
 That is, we focus on a \emph{manifest} perspective of test dependence,
 requiring a \emph{concrete} order of the test suite that
-produces \emph{different} and \emph{visible} results from the expected.  
+produces \emph{different} and \emph{user-visible} results from the expected.  
+
+We work with real, existing test suites rather than assuming
+whether there could be any hypothetic suite that can exhibit dependence
+or environment that can lead to different program states or test results.
+
+%As we discuss later, considering only manifest test dependences allows
+%us to more easily situate this research in the empirical domain.
+%\todo{manifest is more challenging}
+%test results rather than program and database states.
+
 
 
 \subsection{Causes of Dependent Tests}
@@ -178,7 +189,8 @@ This paper makes the following contributions:
   that are guaranteed to produce the same results as in the default
   order. Both algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
-  do not guarantee to find all dependent tests. \edit{check above}
+  do not guarantee to find all dependent tests. \edit{check above when the algorithm section
+      is written}
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
   tool, called \ourtool (Section~\ref{sec:impl}), and applied it to \subjnum real-world subject programs.
