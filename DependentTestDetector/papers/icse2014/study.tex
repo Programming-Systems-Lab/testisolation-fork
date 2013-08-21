@@ -174,7 +174,6 @@ into two major categories (Table~\ref{tab:reper}).
 
 \noindent \textbf{Revealing Weakness in a Test Suite.} Most of
 the identified dependent tests fall into this category.
-\edit{I added the following sentence}
 All 94 dependent tests in this category result in \textit{false alarms}
 --- the test should pass but fails after reordering due to the dependence.
 The test dependences arise due to incorrect initialization
@@ -184,10 +183,6 @@ rather than the tested code. Typically, one test initializes
 a global variable or the execution environment; and another
 test does not perform any initialization, but
 relies on the program state after the first test's execution.
-%global variable that is a part of the environment, but the test does
-%not properly initialize it.  In the second case, a test should but
-%does not call
-%an initialization function before later invocations to a complex library.
 Such dependence in the test code is often masked because
 the initializing test always executes before other tests in the
 default execution order. The dependent tests are not revealed
@@ -201,7 +196,6 @@ until the initializing test is reordered to execute
 
 %\vspace{1mm}
 
-%\noindent \textbf{Spurious Bug Reports}
 Sometimes developers introduce dependent tests intentionally because it is
 easier, more efficient, or more convenient~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
 %DB-testing}.
@@ -243,8 +237,8 @@ program, \emph{exactly} when the test suite is executed in its default
 order. Masking occurs when a test case $t$ \emph{should}
 reveal a fault, but tests executed before $t$ in a test suite always
 generate environments in which $t$ passes accidently and
-does not reveal the fault. \edit{I added the following sentence}
-Tests in this category results in \textit{missed alarms} ---
+does not reveal the fault. 
+Tests in this category result in \textit{missed alarms} ---
 a test should fail but passes due to the dependence.
 
 \input{clicode}
@@ -280,8 +274,8 @@ realized the test dependence. Developers fixed this
 fault by adding a static initialization block which
 calls \CodeIn{reset()} in class \CodeIn{OptionBuilder}.
 
-\edit{where should we emphasize that masking faults is an
-orthognonal issue of fixing the dependence on code or test?}
+%\edit{where should we emphasize that masking faults is an
+%orthognonal issue of fixing the dependence on code or test?}
 
 
 \subsubsection{Implications for Dependent Test Detection}

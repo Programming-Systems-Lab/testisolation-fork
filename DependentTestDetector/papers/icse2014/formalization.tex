@@ -40,7 +40,6 @@ decides whether the test passes or fails.
 
 For simplicity, our definition does not consider non-determinstic
 tests, non-terminating tests, and tests aborting the JVM.
-\edit{I added the above sentence}
 
 
 \begin{definition}[Test Suite]
@@ -51,6 +50,8 @@ A test suite\/ $T$ is an $n$-tuple (i.e., ordered sequence) of tests
 %of the suite are not important, we use $T$ to denote the entire test
 %suite $(t_1, \dots, t_n)$.
 \end{definition}
+
+\todo{the name of f is bad, need to change}
 
 \begin{definition}[Test Execution]
 Let\/ \alltests\ be the set of all possible
@@ -87,25 +88,37 @@ $t_1$ fails given the environment\/ $\env_1$, and\/ $t_2$ passes.
 \end{definition}
 
 
-\edit{SZ: I edited the following definition including the footnote, please have a check}
+\edit{SZ: I edited the following definition} 
 
 \begin{definition}[Manifest Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
-manifest dependent test if $\exists$ two ordered test sequences ${S_1 \subseteq T - t}$
-and ${S_2 \subseteq T - t}$: \result{t}{f(S_1, \env_0)} $\neq$
-\result{t}{f(S_2, \env_0)}.
-\footnote{$S \subseteq T - t$ represents that $S$ does not
-contain repetitive tests, and for each
-test $t' \in S$ such that $t' \in T$ and $t' \neq t$.}
+manifest dependent test if $\exists$ two test suites
+$S_1, S_2 \in$ permutations($T$):
+\result{t}{S_1, \env_0}[$t$] $\neq$
+\result{t}{S_2, \env_0}[$t$].
+%
+%${S_1 \subseteq T - t}$
+%and ${S_2 \subseteq T - t}$: \result{t}{f(S_1, \env_0)} $\neq$
+%\result{t}{f(S_2, \env_0)}.
+%\footnote{$S \subseteq T - t$ represents that $S$ does not
+%contain repetitive tests, and for each
+%test $t' \in S$ such that $t' \in T$ and $t' \neq t$.}
 \end{definition}
 
+\todo{still a point: why S1, S2? shouldnot S1 enough?}
+
+\edit{I edit below}
 The definition of manifest dependent test (for short, dependent test)
 focuses on environment modified by reordering test execution.
 A dependent test $t$ manifests only
-if there are two sequences of tests $S_1$ and $S_2$, in which the execution
-$\exec{S_1}{\env_0}$  produces an
-environment that will make $t$ exhibit a
-different result than in the environment produced by $\exec{S_2}{\env_0}$.
+if there are two test suites $S_1$ and $S_2$ which
+are two permutations of the original test suite $T$,
+in which $t$ exhibits a different result
+in the execution $\exec{S_1}{\env_0}$
+than in the execution $\exec{S_2}{\env_0}$.
+%produces an
+%environment that will make $t$ exhibit a
+%different result than in the environment produced by $\exec{S_2}{\env_0}$.
 
 
 \subsection{The Dependent Test Detection Problem}
@@ -199,16 +212,16 @@ of this algorithm is linear.
 \subsection{Discussion}
 \label{sec:formaldiscussion}
 
-Our formalism only considers deterministic tests,
+For the sake of simplicity, our formalism only
+considers deterministic tests,
 and excludes tests whose results might be affected non-determinism such as thread scheduling.
-For the sake of simplicity, our formalism excludes the case that a test 
-can depend on itself. That is, executing the same test twice
-may lead to different results. Our empirical study of
-real-world dependent tests indicate that self-dependent tests
-occur very rare in practice. In addition, typical
+Our formalism excludes self-dependence, 
+when executing the same test twice
+may lead to different results. Our empirical study
+indicates that self-dependent tests
+are rare in practice. In addition, typical
 downstream testing techniques such as test selection and
 prioritization do not usually execute a test twice within the same JVM.
 
-\edit{I editted the above text}
 
 % vim:wrap:wm=8:bs=2:expandtab:ts=4:tw=70:

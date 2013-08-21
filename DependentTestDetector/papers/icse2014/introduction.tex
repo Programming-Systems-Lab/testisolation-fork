@@ -33,8 +33,6 @@ Is it because the problem is important but is too hard to analyze or understand?
 
 \subsection{Manifest Test Dependence}
 
-\edit{I edited the following 3 paragraphs}
-
 This paper focuses on test dependence that manifests as a \textit{user-visible}
 difference. We adopt the results of the default, usually
 implicit, order of execution of a test suite as the
@@ -48,13 +46,13 @@ That is, we focus on a \emph{manifest} perspective of test dependence,
 requiring a \emph{concrete} order of the test suite that
 produces \emph{different} and \emph{user-visible} results from the expected.  
 %
-We work with real, existing test suites rather than assuming
-whether there could be any hypothetic suite that can exhibit dependence
-or environment that can lead to different program states or test results.
+We work with real, existing test suites rather than wondering
+whether there could be any hypothetical suite 
+or environment that can lead to different program states.
 
 In the following sections of this paper, we use \textit{dependent tests}
 to represent \textit{manifest dependent tests} for brevity
-unless explicitly mentioned
+unless explicitly mentioned.
 
 
 %As we discuss later, considering only manifest test dependences allows
@@ -89,13 +87,6 @@ JUnit provide ways to set up the environment for a test execution and clean
 up the environment afterward.
 
 
-% And while frameworks make it easier to get environment setup right, 
-% they cannot ensure that it is done properly. 
-% Like with other code, this means that tests in some cases will have
-% unintended and unexpected behaviors.  And as programs increase in complexity,
-% so may tests, which may increase the frequency of such problems in tests,
-% which may in turn increase the frequency of test dependence.
-% The situation is exacerbated by the fact that 
 
 Test dependence is usually caused by global variables shared by tests.
 Assertions in the program code
@@ -185,17 +176,19 @@ This paper makes the following contributions:
   problem (Section~\ref{sec:formalism}).
 
   \item \textbf{Algorithms.} We present two algorithms
-  to detect dependent tests (Section~\ref{sec:detecting}). The first \todo{use more descriptive termns}
-  basic algorithm exhaustively executes all possible $k$-tests for
+  to detect dependent tests (Section~\ref{sec:detecting}).
+  The first exhaustive $k$-bounded algorithm
+  executes all possible $k$-tests for
   a bounding parameter $k$ to identify tests exhibiting different results.
-  The second improved algorithm uses dynamic program analyses
+  The second dependence-aware $k$-bounded
+  algorithm uses dynamic program analyses
   to reduce the search space. It records fields read and
   written by each test, and then safely ignores test execution orders
   that are guaranteed to produce the same results as in the default
   order. Both algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
-  do not guarantee to find all dependent tests. \edit{check above when the algorithm section
-      is written}
+  do not guarantee to find all dependent tests. 
+  %\edit{check above when the algorithm section is written}
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
   tool, called \ourtool (Section~\ref{sec:impl}), and applied it to \subjnum real-world subject programs.
@@ -210,39 +203,5 @@ This paper makes the following contributions:
 \end{itemize}
 
 
-%%%%ignore text below, which is commented out
-
-\begin{comment}
-\todo{We need a consistent set of terminology.  I like the following, 
-adapted from \\
-http://en.wikipedia.org/wiki/Dependability:
-\begin{itemize}
-\item
- Defect:
-      A flaw, failing, or imperfection in a system, such as an
-      incorrect design, algorithm, or implementation.  Also known as a
-      fault or bug.  Typically caused by a human mistake.
-\item
- Error:
-      An error is a discrepancy between the intended behavior of a
-      system and its actual behavior inside the system boundary.  Not
-      detectable without assert statements and the like.
-\item
- Failure:
-      A failure is an instance in time when a system displays
-      behavior that is contrary to its specification.
-\end{itemize}
-but if we use something else (which would be fine), we should define the terms.}
-\end{comment}
-
-\begin{comment}
-\edit{Several places particularly require consistence: (1)
-test dependence reveals \todo{defect, or flaws, or smells}
-in test code, (2) test dependence can mask \todo{bug, defect,
-or fault}, (3) test dependence, or dependent tests. seems
-these 2 phrases are used interchangably.
-In addition, should it be test dependence, or test
-dependences?, (4) test results or test outcomes.}
-\end{comment}
 %  LocalWords:  Kapfhammer Soffa subsequence SWT CLI NUM
 

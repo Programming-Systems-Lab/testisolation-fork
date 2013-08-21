@@ -60,10 +60,9 @@ all dependent tests.
 Section~\ref{sec:basic} describes an exhaustive $k-$bounded algorithm that
 executes all possible $k$-test for a bounding parameter $k$
 to detect dependent tests.
-Section~\ref{sec:advalgorithm} describes an improved $k-$bounded algorithm.
-The improved algorithm dynamically collected the fields that each test
+Section~\ref{sec:advalgorithm} describes a dependence-aware $k-$bounded algorithm.
+The dependence-aware algorithm dynamically collects the fields that each test
 reads or writes, and uses such collected information to reduce the search space.
-\edit{I edit the above sentence.}
 Both algorithms are \textit{sound} but \textit{incomplete}:
 every dependent test they find is real, but they do not
 any guarantee to find every dependent test.
@@ -102,12 +101,8 @@ that exhibit different results.
 
 
 
-\subsection{Improved $k$-Bounded Algorithm}
+\subsection{Dependence-Aware $k$-Bounded Algorithm}
 \label{sec:advalgorithm}
-
-%\todo{I don't like ``improved'', which doesn't convey intuition.  Use a
-%  more descriptive term.}
-\edit{What about "Dependence-Guided $k$-bounded algorithm"}
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
@@ -119,15 +114,14 @@ computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $
 getPossibleExecOrder($T$, $k$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
-\STATE $\mathit{expectedResults}$ $\leftarrow$ $\result{T}{\env_0}$\\
+\STATE $\langle reads, writes\rangle$ $\leftarrow$ recordFieldAccess($T$)\\
 \COMMENT{$\mathit{reads}$ and $\mathit{writes}$'s data type:
   Map$\langle$Test, Set$\langle$Field$\rangle$$\rangle$
 % which maps a test to a set of fields.
-}\\
-\STATE $\langle reads, writes\rangle$ $\leftarrow$ recordFieldAccess($T$)
+}
+\STATE $\mathit{lastWrites}$ $\leftarrow$ computeLastWrites($T$, $\mathit{reads}$, $\mathit{writes}$)
 \\\COMMENT{$\mathit{lastWrites}$'s data type: Map$\langle$Test, Map$\langle$Field, Test$\rangle$$\rangle$, which maps a test to fields it reads and
 the corresponding last test that writes each field.}
-\STATE $\mathit{lastWrites}$ $\leftarrow$ computeLastWrites($T$, $\mathit{reads}$, $\mathit{writes}$)
 \STATE $\mathit{result}$ $\leftarrow$ $\emptyset$
 \FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
 \STATE $\mathit{lastWriteTS}$ $\leftarrow$ computeLastWrites($ts$, $\mathit{reads}$, $\mathit{writes}$)
@@ -140,7 +134,7 @@ the corresponding last test that writes each field.}
 \end{algorithmic}
 
 \vspace{-3mm}
-\caption {The improved algorithm to detect dependent tests.
+\caption {The dependence-aware $k$-bounded algorithm to detect dependent tests.
 It uses the algorithm of Figure~\ref{fig:dtalgorithm}, re-defining the
 getPossibleExecOrder function.
 Our experiments uses $k=1$, \todo{experiment setting, how
@@ -195,11 +189,12 @@ in the order of Test1, Test2, Test3, and Test4.
 \vspace{4mm}
 
 Number of permutations that need to be executed.
-\setlength{\tabcolsep}{0.5\tabcolsep}
+\setlength{\tabcolsep}{1.3\tabcolsep}
 \begin{tabular}{|c|c|c|}
 %\toprule
 \hline
-\textbf{$k$ value} & \textbf{Basic Algorithm} & \textbf{Improved Algorithm}  \\
+\textbf{$k$ value} & \textbf{Exhaustive } &
+\textbf{Dependence-Aware }  \\
 \hline
 1 & 4 & 1\\
 \hline
@@ -215,8 +210,8 @@ Number of permutations that need to be executed.
 \end{tabular}
 
 
-\Caption{Example tests to illustrate the improved
-dependent test detection algorithm (Figure~\ref{fig:impralg}).}
+\Caption{Example tests to illustrate the dependence-aware
+$k$-bounded dependent test detection algorithm (Figure~\ref{fig:impralg}).}
 \label{fig:rwexample}
 \end{figure}
 
@@ -225,7 +220,7 @@ For example, it would take months to
 execute all 3-permutations
 in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects}).
 
-To reduce the search space, our improved algorithm
+To reduce the search space, our dependence-aware algorithm
 uses dynamic analyses to avoid executing test
 permutations that are guaranteed to have the
 same results as being executed in the default order.
@@ -242,25 +237,25 @@ The algorithm in Figure~\ref{fig:impralg} uses the
 algorithm of Figure~\ref{fig:dtalgorithm}, by redefining
 the getPossibleExecOrder function. The redefined
 getPossibleExecOrder function first records
-the test execution results (line 1) and
-and fields that each test reads and writes (line 2).
+fields that each test reads and writes (line 1).
 Then, for each field read by a test,
 the function identifies the last test that writes
-that field (line 4).
-Whe generating all possible test permutations
+that field (line 3).
+When generating all possible test permutations
 up to length $k$, the algorithm checks whether
 all fields each test (in the generated permuation)
 may read are written by the same tests as in the
-default order (lines 6--9). If so, all tests in the permutation
+default order (lines 5--8). If so, all tests in the permutation
 must produce the same results, and the algorithm discards
 this permutation without executing it. Otherwise,
 the function adds the generated permutation to the result
-set (line 8), and runs the algorithm in Figure~\ref{fig:dtalgorithm}
+set (line 7), and runs the algorithm in Figure~\ref{fig:dtalgorithm}
 to identify dependent tests among it.
 
 \edit{I add a simple proof below}
 
-We next proof the correctness of the improved $k$-bounded algorithm.
+We next proof the correctness of the dependence-aware
+$k$-bounded algorithm.
 
 \begin{theorem}
 All tests in a test permutation discarded by the getPossibleExecOrder
@@ -287,7 +282,7 @@ think about how to make it shorter.}
 \end{proof}
 
 \edit{I edited text below}
-The improved $k$-bounded algorithm has two major benefits.
+The dependence-aware $k$-bounded algorithm has two major benefits.
 First, it clusters tests by the fields they
 read and write. Thus, only tests reading or writing at
 the same global field(s), rather than \textit{all} tests
