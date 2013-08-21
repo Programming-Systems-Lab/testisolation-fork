@@ -78,7 +78,7 @@ Our basic algorithm uses the findings of our study
 (Section~\ref{sec:study})
 that most dependent tests can be found by running only short
 subsequences of test suites. For example,
-in our study, \todo{}\% of the real-world dependent tests
+in our study, \pertange of the real-world dependent tests
 can be found by running no more than 2 tests together.
 Instead of executing all permutations of the
 whole test suite, our algorithm (Figure~\ref{fig:dtalgorithm})
@@ -105,15 +105,16 @@ that exhibit different results.
 \subsection{Improved $k$-Bounded Algorithm}
 \label{sec:advalgorithm}
 
-\todo{I don't like ``improved'', which doesn't convey intuition.  Use a
-  more descriptive term.}
-\edit{What about "Guided $k$-bounded algorithm"}
+%\todo{I don't like ``improved'', which doesn't convey intuition.  Use a
+%  more descriptive term.}
+\edit{What about "Dependence-Guided $k$-bounded algorithm"}
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
 recordFieldAccess($ts$): returns fields accessed (i.e., read and written) by each test in an ordered sequence of tests $ts$. \\
 computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $ts$, identify the last test in $ts$ that writes to the field.\\
 
+\vspace{-2mm}
 
 getPossibleExecOrder($T$, $k$):\\
 \vspace{-5mm}
@@ -183,7 +184,7 @@ in the order of Test1, Test2, Test3, and Test4.
 \begin{tabular}{|c|l|l|l|l|}
 %\toprule
 \hline
-\textbf{Shared Fields } & \textbf{Test1} & \textbf{Test2} & \textbf{Test3}& \textbf{Test4}\\
+\textbf{Global Fields } & \textbf{Test1} & \textbf{Test2} & \textbf{Test3}& \textbf{Test4}\\
 \hline
 \code{x} & Read & & Write& Read\\
 \hline
@@ -204,11 +205,12 @@ Number of permutations that need to be executed.
 \hline
 2 & 12 & 5\\
 \hline
-3 & 24 & \todo{xx} \\
+3 & 24 & 18 \\
 \hline
-4 & 24 & \todo{xx} \\
+4 & 24 & 20 \\
 \hline
-\textbf{Total} & 64 & \todo{xx} \\
+\hline
+\textbf{Total} & 64 & 44 \\
 \hline
 \end{tabular}
 
@@ -229,41 +231,78 @@ permutations that are guaranteed to have the
 same results as being executed in the default order.
 The intuition of our algorithm is that,
 given a test permutation, for \textit{each}
-test, if \textit{all shared fields} 
-\todo{is it ok that shared fields are not defined,
-shoiuld we use global fields?} it reads
+test, if \textit{all global fields} it reads
 are written by the \textit{same} test as
 in the default execution order, all tests in
 the permutation are guaranteed to
 have the same results and the permutation can be safely ignored. 
 
-\todo{I did not edit text below, need to simplfiy the text}
-The improved algorithm (Figure~\ref{fig:impralg}) takes the same
-input as the basic algorithm. It first executes the whole
-test suite in its default order
-to record test execution results (line 2) as
-well as fields that each test reads and writes (line 3).
+\edit{I edit the text below}
+The algorithm in Figure~\ref{fig:impralg} uses the
+algorithm of Figure~\ref{fig:dtalgorithm}, by redefining
+the getPossibleExecOrder function. The redefined
+getPossibleExecOrder function first records
+the test execution results (line 1) and
+and fields that each test reads and writes (line 2).
 Then, for each field read by a test,
-the algorithm identifies the last test that writes
+the function identifies the last test that writes
 that field (line 4).
-After that, the algorithm generates all possible test permutations
-up to length $k$. Before executing each permutation, 
-the algorithm checks whether all fields a test may read are written
-by the same tests as in the default order (lines 6--9).
-If so, the algorithm concludes that all tests in the permutation
-must reveal the same results. Otherwise,
-it executes the permutation and records the tests with
-different execution results. Lines 10--15 in Figure~\ref{fig:impralg}
-are the same as lines 4--9 in Figure~\ref{fig:dtalgorithm}.
+Whe generating all possible test permutations
+up to length $k$, the algorithm checks whether
+all fields each test (in the generated permuation)
+may read are written by the same tests as in the
+default order (lines 6--9). If so, all tests in the permutation
+must produce the same results, and the algorithm discards
+this permutation without executing it. Otherwise,
+the function adds the generated permutation to the result
+set (line 8), and runs the algorithm in Figure~\ref{fig:dtalgorithm}
+to identify dependent tests among it.
 
-\todo{do we need a proof here.}
+\edit{I add a simple proof below}
+
+We next proof the correctness of the improved $k$-bounded algorithm.
+
+\begin{theorem}
+All tests in a test permutation discarded by the getPossibleExecOrder
+function (Figure~\ref{fig:impralg}) are guaranteed to produce the same results as in its default order.
+\end{theorem}
+
+\begin{proof}
+We prove this theorem by contradiction. Given a test
+suite $T$ and a test permutation $P$ of $T$, let's assume
+permutation $P$ is discarded by the getPossibleExecOrder function
+since all fields read by each test in $P$ are written
+by the same test as in $T$.
+
+
+Suppose there exists a test $t \in P$ produces a different result
+than in $T$. Test $t$ must read different values
+for at least one shared field. Based on our assumption,
+the shared field is written by the same test as in $T$,
+but the test reads different values for at least
+one shared field. By induction, there must exist
+a test $t' \in P$ that 
+\edit{the above proof is not finished, need to
+think about how to make it shorter.}
+\end{proof}
+
+\edit{I edited text below}
+The improved $k$-bounded algorithm has two major benefits.
+First, it clusters tests by the fields they
+read and write. Thus, only tests reading or writing at
+the same global field(s), rather than \textit{all} tests
+in a suite, are treated as potentially dependent.
+Second, even for tests reading or writing the same global
+field(s), some permutations can still be discarded
+without executing by checking the tests performing the last write.
 
 %in which every test must
 %reveal the same result to reduce the total number
 %of permutations which need to be explored.
 
-To illustrate this algorithm, Figure~\ref{fig:rwexample} shows an example
-consisting of 2 shared fields and 4 tests. In the default execution
+To illustrate the second benefit, Figure~\ref{fig:rwexample}
+shows an example
+consisting of 2 global fields and 4 tests. In the default execution
 order, Test 1 reads the \textit{initial} value of \code{x};
 Test2 reads the \textit{initial} value of \code{y}, and Test4
 reads the value of \code{x} written by Test3.
@@ -279,22 +318,11 @@ Due to space limitation, we omit details of test executions when
 $k=3$ and $k=4$, and lists the number of permutations that need
 to execute in Figure~\ref{fig:rwexample}.
 
-\todo{need to edit the text below}
-Another huge saving resulting from this algorithm, as observed in our
-experiments, is that it classifies tests by the fields they
-read and write. Thus, only tests reading or writing at
-least one shared field, rather than \textit{all} tests, are treated as potentially
-dependent.
+%\todo{illustrate why simply group tests by read/write is incorrect.}
 
-\todo{should mention that this algorithm is quite conservation,
-and why it is correct. We ignore write}
 
-\todo{illustrate why simply group tests by read/write is incorrect.}
-
-\todo{one improvement space: distinguish different values}
-
-\todo{give an intuition of why it can improve scalability, since
-not every test will overlap with each other.}
+%\todo{give an intuition of why it can improve scalability, since
+%not every test will overlap with each other.}
 
 
 
@@ -304,10 +332,4 @@ not every test will overlap with each other.}
 %in the same order that the test suite was initially executed, thus reducing the number of permutations which
 %need to be explored.
 
-\todo{I prefer to talk about file systems, optimizations
-that use user-provided annotations, the prefix of a permutation,
-and use multiple executions to
-guide selection in the implementation section.}
 
-\todo{discuss the soundness of the algorithm, which may be compromised
-by class loading}
