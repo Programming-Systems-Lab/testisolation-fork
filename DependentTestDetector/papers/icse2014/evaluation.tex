@@ -1,178 +1,125 @@
 \section{Empirical Evaluation}
 \label{sec:evaluation}
 
-To show the effectiveness of our proposed
-dependent test detection algorithms, we conducted
-an evaluation on \todo{XXX} open-source programs (Table~\ref{tab:subjects}).
-In our evaluation, we seek to answer the following research questions:
+We evaluated three aspects of \ourtool's
+effectiveness, answering the following
+research questions:
 
-\begin{itemize}
-\item \textbf{RQ1:} How effectively do our algorithms detect
-dependent tests?
-\item \textbf{RQ2:} How do the proposed static and dynamic program analyses
-in the improved algorithm increase the algorithm efficiency?
-\end{itemize}
-
-\todo{check the research questions above? any more?}
-\todo{should we add human-written tests v.s. automatically-generated tests?
-I prefer not, since it does not lead to much insight.}
+\begin{enumerate}
+\item How many dependent tests can \ourtool detect in
+real-world programs (Section~\ref{sec:detectedtests})?
+\item How long does \ourtool take to detect dependent
+tests (Section~\ref{sec:performance})?
+\item How does \ourtool's effectiveness compare to an alternative
+approach based on test execution order randomization
+(Section~\ref{sec:random})?
+\end{enumerate}
 
 \subsection{Subject Programs}
 
 \input{subject-table}
 \input{example-table}
 
-Table~\ref{tab:subjects} summarizes the programs used in our evaluation.
+Table~\ref{tab:subjects} summarizes the programs and
+tests used in our evaluation.
 
 JodaTime~\cite{jodatime} is an open source
-date and time library intended to improve upon the weaknesses of the
-date and time facilities provided by the standard JDK.
-It is a mature project that has been under active development
-for more than eight years.
-
-XML Security~\cite{xmlsecurity}
+date and time library. It is a mature project that
+has been under active development
+for more than eight years. XML Security~\cite{xmlsecurity}
 is a component library implementing XML signature and encryption
-standards. Each released
-version of XML Security has a human-written JUnit test suite that
-achieves fairly high statement coverage.
-
-
+standards. XML Security is included in
+the SIR repository, and has been used widely
+as a subject program in the software testing community.
 Crystal~\cite{crystal} is a tool that
-pro-actively examines developers' code and precisely identifies and reports on textual, compilation, and behavioral conflicts.
+pro-actively examines developers' code and
+precisely identifies and reports on textual,
+compilation, and behavioral conflicts.
+Synoptic~\cite{synoptic} is a tool to mine a finite state
+machine model representation of a system from logs.
 
-\todo{Add Derby, and Synoptic}
+Each subject program has a human-written JUnit test suite.
+In addition, for each subject program, we use
+Randoop~\cite{PachecoLET2007}, a state-of-the-art automated
+test generation tool, to create a suite of 5,000 tests.
+Randoop automatically drops textually-redundant tests 
+and outputs a subset of the generated tests as
+shown in Table~\ref{tab:subjects}.
 
-\todo{say why choose these subject programs}
 
 \subsection{Evaluation Procedure}
 
 We use \ourtool to detect dependent
-tests among the human-written test suite 
-associated with each subject program in Table~\ref{tab:subjects}.
+tests among both the human-written test suite 
+and the automatically-generated test suite
+for each subject program in Table~\ref{tab:subjects}.
 
-We also evaluate \ourtool on automatically-generated
-test suites. For each subject program, we use
-Randoop~\cite{PachecoLET2007}, a state-of-the-art automated
-test generation tool, to generate 5,000 tests.
-Randoop drops tests that it considers to be redundant,
-and outputs a subset of the generated tests as
-shown in Table~\ref{tab:subjects}.
-Then, we applied \ourtool to detect dependent tests
-in these automatically-generated test suites.
 
 For both human-written and automatically-generated
-test suites, we use isolated execution ($k = 1$)
-and pairwise execution ($k = 2$), since our empirical
-study (Section~\ref{sec:study}) indicates that  a small $k$
+test suites, we run both exhausitive
+$k$-bounded algorithm and dependence-aware
+$k$-bounded algorithm to find dependent tests.
+For each algorithm, we use isolated execution ($k = 1$),
+pairwise execution ($k = 2$), and
+3-wise execution ($k = 3$), since our empirical
+study (Section~\ref{sec:study}) indicates that a small $k$
 can find most test dependences. 
-\todo{The experimental methodology might be different
-for the improved algorithm, which can incoporate user
-annoations, and is not restricted to k = 1, or 2}
+
+%\todo{The experimental methodology might be different
+%for the improved algorithm, which can incoporate user
+%annoations, and is not restricted to k = 1, or 2}
+
+When comparing \ourtool with test execution order
+randomization, we use Random jUnit
+executor~\cite{randomjunit}, an existing tool
+that shuttles the whole test suite and executes the shuttled
+test suite. We execute each human-written
+and automatically-generated test suite with Random
+jUnit executor until reaching a plateau, i.e.,
+no more dependent tests are identified in the past
+10 executions.
 
 Each output dependent test is examined manually to make
-sure its different results are not caused by non-deterministic
+sure the test dependence is not caused by non-deterministic
 factors, such as multi-threading.
 
+Our experiments were run on a 2.67GHz Intel Core PC
+with 4GB physical memory (2GB was allocated for the JVM),
+running Windows 7
 
 \subsection{Results}
 
-\todo{show the basic results here, i.e., the num
-of dependent tests found. Its consequence is discussed
-below.}
+Table~\ref{tab:results} summarizes the detected
+dependent tests by \ourtool.
 
-\subsubsection{RQ1: Algorithm Effectiveness}
+\subsubsection{Detected Dependent Tests}
+\label{sec:detectedtests}
 
-\todo{How many} dependent tests reported in Table~\ref{fig:example-summary}
-are found by isolated execution, and \todo{how many} dependent
-tests reported in the same are found by pairwise execution.
+\todo{How many dependent tests are detected by both
+algorithms?}
 
-\todo{does two algorithms find the same number of tests?}
+\subsubsection{Performance of \ourtool}
+\label{sec:performance}
+
+\todo{show the time cost}
+
+\subsubsection{Comparing with Test Execution Order\\ Randomization}
+\label{sec:random}
+
+compare with~\cite{randomjunit}
+
+
+
  
-\todo{say this concurs with the study findings}
+\todo{summarize the findings and show
+whether this concurs with the study findings}
 
-Characteristics of the identified dependent tests are discussed
-in Section~\ref{sec:humantest} and~\ref{sec:autotest} in details.
 
 %During manual bug diagnosis in JodaTime, we identified two test dependences that require
 %\emph{three} tests to manifest. While these are easy to reproduce, we
 %did not check that our tool finds them, because the time needed to
 %run our naive algorithm on JodaTime with $k=3$ is measured in months.
 
-\subsubsection{RQ2: Improvement from Program Analyses}
-
-\todo{How much improvement can we gain?}
-
-\subsection{Dependence in Human-written Tests}
-\label{sec:humantest}
-
-\todo{The following text needs to be re-organized.
-Be consistent to the categories used in the study section}
-
-Most of the test dependences we found in human-written
-test suites arise due to incorrect initialization
-of program state by one or more tests. Such test
-dependence often suggests defects in the
-test code. 
-
-There are two common patterns where incorrect
-initialization leads to test dependence.
-The first pattern is probably the most common. 
-The test code relies on a
-global variable, but the test itself does
-not properly initialize it.  In the second pattern,
-a test should but does not call
-an initialization function before later invocations to a complex library.
-This flaw in the test code is masked because the default test suite execution
-order includes other tests that initialize the library.  The defect is
-inconsequential until and unless the flawed test is reordered, either manually or by
-a downstream tool, to execute before any other initializing test.
-We next example dependent tests for these two patterns.
-
-
-
-%
-\ourtool identified 18 dependent tests in Crystal.
-All these dependent tests
-are caused by incomplete initialization of the
-environment when testing methods of three distinct classes
-(\code{Data\-Source, Lo\-cal\-State\-Re\-sult, Con\-flict\-Daemon}).
-In all cases, one test initializes the environment correctly, and all
-other tests rely on that test executing first. 
-Crystal developers confirmed that such test dependence was not
-intentional and most likely happened because they were not
-aware of the potential dependency caused by the use of global
-variables. Since we pointed out this problem, the developers treat the
-dependencies as undesirable and opened a bug report to have this issue
-resolved.\footnote{\url{https://code.google.com/p/crystalvc/issues/detail?id=57}}
-
-
-The XML Security version used in our evaluation is included
-in the Soft\-ware-artifact
-Infrastructure Repository (SIR)~\cite{sir}. \ourtool identified
-3 dependent tests (\code{test\_Y1}, \code{test\_Y2}, and \code{test\_Y3}
-in class \code{ExclusiveC14NInterop}), which share the same root
-cause of the dependence: before any
-method in the library can be used, the global initialization function 
-\code{Init.init()} has to be called but is not called. The
-\code{Init.init()} method initializes the static field that
-each dependent test relies on.
-
-For dependent tests in a human-written test suite, we speculate that
-developers either simply forgot to
-initialize the tests properly, or expected that these tests would always execute
-in the order defined
-in the test suite.
-
-
-
-\subsection{Dependence in Auto Generated Tests}
-\label{sec:autotest}
-
-Dependent tests in an automatically-generated test suite
-are more common.  As shown in Table~\ref{tab:results}, in most
-projects, a large fraction of the remaining tests are dependent.
-
-\input{beanutils}
 
 
 \subsection{Discussion}

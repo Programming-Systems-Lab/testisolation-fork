@@ -1,8 +1,8 @@
 
 \begin{table}
 \centering
-\setlength{\tabcolsep}{0.5\tabcolsep}
-\begin{tabular}{|l|l|l|l|l|}
+\setlength{\tabcolsep}{0.4\tabcolsep}
+\begin{tabular}{|l|l|c|c|l|}
 %\toprule
 \hline
 \textbf{Program} & \textbf{LOC} & \textbf{\#Tests} & \textbf{\#Auto Tests} & \textbf{Revision}
@@ -12,14 +12,19 @@
 JodaTime & & 3875 
 % 3875 is retrieved by running mvn test on the related revision
 & 2663 &  b609d7d66d\\
-Crystal & & 75 & 2542 & trunk version\\
 XML Security & & 108 & 2947 & version 1.0.4 \\ 
-Derby & &  & &  \\ 
+Crystal & & 75 & 2542 & trunk version\\
+Synoptic & &  & &  trunk version\\ 
 %\bottomrule
 \hline
+%\textbf{Total}& &  & &  \\ 
+%\hline
 \end{tabular}
-\caption{Subject programs used in our evaluation. \todo{the list
-subject programs are out-of-date. need find new ones. Do not look at the table content}
+\caption{Subject programs used in our evaluation.
+Column ``\#Tests'' shows the number of human-written
+unit tests associated with each program. Column
+``\#Auto Tests'' shows the number of automatically-generated
+unit tests for each program, by Randoop~\cite{PachecoLET2007}.
 }
 \label{tab:subjects}
 \end{table}

@@ -51,13 +51,14 @@ A test suite\/ $T$ is an $n$-tuple (i.e., ordered sequence) of tests
 %suite $(t_1, \dots, t_n)$.
 \end{definition}
 
-\todo{the name of f is bad, need to change}
+\edit{I changed the function name to: exec}
+
 
 \begin{definition}[Test Execution]
 Let\/ \alltests\ be the set of all possible
 tests and\/ \environs\ the set of all possible
 environments.
-The function\/ ${f}: \alltests \times \environs \rightarrow
+The function\/ $\execfunc: \alltests \times \environs \rightarrow
 \environs$ is called test
 execution. $f$ maps the execution of a test\/ $ t \in
 \alltests$ 
@@ -66,7 +67,7 @@ environment\/ $\env' \in \environs$.
 
 For the execution of a test suite\/ $T = \suite{t_1, t_2, \dots, t_n}$
 we use the shorthand\/
-$\exec{T}{\env}$ for $\exec{t_n}{\exec{t_{n-1}}{\dots \exec{t_1}
+$\exec{T}{\env}$ for $\exec{t_n}{{\dots \exec{t_1}
 {\env} \dots }}$.
 \end{definition}
 
@@ -75,9 +76,10 @@ The result of a test $t$ executed in an environment\/ $\env$,
 denoted\/ \result{t}{\env}, is defined by the test's oracle
 and is either \pass or \fail.
 
-The result of a test suite\/ \suite{t_1,\dots,t_n}, executed in an
+The result of a test suite\/ $T$ = \suite{t_1,\dots,t_n}, executed in an
 environment\/ \env, denoted\/ \result{\suite{t_1,\dots,t_n}}{\env} is a
 sequence of results\/ \suite{o_1,\dots,o_n} with $o_i \in \{\pass,\fail\}$.
+We use \result{T}{\env}[$t$] to denote the result of a test $t \in T$.
 
 %For test outcomes of sequences where all individual outcomes are
 %either \pass or \fail, we use the notation $(\pass^*)$ and $(\fail^*)$,
@@ -88,7 +90,7 @@ $t_1$ fails given the environment\/ $\env_1$, and\/ $t_2$ passes.
 \end{definition}
 
 
-\edit{SZ: I edited the following definition} 
+\edit{SZ: I edited the above and following definition} 
 
 \begin{definition}[Manifest Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
@@ -105,7 +107,6 @@ $S_1, S_2 \in$ permutations($T$):
 %test $t' \in S$ such that $t' \in T$ and $t' \neq t$.}
 \end{definition}
 
-\todo{still a point: why S1, S2? shouldnot S1 enough?}
 
 \edit{I edit below}
 The definition of manifest dependent test (for short, dependent test)

@@ -252,7 +252,7 @@ the function adds the generated permutation to the result
 set (line 7), and runs the algorithm in Figure~\ref{fig:dtalgorithm}
 to identify dependent tests among it.
 
-\edit{I add a simple proof below}
+\edit{I add a simple proof below, which I am not happy with}
 
 We next proof the correctness of the dependence-aware
 $k$-bounded algorithm.
@@ -271,14 +271,19 @@ by the same test as in $T$.
 
 
 Suppose there exists a test $t \in P$ produces a different result
-than in $T$. Test $t$ must read different values
-for at least one shared field. Based on our assumption,
-the shared field is written by the same test as in $T$,
-but the test reads different values for at least
-one shared field. By induction, there must exist
-a test $t' \in P$ that 
-\edit{the above proof is not finished, need to
-think about how to make it shorter.}
+than in $T$. Test $t$ must read a different value
+for at least one shared field. Without loss of generality,
+let's suppose $f$ is a shared field for which $t$ reads
+a different value. Based on our assumption, 
+$f$ is written by the same test, denoted as $t'$, as in $T$.
+Since the $f$'s value is different in $P$, $t'$
+must read different value for other shared fields.
+By induction, there must exist a test $t'' \in P$ that 
+reads a different \textit{initialization} value
+for at least one shared field. This contradicts
+the assumption that tests are executed in the same environment.
+\edit{the above proof is not clear, need to
+think about how to make it shorter and clearer.}
 \end{proof}
 
 \edit{I edited text below}

@@ -1,39 +1,46 @@
-\newcommand{\masking}{Masking Faults}
-\newcommand{\initializaiton}{Test Structure} %ialization}
-\newcommand{\spurious}{Spurious Bug}
 
 \begin{table*}
 \centering
 \setlength{\tabcolsep}{0.3\tabcolsep}
-\begin{tabular}{|l||c|c|c||c|c|}
+\begin{tabular}{|l||c|c|c|c|c|c||c|c|c|c|c|c|}
 %\toprule
 \hline
-\textbf{Subject} & \multicolumn{3}{|c||}{\textbf{Detected Dependent Tests}} & \multicolumn{2}{|c|}{\textbf{Analysis Cost (second)}}\\
-\cline{2-6}
-\textbf{Programs} & \textbf{\#Dependent Tests} & \textbf{\#Dependent Auto Tests} &
-\textbf{Kind} &
-\textbf{Basic Algorithm} & \textbf{Improved Algorithm}
-\\
+\textbf{Subject} & \multicolumn{6}{|c||}{\textbf{\#Detected Dependent Tests}} & \multicolumn{6}{|c|}{\textbf{Analysis Cost (second)}}\\
 %\midrule
+\cline{2-13}
+\textbf{Programs} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c||}{\textbf{Dependence-Aware}} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c|}{\textbf{Dependence-Aware}} \\
+\cline{2-13}
+& $k$=1 & $k$=2 & $k$=3 & $k$=1 & $k$=2 & $k$=3 &  $k$=1 & $k$=2 & $k$=3 & $k$=1 & $k$=2 & $k$=3 \\
 \hline
-JodaTime & 3875 
-% 3875 is retrieved by running mvn test on the related revision
-& 3 & \masking{} & 2663 & 711  \\
-Crystal & 75 & 18 &\initializaiton{} & 2542 & 20 \\
-XML Security & 108 & 3 & \initializaiton{}& 2947 & 925  \\ %, 1.0.5d2\\
-Derby & &  & & & \\ 
 %\bottomrule
+\multicolumn{13}{|l|}{ }\\
+\multicolumn{13}{|l|}{\textbf{Human-written unit tests} }\\
+\hline
+JodaTime & & & & & & & & & & & & \\
+XML Security& & & & & & & & & & & & \\
+Crystal & & & & & & & & & & & & \\
+Synoptic & & & & & & & & & & & & \\
+\hline
+\textbf{Total} & & & & & & & & & & & & \\
+\hline
+\multicolumn{13}{|l|}{ }\\
+\multicolumn{13}{|l|}{\textbf{Automatically-generated unit tests} }\\
+\hline
+JodaTime & & & & & & & & & & & & \\
+XML Security& & & & & & & & & & & & \\
+Crystal & & & & & & & & & & & & \\
+Synoptic & & & & & & & & & & & & \\
+\hline
+\textbf{Total} & & & & & & & & & & & & \\
 \hline
 \end{tabular}
-\caption{Experimental results. Column ``Kind'' refers to the kind
-of problem associated with the dependency. 
-\todo{The subject program list is out-of-date. donot look at the table content, just check the table format.}
-\todo{The kind column above may not make much sense. since the
-test we detect cannot lead to spurious bug report, and are unlikely
-to reveal bugs. They can only reveal tes flaws.}
-\todo{Or we should replace "kind" to "root cause".}
-%automatically-generated test suites are described in Section~\ref{sec:autogen}.
-%\todo{KM}{I think that the last sentence is not necessary}}
+\caption{Experimental results. Column ``\#Detected Dependent Tests''
+shows the number of detected dependent tests in each subject program.
+Columns ``Exhaustive'' and ``Dependence-Aware'' show the results
+of applying the exhaustive $k$-bounded and the dependence-aware
+$k$-bounded algorithms, respectively. Column ``Analysis Costs (second)''
+shows the time cost (in seconds) of each algorithm under
+different settings.
 }
 \label{tab:results}
 \end{table*}

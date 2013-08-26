@@ -1,0 +1,58 @@
+\todo{The following text needs to be re-organized.
+Be consistent to the categories used in the study section}
+
+Most of the test dependences we found in human-written
+test suites arise due to incorrect initialization
+of program state by one or more tests. Such test
+dependence often suggests defects in the
+test code. 
+
+There are two common patterns where incorrect
+initialization leads to test dependence.
+The first pattern is probably the most common. 
+The test code relies on a
+global variable, but the test itself does
+not properly initialize it.  In the second pattern,
+a test should but does not call
+an initialization function before later invocations to a complex library.
+This flaw in the test code is masked because the default test suite execution
+order includes other tests that initialize the library.  The defect is
+inconsequential until and unless the flawed test is reordered, either manually or by
+a downstream tool, to execute before any other initializing test.
+We next example dependent tests for these two patterns.
+
+
+
+%
+\ourtool identified 18 dependent tests in Crystal.
+All these dependent tests
+are caused by incomplete initialization of the
+environment when testing methods of three distinct classes
+(\code{Data\-Source, Lo\-cal\-State\-Re\-sult, Con\-flict\-Daemon}).
+In all cases, one test initializes the environment correctly, and all
+other tests rely on that test executing first. 
+Crystal developers confirmed that such test dependence was not
+intentional and most likely happened because they were not
+aware of the potential dependency caused by the use of global
+variables. Since we pointed out this problem, the developers treat the
+dependencies as undesirable and opened a bug report to have this issue
+resolved.\footnote{\url{https://code.google.com/p/crystalvc/issues/detail?id=57}}
+
+
+The XML Security version used in our evaluation is included
+in the Soft\-ware-artifact
+Infrastructure Repository (SIR)~\cite{sir}. \ourtool identified
+3 dependent tests (\code{test\_Y1}, \code{test\_Y2}, and \code{test\_Y3}
+in class \code{ExclusiveC14NInterop}), which share the same root
+cause of the dependence: before any
+method in the library can be used, the global initialization function 
+\code{Init.init()} has to be called but is not called. The
+\code{Init.init()} method initializes the static field that
+each dependent test relies on.
+
+For dependent tests in a human-written test suite, we speculate that
+developers either simply forgot to
+initialize the tests properly, or expected that these tests would always execute
+in the order defined
+in the test suite.
+
