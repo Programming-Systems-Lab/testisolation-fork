@@ -1,6 +1,10 @@
 \section{Detecting Dependent Tests}
 \label{sec:detecting}
 
+\newcommand{\smalltrialnum}{10\xspace}
+\newcommand{\mediumtrialnum}{100\xspace}
+\newcommand{\trialnum}{1000\xspace}
+
 \newcommand{\testlist}[0]{\ensuremath{T^k_i}}
 \newcommand{\executeTestsInOrder}[1]{\result{#1}{\env_0}}
 
@@ -73,31 +77,35 @@ getPossibleExecOrder($T$):\\
 $k$ is ignored.
 It uses the parameter $k$ for the size of the generated test suites.
 \todo{Refer to Figure~\ref{fig:basealgorithm}.}
-Our experiments use $\mathit{numtrials}=10$.  The test suite size parameter
+Our experiments use $\mathit{numtrials} = \smalltrialnum,
+\mediumtrialnum, \trialnum$.  The test suite size parameter
 $k$ is ignored.}
 \label{fig:randalgorithm}
 \end{figure}
 
 
+Figure~\ref{fig:basealgorithm} shows the algorithm.
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, this algorithm
 first executes $T$ with its default order
-to obtain the \emph{expected result} of each test.
+to obtain the \emph{expected result} of each test (line 2).
 Then, it randomizes the original
-test execution order, and then executes each test
-again to observe its result. The algorithm checks
+test execution order (line 3), and then executes each test
+again to observe its result (line 4). The algorithm checks
 whether the result of any test differs from the
-expected result. 
+expected result (lines 5--8). 
 
 In our implementation, this algorithm repeatedly
 shuffles the test suite, and executes each test until
 no more dependent tests are identified within a
-pre-defined number of iterations (default: 10 iterations).
+pre-defined number of iterations (default: \smalltrialnum iterations).
+Our experiments use $\smalltrialnum,
+\mediumtrialnum, \trialnum$ as the iteration numbers.
 
-\todo{How did we choose 10 iterations?  It might be good to try with some
-  different number such as 20 and report that there was no difference.
-  More generally, when choosing an arbitrary number, it adds credibility to
-  either give a justification for the number or to do an experiment to show
-  that the number is a reasonable choice.}
+%\todo{How did we choose 10 iterations?  It might be good to try with some
+%  different number such as 20 and report that there was no difference.
+%  More generally, when choosing an arbitrary number, it adds credibility to
+%  either give a justification for the number or to do an experiment to show
+%  that the number is a reasonable choice.}
 
 
 \subsection{Exhausitive Bounded Algorithm}
