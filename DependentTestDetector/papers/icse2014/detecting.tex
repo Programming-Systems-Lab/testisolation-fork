@@ -4,13 +4,32 @@
 \newcommand{\testlist}[0]{\ensuremath{T^k_i}}
 \newcommand{\executeTestsInOrder}[1]{\result{#1}{\env_0}}
 
+An exhaustive search would execute all $n!$
+permutations of the test suite to detect dependent tests.
+However, this is not feasible for realistic $n$.
+Since the general form of the dependent test detection problem is
+NP-complete, we do not expect to find an efficient algorithm for it.
+
+To approximate the exact solution, this section
+presents three approximate algorithms that find a \textit{subset} of
+all dependent tests.
+%In this section we present two algorithms to detect dependent
+%tests. 
+Section~\ref{sec:randomized} describes a randomized algorithm
+that repeatedly executes all the tests of a suite in random order.
+Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
+executes all possible sequences of $k$ tests for a bounding parameter $k$.
+Section~\ref{sec:advalgorithm} describes a dependence-aware $k-$bounded algorithm.
+The dependence-aware algorithm dynamically collects the fields that each test
+reads or writes, and uses such collected information to reduce the search space.
+All algorithms are \textit{sound} but \textit{incomplete}:
+every dependent test they find is real, but they do not
+any guarantee to find every dependent test.
+
+\subsection{Randomized Algorithm}
+\label{sec:randomized}
+
 \begin{figure}[t]
-\textbf{Auxiliary methods}:\\
-kPermutations($T$, $k$): returns all $k$-permutations of $T$; that is, all
-sequences of $k$ elements of $T$ without repetition
-
-\medskip
-
 \textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
 \textbf{Output}: a set of dependent tests $\mathit{dependentTests}$\\
 \vspace{-5mm}
@@ -37,43 +56,19 @@ sequences of $k$ elements of $T$ without repetition
 getPossibleExecOrder($T$, $k$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
-\RETURN kPermutations($T$, $k$)
+\FOR{$i$ in 1..$\mathit{numtrials}$}
+\STATE \textbf{yield} shuffle($T$)
+\ENDFOR
 \end{algorithmic}
 
 \vspace{-3mm}
-\caption {The exhaustive $k$-bounded algorithm to detect dependent tests.
-Our experiments use $k=1$ and $k=2$ to bound the length of
-test execution. } 
-\label{fig:dtalgorithm}
+\caption {The randomized algorithm to detect dependent tests.
+Our experiments use $\mathit{numtrials}=10$.  The test suite size parameter
+$k$ is ignored.}
+\label{fig:basealgorithm}
+\label{fig:randalgorithm}
 \end{figure}
-An exhaustive search would execute all $n!$
-permutations of the test suite to detect dependent tests.
-However, this is not feasible for realistic $n$.
-Since the general form of the dependent test detection problem is
-NP-complete, we do not expect to find an efficient algorithm for it.
 
-To approximate the exact solution, this section
-presents three approximate algorithms that find a \textit{subset} of
-all dependent tests.
-%In this section we present two algorithms to detect dependent
-%tests. 
-\edit{I add the following sentence}
-Section~\ref{sec:randomized} describes a randomized algorithm
-that repeatedly shuffles a test suite, and then
-executes each test in a random order.
-Section~\ref{sec:basic} describes an exhaustive $k-$bounded algorithm that
-executes all possible $k$-test for a bounding parameter $k$
-to detect dependent tests.
-Section~\ref{sec:advalgorithm} describes a dependence-aware $k-$bounded algorithm.
-The dependence-aware algorithm dynamically collects the fields that each test
-reads or writes, and uses such collected information to reduce the search space.
-All algorithms are \textit{sound} but \textit{incomplete}:
-every dependent test they find is real, but they do not
-any guarantee to find every dependent test.
-
-\subsection{Randomized Algorithm}
-\edit{I add this following subsection}
-\label{sec:randomized}
 
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, this algorithm
 first executes $T$ with its default order
@@ -89,10 +84,38 @@ shuffles the test suite, and executes each test until
 no more dependent tests are identified within a
 pre-defined number of iterations (default: 10 iterations).
 
+\todo{How did we choose 10 iterations?  It might be good to try with some
+  different number such as 20 and report that there was no difference.
+  More generally, when choosing an arbitrary number, it adds credibility to
+  either give a justification for the number or to do an experiment to show
+  that the number is a reasonable choice.}
 
 
-\subsection{Exhausitive $k-$bounded Algorithm}
+\subsection{Exhausitive Bounded Algorithm}
 \label{sec:basic}
+
+\begin{figure}[t]
+\textbf{Auxiliary methods}:\\
+kPermutations($T$, $k$): returns all $k$-permutations of $T$; that is, all
+sequences of $k$ elements of $T$ without repetition
+
+\medskip
+
+getPossibleExecOrder($T$, $k$):\\
+\vspace{-5mm}
+\begin{algorithmic}[1]
+\RETURN kPermutations($T$, $k$)
+\end{algorithmic}
+
+\vspace{-3mm}
+\caption {The exhaustive $k$-bounded algorithm to detect dependent tests.
+It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining the
+getPossibleExecOrder function.
+Our experiments use $k=1$ and $k=2$ to bound the length of
+test execution. } 
+\label{fig:exhaustivealgorithm}
+\end{figure}
+
 
 %To detect all possible dependent tests, 
 
@@ -103,7 +126,7 @@ subsequences of test suites. For example,
 in our study, \pertange of the real-world dependent tests
 can be found by running no more than 2 tests together.
 Instead of executing all permutations of the
-whole test suite, our algorithm (Figure~\ref{fig:dtalgorithm})
+whole test suite, our algorithm (Figure~\ref{fig:exhaustivealgorithm})
 executes all $k$-permutations for a bounding
 parameter $k$.
 By doing so, the algorithm reduces
@@ -124,7 +147,7 @@ that exhibit different results.
 
 
 
-\subsection{Dependence-Aware $k$-Bounded Algorithm}
+\subsection{Dependence-Aware Bounded Algorithm}
 \label{sec:advalgorithm}
 
 \begin{figure}[t]
@@ -158,7 +181,7 @@ the corresponding last test that writes each field.}
 
 \vspace{-3mm}
 \caption {The dependence-aware $k$-bounded algorithm to detect dependent tests.
-It uses the algorithm of Figure~\ref{fig:dtalgorithm}, re-defining the
+It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining the
 getPossibleExecOrder function.
 Our experiments uses $k=1$, \todo{experiment setting, how
 large k it can scale to.}. } 
@@ -257,7 +280,7 @@ have the same results and the permutation can be safely ignored.
 
 \edit{I edit the text below}
 The algorithm in Figure~\ref{fig:impralg} uses the
-algorithm of Figure~\ref{fig:dtalgorithm}, by redefining
+algorithm of Figure~\ref{fig:basealgorithm}, by redefining
 the getPossibleExecOrder function. The redefined
 getPossibleExecOrder function first records
 fields that each test reads and writes (line 1).
@@ -272,7 +295,7 @@ default order (lines 5--8). If so, all tests in the permutation
 must produce the same results, and the algorithm discards
 this permutation without executing it. Otherwise,
 the function adds the generated permutation to the result
-set (line 7), and runs the algorithm in Figure~\ref{fig:dtalgorithm}
+set (line 7), and runs the algorithm in Figure~\ref{fig:basealgorithm}
 to identify dependent tests among it.
 
 \edit{I add a simple proof below, which I am not happy with}

@@ -51,8 +51,6 @@ A test suite\/ $T$ is an $n$-tuple (i.e., ordered sequence) of tests
 %suite $(t_1, \dots, t_n)$.
 \end{definition}
 
-\edit{I changed the function name to: exec}
-
 
 \begin{definition}[Test Execution]
 Let\/ \alltests\ be the set of all possible
@@ -85,12 +83,22 @@ We use \result{T}{\env}[$t$] to denote the result of a test $t \in T$.
 %either \pass or \fail, we use the notation $(\pass^*)$ and $(\fail^*)$,
 %respectively.
 
-For example, $\result{\suite{t_1, t_2}}{\env_1} = \suite{\fail, \pass}$ represents that 
-$t_1$ fails given the environment\/ $\env_1$, and\/ $t_2$ passes.
+For example, $\result{\suite{t_1, t_2}}{\env_1} = \suite{\fail, \pass}$ represents that if
+$t_1$ then $t_2$ are run, starting with the environment\/ $\env_1$, then\/
+$t_1$ fails and\/ $t_2$ passes.
 \end{definition}
 
-
-\edit{SZ: I edited the above and following definition} 
+A manifest dependent test is one that can be exposed by 
+reordering existing test cases.
+A dependent test $t$ manifests only
+if there are two test suites $S_1$ and $S_2$ which
+are two permutations of the original test suite $T$,
+in which $t$ exhibits a different result
+in the execution $\exec{S_1}{\env_0}$
+than in the execution $\exec{S_2}{\env_0}$.
+%produces an
+%environment that will make $t$ exhibit a
+%different result than in the environment produced by $\exec{S_2}{\env_0}$.
 
 \begin{definition}[Manifest Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
@@ -108,18 +116,6 @@ $S_1, S_2 \in$ permutations($T$):
 \end{definition}
 
 
-\edit{I edit below}
-The definition of manifest dependent test (for short, dependent test)
-focuses on environment modified by reordering test execution.
-A dependent test $t$ manifests only
-if there are two test suites $S_1$ and $S_2$ which
-are two permutations of the original test suite $T$,
-in which $t$ exhibits a different result
-in the execution $\exec{S_1}{\env_0}$
-than in the execution $\exec{S_2}{\env_0}$.
-%produces an
-%environment that will make $t$ exhibit a
-%different result than in the environment produced by $\exec{S_2}{\env_0}$.
 
 
 \subsection{The Dependent Test Detection Problem}
