@@ -1,43 +1,44 @@
 
 \begin{table*}
 \centering
-\setlength{\tabcolsep}{0.3\tabcolsep}
-\begin{tabular}{|l||c|c|c|c|c|c||c|c|c|c|c|c|}
+\setlength{\tabcolsep}{0.1\tabcolsep}
+\begin{tabular}{|l|c||c|c|c|c|c|c|c||c|c|c|c|c|c|c|}
 %\toprule
 \hline
-\textbf{Subject} & \multicolumn{6}{|c||}{\textbf{\#Detected Dependent Tests}} & \multicolumn{6}{|c|}{\textbf{Analysis Cost (second)}}\\
+\textbf{Subject} & \textbf{\#Tests} & \multicolumn{7}{|c||}{\textbf{\#Detected Dependent Tests}} & \multicolumn{7}{|c|}{\textbf{Analysis Cost (second)}}\\
 %\midrule
-\cline{2-13}
-\textbf{Programs} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c||}{\textbf{Dependence-Aware}} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c|}{\textbf{Dependence-Aware}} \\
-\cline{2-13}
-& $k$=1 & $k$=2 & $k$=3 & $k$=1 & $k$=2 & $k$=3 &  $k$=1 & $k$=2 & $k$=3 & $k$=1 & $k$=2 & $k$=3 \\
+\cline{3-16}
+\textbf{Programs} & & \textbf{Randomized} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c||}{\textbf{Dependence-Aware}} & \textbf{Randomized} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c|}{\textbf{Dependence-Aware}} \\
+%\cline{3-8}\cline{10-15}
+& & & $k$=1 & $k$=2 & $k$=3 & $k$=1 & $k$=2 & $k$=3 &  & $k$=1 & $k$=2 & $k$=3 & $k$=1  & $k$=2 & $k$=3 \\
 \hline
 %\bottomrule
-\multicolumn{13}{|l|}{ }\\
-\multicolumn{13}{|l|}{\textbf{Human-written unit tests} }\\
+\multicolumn{16}{|l|}{ }\\
+\multicolumn{16}{|l|}{\textbf{Human-written unit tests} }\\
 \hline
-JodaTime & & & & & & & & & & & & \\
-XML Security& & & & & & & & & & & & \\
-Crystal & & & & & & & & & & & & \\
-Synoptic & & & & & & & & & & & & \\
+JodaTime & & & && && & & & & & & & & \\
+XML Security& & &&& & & & & & & & & & & \\
+Crystal & & & & &&& && & & & & & & \\
+Synoptic & & & & &&& && & & & & & & \\
 \hline
-\textbf{Total} & & & & & & & & & & & & \\
+\textbf{Total} & & &&& && & & & & & & & & \\
 \hline
-\multicolumn{13}{|l|}{ }\\
-\multicolumn{13}{|l|}{\textbf{Automatically-generated unit tests} }\\
+\multicolumn{16}{|l|}{ }\\
+\multicolumn{16}{|l|}{\textbf{Automatically-generated unit tests} }\\
 \hline
-JodaTime & & & & & & & & & & & & \\
-XML Security& & & & & & & & & & & & \\
-Crystal & & & & & & & & & & & & \\
-Synoptic & & & & & & & & & & & & \\
+JodaTime & & && &&& & & & & & & & & \\
+XML Security& && &&& & & & & & & & & & \\
+Crystal & & & & &&&& & & & & & & & \\
+Synoptic & & & & &&&& & & & & & & & \\
 \hline
-\textbf{Total} & & & & & & & & & & & & \\
+\textbf{Total} & &&& & && & & & & & & & & \\
 \hline
 \end{tabular}
-\caption{Experimental results. Column ``\#Detected Dependent Tests''
+\caption{Experimental results. Column ``\#Tests'' shows the total number
+of tests, taken from Table~\ref{tab:subjects}. Column ``\#Detected Dependent Tests''
 shows the number of detected dependent tests in each subject program.
-Columns ``Exhaustive'' and ``Dependence-Aware'' show the results
-of applying the exhaustive $k$-bounded and the dependence-aware
+Columns ``Randomized'', ``Exhaustive'' and ``Dependence-Aware'' show the results
+of applying the randomized algorithm, the exhaustive $k$-bounded algorithm and the dependence-aware
 $k$-bounded algorithms, respectively. Column ``Analysis Costs (second)''
 shows the time cost (in seconds) of each algorithm under
 different settings.

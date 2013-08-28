@@ -53,19 +53,42 @@ Since the general form of the dependent test detection problem is
 NP-complete, we do not expect to find an efficient algorithm for it.
 
 To approximate the exact solution, this section
-presents two approximate algorithms that find a \textit{subset} of
+presents three approximate algorithms that find a \textit{subset} of
 all dependent tests.
 %In this section we present two algorithms to detect dependent
 %tests. 
+\edit{I add the following sentence}
+Section~\ref{sec:randomized} describes a randomized algorithm
+that repeatedly shuffles a test suite, and then
+executes each test in a random order.
 Section~\ref{sec:basic} describes an exhaustive $k-$bounded algorithm that
 executes all possible $k$-test for a bounding parameter $k$
 to detect dependent tests.
 Section~\ref{sec:advalgorithm} describes a dependence-aware $k-$bounded algorithm.
 The dependence-aware algorithm dynamically collects the fields that each test
 reads or writes, and uses such collected information to reduce the search space.
-Both algorithms are \textit{sound} but \textit{incomplete}:
+All algorithms are \textit{sound} but \textit{incomplete}:
 every dependent test they find is real, but they do not
 any guarantee to find every dependent test.
+
+\subsection{Randomized Algorithm}
+\edit{I add this following subsection}
+\label{sec:randomized}
+
+Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, this algorithm
+first executes $T$ with its default order
+to obtain the \emph{expected result} of each test.
+Then, it randomizes the original
+test execution order, and then executes each test
+again to observe its result. The algorithm checks
+whether the result of any test differs from the
+expected result. 
+
+In our implementation, this algorithm repeatedly
+shuffles the test suite, and executes each test until
+no more dependent tests are identified within a
+pre-defined number of iterations (default: 10 iterations).
+
 
 
 \subsection{Exhausitive $k-$bounded Algorithm}
@@ -73,7 +96,7 @@ any guarantee to find every dependent test.
 
 %To detect all possible dependent tests, 
 
-Our basic algorithm uses the findings of our study
+This algorithm uses the findings of our study
 (Section~\ref{sec:study})
 that most dependent tests can be found by running only short
 subsequences of test suites. For example,

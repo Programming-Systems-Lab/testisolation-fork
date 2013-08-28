@@ -1,18 +1,18 @@
 \section{Empirical Evaluation}
 \label{sec:evaluation}
 
-We evaluated three aspects of \ourtool's
+We evaluated two aspects of \ourtool's
 effectiveness, answering the following
 research questions:
 
 \begin{enumerate}
 \item How many dependent tests can \ourtool detect in
-real-world programs (Section~\ref{sec:detectedtests})?
-\item How long does \ourtool take to detect dependent
+real-world programs by each detection algorithm (Section~\ref{sec:detectedtests})?
+\item How long does each algorithm in \ourtool take to detect dependent
 tests (Section~\ref{sec:performance})?
-\item How does \ourtool's effectiveness compare to an alternative
-approach based on test execution order randomization
-(Section~\ref{sec:random})?
+%\item How does \ourtool's effectiveness compare to an alternative
+%approach based on test execution order randomization
+%(Section~\ref{sec:random})?
 \end{enumerate}
 
 \subsection{Subject Programs}
@@ -56,28 +56,35 @@ for each subject program in Table~\ref{tab:subjects}.
 
 
 For both human-written and automatically-generated
-test suites, we run both exhausitive
-$k$-bounded algorithm and dependence-aware
-$k$-bounded algorithm to find dependent tests.
-For each algorithm, we use isolated execution ($k = 1$),
+test suites, we run the three algorithms proposed
+in Section~\ref{sec:detecting} separately.
+
+We run the randomzied algorithm repeatedly until no
+new dependent tests are identified in the last
+10 iterations.
+
+When running the exhausitive $k$-bounded algorithm and dependence-aware
+$k$-bounded algorithm,
+we use isolated execution ($k = 1$),
 pairwise execution ($k = 2$), and
-3-wise execution ($k = 3$), since our empirical
-study (Section~\ref{sec:study}) indicates that a small $k$
+3-wise execution ($k = 3$). The choice of $k$ is
+based on the results of our empirical
+study (Section~\ref{sec:study}) that a small $k$
 can find most test dependences. 
 
 %\todo{The experimental methodology might be different
 %for the improved algorithm, which can incoporate user
 %annoations, and is not restricted to k = 1, or 2}
 
-When comparing \ourtool with test execution order
-randomization, we use Random jUnit
-executor~\cite{randomjunit}, an existing tool
-that shuttles the whole test suite and executes the shuttled
-test suite. We execute each human-written
-and automatically-generated test suite with Random
-jUnit executor until reaching a plateau, i.e.,
-no more dependent tests are identified in the past
-10 executions.
+%When comparing \ourtool with test execution order
+%randomization, we use Random jUnit
+%executor~\cite{randomjunit}, an existing tool
+%that shuttles the whole test suite and executes the shuttled
+%test suite. We execute each human-written
+%and automatically-generated test suite with Random
+%jUnit executor until reaching a plateau, i.e.,
+%no more dependent tests are identified in the past
+%10 executions.
 
 Each output dependent test is examined manually to make
 sure the test dependence is not caused by non-deterministic
@@ -103,10 +110,10 @@ algorithms?}
 
 \todo{show the time cost}
 
-\subsubsection{Comparing with Test Execution Order\\ Randomization}
-\label{sec:random}
+%\subsubsection{Comparing with Test Execution Order\\ Randomization}
+%\label{sec:random}
 
-compare with~\cite{randomjunit}
+%compare with~\cite{randomjunit}
 
 
 

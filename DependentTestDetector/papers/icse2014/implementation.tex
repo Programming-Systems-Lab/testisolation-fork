@@ -2,11 +2,11 @@
 \label{sec:impl}
 
 
-We implemented our two dependent test detection algorithms in
+We implemented our three dependent test detection algorithms in
 a prototype tool, called \ourtool. \ourtool
 supports JUnit 3.x/4.x tests, and is fully-automated.
 
-For the basic, $k$-bounded dependent test detection algorithm
+For the exhaustive $k$-bounded dependent test detection algorithm
 (Section~\ref{sec:basic}), \ourtool takes a test suite
 and the bounding parameter $k$ as inputs, 
 exhaustively executes every $k$-tuple
@@ -22,7 +22,7 @@ $k$-tuple of tests and clear external state such
 as files, ensuring there is no interaction between
 different runs. 
 
-For the improved algorithm (Section~\ref{sec:advalgorithm}),
+For the dependence-aware $k$-bounded algorithm (Section~\ref{sec:advalgorithm}),
 \ourtool uses ASM~\cite{asm} to perform load-time bytecode
 instrumentation. Specifically, it inserts code to monitor each
 field access (including read and write) by recording the

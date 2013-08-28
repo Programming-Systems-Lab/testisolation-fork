@@ -175,17 +175,20 @@ This paper makes the following contributions:
   as well as a proof that finding \emph{manifest} dependences is an NP-complete
   problem (Section~\ref{sec:formalism}).
 
-  \item \textbf{Algorithms.} We present two algorithms
+  \item \textbf{Algorithms.} We present three algorithms
   to detect dependent tests (Section~\ref{sec:detecting}).
-  The first exhaustive $k$-bounded algorithm
+  \edit{I add the following random algorithm}
+  The first randomized algorithm repeatedly shuffles a test suite,
+  and then executes each test in a random order.
+  The second exhaustive $k$-bounded algorithm
   executes all possible $k$-tests for
   a bounding parameter $k$ to identify tests exhibiting different results.
-  The second dependence-aware $k$-bounded
+  The third dependence-aware $k$-bounded
   algorithm uses dynamic program analyses
   to reduce the search space. It records fields read and
   written by each test, and then safely ignores test execution orders
   that are guaranteed to produce the same results as in the default
-  order. Both algorithms are \emph{sound} but \emph{incomplete}:
+  order. All algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
   do not guarantee to find all dependent tests. 
   %\edit{check above when the algorithm section is written}
