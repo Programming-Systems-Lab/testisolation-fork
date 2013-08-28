@@ -30,13 +30,13 @@ any guarantee to find every dependent test.
 \label{sec:randomized}
 
 \begin{figure}[t]
-\textbf{Input}: a test suite $\mathit{T}$, an execution length $\mathit{k}$\\
+\textbf{Input}: a test suite $\mathit{T}$\\
 \textbf{Output}: a set of dependent tests $\mathit{dependentTests}$\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
 \STATE $\mathit{dependentTests}$ $\leftarrow$ $\emptyset$
 \STATE $\mathit{expectedResults}$ $\leftarrow$ $\result{T}{\env_0}$
-\FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$, $\mathit{k}$)}
+\FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$)}
 \STATE $\mathit{execResults}$ $\leftarrow$ $\result{ts}{\env_0}$
 \FOR{each test $\mathit{t}$ in $\mathit{ts}$}
 \IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
@@ -51,9 +51,15 @@ any guarantee to find every dependent test.
 % getPossibleExecOrder($T$, $k$): returns a set of test suites, each of size
 % $\le k$; each suite is composed of tests selected from $T$ without replacement.\\
 
-\medskip
+\vspace{-3mm}
+\caption {The randomized algorithm to detect dependent tests.
+}
+\label{fig:basealgorithm}
+\end{figure}
 
-getPossibleExecOrder($T$, $k$):\\
+
+\begin{figure}[t]
+getPossibleExecOrder($T$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
 \FOR{$i$ in 1..$\mathit{numtrials}$}
@@ -63,9 +69,12 @@ getPossibleExecOrder($T$, $k$):\\
 
 \vspace{-3mm}
 \caption {The randomized algorithm to detect dependent tests.
+  The test suite size parameter
+$k$ is ignored.
+It uses the parameter $k$ for the size of the generated test suites.
+\todo{Refer to Figure~\ref{fig:basealgorithm}.}
 Our experiments use $\mathit{numtrials}=10$.  The test suite size parameter
 $k$ is ignored.}
-\label{fig:basealgorithm}
 \label{fig:randalgorithm}
 \end{figure}
 
@@ -101,7 +110,7 @@ sequences of $k$ elements of $T$ without repetition
 
 \medskip
 
-getPossibleExecOrder($T$, $k$):\\
+getPossibleExecOrder($T$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
 \RETURN kPermutations($T$, $k$)
@@ -157,7 +166,7 @@ computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $
 
 \vspace{-2mm}
 
-getPossibleExecOrder($T$, $k$):\\
+getPossibleExecOrder($T$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
 \STATE $\langle reads, writes\rangle$ $\leftarrow$ recordFieldAccess($T$)\\
