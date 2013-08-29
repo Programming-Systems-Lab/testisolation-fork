@@ -140,6 +140,30 @@ whether this concurs with the study findings}
 
 \subsection{Discussion}
 
+\subsubsection{Developers' Reactions}
+
+We sent the identified human-written dependent tests to the
+subject program developers.
+
+One dependent test in JodaTime was previoulsy-known,
+and had already been fixed. JodaTime's
+developers also confirmed the other two new dependent
+tests, but contended that it is due to interactions
+that are not intended in the design of the library.
+
+The Crystal developers confirmed that dependent tests
+found in Crystal were not intentional and mostly likely
+happended because they were not aware of the potential dependency
+caused by global variables. The developers treat the
+dependencies as undesirable and opened a bug report for
+this report issue\footnote{\url{https://code.google.com/p/crystalvc/issues/ detail?id=57}}.
+
+The dependent test in Synoptic was also identified
+by the developers. The Synoptic developers merged
+two related tests to fix this issue.
+
+\todo{say some about xml security}
+
 \subsubsection{Threats to Validity}
 
 There are two major threats to validity in our evaluation.

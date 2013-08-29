@@ -56,7 +56,10 @@ any guarantee to find every dependent test.
 % $\le k$; each suite is composed of tests selected from $T$ without replacement.\\
 
 \vspace{-3mm}
-\caption {The randomized algorithm to detect dependent tests.
+\caption {The algorithm to detect dependent tests.
+The getPossibleExecOrder function is instantiated
+by different algorithms in Figures~\ref{fig:randalgorithm},
+~\ref{fig:exhaustivealgorithm}, and~\ref{fig:impralg}.
 }
 \label{fig:basealgorithm}
 \end{figure}
@@ -73,18 +76,15 @@ getPossibleExecOrder($T$):\\
 
 \vspace{-3mm}
 \caption {The randomized algorithm to detect dependent tests.
-  The test suite size parameter
-$k$ is ignored.
-It uses the parameter $k$ for the size of the generated test suites.
-\todo{Refer to Figure~\ref{fig:basealgorithm}.}
+It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining
+the getPossibleExecOrder function.
 Our experiments use $\mathit{numtrials} = \smalltrialnum,
-\mediumtrialnum, \trialnum$.  The test suite size parameter
-$k$ is ignored.}
+\mediumtrialnum, \trialnum$.}
 \label{fig:randalgorithm}
 \end{figure}
 
 
-Figure~\ref{fig:basealgorithm} shows the algorithm.
+Figure~\ref{fig:randalgorithm} shows the algorithm.
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, this algorithm
 first executes $T$ with its default order
 to obtain the \emph{expected result} of each test (line 2).
@@ -128,8 +128,9 @@ getPossibleExecOrder($T$):\\
 \caption {The exhaustive $k$-bounded algorithm to detect dependent tests.
 It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining the
 getPossibleExecOrder function.
-Our experiments use $k=1$ and $k=2$ to bound the length of
-test execution. } 
+%Our experiments use $k=1$ and $k=2$ to bound the length of
+%test execution. 
+} 
 \label{fig:exhaustivealgorithm}
 \end{figure}
 
@@ -200,8 +201,9 @@ the corresponding last test that writes each field.}
 \caption {The dependence-aware $k$-bounded algorithm to detect dependent tests.
 It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining the
 getPossibleExecOrder function.
-Our experiments uses $k=1$, \todo{experiment setting, how
-large k it can scale to.}. } 
+%Our experiments uses $k=1$, \todo{experiment setting, how
+%large k it can scale to.}. 
+} 
 \label{fig:impralg}
 \end{figure}
 
