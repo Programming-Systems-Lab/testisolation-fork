@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.lang.reflect.Array;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -155,4 +158,33 @@ public class Utils {
 	      
 	      return sb.toString();
 	 }
+	
+	public static Class<?> loadclass(String classPath, String  className) {
+        // Create a File object on the root of the directory containing the class file
+        String[] paths = classPath.split(Globals.pathSep);
+        File[] files = new File[paths.length];
+        for(int i = 0; i < paths.length; i++) {
+                files[i] = new File(paths[i]);
+        }
+
+        try {
+            // Convert File to a URL
+                URL[] urls = new URL[files.length];
+                for(int i = 0; i < files.length; i++) {
+                        urls[i] = files[i].toURL();
+                }
+
+            // Create a new class loader with the directory
+            ClassLoader cl = new URLClassLoader(urls);
+
+            // Load in the class; MyClass.class should be located in
+            // the directory file:/c:/myclasses/com/mycompany
+            Class<?> cls = cl.loadClass(className);
+            return cls;
+        } catch (MalformedURLException e) {
+        } catch (ClassNotFoundException e) {
+        }
+        return null;
+}
+	
 }
