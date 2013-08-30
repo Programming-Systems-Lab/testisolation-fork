@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import edu.washington.cs.dt.OneTestExecResult;
+import edu.washington.cs.dt.RESULT;
 import edu.washington.cs.dt.TestExecResults;
 import edu.washington.cs.dt.runners.AbstractTestRunner;
 import edu.washington.cs.dt.runners.FixedOrderRunner;
@@ -33,6 +34,9 @@ public class RunTestInFixedOrder {
 	@Option("Randomize the order")
 	public static boolean random = false;
 	
+	@Option("Print detailed info")
+	public static boolean verbose = false;
+	
 	public static void main(String[] args) {
 		new RunTestInFixedOrder().nonStaticMain(args);
 	}
@@ -52,14 +56,26 @@ public class RunTestInFixedOrder {
 		//get the results, and dump that out
 		Map<String, OneTestExecResult> result = results.getExecutionRecords().get(0).singleRun;
 		StringBuilder sb = new StringBuilder();
+		StringBuilder failedTests = new StringBuilder();
 		for(String test : result.keySet()) {
 			sb.append(test);
 			sb.append(" : ");
 			sb.append(result.get(test).result);
 			sb.append(Globals.lineSep);
+			if(verbose) {
+				if(!result.get(test).result.equals(RESULT.PASS)) {
+					System.out.println(" test fail! " + test);
+					System.out.println(result.get(test).getFullStackTrace());
+					failedTests.append(test);
+					failedTests.append(Globals.lineSep);
+				}
+			}
 		}
 		try {
 			Files.writeToFile(sb.toString(), outputFile);
+			if(verbose) {
+				Files.writeToFile(failedTests.toString(), outputFile + "_only_failed.txt");
+			}
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
