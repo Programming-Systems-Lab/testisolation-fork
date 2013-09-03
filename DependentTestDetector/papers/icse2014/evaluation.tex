@@ -1,6 +1,8 @@
 \section{Empirical Evaluation}
 \label{sec:evaluation}
 
+
+
 \newcommand{\jodatimetests}{3875\xspace}
 \newcommand{\xmlsecuritytests}{108\xspace}
 \newcommand{\crystaltests}{75\xspace}
@@ -9,6 +11,9 @@
 \newcommand{\xmlsecurityautotests}{665\xspace}
 \newcommand{\crystalautotests}{3198\xspace}
 \newcommand{\synopticautotests}{2467\xspace}
+
+\input{subject-table}
+\input{example-table}
 
 We evaluated two aspects of \ourtool's
 effectiveness, answering the following
@@ -19,6 +24,9 @@ research questions:
 real-world programs by each detection algorithm (Section~\ref{sec:detectedtests})?
 \item How long does each algorithm in \ourtool take to detect dependent
 tests (Section~\ref{sec:performance})?
+
+\item Which algorithm is the most cost-effective one in detecting
+dependent tests (Section~\ref{sec:algcomparison})?
 %\item How does \ourtool's effectiveness compare to an alternative
 %approach based on test execution order randomization
 %(Section~\ref{sec:random})?
@@ -26,8 +34,6 @@ tests (Section~\ref{sec:performance})?
 
 \subsection{Subject Programs}
 
-\input{subject-table}
-\input{example-table}
 
 Table~\ref{tab:subjects} summarizes the programs and
 tests used in our evaluation.
@@ -118,20 +124,15 @@ algorithms?}
 \label{sec:performance}
 
 \todo{show the time cost}
-
-%\subsubsection{Comparing with Test Execution Order\\ Randomization}
-%\label{sec:random}
-
-%compare with~\cite{randomjunit}
-
-
-
  
 \todo{summarize the findings and show
 whether this concurs with the study findings}
 
+\subsubsection{Comparison of Algorithms}
+\label{sec:algcomparison}
 
-%During manual bug diagnosis in JodaTime, we identified two test dependences that require
+\todo{which one is the most cost-effective one, i speculate that it might be the randomized one}
+
 %\emph{three} tests to manifest. While these are easy to reproduce, we
 %did not check that our tool finds them, because the time needed to
 %run our naive algorithm on JodaTime with $k=3$ is measured in months.
@@ -139,58 +140,75 @@ whether this concurs with the study findings}
 
 
 \subsection{Discussion}
+\label{sec:expdiscussion}
 
 \subsubsection{Developers' Reactions}
 
 We sent the identified human-written dependent tests to the
-subject program developers.
+subject program developers, asking for their feedback.
 
 One dependent test in JodaTime was previoulsy-known,
 and had already been fixed. JodaTime's
-developers also confirmed the other two new dependent
-tests, but contended that it is due to interactions
+developers confirmed the other two new dependent
+tests, and thought that they is due to interactions
 that are not intended in the design of the library.
 
-The Crystal developers confirmed that dependent tests
+The Crystal developers confirmed that all dependent tests
 found in Crystal were not intentional and mostly likely
 happended because they were not aware of the potential dependency
 caused by global variables. The developers treat the
 dependencies as undesirable and opened a bug report for
 this report issue\footnote{\url{https://code.google.com/p/crystalvc/issues/ detail?id=57}}.
 
-The dependent test in Synoptic was also identified
-by the developers. The Synoptic developers merged
-two related tests to fix this issue.
+The Synoptic developers merged two related tests to fix
+the dependent tests.
 
-\todo{say some about xml security}
+After receiving our reported dependent tests in XML-Security,
+the SIR~\cite{sir} maintainers 
+confirmed that tests should \textit{always} ``stand alone''
+without dependency on other tests, and treated that as
+``test engineering 101''. They are working on fixing the reported
+test dependence.
 
 \subsubsection{Threats to Validity}
 
-There are two major threats to validity in our evaluation.
-First, the \todo{NUM} open-source
+There are several threats to validity in our evaluation.
+First, the \subjnum open-source
 programs and their test suites may not be
 representative enough. Thus, we can not claim the results
 can be generalized to an arbitrary program.
 Second, in this evaluation, we focus specifically on
-dependence between unit tests.
-\todo{only consider unit tests, no system tests.} 
+the {manifest dependence} between \textit{unit tests}.
+It is unclear how test dependence will arise
+in other types of tests, such as integration tests
+or system tests.
 Third, due to the computational complexity of the general dependent test
-detection problem, it is difficult to know precisely how many dependent
-tests exist in a test suite. Thus, we do not
-yet have empirical data that shows how many percentages of dependence tests
+detection problem, we do not yet have
+empirical data of how many dependent
+tests exist in a test suite and how many percentages of dependence tests
 \ourtool can catch.  Giving a reasonable estimation is one of our future work.
-\todo{this paper focuses on manifest test dependence, what about
-potential test dependence, as well as some other cases in the
-study}
+
+%\todo{this paper focuses on manifest test dependence, what about
+%potential test dependence, as well as some other cases in the
+%study}
 
 \subsubsection{Experimental Conclusions}
 
 
-We have XXX chief findings: \textbf{(1)}
-\textbf{(2)}, \textbf{(3)} ...
-The examples where dependence identified weaknesses in the tests themselves
-are even less likely to be observed.  
-Our prototype tool shows
-the potential for revealing dependences, allowing
-developers to observe them and make conscious decisions about how, or even whether,
-to deal with the dependences. 
+We have three chief findings: \textbf{(1)}
+Dependent tests are not obvious to be identified
+unless been explicitly searched for.
+An automatically-generated test suite can contain
+substantially more dependent tests than a human-written
+test suite.
+\textbf{(2)} Like the dependent tests
+studied in Section~\ref{sec:study}, the identified
+dependent tests in our subject programs reveal weakness
+in a test suite rather than defect in the tested code.
+And \textbf{(3)} In terms
+of the number of detected dependent tests
+and time cost, the randomized algorithm is the
+most cost-effective one.
+%However, it does not
+%have any guarantee in 
+
