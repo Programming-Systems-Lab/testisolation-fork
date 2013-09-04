@@ -18,22 +18,22 @@
 \multicolumn{16}{|l|}{ }\\
 \multicolumn{16}{|l|}{\textbf{Human-written unit tests} }\\
 \hline
-JodaTime & \jodatimetests & 1 & 1 & 6 & 2 &\unknown&& &   57 & 528 & 5538 &1265& \infy & &   \\
+JodaTime & \jodatimetests & 1 & 1 & 6 & 2 &\unknown&& &   57 & 528 & 5538 &1265& 4$\times$ $10^6$* & &   \\
 XML Security& \xmlsecuritytests & 1 & 4 & 4 &4 &4 & 4 & 4  &65 & 594 & 5977 & 106 &  11927 & 93 & 3322  \\
 Crystal & \crystaltests & 18 & 18 & 18 &17&18&  & &14& 131 & 1304 & 166 & 7323 &   & \\
 Synoptic & \synoptictests & 1 &1  & 1 & 0 &1 & &&  7 & 67 & 760& 25 & 3372&  &  \\
 \hline
-\textbf{Total} & \totaltests & 21&24&29& 23 &\unknown&  & &  143 & 1320 & 13579 &1562& \infy &   &  \\
+\textbf{Total} & \totaltests & 21&24&29& 23 &\unknown&  & &  143 & 1320 & 13579 &1562&  4$\times$ $10^6$*&   &  \\
 \hline
 \multicolumn{16}{|l|}{ }\\
 \multicolumn{16}{|l|}{\textbf{Automatically-generated unit tests} }\\
 \hline
-JodaTime & \jodatimeautotests & 586 &815& 966 & 534 & \unknown&& & 131  & 1139 & 9000 & 448 & \infy & &  \\
-XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 &&  &  & 50 & 430 & 4174 & 133 & \infy & & \\
-Crystal & \crystalautotests & 159 & 162 & 164 & 55 & \unknown& & & 103 & 949& 9436  & 2477 & \infy & & \\
-Synoptic & \synopticautotests & 3 & 7 & 10 &2& \unknown& &  &81& 770  & 6311 & 454 & \infy & & \\
+JodaTime & \jodatimeautotests & 586 &815& 966 & 534 & \unknown&& & 131  & 1139 & 9000 & 448 & 2$\times$$10^6$*& &  \\
+XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 & \unknown&  &  & 50 & 430 & 4174 & 133 & 1$\times$$10^5$* & & \\
+Crystal & \crystalautotests & 159 & 162 & 164 & 55 & \unknown& & & 103 & 949& 9436  & 2477 & 8$\times$$10^6$*& & \\
+Synoptic & \synopticautotests & 3 & 7 & 10 &2& \unknown& &  &81& 770  & 6311 & 454 & 1$\times$$10^6$*& & \\
 \hline
-\textbf{Total} & \totalautotests &915&1155& 1311 & 720& & & &365 &3288 & 28921 & 3512 & \infy & & \\
+\textbf{Total} & \totalautotests &915&1155& 1311 & 720& \unknown & & &365 &3288 & 28921 & 3512 & 1.2$\times$$10^7$*& & \\
 \hline
 \end{tabular}
 \caption{Experimental results. Column ``\#Tests'' shows the total number
@@ -44,9 +44,12 @@ of applying the randomized algorithm, the exhaustive $k$-bounded algorithm and t
 $k$-bounded algorithms, respectively. 
 When evaluating the randomized algorithm, we use $numtrials$ =
 $\smalltrialnum, \mediumtrialnum, \trialnum$ in the algorithm (Figure~\ref{fig:randalgorithm}).
+``\unknown'' means the technique does not scale to the test
+suite. Thus, the exact number of dependent tests is unknown.
 Column ``Analysis Costs (second)''
 shows the time cost (in seconds) of each algorithm under
-different settings.
+different settings. A starred number represents an estimated
+time cost. The estimation methodology is described in Section~\ref{sec:performance}.
 }
 \label{tab:results}
 \end{table*}

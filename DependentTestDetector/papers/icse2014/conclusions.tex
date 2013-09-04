@@ -4,8 +4,7 @@
 Test independence is broadly assumed but rarely addressed, and
 test dependence has largely been ignored in previous
 research on software testing. To understand
-dependent tests, we provide a
-precise formalization of the test dependence problem,
+dependent tests, we provide a precise formalization of the test dependence problem,
 and describe one of the first studies on real-world dependent
 tests from popular software issue tracking systems. Guided by
 this study, to detect dependent tests, we design
@@ -14,6 +13,19 @@ in a test suite. Our empirical evaluation reveals
 previously-unknown dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
 suites.
+
+\todo{check the paragraph}
+The results of this paper offer initial answers to four questions we posed
+in the introduction. First, test dependence \textit{does}
+arise in practice, from both human-written test suites and automatically-generated
+test suites. Second, dependent tests can have
+non-trivial negative repercussions, even though the
+extent is unknown. Third, we speculate
+\todo{need to why ppl did not notice this?} that .. Fourth,
+detecting manifest dependent tests is a NP-complete problem,
+for which efficient algorithms are unlikely to exist. However,
+in practice, a simple algorithm like the randomized algorithm
+described in this paper can work fairly well.
 
 The source code of our tool implementation is publicly
 available at: \url{http://testisolation.googlecode.com}.
