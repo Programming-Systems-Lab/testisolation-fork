@@ -72,37 +72,26 @@ tests among both the human-written test suite
 and the automatically-generated test suite
 for each subject program in Table~\ref{tab:subjects}.
 
+We run the three algorithms proposed
+in Section~\ref{sec:detecting} on both
+human-written and automatically-generated test suites
+of each subject program.
 
-For both human-written and automatically-generated
-test suites, we run the three algorithms proposed
-in Section~\ref{sec:detecting} separately.
-
-We run the randomzied algorithm repeatedly until no
-new dependent tests are identified in the last
-10 iterations.
-
-When running the exhausitive $k$-bounded algorithm and dependence-aware
-$k$-bounded algorithm,
-we use isolated execution ($k = 1$),
-pairwise execution ($k = 2$), and
-3-wise execution ($k = 3$). The choice of $k$ is
+We run the randomzied algorithm \smalltrialnum, \mediumtrialnum,
+and \trialnum times on each test suite, and record
+the total number of detected dependent tests and time cost
+for each setting. The choice of \trialnum times is based
+on the practical guidelines of using randomized algorithm
+in software engineering, as summarized in~\cite{Arcuri:2011}.
+%
+For the exhausitive $k$-bounded algorithm
+and dependence-aware $k$-bounded algorithm,
+we use isolated execution ($k = 1$), and
+pairwise execution ($k = 2$). The choice of $k$ is
 based on the results of our empirical
 study (Section~\ref{sec:study}) that a small $k$
-can find most test dependences. 
+can find most realistic test dependences.
 
-%\todo{The experimental methodology might be different
-%for the improved algorithm, which can incoporate user
-%annoations, and is not restricted to k = 1, or 2}
-
-%When comparing \ourtool with test execution order
-%randomization, we use Random jUnit
-%executor~\cite{randomjunit}, an existing tool
-%that shuttles the whole test suite and executes the shuttled
-%test suite. We execute each human-written
-%and automatically-generated test suite with Random
-%jUnit executor until reaching a plateau, i.e.,
-%no more dependent tests are identified in the past
-%10 executions.
 
 Each output dependent test is examined manually to make
 sure the test dependence is not caused by non-deterministic
@@ -110,31 +99,123 @@ factors, such as multi-threading.
 
 Our experiments were run on a 2.67GHz Intel Core PC
 with 4GB physical memory (2GB was allocated for the JVM),
-running Windows 7
+running Windows 7.
 
 \subsection{Results}
 
-Table~\ref{tab:results} summarizes the detected
-dependent tests by \ourtool.
+Table~\ref{tab:results} summarizes the number of detected
+dependent tests and the cost by each algorithm
+in \ourtool.
 
 \subsubsection{Detected Dependent Tests}
 \label{sec:detectedtests}
 
-\todo{How many dependent tests are detected by both
-algorithms?}
+A total number of 29 dependent tests are detected
+from all human-written test suites, and 1311
+dependent tests are detected from all automatically-generated
+test suites. The percentage of dependent tests
+in automatically-generated test suites is significantly
+higher than in human-written test suites. We identified
+two possible reasons: first, developers usually have deep
+knowledge the intended purpose of a program when writing tests
+for it. Such expertise helps them to build relatively well-structured and coherent
+tests, e.g., tests that carefully initialize and destroy the
+shared objects they may use. Second, 
+ it is challenging for automated test generation tools to understand
+ a program's intended purpose as well as how
+specific parts of the program depend on the environment.
+Thus, automated tools often do not explicitly generate code that sets up the
+environment correctly.  In addition, to cover more
+program states, automated tools often incrementally
+builds tests on top of the program state after executing
+other tests. This could further make a test's result depend on another.
+
+
+%If, at the same time, other tests are
+%generated that as a side e?ect create the needed environment, test dependence ensues
+
+
+
+The randomized algorithm is surpringly effective in
+detecting dependent tests. After running \trialnum times,
+it identifies \textit{more} dependent tests than the other
+two algorithms can find. For human-written
+tests, the randomized algorithm detects 2 more dependent
+tests in the JodaTime program. These two tests only
+manifest when a sequence of three tests are run in a specified,
+non-default order. Both exhaustive and dependence-aware $k$-bounded
+algorithm fail to detect these two tests, because
+they can not scale to $k$=3 for the
+JodaTime program. Related, the randomized algorithm
+detects significantly more dependent
+tests in the automatically-generated test suites, for
+two reasons. First,
+both the exhaustive and dependence $k$-bounded
+failed to scale to $k$=2 for 3 automatically-generated test suites;
+and second, some detected dependent tests requires executing more than 2 tests
+to manifest.
+
+%Compared to the randomized algorithm, On the other hand,
 
 \subsubsection{Performance of \ourtool}
 \label{sec:performance}
 
-\todo{show the time cost}
+The time cost of the randomized algorithm 
+varies across different subject programs, and
+is proportional to number of runs. Overall, the
+time cost is acceptable for practical use.
+For example, the randomized algorithm took around 1.5 hours
+to finish 1000 runs,  for the largest human-written test
+suite (\jodatimetests tests in JodaTime).
  
-\todo{summarize the findings and show
-whether this concurs with the study findings}
+The time cost of running the exhaustive $k$-bounded algorithm
+is prohibitive. The exhaustive algorithm failed to
+scale to one human-written test suite and three automatically-generated
+test suites when $k$=2, and failed to scale to all test suites
+when $k$=3. The primary reason is due to the extremely large
+number of all possible tuples. For example, running all JodaTime's \jodatimetests human-written
+unit tests when $k$=2 requires running 15,011,750 test pairs, costing
+approximately 1400 hours (58 days). 
+
+The dependence-aware $k$-bounded algorithm helps improve
+the efficiency of \todo{more results here.}
+
+Table~\ref{tab:results} gives an estimated time cost for each
+test suite that an algorithm failed to scale to. For each test suite,
+we randomly chose 1000 samples from all possible
+test tuples, executed them, and measured the time cost. Then,
+we calcuated the average time cost of each sample, and multiples
+the average cost with the number of all samples.
+
+
 
 \subsubsection{Comparison of Algorithms}
 \label{sec:algcomparison}
 
-\todo{which one is the most cost-effective one, i speculate that it might be the randomized one}
+We next discuss the tradeoffs of choosing different detection
+algorithms. Although the randomized algorithm
+detects the most dependent tests in our subject programs,
+it has several shortcomings that must be considered
+in practice. First, there is no guarantee of
+the randomized algorithm's results. A randomized
+algorithm might even produce different results across runs,
+and makes reproducing a dependent test harder.
+Second, more importantly, there is no stop criteria
+of using the randomized algorithm in shuffling and
+running the test suite. Thus, it is hard for users
+to know how many runs would be enough for a test suite.
+Third, when a dependent test is identified, users
+may need to inspect every test that is executed
+before the dependent test, and isolate  a minimized
+subsequence of tests (either
+manually or using an assisting tool) to understand the dependence root cause.
+
+By contrast, both exhaustive $k$-bounded and dependence-aware
+$k$-bounded algorithms do not suffer from the above shortcomings.
+One major factor that may prevent them being applied to a
+large test suite might be the time cost for systematically
+exploring all possible test tuples.
+
 
 %\emph{three} tests to manifest. While these are easy to reproduce, we
 %did not check that our tool finds them, because the time needed to

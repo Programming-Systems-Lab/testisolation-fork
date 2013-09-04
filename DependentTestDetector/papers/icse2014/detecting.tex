@@ -280,13 +280,16 @@ $k$-bounded dependent test detection algorithm (Figure~\ref{fig:impralg}).}
 \label{fig:rwexample}
 \end{figure}
 
-The exhaustive $k-$bounded algorithm cannot scale to a realistic test suite.
-For example, it would take months to 
-execute all 3-permutations
-in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects}).
+%The exhaustive $k-$bounded algorithm cannot scale to a realistic test suite.
+%For example, it would take months to 
+%execute all 3-permutations
+%in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects}).
 
-To reduce the search space, our dependence-aware algorithm
-uses dynamic analyses to avoid executing test
+The dependence-aware $k$-bounded algorithm
+detects the same number of dependent tests
+as the exhaustive $k$-bounded algorithm (when using the same $k$),
+but it uses dynamic analyses to improve efficiency.
+It avoids executing test
 permutations that are guaranteed to have the
 same results as being executed in the default order.
 The intuition of our algorithm is that,
@@ -297,7 +300,6 @@ in the default execution order, all tests in
 the permutation are guaranteed to
 have the same results and the permutation can be safely ignored. 
 
-\edit{I edit the text below}
 The algorithm in Figure~\ref{fig:impralg} uses the
 algorithm of Figure~\ref{fig:basealgorithm}, by redefining
 the getPossibleExecOrder function. The redefined
@@ -316,42 +318,10 @@ this permutation without executing it. Otherwise,
 the function adds the generated permutation to the result
 set (line 7), and runs the algorithm in Figure~\ref{fig:basealgorithm}
 to identify dependent tests among it.
+Due to space limit, we omit the proof of the correctness
+of the dependence-aware $k$-bounded algorithm. Interested
+readers can refer to~\cite{proof-dependence-aware} for details.
 
-\edit{I add a simple proof below, which I am not happy with}
-
-We next proof the correctness of the dependence-aware
-$k$-bounded algorithm.
-
-\begin{theorem}
-All tests in a test permutation discarded by the getPossibleExecOrder
-function (Figure~\ref{fig:impralg}) are guaranteed to produce the same results as in its default order.
-\end{theorem}
-
-\begin{proof}
-We prove this theorem by contradiction. Given a test
-suite $T$ and a test permutation $P$ of $T$, let's assume
-permutation $P$ is discarded by the getPossibleExecOrder function
-since all fields read by each test in $P$ are written
-by the same test as in $T$.
-
-
-Suppose there exists a test $t \in P$ produces a different result
-than in $T$. Test $t$ must read a different value
-for at least one shared field. Without loss of generality,
-let's suppose $f$ is a shared field for which $t$ reads
-a different value. Based on our assumption, 
-$f$ is written by the same test, denoted as $t'$, as in $T$.
-Since the $f$'s value is different in $P$, $t'$
-must read different value for other shared fields.
-By induction, there must exist a test $t'' \in P$ that 
-reads a different \textit{initialization} value
-for at least one shared field. This contradicts
-the assumption that tests are executed in the same environment.
-\edit{the above proof is not clear, need to
-think about how to make it shorter and clearer.}
-\end{proof}
-
-\edit{I edited text below}
 The dependence-aware $k$-bounded algorithm has two major benefits.
 First, it clusters tests by the fields they
 read and write. Thus, only tests reading or writing at
@@ -398,3 +368,39 @@ to execute in Figure~\ref{fig:rwexample}.
 %need to be explored.
 
 
+\begin{comment}
+
+\edit{I add a simple proof below, which I am not happy with}
+
+We next proof the correctness of the dependence-aware
+$k$-bounded algorithm.
+
+\begin{theorem}
+All tests in a test permutation discarded by the getPossibleExecOrder
+function (Figure~\ref{fig:impralg}) are guaranteed to produce the same results as in its default order.
+\end{theorem}
+
+\begin{proof}
+We prove this theorem by contradiction. Given a test
+suite $T$ and a test permutation $P$ of $T$, let's assume
+permutation $P$ is discarded by the getPossibleExecOrder function
+since all fields read by each test in $P$ are written
+by the same test as in $T$.
+
+
+Suppose there exists a test $t \in P$ produces a different result
+than in $T$. Test $t$ must read a different value
+for at least one shared field. Without loss of generality,
+let's suppose $f$ is a shared field for which $t$ reads
+a different value. Based on our assumption, 
+$f$ is written by the same test, denoted as $t'$, as in $T$.
+Since the $f$'s value is different in $P$, $t'$
+must read different value for other shared fields.
+By induction, there must exist a test $t'' \in P$ that 
+reads a different \textit{initialization} value
+for at least one shared field. This contradicts
+the assumption that tests are executed in the same environment.
+\edit{the above proof is not clear, need to
+think about how to make it shorter and clearer.}
+\end{proof}
+\end{comment}
