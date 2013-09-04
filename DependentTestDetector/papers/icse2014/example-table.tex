@@ -2,36 +2,36 @@
 \begin{table*}
 \centering
 \setlength{\tabcolsep}{0.12\tabcolsep}
-\begin{tabular}{|l|c|C|C|C|c|c|c|C|C|C|c|c|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|C|C|C|c|c|c|c|c|c|c|c|c|c|c|c|}
 %\toprule
 \hline
-\textbf{Subject} & & \multicolumn{9}{|c|}{\textbf{\#Detected Dependent Tests}} & \multicolumn{9}{|c|}{\textbf{Analysis Cost (second)}}\\
+\textbf{Subject} & & \multicolumn{7}{|c|}{\textbf{\#Detected Dependent Tests}} & \multicolumn{7}{|c|}{\textbf{Analysis Cost (second)}}\\
 %\midrule
-\cline{3-20}
-\textbf{Programs} & \textbf{\#Tests} & \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c|}{\textbf{Dependence-Aware}} & \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{3}{|c|}{\textbf{Exhaustive }} & \multicolumn{3}{|c|}{\textbf{Dependence-Aware}} \\
+\cline{3-16}
+\textbf{Programs} & \textbf{\#Tests} & \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{2}{|c|}{\textbf{Exhaustive }} & \multicolumn{2}{|c|}{\textbf{Dependence-Aware}} & \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{2}{|c|}{\textbf{Exhaustive }} & \multicolumn{2}{|c|}{\textbf{Dependence-Aware}} \\
 %\cline{3-8}\cline{10-15}
-& & \smalltrialnum & \mediumtrialnum & \trialnum& $k$=1 & $k$=2 & $k$=3 & $k$=1 & $k$=2 & $k$=3 & \smalltrialnum & \mediumtrialnum & \trialnum & $k$=1 & $k$=2 & $k$=3 & $k$=1 \quad  & $k$=2 \quad & $k$=3 \\
+& & \smalltrialnum & \mediumtrialnum & \trialnum& $k$=1 & $k$=2 & $k$=1 & $k$=2 & \smalltrialnum & \mediumtrialnum & \trialnum & $k$=1 & $k$=2 &  \quad $k$=1 \quad \quad & $k$=2  \\
 \hline
 %\bottomrule
-\multicolumn{20}{|l|}{ }\\
-\multicolumn{20}{|l|}{\textbf{Human-written unit tests} }\\
+\multicolumn{16}{|l|}{ }\\
+\multicolumn{16}{|l|}{\textbf{Human-written unit tests} }\\
 \hline
-JodaTime & \jodatimetests & 1 & 1 & 6 & 2 &&& && &  57 & 528 & 5538 &1265& & & &  & \\
-XML Security& \xmlsecuritytests & 1 & 4 & 4 &4 &4 && 4 & 4 & &65 & 594 & 5977 & 106 &  11927 && 93 & 3322 & \\
-Crystal & \crystaltests & 18 & 18 & 18 &17&18& & & &&14& 131 & 1304 & 166 & 7323 &  & & &\\
-Synoptic & \synoptictests & 1 &1  & 1 & 0 && &&& & 7 & 67 & 760& 25 & & & & & \\
+JodaTime & \jodatimetests & 1 & 1 & 6 & 2 &&& &   57 & 528 & 5538 &1265&  & &   \\
+XML Security& \xmlsecuritytests & 1 & 4 & 4 &4 &4 & 4 & 4  &65 & 594 & 5977 & 106 &  11927 & 93 & 3322  \\
+Crystal & \crystaltests & 18 & 18 & 18 &17&18&  & &14& 131 & 1304 & 166 & 7323 &   & \\
+Synoptic & \synoptictests & 1 &1  & 1 & 0 && &&  7 & 67 & 760& 25 & &  &  \\
 \hline
-\textbf{Total} & \totaltests & 21&24&29& 23 && & & & & 143 & 1320 & 13579 &1562& & &  & & \\
+\textbf{Total} & \totaltests & 21&24&29& 23 &&  & &  143 & 1320 & 13579 &1562& &   &  \\
 \hline
-\multicolumn{20}{|l|}{ }\\
-\multicolumn{20}{|l|}{\textbf{Automatically-generated unit tests} }\\
+\multicolumn{16}{|l|}{ }\\
+\multicolumn{16}{|l|}{\textbf{Automatically-generated unit tests} }\\
 \hline
-JodaTime & \jodatimeautotests & 586 &815& 966 & 534 & &&&& & 131  & 1139 & 9000 & 448 & & && & \\
-XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 &&&&  &  & 50 & 430 & 4174 & 133 & && & & \\
-Crystal & \crystalautotests & 159 & 162 & 164 &&&& & & & 103 & 949& 9436  & & & & &&\\
-Synoptic & \synopticautotests & 3 & 7 & 10 &&&& & & &81& 770  & 6311 & & & & &&\\
+JodaTime & \jodatimeautotests & 586 &815& 966 & 534 & && & 131  & 1139 & 9000 & 448 & & &  \\
+XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 &&  &  & 50 & 430 & 4174 & 133 &  & & \\
+Crystal & \crystalautotests & 159 & 162 & 164 && & & & 103 & 949& 9436  & & & & \\
+Synoptic & \synopticautotests & 3 & 7 & 10 &&& &  &81& 770  & 6311 & & & & \\
 \hline
-\textbf{Total} & \totalautotests &915&1155& 1311 & & & &&& &365 &3288 & 28921 & & & & && \\
+\textbf{Total} & \totalautotests &915&1155& 1311 & & & & &365 &3288 & 28921 &  & & & \\
 \hline
 \end{tabular}
 \caption{Experimental results. Column ``\#Tests'' shows the total number
