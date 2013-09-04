@@ -12,17 +12,17 @@ import junit.framework.TestCase;
 public class TestRandomizedDependentTestFinder extends TestCase {
 
 	
-	final String exampleFile = "./tests/edu/washington/cs/dt/main/sampleinput.txt";
+	final static String exampleFile = "./tests/edu/washington/cs/dt/main/sampleinput.txt";
 	
-	final String xmlSecurityFile_manual = "./tests/edu/washington/cs/dt/tools/xmlsecurity-all-manual-tests.txt";
-	final String crystalFile_manual = "./tests/edu/washington/cs/dt/tools/crystal-all-manual-tests.txt";
-	final String jodatimeFile_manual = "./tests/edu/washington/cs/dt/tools/jodatime-all-manual-tests.txt";
-	final String synopticFile_manual = "./tests/edu/washington/cs/dt/tools/synoptic-all-manual-tests.txt";
+	final static String xmlSecurityFile_manual = "./tests/edu/washington/cs/dt/tools/xmlsecurity-all-manual-tests.txt";
+	final static String crystalFile_manual = "./tests/edu/washington/cs/dt/tools/crystal-all-manual-tests.txt";
+	final static String jodatimeFile_manual = "./tests/edu/washington/cs/dt/tools/jodatime-all-manual-tests.txt";
+	final static String synopticFile_manual = "./tests/edu/washington/cs/dt/tools/synoptic-all-manual-tests.txt";
 	
-	final String xmlSecurityFile_auto = "./tests/edu/washington/cs/dt/tools/xmlsecurity-auto-test-list.txt";
-	final String crystalFile_auto = "./tests/edu/washington/cs/dt/tools/crystal-auto-test-list.txt";
-	final String jodatimeFile_auto = "./tests/edu/washington/cs/dt/tools/jodattime-auto-test-list.txt";
-	final String synopticFile_auto = "./tests/edu/washington/cs/dt/tools/synoptic-auto-test-list.txt";
+	final static String xmlSecurityFile_auto = "./tests/edu/washington/cs/dt/tools/xmlsecurity-auto-test-list.txt";
+	final static String crystalFile_auto = "./tests/edu/washington/cs/dt/tools/crystal-auto-test-list.txt";
+	final static String jodatimeFile_auto = "./tests/edu/washington/cs/dt/tools/jodattime-auto-test-list.txt";
+	final static String synopticFile_auto = "./tests/edu/washington/cs/dt/tools/synoptic-auto-test-list.txt";
 	
 //	public void testToyExamples() {
 //		Log.logConfig("./randomized_toy_results.txt");
@@ -104,7 +104,7 @@ public class TestRandomizedDependentTestFinder extends TestCase {
 	public void testJodaTime_auto() {
 		Log.logConfig("./randomized_jodatime_auto_tests_results.txt");
 		RandomizedDependentTestFinder.verbose = true;
-		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.jodatimeFile_auto);
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(jodatimeFile_auto);
 		randomizedFinder.setTrialNum(1000);
 		Set<String> dts = randomizedFinder.findDependentTests();
 		for(String t : dts) {
@@ -115,7 +115,7 @@ public class TestRandomizedDependentTestFinder extends TestCase {
 	public void testSynoptic_auto() {
 		Log.logConfig("./randomized_synoptic_auto_tests_results.txt");
 		RandomizedDependentTestFinder.verbose = true;
-		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.synopticFile_auto);
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(synopticFile_auto);
 		randomizedFinder.setTrialNum(1000);
 		Set<String> dts = randomizedFinder.findDependentTests();
 		for(String t : dts) {
@@ -126,7 +126,7 @@ public class TestRandomizedDependentTestFinder extends TestCase {
 	public void testCrystal_auto() {
 		Log.logConfig("./randomized_crystal_auto_tests_results.txt");
 		RandomizedDependentTestFinder.verbose = true;
-		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.crystalFile_auto);
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(crystalFile_auto);
 		randomizedFinder.setTrialNum(1000);
 		Set<String> dts = randomizedFinder.findDependentTests();
 		for(String t : dts) {
