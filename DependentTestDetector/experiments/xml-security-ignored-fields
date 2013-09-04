@@ -1,0 +1,34 @@
+private static final byte[] org.bouncycastle.crypto.engines.AESEngine.S
+private static final int[] org.bouncycastle.crypto.engines.AESEngine.rcon
+private static final byte[] org.bouncycastle.crypto.engines.AESEngine.Alogtable
+private static final byte[] org.bouncycastle.crypto.engines.AESEngine.Logtable
+private static final byte[] org.bouncycastle.crypto.engines.AESEngine.Si
+private static org.apache.xml.utils.XMLStringFactory org.apache.xpath.objects.XMLStringFactoryImpl.m_xstringfactory
+private static final java.lang.Object org.apache.xml.dtm.SecuritySupport.securitySupport
+static byte[] org.bouncycastle.crypto.engines.DESEngine.pc1
+static short[] org.bouncycastle.crypto.engines.DESEngine.bytebit
+static byte[] org.bouncycastle.crypto.engines.DESEngine.totrot
+static byte[] org.bouncycastle.crypto.engines.DESEngine.pc2
+static int[] org.bouncycastle.crypto.engines.DESEngine.bigbyte
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP7
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP5
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP3
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP1
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP8
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP6
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP4
+static int[] org.bouncycastle.crypto.engines.DESEngine.SP2
+static java.util.Hashtable org.apache.xpath.compiler.Keywords.m_axisnames
+static java.util.Hashtable org.apache.xpath.compiler.Keywords.m_nodetypes
+static java.util.Hashtable org.apache.xpath.compiler.Keywords.m_functions
+#public static org.apache.xpath.compiler.FuncLoader[] org.apache.xpath.compiler.FunctionTable.m_functions
+#static java.util.Map org.apache.xml.security.c14n.Canonicalizer._canonicalizerHash
+#static org.apache.xerces.dom.DOMImplementationImpl org.apache.xerces.dom.DOMImplementationImpl.singleton
+#protected static java.util.ResourceBundle org.apache.xml.security.utils.I18n.resourceBundle
+#static java.util.HashMap org.apache.xml.security.algorithms.SignatureAlgorithm._algorithmHash
+#static java.util.HashMap org.apache.xml.security.utils.ElementProxy._prefixMappings
+#static java.util.Vector org.apache.xml.security.keys.keyresolver.KeyResolver._resolverVector
+#static java.util.Vector org.apache.xml.security.utils.resolver.ResourceResolver._resolverVector
+#static java.util.HashMap org.apache.xml.security.transforms.Transform._transformHash
+#protected static final java.util.Hashtable org.apache.xerces.impl.dv.dtd.DatatypeValidatorFactoryImpl.fgBaseTypes
+#static java.util.HashMap org.apache.xml.security.algorithms.encryption.EncryptionMethod._algorithmHash

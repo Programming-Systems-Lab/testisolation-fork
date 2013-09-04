@@ -1,0 +1,5 @@
+org.apache.log4j.Category
+java.io.PrintStream
+org.apache.log4j.Level
+org.apache.log4j.spi.RepositorySelector
+
