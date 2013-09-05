@@ -1,8 +1,11 @@
 package edu.washington.cs.dt.tools;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import edu.washington.cs.dt.OneTestExecResult;
@@ -24,6 +27,12 @@ public class BoundedDependentTestFinder {
 	
 	public static boolean only_compare_outcome = true;
 	
+	private Random randDiscarder = null;
+	private int sampleNum = 0;
+	private float sampleRate = 0;
+	
+	private Set<String> safeTests = new HashSet<String>();
+	
 	public BoundedDependentTestFinder(List<String> tests, int k) {
 		Utils.checkNull(tests, "Should not be null");
 		Utils.checkTrue(k >= 1, "Invalid k value: " + k);
@@ -34,6 +43,18 @@ public class BoundedDependentTestFinder {
 	
 	public BoundedDependentTestFinder(String fileName, int k) {
 		this(Files.readWholeNoExp(fileName), k);
+	}
+	
+	public void useRandomDiscarder(int sampleNum, float sampleRate) {
+		Utils.checkTrue(sampleNum > 0, "Invalid value: " + sampleNum);
+		Utils.checkTrue(sampleRate > 0f, "Invalid rate: " + sampleRate);
+		this.randDiscarder = new Random(1);
+		this.sampleNum = sampleNum;
+		this.sampleRate = sampleRate;
+	}
+	
+	public void addSafeTests(Collection<String> tests) {
+		this.safeTests.addAll(tests);
 	}
 	
 	public Set<String> findDependentTests() {
@@ -63,6 +84,17 @@ public class BoundedDependentTestFinder {
 		while(generator.hasNext()) {
 			/*get a list of test to run*/
 			int[] testIndices = generator.getNext();
+			
+			if(this.randDiscarder != null) {
+				if(this.randDiscarder.nextFloat() > this.sampleRate) {
+					//do random sampling
+					continue;
+				}
+				if(count == this.sampleNum) {
+					break;
+				}
+			}
+			
 			List<String> currTests = new ArrayList<String>();
 			for(int index : testIndices) {
 				currTests.add(this.defaultTestList.get(index));
@@ -70,6 +102,10 @@ public class BoundedDependentTestFinder {
 			
 			if(verbose) {
 				Log.logln("Round: " + count + ", tests: " + currTests);
+			}
+			
+			if(this.safeTests.containsAll(currTests)) {
+				continue;
 			}
 			
 			FixedOrderRunner runner = new FixedOrderRunner(currTests);
@@ -127,7 +163,7 @@ public class BoundedDependentTestFinder {
 				if(verbose) {
 					Log.logln("  Diff Test: " + actualTest);
 					Log.logln("    default result: " + defaultTestResult.result);
-					Log.logln("    shuffled result: " + actualTestResult.result);
+					Log.logln("    result in this run: " + actualTestResult.result);
 				}
 			}
 		}

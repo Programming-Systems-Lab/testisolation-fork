@@ -121,7 +121,7 @@ public class DependenceAwareDependentTestFinder {
 				if(verbose) {
 					Log.logln("  Diff Test: " + actualTest);
 					Log.logln("    default result: " + defaultTestResult.result);
-					Log.logln("    shuffled result: " + actualTestResult.result);
+					Log.logln("    result in this run: " + actualTestResult.result);
 				}
 			}
 		}
