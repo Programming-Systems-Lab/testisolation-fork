@@ -665,7 +665,7 @@ The default execution results:
   Test: randoop.xmlsecurity.RandoopTest1.test164: PASS
   Test: randoop.xmlsecurity.RandoopTest1.test165: PASS
 Round: 0, tests: [randoop.xmlsecurity.RandoopTest0.test1]
-Time cost: 5 second
+Time cost: 3 second
 Number of dependent tests: 0
 Round: 1, tests: [randoop.xmlsecurity.RandoopTest0.test2]
 Round: 2, tests: [randoop.xmlsecurity.RandoopTest0.test3]
@@ -696,7 +696,7 @@ Round: 26, tests: [randoop.xmlsecurity.RandoopTest0.test27]
 Round: 27, tests: [randoop.xmlsecurity.RandoopTest0.test28]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test28
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 28, tests: [randoop.xmlsecurity.RandoopTest0.test29]
 Round: 29, tests: [randoop.xmlsecurity.RandoopTest0.test30]
 Round: 30, tests: [randoop.xmlsecurity.RandoopTest0.test31]
@@ -708,24 +708,24 @@ Round: 35, tests: [randoop.xmlsecurity.RandoopTest0.test36]
 Round: 36, tests: [randoop.xmlsecurity.RandoopTest0.test37]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test37
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 37, tests: [randoop.xmlsecurity.RandoopTest0.test38]
 Round: 38, tests: [randoop.xmlsecurity.RandoopTest0.test39]
 Round: 39, tests: [randoop.xmlsecurity.RandoopTest0.test40]
 Round: 40, tests: [randoop.xmlsecurity.RandoopTest0.test41]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test41
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 41, tests: [randoop.xmlsecurity.RandoopTest0.test42]
 Round: 42, tests: [randoop.xmlsecurity.RandoopTest0.test43]
 Round: 43, tests: [randoop.xmlsecurity.RandoopTest0.test44]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test44
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 44, tests: [randoop.xmlsecurity.RandoopTest0.test45]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test45
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 45, tests: [randoop.xmlsecurity.RandoopTest0.test46]
 Round: 46, tests: [randoop.xmlsecurity.RandoopTest0.test47]
 Round: 47, tests: [randoop.xmlsecurity.RandoopTest0.test48]
@@ -744,12 +744,12 @@ Round: 59, tests: [randoop.xmlsecurity.RandoopTest0.test60]
 Round: 60, tests: [randoop.xmlsecurity.RandoopTest0.test61]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test61
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 61, tests: [randoop.xmlsecurity.RandoopTest0.test62]
 Round: 62, tests: [randoop.xmlsecurity.RandoopTest0.test63]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test63
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 63, tests: [randoop.xmlsecurity.RandoopTest0.test64]
 Round: 64, tests: [randoop.xmlsecurity.RandoopTest0.test65]
 Round: 65, tests: [randoop.xmlsecurity.RandoopTest0.test66]
@@ -762,7 +762,7 @@ Round: 71, tests: [randoop.xmlsecurity.RandoopTest0.test72]
 Round: 72, tests: [randoop.xmlsecurity.RandoopTest0.test73]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test73
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 73, tests: [randoop.xmlsecurity.RandoopTest0.test74]
 Round: 74, tests: [randoop.xmlsecurity.RandoopTest0.test75]
 Round: 75, tests: [randoop.xmlsecurity.RandoopTest0.test76]
@@ -770,7 +770,7 @@ Round: 76, tests: [randoop.xmlsecurity.RandoopTest0.test77]
 Round: 77, tests: [randoop.xmlsecurity.RandoopTest0.test78]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test78
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 78, tests: [randoop.xmlsecurity.RandoopTest0.test79]
 Round: 79, tests: [randoop.xmlsecurity.RandoopTest0.test80]
 Round: 80, tests: [randoop.xmlsecurity.RandoopTest0.test81]
@@ -780,7 +780,7 @@ Round: 83, tests: [randoop.xmlsecurity.RandoopTest0.test84]
 Round: 84, tests: [randoop.xmlsecurity.RandoopTest0.test85]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test85
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 85, tests: [randoop.xmlsecurity.RandoopTest0.test86]
 Round: 86, tests: [randoop.xmlsecurity.RandoopTest0.test87]
 Round: 87, tests: [randoop.xmlsecurity.RandoopTest0.test88]
@@ -797,14 +797,14 @@ Round: 97, tests: [randoop.xmlsecurity.RandoopTest0.test98]
 Round: 98, tests: [randoop.xmlsecurity.RandoopTest0.test99]
 Round: 99, tests: [randoop.xmlsecurity.RandoopTest0.test100]
 Round: 100, tests: [randoop.xmlsecurity.RandoopTest0.test101]
-Time cost: 24 second
+Time cost: 25 second
 Number of dependent tests: 10
 Round: 101, tests: [randoop.xmlsecurity.RandoopTest0.test102]
 Round: 102, tests: [randoop.xmlsecurity.RandoopTest0.test103]
 Round: 103, tests: [randoop.xmlsecurity.RandoopTest0.test104]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test104
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 104, tests: [randoop.xmlsecurity.RandoopTest0.test105]
 Round: 105, tests: [randoop.xmlsecurity.RandoopTest0.test106]
 Round: 106, tests: [randoop.xmlsecurity.RandoopTest0.test107]
@@ -812,15 +812,15 @@ Round: 107, tests: [randoop.xmlsecurity.RandoopTest0.test108]
 Round: 108, tests: [randoop.xmlsecurity.RandoopTest0.test109]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test109
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 109, tests: [randoop.xmlsecurity.RandoopTest0.test110]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test110
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 110, tests: [randoop.xmlsecurity.RandoopTest0.test111]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test111
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 111, tests: [randoop.xmlsecurity.RandoopTest0.test112]
 Round: 112, tests: [randoop.xmlsecurity.RandoopTest0.test113]
 Round: 113, tests: [randoop.xmlsecurity.RandoopTest0.test114]
@@ -837,7 +837,7 @@ Round: 123, tests: [randoop.xmlsecurity.RandoopTest0.test124]
 Round: 124, tests: [randoop.xmlsecurity.RandoopTest0.test125]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test125
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 125, tests: [randoop.xmlsecurity.RandoopTest0.test126]
 Round: 126, tests: [randoop.xmlsecurity.RandoopTest0.test127]
 Round: 127, tests: [randoop.xmlsecurity.RandoopTest0.test128]
@@ -849,14 +849,14 @@ Round: 132, tests: [randoop.xmlsecurity.RandoopTest0.test133]
 Round: 133, tests: [randoop.xmlsecurity.RandoopTest0.test134]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test134
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 134, tests: [randoop.xmlsecurity.RandoopTest0.test135]
 Round: 135, tests: [randoop.xmlsecurity.RandoopTest0.test136]
 Round: 136, tests: [randoop.xmlsecurity.RandoopTest0.test137]
 Round: 137, tests: [randoop.xmlsecurity.RandoopTest0.test138]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test138
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 138, tests: [randoop.xmlsecurity.RandoopTest0.test139]
 Round: 139, tests: [randoop.xmlsecurity.RandoopTest0.test140]
 Round: 140, tests: [randoop.xmlsecurity.RandoopTest0.test141]
@@ -865,7 +865,7 @@ Round: 142, tests: [randoop.xmlsecurity.RandoopTest0.test143]
 Round: 143, tests: [randoop.xmlsecurity.RandoopTest0.test144]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test144
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 144, tests: [randoop.xmlsecurity.RandoopTest0.test145]
 Round: 145, tests: [randoop.xmlsecurity.RandoopTest0.test146]
 Round: 146, tests: [randoop.xmlsecurity.RandoopTest0.test147]
@@ -873,11 +873,11 @@ Round: 147, tests: [randoop.xmlsecurity.RandoopTest0.test148]
 Round: 148, tests: [randoop.xmlsecurity.RandoopTest0.test149]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test149
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 149, tests: [randoop.xmlsecurity.RandoopTest0.test150]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test150
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 150, tests: [randoop.xmlsecurity.RandoopTest0.test151]
 Round: 151, tests: [randoop.xmlsecurity.RandoopTest0.test152]
 Round: 152, tests: [randoop.xmlsecurity.RandoopTest0.test153]
@@ -888,12 +888,12 @@ Round: 156, tests: [randoop.xmlsecurity.RandoopTest0.test157]
 Round: 157, tests: [randoop.xmlsecurity.RandoopTest0.test158]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test158
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 158, tests: [randoop.xmlsecurity.RandoopTest0.test159]
 Round: 159, tests: [randoop.xmlsecurity.RandoopTest0.test160]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test160
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 160, tests: [randoop.xmlsecurity.RandoopTest0.test161]
 Round: 161, tests: [randoop.xmlsecurity.RandoopTest0.test162]
 Round: 162, tests: [randoop.xmlsecurity.RandoopTest0.test163]
@@ -905,7 +905,7 @@ Round: 167, tests: [randoop.xmlsecurity.RandoopTest0.test168]
 Round: 168, tests: [randoop.xmlsecurity.RandoopTest0.test169]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test169
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 169, tests: [randoop.xmlsecurity.RandoopTest0.test170]
 Round: 170, tests: [randoop.xmlsecurity.RandoopTest0.test171]
 Round: 171, tests: [randoop.xmlsecurity.RandoopTest0.test172]
@@ -923,43 +923,43 @@ Round: 182, tests: [randoop.xmlsecurity.RandoopTest0.test183]
 Round: 183, tests: [randoop.xmlsecurity.RandoopTest0.test184]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test184
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 184, tests: [randoop.xmlsecurity.RandoopTest0.test185]
 Round: 185, tests: [randoop.xmlsecurity.RandoopTest0.test186]
 Round: 186, tests: [randoop.xmlsecurity.RandoopTest0.test187]
 Round: 187, tests: [randoop.xmlsecurity.RandoopTest0.test188]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test188
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 188, tests: [randoop.xmlsecurity.RandoopTest0.test189]
 Round: 189, tests: [randoop.xmlsecurity.RandoopTest0.test190]
 Round: 190, tests: [randoop.xmlsecurity.RandoopTest0.test191]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test191
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 191, tests: [randoop.xmlsecurity.RandoopTest0.test192]
 Round: 192, tests: [randoop.xmlsecurity.RandoopTest0.test193]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test193
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 193, tests: [randoop.xmlsecurity.RandoopTest0.test194]
 Round: 194, tests: [randoop.xmlsecurity.RandoopTest0.test195]
 Round: 195, tests: [randoop.xmlsecurity.RandoopTest0.test196]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test196
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 196, tests: [randoop.xmlsecurity.RandoopTest0.test197]
 Round: 197, tests: [randoop.xmlsecurity.RandoopTest0.test198]
 Round: 198, tests: [randoop.xmlsecurity.RandoopTest0.test199]
 Round: 199, tests: [randoop.xmlsecurity.RandoopTest0.test200]
 Round: 200, tests: [randoop.xmlsecurity.RandoopTest0.test201]
-Time cost: 42 second
+Time cost: 47 second
 Number of dependent tests: 28
 Round: 201, tests: [randoop.xmlsecurity.RandoopTest0.test202]
 Round: 202, tests: [randoop.xmlsecurity.RandoopTest0.test203]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test203
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 203, tests: [randoop.xmlsecurity.RandoopTest0.test204]
 Round: 204, tests: [randoop.xmlsecurity.RandoopTest0.test205]
 Round: 205, tests: [randoop.xmlsecurity.RandoopTest0.test206]
@@ -975,18 +975,18 @@ Round: 214, tests: [randoop.xmlsecurity.RandoopTest0.test215]
 Round: 215, tests: [randoop.xmlsecurity.RandoopTest0.test216]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test216
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 216, tests: [randoop.xmlsecurity.RandoopTest0.test217]
 Round: 217, tests: [randoop.xmlsecurity.RandoopTest0.test218]
 Round: 218, tests: [randoop.xmlsecurity.RandoopTest0.test219]
 Round: 219, tests: [randoop.xmlsecurity.RandoopTest0.test220]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test220
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 220, tests: [randoop.xmlsecurity.RandoopTest0.test221]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test221
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 221, tests: [randoop.xmlsecurity.RandoopTest0.test222]
 Round: 222, tests: [randoop.xmlsecurity.RandoopTest0.test223]
 Round: 223, tests: [randoop.xmlsecurity.RandoopTest0.test224]
@@ -998,39 +998,39 @@ Round: 228, tests: [randoop.xmlsecurity.RandoopTest0.test229]
 Round: 229, tests: [randoop.xmlsecurity.RandoopTest0.test230]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test230
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 230, tests: [randoop.xmlsecurity.RandoopTest0.test231]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test231
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 231, tests: [randoop.xmlsecurity.RandoopTest0.test232]
 Round: 232, tests: [randoop.xmlsecurity.RandoopTest0.test233]
 Round: 233, tests: [randoop.xmlsecurity.RandoopTest0.test234]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test234
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 234, tests: [randoop.xmlsecurity.RandoopTest0.test235]
 Round: 235, tests: [randoop.xmlsecurity.RandoopTest0.test236]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test236
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 236, tests: [randoop.xmlsecurity.RandoopTest0.test237]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test237
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 237, tests: [randoop.xmlsecurity.RandoopTest0.test238]
 Round: 238, tests: [randoop.xmlsecurity.RandoopTest0.test239]
 Round: 239, tests: [randoop.xmlsecurity.RandoopTest0.test240]
 Round: 240, tests: [randoop.xmlsecurity.RandoopTest0.test241]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test241
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 241, tests: [randoop.xmlsecurity.RandoopTest0.test242]
 Round: 242, tests: [randoop.xmlsecurity.RandoopTest0.test243]
 Round: 243, tests: [randoop.xmlsecurity.RandoopTest0.test244]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test244
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 244, tests: [randoop.xmlsecurity.RandoopTest0.test245]
 Round: 245, tests: [randoop.xmlsecurity.RandoopTest0.test246]
 Round: 246, tests: [randoop.xmlsecurity.RandoopTest0.test247]
@@ -1038,36 +1038,36 @@ Round: 247, tests: [randoop.xmlsecurity.RandoopTest0.test248]
 Round: 248, tests: [randoop.xmlsecurity.RandoopTest0.test249]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test249
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 249, tests: [randoop.xmlsecurity.RandoopTest0.test250]
 Round: 250, tests: [randoop.xmlsecurity.RandoopTest0.test251]
 Round: 251, tests: [randoop.xmlsecurity.RandoopTest0.test252]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test252
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 252, tests: [randoop.xmlsecurity.RandoopTest0.test253]
 Round: 253, tests: [randoop.xmlsecurity.RandoopTest0.test254]
 Round: 254, tests: [randoop.xmlsecurity.RandoopTest0.test255]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test255
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 255, tests: [randoop.xmlsecurity.RandoopTest0.test256]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test256
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 256, tests: [randoop.xmlsecurity.RandoopTest0.test257]
 Round: 257, tests: [randoop.xmlsecurity.RandoopTest0.test258]
 Round: 258, tests: [randoop.xmlsecurity.RandoopTest0.test259]
 Round: 259, tests: [randoop.xmlsecurity.RandoopTest0.test260]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test260
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 260, tests: [randoop.xmlsecurity.RandoopTest0.test261]
 Round: 261, tests: [randoop.xmlsecurity.RandoopTest0.test262]
 Round: 262, tests: [randoop.xmlsecurity.RandoopTest0.test263]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test263
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 263, tests: [randoop.xmlsecurity.RandoopTest0.test264]
 Round: 264, tests: [randoop.xmlsecurity.RandoopTest0.test265]
 Round: 265, tests: [randoop.xmlsecurity.RandoopTest0.test266]
@@ -1079,7 +1079,7 @@ Round: 270, tests: [randoop.xmlsecurity.RandoopTest0.test271]
 Round: 271, tests: [randoop.xmlsecurity.RandoopTest0.test272]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test272
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 272, tests: [randoop.xmlsecurity.RandoopTest0.test273]
 Round: 273, tests: [randoop.xmlsecurity.RandoopTest0.test274]
 Round: 274, tests: [randoop.xmlsecurity.RandoopTest0.test275]
@@ -1087,7 +1087,7 @@ Round: 275, tests: [randoop.xmlsecurity.RandoopTest0.test276]
 Round: 276, tests: [randoop.xmlsecurity.RandoopTest0.test277]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test277
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 277, tests: [randoop.xmlsecurity.RandoopTest0.test278]
 Round: 278, tests: [randoop.xmlsecurity.RandoopTest0.test279]
 Round: 279, tests: [randoop.xmlsecurity.RandoopTest0.test280]
@@ -1098,7 +1098,7 @@ Round: 283, tests: [randoop.xmlsecurity.RandoopTest0.test284]
 Round: 284, tests: [randoop.xmlsecurity.RandoopTest0.test285]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test285
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 285, tests: [randoop.xmlsecurity.RandoopTest0.test286]
 Round: 286, tests: [randoop.xmlsecurity.RandoopTest0.test287]
 Round: 287, tests: [randoop.xmlsecurity.RandoopTest0.test288]
@@ -1107,33 +1107,33 @@ Round: 289, tests: [randoop.xmlsecurity.RandoopTest0.test290]
 Round: 290, tests: [randoop.xmlsecurity.RandoopTest0.test291]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test291
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 291, tests: [randoop.xmlsecurity.RandoopTest0.test292]
 Round: 292, tests: [randoop.xmlsecurity.RandoopTest0.test293]
 Round: 293, tests: [randoop.xmlsecurity.RandoopTest0.test294]
 Round: 294, tests: [randoop.xmlsecurity.RandoopTest0.test295]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test295
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 295, tests: [randoop.xmlsecurity.RandoopTest0.test296]
 Round: 296, tests: [randoop.xmlsecurity.RandoopTest0.test297]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test297
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 297, tests: [randoop.xmlsecurity.RandoopTest0.test298]
 Round: 298, tests: [randoop.xmlsecurity.RandoopTest0.test299]
 Round: 299, tests: [randoop.xmlsecurity.RandoopTest0.test300]
 Round: 300, tests: [randoop.xmlsecurity.RandoopTest0.test301]
-Time cost: 63 second
+Time cost: 69 second
 Number of dependent tests: 51
 Round: 301, tests: [randoop.xmlsecurity.RandoopTest0.test302]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test302
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 302, tests: [randoop.xmlsecurity.RandoopTest0.test303]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test303
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 303, tests: [randoop.xmlsecurity.RandoopTest0.test304]
 Round: 304, tests: [randoop.xmlsecurity.RandoopTest0.test305]
 Round: 305, tests: [randoop.xmlsecurity.RandoopTest0.test306]
@@ -1142,16 +1142,16 @@ Round: 307, tests: [randoop.xmlsecurity.RandoopTest0.test308]
 Round: 308, tests: [randoop.xmlsecurity.RandoopTest0.test309]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test309
     default result: FAILURE
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 309, tests: [randoop.xmlsecurity.RandoopTest0.test310]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test310
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 310, tests: [randoop.xmlsecurity.RandoopTest0.test311]
 Round: 311, tests: [randoop.xmlsecurity.RandoopTest0.test312]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test312
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 312, tests: [randoop.xmlsecurity.RandoopTest0.test313]
 Round: 313, tests: [randoop.xmlsecurity.RandoopTest0.test314]
 Round: 314, tests: [randoop.xmlsecurity.RandoopTest0.test315]
@@ -1161,7 +1161,7 @@ Round: 317, tests: [randoop.xmlsecurity.RandoopTest0.test318]
 Round: 318, tests: [randoop.xmlsecurity.RandoopTest0.test319]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test319
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 319, tests: [randoop.xmlsecurity.RandoopTest0.test320]
 Round: 320, tests: [randoop.xmlsecurity.RandoopTest0.test321]
 Round: 321, tests: [randoop.xmlsecurity.RandoopTest0.test322]
@@ -1172,17 +1172,17 @@ Round: 325, tests: [randoop.xmlsecurity.RandoopTest0.test326]
 Round: 326, tests: [randoop.xmlsecurity.RandoopTest0.test327]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test327
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 327, tests: [randoop.xmlsecurity.RandoopTest0.test328]
 Round: 328, tests: [randoop.xmlsecurity.RandoopTest0.test329]
 Round: 329, tests: [randoop.xmlsecurity.RandoopTest0.test330]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test330
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 330, tests: [randoop.xmlsecurity.RandoopTest0.test331]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test331
     default result: FAILURE
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 331, tests: [randoop.xmlsecurity.RandoopTest0.test332]
 Round: 332, tests: [randoop.xmlsecurity.RandoopTest0.test333]
 Round: 333, tests: [randoop.xmlsecurity.RandoopTest0.test334]
@@ -1196,11 +1196,11 @@ Round: 340, tests: [randoop.xmlsecurity.RandoopTest0.test341]
 Round: 341, tests: [randoop.xmlsecurity.RandoopTest0.test342]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test342
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 342, tests: [randoop.xmlsecurity.RandoopTest0.test343]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test343
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 343, tests: [randoop.xmlsecurity.RandoopTest0.test344]
 Round: 344, tests: [randoop.xmlsecurity.RandoopTest0.test345]
 Round: 345, tests: [randoop.xmlsecurity.RandoopTest0.test346]
@@ -1212,12 +1212,12 @@ Round: 350, tests: [randoop.xmlsecurity.RandoopTest0.test351]
 Round: 351, tests: [randoop.xmlsecurity.RandoopTest0.test352]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test352
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 352, tests: [randoop.xmlsecurity.RandoopTest0.test353]
 Round: 353, tests: [randoop.xmlsecurity.RandoopTest0.test354]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test354
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 354, tests: [randoop.xmlsecurity.RandoopTest0.test355]
 Round: 355, tests: [randoop.xmlsecurity.RandoopTest0.test356]
 Round: 356, tests: [randoop.xmlsecurity.RandoopTest0.test357]
@@ -1229,7 +1229,7 @@ Round: 361, tests: [randoop.xmlsecurity.RandoopTest0.test362]
 Round: 362, tests: [randoop.xmlsecurity.RandoopTest0.test363]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test363
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 363, tests: [randoop.xmlsecurity.RandoopTest0.test364]
 Round: 364, tests: [randoop.xmlsecurity.RandoopTest0.test365]
 Round: 365, tests: [randoop.xmlsecurity.RandoopTest0.test366]
@@ -1237,13 +1237,13 @@ Round: 366, tests: [randoop.xmlsecurity.RandoopTest0.test367]
 Round: 367, tests: [randoop.xmlsecurity.RandoopTest0.test368]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test368
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 368, tests: [randoop.xmlsecurity.RandoopTest0.test369]
 Round: 369, tests: [randoop.xmlsecurity.RandoopTest0.test370]
 Round: 370, tests: [randoop.xmlsecurity.RandoopTest0.test371]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test371
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 371, tests: [randoop.xmlsecurity.RandoopTest0.test372]
 Round: 372, tests: [randoop.xmlsecurity.RandoopTest0.test373]
 Round: 373, tests: [randoop.xmlsecurity.RandoopTest0.test374]
@@ -1252,40 +1252,40 @@ Round: 375, tests: [randoop.xmlsecurity.RandoopTest0.test376]
 Round: 376, tests: [randoop.xmlsecurity.RandoopTest0.test377]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test377
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 377, tests: [randoop.xmlsecurity.RandoopTest0.test378]
 Round: 378, tests: [randoop.xmlsecurity.RandoopTest0.test379]
 Round: 379, tests: [randoop.xmlsecurity.RandoopTest0.test380]
 Round: 380, tests: [randoop.xmlsecurity.RandoopTest0.test381]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test381
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 381, tests: [randoop.xmlsecurity.RandoopTest0.test382]
 Round: 382, tests: [randoop.xmlsecurity.RandoopTest0.test383]
 Round: 383, tests: [randoop.xmlsecurity.RandoopTest0.test384]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test384
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 384, tests: [randoop.xmlsecurity.RandoopTest0.test385]
 Round: 385, tests: [randoop.xmlsecurity.RandoopTest0.test386]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test386
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 386, tests: [randoop.xmlsecurity.RandoopTest0.test387]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test387
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 387, tests: [randoop.xmlsecurity.RandoopTest0.test388]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test388
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 388, tests: [randoop.xmlsecurity.RandoopTest0.test389]
 Round: 389, tests: [randoop.xmlsecurity.RandoopTest0.test390]
 Round: 390, tests: [randoop.xmlsecurity.RandoopTest0.test391]
 Round: 391, tests: [randoop.xmlsecurity.RandoopTest0.test392]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test392
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 392, tests: [randoop.xmlsecurity.RandoopTest0.test393]
 Round: 393, tests: [randoop.xmlsecurity.RandoopTest0.test394]
 Round: 394, tests: [randoop.xmlsecurity.RandoopTest0.test395]
@@ -1293,12 +1293,12 @@ Round: 395, tests: [randoop.xmlsecurity.RandoopTest0.test396]
 Round: 396, tests: [randoop.xmlsecurity.RandoopTest0.test397]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test397
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 397, tests: [randoop.xmlsecurity.RandoopTest0.test398]
 Round: 398, tests: [randoop.xmlsecurity.RandoopTest0.test399]
 Round: 399, tests: [randoop.xmlsecurity.RandoopTest0.test400]
 Round: 400, tests: [randoop.xmlsecurity.RandoopTest0.test401]
-Time cost: 83 second
+Time cost: 93 second
 Number of dependent tests: 75
 Round: 401, tests: [randoop.xmlsecurity.RandoopTest0.test402]
 Round: 402, tests: [randoop.xmlsecurity.RandoopTest0.test403]
@@ -1309,7 +1309,7 @@ Round: 406, tests: [randoop.xmlsecurity.RandoopTest0.test407]
 Round: 407, tests: [randoop.xmlsecurity.RandoopTest0.test408]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test408
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 408, tests: [randoop.xmlsecurity.RandoopTest0.test409]
 Round: 409, tests: [randoop.xmlsecurity.RandoopTest0.test410]
 Round: 410, tests: [randoop.xmlsecurity.RandoopTest0.test411]
@@ -1318,21 +1318,21 @@ Round: 412, tests: [randoop.xmlsecurity.RandoopTest0.test413]
 Round: 413, tests: [randoop.xmlsecurity.RandoopTest0.test414]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test414
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 414, tests: [randoop.xmlsecurity.RandoopTest0.test415]
 Round: 415, tests: [randoop.xmlsecurity.RandoopTest0.test416]
 Round: 416, tests: [randoop.xmlsecurity.RandoopTest0.test417]
 Round: 417, tests: [randoop.xmlsecurity.RandoopTest0.test418]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test418
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 418, tests: [randoop.xmlsecurity.RandoopTest0.test419]
 Round: 419, tests: [randoop.xmlsecurity.RandoopTest0.test420]
 Round: 420, tests: [randoop.xmlsecurity.RandoopTest0.test421]
 Round: 421, tests: [randoop.xmlsecurity.RandoopTest0.test422]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test422
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 422, tests: [randoop.xmlsecurity.RandoopTest0.test423]
 Round: 423, tests: [randoop.xmlsecurity.RandoopTest0.test424]
 Round: 424, tests: [randoop.xmlsecurity.RandoopTest0.test425]
@@ -1349,7 +1349,7 @@ Round: 434, tests: [randoop.xmlsecurity.RandoopTest0.test435]
 Round: 435, tests: [randoop.xmlsecurity.RandoopTest0.test436]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test436
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 436, tests: [randoop.xmlsecurity.RandoopTest0.test437]
 Round: 437, tests: [randoop.xmlsecurity.RandoopTest0.test438]
 Round: 438, tests: [randoop.xmlsecurity.RandoopTest0.test439]
@@ -1366,11 +1366,11 @@ Round: 448, tests: [randoop.xmlsecurity.RandoopTest0.test449]
 Round: 449, tests: [randoop.xmlsecurity.RandoopTest0.test450]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test450
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 450, tests: [randoop.xmlsecurity.RandoopTest0.test451]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test451
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 451, tests: [randoop.xmlsecurity.RandoopTest0.test452]
 Round: 452, tests: [randoop.xmlsecurity.RandoopTest0.test453]
 Round: 453, tests: [randoop.xmlsecurity.RandoopTest0.test454]
@@ -1382,7 +1382,7 @@ Round: 458, tests: [randoop.xmlsecurity.RandoopTest0.test459]
 Round: 459, tests: [randoop.xmlsecurity.RandoopTest0.test460]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test460
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 460, tests: [randoop.xmlsecurity.RandoopTest0.test461]
 Round: 461, tests: [randoop.xmlsecurity.RandoopTest0.test462]
 Round: 462, tests: [randoop.xmlsecurity.RandoopTest0.test463]
@@ -1390,19 +1390,19 @@ Round: 463, tests: [randoop.xmlsecurity.RandoopTest0.test464]
 Round: 464, tests: [randoop.xmlsecurity.RandoopTest0.test465]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test465
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 465, tests: [randoop.xmlsecurity.RandoopTest0.test466]
 Round: 466, tests: [randoop.xmlsecurity.RandoopTest0.test467]
 Round: 467, tests: [randoop.xmlsecurity.RandoopTest0.test468]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test468
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 468, tests: [randoop.xmlsecurity.RandoopTest0.test469]
 Round: 469, tests: [randoop.xmlsecurity.RandoopTest0.test470]
 Round: 470, tests: [randoop.xmlsecurity.RandoopTest0.test471]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test471
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 471, tests: [randoop.xmlsecurity.RandoopTest0.test472]
 Round: 472, tests: [randoop.xmlsecurity.RandoopTest0.test473]
 Round: 473, tests: [randoop.xmlsecurity.RandoopTest0.test474]
@@ -1420,17 +1420,17 @@ Round: 484, tests: [randoop.xmlsecurity.RandoopTest0.test485]
 Round: 485, tests: [randoop.xmlsecurity.RandoopTest0.test486]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test486
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 486, tests: [randoop.xmlsecurity.RandoopTest0.test487]
 Round: 487, tests: [randoop.xmlsecurity.RandoopTest0.test488]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test488
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 488, tests: [randoop.xmlsecurity.RandoopTest0.test489]
 Round: 489, tests: [randoop.xmlsecurity.RandoopTest0.test490]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test490
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 490, tests: [randoop.xmlsecurity.RandoopTest0.test491]
 Round: 491, tests: [randoop.xmlsecurity.RandoopTest0.test492]
 Round: 492, tests: [randoop.xmlsecurity.RandoopTest0.test493]
@@ -1440,20 +1440,20 @@ Round: 495, tests: [randoop.xmlsecurity.RandoopTest0.test496]
 Round: 496, tests: [randoop.xmlsecurity.RandoopTest0.test497]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test497
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 497, tests: [randoop.xmlsecurity.RandoopTest0.test498]
 Round: 498, tests: [randoop.xmlsecurity.RandoopTest0.test499]
 Round: 499, tests: [randoop.xmlsecurity.RandoopTest0.test500]
   Diff Test: randoop.xmlsecurity.RandoopTest0.test500
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 500, tests: [randoop.xmlsecurity.RandoopTest1.test1]
-Time cost: 102 second
+Time cost: 114 second
 Number of dependent tests: 91
 Round: 501, tests: [randoop.xmlsecurity.RandoopTest1.test2]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test2
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 502, tests: [randoop.xmlsecurity.RandoopTest1.test3]
 Round: 503, tests: [randoop.xmlsecurity.RandoopTest1.test4]
 Round: 504, tests: [randoop.xmlsecurity.RandoopTest1.test5]
@@ -1461,33 +1461,33 @@ Round: 505, tests: [randoop.xmlsecurity.RandoopTest1.test6]
 Round: 506, tests: [randoop.xmlsecurity.RandoopTest1.test7]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test7
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 507, tests: [randoop.xmlsecurity.RandoopTest1.test8]
 Round: 508, tests: [randoop.xmlsecurity.RandoopTest1.test9]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test9
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 509, tests: [randoop.xmlsecurity.RandoopTest1.test10]
 Round: 510, tests: [randoop.xmlsecurity.RandoopTest1.test11]
 Round: 511, tests: [randoop.xmlsecurity.RandoopTest1.test12]
 Round: 512, tests: [randoop.xmlsecurity.RandoopTest1.test13]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test13
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 513, tests: [randoop.xmlsecurity.RandoopTest1.test14]
 Round: 514, tests: [randoop.xmlsecurity.RandoopTest1.test15]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test15
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 515, tests: [randoop.xmlsecurity.RandoopTest1.test16]
 Round: 516, tests: [randoop.xmlsecurity.RandoopTest1.test17]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test17
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 517, tests: [randoop.xmlsecurity.RandoopTest1.test18]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test18
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 518, tests: [randoop.xmlsecurity.RandoopTest1.test19]
 Round: 519, tests: [randoop.xmlsecurity.RandoopTest1.test20]
 Round: 520, tests: [randoop.xmlsecurity.RandoopTest1.test21]
@@ -1495,19 +1495,19 @@ Round: 521, tests: [randoop.xmlsecurity.RandoopTest1.test22]
 Round: 522, tests: [randoop.xmlsecurity.RandoopTest1.test23]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test23
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 523, tests: [randoop.xmlsecurity.RandoopTest1.test24]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test24
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 524, tests: [randoop.xmlsecurity.RandoopTest1.test25]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test25
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 525, tests: [randoop.xmlsecurity.RandoopTest1.test26]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test26
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 526, tests: [randoop.xmlsecurity.RandoopTest1.test27]
 Round: 527, tests: [randoop.xmlsecurity.RandoopTest1.test28]
 Round: 528, tests: [randoop.xmlsecurity.RandoopTest1.test29]
@@ -1515,7 +1515,7 @@ Round: 529, tests: [randoop.xmlsecurity.RandoopTest1.test30]
 Round: 530, tests: [randoop.xmlsecurity.RandoopTest1.test31]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test31
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 531, tests: [randoop.xmlsecurity.RandoopTest1.test32]
 Round: 532, tests: [randoop.xmlsecurity.RandoopTest1.test33]
 Round: 533, tests: [randoop.xmlsecurity.RandoopTest1.test34]
@@ -1531,11 +1531,11 @@ Round: 542, tests: [randoop.xmlsecurity.RandoopTest1.test43]
 Round: 543, tests: [randoop.xmlsecurity.RandoopTest1.test44]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test44
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 544, tests: [randoop.xmlsecurity.RandoopTest1.test45]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test45
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 545, tests: [randoop.xmlsecurity.RandoopTest1.test46]
 Round: 546, tests: [randoop.xmlsecurity.RandoopTest1.test47]
 Round: 547, tests: [randoop.xmlsecurity.RandoopTest1.test48]
@@ -1543,11 +1543,11 @@ Round: 548, tests: [randoop.xmlsecurity.RandoopTest1.test49]
 Round: 549, tests: [randoop.xmlsecurity.RandoopTest1.test50]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test50
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 550, tests: [randoop.xmlsecurity.RandoopTest1.test51]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test51
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 551, tests: [randoop.xmlsecurity.RandoopTest1.test52]
 Round: 552, tests: [randoop.xmlsecurity.RandoopTest1.test53]
 Round: 553, tests: [randoop.xmlsecurity.RandoopTest1.test54]
@@ -1573,29 +1573,29 @@ Round: 572, tests: [randoop.xmlsecurity.RandoopTest1.test73]
 Round: 573, tests: [randoop.xmlsecurity.RandoopTest1.test74]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test74
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 574, tests: [randoop.xmlsecurity.RandoopTest1.test75]
 Round: 575, tests: [randoop.xmlsecurity.RandoopTest1.test76]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test76
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 576, tests: [randoop.xmlsecurity.RandoopTest1.test77]
 Round: 577, tests: [randoop.xmlsecurity.RandoopTest1.test78]
 Round: 578, tests: [randoop.xmlsecurity.RandoopTest1.test79]
 Round: 579, tests: [randoop.xmlsecurity.RandoopTest1.test80]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test80
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 580, tests: [randoop.xmlsecurity.RandoopTest1.test81]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test81
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 581, tests: [randoop.xmlsecurity.RandoopTest1.test82]
 Round: 582, tests: [randoop.xmlsecurity.RandoopTest1.test83]
 Round: 583, tests: [randoop.xmlsecurity.RandoopTest1.test84]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test84
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 584, tests: [randoop.xmlsecurity.RandoopTest1.test85]
 Round: 585, tests: [randoop.xmlsecurity.RandoopTest1.test86]
 Round: 586, tests: [randoop.xmlsecurity.RandoopTest1.test87]
@@ -1611,12 +1611,12 @@ Round: 595, tests: [randoop.xmlsecurity.RandoopTest1.test96]
 Round: 596, tests: [randoop.xmlsecurity.RandoopTest1.test97]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test97
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 597, tests: [randoop.xmlsecurity.RandoopTest1.test98]
 Round: 598, tests: [randoop.xmlsecurity.RandoopTest1.test99]
 Round: 599, tests: [randoop.xmlsecurity.RandoopTest1.test100]
 Round: 600, tests: [randoop.xmlsecurity.RandoopTest1.test101]
-Time cost: 121 second
+Time cost: 136 second
 Number of dependent tests: 113
 Round: 601, tests: [randoop.xmlsecurity.RandoopTest1.test102]
 Round: 602, tests: [randoop.xmlsecurity.RandoopTest1.test103]
@@ -1629,16 +1629,16 @@ Round: 608, tests: [randoop.xmlsecurity.RandoopTest1.test109]
 Round: 609, tests: [randoop.xmlsecurity.RandoopTest1.test110]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test110
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 610, tests: [randoop.xmlsecurity.RandoopTest1.test111]
 Round: 611, tests: [randoop.xmlsecurity.RandoopTest1.test112]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test112
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 612, tests: [randoop.xmlsecurity.RandoopTest1.test113]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test113
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 613, tests: [randoop.xmlsecurity.RandoopTest1.test114]
 Round: 614, tests: [randoop.xmlsecurity.RandoopTest1.test115]
 Round: 615, tests: [randoop.xmlsecurity.RandoopTest1.test116]
@@ -1650,12 +1650,12 @@ Round: 620, tests: [randoop.xmlsecurity.RandoopTest1.test121]
 Round: 621, tests: [randoop.xmlsecurity.RandoopTest1.test122]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test122
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 622, tests: [randoop.xmlsecurity.RandoopTest1.test123]
 Round: 623, tests: [randoop.xmlsecurity.RandoopTest1.test124]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test124
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 624, tests: [randoop.xmlsecurity.RandoopTest1.test125]
 Round: 625, tests: [randoop.xmlsecurity.RandoopTest1.test126]
 Round: 626, tests: [randoop.xmlsecurity.RandoopTest1.test127]
@@ -1663,22 +1663,22 @@ Round: 627, tests: [randoop.xmlsecurity.RandoopTest1.test128]
 Round: 628, tests: [randoop.xmlsecurity.RandoopTest1.test129]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test129
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 629, tests: [randoop.xmlsecurity.RandoopTest1.test130]
 Round: 630, tests: [randoop.xmlsecurity.RandoopTest1.test131]
 Round: 631, tests: [randoop.xmlsecurity.RandoopTest1.test132]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test132
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 632, tests: [randoop.xmlsecurity.RandoopTest1.test133]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test133
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 633, tests: [randoop.xmlsecurity.RandoopTest1.test134]
 Round: 634, tests: [randoop.xmlsecurity.RandoopTest1.test135]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test135
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 635, tests: [randoop.xmlsecurity.RandoopTest1.test136]
 Round: 636, tests: [randoop.xmlsecurity.RandoopTest1.test137]
 Round: 637, tests: [randoop.xmlsecurity.RandoopTest1.test138]
@@ -1687,22 +1687,22 @@ Round: 639, tests: [randoop.xmlsecurity.RandoopTest1.test140]
 Round: 640, tests: [randoop.xmlsecurity.RandoopTest1.test141]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test141
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 641, tests: [randoop.xmlsecurity.RandoopTest1.test142]
 Round: 642, tests: [randoop.xmlsecurity.RandoopTest1.test143]
 Round: 643, tests: [randoop.xmlsecurity.RandoopTest1.test144]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test144
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 644, tests: [randoop.xmlsecurity.RandoopTest1.test145]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test145
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 645, tests: [randoop.xmlsecurity.RandoopTest1.test146]
 Round: 646, tests: [randoop.xmlsecurity.RandoopTest1.test147]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test147
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 647, tests: [randoop.xmlsecurity.RandoopTest1.test148]
 Round: 648, tests: [randoop.xmlsecurity.RandoopTest1.test149]
 Round: 649, tests: [randoop.xmlsecurity.RandoopTest1.test150]
@@ -1720,17 +1720,17 @@ Round: 660, tests: [randoop.xmlsecurity.RandoopTest1.test161]
 Round: 661, tests: [randoop.xmlsecurity.RandoopTest1.test162]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test162
     default result: PASS
-    shuffled result: ERROR
+    result in this run: ERROR
 Round: 662, tests: [randoop.xmlsecurity.RandoopTest1.test163]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test163
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 663, tests: [randoop.xmlsecurity.RandoopTest1.test164]
   Diff Test: randoop.xmlsecurity.RandoopTest1.test164
     default result: PASS
-    shuffled result: FAILURE
+    result in this run: FAILURE
 Round: 664, tests: [randoop.xmlsecurity.RandoopTest1.test165]
-End, total time cost: 133 seconds
+End, total time cost: 150 seconds
 Number of dependent tests: 129
     randoop.xmlsecurity.RandoopTest0.test28
     randoop.xmlsecurity.RandoopTest0.test37
