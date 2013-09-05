@@ -1,0 +1,1 @@
+private static org.apache.log4j.spi.RepositorySelector org.apache.log4j.LogManager.repositorySelector
