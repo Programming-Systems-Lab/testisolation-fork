@@ -46,10 +46,38 @@ public class TestBoundedDependentTestFinder extends TestCase {
 				"./bounded_1_jodatime_manualtxt", 1);
 	}
 	
+	public void testJodatime_manual_sample_2() {
+		runTestsWithSampling("./bounded_2_jodatime_sample_2.txt",
+				TestRandomizedDependentTestFinder.jodatimeFile_manual, 2,
+				1000, 0.03f);
+	}
+	
+	public void testJodatime_auto_sample_2() {
+		runTestsWithSampling("./bounded_2_jodatime_auto_sample_2.txt",
+				TestRandomizedDependentTestFinder.jodatimeFile_auto, 2,
+				1000, 0.03f);
+	}
+	
+	
+	//run
+	public void testSynoptic_manual_sampled() {
+		this.runTests(TestRandomizedDependentTestFinder.synopticFile_manual, 
+				"./bounded_1_synoptic_manualtxt", 1);
+	}
+	
+	
+	
 	//for automated tests
 	public void testXMLSecurity_auto() {
 		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_auto, 
 				"./bounded_1_xmlsecurity_auto.txt", 1);
+	}
+	
+	//run
+	public void testXMLSecurity_auto_sample_2() {
+		this.runTestsWithSampling("./bounded_2_xmlsecurity_sampled_auto.txt",
+				TestRandomizedDependentTestFinder.xmlSecurityFile_auto, 
+				 2, 1000, 0.03f);
 	}
 	
 	public void testCrystal_auto() {
@@ -57,18 +85,46 @@ public class TestBoundedDependentTestFinder extends TestCase {
 				"./bounded_1_crystal_auto.txt", 1);
 	}
 	
+	public void testCrystal_auto_sample_2() {
+		this.runTestsWithSampling("./bounded_2_crystal_sampled_auto.txt",
+				TestRandomizedDependentTestFinder.crystalFile_auto, 
+				 2, 1000, 0.03f);
+	}
+	
 	public void testJodatime_auto() {
 		this.runTests(TestRandomizedDependentTestFinder.jodatimeFile_auto, 
 				"./bounded_1_jodattime_auto.txt", 1);
 	}
 	
-	
+	//run
+	public void testSynoptic_auto_1() {
+		this.runTests(TestRandomizedDependentTestFinder.synopticFile_auto,
+				"./bounded_1_synoptic_auto.txt", 1);
+	}
+	public void testSynoptic_auto_sampled_2() {
+		this.runTestsWithSampling("./bounded_2_synoptic_sampled_auto.txt",
+				TestRandomizedDependentTestFinder.synopticFile_auto,
+				 2, 1000, 0.03f);
+	}
 	
 	public void runTests(String testFile, String fileName, int k) {
 		Log.logConfig(fileName);
 		BoundedDependentTestFinder.verbose = true;
 		BoundedDependentTestFinder boundedDTFinder
 		    = new BoundedDependentTestFinder(testFile, k);
+		Set<String> dts = boundedDTFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	public void runTestsWithSampling(String logFileName, String testFile, int k,
+			int sampleSize, float rate) {
+		Log.logConfig(logFileName);
+		BoundedDependentTestFinder.verbose = true;
+		BoundedDependentTestFinder boundedDTFinder
+		    = new BoundedDependentTestFinder(testFile, k);
+		boundedDTFinder.useRandomDiscarder(sampleSize, rate);
 		Set<String> dts = boundedDTFinder.findDependentTests();
 		for(String t : dts) {
 			System.out.println("    " + t);
