@@ -28,10 +28,10 @@ Synoptic & \synoptictests & 1 &1  & 1 & 0 &1 & 0 & 1 &  7 & 67 & 760& 25 & 3372&
 \multicolumn{16}{|l|}{ }\\
 \multicolumn{16}{|l|}{\textbf{Automatically-generated unit tests} }\\
 \hline
-JodaTime & \jodatimeautotests & 586 &815& 966 & 534 & \unknown&& & 131  & 1139 & 9000 & 448 & 2$\times$$10^6$*& &  \\
-XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 & \unknown&  &  & 50 & 430 & 4174 & 133 & 1$\times$$10^5$* & & \\
+JodaTime & \jodatimeautotests & 586 &815& 966 & 534 & \unknown&361 & \unknown & 131  & 1139 & 9000 & 448 & 2$\times$$10^6$*& 404 &  6$\times$$10^5$\\
+XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 & \unknown& 64  &  & 50 & 430 & 4174 & 133 & 1$\times$$10^5$* & 92 &  \\
 Crystal & \crystalautotests & 159 & 162 & 164 & 55 & \unknown& & & 103 & 949& 9436  & 2477 & 8$\times$$10^6$*& & \\
-Synoptic & \synopticautotests & 3 & 7 & 10 &2& \unknown& &  &81& 770  & 6311 & 454 & 1$\times$$10^6$*& & \\
+Synoptic & \synopticautotests & 3 & 7 & 10 &2& \unknown& 2 & \unknown  &81& 770  & 6311 & 454 & 1$\times$$10^6$*& 454 & 2$\times$$10^4$\\
 \hline
 \textbf{Total} & \totalautotests &915&1155& 1311 & 720& \unknown & & &365 &3288 & 28921 & 3512 & 1.2$\times$$10^7$*& & \\
 \hline
@@ -45,7 +45,8 @@ $k$-bounded algorithm, respectively.
 When evaluating the randomized algorithm, we use $numtrials$ =
 $\smalltrialnum, \mediumtrialnum, \trialnum$ (Figure~\ref{fig:randalgorithm}).
 ``\unknown'' means the technique does not scale to the test
-suite, and thus the exact number of dependent tests is unknown.
+suite (i.e., requiring more than 1 day to execute all test permutations),
+and thus the exact number of dependent tests is unknown.
 Column ``Analysis Costs (second)''
 shows the time cost of each algorithm.
 A starred number represents an estimated
