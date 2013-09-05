@@ -121,11 +121,11 @@ A total number of 29 dependent tests are detected
 from all human-written test suites, and 1311
 dependent tests are detected from all automatically-generated
 test suites. The percentage of dependent tests
-in automatically-generated test suites is significantly
-higher than in human-written test suites. We identified
+in the automatically-generated test suites is significantly
+higher than in the human-written test suites. We identified
 two possible reasons: first, developers usually have deep
-knowledge the intended purpose of a program when writing tests
-for it. Such expertise helps them to build relatively well-structured and coherent
+knowledge about the intended purpose of a program when writing tests
+for it. Such expertise helps them build relatively well-structured and coherent
 tests, e.g., tests that carefully initialize and destroy the
 shared objects they may use. Second, 
  it is challenging for automated test generation tools to understand
@@ -146,20 +146,20 @@ other tests. This could further make a test's result depend on another.
 The randomized algorithm is surpringly effective in
 detecting dependent tests. After running \trialnum times,
 it identifies \textit{more} dependent tests than the other
-two algorithms can find. For human-written
-tests, the randomized algorithm detects 2 more dependent
-tests in the JodaTime program. These two tests only
+two algorithms can find. For the human-written
+test suites, the randomized algorithm detects 2 more dependent
+tests in JodaTime. These two tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and dependence-aware $k$-bounded
 algorithm fail to detect these two tests, because
-they can not scale to $k$=3 for the
-JodaTime program. Related, the randomized algorithm
+they can not scale to $k$=3 for 
+JodaTime. Related, the randomized algorithm
 detects significantly more dependent
 tests in the automatically-generated test suites, for
 two reasons. First,
-both the exhaustive and dependence $k$-bounded
-failed to scale to $k$=2 for 3 automatically-generated test suites;
-and second, some detected dependent tests requires executing more than 2 tests
+both the exhaustive and dependence-aware $k$-bounded
+failed to scale to $k$=2 for all automatically-generated test suites;
+and second, some detected dependent tests require executing more than 2 tests
 to manifest.
 
 %Compared to the randomized algorithm, On the other hand,
@@ -168,19 +168,20 @@ to manifest.
 \label{sec:performance}
 
 The time cost of the randomized algorithm 
-varies across different subject programs, and
-is proportional to number of runs. Overall, the
-time cost is acceptable for practical use.
+is proportional to number of runs, and
+varies across different subject programs.
+ Overall, the time cost is acceptable for practical use.
 For example, the randomized algorithm took around 1.5 hours
 to finish 1000 runs,  for the largest human-written test
 suite (\jodatimetests tests in JodaTime).
  
 The time cost of running the exhaustive $k$-bounded algorithm
 is prohibitive. The exhaustive algorithm failed to
-scale to one human-written test suite and three automatically-generated
+scale to one human-written test suite and all four automatically-generated
 test suites when $k$=2, and failed to scale to all test suites
-when $k$=3. The primary reason is due to the extremely large
-number of all possible tuples. For example, running all JodaTime's \jodatimetests human-written
+when $k$=3. The primary reason is due to the large
+number of all possible test permutations. For example, running all
+JodaTime's \jodatimetests human-written
 unit tests when $k$=2 requires running 15,011,750 test pairs, costing
 approximately 1400 hours (58 days). 
 
@@ -189,10 +190,10 @@ the efficiency of \todo{more results here.}
 
 Table~\ref{tab:results} gives an estimated time cost for each
 test suite that an algorithm failed to scale to. For each test suite,
-we randomly chose 1000 samples from all possible
-test tuples, executed them, and measured the time cost. Then,
-we calcuated the average time cost of each sample, and multiples
-the average cost with the number of all samples.
+we randomly chose 1000 permutations from all
+test permutations, executed them, and measured the time cost. Then,
+we calcuate the average time cost of running one permutation, and multiple
+the average cost with the number of all permutations.
 
 
 
@@ -200,28 +201,28 @@ the average cost with the number of all samples.
 \label{sec:algcomparison}
 
 We next discuss the tradeoffs of choosing different detection
-algorithms. Although the randomized algorithm
+algorithms in \ourtool. Although the randomized algorithm
 detects the most dependent tests in our subject programs,
 it has several shortcomings that must be considered
-in practice. First, there is no guarantee of
-the randomized algorithm's results. A randomized
+in practice. First, there is no guarantee of how many
+dependent tests that the randomized algorithm can detect. A randomized
 algorithm might even produce different results across runs,
 and makes reproducing a dependent test harder.
 Second, more importantly, there is no stop criteria
 of using the randomized algorithm in shuffling and
-running the test suite. Thus, it is hard for users
+running the test suite. Thus, it might be hard for users
 to know how many runs would be enough for a test suite.
 Third, when a dependent test is identified, users
 may need to inspect every test that is executed
 before the dependent test, and isolate  a minimized
 subsequence of tests (either
-manually or using an assisting tool) to understand the dependence root cause.
+manually or using an assisting tool~\cite{Zeller:2002}) to understand the dependence root cause.
 
-By contrast, both exhaustive $k$-bounded and dependence-aware
+By contrast, both the exhaustive $k$-bounded and the dependence-aware
 $k$-bounded algorithms do not suffer from the above shortcomings.
-One major factor that may prevent them being applied to a
+However, the major factor that prevent them being applied to a
 large test suite might be the time cost for systematically
-exploring all possible test tuples.
+exploring all possible test permutations.
 
 
 %\emph{three} tests to manifest. While these are easy to reproduce, we
