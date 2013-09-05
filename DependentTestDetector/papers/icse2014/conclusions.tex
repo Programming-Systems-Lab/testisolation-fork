@@ -4,10 +4,10 @@
 Test independence is broadly assumed but rarely addressed, and
 test dependence has largely been ignored in previous
 research on software testing. To understand
-dependent tests, we provide a precise formalization of the test dependence problem,
-and describe one of the first studies on real-world dependent
-tests from popular software issue tracking systems. Guided by
-this study, to detect dependent tests, we design
+dependent tests, we describe one of the first studies on
+real-world dependent tests, and
+provide a precise formalization of the dependent test detection
+problem. To detect dependent tests, we design
 and implement three algorithms to identify manifest test dependence
 in a test suite. Our empirical evaluation reveals
 previously-unknown dependent tests in every subject program
@@ -20,8 +20,11 @@ in the introduction. First, test dependence \textit{does}
 arise in practice, from both human-written test suites and automatically-generated
 test suites. Second, dependent tests can have
 non-trivial negative repercussions, even though the
-extent is unknown. Third, we speculate
-\todo{need to why ppl did not notice this?} that .. Fourth,
+extent is unknown. Third, we speculate that this
+problem is not thoroughly examined before due to the
+lack of empirical evidence, a rigirous problem formulation,
+and detection algorithms.
+Fourth,
 detecting manifest dependent tests is a NP-complete problem,
 for which efficient algorithms are unlikely to exist. However,
 in practice, a simple algorithm like the randomized algorithm

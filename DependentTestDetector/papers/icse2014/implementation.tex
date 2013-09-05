@@ -4,15 +4,14 @@
 
 We implemented our three dependent test detection algorithms in
 a prototype tool, called \ourtool. \ourtool
-supports JUnit 3.x/4.x tests, and is fully-automated.
+supports JUnit 3.x/4.x tests. %, and is fully-automated.
 
 \ourtool launches a fresh JVM when
-executing a shuffled test sutie or every
-$k$-tuple of tests and clears external state such
+executing a test permutation and clears external state such
 as files, ensuring there is no interaction between
 different runs. When comparing the observed result of
-a test in an execution order with its default result,
-\ourtool considers JUnit test results to be the same when the
+a test in a permutation with its default result,
+\ourtool considers two JUnit test results to be the same when the
 tests either both pass, or exhibit exactly the same exception
 or assertion violation.
 
@@ -26,7 +25,7 @@ or assertion violation.
 
 To implement the dependence-aware $k$-bounded algorithm (Section~\ref{sec:advalgorithm}),
 \ourtool uses ASM~\cite{asm} to perform load-time bytecode
-instrumentation. Specifically, it inserts code to monitor each
+instrumentation. Specifically, \ourtool inserts code to monitor each
 field access (including read and write) by recording the
 object ID and the field name. Each test produces a trace file after being
 executed on a \ourtool-instrumented program.
@@ -34,15 +33,18 @@ executed on a \ourtool-instrumented program.
 %\ourtool also monitors array accesses by recording
 %both the array object ID and the array index being accessed.
 \ourtool uses two optimizations to reduce the
-instrumentation overhead. First, accesses to objects
-created by the test itself and disposed
-after test execution, are not instrumented; since such 
-objects are not accessible to other tests and thus can not
+instrumentation overhead. First, accesses to local objects
+only accessible to a test itself are not instrumented,
+%created by the test itself and disposed
+%after test execution, 
+%since such 
+%objects are not accessible to other tests and thus
+since such objects can not
 be the cause of test dependence. Second,
 \ourtool does not instrument JDK classes. It uses the side-effect
 annotations provided by Javarifier~\cite{QuinonezTE2008} to 
 determine whether an object will be mutated or not.
-Specifically, if a test uses an object as a mutable reference
+If a test uses an object as a mutable reference
 in a Javarifier-annotated JDK call, \ourtool treats the test
 has a write effect to the object.
 \ourtool also instruments

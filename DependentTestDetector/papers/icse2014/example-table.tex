@@ -38,18 +38,18 @@ Synoptic & \synopticautotests & 3 & 7 & 10 &2& \unknown& &  &81& 770  & 6311 & 4
 \end{tabular}
 \caption{Experimental results. Column ``\#Tests'' shows the total number
 of tests, taken from Table~\ref{tab:subjects}. Column ``\#Detected Dependent Tests''
-shows the number of detected dependent tests in each subject program.
+shows the number of detected dependent tests in each test suite.
 Columns ``Randomized'', ``Exhaustive'' and ``Dependence-Aware'' show the results
 of applying the randomized algorithm, the exhaustive $k$-bounded algorithm and the dependence-aware
-$k$-bounded algorithms, respectively. 
+$k$-bounded algorithm, respectively. 
 When evaluating the randomized algorithm, we use $numtrials$ =
-$\smalltrialnum, \mediumtrialnum, \trialnum$ in the algorithm (Figure~\ref{fig:randalgorithm}).
+$\smalltrialnum, \mediumtrialnum, \trialnum$ (Figure~\ref{fig:randalgorithm}).
 ``\unknown'' means the technique does not scale to the test
-suite. Thus, the exact number of dependent tests is unknown.
+suite, and thus the exact number of dependent tests is unknown.
 Column ``Analysis Costs (second)''
-shows the time cost (in seconds) of each algorithm under
-different settings. A starred number represents an estimated
-time cost. The estimation methodology is described in Section~\ref{sec:performance}.
+shows the time cost of each algorithm.
+A starred number represents an estimated
+time cost for the test suite. The estimation methodology is described in Section~\ref{sec:performance}.
 }
 \label{tab:results}
 \end{table*}

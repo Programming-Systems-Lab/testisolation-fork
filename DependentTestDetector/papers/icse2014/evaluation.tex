@@ -18,13 +18,18 @@
 \input{subject-table}
 \input{example-table}
 
-We evaluated two aspects of \ourtool's
-effectiveness, answering the following
-research questions:
+%We evaluated two aspects of \ourtool's
+%effectiveness, answering the following
+%research questions:
+Our evaluation answers the following research questions:
+
+\vspace{-1mm}
 
 \begin{enumerate}
-\item How many dependent tests can \ourtool detect in
-real-world programs by each detection algorithm (Section~\ref{sec:detectedtests})?
+\item How many dependent tests can each detection
+algorithm detect in
+real-world programs (Section~\ref{sec:detectedtests})?
+
 \item How long does each algorithm in \ourtool take to detect dependent
 tests (Section~\ref{sec:performance})?
 
@@ -38,7 +43,7 @@ dependent tests (Section~\ref{sec:algcomparison})?
 \subsection{Subject Programs}
 
 
-Table~\ref{tab:subjects} summarizes the programs and
+Table~\ref{tab:subjects} lists the programs and
 tests used in our evaluation.
 
 JodaTime~\cite{jodatime} is an open source
@@ -67,31 +72,33 @@ shown in Table~\ref{tab:subjects}.
 
 \subsection{Evaluation Procedure}
 
-We use \ourtool to detect dependent
-tests among both the human-written test suite 
+We evaluate each algorithm 
+on both the human-written test suite 
 and the automatically-generated test suite
 for each subject program in Table~\ref{tab:subjects}.
 
-We run the three algorithms proposed
-in Section~\ref{sec:detecting} on both
-human-written and automatically-generated test suites
-of each subject program.
+%We run the three algorithms proposed
+%in Section~\ref{sec:detecting} on both
+%human-written and automatically-generated test suites
+%of each subject program.
 
 We run the randomzied algorithm \smalltrialnum, \mediumtrialnum,
 and \trialnum times on each test suite, and record
 the total number of detected dependent tests and time cost
 for each setting. The choice of \trialnum times is based
-on the practical guidelines of using randomized algorithm
+on the a practical guideline of using randomized algorithm
 in software engineering, as summarized in~\cite{Arcuri:2011}.
 %
 For the exhausitive $k$-bounded algorithm
-and dependence-aware $k$-bounded algorithm,
+and the dependence-aware $k$-bounded algorithm,
 we use isolated execution ($k = 1$), and
 pairwise execution ($k = 2$). The choice of $k$ is
 based on the results of our empirical
 study (Section~\ref{sec:study}) that a small $k$
 can find most realistic test dependences.
 
+\todo{say a few sentences about the manual part, such as
+listing the immutable fields. say the approximate manual time used here.}
 
 Each output dependent test is examined manually to make
 sure the test dependence is not caused by non-deterministic
@@ -104,7 +111,7 @@ running Windows 7.
 \subsection{Results}
 
 Table~\ref{tab:results} summarizes the number of detected
-dependent tests and the cost by each algorithm
+dependent tests and the time cost by each algorithm
 in \ourtool.
 
 \subsubsection{Detected Dependent Tests}
@@ -247,12 +254,13 @@ this report issue\footnote{\url{https://code.google.com/p/crystalvc/issues/ deta
 The Synoptic developers merged two related tests to fix
 the dependent tests.
 
-After receiving our reported dependent tests in XML-Security,
-the SIR~\cite{sir} maintainers 
-confirmed that tests should \textit{always} ``stand alone''
+%After receiving our reported dependent tests in XML-Security,
+The SIR~\cite{sir} maintainers confirmed our reported dependent
+tests in XML-Security. They highlighted the practice
+that tests should \textit{always} ``stand alone''
 without dependency on other tests, and treated that as
-``test engineering 101''. They are working on fixing the reported
-test dependence.
+``test engineering 101''. They also accepted our suggested
+patch to fix the dependent tests.
 
 \subsubsection{Threats to Validity}
 
@@ -263,7 +271,7 @@ representative enough. Thus, we can not claim the results
 can be generalized to an arbitrary program.
 Second, in this evaluation, we focus specifically on
 the {manifest dependence} between \textit{unit tests}.
-It is unclear how test dependence will arise
+We did not investigate possible test dependence that may arise
 in other types of tests, such as integration tests
 or system tests.
 Third, due to the computational complexity of the general dependent test
@@ -280,7 +288,8 @@ tests exist in a test suite and how many percentages of dependence tests
 
 
 We have three chief findings: \textbf{(1)}
-Dependent tests are not obvious to be identified
+Dependent tests do exist in real-world test suites.
+They may not be obvious to be identified
 unless been explicitly searched for.
 An automatically-generated test suite can contain
 substantially more dependent tests than a human-written
@@ -291,7 +300,7 @@ dependent tests in our subject programs reveal weakness
 in a test suite rather than defect in the tested code.
 And \textbf{(3)} In terms
 of the number of detected dependent tests
-and time cost, the randomized algorithm is the
+and the time cost, the randomized algorithm is the
 most cost-effective one.
 %However, it does not
 %have any guarantee in 
