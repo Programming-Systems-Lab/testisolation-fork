@@ -1,1 +1,2 @@
 protected static java.util.logging.Logger mcscm.McScMTests.logger
+static final java.lang.String[] dynoptic.model.export.GraphExporter.dotCommands
