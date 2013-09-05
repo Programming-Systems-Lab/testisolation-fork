@@ -82,14 +82,14 @@ for each subject program in Table~\ref{tab:subjects}.
 %human-written and automatically-generated test suites
 %of each subject program.
 
-We run the randomzied algorithm \smalltrialnum, \mediumtrialnum,
+We run the randomized algorithm \smalltrialnum, \mediumtrialnum,
 and \trialnum times on each test suite, and record
 the total number of detected dependent tests and time cost
 for each setting. The choice of \trialnum times is based
 on the a practical guideline of using randomized algorithm
 in software engineering, as summarized in~\cite{Arcuri:2011}.
 %
-For the exhausitive $k$-bounded algorithm
+For the exhaustive $k$-bounded algorithm
 and the dependence-aware $k$-bounded algorithm,
 we use isolated execution ($k = 1$), and
 pairwise execution ($k = 2$). The choice of $k$ is
@@ -143,7 +143,7 @@ other tests. This could further make a test's result depend on another.
 
 
 
-The randomized algorithm is surpringly effective in
+The randomized algorithm is surprisingly effective in
 detecting dependent tests. After running \trialnum times,
 it identifies \textit{more} dependent tests than the other
 two algorithms can find. For the human-written
@@ -152,7 +152,7 @@ tests in JodaTime. These two tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and dependence-aware $k$-bounded
 algorithm fail to detect these two tests, because
-they can not scale to $k$=3 for 
+they cannot scale to $k$=3 for 
 JodaTime. Related, the randomized algorithm
 detects significantly more dependent
 tests in the automatically-generated test suites, for
@@ -192,7 +192,7 @@ Table~\ref{tab:results} gives an estimated time cost for each
 test suite that an algorithm failed to scale to. For each test suite,
 we randomly chose 1000 permutations from all
 test permutations, executed them, and measured the time cost. Then,
-we calcuate the average time cost of running one permutation, and multiple
+we calculate the average time cost of running one permutation, and multiple
 the average cost with the number of all permutations.
 
 
@@ -239,7 +239,7 @@ exploring all possible test permutations.
 We sent the identified human-written dependent tests to the
 subject program developers, asking for their feedback.
 
-One dependent test in JodaTime was previoulsy-known,
+One dependent test in JodaTime was previously-known,
 and had already been fixed. JodaTime's
 developers confirmed the other two new dependent
 tests, and thought that they is due to interactions
@@ -247,7 +247,7 @@ that are not intended in the design of the library.
 
 The Crystal developers confirmed that all dependent tests
 found in Crystal were not intentional and mostly likely
-happended because they were not aware of the potential dependency
+happened because they were not aware of the potential dependency
 caused by global variables. The developers treat the
 dependencies as undesirable and opened a bug report for
 this report issue\footnote{\url{https://code.google.com/p/crystalvc/issues/ detail?id=57}}.
@@ -268,7 +268,7 @@ patch to fix the dependent tests.
 There are several threats to validity in our evaluation.
 First, the \subjnum open-source
 programs and their test suites may not be
-representative enough. Thus, we can not claim the results
+representative enough. Thus, we cannot claim the results
 can be generalized to an arbitrary program.
 Second, in this evaluation, we focus specifically on
 the {manifest dependence} between \textit{unit tests}.
