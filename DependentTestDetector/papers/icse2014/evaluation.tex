@@ -119,24 +119,37 @@ in \ourtool.
 \subsubsection{Detected Dependent Tests}
 \label{sec:detectedtests}
 
-A total number of human-written 29 dependent tests and 1311
-automatically-generated dependent tests have been detected
-by \ourtool. The percentage of dependent tests
-in the automatically-generated test suites is significantly
-higher than in the human-written test suites. We identified
-two possible reasons: first, developers usually have deep
-knowledge about the intended purpose of a program when writing tests
-for it. Such expertise helps them build relatively well-structured
-tests, e.g., tests that carefully initialize and destroy the
-shared objects they may use. Second, 
- it is challenging for automated test generation tools to understand
- a program's intended purpose as well as how
-specific parts of the program depend on the environment.
-Thus, automated tools often do not explicitly generate code that sets up the
-environment correctly.  In addition, to cover more
-program states, automated tools often incrementally
-builds tests on top of the program state after executing
-other tests. This could further make a test's result depend on another.
+\todo{I rewrote the below paragraph.  Please review.}
+
+\ourtool detected 29 human-written dependent tests and 1311
+automatically-generated dependent tests.  A larger percentage (15\%) of
+automatically-generated tests are dependent.  Developers' understanding of
+the code, and their goals when writing the tests, helps them build
+well-structured tests that carefully initialize and destroy the shared
+objects they may use and that avoid using other objects.  In other words,
+the dependences in automatically-generated tests often stem from ``misuse''
+of APIs, such as not setting up the environment correctly.  This misuse may
+indicate that the tests are invalid; it may indicate weaknesses, poor
+design, or fragility of the APIs; or it may indicate that the human-written
+tests have failed to exercise some functionality.\todo{Can we say anything
+  about the relative frequency of the three?}
+
+% The percentage of dependent tests
+% in the automatically-generated test suites is significantly
+% higher than in the human-written test suites. We identified
+% two possible reasons: first, developers usually have deep
+% knowledge about the intended purpose of a program when writing tests
+% for it. Such expertise helps them build relatively well-structured
+% tests, e.g., tests that carefully initialize and destroy the
+% shared objects they may use. Second, 
+%  it is challenging for automated test generation tools to understand
+%  a program's intended purpose as well as how
+% specific parts of the program depend on the environment.
+% Thus, automated tools often do not explicitly generate code that sets up the
+% environment correctly.  In addition, to cover more
+% program states, automated tools often incrementally
+% builds tests on top of the program state after executing
+% other tests. This could further make a test's result depend on another.
 
 
 %If, at the same time, other tests are
