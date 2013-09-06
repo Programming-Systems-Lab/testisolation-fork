@@ -248,7 +248,7 @@ the Apache CLI library~\cite{cli} for this category.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
 code. The fault is due to the improper initialization of the static variable
 \CodeIn{argName}. The static variable \CodeIn{argName} should be set
-to its default value \CodeIn{``arg''} by CLI's clients via calling
+to its default value \CodeIn{"arg"} by CLI's clients via calling
 method \CodeIn{reset()}. Otherwise, \CodeIn{argName}'s
 default value remains \CodeIn{null} and should \emph{not} be
 used in creating an \CodeIn{OptionBuilder} object.
