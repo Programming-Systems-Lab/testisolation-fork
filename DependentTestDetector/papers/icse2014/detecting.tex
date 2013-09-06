@@ -189,7 +189,7 @@ the corresponding last test that writes each field.}
 \FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
 \STATE $\mathit{lastWriteTS}$ $\leftarrow$ computeLastWrites($ts$, $\mathit{reads}$, $\mathit{writes}$)
 %\vspace{-3mm}
-\IF{$\exists$ Test $\mathit{t} \in ts$ such that $\mathit{lastWrite}$[$t$] $\neq$ $\mathit{lastWriteTS}$[$t$]  }
+\IF{$\exists$ Test $\mathit{t} \in ts$ such that $\mathit{lastWrites}$[$t$] $\neq$ $\mathit{lastWriteTS}$[$t$]  }
 \STATE $\mathit{result}$ $\leftarrow$ $\mathit{result} \cup \mathit{ts}$
 \ENDIF
 \ENDFOR
@@ -282,7 +282,7 @@ $k$-bounded dependent test detection algorithm (Figure~\ref{fig:impralg}).}
 %The exhaustive $k-$bounded algorithm cannot scale to a realistic test suite.
 %For example, it would take months to 
 %execute all 3-permutations
-%in JodaTime's test suite (3875 tests, Table~\ref{tab:subjects}).
+%in Joda-Time's test suite (3875 tests, Table~\ref{tab:subjects}).
 
 The dependence-aware $k$-bounded algorithm
 detects the same number of dependent tests
@@ -402,3 +402,6 @@ the assumption that tests are executed in the same environment.
 think about how to make it shorter and clearer.}
 \end{proof}
 \end{comment}
+
+%  LocalWords:  getPossibleExecOrder numtrials lastWriteTS
+%  LocalWords:  lastWrites

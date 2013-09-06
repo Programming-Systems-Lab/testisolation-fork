@@ -47,7 +47,7 @@ dependent tests (Section~\ref{sec:algcomparison})?
 Table~\ref{tab:subjects} lists the programs and
 tests used in our evaluation.
 
-JodaTime~\cite{jodatime} is an open source
+Joda-Time~\cite{jodatime} is an open source
 date and time library. It is a mature project that
 has been under active development
 for more than eight years. XML Security~\cite{xmlsecurity}
@@ -149,12 +149,12 @@ detecting dependent tests. After running \trialnum times,
 it identifies \textit{more} dependent tests than the other
 two algorithms can find. For the human-written
 test suites, the randomized algorithm detects 2 more dependent
-tests in JodaTime. These two tests only
+tests in Joda-Time. These two tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and dependence-aware $k$-bounded
 algorithm fail to detect these two tests, because
 they cannot scale to $k$=3 for 
-JodaTime. Related, the randomized algorithm
+Joda-Time. Related, the randomized algorithm
 detects more dependent
 tests in the automatically-generated test suites, for
 two reasons. First,
@@ -174,7 +174,7 @@ varies across different subject programs.
  Overall, the time cost is acceptable for practical use.
 For example, the randomized algorithm took around 1.5 hours
 to finish 1000 runs,  for the largest human-written test
-suite (\jodatimetests tests in JodaTime).
+suite (\jodatimetests tests in Joda-Time).
  
 The time cost of running the exhaustive $k$-bounded algorithm
 is prohibitive. The exhaustive algorithm failed to
@@ -183,10 +183,10 @@ test suites when $k$=2, and failed to scale to all test suites
 when $k$=3. The primary reason is due to the large
 number of possible test permutations. 
 For example, when $k$=2, there are 15,011,750 permutations
-for JodaTime's human-written test suite (\jodatimetests tests),
+for Joda-Time's human-written test suite (\jodatimetests tests),
 which take approximately 1400 hours (58 days) to finish.
 %For example, running all
-%JodaTime's \jodatimetests human-written
+%Joda-Time's \jodatimetests human-written
 %unit tests when $k$=2 requires running 15,011,750 test pairs, taking
 %approximately 
 
@@ -246,7 +246,7 @@ explore all possible test permutations.
 
 %\emph{three} tests to manifest. While these are easy to reproduce, we
 %did not check that our tool finds them, because the time needed to
-%run our naive algorithm on JodaTime with $k=3$ is measured in months.
+%run our naive algorithm on Joda-Time with $k=3$ is measured in months.
 
 
 
@@ -259,8 +259,8 @@ explore all possible test permutations.
 We sent the identified human-written dependent tests to the
 subject program developers, asking for their feedback.
 
-One dependent test in JodaTime was previously-known,
-and had already been fixed. JodaTime's
+One dependent test in Joda-Time was previously-known,
+and had already been fixed. Joda-Time's
 developers confirmed the other new dependent
 tests, and thought that they are due to unintended interactions
 in the design of the library.
@@ -328,3 +328,5 @@ most cost-effective one.
 %However, it does not
 %have any guarantee in 
 
+
+%  LocalWords:  Joda dependences multi 67GHz 4GB 2GB tradeoffs subsequence
