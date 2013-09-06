@@ -1,1 +1,4 @@
 private static org.apache.log4j.spi.RepositorySelector org.apache.log4j.LogManager.repositorySelector
+public static final java.io.PrintStream java.lang.System.err
+private static org.apache.log4j.Logger crystal.util.ValidInputChecker._log
+
