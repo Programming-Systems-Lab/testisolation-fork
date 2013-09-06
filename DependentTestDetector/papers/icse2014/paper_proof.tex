@@ -1,0 +1,38 @@
+\title{Correctness Proof of the Dependence-Aware $k$-Bounded Algorithm}
+
+\documentclass[12pt]{article}
+
+\begin{document}
+%\maketitle
+
+
+\noindent \textbf{Correctness Proof of the Dependence-Aware $k$-Bounded Algorithm}\\
+
+
+\noindent \textbf{Theorem} All tests in a test permutation discarded by the getPossibleExecOrder
+function in the dependence-aware $k$-bounded algorithm are guaranteed to produce the same results as in its default order.\\
+
+
+
+\noindent \textbf{Proof.} We prove this theorem by contradiction. Given a test
+suite $T$ and a test permutation $P$ of $T$, let's assume
+permutation $P$ is discarded by the getPossibleExecOrder function
+since all fields read by each test in $P$ are written
+by the same test as in $T$. The initial values of all shared fields are the same across different executions.
+
+
+Suppose there exists a test $t \in P$ produces a different result
+than in $T$. Test $t$ must read a different value
+for at least one shared field. Without loss of generality,
+let's suppose $f$ is the shared field read by $t$ with
+a different value. Based on our assumption, 
+$f$ is written by the same test, denoted as $t'$, as in $T$.
+Since the $f$'s value is different in $P$, $t'$
+must read different values for other shared fields.
+By induction, there must exist a test $t'' \in P$ that 
+reads a different \textit{initial} value
+for at least one shared field. This contradicts
+the assumption that tests are executed in the same environment with the initial values of all shared fields.
+
+
+\end{document}
