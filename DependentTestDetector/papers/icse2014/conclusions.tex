@@ -4,11 +4,11 @@
 Test independence is broadly assumed but rarely addressed, and
 test dependence has largely been ignored in previous
 research on software testing. To understand
-dependent tests, we describe one of the first studies on
+dependent tests, we described one of the first studies on
 real-world dependent tests, and
-provide a precise formalization of the dependent test detection
-problem. To detect dependent tests, we design
-and implement three algorithms to identify manifest test dependence
+provided a precise formalization of the dependent test detection
+problem. To detect dependent tests, we designed
+and implemented three algorithms to identify manifest test dependence
 in a test suite. Our empirical evaluation reveals
 previously-unknown dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
@@ -19,11 +19,10 @@ The results of this paper offer initial answers to the four questions we posed
 in the introduction. First, test dependence \textit{does}
 arise in practice, from both human-written test suites and automatically-generated
 test suites. Second, dependent tests can have
-non-trivial negative repercussions, even though the
-extent is unknown. Third, we speculate that this
+non-trivial negative repercussions. Third, we speculate that this
 problem is not thoroughly examined before due to the
 lack of empirical evidence, a rigorous problem definition,
-and detection algorithms, or people may simply believe that well-designed
+and detection algorithms; alternatively people may simply believe that well-designed
 test suites do not have this problem.
 Fourth,
 detecting manifest dependent tests is a NP-complete problem,
@@ -31,5 +30,5 @@ for which efficient algorithms are unlikely to exist. However,
 in practice, a simple algorithm like the randomized algorithm
 described in this paper can work fairly well.
 
-The source code of our tool implementation is publicly
-available at: \url{http://testisolation.googlecode.com}.
+%The source code of our tool implementation is publicly
+%available at: \url{http://testisolation.googlecode.com}.
