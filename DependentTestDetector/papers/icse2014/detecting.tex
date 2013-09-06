@@ -152,10 +152,9 @@ the number of permutations to execute
 to $O(n^k)$, which for small $k$ is tractable. 
 
 
-Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, our algorithm
-first executes $T$ with its default order
-to obtain the \emph{expected result} of each test (line 2). 
-It then executes every $k$-permutations of tests,
+Figure~\ref{fig:exhaustivealgorithm} shows the algorithm.
+Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the
+algorithm executes every $k$-permutations of tests,
 and checks whether the result of any test differs
 from the expected result (lines 3--10). Finally, the algorithm returns the set
 of all tests $t_i \in T$
@@ -287,12 +286,12 @@ $k$-bounded dependent test detection algorithm (Figure~\ref{fig:impralg}).}
 
 The dependence-aware $k$-bounded algorithm
 detects the same number of dependent tests
-as the exhaustive $k$-bounded algorithm (when using the same $k$),
-but it uses dynamic analyses to improve efficiency.
+as the exhaustive $k$-bounded algorithm does (when using the same $k$),
+but it uses dynamic analyses to improve the efficiency.
 It avoids executing test
 permutations that are guaranteed to have the
 same results as being executed in the default order.
-The intuition of our algorithm is that,
+The intuition of this algorithm is that,
 given a test permutation, for \textit{each}
 test, if \textit{all global fields} it reads
 are written by the \textit{same} test as
@@ -300,7 +299,7 @@ in the default execution order, all tests in
 the permutation are guaranteed to
 have the same results and the permutation can be safely ignored. 
 
-The algorithm in Figure~\ref{fig:impralg} redefines
+Figure~\ref{fig:impralg} shows the algorithm, which redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
 The redefined getPossibleExecOrder function first records
 fields that each test reads and writes (line 1).
@@ -317,7 +316,7 @@ this permutation without executing it. Otherwise,
 the function adds the generated permutation to the result
 set (line 7), and runs the algorithm in Figure~\ref{fig:basealgorithm}
 to identify dependent tests. %among it.
-Due to space limit, we omit the proof of the correctness
+Due to space limits, we omit the proof of the correctness
 of the dependence-aware $k$-bounded algorithm. Interested
 readers can refer to~\cite{proof-dependence-aware} for details.
 
@@ -334,7 +333,7 @@ without executing by checking the tests performing the last write.
 %reveal the same result to reduce the total number
 %of permutations which need to be explored.
 
-To illustrate the second benefit, Figure~\ref{fig:rwexample}
+To better illustrate the second benefit, Figure~\ref{fig:rwexample}
 shows an example
 consisting of 2 global fields and 4 tests. In the default execution
 order, Test 1 reads the \textit{initial} value of \code{x};
@@ -348,7 +347,7 @@ value written by Test3. Similarly, when creating permutations with $k=2$,
 only 5 out of 12 permutations ($\langle$Test1, Test4$\rangle$,
 $\langle$Test2, Test4$\rangle$, $\langle$Test4, Test1$\rangle$,
 $\langle$Test4, Test2$\rangle$, and $\langle$Test4, Test3$\rangle$) need to be executed.
-Due to space limit, we omit test permutations when
+Due to space limits, we omit test permutations when
 $k=3$ and $k=4$, and list the number of permutations that need
 to execute in Figure~\ref{fig:rwexample}.
 

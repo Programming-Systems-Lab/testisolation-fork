@@ -26,6 +26,7 @@ Our evaluation answers the following research questions:
 \vspace{-1mm}
 
 \begin{enumerate}
+\vspace{-1mm}
 \item How many dependent tests can each detection
 algorithm detect in
 real-world programs (Section~\ref{sec:detectedtests})?
@@ -75,7 +76,7 @@ shown in Table~\ref{tab:subjects}.
 We evaluate each algorithm 
 on both the human-written test suite 
 and the automatically-generated test suite
-for each subject program in Table~\ref{tab:subjects}.
+of each subject program in Table~\ref{tab:subjects}.
 
 %We run the three algorithms proposed
 %in Section~\ref{sec:detecting} on both
@@ -97,8 +98,9 @@ based on the results of our empirical
 study (Section~\ref{sec:study}) that a small $k$
 can find most realistic test dependences.
 
-\todo{say a few sentences about the manual part, such as
-listing the immutable fields. say the approximate manual time used here.}
+\edit{say a few sentences here about the manual part, such as
+the approximate manual time cost in
+listing the immutable fields.}
 
 Each output dependent test is examined manually to make
 sure the test dependence is not caused by non-deterministic
@@ -117,15 +119,14 @@ in \ourtool.
 \subsubsection{Detected Dependent Tests}
 \label{sec:detectedtests}
 
-A total number of 29 dependent tests are detected
-from all human-written test suites, and 1311
-dependent tests are detected from all automatically-generated
-test suites. The percentage of dependent tests
+A total number of human-written 29 dependent tests and 1311
+automatically-generated dependent tests have been detected
+by \ourtool. The percentage of dependent tests
 in the automatically-generated test suites is significantly
 higher than in the human-written test suites. We identified
 two possible reasons: first, developers usually have deep
 knowledge about the intended purpose of a program when writing tests
-for it. Such expertise helps them build relatively well-structured and coherent
+for it. Such expertise helps them build relatively well-structured
 tests, e.g., tests that carefully initialize and destroy the
 shared objects they may use. Second, 
  it is challenging for automated test generation tools to understand
@@ -154,7 +155,7 @@ non-default order. Both exhaustive and dependence-aware $k$-bounded
 algorithm fail to detect these two tests, because
 they cannot scale to $k$=3 for 
 JodaTime. Related, the randomized algorithm
-detects significantly more dependent
+detects more dependent
 tests in the automatically-generated test suites, for
 two reasons. First,
 both the exhaustive and dependence-aware $k$-bounded
@@ -180,20 +181,37 @@ is prohibitive. The exhaustive algorithm failed to
 scale to one human-written test suite and all four automatically-generated
 test suites when $k$=2, and failed to scale to all test suites
 when $k$=3. The primary reason is due to the large
-number of all possible test permutations. For example, running all
-JodaTime's \jodatimetests human-written
-unit tests when $k$=2 requires running 15,011,750 test pairs, costing
-approximately 1400 hours (58 days). 
-
-The dependence-aware $k$-bounded algorithm helps improve
-the efficiency of \todo{more results here.}
+number of possible test permutations. 
+For example, when $k$=2, there are 15,011,750 permutations
+for JodaTime's human-written test suite (\jodatimetests tests),
+which take approximately 1400 hours (58 days) to finish.
+%For example, running all
+%JodaTime's \jodatimetests human-written
+%unit tests when $k$=2 requires running 15,011,750 test pairs, taking
+%approximately 
 
 Table~\ref{tab:results} gives an estimated time cost for each
 test suite that an algorithm failed to scale to. For each test suite,
 we randomly chose 1000 permutations from all
-test permutations, executed them, and measured the time cost. Then,
-we calculate the average time cost of running one permutation, and multiple
-the average cost with the number of all permutations.
+test permutations, executed them, and measured the average time cost
+per permutation. Then, we multiple
+the average cost with the total number of permutations to estimate
+the time cost.
+
+The dependence-aware $k$-bounded algorithm substantially improves
+the efficiency of the exhaustive $k$-bounded algorithm. On average,
+it took 3.3$\times$ and 1.6$\times$ less time to run all
+human-written tests and automatically-generated tests, respectively, when $k$=1.
+The dependence-aware algorithm took an order of magnitude
+less time to run both human-written tests and automatically-generated tests,
+when $k$=2.
+For example, when $k$=2, the exhaustive algorithm took 11,927 seconds
+to execute all 11,556 permutations for XML Security's human-written test suite.
+By contrast, the dependence-aware algorithm
+explored the field read and write information, and
+only took 3,322 seconds to execute 2,647 permutations.
+
+
 
 
 
@@ -203,26 +221,27 @@ the average cost with the number of all permutations.
 We next discuss the tradeoffs of choosing different detection
 algorithms in \ourtool. Although the randomized algorithm
 detects the most dependent tests in our subject programs,
-it has several shortcomings that must be considered
+it has several limitations that must be considered
 in practice. First, there is no guarantee of how many
 dependent tests that the randomized algorithm can detect. A randomized
-algorithm might even produce different results across runs,
+algorithm might even produce different results across different runs,
 and makes reproducing a dependent test harder.
-Second, more importantly, there is no stop criteria
-of using the randomized algorithm in shuffling and
-running the test suite. Thus, it might be hard for users
+Second, more importantly, there is no clear stop criteria
+for running the randomized algorithm.
+Thus, it can be hard for users
 to know how many runs would be enough for a test suite.
 Third, when a dependent test is identified, users
-may need to inspect every test that is executed
-before the dependent test, and isolate  a minimized
+need to inspect tests executed
+before the dependent test, and isolate a minimized
 subsequence of tests (either
 manually or using an assisting tool~\cite{Zeller:2002}) to understand the dependence root cause.
 
 By contrast, both the exhaustive $k$-bounded and the dependence-aware
-$k$-bounded algorithms do not suffer from the above shortcomings.
-However, the major factor that prevent them being applied to a
-large test suite might be the time cost for systematically
-exploring all possible test permutations.
+$k$-bounded algorithms systematically search for dependent
+tests, and do not suffer from the above limitations.
+However, the major limitation that prevents them being applied to a
+large test suite might be the time cost to
+explore all possible test permutations.
 
 
 %\emph{three} tests to manifest. While these are easy to reproduce, we
@@ -241,13 +260,13 @@ subject program developers, asking for their feedback.
 
 One dependent test in JodaTime was previously-known,
 and had already been fixed. JodaTime's
-developers confirmed the other two new dependent
-tests, and thought that they is due to interactions
-that are not intended in the design of the library.
+developers confirmed the other new dependent
+tests, and thought that they are due to unintended interactions
+in the design of the library.
 
 The Crystal developers confirmed that all dependent tests
 found in Crystal were not intentional and mostly likely
-happened because they were not aware of the potential dependency
+happened because of the potential dependency
 caused by global variables. The developers treat the
 dependencies as undesirable and opened a bug report for
 this report issue\footnote{\url{https://code.google.com/p/crystalvc/issues/ detail?id=57}}.
@@ -257,11 +276,13 @@ the dependent tests.
 
 %After receiving our reported dependent tests in XML-Security,
 The SIR~\cite{sir} maintainers confirmed our reported dependent
-tests in XML-Security. They highlighted the practice
+tests in XML-Security, and accepted our
+suggested patch to fix them. They also highlighted the practice
 that tests should \textit{always} ``stand alone''
 without dependency on other tests, and treated that as
-``test engineering 101''. They also accepted our suggested
-patch to fix the dependent tests.
+``test engineering 101''. 
+%They also accepted our suggested
+%patch to fix the dependent tests.
 
 \subsubsection{Threats to Validity}
 
@@ -289,8 +310,8 @@ tests exist in a test suite and how many percentages of dependence tests
 
 
 We have three chief findings: \textbf{(1)}
-Dependent tests do exist in real-world test suites.
-They may not be obvious to be identified
+Dependent tests do exist in practice. However,
+they may not be obvious to be identified
 unless been explicitly searched for.
 An automatically-generated test suite can contain
 substantially more dependent tests than a human-written
@@ -298,7 +319,7 @@ test suite.
 \textbf{(2)} Like the dependent tests
 studied in Section~\ref{sec:study}, the identified
 dependent tests in our subject programs reveal weakness
-in a test suite rather than defect in the tested code.
+in a test suite rather than defects in the tested code.
 And \textbf{(3)} In terms
 of the number of detected dependent tests
 and the time cost, the randomized algorithm is the
