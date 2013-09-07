@@ -101,6 +101,12 @@ public class TestBoundedDependentTestFinder extends TestCase {
 		this.runTests(TestRandomizedDependentTestFinder.synopticFile_auto,
 				"./bounded_1_synoptic_auto.txt", 1);
 	}
+	
+	public void testSynoptic_auto_test() {
+		this.runTests(TestRandomizedDependentTestFinder.synopticFile_auto,
+				"./bounded_1_synoptic_auto_TEST.txt", 1);
+	}
+	
 	public void testSynoptic_auto_sampled_2() {
 		this.runTestsWithSampling("./bounded_2_synoptic_sampled_auto.txt",
 				TestRandomizedDependentTestFinder.synopticFile_auto,

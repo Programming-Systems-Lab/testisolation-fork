@@ -40,6 +40,11 @@ public class TestDependenceAwareTestFinder extends TestCase {
 		this.runWithSafeTests(logFileName, testFile, safeFile, k);
 	}
 	
+	public void testCrystalPairwise_manual() {
+		runTests(TestRandomizedDependentTestFinder.crystalFile_manual, TestReader.crystal_manual_pairwise,
+				"./dependence-aware_2_crystal_all_manual.txt", 2);
+	}
+	
 	public void testSynopticIsolation_manual() {
 		String logFileName = "./dependence-aware_synoptic_1_manual.txt";
 		String testFile = TestRandomizedDependentTestFinder.synopticFile_manual;
@@ -55,6 +60,11 @@ public class TestDependenceAwareTestFinder extends TestCase {
 		int k = 1;
 		String safeFile = "./tests/edu/washington/cs/dt/tools/xml-security-auto-safetests.txt";
 		this.runWithSafeTests(logFileName, testFile, safeFile, k);
+	}
+	
+	public void testXMLSecurity_2_auto() {
+		runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_auto, TestReader.xmlsecurity_auto_pairwise_folder,
+				"./dependence-aware_2_xmlsecurity_sample_auto.txt", 2);
 	}
 	
 	public void testSynoptic_2_auto_sample() {
@@ -75,6 +85,19 @@ public class TestDependenceAwareTestFinder extends TestCase {
 	public void testJodatime_2_sample_auto() {
 		runTests(TestRandomizedDependentTestFinder.jodatimeFile_auto, TestReader.jodatime_auto_pairwise_folder,
 				"./dependence-aware_2_jodatime_sample_auto.txt", 2);
+	}
+	
+	public void testCrystal_1_auto() {
+		String logFileName = "./dependence-aware_crystal_1_auto.txt";
+		String testFile = TestRandomizedDependentTestFinder.crystalFile_auto;
+		int k = 1;
+		String safeFile = "./tests/edu/washington/cs/dt/tools/crystal-auto-safetests.txt";
+		this.runWithSafeTests(logFileName, testFile, safeFile, k);
+	}
+	
+	public void testCrystal_2_sample_auto() {
+		runTests(TestRandomizedDependentTestFinder.crystalFile_auto, TestReader.crystal_auto_pairwise_folder,
+				"./dependence-aware_2_crystal_sample_auto.txt", 2);
 	}
 	
 	public void runWithSafeTests(String logFileName, String testFile, String safeFile, int k) {

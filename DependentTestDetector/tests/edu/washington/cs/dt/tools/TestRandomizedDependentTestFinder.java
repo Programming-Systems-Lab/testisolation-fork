@@ -24,80 +24,80 @@ public class TestRandomizedDependentTestFinder extends TestCase {
 	final static String jodatimeFile_auto = "./tests/edu/washington/cs/dt/tools/jodattime-auto-test-list.txt";
 	final static String synopticFile_auto = "./tests/edu/washington/cs/dt/tools/synoptic-auto-test-list.txt";
 	
-//	public void testToyExamples() {
-//		Log.logConfig("./randomized_toy_results.txt");
-//		RandomizedDependentTestFinder.verbose = true;
-//		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.exampleFile);
-//		randomizedFinder.setTrialNum(2);
-//		Set<String> dts = randomizedFinder.findDependentTests();
-//		for(String t : dts) {
-//			System.out.println("    " + t);
-//		}
-//	}
-//	
-//	public void testXMLSecurity_manual() {
-//		Log.logConfig("./randomized_xmlsecurity_results.txt");
-//		RandomizedDependentTestFinder.verbose = true;
-//		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.xmlSecurityFile_manual);
-//		randomizedFinder.setTrialNum(1000);
-//		Set<String> dts = randomizedFinder.findDependentTests();
-//		for(String t : dts) {
-//			System.out.println("    " + t);
-//		}
-//	}
-//	
-//	public void testCrystal_manual() {
-//		Log.logConfig("./randomized_crystal_results.txt");
-//		RandomizedDependentTestFinder.verbose = true;
-//		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.crystalFile_manual);
-//		randomizedFinder.setTrialNum(1000);
-//		Set<String> dts = randomizedFinder.findDependentTests();
-//		for(String t : dts) {
-//			System.out.println("    " + t);
-//		}
-//	}
-//	
-//	//6 in total:
-//	//
-////	 org.joda.time.TestPeriodType.testForFields4
-////	    org.joda.time.TestDateMidnight_Basics.testWithZoneRetainFields_DateTimeZone
-////	    org.joda.time.TestDateTime_Basics.testToDateTime_DateTimeZone
-////	    org.joda.time.TestDateTime_Basics.testWithZoneRetainFields_DateTimeZone
-////	    org.joda.time.TestDateTimeComparator.testMillis
-////	    org.joda.time.TestDateTimeUtils.testOffsetMillisToZero
-//	public void testJodaTime_manual() {
-//		Log.logConfig("./randomized_jodatime_results.txt");
-//		RandomizedDependentTestFinder.verbose = true;
-//		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.jodatimeFile_manual);
-//		randomizedFinder.setTrialNum(1000);
-//		Set<String> dts = randomizedFinder.findDependentTests();
-//		for(String t : dts) {
-//			System.out.println("    " + t);
-//		}
-//	}
-//	
-//	public void testSynoptic_manual() {
-//		Log.logConfig("./randomized_synoptic_results.txt");
-//		RandomizedDependentTestFinder.verbose = true;
-//		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.synopticFile_manual);
-//		randomizedFinder.setTrialNum(1000);
-//		Set<String> dts = randomizedFinder.findDependentTests();
-//		for(String t : dts) {
-//			System.out.println("    " + t);
-//		}
-//	}
-//	
-//	//below is for automated generated tests
-//	public void testXMLSecurity_auto() {
-//		Log.logConfig("./randomized_xmlsecurity_auto_tests_results.txt");
-//		RandomizedDependentTestFinder.verbose = true;
-//		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.xmlSecurityFile_auto);
-//		randomizedFinder.setTrialNum(1000);
-//		Set<String> dts = randomizedFinder.findDependentTests();
-//		for(String t : dts) {
-//			System.out.println("    " + t);
-//		}
-//	}
+	public void testToyExamples() {
+		Log.logConfig("./randomized_toy_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.exampleFile);
+		randomizedFinder.setTrialNum(2);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	public void testXMLSecurity_manual() {
+		Log.logConfig("./randomized_xmlsecurity_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.xmlSecurityFile_manual);
+		randomizedFinder.setTrialNum(1000);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	public void testCrystal_manual() {
+		Log.logConfig("./randomized_crystal_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.crystalFile_manual);
+		randomizedFinder.setTrialNum(1000);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	//6 in total:
+	//
+//	 org.joda.time.TestPeriodType.testForFields4
+//	    org.joda.time.TestDateMidnight_Basics.testWithZoneRetainFields_DateTimeZone
+//	    org.joda.time.TestDateTime_Basics.testToDateTime_DateTimeZone
+//	    org.joda.time.TestDateTime_Basics.testWithZoneRetainFields_DateTimeZone
+//	    org.joda.time.TestDateTimeComparator.testMillis
+//	    org.joda.time.TestDateTimeUtils.testOffsetMillisToZero
+	public void testJodaTime_manual() {
+		Log.logConfig("./randomized_jodatime_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.jodatimeFile_manual);
+		randomizedFinder.setTrialNum(1000);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	public void testSynoptic_manual() {
+		Log.logConfig("./randomized_synoptic_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.synopticFile_manual);
+		randomizedFinder.setTrialNum(1000);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	//below is for automated generated tests
+	public void testXMLSecurity_auto() {
+		Log.logConfig("./randomized_xmlsecurity_auto_tests_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.xmlSecurityFile_auto);
+		randomizedFinder.setTrialNum(1000);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
 	
 	
 	
