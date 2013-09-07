@@ -104,6 +104,9 @@ public class DependenceAwareDependentTestFinder {
 		TestExecResult default_results = expected_results.getExecutionRecords().get(0);
 		TestExecResult actual_results = exec_results.getExecutionRecords().get(0);
 		
+//		System.out.println(default_results.getAllTests().size());
+//		System.out.println(default_results.getAllTests());
+		
 		//check the number of the tests
 		Utils.checkTrue(default_results.getAllTests().size() == this.defaultTestList.size(),
 				"Size not equal: " + default_results.getAllTests().size());
@@ -112,8 +115,15 @@ public class DependenceAwareDependentTestFinder {
 		
 		//then compare the test execution outcome
 		for(String actualTest : actual_results.getAllTests()) {
+//			System.out.println("actual test: " + actualTest);
+			
 			OneTestExecResult defaultTestResult = default_results.getResult(actualTest);
 			OneTestExecResult actualTestResult = actual_results.getResult(actualTest);
+			
+			//the test is not executed in the default order, skip it
+			if(defaultTestResult == null) {
+				continue;
+			}
 			
 			//compare the results
 			if(!sameResults(defaultTestResult, actualTestResult)) {
@@ -130,6 +140,8 @@ public class DependenceAwareDependentTestFinder {
 	}
 	
 	private boolean sameResults(OneTestExecResult r1, OneTestExecResult r2) {
+//		System.out.println(r1);
+//		System.out.println(r2);
 		if(only_compare_outcome) {
 			return r1.result.equals(r2.result);
 		} else {
