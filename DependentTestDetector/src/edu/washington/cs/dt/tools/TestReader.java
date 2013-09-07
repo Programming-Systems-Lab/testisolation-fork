@@ -22,6 +22,7 @@ public class TestReader {
     public static String xmlsecurity_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\xml-security-auto-pairwise\\";
     public static String synoptic_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\synoptic-auto-pairwise\\";
     public static String jodatime_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\joda-time-auto-pairwise\\";
+    public static String crystal_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\crystal-auto-pairwise\\";
     
 	public static String jodattime_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\exec_pairwise";
 	public static String crystal_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\crystal_execute_pairwise";
@@ -30,6 +31,7 @@ public class TestReader {
 	public static String xmlsecurity_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\xmlsecurity_auto_exec_pairwise\\";
 	public static String synoptic_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\synoptic_auto_execute_pairwise\\";
 	public static String jodatime_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\jodatime_auto_exec_pairwise\\";
+	public static String crystal_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\crystal_auto_execute_pairwise\\";
 	
 	public static Set<List<String>>  readTestsFromAllFiles(String folderName, int numPerFile) {
 		Set<List<String>> tests = new LinkedHashSet<List<String>>();
@@ -86,7 +88,8 @@ public class TestReader {
 //		writeAllTestsToDisk(synoptic_pairwisefile, synotpic_manual_pairwise);
 //		writeAllTestsToDisk(xmlsecurity_auto_pairwisefile, xmlsecurity_auto_pairwise_folder);
 //		sampleTestsAndWriteToDisk(1000, synoptic_auto_pairwisefile, synoptic_auto_pairwise_folder);
-		sampleTestsAndWriteToDisk(1000, jodatime_auto_pairwisefile, jodatime_auto_pairwise_folder);
+//		sampleTestsAndWriteToDisk(1000, jodatime_auto_pairwisefile, jodatime_auto_pairwise_folder);
+		sampleTestsAndWriteToDisk(1000, crystal_auto_pairwisefile, crystal_auto_pairwise_folder);
 	}
 	
 }
