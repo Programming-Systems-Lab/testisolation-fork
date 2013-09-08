@@ -366,42 +366,9 @@ to execute in Figure~\ref{fig:rwexample}.
 %need to be explored.
 
 
-\begin{comment}
-
-\edit{I add a simple proof below, which I am not happy with}
-
-We next proof the correctness of the dependence-aware
-$k$-bounded algorithm.
-
-\begin{theorem}
-All tests in a test permutation discarded by the getPossibleExecOrder
-function (Figure~\ref{fig:impralg}) are guaranteed to produce the same results as in its default order.
-\end{theorem}
-
-\begin{proof}
-We prove this theorem by contradiction. Given a test
-suite $T$ and a test permutation $P$ of $T$, let's assume
-permutation $P$ is discarded by the getPossibleExecOrder function
-since all fields read by each test in $P$ are written
-by the same test as in $T$.
+%\begin{comment}
 
 
-Suppose there exists a test $t \in P$ produces a different result
-than in $T$. Test $t$ must read a different value
-for at least one shared field. Without loss of generality,
-let's suppose $f$ is a shared field for which $t$ reads
-a different value. Based on our assumption, 
-$f$ is written by the same test, denoted as $t'$, as in $T$.
-Since the $f$'s value is different in $P$, $t'$
-must read different value for other shared fields.
-By induction, there must exist a test $t'' \in P$ that 
-reads a different \textit{initialization} value
-for at least one shared field. This contradicts
-the assumption that tests are executed in the same environment.
-\edit{the above proof is not clear, need to
-think about how to make it shorter and clearer.}
-\end{proof}
-\end{comment}
 
 %  LocalWords:  getPossibleExecOrder numtrials lastWriteTS
 %  LocalWords:  lastWrites
