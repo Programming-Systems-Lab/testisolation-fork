@@ -29,7 +29,6 @@ crystal.model.DataSourceTest.testSetParent
 crystal.model.DataSourceTest.testSetKind
 crystal.model.DataSourceTest.testSetCloneString
 crystal.model.DataSourceTest.testToString
-crystal.model.LocalStateResultTest.testToString
 crystal.model.LocalStateResultTest.testLocalStateResult
 crystal.model.LocalStateResultTest.testStrangeActionName
 crystal.model.LocalStateResultTest.testErrorActionNameConstructor
@@ -40,6 +39,7 @@ crystal.model.LocalStateResultTest.testGetNoErrorMessage
 crystal.model.LocalStateResultTest.testGetLastErrorMessage
 crystal.model.LocalStateResultTest.testGetLocalState
 crystal.model.LocalStateResultTest.testGetLastLocalState
+crystal.model.LocalStateResultTest.testToString
 crystal.model.RelationshipTest.testStrangeNameConstructor
 crystal.model.RelationshipTest.testConstructor
 crystal.model.RelationshipTest.testCalculateAction
