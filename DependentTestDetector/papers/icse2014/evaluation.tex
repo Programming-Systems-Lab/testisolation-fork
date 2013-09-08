@@ -69,6 +69,11 @@ Randoop automatically drops textually-redundant tests
 and outputs a subset of the generated tests as
 shown in Table~\ref{tab:subjects}.
 
+We manually examine the generated test suites, and discarded
+the automatically-generated test suite of JodaTime, since many
+tests in it are non-deterministic (i.e., 
+running them in the \textit{same} order can produce different results).
+
 
 \subsection{Evaluation Procedure}
 
@@ -131,8 +136,13 @@ of APIs, such as not setting up the environment correctly.  This misuse may
 indicate that the tests are invalid; it may indicate weaknesses, poor
 design, or fragility of the APIs; or it may indicate that the human-written
 tests have failed to exercise some functionality.
-\edit{Can we say anything
-  about the relative frequency of the three?}
+The root cause of all dependent tests is the improper access to
+global fields. XML Security and Crystal developers use more
+global fields in the test code,
+so there are relatively more dependent tests in them.
+This concurs with our findings in Section~\ref{sec:studyfindings}.
+%\edit{Can we say anything
+%  about the relative frequency of the three?}
 
 % The percentage of dependent tests
 % in the automatically-generated test suites is significantly
@@ -169,12 +179,20 @@ algorithm fail to detect these two tests, because
 they cannot scale to $k$=3 for 
 Joda-Time. Related, the randomized algorithm
 detects more dependent
-tests in the automatically-generated test suites, for
-two reasons. First,
-both the exhaustive and dependence-aware $k$-bounded
-failed to scale to $k$=2 for all automatically-generated test suites;
-and second, some detected dependent tests require executing more than 2 tests
-to manifest.
+tests in the automatically-generated test suites,
+because both the exhaustive and dependence-aware $k$-bounded
+failed to scale to $k$=2 for all automatically-generated test suites.
+The dependence-aware bounded algorithm found the same
+number of dependent tests as the exhaustive bounded algorithm, except
+for the automatically-generated test suite of XMLSecurity.
+One dependent test was missed because
+%caused by
+%due to the improper read of
+our current implementation could not track global field access
+through reflection calls.
+
+%and second, some detected dependent tests require executing more than 2 tests
+%to manifest.
 
 %Compared to the randomized algorithm, On the other hand,
 
@@ -212,7 +230,7 @@ the time cost.
 
 The dependence-aware $k$-bounded algorithm substantially improves
 the efficiency of the exhaustive $k$-bounded algorithm. On average,
-it took 3.3$\times$ and 1.6$\times$ less time to run all
+it took 3.3$\times$ and 1.1$\times$ less time to run all
 human-written tests and automatically-generated tests, respectively, when $k$=1.
 The dependence-aware algorithm took an order of magnitude
 less time to run both human-written tests and automatically-generated tests,

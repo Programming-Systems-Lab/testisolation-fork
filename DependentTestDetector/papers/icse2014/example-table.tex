@@ -19,7 +19,7 @@
 \multicolumn{16}{|l|}{ }\\
 \multicolumn{16}{|l|}{\textbf{Human-written unit tests} }\\
 \hline
-JodaTime & \jodatimetests & 1 & 1 & 6 & 2 &\unknown& 2& \unknown &   57 & 528 & 5538 &1265& 4$\times$ $10^6$* & 291 & 5$\times$$10^5$*  \\
+Joda-Time & \jodatimetests & 1 & 1 & 6 & 2 &\unknown& 2& \unknown &   57 & 528 & 5538 &1265& 4$\times$ $10^6$* & 291 & 5$\times$$10^5$*  \\
 XML Security& \xmlsecuritytests & 1 & 4 & 4 &4 &4 & 4 & 4  &65 & 594 & 5977 & 106 &  11927 & 93 & 3322  \\
 Crystal & \crystaltests & 18 & 18 & 18 &17&18& 17 & 18 &14& 131 & 1304 & 166 & 7323 & 95  & 4155 \\
 Synoptic & \synoptictests & 1 &1  & 1 & 0 &1 & 0 & 1 &  7 & 67 & 760& 25 & 3372& 24 & 1797 \\
@@ -29,7 +29,7 @@ Synoptic & \synoptictests & 1 &1  & 1 & 0 &1 & 0 & 1 &  7 & 67 & 760& 25 & 3372&
 \multicolumn{16}{|l|}{ }\\
 \multicolumn{16}{|l|}{\textbf{Automatically-generated unit tests} }\\
 \hline
-JodaTime & \jodatimeautotests & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore &  \ignore \\
+Joda-Time & \jodatimeautotests & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore &  \ignore \\
 XML Security& \xmlsecurityautotests& 167 & 171 & 171 & 129 & \unknown& 128  & \unknown & 50 & 430 & 4174 & 133 & 1$\times$$10^5$* & 128 & 5$\times$$10^4$* \\
 Crystal & \crystalautotests & 159 & 162 & 164 & 55 & \unknown& 55 & \unknown & 103 & 949& 9436  & 2477 & 8$\times$$10^6$*& 2297 & 1$\times$$10^6$* \\
 Synoptic & \synopticautotests & 3 & 7 & 10 &2& \unknown& 2 & \unknown  &81& 770  & 6311 & 454 & 1$\times$$10^6$*& 454 & 2$\times$$10^4$* \\
@@ -48,6 +48,7 @@ $\smalltrialnum, \mediumtrialnum, \trialnum$ (Figure~\ref{fig:randalgorithm}).
 ``\unknown'' means the technique does not scale to the test
 suite (i.e., requiring more than 1 day to execute all test permutations),
 and thus the exact number of dependent tests is unknown.
+``\ignore'' means the test suite is not evaluated due to its non-determinism.
 Column ``Analysis Costs (seconds)''
 shows the time cost of each algorithm.
 A starred number represents an estimated
