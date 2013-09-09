@@ -3,17 +3,20 @@
 
 Test independence is broadly assumed but rarely addressed, and
 test dependence has largely been ignored in previous
-research on software testing. To understand
-dependent tests, we described one of the first studies on
-real-world dependent tests, and
-provided a precise formalization of the dependent test detection
+research on software testing. 
+To understand dependent tests, we described one of the first studies on
+real-world dependent tests. We showed that 
+test dependence \textit{does} arise in practice, and could have
+non-trivial negative repercussions. We also
+formalized the the dependent test detection
 problem. To detect dependent tests, we designed
 and implemented three algorithms to identify manifest test dependence
-in a test suite. Our empirical evaluation reveals
+in a test suite. Our empirical evaluation revealed
 previously-unknown dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
 suites.
 
+\begin{comment}
 The results of this paper offer initial answers to the four questions we posed
 in the introduction. First, test dependence \textit{does}
 arise in practice, from both human-written test suites and automatically-generated
@@ -28,6 +31,7 @@ detecting manifest dependent tests is a NP-complete problem,
 for which efficient algorithms are unlikely to exist. However,
 in practice, a simple algorithm like the randomized algorithm
 described in this paper can work fairly well.
+\end{comment}
 
 %The source code of our tool implementation is publicly
 %available at: \url{http://testisolation.googlecode.com}.

@@ -36,9 +36,10 @@ database state and the potentially frequent re-computations of test
 adequacy''~\cite[p.~101]{kapfhammeretal:FSE:2003}.
 By contrast, our definition differs from that of Kapfhammer
 and Soffa by considering
-test results rather than program and database states.
-Considering only manifest test dependences allows
-us to more easily situate this research in the empirical domain (Section~\ref{sec:formaldiscussion}).
+test results rather than program and database states
+(which may not be visible to users).
+%Considering only manifest test dependences allows
+%us to more easily situate this research in the empirical domain (Section~\ref{sec:formaldiscussion}).
 
 The IEEE Standard for Software and System Test
 Documentation (829-1998) \S 11.2.7, ``Intercase
@@ -92,7 +93,7 @@ execution of one or more test cases.''
 
 
 Compared with these informal definitions,
-we define test dependence precisely, and we also provide empirical evidence
+we formalize test dependence, and provide empirical evidence
 to show that test dependence does arise in practice, and could
 have costly repercussions.
 %They give an informal definition of what it means for the execution of a

@@ -45,12 +45,15 @@ dependent tests (Section~\ref{sec:algcomparison})?
 
 
 Table~\ref{tab:subjects} lists the programs and
-tests used in our evaluation.
+tests used in our evaluation. We used these subject
+programs because they have been developed for
+a considerable amount time (3--10 years), and each
+of them includes a well-written unit test suite.
 
 Joda-Time~\cite{jodatime} is an open source
 date and time library. It is a mature project that
 has been under active development
-for more than eight years. XML Security~\cite{xmlsecurity}
+for ten years. XML Security~\cite{xmlsecurity}
 is a component library implementing XML signature and encryption
 standards. XML Security is included in
 the SIR repository, and has been used widely
@@ -61,18 +64,20 @@ identifies textual, compilation, and behavioral conflicts.
 Synoptic~\cite{synoptic} is a tool to mine a finite state
 machine model representation of a system from logs.
 
-Each subject program has a human-written JUnit test suite.
-In addition, for each subject program, we use
+Given the increasing importance of automated test generation
+tools~\cite{PachecoLET2007, ZhangSBE2011, Csallner:2004, fraseretal:ISSTA:2011},
+we also want to investigate dependent tests in automatically-generated
+test suites. For each subject program, we use
 Randoop~\cite{PachecoLET2007}, a state-of-the-art automated
 test generation tool, to create a suite of 5,000 tests.
 Randoop automatically drops textually-redundant tests 
 and outputs a subset of the generated tests as
 shown in Table~\ref{tab:subjects}.
 
-We manually examine the generated test suites, and discarded
-the automatically-generated test suite of JodaTime, since many
-tests in it are non-deterministic (i.e., 
-running them in the \textit{same} order can produce different results).
+We discarded the automatically-generated test suite of
+JodaTime, since many tests in it are non-deterministic (i.e., 
+running them in the \textit{same} order
+can produce different results).
 
 
 \subsection{Evaluation Procedure}
@@ -130,17 +135,19 @@ automatically-generated dependent tests.  A larger percentage (15\%) of
 automatically-generated tests are dependent.  Developers' understanding of
 the code, and their goals when writing the tests, helps them build
 well-structured tests that carefully initialize and destroy the shared
-objects they may use and that avoid using other objects.  In other words,
-the dependences in automatically-generated tests often stem from ``misuse''
-of APIs, such as not setting up the environment correctly.  This misuse may
+objects they may use and that avoid using other objects.
+By contrast,  most automated test generation tools are not ``state-aware'': the
+generated tests often ``misuse'' APIs, such as not setting up
+the environment correctly.  This misuse may
 indicate that the tests are invalid; it may indicate weaknesses, poor
 design, or fragility of the APIs; or it may indicate that the human-written
 tests have failed to exercise some functionality.
-The root cause of all dependent tests is the improper access to
+
+The root cause of all detected dependent tests is the improper access to
 global fields. XML Security and Crystal developers use more
 global fields in the test code,
-so there are relatively more dependent tests in them.
-This concurs with our findings in Section~\ref{sec:studyfindings}.
+so there are relatively more dependent tests detected in them.
+%This concurs with our findings in Section~\ref{sec:studyfindings}.
 %\edit{Can we say anything
 %  about the relative frequency of the three?}
 
@@ -256,16 +263,15 @@ in practice. First, there is no guarantee of how many
 dependent tests that the randomized algorithm can detect. A randomized
 algorithm might even produce different results across different runs.
 Second, more importantly, there is no clear stop criteria
-for running the randomized algorithm.
+for running the randomized algorithm in practice.
 Thus, it can be hard for users
 to know how many runs would be enough to find all dependent tests in a test suite.
-Third, when a dependent test is identified, users
-need to inspect tests executed
-before the dependent test, and isolate a minimized
+Third, given an identified dependent test, users
+need to inspect tests executed it, and isolate a minimized
 subsequence of tests (either
 manually or using an assisting tool~\cite{Zeller:2002}) to understand the dependence root cause.
 
-By contrast, both the exhaustive $k$-bounded and the dependence-aware
+By contrast, both the exhaustive $k$-bounded and the depend\-ence-aware
 $k$-bounded algorithms systematically search for dependent
 tests of a given size and do not suffer from the above limitations.
 However, the major limitation that prevents them being applied to a

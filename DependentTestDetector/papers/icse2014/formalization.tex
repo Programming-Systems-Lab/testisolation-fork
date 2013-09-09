@@ -63,10 +63,10 @@ execution. $f$ maps the execution of a test\/ $ t \in
 in an environment\/ $\env \in \environs$ to a new (potentially updated)
 environment\/ $\env' \in \environs$.
 
-For the execution of a test suite\/ $T = \suite{t_1, t_2, \dots, t_n}$
+Given a test suite\/ $T = \suite{t_1, t_2, \dots, t_n}$,
 we use the shorthand\/
-$\exec{T}{\env}$ for $\exec{t_n}{{\dots \exec{t_1}
-{\env} \dots }}$.
+$\exec{T}{\env}$ for $\exec{t_n}{\exec{t_{n-1}}{{\dots \exec{t_1}
+{\env} \dots }}}$, to represent its execution.
 \end{definition}
 
 \begin{definition}[Test Result]
@@ -104,8 +104,8 @@ than in the execution $\exec{S_2}{\env_0}$.
 Given a test suite\/ $T$, a test $t \in T$ is a
 manifest dependent test if $\exists$ two test suites
 $S_1, S_2 \in$ permutations($T$):
-\result{t}{S_1, \env_0}[$t$] $\neq$
-\result{t}{S_2, \env_0}[$t$].
+\result{t}{\exec{S_1}{\env_0}}[$t$] $\neq$
+\result{t}{\exec{S_2}{\env_0}}[$t$].
 %
 %${S_1 \subseteq T - t}$
 %and ${S_2 \subseteq T - t}$: \result{t}{f(S_1, \env_0)} $\neq$
@@ -211,7 +211,8 @@ of this algorithm is linear.
 
 For the sake of simplicity, our formalism only
 considers deterministic tests,
-and excludes tests whose results might be affected non-determinism such as thread scheduling.
+and excludes tests whose results might be affected by
+non-determinism such as thread scheduling.
 Our formalism excludes self-dependence, 
 when executing the same test twice
 may lead to different results. Our empirical study

@@ -7,13 +7,12 @@ a prototype tool, called \ourtool. \ourtool
 supports JUnit 3.x/4.x tests. %, and is fully-automated.
 
 \ourtool launches a fresh JVM when
-executing a test permutation and clears external state such
-as files, ensuring there is no interaction between
+executing a test permutation, ensuring there is no interaction between
 different runs. When comparing the observed result of
 a test in a permutation with its default result,
 \ourtool considers two JUnit test results to be the same when the
 tests either both pass, or exhibit exactly the same exception
-or assertion violation.
+(from the same line of code) or assertion violation.
 
 %For the exhaustive $k$-bounded dependent test detection algorithm
 %(Section~\ref{sec:basic}), \ourtool takes a test suite
@@ -47,18 +46,23 @@ determine whether an object will be mutated or not.
 If a test uses an object as a mutable reference
 in a Javarifier-annotated JDK call, \ourtool treats the test
 has a write effect to the object.
-\ourtool also instruments
-calls to the \CodeIn{clone()} method and reflection
-methods, to record the objects they may create.
-\edit{a few sentences about security manager, and file accesses here}
+\ourtool also handles file access, Java security manager,
+the \CodeIn{clone()} method, and reflective object creation.
+We omit the implementation details due to the space limits.
 
 
-\edit{There are several sources of unsoundness in \ourtool's
-implementation. First, ...say the tradeoff in implementation here,
-such as dynamic class loading, native methods, etc....
-Despite these limitations, \ourtool works well in practice
-and identifies many real-world dependent tests (Section~\ref{sec:evaluation}).
-}
+%\ourtool also instruments
+%calls to the \CodeIn{clone()} method and reflection
+%methods, to record the objects they may create.
+%\edit{a few sentences about security manager, and file accesses here}
+
+
+%\edit{There are several sources of unsoundness in \ourtool's
+%implementation. First, ...say the tradeoff in implementation here,
+%such as dynamic class loading, native methods, etc....
+%Despite these limitations, \ourtool works well in practice
+%and identifies many real-world dependent tests (Section~\ref{sec:evaluation}).
+%5}
 
 %In addition, \ourtool implements the Delta debugging
 %algorithm~\cite{Zeller:2002} to

@@ -22,7 +22,8 @@ all dependent tests.
 Section~\ref{sec:randomized} describes a randomized algorithm
 that repeatedly executes all the tests of a suite in random order.
 Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
-executes all possible sequences of $k$ tests for a bounding parameter $k$.
+executes all possible sequences of $k$ tests for a bounding parameter $k$
+(specified by users).
 Section~\ref{sec:advalgorithm} describes a dependence-aware $k-$bounded algorithm.
 The dependence-aware algorithm dynamically collects the fields that each test
 reads or writes, and uses such collected information to reduce the search space.
@@ -293,11 +294,11 @@ permutations that are guaranteed to have the
 same results as being executed in the default order.
 The intuition of this algorithm is that,
 given a test permutation, for \textit{each}
-test, if \textit{all global fields} it reads
-are written by the \textit{same} test as
-in the default execution order, all tests in
+test, if \textit{every global field} it reads
+is written by the \textit{same} test as
+originally in the default execution order, all tests in
 the permutation are guaranteed to
-have the same results and the permutation can be safely ignored. 
+produce the same results. Thus, the permutation can be safely ignored. 
 
 Figure~\ref{fig:impralg} shows the algorithm, which redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.

@@ -117,8 +117,9 @@ document them, but in other cases they are
 inadvertent. Among \dtnum dependent tests,
 94 (98\%) of them were treated as major or minor problems,
 but only 38 (40\%) of all the \dtnum dependent tests
-got fixed by developers. There is no statistical
-significant correlation between severity and fixing.
+got fixed by developers. 
+%There is no statistical
+%significant correlation between severity and fixing.
 Among the 38 fixed dependent tests, only 6 fixes are
 on the program code, while the other fixes are on the
 test code. This indicates that dependent tests usually
@@ -284,7 +285,7 @@ calls \CodeIn{reset()} in class \CodeIn{OptionBuilder}.
 We summarize the main implications of our findings.
 
 \noindent \textbf{{Dependent tests exist in practice, but
-they can be hard to identify.}}
+they are not obvious to identify.}}
 None of the dependent tests we studied can be identified by
 running the existing test suite in the default order. 
 Every dependent test was reported when the
@@ -330,8 +331,7 @@ may achieve a high return by focusing on global variables.
 
 Our findings apply in the context of our study and methodology and may not
 apply to arbitrary programs.
-The applications we studied are widely used and have comprehensive test suites.
-However, a limitation is that they are all written in 
+The applications we studied are all written in 
 Java and have JUnit test suites.  
 
 We accepted the developers' judgment regarding which tests are dependent
