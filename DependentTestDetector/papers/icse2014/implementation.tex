@@ -31,8 +31,9 @@ executed on a \ourtool-instrumented program.
 %too low-level, commented out by Sai, an array object is also an object
 %\ourtool also monitors array accesses by recording
 %both the array object ID and the array index being accessed.
-\ourtool uses two optimizations to reduce the
-instrumentation overhead. First, accesses to local objects
+\ourtool uses two optimizations to improve \ourtool's performance.
+%instrumentation overhead. 
+First, accesses to local objects
 only accessible to a test itself are not instrumented,
 %created by the test itself and disposed
 %after test execution, 
@@ -46,7 +47,11 @@ determine whether an object will be mutated or not.
 If a test uses an object as a mutable reference
 in a Javarifier-annotated JDK call, \ourtool treats the test
 has a write effect to the object.
-\ourtool also handles file access, Java security manager,
+Third, optionally, users can specify a list of ``dependence-free''
+fields (e.g., global fields for logging or counting), which can
+never be the root cause of manifest test dependence. \ourtool
+ignores the accesses to these fields.
+Besides, \ourtool also handles file access, Java security manager,
 the \CodeIn{clone()} method, and reflective object creation.
 We omit the implementation details due to the space limits.
 

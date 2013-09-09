@@ -27,7 +27,7 @@ test parallelization~\cite{Misailovic:2007}, test factoring~\cite{Saff:2005}, an
 %in the presence of dependent tests.
 However, this critical assumption is rarely questioned or investigated.
 Test dependence is generally ignored.
-Such conventional wisdom motivates us
+Such unverified conventional wisdom motivates us
 to investigate this assumption, understanding
 whether test dependence arises in practice, 
 the repercussions of dependent tests, and how to proactively
@@ -87,9 +87,9 @@ potential to yield
 a different result.  
 
 As a principle of unit testing~\cite{Massol:2003}, each unit
-test should initialize (or mock) the execution environment
+test should properly initialize (or mock) the execution environment
 and/or any resources it will use.
-Likewise, after test execution, it should carefully reset the
+Likewise, after test execution, it should reset the
 execution environment and external resources
 to avoid affecting other tests' execution.
 This principle is adopted and confirmed by many
