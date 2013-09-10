@@ -28,7 +28,7 @@ test parallelization~\cite{Misailovic:2007}, test factoring~\cite{Saff:2005}, an
 However, this critical assumption is rarely questioned or investigated.
 Test dependence is generally ignored.
 Such unverified conventional wisdom motivates us
-to investigate this assumption, understanding
+to investigate its validity, understanding
 whether test dependence arises in practice, 
 the repercussions of dependent tests, and how to proactively
 detect dependent tests.
@@ -207,10 +207,10 @@ This paper makes the following contributions:
   to detect dependent tests (Section~\ref{sec:detecting}).
   The first algorithm repeatedly shuffles a test suite,
   and then executes each test in a random order.
-  The second exhaustive $k$-bounded algorithm
+  The second exhaustive bounded algorithm
   executes all possible $k$-tests for
   a bounding parameter $k$ to identify tests exhibiting different results.
-  The third dependence-aware $k$-bounded
+  The third dependence-aware bounded
   algorithm uses dynamic program analyses
   to reduce the search space. It records fields read and
   written by each test, and then safely ignores test execution orders

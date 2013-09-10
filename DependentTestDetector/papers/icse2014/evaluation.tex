@@ -2,6 +2,7 @@
 \label{sec:evaluation}
 
 
+\newcommand{\jt}{Joda-Time\xspace}
 
 \newcommand{\jodatimetests}{3875\xspace}
 \newcommand{\xmlsecuritytests}{108\xspace}
@@ -50,7 +51,7 @@ programs because they have been developed for
 a considerable amount of time (3--10 years), and each
 of them includes a well-written unit test suite.
 
-Joda-Time~\cite{jodatime} is an open source
+\jt~\cite{jodatime} is an open source
 date and time library. It is a mature project that
 has been under active development
 for ten years. XML Security~\cite{xmlsecurity}
@@ -75,7 +76,7 @@ and outputs a subset of the generated tests as
 shown in Table~\ref{tab:subjects}.
 
 We discarded the automatically-generated test suite of
-JodaTime, since many tests in it are non-deterministic (i.e., 
+\jt, since many tests in it are non-deterministic (i.e., 
 running them in the \textit{same} order
 can produce different results).
 
@@ -183,12 +184,12 @@ detecting dependent tests. When run \trialnum times,
 it identifies \textit{more} dependent tests than the other
 two algorithms can find. For the human-written
 test suites, the randomized algorithm detects 2 more dependent
-tests in Joda-Time. These two tests only
+tests in \jt. These two tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and dependence-aware $k$-bounded
 algorithm fail to detect these two tests, because
 they cannot scale to $k$=3 for 
-Joda-Time. Related, the randomized algorithm
+\jt. Related, the randomized algorithm
 detects more dependent
 tests in the automatically-generated test suites,
 because both the exhaustive and dependence-aware $k$-bounded
@@ -210,7 +211,7 @@ The time cost of the randomized algorithm
 is proportional to the run time of the suite and the number of runs.
 Overall, the time cost is acceptable for practical use.
 For example, the randomized algorithm took around 1.5 hours
-to finish 1000 runs,  for JodaTime's human-written test
+to finish 1000 runs,  for \jt's human-written test
 suite (\jodatimetests tests).
  
 The time cost of running the exhaustive $k$-bounded algorithm
@@ -220,7 +221,7 @@ test suites when $k$=2, and failed to scale to all test suites
 when $k$=3. The primary reason is due to the large
 number of possible test permutations. 
 For example, when $k$=2, there are 15,011,750 permutations
-for Joda-Time's human-written test suite (\jodatimetests tests),
+for \jt's human-written test suite (\jodatimetests tests),
 which would take approximately 58 days to finish.
 %For example, running all
 %Joda-Time's \jodatimetests human-written
@@ -294,8 +295,8 @@ explore all possible test permutations.
 We sent the identified human-written dependent tests to the
 subject program developers, asking for their feedback.
 
-One dependent test in Joda-Time was previously-known,
-and had already been fixed. Joda-Time's
+One dependent test in \jt was previously-known,
+and had already been fixed. \jt's
 developers confirmed the other new dependent
 tests, and thought that they are due to unintended interactions
 in the design of the library.
