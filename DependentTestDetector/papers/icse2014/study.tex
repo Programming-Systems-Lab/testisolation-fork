@@ -11,7 +11,7 @@
 To investigate whether dependent tests can reach beyond theory
 and appear in real-world programs, this section presents an empirical
 study of concrete examples of test dependence found in
-well-known open source programs. 
+well-known open source software. 
 
 
 \subsection{Sources and Study Methodology}
@@ -29,9 +29,10 @@ For each issue tracking system, we searched for a set of four keywords
 ``different test outcome''), and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
-helped us understand whether the report is about test dependence
---- a test manifesting different results under different
-test execution orders. Each dependent test candidate was examined by
+helped us understand whether the report is about test dependence.
+%--- a test manifesting different results under different
+%test execution orders. 
+Each dependent test candidate was examined by
 at least two people and the whole process consisted of several
 rounds of (re-)study and cross checking. We ignored reports
 that are described vaguely, and excluded tests whose results are
@@ -68,7 +69,7 @@ If the test produces a different result
 when run after one other test (often, the subsuite is
 running these two tests in the opposite order as the full original test
 suite), then the number of tests to manifest the dependent test is 2.
-Among the \dtnum studied dependent tests, only 2 of them
+Among the \dtnum studied dependent tests, we found only 2 of them
 require 3 tests to manifest the dependence.
 One test depends on itself:
 running the test twice produces different results than running it once,
@@ -115,7 +116,7 @@ modify the test code to remove them.}}
 In some cases, dependent tests are intentional and developers
 document them, but in other cases they are
 inadvertent. Among \dtnum dependent tests,
-94 (98\%) of them were treated as major or minor problems,
+94 (98\%) of them were treated as major or minor problems in the report,
 but only 38 (40\%) of all the \dtnum dependent tests
 got fixed by developers. 
 %There is no statistical
@@ -222,7 +223,7 @@ However, this bug report was spurious and was
 caused by undocumented test dependence.
 All 49 failing tests are dependent tests with the same
 root cause: in SWT, only one global \code{Display}
-object is allowed; the tests that the user tried to run
+object is allowed; the tests that the user tried to run,
 create, but do not dispose of a \code{Display} object, while
 the tests in \code{TestDisplay} attempt to create
 a new \code{Display} object, which fails, as one
@@ -291,8 +292,9 @@ running the existing test suite in the default order.
 Every dependent test was reported when the
 test suite is reordered, either accidentally by a user or
 by a testing tool. This indicates that
-dependent test detection techniques should
-explicitly search for such dependent tests.
+a tool for detecting dependent tests is needed.
+%dependent test detection techniques should
+%explicitly search for such dependent tests.
 
 \vspace{1mm}
 \noindent \textbf{Dependent test detection techniques

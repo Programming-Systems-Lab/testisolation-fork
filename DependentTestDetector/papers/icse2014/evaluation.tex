@@ -47,7 +47,7 @@ dependent tests (Section~\ref{sec:algcomparison})?
 Table~\ref{tab:subjects} lists the programs and
 tests used in our evaluation. We used these subject
 programs because they have been developed for
-a considerable amount time (3--10 years), and each
+a considerable amount of time (3--10 years), and each
 of them includes a well-written unit test suite.
 
 Joda-Time~\cite{jodatime} is an open source
@@ -193,6 +193,7 @@ detects more dependent
 tests in the automatically-generated test suites,
 because both the exhaustive and dependence-aware $k$-bounded
 failed to scale to $k$=2 for all automatically-generated test suites.
+
 The dependence-aware bounded algorithm found the same
 number of dependent tests as the exhaustive bounded algorithm, except
 for the automatically-generated test suite of XMLSecurity.
@@ -309,7 +310,7 @@ found in Crystal were not intentional and mostly likely
 happened because of the dependency
 through global variables. The developers considered the
 dependencies undesirable and opened a bug report for
-this report issue\footnote{\url{https://code.google.com/p/crystalvc/issues/ detail?id=57}}.
+this report issue~\cite{crystalbugreport}.
 
 The Synoptic developers merged two related tests to fix
 the dependent tests.

@@ -124,7 +124,7 @@ subtle bug or test failure.
 \subsection{Repercussions of Dependent Tests}
 
 
-Our study of \dtnum real-world, developer-confirmed dependent
+Our study of \dtnum real-world, confirmed dependent
 tests 
 % from \repnum software issue tracking systems
 (Section~\ref{sec:study}) identified two 
@@ -193,7 +193,7 @@ This paper makes the following contributions:
   systems to show that test dependence
   arises in practice. Our study identifies common
   characteristics of dependent tests, and
-  it indicates that test dependence can have
+  indicates that test dependence can have
   potentially costly repercussions and can be hard to identify unless
   explicitly searched for (Section~\ref{sec:study}).
 
@@ -205,7 +205,7 @@ This paper makes the following contributions:
 
   \item \textbf{Algorithms.} We present three algorithms
   to detect dependent tests (Section~\ref{sec:detecting}).
-  The first randomized algorithm repeatedly shuffles a test suite,
+  The first algorithm repeatedly shuffles a test suite,
   and then executes each test in a random order.
   The second exhaustive $k$-bounded algorithm
   executes all possible $k$-tests for
@@ -222,14 +222,14 @@ This paper makes the following contributions:
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
   tool, called \ourtool (Section~\ref{sec:impl}), and applied it to \subjnum real-world subject programs.
-  \ourtool detected previously-unknown dependent tests in \textit{every}
+  \ourtool detected dependent tests in \textit{every}
   subject program we studied, from both human-written unit tests and automatically-generated
   unit tests (Section~\ref{sec:evaluation}).
   %been discovered before, showing that on average \todo{xx}\% of the human-written
   %unit tests are dependent and \todo{xx}\% of the automatically-generated
   %unit tests are dependent
-  Finally, we discuss a set of open questions and other possible impacts of dependent
-  tests in Section~\ref{sec:discussion}.
+  %Finally, we discuss a set of open questions and other possible impacts of dependent
+  %tests in Section~\ref{sec:discussion}.
 \end{itemize}
 
 

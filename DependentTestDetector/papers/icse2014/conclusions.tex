@@ -1,4 +1,4 @@
-\section{Conclusion}
+\section{Conclusion and Future Work}
 \label{sec:questions}
 
 Test independence is broadly assumed but rarely addressed, and
@@ -12,26 +12,97 @@ formalized the the dependent test detection
 problem. To detect dependent tests, we designed
 and implemented three algorithms to identify manifest test dependence
 in a test suite. Our empirical evaluation revealed
-previously-unknown dependent tests in every subject program
+dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
 suites.
 
-\begin{comment}
-The results of this paper offer initial answers to the four questions we posed
-in the introduction. First, test dependence \textit{does}
-arise in practice, from both human-written test suites and automatically-generated
-test suites. Second, dependent tests can have
-non-trivial negative repercussions. Third, we speculate that this
-problem is not thoroughly examined before due to the
-lack of empirical evidence, a rigorous problem definition,
-and detection algorithms; alternatively people may simply believe that well-designed
-test suites do not have this problem.
-Fourth,
-detecting manifest dependent tests is a NP-complete problem,
-for which efficient algorithms are unlikely to exist. However,
-in practice, a simple algorithm like the randomized algorithm
-described in this paper can work fairly well.
-\end{comment}
+Our future work should focus on the following directions:
+
+\noindent \textbf{{Investigating impact of dependent tests.}}
+Dependent tests can compromise the application of
+testing techniques such as test generation, selection,
+prioritization, and parallelization, since
+most current testing techniques just assume independence and
+make no statement about what happens when this
+assumption is not true. However,
+more comprehensive empirical studies should measure  
+the extent of this impact.
+%
+Another open question is how should
+testing techniques handle test dependence.
+One straightforward way 
+might be to augment such techniques to respect a
+defined partial order among tests. This partial order
+can be derived from knowledge about dependent tests,
+or be detected by our \ourtool tool.
+%Like contrived examples of test
+%dependence itself, it is easy to produce simple examples where
+%downstream techniques produce incorrect output when applied to dependent
+%tests.
+%under the assumption that the input tests have no dependences.
+%However, 
+
+
+
+\vspace{1mm}
+
+\noindent \textbf{{Eliminating dependent tests.}}
+As reflected in our study (Section~\ref{sec:study}),
+the practice of eliminating dependent tests
+remains mostly manual and ad hoc --- software developers
+usually manually hardcode test
+execution orders in a configuration file or
+simply merge or remove tests.
+A more flexible and robust methodology for
+dependent test elimination should be developed.
+This question also applies to automated test generators.
+While there is some work to alleviate
+this problem~\cite{fraseretal:ISSTA:2011}, the question
+of removing automatically-generated dependent tests
+still remains open.
+
+%On the other hand, 
+%almost all automated test generation
+%techniques we are aware of produce tests
+%that are hard to read for humans, are undocumented, and their intent
+%cannot easily be gleaned from naming conventions and other aids
+%developers normally use. Therefore, it requires more effort
+%from developers to identify the root cause of dependence
+%and then remove the dependence. While there is some work to alleviate
+%this problem~\cite{fraseretal:ISSTA:2011}, the question
+%of eliminating  automatically-generated dependent tests
+%still remains open.
+
+
+%As discussed in our experiments, it appears that test
+%dependence in automatically generated test suites is 
+%even more troublesome than in human-written suites. 
+
+
+\vspace{1mm}
+
+
+\noindent \textbf{{Preventing dependent tests.}}
+%Detecting dependent tests is not obvious in most
+%cases. Thus, a natural question is how could
+%software developers prevent dependent tests when
+%writing testing code.
+One possible way is encouraging to
+use advanced testing frameworks that support test dependence~\cite{testng},
+so that developers can explicitly specify test
+dependence when writing tests.
+%However, using different testing frameworks may
+%bring up the backward-compatibility issue to the existing tests.
+
+Stylized coding patterns can also be useful. Developers
+should be encouraged to write tests ``defensively'' by
+specifying necessary test execution pre-conditions and
+using less (or properly mocking) global variables or shared resources. 
+There is already some work aiming at automating this
+process to prevent the potential
+for dependences by refactoring programs to use
+less global state~\cite{wlokaetal:FSE:2009}. 
+
 
 %The source code of our tool implementation is publicly
 %available at: \url{http://testisolation.googlecode.com}.

@@ -98,7 +98,7 @@ expected result (lines 5--8).
 In our implementation, this algorithm repeatedly
 shuffles the test suite, and executes each test until
 no more dependent tests are identified within a
-pre-defined number of iterations (default: \smalltrialnum iterations).
+pre-defined number of iterations. % (default: \smalltrialnum iterations).
 Our experiments use $\smalltrialnum,
 \mediumtrialnum, \trialnum$ as the iteration numbers.
 
@@ -323,12 +323,12 @@ readers can refer to~\cite{proof-dependence-aware} for details.
 
 The dependence-aware $k$-bounded algorithm has two major benefits.
 First, it clusters tests by the fields they
-read and write. Thus, only tests reading or writing
+read and write. Only tests reading or writing
 the same global field(s), rather than \textit{all} tests
 in a suite, are treated as potentially dependent.
-Second, even for tests reading or writing the same global
-field(s), some permutations can still be discarded
-without executing by checking the tests performing the last write.
+Second, for tests reading or writing the same global
+field(s), some permutations can be discarded
+by checking the tests performing the last write.
 
 %in which every test must
 %reveal the same result to reduce the total number
