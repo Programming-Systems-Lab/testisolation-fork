@@ -304,17 +304,17 @@ and had already been fixed. Joda-Time's
 developers confirmed the other new dependent
 tests, and thought that they are due to unintended interactions
 in the design of the library.
-
+%
 The Crystal developers confirmed that all dependent tests
 found in Crystal were not intentional and mostly likely
 happened because of the dependency
 through global variables. The developers considered the
 dependencies undesirable and opened a bug report for
 this report issue~\cite{crystalbugreport}.
-
+%
 The Synoptic developers merged two related tests to fix
 the dependent tests.
-
+%
 %After receiving our reported dependent tests in XML-Security,
 The SIR~\cite{sir} maintainers confirmed our reported dependent
 tests in XML-Security, and accepted our
@@ -335,8 +335,7 @@ can be generalized to an arbitrary program.
 Second, in this evaluation, we focus specifically on
 the {manifest dependence} between \textit{unit tests}.
 We did not investigate possible test dependence that may arise
-in other types of tests, such as integration tests
-or system tests.
+in other types of tests, such as integration tests.
 Third, due to the computational complexity of the general dependent test
 detection problem, we do not yet have
 empirical data regarding how many dependent
@@ -351,9 +350,7 @@ tests exist in a test suite and how many percentages of dependence tests
 
 \noindent \textbf{Experimental Conclusions}
 We have three chief findings \textbf{(1)}
-Dependent tests do exist in practice. However,
-they are not easily identified
-unless been explicitly searched for.
+Dependent tests do exist in practice.
 An automatically-generated test suite can contain
 substantially more dependent tests than a human-written
 test suite.
