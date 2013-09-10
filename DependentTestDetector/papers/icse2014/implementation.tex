@@ -31,7 +31,7 @@ executed on a \ourtool-instrumented program.
 %too low-level, commented out by Sai, an array object is also an object
 %\ourtool also monitors array accesses by recording
 %both the array object ID and the array index being accessed.
-\ourtool uses two optimizations to improve \ourtool's performance.
+\ourtool uses three optimizations to improve \ourtool's performance.
 %instrumentation overhead. 
 First, accesses to local objects
 only accessible to a test itself are not instrumented,
@@ -51,7 +51,7 @@ Third, optionally, users can specify a list of ``dependence-free''
 fields (e.g., global fields for logging or counting), which can
 never be the root cause of manifest test dependence. \ourtool
 ignores the accesses to these fields.
-Besides, \ourtool also handles array access, file access, 
+\ourtool also handles array access, file access, 
 the \CodeIn{clone()} method, reflective object creation, etc.
 We omit the implementation details due to the space limits.
 
