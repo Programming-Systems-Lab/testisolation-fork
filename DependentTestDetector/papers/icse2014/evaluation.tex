@@ -196,17 +196,12 @@ failed to scale to $k$=2 for all automatically-generated test suites.
 
 The dependence-aware bounded algorithm found the same
 number of dependent tests as the exhaustive bounded algorithm, except
-for the automatically-generated test suite of XMLSecurity.
-One dependent test was missed because
-%caused by
-%due to the improper read of
-our current implementation could not track global field access
-through reflection calls.
+that it missed one dependent test in XML Security's
+automatically-generated test suite.
+The dependent test was missed because \ourtool
+did not track field access within the \CodeIn{java.security} package,
+and Javarifier did not provide annotations for those APIs.
 
-%and second, some detected dependent tests require executing more than 2 tests
-%to manifest.
-
-%Compared to the randomized algorithm, On the other hand,
 
 \subsubsection{Performance of \ourtool}
 \label{sec:performance}
