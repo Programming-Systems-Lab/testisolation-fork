@@ -938,3 +938,43 @@ issues.apache.org/jira/browse/CLI-186} \url{https://issues.apache.org/jira/brows
 
 @comment{jabref-meta: selector_keywords:}
 
+@InProceedings{SaffE2004:mock-creation,
+  author = 	 "David Saff and Michael D. Ernst",
+  title = 	 "Automatic mock object creation for test factoring",
+  booktitle =	 PASTE2004,
+  pages = 	 "49--51",
+  year =	 2004,
+  address =	 PASTE2004addr,
+  month =	 PASTE2004date,
+  abstract =
+   "{\em Test factoring} creates fast, focused unit tests from slow system-wide
+    tests; each new unit test exercises only a subset of the functionality
+    exercised by the system tests.  Augmenting a test suite with factored unit
+    tests, and prioritizing the tests, should catch errors earlier in a test
+    run.
+    \par
+    One way to factor a test is to introduce \emph{mock objects}.  If a test
+    exercises a component A, which is designed to issue queries against or
+    mutate another component B, the implementation of B can be replaced by a
+    {\em mock}.  The mock has two purposes:  it checks that A's calls to B are
+    as expected, and it simulates B's behavior in response.  Given a system
+    test for A and B, and a record of A's and B's behavior when the system test
+    is run, we would like to automatically generate unit tests for A in which B
+    is mocked.  The factored tests can isolate bugs in A from bugs in B and, if
+    B is slow or expensive, improve test performance or cost.
+    \par
+    This paper motivates test factoring with an illustrative example, proposes
+    a simple procedure for automatically generating mock objects for factored
+    tests, and gives examples of how the procedure can be extended to larger
+    change languages.",
+  category = "Testing",
+  csetags = "mernst,mernst-Testing,plse",
+  basefilename = "mock-factoring-paste2004",
+  downloadsnonlocal =
+   "http://homes.cs.washington.edu/~mernst/pubs/mock-factoring-paste2004.pdf PDF;
+    http://homes.cs.washington.edu/~mernst/pubs/mock-factoring-paste2004.ps PostScript",
+  summary =
+   "A set of small, fast-running tests can be more useful than a single
+    larger test.  This paper proposes a way to automatically factor a large
+    test case into smaller tests, using mock objects to model the environment.",
+}
