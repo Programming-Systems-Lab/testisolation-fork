@@ -101,7 +101,7 @@ on a practical guideline for using randomized algorithms
 in software engineering, as summarized in~\cite{Arcuri:2011}.
 %
 For the exhaustive $k$-bounded algorithm
-and the dependence-aware $k$-bounded algorithm,
+and the \dependenceaware{} $k$-bounded algorithm,
 we use isolated execution ($k = 1$), and
 pairwise execution ($k = 2$). The choice of $k$ is
 based on the results of our empirical
@@ -164,16 +164,16 @@ two algorithms can find. For the human-written
 test suites, the randomized algorithm detects 2 more dependent
 tests in \jt. These two tests only
 manifest when a sequence of three tests are run in a specified,
-non-default order. Both exhaustive and dependence-aware $k$-bounded
+non-default order. Both exhaustive and \dependenceaware{} $k$-bounded
 algorithm fail to detect these two tests, because
 they cannot scale to $k$=3 for 
 \jt. Related, the randomized algorithm
 detects more dependent
 tests in the automatically-generated test suites,
-because both the exhaustive and dependence-aware $k$-bounded
+because both the exhaustive and \dependenceaware{} $k$-bounded
 failed to scale to $k$=2 for all automatically-generated test suites.
 
-The dependence-aware bounded algorithm found the same
+The \dependenceaware{} bounded algorithm found the same
 number of dependent tests as the exhaustive bounded algorithm, except
 that it missed one dependent test in XML Security's
 automatically-generated test suite.
@@ -214,16 +214,16 @@ per permutation. Then, we multiple
 the average cost by the total number of permutations to estimate
 the time cost.
 
-The dependence-aware $k$-bounded algorithm substantially improves
+The \dependenceaware{} $k$-bounded algorithm substantially improves
 the efficiency of the exhaustive $k$-bounded algorithm. On average,
 it took 3.3$\times$ and 1.1$\times$ less time to run all
 human-written tests and automatically-generated tests, respectively, when $k$=1.
-The dependence-aware algorithm took an order of magnitude
+The \dependenceaware{} algorithm took an order of magnitude
 less time to run both human-written tests and automatically-generated tests,
 when $k$=2.
 For example, when $k$=2, the exhaustive algorithm took 11,927 seconds
 to execute all 11,556 permutations for XML Security's human-written test suite.
-By contrast, the dependence-aware algorithm
+By contrast, the \dependenceaware{} algorithm
 explored the field read and write information, and
 only took 3,322 seconds to execute 2,647 permutations.
 

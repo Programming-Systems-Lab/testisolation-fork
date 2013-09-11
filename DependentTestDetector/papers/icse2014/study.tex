@@ -8,9 +8,9 @@
 \newcommand{\unfixed}{{{58}}\xspace}
 
 
-To investigate whether dependent tests can reach beyond theory
-and appear in real-world programs, this section presents an empirical
-study of concrete examples of test dependence found in
+Dependent tests are known to occur in practice, but little is known about
+their characteristics.  This section qualitatively studies
+concrete examples of test dependence found in
 well-known open source software. 
 
 
@@ -24,9 +24,9 @@ Each issue tracking system serves tens of projects, and
 holds thousands of bug reports, feature requests, improvement
 suggestions, etc.
 
-For each issue tracking system, we searched for a set of four keywords
+For each issue tracking system, we searched for four phrases
 (``dependent test'', ``test dependence'', ``test execution order'',
-``different test outcome''), and manually examined the matched results. For each match, we read the
+``different test outcome'') and manually examined the matched results. For each match, we read the
 description of the issue report, the discussions between reporters
 and developers, and the fixing patches (if available). This information
 helped us understand whether the report is about test dependence.
@@ -35,7 +35,7 @@ helped us understand whether the report is about test dependence.
 Each dependent test candidate was examined by
 at least two people and the whole process consisted of several
 rounds of (re-)study and cross checking. We ignored reports
-that are described vaguely, and excluded tests whose results are
+that are described vaguely, and we excluded tests whose results are
 affected by non-determinism (e.g., multi-threading).
 All collected dependent tests are publicly available 
 at: \url{http://homes.cs.washington.edu/~szhang/dependent\_tests.html}

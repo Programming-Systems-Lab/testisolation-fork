@@ -14,7 +14,7 @@ a test in a permutation with its default result,
 tests either both pass, or exhibit exactly the same exception
 (from the same line of code) or assertion violation.
 
-To implement the dependence-aware $k$-bounded
+To implement the \dependenceaware{} $k$-bounded
 algorithm, \ourtool uses ASM~\cite{asm} to perform load-time bytecode
 instrumentation. Specifically, \ourtool inserts code to monitor each
 static field access (including read and write), and
