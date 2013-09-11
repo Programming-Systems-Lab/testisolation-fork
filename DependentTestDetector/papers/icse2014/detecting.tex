@@ -170,7 +170,8 @@ that exhibit different results.
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
-recordFieldAccess($ts$): returns fields accessed (i.e., read and written) by each test in an ordered sequence of tests $ts$. \\
+recordFieldAccess($\mathit{t}$): executes a test $\mathit{t}$ and returns the fields it reads and writes.\\
+%by a test $t$. \\% in an ordered sequence of tests $ts$. \\
 
 
 \vspace{-2mm}
@@ -179,15 +180,15 @@ getPossibleExecOrder($T$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
 \FOR { each $\mathit{t}$ in $\mathit{T}$ }
-\STATE $\langle {reads}_t, {writes}_t\rangle$ $\leftarrow$ recordFieldAccess($\langle t \rangle$)\\ 
+\STATE $\langle \mathit{{reads}_t}, \mathit{{writes}_t}\rangle$ $\leftarrow$ recordFieldAccess($\mathit{t}$)\\ 
 \ENDFOR
 
 \STATE $\mathit{result}$ $\leftarrow$ $\emptyset$ \\
 \FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
-	\FOR {each $t_i$ in $ts$ \{ $i$ is the position of $t_i$ in $ts$ \}} 
-		\STATE $previousWrites$ $\leftarrow$ $\bigcup_{j < i}  {writes}_{t_j} $ \\
-		\IF {$previousWrites \cap reads_{t_i} \neq \emptyset$}
-			\STATE $result \leftarrow results \cup ts$
+	\FOR {each $\mathit{t_i}$ in $\mathit{ts}$ \{ $\mathit{i}$ is the index of $\mathit{t_i}$ in $\mathit{ts}$ \}} 
+		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{{writes}_{t_j}} $ \\
+		\IF {$\mathit{previousWrites} \cap \mathit{reads_{t_i}} \neq \emptyset$}
+			\STATE $\mathit{result} \leftarrow \mathit{results} \cup \mathit{ts}$
 		\ENDIF
 	\ENDFOR
 
@@ -287,23 +288,31 @@ The dependence-aware $k$-bounded algorithm
 detects the same number of dependent tests
 as the exhaustive $k$-bounded algorithm does (when using the same $k$),
 but it uses dynamic analyses to improve the efficiency.
-Information obtained from shorter permutations is used to avoid running lonnger permutations; 
-a permutation can safely be ignored if all global variables a test accesses
-are the same as a previously executed permutation. 
+%Information obtained from shorter permutations is used to avoid running lonnger permutations; 
+The intuition of this algorithm is that, given
+a test permutation, for \textit{each} test,
+if \textit{every global field} it reads
+is \textit{not} written by any test executed \textit{before} it,
+all tests in the permutation are guranteed to produce
+the same results. Thus, the permutation can be safely ignored.
+
+%a permutation can safely be ignored if all global fields a test accesses
+%5are the same as a previously executed permutation. 
 
 
 Figure~\ref{fig:impralg} shows the algorithm, which redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
 The redefined getPossibleExecOrder function first records
-fields that each test reads and writes in isolation (line 1).
-When generating all possible test permutations
-up to length $k$, the algorithm ensures
-\textit{all} fields \textit{each} test (in the generated permutation)
-may read are not written by any previous test. If so, all tests in the permutation
-must produce the same results as execution in isolation, and the algorithm discards
-this permutation without executing it. Otherwise,
-the function adds the generated permutation to the result
-set (line 7), and runs the algorithm in Figure~\ref{fig:basealgorithm}
+fields that each test reads and writes when executed in isolation
+(line 1).  When generating all possible test permutations
+up to length $k$, the algorithm checks whether
+\textit{all} global fields \textit{each} test (in the generated permutation)
+may read are not written by any test executed before it (lines 6--10).
+If so, all tests in the permutation
+must produce the same results as executed in isolation,
+and the algorithm can safely discard this permutation without
+executing it. Otherwise, the algorithm adds the generated
+permutation to the result set (line 9), and runs the algorithm in Figure~\ref{fig:basealgorithm}
 to identify dependent tests. %among it.
 Due to space limits, we omit the proof of the correctness
 of the dependence-aware $k$-bounded algorithm. Interested
@@ -315,8 +324,8 @@ read and write. Only tests reading or writing
 the same global field(s), rather than \textit{all} tests
 in a suite, are treated as potentially dependent.
 Second, for tests reading or writing the same global
-field(s), some permutations can be avoided by considering their
-order.
+field(s), some permutations can be ignored by checking
+the global fields each test may access. 
 
 %in which every test must
 %reveal the same result to reduce the total number
