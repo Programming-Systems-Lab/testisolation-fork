@@ -135,7 +135,8 @@ in \ourtool.
 
 %\todo{I rewrote the below paragraph.  Please review.}
 
-\ourtool detected 29 human-written dependent tests and 1311
+\ourtool detected 29 human-written dependent tests (among which 27
+dependent tests are previously-unknown) and 1311
 automatically-generated dependent tests.  A larger percentage (15\%) of
 automatically-generated tests are dependent.  Developers' understanding of
 the code, and their goals when writing the tests, help them build
@@ -155,29 +156,6 @@ so there are relatively more dependent tests detected in them.
 %This concurs with our findings in Section~\ref{sec:studyfindings}.
 %\edit{Can we say anything
 %  about the relative frequency of the three?}
-
-% The percentage of dependent tests
-% in the automatically-generated test suites is significantly
-% higher than in the human-written test suites. We identified
-% two possible reasons: first, developers usually have deep
-% knowledge about the intended purpose of a program when writing tests
-% for it. Such expertise helps them build relatively well-structured
-% tests, e.g., tests that carefully initialize and destroy the
-% shared objects they may use. Second, 
-%  it is challenging for automated test generation tools to understand
-%  a program's intended purpose as well as how
-% specific parts of the program depend on the environment.
-% Thus, automated tools often do not explicitly generate code that sets up the
-% environment correctly.  In addition, to cover more
-% program states, automated tools often incrementally
-% builds tests on top of the program state after executing
-% other tests. This could further make a test's result depend on another.
-
-
-%If, at the same time, other tests are
-%generated that as a side e?ect create the needed environment, test dependence ensues
-
-
 
 The randomized algorithm is surprisingly effective in
 detecting dependent tests. When run \trialnum times,
@@ -308,7 +286,8 @@ through global variables. The developers considered the
 dependencies undesirable and opened a bug report for
 this report issue~\cite{crystalbugreport}.
 %
-The Synoptic developers merged two related tests to fix
+The dependent test in Synoptic was previously-known.
+The developers merged two related tests to fix
 the dependent tests.
 %
 %After receiving our reported dependent tests in XML-Security,
@@ -320,6 +299,41 @@ without dependency on other tests, and characterized that as
 ``test engineering 101''. 
 %They also accepted our suggested
 %patch to fix the dependent tests.
+
+\vspace{1mm}
+\noindent \textbf{Initial Assessment of the Impact of
+Dependent Tests.} We manually investigate the
+impact of dependent tests to two well-known
+downstream testing techniques: test
+selection and test prioritization.
+We count the number of dependent tests in the
+4 human-written test suites (Table~\ref{tab:results}) that can
+affect the results of these two techniques.
+For test selection, we manually check whether
+there exists a subsequence of tests
+that do not return the same results
+when executed in the \textit{same} order
+as in the original test suite. 
+For test prioritization, we manually check whether
+there exists a possibly-\textit{reordered}
+subsequence of tests that do not return the
+same results as in the original test suite.
+As a result, 26 out of 29 dependent tests can
+%besides the synoptic test, and 2 jodatime tests
+affect the results of test selection,
+and all 29 dependent tests can affect the results
+of test prioritization.
+
+%\noindent
+%\setlength{\tabcolsep}{0.1\tabcolsep}
+%\begin{tabular}{|l|c|}
+%\hline
+%Downstream Testing Techniques& \#Affected Dependent Tests\\
+%\hline
+%Test Selection & \\
+%Test Prioritization& \\
+%\hline
+%\end{tabular}
 
 \vspace{1mm}
 \noindent \textbf{Threats to Validity}
