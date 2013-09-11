@@ -14,25 +14,49 @@ function in the dependence-aware $k$-bounded algorithm are guaranteed to produce
 
 
 
-\noindent \textbf{Proof.} We prove this theorem by contradiction. Given a test
-suite $T$ and a test permutation $P$ of $T$, let's assume
-permutation $P$ is discarded by the getPossibleExecOrder function
-since all fields read by each test in $P$ are written
-by the same test as in $T$. The initial values of all shared fields are the same across different executions.
+\noindent \textbf{Proof.} 
+
+When $k=$1, the algorithm discards tests that never read or write a global field. A test that does not access any global field will never be affected by other tests, and thus is guaranteed to produce the same result in any execution environment.
+
+When $k\ge$2, We prove this theorem by contradiction. Given a test suite $T$ and a test permutation $P$ of $T$, let's assume  $P$ is discarded by the
+getPossibleExecOrder function. Based on the definition of the algorithm,
+all global fields read by each test in $t \in P$ are \textit{not} written by the tests
+executed before $t$ in $P$. Further, the initial value of each shared field is the
+same across different executions.
 
 
-Suppose there exists a test $t \in P$ produces a different result
-than in $T$. Test $t$ must read a different value
-for at least one shared field. Without loss of generality,
-let's suppose $f$ is the shared field read by $t$ with
-a different value. Based on our assumption, 
-$f$ is written by the same test, denoted as $t'$, as in $T$.
-Since the $f$'s value is different in $P$, $t'$
-must read different values for other shared fields.
-By induction, there must exist a test $t'' \in P$ that 
-reads a different \textit{initial} value
-for at least one shared field. This contradicts
-the assumption that tests are executed in the same environment with the initial values of all shared fields.
+Suppose there exists a test $t \in P$ produces a different result than in $T$.
+Test $t$ must read a different value for at least one shared field. Without loss
+of generality, let's suppose $f$ is the shared field read by $t$ with a different
+value. There are two cases about $f$ and $t$:
 
+\begin{enumerate}
+\item $f$ is not written by any tests executed before $t$ in $P$. So that, $t$ must
+read a different initial value of $f$. This contradicts with our assumption
+that each global field has the same initial value across executions.
+
+\item $f$ is written (with a different value) by another test $t'$
+executed before $t$ in $P$. There are two cases about $t'$:
+
+\begin{enumerate}
+\item $t'$ writes $f$ when executed in isolation. This contradicts with our
+assumption that every global fields $t$ reads is not written all tests
+(including $t'$) when executed in isolation.
+
+\item $t'$ does not write $f$ when executed in isolation. In this case, there must exist another test $t''$ $\in P$ executed before $t'$
+in $P$, whose execution changes the execution path of $t'$
+and causes $t'$ to read $f$. In other words, $t''$'s execution interferes with $t'$ , so that (1) $t''$ reads a different initial value for $f$
+(this contracts with our assumption), or (2) there must be another global field $f'$ which $t'$ reads and $t''$ writes.
+\end{enumerate}
+
+\end{enumerate}
+
+Based on case 2(b), since $P$ contains a finite number of tests, there must exist a test $\hat{t} \in P$ that has no tests 
+executed before it and writes to the shared 
+fields it reads, but $\hat{t}$ still reads a
+ different value for at least one shared field. The only possibility is that $\hat{t}$ reads a different initial value
+for at least one shared field. This contradicts the assumption that tests are
+executed in the same environment with the initial values of all shared 
+fields.
 
 \end{document}
