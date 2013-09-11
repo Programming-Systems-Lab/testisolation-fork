@@ -538,23 +538,11 @@
 \def\dbltopfraction{.7}
 \def\dblfloatpagefraction{.5}
 
-%
-\long\def\@makecaption#1#2{
-   \vskip \baselineskip
-   \setbox\@tempboxa\hbox{\textbf{#1: #2}}
-   \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
-       \textbf{#1: #2}\par               %   THEN set as ordinary paragraph.
-     \else                      %   ELSE  center.
-       \hbox to\hsize{\hfil\box\@tempboxa\hfil}\par
-   \fi}
-
-%
-
 \long\def\@makecaption#1#2{
    \vskip 10pt
-   \setbox\@tempboxa\hbox{\textbf{#1: #2}}
+   \setbox\@tempboxa\hbox{{\small #1: #2\strut}}
    \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
-       \textbf{#1: #2}\par                %   THEN set as ordinary paragraph.
+       {\small\parbox{\hsize}{#1: #2\strut}}\par               %   THEN set as ordinary paragraph.
      \else                      %   ELSE  center.
        \hbox to\hsize{\hfil\box\@tempboxa\hfil}
    \fi}
