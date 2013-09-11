@@ -171,28 +171,26 @@ that exhibit different results.
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
 recordFieldAccess($ts$): returns fields accessed (i.e., read and written) by each test in an ordered sequence of tests $ts$. \\
-computeLastWrites($ts$, $reads$, $write$): for each field read by each test in $ts$, identify the last test in $ts$ that writes to the field.\\
+
 
 \vspace{-2mm}
 
 getPossibleExecOrder($T$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
-\STATE $\langle reads, writes\rangle$ $\leftarrow$ recordFieldAccess($T$)\\
-\COMMENT{$\mathit{reads}$ and $\mathit{writes}$'s data type:
-  Map$\langle$Test, Set$\langle$Field$\rangle$$\rangle$
-% which maps a test to a set of fields.
-}
-\STATE $\mathit{lastWrites}$ $\leftarrow$ computeLastWrites($T$, $\mathit{reads}$, $\mathit{writes}$)
-\\\COMMENT{$\mathit{lastWrites}$'s data type: Map$\langle$Test, Map$\langle$Field, Test$\rangle$$\rangle$, which maps a test to fields it reads and
-the corresponding last test that writes each field.}
-\STATE $\mathit{result}$ $\leftarrow$ $\emptyset$
+\FOR { each $\mathit{t}$ in $\mathit{T}$ }
+\STATE $\langle {reads}_t, {writes}_t\rangle$ $\leftarrow$ recordFieldAccess($\langle t \rangle$)\\ 
+\ENDFOR
+
+\STATE $\mathit{result}$ $\leftarrow$ $\emptyset$ \\
 \FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
-\STATE $\mathit{lastWriteTS}$ $\leftarrow$ computeLastWrites($ts$, $\mathit{reads}$, $\mathit{writes}$)
-%\vspace{-3mm}
-\IF{$\exists$ Test $\mathit{t} \in ts$ such that $\mathit{lastWrites}$[$t$] $\neq$ $\mathit{lastWriteTS}$[$t$]  }
-\STATE $\mathit{result}$ $\leftarrow$ $\mathit{result} \cup \mathit{ts}$
-\ENDIF
+	\FOR {each $t_i$ in $ts$ \{ $i$ is the position of $t_i$ in $ts$ \}} 
+		\STATE $previousWrites$ $\leftarrow$ $\bigcup_{j < i}  {writes}_{t_j} $ \\
+		\IF {$previousWrites \cap reads_{t_i} \neq \emptyset$}
+			\STATE $result \leftarrow results \cup ts$
+		\ENDIF
+	\ENDFOR
+
 \ENDFOR
 \RETURN $\mathit{result}$
 \end{algorithmic}
@@ -207,78 +205,78 @@ getPossibleExecOrder function.
 \label{fig:impralg}
 \end{figure}
 
-\begin{figure}
-\centering
-
-\strut \hspace{-25mm} Initially: \code{x = y = 1;}
-
-\subfigure{
-\begin{minipage}{.43\columnwidth}
-\code{Test1 \\  if(x == 0) \{ y = 0;\}\\ }
-\end{minipage}
-}
-\subfigure{
-\begin{minipage}{.43\columnwidth}
-\code{Test2\\ assert y == 1;}
-\vspace{0.9em}
-\end{minipage}
-}
-\subfigure{
-\begin{minipage}{.43\columnwidth}
-\code{Test3\\ x = 0;}
-
-\vspace{0.5em}
-\end{minipage}
-}
-\subfigure{
-\begin{minipage}{.43\columnwidth}
-\code{Test4 \\  if(x == 0) \{ y = 1;\}\\ }
-\end{minipage}
-}
-
-\strut \hspace{-3mm} Field read and write information by each test when executing
-in the order of Test1, Test2, Test3, and Test4.
-\vspace{1mm}
-
-\begin{tabular}{|c|l|l|l|l|}
+%\begin{figure}
+%\centering
+%
+%\strut \hspace{-25mm} Initially: \code{x = y = 1;}
+%
+%\subfigure{
+%\begin{minipage}{.43\columnwidth}
+%\code{Test1 \\  if(x == 0) \{ y = 0;\}\\ }
+%\end{minipage}
+%}
+%\subfigure{
+%\begin{minipage}{.43\columnwidth}
+%\code{Test2\\ assert y == 1;}
+%\vspace{0.9em}
+%\end{minipage}
+%}
+%\subfigure{
+%\begin{minipage}{.43\columnwidth}
+%\code{Test3\\ x = 0;}
+%
+%\vspace{0.5em}
+%\end{minipage}
+%}
+%\subfigure{
+%\begin{minipage}{.43\columnwidth}
+%\code{Test4 \\  if(x == 0) \{ y = 1;\}\\ }
+%\end{minipage}
+%}
+%
+%\strut \hspace{-3mm} Field read and write information by each test when executing
+%in the order of Test1, Test2, Test3, and Test4.
+%\vspace{1mm}
+%
+%\begin{tabular}{|c|l|l|l|l|}
 %\toprule
-\hline
-\textbf{Global Fields } & \textbf{Test1} & \textbf{Test2} & \textbf{Test3}& \textbf{Test4}\\
-\hline
-\code{x} & Read & & Write& Read\\
-\hline
-\code{y} & & Read & &Write \\
-\hline
-\end{tabular}
-
-\vspace{4mm}
-
-Number of permutations that need to be executed.
-\setlength{\tabcolsep}{1.3\tabcolsep}
-\begin{tabular}{|c|c|c|}
+%\hline
+%\textbf{Global Fields } & \textbf{Test1} & \textbf{Test2} & \textbf{Test3}& \textbf{Test4}\\
+%\hline
+%\code{x} & Read & & Write& Read\\
+%\hline
+%\code{y} & & Read & &Write \\
+%\hline
+%\end{tabular}
+%
+%\vspace{4mm}
+%
+%Number of permutations that need to be executed.
+%\setlength{\tabcolsep}{1.3\tabcolsep}
+%\begin{tabular}{|c|c|c|}
 %\toprule
-\hline
-\textbf{$k$ value} & \textbf{Exhaustive } &
-\textbf{Dependence-Aware }  \\
-\hline
-1 & 4 & 1\\
-\hline
-2 & 12 & 5\\
-\hline
-3 & 24 & 18 \\
-\hline
-4 & 24 & 20 \\
-\hline
-\hline
-\textbf{Total} & 64 & 44 \\
-\hline
-\end{tabular}
-
-
-\Caption{Example tests to illustrate the dependence-aware
-$k$-bounded dependent test detection algorithm (Figure~\ref{fig:impralg}).}
-\label{fig:rwexample}
-\end{figure}
+%\hline
+%\textbf{$k$ value} & \textbf{Exhaustive } &
+%\textbf{Dependence-Aware }  \\
+%\hline
+%1 & 4 & 1\\
+%\hline
+%2 & 12 & 5\\
+%\hline
+%3 & 24 & 18 \\
+%\hline
+%4 & 24 & 20 \\
+%\hline
+%\hline
+%\textbf{Total} & 64 & 44 \\
+%\hline
+%\end{tabular}
+%
+%
+%\Caption{Example tests to illustrate the dependence-aware
+%$k$-bounded dependent test detection algorithm (Figure~\ref{fig:impralg}).}
+%\label{fig:rwexample}
+%\end{figure}
 
 %The exhaustive $k-$bounded algorithm cannot scale to a realistic test suite.
 %For example, it would take months to 
@@ -289,30 +287,20 @@ The dependence-aware $k$-bounded algorithm
 detects the same number of dependent tests
 as the exhaustive $k$-bounded algorithm does (when using the same $k$),
 but it uses dynamic analyses to improve the efficiency.
-It avoids executing test
-permutations that are guaranteed to have the
-same results as being executed in the default order.
-The intuition of this algorithm is that,
-given a test permutation, for \textit{each}
-test, if \textit{every global field} it reads
-is written by the \textit{same} test as
-originally in the default execution order, all tests in
-the permutation are guaranteed to
-produce the same results. Thus, the permutation can be safely ignored. 
+Information obtained from shorter permutations is used to avoid running lonnger permutations; 
+a permutation can safely be ignored if all global variables a test accesses
+are the same as a previously executed permutation. 
+
 
 Figure~\ref{fig:impralg} shows the algorithm, which redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
 The redefined getPossibleExecOrder function first records
-fields that each test reads and writes (line 1).
-Then, for each field read by a test,
-the function identifies the last test that writes
-that field (line 3).
+fields that each test reads and writes in isolation (line 1).
 When generating all possible test permutations
-up to length $k$, the algorithm checks whether
+up to length $k$, the algorithm ensures
 \textit{all} fields \textit{each} test (in the generated permutation)
-may read are written by the same tests as in the
-default order (lines 5--8). If so, all tests in the permutation
-must produce the same results, and the algorithm discards
+may read are not written by any previous test. If so, all tests in the permutation
+must produce the same results as execution in isolation, and the algorithm discards
 this permutation without executing it. Otherwise,
 the function adds the generated permutation to the result
 set (line 7), and runs the algorithm in Figure~\ref{fig:basealgorithm}
@@ -327,30 +315,30 @@ read and write. Only tests reading or writing
 the same global field(s), rather than \textit{all} tests
 in a suite, are treated as potentially dependent.
 Second, for tests reading or writing the same global
-field(s), some permutations can be discarded
-by checking the tests performing the last write.
+field(s), some permutations can be avoided by considering their
+order.
 
 %in which every test must
 %reveal the same result to reduce the total number
 %of permutations which need to be explored.
 
-To better illustrate the second benefit, Figure~\ref{fig:rwexample}
-shows an example
-consisting of 2 global fields and 4 tests. In the default execution
-order, Test 1 reads the \textit{initial} value of \code{x};
-Test2 reads the \textit{initial} value of \code{y}, and Test4
-reads the value of \code{x} written by Test3.
-Based on such recorded information, when creating permutations with $k=1$,
-our algorithm determines that only
-Test4 needs to be executed, since Test4, if executed in isolation,
-will read the \textit{initial} value of \code{x} rather than the \code{x}
-value written by Test3. Similarly, when creating permutations with $k=2$,
-only 5 out of 12 permutations ($\langle$Test1, Test4$\rangle$,
-$\langle$Test2, Test4$\rangle$, $\langle$Test4, Test1$\rangle$,
-$\langle$Test4, Test2$\rangle$, and $\langle$Test4, Test3$\rangle$) need to be executed.
-Due to space limits, we omit test permutations when
-$k=3$ and $k=4$, and list the number of permutations that need
-to execute in Figure~\ref{fig:rwexample}.
+%To better illustrate the second benefit, Figure~\ref{fig:rwexample}
+%shows an example
+%consisting of 2 global fields and 4 tests. In the default execution
+%order, Test 1 reads the \textit{initial} value of \code{x};
+%Test2 reads the \textit{initial} value of \code{y}, and Test4
+%reads the value of \code{x} written by Test3.
+%Based on such recorded information, when creating permutations with $k=1$,
+%our algorithm determines that only
+%Test4 needs to be executed, since Test4, if executed in isolation,
+%will read the \textit{initial} value of \code{x} rather than the \code{x}
+%value written by Test3. Similarly, when creating permutations with $k=2$,
+%only 5 out of 12 permutations ($\langle$Test1, Test4$\rangle$,
+%$\langle$Test2, Test4$\rangle$, $\langle$Test4, Test1$\rangle$,
+%$\langle$Test4, Test2$\rangle$, and $\langle$Test4, Test3$\rangle$) need to be executed.
+%Due to space limits, we omit test permutations when
+%$k=3$ and $k=4$, and list the number of permutations that need
+%to execute in Figure~\ref{fig:rwexample}.
 
 %\todo{illustrate why simply group tests by read/write is incorrect.}
 
