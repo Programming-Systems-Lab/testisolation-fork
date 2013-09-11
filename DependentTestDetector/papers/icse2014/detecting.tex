@@ -291,10 +291,13 @@ but it uses dynamic analyses to improve the efficiency.
 %Information obtained from shorter permutations is used to avoid running lonnger permutations; 
 The intuition of this algorithm is that, given
 a test permutation, for \textit{each} test,
-if \textit{every global field} it reads
+if \textit{every global field} (and other external
+resources like a {file}) it reads
 is \textit{not} written by any test executed \textit{before} it,
 all tests in the permutation are guranteed to produce
-the same results. Thus, the permutation can be safely ignored.
+the same results as in the default order (since each
+test does not interfere another). Thus, the permutation
+can be safely ignored.
 
 %a permutation can safely be ignored if all global fields a test accesses
 %5are the same as a previously executed permutation. 
