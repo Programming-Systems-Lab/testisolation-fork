@@ -978,3 +978,137 @@ issues.apache.org/jira/browse/CLI-186} \url{https://issues.apache.org/jira/brows
     larger test.  This paper proposes a way to automatically factor a large
     test case into smaller tests, using mock objects to model the environment.",
 }
+
+@string{TSE     = IEEESE}
+
+@Article{RenCR2006,
+  author = 	 "Xiaoxia Ren and Ophelia C. Chesley and Barbara G. Ryder",
+  title = 	 "Identifying failure causes in {Java} programs: An application of change impact analysis",
+  journal = 	 TSE,
+  year = 	 2006,
+  volume = 	 32,
+  number = 	 9,
+  pages = 	 "718--732",
+  month = 	 sep,
+  downloads =    "http://doi.ieeecomputersociety.org/10.1109/TSE.2006.90 DOI",
+  abstract =
+   "During program maintenance, a programmer may make changes that enhance
+    program functionality or fix bugs in code. Then, the programmer usually
+    will run unit/regression tests to prevent invalidation of previously tested
+    functionality. If a test fails unexpectedly, the programmer needs to
+    explore the edit to find the failure-inducing changes for that test. Crisp
+    uses results from Chianti, a tool that performs semantic change impact
+    analysis [1], to allow the programmer to examine those parts of the edit
+    that affect the failing test. Crisp then builds a compilable intermediate
+    version of the program by adding a programmer-selected partial edit to the
+    original code, augmenting the selection as necessary to ensure
+    compilation. The programmer can reexecute the test on the intermediate
+    version in order to locate the exact reasons for the failure by
+    concentrating on the specific changes that were applied. In nine initial
+    case studies on pairs of versions from two real Java programs, Daikon [2]
+    and Eclipse jdt compiler [3], we were able to use Crisp to identify the
+    failure-inducing changes for all but 1 of 68 failing tests. On average, 33
+    changes were found to affect each failing test (of the 67), but only 1-4 of
+    these changes were found to be actually failure-inducing.",
+  usesDaikonAsTestSubject = 1,
+}
+
+@string{ASE2011 = "ASE"}
+@string{ASE2011addr = ""}
+# Website says "Nov 6-10"; probably actually Nov 8-10
+@string{ASE2011date = nov}
+
+@InProceedings{RobinsonEPAL2011,
+  author = 	 "Brian Robinson and Michael D. Ernst and Jeff H. Perkins and Vinay Augustine and Nuo Li",
+  title = 	 "Scaling up automated test generation: Automatically generating maintainable regression unit tests for programs",
+  booktitle = ASE2011,
+  NEEDpages = 	 "*",
+  year = 	 2011,
+  address = 	 ASE2011addr,
+  month = 	 ASE2011date,
+  abstract =
+   "This paper presents an automatic technique for generating maintainable
+    regression unit tests for programs.  We found previous test generation
+    techniques inadequate for two main reasons.  First. they were designed
+    for and evaluated upon libraries rather than applications.  Second, they
+    were designed to find bugs rather than to create maintainable regression
+    test suites:  the test suites that they generated were brittle and hard
+    to understand.
+    This paper presents a suite of techniques that address these problems by
+    enhancing an existing unit test generation system.  In experiments using
+    an industrial system, the generated tests achieved good coverage and
+    mutation kill score, were readable by the product's developers, and
+    required few edits as the system under test evolved.
+    While our evaluation is in the context of one test generator, we are
+    aware of many research systems that suffer similar limitations, so our
+    approach and observations are more generally relevant.",
+  basefilename = "maintainable-tests-ase2011",
+  downloads = 
+   "http://code.google.com/p/randoop/ Randoop implementation",
+  category =  "Testing",
+  csetags = "mernst,mernst-Testing,plse",
+  summary =
+   "This paper shows how to apply automatic test generation to the domain of
+    programs (not just libraries), and how to make the resulting test suite
+    maintainable (easy to understand and to adapt to changes in the program).",
+}
+
+@string{ECOOP2005 = "ECOOP"}
+@string{ECOOP2005addr = ""}
+@string{ECOOP2005date = jul}
+
+@InProceedings{PachecoE2005,
+  author =	 "Carlos Pacheco and Michael D. Ernst",
+  title =	 "Eclat: Automatic generation and classification of test inputs",
+  booktitle =	 ECOOP2005,
+  pages = 	 "504--527",
+  year = 	 2005,
+  address =	 ECOOP2005addr,
+  month =	 ECOOP2005date,
+  abstract =
+   "This paper describes a technique that selects, from a large set of test
+    inputs, a small subset likely to reveal faults in the software under test.
+    The technique takes a program or software component, plus a set of correct
+    executions---say, from observations of the software running properly, or
+    from an existing test suite that a user wishes to enhance.  The technique
+    first infers an operational model of the software's operation.  Then,
+    inputs whose operational pattern of execution differs from the model in
+    specific ways are suggestive of faults.  These inputs are further reduced
+    by selecting only one input per operational pattern. The result is a small
+    portion of the original inputs, deemed by the technique as most likely to
+    reveal faults.  Thus, the technique can also be seen as an error-detection
+    technique.
+    \par
+    The paper describes two additional techniques that complement test input
+    selection.  One is a technique for automatically producing an oracle (a set
+    of assertions) for a test input from the operational model, thus
+    transforming the test input into a test case.  The other is a
+    classification-guided test input generation technique that also makes use
+    of operational models and patterns.  When generating inputs, it filters out
+    code sequences that are unlikely to contribute to legal inputs, improving
+    the efficiency of its search for fault-revealing inputs.
+    \par
+    We have implemented these techniques in the Eclat tool, which generates
+    unit tests for Java classes. Eclat's input is a set of classes to test and
+    an example program execution---say, a passing test suite. Eclat's output is
+    a set of JUnit test cases, each containing a potentially fault-revealing
+    input and a set of assertions at least one of which fails.  In our
+    experiments, Eclat successfully generated inputs that exposed
+    fault-revealing behavior; we have used Eclat to reveal real errors in
+    programs.  The inputs it selects as fault-revealing are an order of
+    magnitude as likely to reveal a fault as all generated inputs.",
+  basefilename = "classify-tests-ecoop2005",
+  downloads =
+   "http://pag.csail.mit.edu/eclat/ Eclat implementation;
+    http://code.google.com/p/randoop/ Randoop implementation",
+  downloadsnonlocal =
+   "http://homes.cs.washington.edu/~mernst/pubs/classify-tests-ecoop2005.pdf PDF",
+  category =     "Testing",
+  csetags = "mernst,mernst-Testing,plse",
+  summary =
+   "This paper presents an automatic mechanism for selecting tests that are
+    likely to expose errors---tests whose run-time behavior is maximally
+    different from succeeding runs.  The paper also gives techniques for
+    test input generation and for converting a test input into a test case.",
+  usesDaikon = 1,
+}

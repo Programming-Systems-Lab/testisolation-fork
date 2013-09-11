@@ -12,13 +12,13 @@ Consider a test suite containing two tests \code{A}
 and \code{B}, where running \code{A} and then \code{B} leads
 to \code{A} passing, while running \code{B} and then
 \code{A} leads to \code{A} failing. We call \code{A}
-an \textit{order-dependent} test (in the context of this suite), since its result depends on
+an \textit{order-dependent} test (in the context of this test suite), since its result depends on
 whether it runs after \code{B} or not.
 
 
 
 In a unit test suite, all the test cases should be independent:
-no test should affect other test's result, and
+no test should affect any other test's result, and
 running the tests in any order should produce the same test results.
 Practitioners are well aware of test dependence:  coding
 guidelines~\cite{unit-test-def,Massol:2003} and
@@ -30,7 +30,7 @@ Nonetheless, much testing research and practice
 assumes test independence;
 this include techniques for test selection~\cite{harroldetal:OOPSLA:2001,RenCR2006},
 test prioritization~\cite{Elbaum:2000:PTC:347324.348910},
-test parallelization~\cite{Misailovic:2007}.
+and test parallelization~\cite{Misailovic:2007}.
 %% These are not offected:
 %%, test factoring~\cite{Saff:2005}, and test carving~\cite{Elbaum:2006}.
 %theoretical results, algorithms, and tools may behave unexpectedly
@@ -56,8 +56,10 @@ detect dependent tests.
 This paper focuses on test
 dependence that manifests as a
 difference in test outcome as determined by the test oracle.
-We adopt the results of the default, usually
-implicit, order of execution of a test suite as the
+We adopt the results of the default
+%% True, but a distraction.
+% , usually implicit,
+order of execution of a test suite as the
 expected results. A test is dependent when there is a possibly
 reordered subsequence of the original test suite, in which
 the test's result (determined by its existing testing
@@ -76,15 +78,18 @@ and prevalence of dependent tests.
 affect any internal computation or heap value; but these internal details
 do not affect the test outcome.  Another alternative would be to ask
 whether it is possible to write a new dependent test for an existing
-program; but the answer to this is trivially ``yes''.)
+program; but the answer to this question is trivially ``yes''.)
 
 
 This paper uses \textit{dependent test} as a shorthand for
-\textit{manifest order-dependent test} for brevity
-unless explicitly noted.
+\textit{manifest order-dependent test}
+unless otherwise noted.
 %
 A single test may consist of setup and teardown
-code, multiple statements, and multiple assertions (the oracle) distributed
+code, multiple statements, and multiple assertions
+%% True, but a distraction
+% (the oracle)
+distributed
 through the test.
 
 
@@ -97,22 +102,21 @@ through the test.
 
 \subsection{Causes of Dependent Tests}
 
-\todo{Fold this section into Section~\ref{sec:intro-repercussions}?}
+\todo{Fold this section into Section~\ref{sec:intro-repercussions}??}
 
 Test dependence results from interactions with other tests, as reflected
 in the execution environment.
-Specifically, when a
-test is executed in different environments --- global variables
-with different values, differences in the file system, etc: --- it has the
-potential to yield
-different results.  
-Testing oracles usually do not directly check all global variables,
-but rather check values that have been computed from
-them. Developers don't notice the dependencies until they are deep in debugging a
-subtle bug or test failure.
+A test has the potential to yield
+different test results when executed in different environments --- global variables
+with different values, differences in the file system, etc.
+%% I don't see how this supports our main argument.
+% Testing oracles usually do not directly check all global variables,
+% but rather check values that have been computed from
+% them. Developers don't notice the dependencies until they are deep in debugging a
+% subtle bug or test failure.
 
 
-\todo{Where does this paragraph belong?}
+\todo{Where does this paragraph belong?  Here?}
 As a principle of unit testing~\cite{Massol:2003}, each unit
 test should properly initialize (or mock) the execution environment
 and/or any resources it will use.
@@ -138,23 +142,25 @@ to make mistakes when writing tests as when they are writing other code.
 \subsection{Repercussions of Dependent Tests}
 \label{sec:intro-repercussions}
 
-Our study of \dtnum real-world, confirmed dependent
-tests 
-% from \repnum software issue tracking systems
-(Section~\ref{sec:study}) identified two 
-major consequences of the fact that a dependent test gives different
+% Our study of \dtnum real-world, confirmed dependent
+% tests 
+% % from \repnum software issue tracking systems
+% (Section~\ref{sec:study}) identified two 
+Here are three consequences of the fact that a dependent test gives different
 results depending on when it is executing during testing.
 
 \textbf{(1)}
-In some cases, dependent tests can
+Dependent tests can
 \emph{mask faults in a program}. Specifically, executing a test suite in the
 default order does not expose the fault, whereas
-executing the same test suite in a different order does. We found 
-a bug~\cite{clibug} that had been masked by two dependent tests
-for 3 years in the Apache CLI library~\cite{cli} (Section~\ref{sec:repercussion}).
+executing the same test suite in a different order does. 
+% We found a
+One bug~\cite{clibug} in the Apache CLI library~\cite{cli}
+was been masked by two dependent tests
+for 3 years (Section~\ref{sec:repercussion}).
 
 \textbf{(2)}
-More commonly, test dependences can lead to \emph{spurious bug reports}.
+Test dependences can lead to \emph{spurious bug reports}.
 When a dependent test fails, it usually reveals a weakness in the test
 suite (such as failure to perform proper initialization) rather than a bug
 in the program.
@@ -191,7 +197,7 @@ test parallelization techniques (that schedule the input tests for execution acr
 CPUs), test execution techniques~\cite{Misailovic:2007, SPLAT},
 test factoring~\cite{Saff:2005} and test carving~\cite{Elbaum:2006} (which
 convert large system tests into smaller unit tests),
-test generation (which re-executes suites as it builds them up)~\cite{PachecoE2005,RobinsonEPAL2011}),
+test generation (which re-executes suites as it builds them up)~\cite{PachecoE2005,RobinsonEPAL2011},
 experimental debugging techniques (such as Delta
 Debugging~\cite{Zeller:2002} and mutation analysis\todo{add citation},
 which run a set of tests repeatedly), etc. 
@@ -237,8 +243,9 @@ This paper makes the following contributions:
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
   tool, called \ourtool (Section~\ref{sec:impl}).
   \ourtool detected 27 previously-unknown dependent tests in human-written
-  unit tests in \subjnum real-world subject programs (and even more in
-  automatically-generated tests).  The developers confirmed all of these as
+  unit tests in \subjnum real-world subject programs.
+  % (and even more in automatically-generated tests).
+  The developers confirmed all of these as
   undesired.
 
   % \textit{every} subject program we studied, from both  and automatically-generated
