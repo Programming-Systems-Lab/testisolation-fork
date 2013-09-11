@@ -14,43 +14,51 @@ a test in a permutation with its default result,
 tests either both pass, or exhibit exactly the same exception
 (from the same line of code) or assertion violation.
 
-%For the exhaustive $k$-bounded dependent test detection algorithm
-%(Section~\ref{sec:basic}), \ourtool takes a test suite
-%and the bounding parameter $k$ as inputs, 
-%exhaustively executes every $k$-tuple
-%of tests, and compares execution results to identify possible
-%dependence tests.
- 
-
-To implement the dependence-aware $k$-bounded algorithm (Section~\ref{sec:advalgorithm}),
-\ourtool uses ASM~\cite{asm} to perform load-time bytecode
+To implement the dependence-aware $k$-bounded
+algorithm, \ourtool uses ASM~\cite{asm} to perform load-time bytecode
 instrumentation. Specifically, \ourtool inserts code to monitor each
-static field access (including read and write). File accesses are
-also monitored through installing a Java \code{SecurityManager} which provides 
-read / write level information on files. Static field and file access are merged to produces a trace file for a \ourtool-instrumented test suite.
+static field access (including read and write), and
+monitors each file access by
+installing a Java \code{SecurityManager} which provides 
+file-level read/write information.
+Each test produces a trace file containing both
+field and file access information, after being executed
+on a \ourtool-instrumented program.
+%Both field and file access information are recorded
+%in a trace file after executing a \ourtool-instrumented test.
 
-Mutable and immutable objects must be treated differently, as even a ``read'' access to a static
-field will provide access to all the heap reachable from the object stored in that field. Such accesses must be treated as a read followed by a write. This issue seriously impacts the effectiveness of the dependency-aware algorithm. Classes known to only have immutable instances were provided as input to \ourtool. The instrumented Javari JDK provided by the Checker framework \cite{??}, classes marked as immutable by developer comments, and manual inspection of widely used classes (e.g., \code{java.awt.Color}, \code{java.util.Locale}) are the source of this information.
 
-In practice many objects are not mutated even though this is not prohibited by the Java language (e.g., primitive arrays being used as constants). The algorithm was also instructed to ignore such fields, determined by manually inspecting fields which followed the Java naming convention of all-capital letters for constants, and fields commonly referenced by test code. 
+\ourtool does not instrument JDK classes. It uses the side-effect annotations
+provided by the Javarifier~\cite{QuinonezTE2008} tool to determine whether
+an object will be mutated or not. If a test uses an object
+as a mutable reference in a Javarifier-annotated JDK call, \ourtool
+treats the test has a write effect to the object.
+For JDK classes not covered by
+Javarifier's annotations, \ourtool assumes these classes (and their object
+instances) are stateless. Optionally, users can specify a
+list of ``dependence-free'' fields (e.g., an global field for
+logging or counting), which can never be the root cause of manifest test dependence.
+\ourtool ignores the accesses to these fields.
 
-In order to make the problem tractable, it was assumed that objects reachable from the static fields do not alias one another. This is important since in presence of aliasing, writing to one static field may effect others. This was not an issue in the subject programs we explored.
+%In order to make the problem tractable, it was assumed that objects reachable from the static fields do not alias one another. 
 
-The other assumption made was that the JDK does not contain state itself, as the JDK was not instrumented. This is not entirely true and was an issue in \todo{explain this issue}. However, we believe this shortcoming is not fundamental and can be dealt with by  instrumenting static method calls to certain packages in the JDK.
+%Mutable and immutable objects must be treated differently, as even a ``read'' access to a static
+%field will provide access to all the heap reachable from the object stored in that field. Such accesses must be treated as a read followed by a write. This issue seriously impacts the effectiveness of the dependency-aware algorithm. Classes known to only have immutable instances were provided as input to \ourtool. The instrumented Javari JDK provided by the Checker framework \cite{??}, classes marked as immutable by developer comments, and manual inspection of widely used classes (e.g., \code{java.awt.Color}, \code{java.util.Locale}) are the source of this information.
+
+%In practice many objects are not mutated even though this is not prohibited by the Java language (e.g., primitive arrays being used as constants). The algorithm was also instructed to ignore such fields, determined by manually inspecting fields which followed the Java naming convention of all-capital letters for constants, and fields commonly referenced by test code. 
+
+
+%This is important since in presence of aliasing, writing to one static field may effect others. This was not an issue in the subject programs we explored.
+
+
+
+%The other assumption made was that the JDK does not contain state itself, as the JDK was not instrumented. This is not entirely true and was an issue in \todo{explain this issue}. 
 
 
 %\ourtool also instruments
 %calls to the \CodeIn{clone()} method and reflection
 %methods, to record the objects they may create.
 %\edit{a few sentences about security manager, and file accesses here}
-
-
-%\edit{There are several sources of unsoundness in \ourtool's
-%implementation. First, ...say the tradeoff in implementation here,
-%such as dynamic class loading, native methods, etc....
-%Despite these limitations, \ourtool works well in practice
-%and identifies many real-world dependent tests (Section~\ref{sec:evaluation}).
-%5}
 
 %In addition, \ourtool implements the Delta debugging
 %algorithm~\cite{Zeller:2002} to
