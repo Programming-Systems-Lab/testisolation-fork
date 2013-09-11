@@ -263,15 +263,22 @@ can be safely ignored.
 %a permutation can safely be ignored if all global fields a test accesses
 %5are the same as a previously executed permutation. 
 
+When $k$=1, the algorithm first executes all tests in the default order
+within the same JVM, and discards all tests that do \textit{not}
+access (including read and write) any global fields. Then,
+the algorithm executes each of the remaining tests in isolation (i.e., in a fresh JVM),
+and reports the tests whose results are different as executed in
+the default order.
 
-Figure~\ref{fig:impralg} shows the algorithm, which redefines
+Figure~\ref{fig:impralg} shows the algorithm for $k$$\ge$2, which redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
-The redefined getPossibleExecOrder function first records
-fields that each test reads and writes when executed in \textit{isolation}
-(line 1).  When generating all possible test permutations
+The redefined getPossibleExecOrder function first executes
+each test in \textit{isolation}, and records the
+fields that each test reads and writes (line 1).
+When generating all possible test permutations
 up to length $k$, the algorithm checks whether
 \textit{all} global fields \textit{each} test (in the generated permutation)
-may read are not written by any test executed before it (lines 6--10).
+may read are not written by \textit{any} test executed before it (lines 6--10).
 If so, all tests in the permutation
 must produce the same results as executed in isolation,
 and the algorithm can safely discard this permutation without
