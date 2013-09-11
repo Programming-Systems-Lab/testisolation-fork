@@ -6,12 +6,12 @@
 \begin{tabular}{|c||c|c|c|c||c|c|c|c|c||c|c|c|c||c|c|c|c|}
 \hline
 %1&2&3&4&5&6&7&8&9&10&11&12&13&14\\
-\textbf{Issue}&\multicolumn{4}{|c||}{\textbf{Dependent Tests}}&\multicolumn{5}{|c||}{\textbf{\#Involved Tests for}}&\multicolumn{4}{|c||}{\textbf{Resolution}}&\multicolumn{4}{|c|}{\textbf{Root Cause}}\\
+\textbf{Issue}&\multicolumn{4}{|c||}{\textbf{Dependent Tests}}&\multicolumn{5}{|c||}{\textbf{\# Involved Tests for}}&\multicolumn{4}{|c||}{\textbf{Resolution}}&\multicolumn{4}{|c|}{\textbf{Root Cause}}\\
 \cline{2-5}\cline{11-18}
 \textbf{Tracking} &Total&\multicolumn{3}{|c||}{Severity}&\multicolumn{5}{|c||}{\textbf{Manifestation}}&
 &\multicolumn{3}{|c||}{Patch Location}&Static&File & Database & Unknown\\
 \cline{3-10}\cline{12-14}
-\textbf{System}&Number&Major&Minor&Trivial& Self &1 test&2 tests&3 tests & Unknown&Days&Code&Test&Unfixed&Variable&System& State&\\
+\textbf{System}&Number&Major&Minor&Trivial& Self &1 test&2 tests&3 tests & Unknown&Days&Code&Test&Unfixed&Variable&System& &\\
 \hline
 Apache&26&22&3&1&0&5&18&1&2&93&5&20&1&9&3&8 &6\\
 \hline
@@ -34,7 +34,7 @@ Real-world dependent tests.
 Column ``Total Number'' shows the total number of identified dependent tests.
 Column ``Severity'' is the developers' assessment of the importance of the
 test dependence.
-Column ``\#Involved Tests for Manifestation'' is the number of tests needed
+Column ``\# Involved Tests for Manifestation'' is the number of tests needed
 to manifest the dependence. Column ``Self'' shows the number of
 tests that depend on themselves. Column ``Days'' is the
 average days taken by developers to resolve a dependent test.
@@ -44,6 +44,8 @@ by modifying program code, by modifying test code, or not fixed.
 %differences include language, locale, and databases.
 }
 }
+\todo{Split ``unfixed'' into ``documented'' and ``unfixed''}
+
 \end{table*}
 
 %  LocalWords:  JBoss
