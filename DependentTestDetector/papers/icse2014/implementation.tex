@@ -25,35 +25,18 @@ tests either both pass, or exhibit exactly the same exception
 To implement the dependence-aware $k$-bounded algorithm (Section~\ref{sec:advalgorithm}),
 \ourtool uses ASM~\cite{asm} to perform load-time bytecode
 instrumentation. Specifically, \ourtool inserts code to monitor each
-field access (including read and write) by recording the
-object ID and the field name. Each test produces a trace file after being
-executed on a \ourtool-instrumented program.
-%too low-level, commented out by Sai, an array object is also an object
-%\ourtool also monitors array accesses by recording
-%both the array object ID and the array index being accessed.
-\ourtool uses three optimizations to improve \ourtool's performance.
-%instrumentation overhead. 
-First, accesses to local objects
-only accessible to a test itself are not instrumented,
-%created by the test itself and disposed
-%after test execution, 
-%since such 
-%objects are not accessible to other tests and thus
-since such objects cannot
-be the cause of test dependence. Second,
-\ourtool does not instrument JDK classes. It uses the side-effect
-annotations provided by Javarifier~\cite{QuinonezTE2008} to 
-determine whether an object will be mutated or not.
-If a test uses an object as a mutable reference
-in a Javarifier-annotated JDK call, \ourtool treats the test
-has a write effect to the object.
-Third, optionally, users can specify a list of ``dependence-free''
-fields (e.g., global fields for logging or counting), which can
-never be the root cause of manifest test dependence. \ourtool
-ignores the accesses to these fields.
-\ourtool also handles array access, file access, 
-the \CodeIn{clone()} method, reflective object creation, etc.
-We omit the implementation details due to the space limits.
+static field access (including read and write). File accesses are
+also monitored through installing a Java \code{SecurityManager} which provides 
+read / write level information on files. Static field and file access are merged to produces a trace file for a \ourtool-instrumented test suite.
+
+Mutable and immutable objects must be treated differently, as even a ``read'' access to a static
+field will provide access to all the heap reachable from the object stored in that field. Such accesses must be treated as a read followed by a write. This issue seriously impacts the effectiveness of the dependency-aware algorithm. Classes known to only have immutable instances were provided as input to \ourtool. The instrumented Javari JDK provided by the Checker framework \cite{??}, classes marked as immutable by developer comments, and manual inspection of widely used classes (e.g., \code{java.awt.Color}, \code{java.util.Locale}) are the source of this information.
+
+In practice many objects are not mutated even though this is not prohibited by the Java language (e.g., primitive arrays being used as constants). The algorithm was also instructed to ignore such fields, determined by manually inspecting fields which followed the Java naming convention of all-capital letters for constants, and fields commonly referenced by test code. 
+
+In order to make the problem tractable, it was assumed that objects reachable from the static fields do not alias one another. This is important since in presence of aliasing, writing to one static field may effect others. This was not an issue in the subject programs we explored.
+
+The other assumption made was that the JDK does not contain state itself, as the JDK was not instrumented. This is not entirely true and was an issue in \todo{explain this issue}. However, we believe this shortcoming is not fundamental and can be dealt with by  instrumenting static method calls to certain packages in the JDK.
 
 
 %\ourtool also instruments
