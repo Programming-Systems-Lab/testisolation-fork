@@ -6,10 +6,38 @@ import java.util.Set;
 
 import plume.Pair;
 import edu.washington.cs.dt.util.Files;
+import edu.washington.cs.dt.util.Globals;
 import junit.framework.TestCase;
 
 public class TestTestDependenceAnalyzer extends TestCase {
 
+	public void testJFreechartManual() {
+		String jfreechartTestFolder = "E:\\testisolation\\dt-instrument-folder\\jfreechart\\dt-output-folder";
+		TestExecTraceReader traceReader = new TestExecTraceReader(jfreechartTestFolder);
+		TestDependenceAnalyzer analyzer = new TestDependenceAnalyzer(traceReader);
+		analyzer.doTraceAnalysis();
+		
+		List<String> allSafeTests = analyzer.getSafeTests();
+		System.out.println("No of safe tests: " + allSafeTests.size());
+		
+		StringBuilder sb = new StringBuilder();
+		for(String test : allSafeTests) {
+			System.out.println(test);
+			sb.append(test);
+			sb.append(Globals.lineSep);
+		}
+		Files.writeToFileWithNoExp(allSafeTests, "./jfreechart_safetests.txt");
+		
+//		List<Pair<String, String>> pairs = analyzer.getPariwiseTests();
+//		System.out.println("None of pair wise tests: " + pairs.size());
+//		String dir = "E:\\testisolation\\dependence-aware-folder\\jfreechart_manual_pairwise\\";
+//		int count = 0;
+//		for(Pair<String, String> p : pairs) {
+//			Files.writeToFileWithNoExp(Arrays.asList(p.a, p.b), dir + count + ".txt");
+//			count++;
+//		}
+	}
+	
 	public void testCrystalManual() {
 			String crystalTestFolder = "E:\\testisolation\\dt-instrument-folder\\crystal\\dt-output-folder";
 			TestExecTraceReader traceReader = new TestExecTraceReader(crystalTestFolder);
