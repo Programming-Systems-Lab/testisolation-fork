@@ -11,5 +11,4 @@ public class TestRunTestInFixedOrder extends TestCase {
 	public void testExamples() {
 		RunTestInFixedOrder.main(new String[]{"--testFile=./tests/edu/washington/cs/dt/main/sampleinput.txt"});
 	}
-
 }

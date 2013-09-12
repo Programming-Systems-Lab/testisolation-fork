@@ -16,6 +16,16 @@ public class TestBoundedDependentTestFinder extends TestCase {
 				"./bounded_3_toy_results.txt", 3);
 	}
 	
+	public void testJFreeChart_manual() {
+		this.runTests(TestRandomizedDependentTestFinder.jfreechart_manual, 
+				"./bounded_1_jfreechart_manualtxt", 1);
+	}
+	
+	public void testJFreeChart_manual_2() {
+		this.runTests(TestRandomizedDependentTestFinder.jfreechart_manual, 
+				"./bounded_2_jfreechart_manualtxt", 2);
+	}
+	
 	public void testXMLSecurity_manual() {
 		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_manual, 
 				"./bounded_1_xmlsecurity_manualtxt", 1);

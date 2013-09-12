@@ -14,6 +14,14 @@ public class TestDependenceAwareTestFinder extends TestCase {
 				"./dependence-aware_2_xmlsecurity_manual.txt", 2);
 	}
 	
+	public void testJFreechartIsolation_manual() {
+		String logFileName = "./dependence-aware_jfreechart_1_manual.txt";
+		String testFile = TestRandomizedDependentTestFinder.jfreechart_manual;
+		int k = 1;
+		String safeFile = "./tests/edu/washington/cs/dt/tools/jfreechart_safetests.txt";
+		this.runWithSafeTests(logFileName, testFile, safeFile, k);
+	}
+	
 	public void testJodatimeIsolation_manual() {
 		String logFileName = "./dependence-aware_jodatime_1_manual.txt";
 		String testFile = TestRandomizedDependentTestFinder.jodatimeFile_manual;
