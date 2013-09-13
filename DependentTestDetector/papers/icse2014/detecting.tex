@@ -74,7 +74,7 @@ that repeatedly executes all the tests of a suite in random order.
 Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
 executes all possible sequences of $k$ tests for a bounding parameter $k$
 (specified by users).
-Section~\ref{sec:advalgorithm} describes a \dependenceaware{} $k-$bounded algorithm.
+Section~\ref{sec:advalgorithm} describes a \dependenceaware{} $k$-bounded algorithm.
 The \dependenceaware{} algorithm dynamically collects the
 static fields that each test
 reads or writes, and uses such collected information to reduce the search space.
@@ -246,7 +246,7 @@ that exhibit different results.
 %\label{fig:rwexample}
 %\end{figure}
 
-%The exhaustive $k-$bounded algorithm cannot scale to a realistic test suite.
+%The exhaustive $k$-bounded algorithm cannot scale to a realistic test suite.
 %For example, it would take months to 
 %execute all 3-permutations
 %in Joda-Time's test suite (3875 tests, Table~\ref{tab:subjects}).
