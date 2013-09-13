@@ -152,8 +152,8 @@ design, or fragility of the APIs; or it may indicate that the human-written
 tests have failed to exercise some functionality.
 
 The root cause of all detected dependent tests is the improper access to
-global fields. XML Security and Crystal developers use more
-global fields in the test code,
+static fields. XML Security and Crystal developers use more
+static fields in the test code,
 so there are relatively more dependent tests detected in them.
 %This concurs with our findings in Section~\ref{sec:studyfindings}.
 %\edit{Can we say anything
@@ -284,10 +284,10 @@ in the design of the library.
 %
 The Crystal developers confirmed that all dependent tests
 found in Crystal were not intentional and 
-happened because of the dependency
+happened because of the dependence
 through global variables. The developers considered the
-dependencies undesirable and opened a bug report for
-this report issue~\cite{crystalbugreport}.
+dependent tests undesirable and opened a bug report for
+this issue~\cite{crystalbugreport}.
 %
 The dependent test in Synoptic was previously-known.
 The developers merged two related tests to fix

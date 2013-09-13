@@ -261,7 +261,8 @@ but it uses dynamic analyses to prune the search space.
 
 When $k$=1, the algorithm executes all tests in the default order
 within the same JVM, and discards tests that do \textit{not}
-access (including read and write) any global fields. Then,
+access (including read and write) any global fields or
+other external resources such as a file. Then,
 the algorithm executes each of the remaining tests in isolation (i.e., in a fresh JVM),
 and reports the tests whose results are different as executed in
 the default order.
@@ -273,10 +274,12 @@ a test permutation, for \textit{each} test,
 if \textit{every global field} (and other 
 resources from the execution environment) it reads
 is \textit{not} written by any test executed \textit{before} it,
-all tests in the permutation are guranteed to produce
-the same results as in the default order (since each
+all tests in the permutation are guaranteed to produce
+the same results as executed in isolation (since each
 test does not interfere with any other tests). Thus, the permutation
-can be safely ignored.
+can be safely ignored. \todo{Darioush, check the above,
+how could this permutation be safely ignored, if the result
+is only the same as in isolation (not the default order?)}
 The algorithm redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
 The redefined getPossibleExecOrder function first executes

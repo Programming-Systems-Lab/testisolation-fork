@@ -235,7 +235,8 @@ there are no test dependences in the input test suite. Violation of
 this assumption, as we show happens in practice, can cause unexpected
 output. %\todo{change erroneous to different?} 
 As an example, test selection may produce a subsequence of tests that do not
-return the same results as they do when executed originally, as part of the full suite.
+return the same results as they do when executed in
+the default order, as part of the full suite.
 
 
 \subsection{Contributions}
@@ -251,7 +252,7 @@ This paper makes the following contributions:
   dependent tests from \repnum software issue tracking
   systems to characterize dependent tests that
   arises in practice.  Test dependence can have
-  potentially costly repercussions and can be hard to identify
+  potentially non-trivial repercussions and can be hard to identify
   (Section~\ref{sec:study}).
 
 \item \textbf{Formalization.} We formalize test dependence
