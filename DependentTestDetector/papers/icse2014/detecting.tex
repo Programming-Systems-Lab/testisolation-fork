@@ -23,13 +23,13 @@ Section~\ref{sec:randomized} describes a randomized algorithm
 that repeatedly executes all the tests of a suite in random order.
 Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
 executes all possible sequences of $k$ tests for a bounding parameter $k$
-(specified by users).
+(specified by the user).
 Section~\ref{sec:advalgorithm} describes a \dependenceaware{} $k$-bounded algorithm.
 The \dependenceaware{} algorithm dynamically collects the
 static fields that each test
-reads or writes, and uses such collected information to reduce the search space.
-All algorithms are \textit{sound} but \textit{incomplete}:
-every dependent test they find is real, but they do not provide any
+reads or writes, and uses the collected information to reduce the search space.
+All three algorithms are \textit{sound} but \textit{incomplete}:
+every dependent test they find is real, but they do not
 guarantee to find every dependent test.
 
 
@@ -76,7 +76,7 @@ getPossibleExecOrder($T$):\\
 
 \vspace{-3mm}
 \caption {The randomized algorithm to detect dependent tests.
-It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining
+It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining
 the getPossibleExecOrder function.
 Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \mediumtrialnum, \trialnum$.}
@@ -134,7 +134,7 @@ getPossibleExecOrder($T$):\\
 
 \vspace{-3mm}
 \caption {The exhaustive $k$-bounded algorithm to detect dependent tests.
-It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining the
+It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
 getPossibleExecOrder function.
 %Our experiments use $k=1$ and $k=2$ to bound the length of
 %test execution. 
@@ -342,7 +342,7 @@ getPossibleExecOrder($T$):\\
 
 \vspace{-3mm}
 \caption {The \dependenceaware{} $k$-bounded algorithm to detect dependent tests.
-It uses the algorithm of Figure~\ref{fig:basealgorithm}, re-defining the
+It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
 getPossibleExecOrder function.
 %Our experiments uses $k=1$, \todo{experiment setting, how
 %large k it can scale to.}. 
