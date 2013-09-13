@@ -261,6 +261,8 @@ detects the same number of dependent tests
 as the exhaustive $k$-bounded algorithm does (when using the same $k$),
 but it uses dynamic analyses to prune the search space.
 %Information obtained from shorter permutations is used to avoid running lonnger permutations; 
+%The algorithm first identifies all dependent tests
+%that can be detected by running
 The intuition of this algorithm is that, given
 a test permutation, for \textit{each} test,
 if \textit{every global field} (and other 
@@ -291,6 +293,8 @@ the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
 The getPossibleExecOrder function first executes
 each test in \textit{isolation}, and records the
 fields that each test reads and writes (lines 1--3).
+It uses the isolation execution result
+of each test as a comparison baseline.
 When generating all possible test permutations
 of length $k$, the algorithm checks whether
 \textit{all} global fields \textit{each} test (in the generated permutation)
