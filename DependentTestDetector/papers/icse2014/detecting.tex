@@ -58,9 +58,9 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \label{fig:randalgorithm}
 \end{figure}
 
-An exhaustive search would execute all $n!$
-permutations of the test suite to detect dependent tests.
-However, this is not feasible for realistic $n$.
+%An exhaustive search would execute all $n!$
+%permutations of the test suite to detect dependent tests.
+%However, this is not feasible for realistic $n$.
 Since the general form of the dependent test detection problem is
 NP-complete, we do not expect to find an efficient algorithm for it.
 
@@ -75,7 +75,8 @@ Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
 executes all possible sequences of $k$ tests for a bounding parameter $k$
 (specified by users).
 Section~\ref{sec:advalgorithm} describes a \dependenceaware{} $k-$bounded algorithm.
-The \dependenceaware{} algorithm dynamically collects the fields that each test
+The \dependenceaware{} algorithm dynamically collects the
+static fields that each test
 reads or writes, and uses such collected information to reduce the search space.
 All algorithms are \textit{sound} but \textit{incomplete}:
 every dependent test they find is real, but they do not provide any
@@ -94,11 +95,12 @@ again to observe its result (line 4). The algorithm checks
 whether the result of any test differs from the
 expected result (lines 5--8). 
 
-In our implementation, this algorithm repeatedly
-shuffles the test suite, and executes each test 
-for a pre-defined number of iterations.
-Our experiments use $\smalltrialnum,
-\mediumtrialnum, \trialnum$ as the iteration numbers.
+%In our implementation, this algorithm repeatedly
+%shuffles the test suite, and executes each test 
+%for a pre-defined number of iterations.
+%Our experiments use $\smalltrialnum,
+%\mediumtrialnum, \trialnum$ as the iteration numbers.
+
 %until
 %no more dependent tests are identified within a
 %pre-defined number of iterations. % (default: \smalltrialnum iterations).
@@ -153,7 +155,7 @@ executes all $k$-permutations for a bounding
 parameter $k$.
 By doing so, the algorithm reduces
 the number of permutations to execute
-to $O(n^k)$, which for small $k$ is tractable. 
+to $O(n^k)$, which for small $k$ and $n$ is tractable. 
 
 
 Figure~\ref{fig:exhaustivealgorithm} shows the algorithm.
@@ -268,12 +270,12 @@ Figure~\ref{fig:impralg} shows the algorithm for $k$$\ge$2.
 %
 The intuition of this algorithm is that, given
 a test permutation, for \textit{each} test,
-if \textit{every global field} (and other external
-resources like a {file}) it reads
+if \textit{every global field} (and other 
+resources from the execution environment) it reads
 is \textit{not} written by any test executed \textit{before} it,
 all tests in the permutation are guranteed to produce
 the same results as in the default order (since each
-test does not interfere another). Thus, the permutation
+test does not interfere with any other tests). Thus, the permutation
 can be safely ignored.
 The algorithm redefines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.

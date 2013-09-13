@@ -95,19 +95,9 @@ test suite; but the answer to this question is trivially ``yes''.)
 This paper uses \textit{dependent test} as a shorthand for
 \textit{manifest order-dependent test}
 unless otherwise noted.
-%
 A single test may consist of setup and teardown
 code, multiple statements, and multiple assertions
-%% True, but a distraction
-% (the oracle)
-distributed
-through the test.
-
-
-%As we discuss later, considering only manifest test dependences allows
-%us to more easily situate this research in the empirical domain.
-%\todo{manifest is more challenging}
-%test results rather than program and database states.
+distributed through the test.
 
 
 
@@ -115,6 +105,7 @@ through the test.
 
 \subsection{Causes and Repercussions}
 \todo{I merged the two original subsections into the following one. looks better?}
+\todo{also some text editing below}
 %\subsection{Repercussions of Dependent Tests}
 \label{sec:intro-repercussions}
 
@@ -122,12 +113,18 @@ through the test.
 
 Dependent tests results from interactions with other tests,
 as reflected in the execution environment.
-A test has the potential to yield
-different test results when executed in different environments
---- global variables with different values, differences in the file system, etc.
+Tests may make \textit{implicit} assumptions that their
+execution environment -- values of global variables,
+contents of files, etc. A dependent test
+manifests when other tests alters the execution
+environment in a way which invalidates those assumptions.
 
-Why does this happen? Ideally, as
-indicated in the principle of unit testing~\cite{Greiler:2013:SAT, Massol:2003}, each unit
+%A test has the potential to yield
+%different test results when executed in different environments
+%--- global variables with different values, differences in the file system, etc.
+
+Why does this happen? As
+suggested by the principle of unit testing~\cite{Greiler:2013:SAT, Massol:2003}, each unit
 test should properly initialize (or mock) the execution environment
 and/or any resources it will use.
 Likewise, after test execution, it should reset the
@@ -140,17 +137,13 @@ Even though frameworks such as
 JUnit provide ways to set up the environment for a test execution and clean
 up the environment afterward,
 they cannot ensure that it is done
-properly. Like with other code, this means that tests in some
-cases will have unintended and unexpected behaviors. And
+properly. This means that tests, like other code,
+will have unintended and unexpected behaviors in some cases. And
 as programs increase in complexity, so may tests, which may
 increase the frequency of such problems in tests, which may
 in turn increase the frequency of test dependence.
+\edit{check the grammar of the above sentence}
 
-%% I don't see how this supports our main argument.
-% Testing oracles usually do not directly check all global variables,
-% but rather check values that have been computed from
-% them. Developers don't notice the dependencies until they are deep in debugging a
-% subtle bug or test failure.
 
 
 %\todo{Where does this paragraph belong?  Here?}
@@ -173,7 +166,7 @@ in turn increase the frequency of test dependence.
 % % from \repnum software issue tracking systems
 % (Section~\ref{sec:study}) identified two 
 Here are three consequences of the fact that a dependent
-test gives different results depending on when it is executing
+test gives different results depending on when it is executed
 during testing.
 
 \textbf{(1)}
@@ -189,14 +182,17 @@ for 3 years (Section~\ref{sec:repercussion}).
 \edit{I edit the following paragraph}
 \textbf{(2)}
 Test dependences can lead to \emph{spurious bug reports}.
-When a dependent test fails, it usually reveals a weakness in the test
+When a dependent test fails, it usually represents
+\edit{change to use the word of "represents", good? using
+"reveals" may sound like dependent test is good to improve code quality}
+a weakness in the test
 suite (such as failure to perform proper initialization) rather than a bug
 in the program. 
 When a test should pass but
 fails after reordering due to the dependence,
 people who are not aware of the dependence can get confused
 and might report bugs about the failing test,
-even though this is exactly the expected behavior.
+even though this is exactly the intended behavior.
 %Programmers made these errors even though frameworks such as
 %JUnit provide ways to set up the environment for a test execution and clean
 %up the environment afterward.
@@ -267,7 +263,7 @@ This paper makes the following contributions:
   \item \textbf{Algorithms.} We present three algorithms
   to detect dependent tests (Section~\ref{sec:detecting}):
   one randomized, one exhaustive bounded, and one that prunes the search
-  space based on dynamic dependences.
+  space using dynamic analyses.
   All three algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
   do not guarantee to find all dependent tests. 

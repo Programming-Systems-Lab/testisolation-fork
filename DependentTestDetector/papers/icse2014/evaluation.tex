@@ -138,12 +138,12 @@ in \ourtool.
 %\todo{I rewrote the below paragraph.  Please review.}
 
 \ourtool detected 29 human-written dependent tests (among which 27
-dependent tests are previously-unknown) and 1311
+dependent tests were previously-unknown) and 1311
 automatically-generated dependent tests.  A larger percentage (15\%) of
 automatically-generated tests are dependent.  Developers' understanding of
 the code, and their goals when writing the tests, help them build
 well-structured tests that carefully initialize and destroy the shared
-objects they may use and that avoid using other objects.
+objects they may use.
 By contrast,  most automated test generation tools are not ``state-aware'': the
 generated tests often ``misuse'' APIs, such as not setting up
 the environment correctly.  This misuse may
@@ -160,7 +160,7 @@ so there are relatively more dependent tests detected in them.
 %  about the relative frequency of the three?}
 
 The randomized algorithm is surprisingly effective in
-detecting dependent tests. When run \trialnum times,
+detecting dependent tests. In our experiments, when run \trialnum times,
 it identifies \textit{more} dependent tests than the other
 two algorithms can find. For the human-written
 test suites, the randomized algorithm detects 2 more dependent
@@ -180,8 +180,8 @@ number of dependent tests as the exhaustive bounded algorithm, except
 that it missed one dependent test in XML Security's
 automatically-generated test suite.
 The dependent test was missed because \ourtool
-did not track field access within the \CodeIn{java.security} package,
-and Javarifier did not provide annotations for APIs
+did not track static field access in the \CodeIn{java.security} package,
+and Javari did not provide annotations for APIs
 in that package.
 
 
@@ -283,7 +283,7 @@ tests, and thought that they are due to unintended interactions
 in the design of the library.
 %
 The Crystal developers confirmed that all dependent tests
-found in Crystal were not intentional and mostly likely
+found in Crystal were not intentional and 
 happened because of the dependency
 through global variables. The developers considered the
 dependencies undesirable and opened a bug report for
@@ -306,12 +306,12 @@ without dependency on other tests, and characterized that as
 \vspace{1mm}
 \noindent \textbf{Initial Assessment of the Impact of
 Dependent Tests.} We manually investigate the
-impact of dependent tests to two well-known
+impact of dependent tests on two well-known
 downstream testing techniques: test
 selection and test prioritization.
-We count the number of dependent tests in the
-4 human-written test suites (Table~\ref{tab:results}) that can
-affect the results of these two techniques.
+We counted the number of dependent tests in the
+4 human-written test suites that can
+theoretically affect the results of these two techniques.
 For test selection, we manually check whether
 there exists a subsequence of tests
 that do not return the same results

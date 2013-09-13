@@ -8,9 +8,10 @@ supports JUnit 3.x/4.x tests. %, and is fully-automated.
 
 \ourtool launches a fresh JVM
 when executing a test permutation
-and clears external state such as files, ensuring there is no interaction between
+and clears resources in the execution
+environment such as files, ensuring there is no interaction between
 different runs. When comparing the observed result of
-a test in a permutation with its default result,
+a test in a permutation with its expected result,
 \ourtool considers two JUnit test results to be the same when the
 tests either both pass, or exhibit exactly the same exception
 (from the same line of code) or assertion violation.
@@ -28,15 +29,29 @@ on a \ourtool-instrumented program.
 %Both field and file access information are recorded
 %in a trace file after executing a \ourtool-instrumented test.
 
+\edit{check the text below}
+\ourtool does not perform any sophisticated points-to or shape
+analyses, rather, it conservatively treats both read
+and write to a static field has a write effect,
+since a read access to a static field may mutate objects
+reachable from the field in the heap.
+\ourtool assumes that the JDK is stateless,
+and thus does not instrument JDK classes. 
 
-\ourtool does not instrument JDK classes. It uses the side-effect annotations
-provided by the Javarifier~\cite{QuinonezTE2008} tool to determine whether
-an object will be mutated or not. If a test uses an object
-as a mutable reference in a Javarifier-annotated JDK call, \ourtool
-treats the test has a write effect to the object.
-For JDK classes not covered by
-Javarifier's annotations, \ourtool assumes these classes (and their object
-instances) are stateless. Optionally, users can specify a
+
+%\ourtool does not instrument JDK classes.
+%It uses the side-effect annotations
+%provided by the Javarifier~\cite{QuinonezTE2008} tool to determine whether
+%an object will be mutated or not. If a test uses an object
+%as a mutable reference in a Javarifier-annotated JDK call, \ourtool
+%treats the test has a write effect to the object.
+%For JDK classes not covered by
+%Javarifier's annotations, \ourtool assumes these classes (and their object
+%instances) are stateless. 
+
+\ourtool uses the side-effect annotations
+provided by Javari~\cite{QuinonezTE2008} to determine the immutable
+static fields. Optionally, users can also specify a
 list of ``dependence-free'' fields (e.g., an global field for
 logging or counting), which can never be the root cause of manifest test dependence.
 \ourtool ignores the accesses to these fields.

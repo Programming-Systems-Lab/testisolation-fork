@@ -65,12 +65,12 @@ A dependent test is manifested if we produce a possibly reordered
 subsequence of the original test suite, such that the test
 produces a different
 result than when run in the original suite.
-We measure the size of the subsuite.
+We measure the size of the subsequence.
 If the test produces a different result when run
 in isolation, the number of tests to manifest
 the dependent test is 1.
 If the test produces a different result
-when run after one other test (often, the subsuite is
+when run after one other test (often, the subsequence is
 running these two tests in the opposite order as the full original test
 suite), then the number of tests to manifest the dependent test is 2.
 Among the \dtnum studied dependent tests, we found only 2 of them
@@ -212,8 +212,8 @@ Even though the developers are aware of these dependences
 when they create tests, this knowledge can get lost.
 Other people who are not aware of these dependences can get confused 
 when they run a subset of the test suite that manifests the
-dependences, and might report bugs about the failing tests,
-even though this is exactly the expected behavior. 
+dependent tests, and might report bugs about the failing tests,
+even though this is exactly the intended behavior. 
 If the dependence is not documented clearly and
 correctly, it can take a considerable amount of time to work out that
 these reported failures are spurious. We found
@@ -233,8 +233,8 @@ object is allowed; the tests that the user tried to run,
 create, but do not dispose of a \code{Display} object, while
 the tests in \code{TestDisplay} attempt to create
 a new \code{Display} object, which fails, as one
-is already created. This is the desired behavior,
-and points to a potential weakness in the test suite.
+is already created. This is the desired behavior of SWT,
+and points to a weakness in the test suite.
 % rather
 %than the code.
 
@@ -299,7 +299,7 @@ they are not obvious to identify.}}
 None of the dependent tests we studied can be identified by
 running the existing test suite in the default order. 
 Every dependent test was reported when the
-test suite is reordered, either accidentally by a user or
+test suite was reordered, either accidentally by a user or
 by a testing tool. This indicates that
 a tool for detecting dependent tests is needed.
 %dependent test detection techniques should
@@ -313,11 +313,11 @@ all $n!$ permutations of a $n$-sized
 test suite to detect all dependent tests. This is
 not feasible for realistic $n$.  Our study shows that
 most dependent tests can be manifested by executing
-no more than 2 tests. Thus, a practical technique
+no more than 2 tests together. Thus, a practical technique
 can focus on running only short subsequences (whose
 length is bounded by a parameter $k$)
 of a test suite. This will reduce the number of permutations
-to $O(n^k)$, which for small $k$ is tractable.
+to $O(n^k)$, which for small $k$ and $n$ is tractable.
 
 \vspace{1mm}
 \noindent \textbf{Dependent test detection techniques
