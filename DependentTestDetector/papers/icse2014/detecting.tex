@@ -87,13 +87,14 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \subsection{Randomized Algorithm}
 \label{sec:randomized}
 
-Figure~\ref{fig:randalgorithm} shows the algorithm.
-Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, this algorithm
+Figure~\ref{fig:basealgorithm} shows the base algorithm, and
+Figure~\ref{fig:randalgorithm} instantiates it for the randomized algorithm.
+Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the base algorithm
 first executes $T$ with its default order
 to obtain the \emph{expected result} of each test (line 2).
-Then, it randomizes the original
-test execution order (line 3), and then executes each test
-again to observe its result (line 4). The algorithm checks
+It chooses some set of test suites (in this case, randomizations of the original
+test execution order (line 3), and then executes each test suite
+to observe its results (line 4). The algorithm checks
 whether the result of any test differs from the
 expected result (lines 5--9). 
 
