@@ -8,6 +8,31 @@
 \newcommand{\testlist}[0]{\ensuremath{T^k_i}}
 \newcommand{\executeTestsInOrder}[1]{\result{#1}{\env_0}}
 
+%An exhaustive search would execute all $n!$
+%permutations of the test suite to detect dependent tests.
+%However, this is not feasible for realistic $n$.
+Since the general form of the dependent test detection problem is
+NP-complete, we do not expect to find an efficient algorithm for it.
+
+To approximate the exact solution, this section
+presents three approximate algorithms that find a \textit{subset} of
+all dependent tests.
+%In this section we present two algorithms to detect dependent
+%tests. 
+Section~\ref{sec:randomized} describes a randomized algorithm
+that repeatedly executes all the tests of a suite in random order.
+Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
+executes all possible sequences of $k$ tests for a bounding parameter $k$
+(specified by users).
+Section~\ref{sec:advalgorithm} describes a \dependenceaware{} $k$-bounded algorithm.
+The \dependenceaware{} algorithm dynamically collects the
+static fields that each test
+reads or writes, and uses such collected information to reduce the search space.
+All algorithms are \textit{sound} but \textit{incomplete}:
+every dependent test they find is real, but they do not provide any
+guarantee to find every dependent test.
+
+
 \begin{figure}[t]
 \textbf{Input}: a test suite $\mathit{T}$\\
 \textbf{Output}: a set of dependent tests $\mathit{dependentTests}$\\
@@ -58,29 +83,6 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \label{fig:randalgorithm}
 \end{figure}
 
-%An exhaustive search would execute all $n!$
-%permutations of the test suite to detect dependent tests.
-%However, this is not feasible for realistic $n$.
-Since the general form of the dependent test detection problem is
-NP-complete, we do not expect to find an efficient algorithm for it.
-
-To approximate the exact solution, this section
-presents three approximate algorithms that find a \textit{subset} of
-all dependent tests.
-%In this section we present two algorithms to detect dependent
-%tests. 
-Section~\ref{sec:randomized} describes a randomized algorithm
-that repeatedly executes all the tests of a suite in random order.
-Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
-executes all possible sequences of $k$ tests for a bounding parameter $k$
-(specified by users).
-Section~\ref{sec:advalgorithm} describes a \dependenceaware{} $k$-bounded algorithm.
-The \dependenceaware{} algorithm dynamically collects the
-static fields that each test
-reads or writes, and uses such collected information to reduce the search space.
-All algorithms are \textit{sound} but \textit{incomplete}:
-every dependent test they find is real, but they do not provide any
-guarantee to find every dependent test.
 
 \subsection{Randomized Algorithm}
 \label{sec:randomized}
