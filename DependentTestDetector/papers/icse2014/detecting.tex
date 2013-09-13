@@ -261,6 +261,15 @@ detects the same number of dependent tests
 as the exhaustive $k$-bounded algorithm does (when using the same $k$),
 but it uses dynamic analyses to prune the search space.
 %Information obtained from shorter permutations is used to avoid running lonnger permutations; 
+The intuition of this algorithm is that, given
+a test permutation, for \textit{each} test,
+if \textit{every global field} (and other 
+resources from the execution environment) it reads
+is \textit{not} written by any test executed \textit{before} it,
+all tests in the permutation are guaranteed to produce
+the same results as executed in isolation (since each
+test does not interfere with any other tests). Thus, the permutation
+can be safely ignored. 
 
 When $k$=1, the algorithm executes all tests in the default order
 within the same JVM, and discards tests that do \textit{not}
@@ -270,25 +279,18 @@ the algorithm executes each of the remaining tests in isolation (i.e., in a fres
 and reports the tests whose results are different as executed in
 the default order.
 
-Figure~\ref{fig:impralg} shows the algorithm for $k$$\ge$2.
+When $k\ge$2, the algorithm first runs the case of $k$=1
+to find all dependent tests that can be manifested when executed in isolation,
+then it runs the algorithm shown in Figure~\ref{fig:impralg}.
 %
-The intuition of this algorithm is that, given
-a test permutation, for \textit{each} test,
-if \textit{every global field} (and other 
-resources from the execution environment) it reads
-is \textit{not} written by any test executed \textit{before} it,
-all tests in the permutation are guaranteed to produce
-the same results as executed in isolation (since each
-test does not interfere with any other tests). Thus, the permutation
-can be safely ignored. \todo{Darioush, check the above,
-how could this permutation be safely ignored, if the result
-is only the same as in isolation (not the default order?)}
-The algorithm redefines
+%\todo{Darioush, check the above,
+%how could this permutation be safely ignored, if the result
+%is only the same as in isolation (not the default order?)}
+The algorithm defines
 the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
-The redefined getPossibleExecOrder function first executes
+The getPossibleExecOrder function first executes
 each test in \textit{isolation}, and records the
 fields that each test reads and writes (lines 1--3).
-\todo{need to explain why executed in isolation?}
 When generating all possible test permutations
 of length $k$, the algorithm checks whether
 \textit{all} global fields \textit{each} test (in the generated permutation)
