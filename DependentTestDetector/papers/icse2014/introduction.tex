@@ -38,7 +38,7 @@ and test parallelization~\cite{Misailovic:2007}.
 %theoretical results, algorithms, and tools may behave unexpectedly
 %in the presence of dependent tests.
 A test suite that contains dependent tests affects the applications
-of these techniques.\edit{I edited the above sentence}
+of these techniques.
 %These techniques produce incorrect results if run on a test suite that contains dependent tests. 
 %\todo{The claim of the above sentence is too strong, and may irritate readers, given we do not have strong evidence.
 %I would tone down it as: dependent tests can
@@ -63,7 +63,6 @@ detect dependent tests.
 \subsection{Manifest Test Dependence}
 
 %To explore these questions, 
-\edit{I added the (... ) }
 This paper focuses on test
 dependence that manifests as a
 difference in test result (i.e., passing or failing) as determined by the testing oracle.
@@ -104,28 +103,29 @@ distributed through the test.
 %\subsection{Causes of Dependent Tests}
 
 \subsection{Causes and Repercussions}
-\todo{I merged the two original subsections into the following one. looks better?}
-\todo{also some text editing below}
+%\todo{I merged the two original subsections into the following one. looks better?}
+%\todo{also some text editing below}
 %\subsection{Repercussions of Dependent Tests}
 \label{sec:intro-repercussions}
 
 %\todo{Fold this section into Section~\ref{sec:intro-repercussions}??}
 
-Dependent tests results from interactions with other tests,
+Test dependence results from interactions with other tests,
 as reflected in the execution environment.
 Tests may make \textit{implicit} assumptions about their
 execution environment -- values of global variables,
 contents of files, etc. A dependent test
-manifests when other tests alter the execution
-environment in a way which invalidates those assumptions.
+manifests when another alters the execution
+environment in a way that invalidates those assumptions.
 
 %A test has the potential to yield
 %different test results when executed in different environments
 %--- global variables with different values, differences in the file system, etc.
 
-Why does this happen? As
-suggested by the principle of unit testing~\cite{Greiler:2013:SAT, Massol:2003}, each unit
-test should properly initialize (or mock) the execution environment
+Why does this happen?
+%As
+%suggested by the principle of unit testing~\cite{Greiler:2013:SAT, Massol:2003},
+Each unit test ought to initialize (or mock) the execution environment
 and/or any resources it will use.
 Likewise, after test execution, it should reset the
 execution environment and external resources
@@ -138,11 +138,12 @@ JUnit provide ways to set up the environment for a test execution and clean
 up the environment afterward,
 they cannot ensure that it is done
 properly. This means that tests, like other code,
-will have unintended and unexpected behaviors in some cases. And
-as programs increase in complexity, so may tests, which may
-increase the frequency of such problems in tests, which may
-in turn increase the frequency of test dependence.
-\edit{check the grammar of the above sentence}
+will have unintended and unexpected behaviors in some cases.
+%And
+%as programs increase in complexity, so may tests, which may
+%increase the frequency of such problems in tests, which may
+%in turn increase the frequency of test dependence.
+%\edit{check the grammar of the above sentence}
 
 
 
@@ -176,23 +177,23 @@ default order does not expose the fault, whereas
 executing the same test suite in a different order does. 
 % We found a
 One bug~\cite{clibug} in the Apache CLI library~\cite{cli}
-was been masked by two dependent tests
+was masked by two dependent tests
 for 3 years (Section~\ref{sec:repercussion}).
 
-\edit{I edit the following paragraph}
 \textbf{(2)}
 Test dependences can lead to \emph{spurious bug reports}.
 When a dependent test fails, it usually represents
-\edit{change to use the word of "represents", good? using
-"reveals" may sound like dependent test is good to improve code quality}
+%\edit{change to use the word of "represents", good? using
+%"reveals" may sound like dependent test is good to improve code quality}
 a weakness in the test
 suite (such as failure to perform proper initialization) rather than a bug
 in the program. 
 When a test should pass but
 fails after reordering due to the dependence,
 people who are not aware of the dependence can get confused
-and might report bugs about the failing test,
-even though this is exactly the intended behavior.
+and might report bugs.
+% about the failing test,
+%even though this is exactly the intended behavior.
 %Programmers made these errors even though frameworks such as
 %JUnit provide ways to set up the environment for a test execution and clean
 %up the environment afterward.
@@ -251,7 +252,7 @@ This paper makes the following contributions:
   \item \textbf{Study.} We describe a study of \dtnum real-world
   dependent tests from \repnum software issue tracking
   systems to characterize dependent tests that
-  arises in practice.  Test dependence can have
+  arise in practice.  Test dependence can have
   potentially non-trivial repercussions and can be hard to identify
   (Section~\ref{sec:study}).
 
