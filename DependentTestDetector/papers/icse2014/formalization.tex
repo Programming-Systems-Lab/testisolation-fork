@@ -6,7 +6,7 @@
 The result of a test not only depends on
 its input data but also its \emph{execution conditions}.
 To characterize the relevant execution conditions, 
-our formalism represents the notions of
+our formalism represents
 (a)~the order in which test cases are executed and (b)~the environment in which a test suite is executed.  
 
 
@@ -75,7 +75,7 @@ denoted\/ \result{t}{\env}, is defined by the test's oracle
 and is either \pass or \fail.
 
 The result of a test suite\/ $T$ = \suite{t_1,\dots,t_n}, executed in an
-environment\/ \env, denoted\/ \result{\suite{t_1,\dots,t_n}}{\env} is a
+environment\/ \env, denoted\/ \result{\suite{t_1,\dots,t_n}}{\env}, is a
 sequence of results\/ \suite{o_1,\dots,o_n} with $o_i \in \{\pass,\fail\}$.
 We use \result{T}{\env}[$t$] to denote the result of a test $t \in T$.
 
@@ -88,7 +88,8 @@ $t_1$ then $t_2$ are run, starting with the environment\/ $\env_1$, then\/
 $t_1$ fails and\/ $t_2$ passes.
 \end{definition}
 
-A manifest order-dependent test is one that can be exposed by 
+A manifest order-dependent test (for short, dependent test)
+is one that can be exposed by 
 reordering existing test cases.
 A dependent test $t$ manifests only
 if there are two test suites $S_1$ and $S_2$ which
@@ -104,8 +105,8 @@ than in the execution $\exec{S_2}{\env_0}$.
 Given a test suite\/ $T$, a test $t \in T$ is a
 manifest order-dependent test if $\exists$ two test suites
 $S_1, S_2 \in$ permutations($T$):
-\result{t}{\exec{S_1}{\env_0}}[$t$] $\neq$
-\result{t}{\exec{S_2}{\env_0}}[$t$].
+\result{S_1}{\env_0}[$t$] $\neq$
+\result{S_2}{\env_0}[$t$].
 %
 %${S_1 \subseteq T - t}$
 %and ${S_2 \subseteq T - t}$: \result{t}{f(S_1, \env_0)} $\neq$
@@ -120,13 +121,13 @@ $S_1, S_2 \in$ permutations($T$):
 
 \subsection{The Dependent Test Detection Problem}
 
-We prove that the problem of detecting manifest order-dependent tests (for
-short, dependent tests) is NP-complete.
+We prove that the problem of detecting dependent tests
+ is NP-complete.
 
 
 \begin{definition}[Dependent Test Detection Problem]
 Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an initial environment\/
-$\env_0$, for a given test\/ $t \in T$, is $t$ a dependent test?
+$\env_0$, is $t \in T$ a dependent test for $T$?
 %there a test suite\/ $S
 %\subseteq T$ that manifests a test dependence involving\/ $t_i$? 
 \end{definition}
@@ -134,14 +135,14 @@ $\env_0$, for a given test\/ $t \in T$, is $t$ a dependent test?
 We prove that this problem is NP-hard by reducing the NP-complete Exact Cover problem
 to the Dependent Test Detection
 problem~\cite{karp:NP:1972}. 
-Then we provide a linear time algorithm to verify any answer to the
+Then we provide a linear-time algorithm to verify any answer to the
 question.
 %Then we sketch an exponential
 %time algorithm that can solve the problem.
-Together these two parts prove the the Dependent Test Detection Problem is NP-complete.
+Together these two parts prove that the Dependent Test Detection Problem is NP-complete.
 
 \begin{theorem}
-The problem of determining a dependent test in
+The problem of determining whether a test is a dependent test for
 a test suite is NP-hard.
 \end{theorem}
 
@@ -199,7 +200,7 @@ linear in the size of the test suite.
 Given a test suite $T$, a test $t \in T$ and a sequence
 $S \subseteq T$ that manifests a dependency on $t$, we first execute $T$, then $S$, and
 compare the result for $t$ in both executions. 
-If the results differ the solution is correct, if they do not differ,
+If the results differ the solution is correct; if they do not differ,
 the solution is rejected.
 Since in the worst case we have to execute $2n$ tests, the complexity
 of this algorithm is linear. 
@@ -212,7 +213,7 @@ of this algorithm is linear.
 For the sake of simplicity, our formalism only
 considers deterministic tests,
 and excludes tests whose results might be affected by
-non-determinism such as thread scheduling,
+non-determinism such as thread scheduling
 and timing issues.
 Our formalism excludes self-dependence, 
 when executing the same test twice
