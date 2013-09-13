@@ -88,7 +88,7 @@ $t_1$ then $t_2$ are run, starting with the environment\/ $\env_1$, then\/
 $t_1$ fails and\/ $t_2$ passes.
 \end{definition}
 
-A manifest dependent test is one that can be exposed by 
+A manifest order-dependent test is one that can be exposed by 
 reordering existing test cases.
 A dependent test $t$ manifests only
 if there are two test suites $S_1$ and $S_2$ which
@@ -100,9 +100,9 @@ than in the execution $\exec{S_2}{\env_0}$.
 %environment that will make $t$ exhibit a
 %different result than in the environment produced by $\exec{S_2}{\env_0}$.
 
-\begin{definition}[Manifest Dependent Test] \label{def:manifest}
+\begin{definition}[Manifest Order-Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
-manifest dependent test if $\exists$ two test suites
+manifest order-dependent test if $\exists$ two test suites
 $S_1, S_2 \in$ permutations($T$):
 \result{t}{\exec{S_1}{\env_0}}[$t$] $\neq$
 \result{t}{\exec{S_2}{\env_0}}[$t$].
@@ -120,13 +120,13 @@ $S_1, S_2 \in$ permutations($T$):
 
 \subsection{The Dependent Test Detection Problem}
 
-We prove that the problem of detecting manifest dependent tests (for
+We prove that the problem of detecting manifest order-dependent tests (for
 short, dependent tests) is NP-complete.
 
 
 \begin{definition}[Dependent Test Detection Problem]
 Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an initial environment\/
-$\env_0$, for a given test\/ $t \in T$, is $t$ a manifest dependent test?
+$\env_0$, for a given test\/ $t \in T$, is $t$ a dependent test?
 %there a test suite\/ $S
 %\subseteq T$ that manifests a test dependence involving\/ $t_i$? 
 \end{definition}

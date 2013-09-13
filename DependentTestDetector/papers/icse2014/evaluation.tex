@@ -59,7 +59,7 @@ has been under active development
 for ten years. XML Security~\cite{xmlsecurity}
 is a component library implementing XML signature and encryption
 standards. XML Security is included in
-the SIR repository, and has been used widely
+the SIR repository~\cite{sir}, and has been used widely
 as a subject program in the software testing community.
 Crystal~\cite{crystal} is a tool that
 pro-actively examines developers' code and
@@ -181,7 +181,8 @@ that it missed one dependent test in XML Security's
 automatically-generated test suite.
 The dependent test was missed because \ourtool
 did not track field access within the \CodeIn{java.security} package,
-and Javarifier did not provide annotations for those APIs.
+and Javarifier did not provide annotations for APIs
+in that package.
 
 
 \subsubsection{Performance of \ourtool}
@@ -370,10 +371,12 @@ test suite.
 studied in Section~\ref{sec:study}, the identified
 dependent tests in our subject programs reveal weakness
 in a test suite rather than defects in the tested code.
-\textbf{(3)} The randomized algorithm is the
+\textbf{(3)} 
+\todo{need to figure out a proper english sentence to say like:
+The dependent test detection problem is inherently
+complex, a smarter algorithm may not achieve great results.}
+The randomized algorithm is the
 most cost-effective in detecting dependent tests.
-\todo{Add a sentence like: ``the problem is np-complete,
-even a smart algorithm cannot achieve great results.'' somewhere}
 %However, it does not
 %have any guarantee in 
 

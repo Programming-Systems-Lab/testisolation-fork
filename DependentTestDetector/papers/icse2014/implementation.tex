@@ -6,8 +6,9 @@ We implemented our three dependent test detection algorithms in
 a prototype tool, called \ourtool. \ourtool
 supports JUnit 3.x/4.x tests. %, and is fully-automated.
 
-\ourtool launches a fresh JVM when
-executing a test permutation, ensuring there is no interaction between
+\ourtool launches a fresh JVM
+when executing a test permutation
+and clears external state such as files, ensuring there is no interaction between
 different runs. When comparing the observed result of
 a test in a permutation with its default result,
 \ourtool considers two JUnit test results to be the same when the
@@ -16,7 +17,7 @@ tests either both pass, or exhibit exactly the same exception
 
 To implement the \dependenceaware{} $k$-bounded
 algorithm, \ourtool uses ASM~\cite{asm} to perform load-time bytecode
-instrumentation. Specifically, \ourtool inserts code to monitor each
+instrumentation. \ourtool inserts code to monitor each
 static field access (including read and write), and
 monitors each file access by
 installing a Java \code{SecurityManager} which provides 

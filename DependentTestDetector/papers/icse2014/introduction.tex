@@ -30,19 +30,22 @@ dependence~\cite{Csallner:2004, Steimann:2013, Gray:1994:QGB:191843.191886,Chays
 %\todo{Cite research about creating mocks.}
 Nonetheless, much testing research and practice
 assumes test independence;
-this include techniques for test selection~\cite{harroldetal:OOPSLA:2001,RenCR2006},
+this includes techniques for test selection~\cite{harroldetal:OOPSLA:2001,RenCR2006},
 test prioritization~\cite{Elbaum:2000:PTC:347324.348910},
 and test parallelization~\cite{Misailovic:2007}.
 %% These are not offected:
 %%, test factoring~\cite{Saff:2005}, and test carving~\cite{Elbaum:2006}.
 %theoretical results, algorithms, and tools may behave unexpectedly
 %in the presence of dependent tests.
-These techniques produce incorrect results if run on a test suite that contains dependent tests.\todo{The claim of the above sentence is too strong, and may irritate readers, given we do not have strong evidence.
-I would tone down it as: dependent tests can
-affect the results of these techniques. Further, the ``correctness''
-of a test selection/prioritization technique is decided by whether
-a test has been selected or not, rather than whether the test should
-maintain the same resutls or not.}
+A test suite that contains dependent tests affect the applications
+of these techniques.\edit{I edited the above sentence}
+%These techniques produce incorrect results if run on a test suite that contains dependent tests. 
+%\todo{The claim of the above sentence is too strong, and may irritate readers, given we do not have strong evidence.
+%I would tone down it as: dependent tests can
+%affect the results of these techniques. Further, the ``correctness''
+%of a test selection/prioritization technique is decided by whether
+%a test has been selected or not, rather than whether the test should
+%maintain the same resutls or not.}
 The critical assumption of test independence is rarely questioned or investigated.
 We wish to investigate the validity of this unverified conventional wisdom,
 in order to understand whether test dependence arises in practice, 
@@ -62,7 +65,7 @@ detect dependent tests.
 %To explore these questions, 
 This paper focuses on test
 dependence that manifests as a
-difference in test outcome as determined by the testing oracle.
+difference in test result as determined by the testing oracle.
 We adopt the results of the default
 %% True, but a distraction.
 % , usually implicit,
@@ -81,11 +84,11 @@ produces {different} results than expected.
 We work with real, existing test suites to determine the practical impact
 and prevalence of dependent tests.
 %
-(One alternative would be to consider tests dependent if reordering could
+(One alternative would be to consider dependent tests if reordering could
 affect any internal computation or heap value; but these internal details
 do not affect the test outcome.  Another alternative would be to ask
 whether it is possible to write a new dependent test for an existing
-program; but the answer to this question is trivially ``yes''.)
+test suite; but the answer to this question is trivially ``yes''.)
 
 
 This paper uses \textit{dependent test} as a shorthand for
@@ -132,8 +135,10 @@ to avoid affecting other tests' execution.
 However, in practice,
 developers are as likely
 to make mistakes when writing tests as when they are writing other code.
-And while frameworks make it easier to get
-environment setup right, they cannot ensure that it is done
+Even though frameworks such as
+JUnit provide ways to set up the environment for a test execution and clean
+up the environment afterward,
+they cannot ensure that it is done
 properly. Like with other code, this means that tests in some
 cases will have unintended and unexpected behaviors. And
 as programs increase in complexity, so may tests, which may
@@ -180,14 +185,20 @@ One bug~\cite{clibug} in the Apache CLI library~\cite{cli}
 was been masked by two dependent tests
 for 3 years (Section~\ref{sec:repercussion}).
 
+\edit{I edit the following paragraph}
 \textbf{(2)}
 Test dependences can lead to \emph{spurious bug reports}.
 When a dependent test fails, it usually reveals a weakness in the test
 suite (such as failure to perform proper initialization) rather than a bug
-in the program.
-Programmers made these errors even though frameworks such as
-JUnit provide ways to set up the environment for a test execution and clean
-up the environment afterward.
+in the program. 
+When a test should pass but
+fails after reordering due to the dependence,
+people who are not aware of the dependence can get confused
+and might report bugs about the failing test,
+even though this is exactly the expected behavior.
+%Programmers made these errors even though frameworks such as
+%JUnit provide ways to set up the environment for a test execution and clean
+%up the environment afterward.
 %
 As an example, the Eclipse developers
 investigated a bug report~\cite{eclipsebug} in SWT for
@@ -224,9 +235,9 @@ Debugging~\cite{Zeller:2002} and mutation analysis~\cite{Schuler:2009:EMT},
 which run a set of tests repeatedly), etc. 
 Most of these downstream testing techniques implicitly assume that
 there are no test dependences in the input test suite. Violation of
-this assumption, as we show happens in practice, can cause erroneous
-output.\todo{change erroneous to different?}  As an
-example, test selection may produce a subsequence of tests that do not
+this assumption, as we show happens in practice, can cause unexpected
+output. %\todo{change erroneous to different?} 
+As an example, test selection may produce a subsequence of tests that do not
 return the same results as they do when executed originally, as part of the full suite.
 
 

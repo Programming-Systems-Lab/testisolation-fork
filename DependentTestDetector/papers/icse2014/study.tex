@@ -126,7 +126,7 @@ but only 38 (40\%) of all the \dtnum dependent tests
 got fixed by developers. 
 %There is no statistical
 %significant correlation between severity and fixing.
-A dependent tests usually
+A dependent test usually
 reveals a flaw in the test code rather than the program code:
 16\% of fixes (6 out of 38) are
 on the program code, while the other fixes are on the
@@ -186,7 +186,7 @@ A dependent test may manifest as a false alarm or a missed alarm
 the dependent tests (94 out of \dtnum) indicate a weakness in the test suite rather than the
 tested code:  
 the test should pass but fails after reordering due to the dependence.
-The test dependence arise due to incorrect initialization
+The test dependence arises due to incorrect initialization
 of program state by one
 or more tests. Typically, one test initializes
 a global variable or the execution environment, and another
@@ -223,7 +223,7 @@ these reported failures are spurious. We found
 In September 2003, a user filed a
 bug report in SWT~\cite{swt}~\cite{eclipsebug},
 stating that 49 tests were failing unexpectedly
-if she runs any other test before \code{TestDisplay} --- 
+if she ran any other test before \code{TestDisplay} --- 
 a test suite creates a new \code{Display} object and tests it.
 However, this bug report was spurious and was
 caused by undocumented test dependence.
@@ -240,7 +240,8 @@ and points to a potential weakness in the test suite.
 
 \vspace{1mm}
 
-\todo{Masking Faults in a Program}
+\todo{Masking Faults in a Program. Mike left this todo, no idea
+what does it mean}
 
 \noindent \textbf{Missed alarm}. In rare cases,
 dependent tests can hide a fault in the
@@ -313,7 +314,7 @@ test suite to detect all dependent tests. This is
 not feasible for realistic $n$.  Our study shows that
 most dependent tests can be manifested by executing
 no more than 2 tests. Thus, a practical technique
-can focuses on running only short subsequences (whose
+can focus on running only short subsequences (whose
 length is bounded by a parameter $k$)
 of a test suite. This will reduce the number of permutations
 to $O(n^k)$, which for small $k$ is tractable.
