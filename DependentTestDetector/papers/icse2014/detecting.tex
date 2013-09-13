@@ -271,7 +271,7 @@ the same results as executed in isolation (since each
 test does not interfere with any other tests). Thus, the permutation
 can be safely ignored. 
 
-When $k$=1, the algorithm executes all tests in the default order
+In the case of $k$=1, the algorithm executes all tests in the default order
 within the same JVM, and discards tests that do \textit{not}
 access (including read and write) any global fields or
 other external resources such as a file. Then,
@@ -279,7 +279,7 @@ the algorithm executes each of the remaining tests in isolation (i.e., in a fres
 and reports the tests whose results are different as executed in
 the default order.
 
-When $k\ge$2, the algorithm first runs the case of $k$=1
+In the case of $k\ge$2, the algorithm first runs the case of $k$=1
 to find all dependent tests that can be manifested when executed in isolation,
 then it runs the algorithm shown in Figure~\ref{fig:impralg}.
 %
