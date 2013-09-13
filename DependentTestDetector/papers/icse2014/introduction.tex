@@ -215,8 +215,8 @@ ran tests in a different order).
 %found a large number of unknown dependent tests, .
 
 \textbf{(3)}
-Dependent tests can interfere with downstream testing
-techniques that change a test suite and thereby change a test's execution environment.
+Dependent tests can \textit{interfere with downstream testing
+techniques} that change a test suite and thereby change a test's execution environment.
 Examples of such techniques include
 test selection techniques (that identify a subset of
 the input test suite to run during
@@ -259,7 +259,7 @@ This paper makes the following contributions:
 \item \textbf{Formalization.} We formalize test dependence
   in terms of test suites as ordered sequences of tests and explicit execution
   environments for test suites.  The formalization enables reasoning about test dependence
-  as well as a proof that finding manifest test dependences is an NP-complete
+  as well as a proof that finding manifest dependent tests is an NP-complete
   problem (Section~\ref{sec:formalism}).
 
   \item \textbf{Algorithms.} We present three algorithms

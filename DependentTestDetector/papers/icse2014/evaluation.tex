@@ -108,7 +108,7 @@ we use isolated execution ($k = 1$), and
 pairwise execution ($k = 2$). The choice of $k$ is
 based on the results of our empirical
 study (Section~\ref{sec:study}) that a small $k$
-can find most realistic test dependences.
+can find most realistic dependent tests.
 
 We provided \ourtool with a list of 39 ``dependence-free'' fields
 for the 4 subject programs. This manual step cost
@@ -167,7 +167,7 @@ test suites, the randomized algorithm detects 2 more dependent
 tests in \jt. These two tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and \dependenceaware{} $k$-bounded
-algorithm fail to detect these two tests, because
+algorithms fail to detect these two tests, because
 they cannot scale to $k$=3 for 
 \jt. Related, the randomized algorithm
 detects more dependent
@@ -182,7 +182,7 @@ automatically-generated test suite.
 The dependent test was missed because \ourtool
 did not track static field access in the \CodeIn{java.security} package,
 and Javari did not provide annotations for APIs
-in that package.
+in that package either.
 
 
 \subsubsection{Performance of \ourtool}
@@ -291,7 +291,7 @@ this issue~\cite{crystalbugreport}.
 %
 The dependent test in Synoptic was previously-known.
 The developers merged two related tests to fix
-the dependent tests.
+the dependent test.
 %
 %After receiving our reported dependent tests in XML-Security,
 The SIR~\cite{sir} maintainers confirmed our reported dependent
