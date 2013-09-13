@@ -36,7 +36,7 @@ and write to a static field has a write effect,
 since a read access to a static field may mutate objects
 reachable from the field in the heap.
 \ourtool assumes that the JDK is stateless,
-and thus does not instrument JDK classes. 
+and thus does not track field access in JDK classes. 
 
 
 %\ourtool does not instrument JDK classes.
