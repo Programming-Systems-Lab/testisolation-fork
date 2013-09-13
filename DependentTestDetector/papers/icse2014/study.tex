@@ -75,7 +75,7 @@ running these two tests in the opposite order as the full original test
 suite), then the number of tests to manifest the dependent test is 2.
 Among the \dtnum studied dependent tests, we found only 2 of them
 require 3 tests to manifest the dependence.
-One test depends on itself:
+One other test depends on itself:
 running the test twice produces different results than running it once,
 because this test side-effects a database it reads.
 We count this special case separately in the ``Self'' column
@@ -122,7 +122,7 @@ modify the test code to remove them.}}
 % inadvertent.
 Among \dtnum dependent tests,
 94 (98\%) of them were treated as major or minor problems in the report,
-but only 38 (40\%) of all the \dtnum dependent tests
+but only 38 (40\%) of the \dtnum dependent tests
 got fixed by developers. 
 %There is no statistical
 %significant correlation between severity and fixing.
@@ -133,14 +133,14 @@ on the program code, while the other fixes are on the
 test code.
 Based on developers' discussions, we found that although
 developers admitted that such test dependence should be removed,
-they often leave the dependence unresolved.
+they often left the dependence unresolved.
 The primary reason is that
 % developers often \textit{intentionally} introduce test dependence because 
 it is
 easier and more convenient to write the test code. When such a dependent
 test is reported, developers may just add comments to the test code
 to document the existing dependence. This applies to 49 (51\%) out
-of all the \dtnum dependent tests. For the remaining 9 (9\%) unfixed tests,
+of the \dtnum dependent tests. For the remaining 9 (9\%) unfixed tests,
 developers thought they were not important enough given the limited
 development time, so they simply closed the issue report without taking
 any action.
@@ -152,12 +152,12 @@ any action.
 %It is non-trivial 
 
 When fixing a dependent test, developers used
-four strategies. For all the 6 dependent tests
-fixed on the program code, developers changed
+four strategies. For the 6 dependent tests
+fixed in the program code, developers changed
 code that performs static variable initialization, which ensures that
 each dependent test will not read an undesired value.
 Section~\ref{sec:repercussion} gives an example.
-Among the other 32 dependent tests fixed on the test code,
+Among the other 32 dependent tests, which were fixed in the test code,
 28 (87\%) of them were fixed by manually specifying
 the test execution order in a test script or a configuration file,
 3 (10\%) of them were simply deleted by developers
@@ -183,8 +183,10 @@ A dependent test may manifest as a false alarm or a missed alarm
 \vspace{1mm}
 
 \noindent \textbf{False alarm.} Most of
-the dependent tests (94 out of \dtnum) indicate a weakness in the test suite rather than the
-tested code:  
+the dependent tests (94 out of \dtnum) 
+result in false alarms:
+%indicate a weakness in the test suite rather than the
+%tested code:  
 the test should pass but fails after reordering due to the dependence.
 The test dependence arises due to incorrect initialization
 of program state by one
@@ -216,8 +218,9 @@ dependent tests, and might report bugs about the failing tests,
 even though this is exactly the intended behavior. 
 If the dependence is not documented clearly and
 correctly, it can take a considerable amount of time to work out that
-these reported failures are spurious. We found
-49 such dependent tests in our study from the Eclipse issue tracking system.
+these reported failures are spurious. 
+The Eclipse issue tracking system contains at least
+49 such dependent tests.
 %Or worse, the developers may try
 %to fix a bug that is not there.
 In September 2003, a user filed a
@@ -240,9 +243,6 @@ and points to a weakness in the test suite.
 
 \vspace{1mm}
 
-\todo{Masking Faults in a Program. Mike left this todo, no idea
-what does it mean}
-
 \noindent \textbf{Missed alarm}. In rare cases,
 dependent tests can hide a fault in the
 program, \emph{exactly} when the test suite is executed in its default
@@ -258,7 +258,7 @@ a test should fail but passes due to the dependence.
 We found two dependent tests in
 the Apache CLI library~\cite{cli} for this category.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
-code. The fault is due to the improper initialization of the static variable
+code. The fault is due to improper initialization of the static variable
 \CodeIn{argName}. The static variable \CodeIn{argName} should be set
 to its default value \CodeIn{"arg"} by CLI's clients via calling
 method \CodeIn{reset()}. Otherwise, \CodeIn{argName}'s
@@ -272,7 +272,7 @@ These two tests fail when run in isolation,
 but both pass when run in the default order. This is because
 in the default order, tests running \emph{before} these
 two tests call \CodeIn{reset()} at least once, which sets
-initialize the value of \CodeIn{argName} and masks the fault.
+the value of \CodeIn{argName} and masks the fault.
 
 %Both dependent tests can reveal this fault,  but
 %the default order of test execution makes both tests pass
@@ -282,7 +282,7 @@ Such dependent tests have a non-trivial impact in practice.
 This fault was reported in the bug database several times~\cite{clibug},
 starting on March 13, 2004 (CLI-26). The report was marked as resolved
 \emph{three years} later on March 15, 2007 when developers
-realized the test dependence. Developers fixed this
+realized the test dependence. The developers fixed this
 fault by adding a static initialization block which
 calls \CodeIn{reset()} in class \CodeIn{OptionBuilder}.
 
@@ -300,8 +300,8 @@ None of the dependent tests we studied can be identified by
 running the existing test suite in the default order. 
 Every dependent test was reported when the
 test suite was reordered, either accidentally by a user or
-by a testing tool. This indicates that
-a tool for detecting dependent tests is needed.
+by a testing tool. This indicates the need
+for a tool to detect dependent tests.
 %dependent test detection techniques should
 %explicitly search for such dependent tests.
 
