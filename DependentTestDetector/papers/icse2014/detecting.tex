@@ -41,7 +41,7 @@ guarantee to find every dependent test.
 \STATE $\mathit{dependentTests}$ $\leftarrow$ $\emptyset$
 \STATE $\mathit{expectedResults}$ $\leftarrow$ $\result{T}{\env_0}$
 \FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$)}
-\STATE $\mathit{execResults}$ $\leftarrow$ $\result{ts}{\env_0}$
+\STATE $\mathit{execResults}$ $\leftarrow$ $\result{\mathit{ts}}{\env_0}$
 \FOR{each test $\mathit{t}$ in $\mathit{ts}$}
 \IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
 \STATE $\mathit{dependentTests}$ $\leftarrow$ $\mathit{dependentTests}$ $\cup$ $\mathit{t}$
