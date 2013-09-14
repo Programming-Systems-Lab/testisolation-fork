@@ -264,6 +264,8 @@ but it uses dynamic analyses to prune the search space.
 %Information obtained from shorter permutations is used to avoid running lonnger permutations; 
 %The algorithm first identifies all dependent tests
 %that can be detected by running
+%The algorithm first obtained the result of
+%each test when executed in isolation.
 The intuition of this algorithm is that, given
 a test permutation, for \textit{each} test,
 if \textit{every global field} (and other 
@@ -271,8 +273,13 @@ resources from the execution environment) it reads
 is \textit{not} written by any test executed \textit{before} it,
 all tests in the permutation are guaranteed to produce
 the same results as executed in isolation (since each
-test does not interfere with any other tests). Thus, the permutation
-can be safely ignored. 
+test does not interfere with any other tests).
+Dependent tests whose isolation execution results
+are different from the results in the default execution order
+can be cheaply detected.
+%and whether the isolation result is the same as
+%the can be cheaply checked.). 
+Thus, the permutation can be safely ignored. 
 
 In the case of $k$=1, the algorithm executes all tests in the default order
 within the same JVM, and discards tests that do \textit{not}
