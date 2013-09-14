@@ -56,10 +56,11 @@ guarantee to find every dependent test.
 % $\le k$; each suite is composed of tests selected from $T$ without replacement.\\
 
 \vspace{-3mm}
-\caption {The algorithm to detect dependent tests.
+\caption {The base algorithm to detect dependent tests.
 The getPossibleExecOrder function is instantiated
-by different algorithms in Figures~\ref{fig:randalgorithm},
-~\ref{fig:exhaustivealgorithm}, and ~\ref{fig:impralg}.
+by different algorithms in
+Figures~\ref{fig:randalgorithm},~\ref{fig:exhaustivealgorithm},
+and~\ref{fig:impralg}.
 }
 \label{fig:basealgorithm}
 \end{figure}
@@ -254,8 +255,7 @@ that exhibit different results.
 %execute all 3-permutations
 %in Joda-Time's test suite (3875 tests, Table~\ref{tab:subjects}).
 
-\todo{please check the whole section here. is it clear?}
-\todo{still feel not that clear}
+\todo{Mike edited this section.  Please check it over.}
 
 The \dependenceaware{} $k$-bounded algorithm
 detects the same number of dependent tests
@@ -266,14 +266,23 @@ but it uses dynamic analyses to prune the search space.
 %that can be detected by running
 %The algorithm first obtained the result of
 %each test when executed in isolation.
-The intuition of this algorithm is that, given
-a test permutation, for \textit{each} test,
-if \textit{every global field} (and other 
+
+Its key idea is to estimate which tests can interact through which fields
+and to only run permutations in which the interactions may be different.
+The algorithm determines, for every field read by a test, which test
+previously wrote that field (or that the field's value is unchanged from the
+initial environment).
+If, in a parmutation, all of those relationships are unchanged from the default
+test order, then all the tests in that permutation give the same result as in the
+default order (and, therefore, that permutation need not be run).  As a
+special case, suppose that for each test,
+\textit{every global field} (and other 
 resources from the execution environment) it reads
-is \textit{not} written by any test executed \textit{before} it,
-all tests in the permutation are guaranteed to produce
-the same results as executed in isolation (since each
-test does not interfere with any other tests).
+is \textit{not} written by any test executed before it; then
+each test in the permutation produces
+the same result as when executed in isolation.
+% (since each
+% test does not interfere with any other tests).
 Dependent tests whose isolation execution results
 are different from the results in the default execution order
 can be cheaply detected.
@@ -281,15 +290,20 @@ can be cheaply detected.
 %the can be cheaply checked.). 
 Thus, the permutation can be safely ignored. 
 
+We give two cases for the algorithm:  an optimized version for $k$=1, and
+a general version for $k$$\ge$2.
+
 In the case of $k$=1, the algorithm executes all tests in the default order
 within the same JVM, and discards tests that do \textit{not}
 access (including read and write) any global fields or
 other external resources such as a file. Then,
-the algorithm executes each of the remaining tests in isolation (i.e., in a fresh JVM),
-and reports the tests whose results are different as executed in
+the algorithm executes each of the remaining tests in isolation (i.e., in a
+fresh JVM\footnote{The JVM startup time is the main cost in any of the
+  dependent test detection algorithms.})
+and reports the tests whose results are different than when executed in
 the default order.
 
-In the case of $k\ge$2, the algorithm first runs the case of $k$=1 (described above)
+In the case of $k$$\ge$2, the algorithm first runs the case of $k$=1 (described above)
 to find all dependent tests that exhibit different results
 when executed in the default order and when executed in isolation.
 Then, it runs the algorithm shown in Figure~\ref{fig:impralg}.
@@ -306,7 +320,7 @@ It uses the isolation execution result
 of each test as a comparison baseline.
 When generating all possible test permutations
 of length $k$, the algorithm checks whether
-\textit{all} global fields \textit{each} test (in the generated permutation)
+\textit{all} global fields in \textit{each} test (in the generated permutation)
 may read are not written by \textit{any} test executed before it (lines 6--10).
 If so, all tests in the permutation
 must produce the same results as executed in isolation,
@@ -314,9 +328,16 @@ and the algorithm can safely discard this permutation without
 executing it. Otherwise, the algorithm adds the generated
 permutation to the result set (line 9), and runs the algorithm in Figure~\ref{fig:basealgorithm}
 to identify dependent tests. %among it.
+
 Due to space limits, we omit the proof of the correctness
 of the \dependenceaware{} $k$-bounded algorithm. Interested
 readers can refer to~\cite{proof-dependence-aware} for proof.
+
+The given algorithm uses isolated execution results as a baseline and
+avoids executing permutations that are redundant with them.  It would be
+possible to optimize the algorithm by adding each executed permutation to
+the baseline and avoiding all redundant executions.  Such an algorithm is
+more complex and we do not show it.
 
 The \dependenceaware{} $k$-bounded algorithm has two major benefits.
 First, it clusters tests by the fields they
@@ -357,9 +378,11 @@ getPossibleExecOrder($T$):\\
 \end{algorithmic}
 
 \vspace{-3mm}
-\caption {The \dependenceaware{} $k$-bounded algorithm to detect dependent tests.
+\caption {The \dependenceaware{} $k$-bounded algorithm to detect dependent tests,
+  for $k$$\ge$2.
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
 getPossibleExecOrder function.
+For $k$=1, see Section~\ref{sec:advalgorithm}.
 %Our experiments uses $k=1$, \todo{experiment setting, how
 %large k it can scale to.}. 
 } 
