@@ -298,7 +298,7 @@ within the same JVM, and discards tests that do \textit{not}
 access (including read and write) any global fields or
 other external resources such as a file. Then,
 the algorithm executes each of the remaining tests in isolation (i.e., in a
-fresh JVM\footnote{The JVM startup time is the main cost in any of the
+fresh JVM\footnote{The JVM startup time is the main cost in the
   dependent test detection algorithms.})
 and reports the tests whose results are different than when executed in
 the default order.
