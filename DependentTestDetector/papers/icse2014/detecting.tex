@@ -255,7 +255,6 @@ that exhibit different results.
 %execute all 3-permutations
 %in Joda-Time's test suite (3875 tests, Table~\ref{tab:subjects}).
 
-\todo{Mike edited this section.  Please check it over.}
 
 The \dependenceaware{} $k$-bounded algorithm
 detects the same number of dependent tests
@@ -270,8 +269,9 @@ but it uses dynamic analyses to prune the search space.
 Its key idea is to estimate which tests can interact through which fields
 and to only run permutations in which the interactions may be different.
 The algorithm determines, for every field read by a test, which test
-previously wrote that field (or that the field's value is unchanged from the
-initial environment).
+previously wrote that field.
+%(or that the field's value is unchanged from the
+%initial environment).
 If, in a parmutation, all of those relationships are unchanged from the default
 test order, then all the tests in that permutation give the same result as in the
 default order (and, therefore, that permutation need not be run).  As a
