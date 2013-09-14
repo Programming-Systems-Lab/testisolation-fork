@@ -28,8 +28,10 @@ on a \ourtool-instrumented program.
 %in a trace file after executing a \ourtool-instrumented test.
 
 \ourtool does not perform any sophisticated points-to or shape
-analyses, rather, it conservatively treats both read
-and write to a static field as a write effect,
+analyses. It uses the side-effect annotations
+provided by Javari~\cite{QuinonezTE2008} to determine the immutable
+classes.  Then, it conservatively treats both read
+and write to a mutable static field as a write effect,
 since a read access to a static field may mutate objects
 reachable from the field in the heap.
 \ourtool assumes that the JDK is stateless,
@@ -46,12 +48,10 @@ and thus does not track field access in JDK classes.
 %Javarifier's annotations, \ourtool assumes these classes (and their object
 %instances) are stateless. 
 
-\ourtool uses the side-effect annotations
-provided by Javari~\cite{QuinonezTE2008} to determine the immutable
-static fields. Optionally, users can also specify a
+Optionally, users can also specify a
 list of ``dependence-free'' fields (e.g., a static field for
 logging or counting), which can never be the root cause of manifest test dependence.
-\ourtool ignores the accesses to these fields.
+\ourtool ignores accesses to these fields.
 
 %In order to make the problem tractable, it was assumed that objects reachable from the static fields do not alias one another. 
 
