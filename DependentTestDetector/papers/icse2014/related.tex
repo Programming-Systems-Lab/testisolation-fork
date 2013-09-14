@@ -73,19 +73,20 @@ Bergelson and Exman characterize a form of test dependence informally:
 given two tests that each pass, the composite
 execution of these tests may still
 fail~\cite[p.~38]{bergelsonetal:EEE:2006}.  That is, if 
-\suite{t_1} executed by itself passes and \suite{t_2} executed by itself passes,
+$t_1$ executed by itself passes and $t_2$ executed by itself passes,
 executing the sequence \suite{t_1, t_2} in the same context may fail.
 However, they do not provide any empirical evidence of
 test dependence nor any detection algorithms.
 
-Some practitioners acknowledge test dependence as a possible, albeit low probability, event:
+Practitioners acknowledge test dependence as undesirable~\cite{unit-test-def}:
+%a possible, albeit low probability, event:
 \begin{quote}
 Unit testing \dots  
 requires that we test the unit in isolation. That is, we
 want to be able to say, \emph{to a very high degree of confidence} [emphasis added], that
 any actual results obtained from the execution of test cases are
 purely the result of the unit under test. The introduction of
-other units may color our results~\cite{unit-test-def}.
+other units may color our results.
 \end{quote}
 They further note that other tests, as well as stubs and drivers,
 may ``interfere with the straightforward
@@ -93,8 +94,8 @@ execution of one or more test cases.''
 
 
 Compared with these informal definitions,
-we formalize test dependence, and provide empirical evidence
-to show that test dependence does arise in practice.
+we formalize test dependence and characterize 
+test dependence in practice.
 %, and could
 %have costly repercussions.
 %They give an informal definition of what it means for the execution of a

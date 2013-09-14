@@ -27,10 +27,9 @@ on a \ourtool-instrumented program.
 %Both field and file access information are recorded
 %in a trace file after executing a \ourtool-instrumented test.
 
-\edit{check the text below}
 \ourtool does not perform any sophisticated points-to or shape
 analyses, rather, it conservatively treats both read
-and write to a static field has a write effect,
+and write to a static field as a write effect,
 since a read access to a static field may mutate objects
 reachable from the field in the heap.
 \ourtool assumes that the JDK is stateless,
