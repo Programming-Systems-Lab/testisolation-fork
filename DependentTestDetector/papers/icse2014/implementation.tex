@@ -6,9 +6,11 @@ We implemented our three dependent test detection algorithms in
 a prototype tool, called \ourtool. \ourtool
 supports JUnit 3.x/4.x tests. %, and is fully-automated.
 
-\ourtool launches a fresh JVM
-when executing a test permutation, ensuring there is no interaction between
-different runs. When comparing the observed result of
+To ensure there is no interaction between
+different runs, \ourtool launches a fresh JVM
+when executing a test permutation, and after a run it resets resources,
+such as deleting any temporary files that were created.
+When comparing the observed result of
 a test in a permutation with its expected result,
 \ourtool considers two JUnit test results to be the same when the
 tests either both pass, or exhibit exactly the same exception

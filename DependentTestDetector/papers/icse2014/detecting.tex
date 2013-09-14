@@ -159,12 +159,12 @@ executes all $k$-permutations for a bounding
 parameter $k$.
 By doing so, the algorithm reduces
 the number of permutations to execute
-to $O(n^k)$, which for small $k$ and $n$ is tractable. 
+to $O(n^k)$, which is tractable for small $k$ and $n$. 
 
 
 Figure~\ref{fig:exhaustivealgorithm} shows the algorithm.
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the
-algorithm executes every $k$-permutations of tests,
+algorithm executes every $k$-permutation of tests,
 and checks whether the result of any test differs
 from the expected result. Finally, the algorithm returns the set
 of all tests $t_i \in T$
