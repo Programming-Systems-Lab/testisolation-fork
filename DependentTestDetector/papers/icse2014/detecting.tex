@@ -255,6 +255,7 @@ that exhibit different results.
 %in Joda-Time's test suite (3875 tests, Table~\ref{tab:subjects}).
 
 \todo{please check the whole section here. is it clear?}
+\todo{still feel not that clear}
 
 The \dependenceaware{} $k$-bounded algorithm
 detects the same number of dependent tests
@@ -281,16 +282,17 @@ the algorithm executes each of the remaining tests in isolation (i.e., in a fres
 and reports the tests whose results are different as executed in
 the default order.
 
-In the case of $k\ge$2, the algorithm first runs the case of $k$=1
-to find all dependent tests that can be manifested when executed in isolation,
-then it runs the algorithm shown in Figure~\ref{fig:impralg}.
+In the case of $k\ge$2, the algorithm first runs the case of $k$=1 (described above)
+to find all dependent tests that exhibit different results
+when executed in the default order and when executed in isolation.
+Then, it runs the algorithm shown in Figure~\ref{fig:impralg}.
 %
 %\todo{Darioush, check the above,
 %how could this permutation be safely ignored, if the result
 %is only the same as in isolation (not the default order?)}
-The algorithm defines
-the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
-The getPossibleExecOrder function first executes
+%The algorithm defines
+%the getPossibleExecOrder function in Figure~\ref{fig:basealgorithm}.
+The defined getPossibleExecOrder function first executes
 each test in \textit{isolation}, and records the
 fields that each test reads and writes (lines 1--3).
 It uses the isolation execution result
