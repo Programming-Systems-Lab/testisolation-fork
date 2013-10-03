@@ -18,6 +18,9 @@ public class TestRandomizedDependentTestFinder extends TestCase {
 	final static String crystalFile_manual = "./tests/edu/washington/cs/dt/tools/crystal-all-manual-tests.txt";
 	final static String jodatimeFile_manual = "./tests/edu/washington/cs/dt/tools/jodatime-all-manual-tests.txt";
 	final static String synopticFile_manual = "./tests/edu/washington/cs/dt/tools/synoptic-all-manual-tests.txt";
+	final static String jfreechart_manual = "./tests/edu/washington/cs/dt/tools/jfreechart-all-manual-tests.txt";
+	
+	final static String jfreechart_tmp = "./tmp-jfreechart.txt";
 	
 	final static String xmlSecurityFile_auto = "./tests/edu/washington/cs/dt/tools/xmlsecurity-auto-test-list.txt";
 	final static String crystalFile_auto = "./tests/edu/washington/cs/dt/tools/crystal-auto-test-list.txt";
@@ -29,6 +32,28 @@ public class TestRandomizedDependentTestFinder extends TestCase {
 		RandomizedDependentTestFinder.verbose = true;
 		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(this.exampleFile);
 		randomizedFinder.setTrialNum(2);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	public void testJFreeChart() {
+		Log.logConfig("./randomized_jfreechart_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(jfreechart_manual);
+		randomizedFinder.setTrialNum(1000);
+		Set<String> dts = randomizedFinder.findDependentTests();
+		for(String t : dts) {
+			System.out.println("    " + t);
+		}
+	}
+	
+	public void testJFreeChart_1() {
+		Log.logConfig("./tmp_jfreechart_results.txt");
+		RandomizedDependentTestFinder.verbose = true;
+		RandomizedDependentTestFinder randomizedFinder = new RandomizedDependentTestFinder(jfreechart_tmp);
+		randomizedFinder.setTrialNum(0);
 		Set<String> dts = randomizedFinder.findDependentTests();
 		for(String t : dts) {
 			System.out.println("    " + t);
