@@ -1,0 +1,24 @@
+I struggled with the takeaway from this paper. First, the definition of dependent tests is narrow (you are not examining state - only test results which means you may miss many real dependencies) and second, you have not shown us that the method used by a system such as JCrasher, that simply resets the environment before each test, is worse than running tests in a way that will allow dependencies to be manifested.  
+
+
+How does this really help the tester? What do we do with the dependent tests that we find?
+
+I don't think the problem has been well enough defined and scoped.
+
+I don't' really like the title that much. I think it can be misleading. In fact at first I thought - well there is an obvious answer to question (of course order can impact test results if tests are not properly written) so it took away from your paper's value. Once I read the paper more thoroughly, I realized that the paper is really about studying how often these exist in practice and how to detect them. You might think about a new title to more accurately reflect that.  
+
+One issue that I have is that you discuss this as a broad testing problem, particularly with respect to prioritization and selection. I believe you need to be careful here. In much of the work on prioritization and selection, system tests are used and test harnesses in these cases will reset the application and its environment between test cases. In fact, most of the SIR applications (ones not written as Junit) do this and many studies have been performed for prioritization and selection on that data. There is an implication in this paper that the research in that area is somehow flawed because of unknown dependence, and I think that is an unfair conclusion some could make. So you need to clearly scope and define this problem to make it understood that this is particular to Junit testing where the application is kept running (perhaps incorrectly) between tests and relies on the setup and shutdown.  
+
+section 2.2.1 - the writing is not clear in this paragraph. You say that you measure the size of the subsequence, and if the tests produce different result s... but as far as I can tell you are not actually running these - you are using the reported results. The way this is written is somewhat misleading. I would modify this to make it clearer 
+
+
+In this section you discuss JCrasher, which clears the environment and prevents dependent tests. Yet you argue that you don't want to do this because it makes tests less behaviorally diverse - but isn't that test dependence? If one test modifies the environment of another test then there is potential to give different results if run in a different order. It seems to me that the JCrasher mode is a purer way of handling dependence. See my comment earlier - I think you should evaluate the tradeoffs between real independence and running tests in a way that could allow dependence.  
+
+While this study may be the first to be written up as a specific study, its findings are already known to the database testing and web testing communities. Testing that deals with test cases accessing persistent state are most likely going to have dependences. This is true for databases, server state, cookies,... Capture-replay testing has to deal with this issue also. These are not new reflections.
+
+
+Unfortunately, the proposed algorithms are expensive and random actually finds more test dependences. This leads me to believe that domain-specific test dependence approaches may be effective, instead of using general algorithms for across domains.  
+
+That is, test dependence is a well known problem that people in those communities deal with. This formalization and these general algorithms do not appear to be very promising.  
+
+This paper assumes the test results of the "default order" of execution as the reference result. Since the reference results will affect the determination on whether test dependence exists or not, it is interesting to know whether there a better "order" to be used as the reference result.  
