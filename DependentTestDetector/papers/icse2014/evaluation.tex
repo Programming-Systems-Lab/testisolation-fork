@@ -42,6 +42,10 @@ dependent tests (Section~\ref{sec:algcomparison})?
 %\item How does \ourtool's effectiveness compare to an alternative
 %approach based on test execution order randomization
 %(Section~\ref{sec:random})?
+
+\item Can dependent tests interfere with downstream testing techniques
+such as test prioritization (Section~\ref{sec:impact})?
+
 \end{enumerate}
 
 \subsection{Subject Programs}
@@ -260,7 +264,7 @@ explore all possible test permutations.
 %did not check that our tool finds them, because the time needed to
 %run our naive algorithm on Joda-Time with $k=3$ is measured in months.
 
-
+\input{impact}
 
 \subsection{Discussion}
 \label{sec:expdiscussion}
@@ -297,29 +301,6 @@ without dependency on other tests, and characterized that as
 %They also accepted our suggested
 %patch to fix the dependent tests.
 
-\vspace{1mm}
-\noindent \textbf{Initial Assessment of the Impact of
-Dependent Tests.} We manually investigated the
-impact of dependent tests on two well-known
-downstream testing techniques: test
-selection and test prioritization.
-We counted the number of dependent tests in the
-4 human-written test suites that can
-theoretically affect the results of these two techniques.
-For test selection, we manually checked whether
-there exists a subsequence of tests
-that do not return the same results
-when executed in the \textit{same} order
-as in the original test suite. 
-For test prioritization, we manually check whether
-there exists a possibly-\textit{reordered}
-subsequence of tests that do not return the
-same results as in the original test suite.
-As a result, 26 out of 29 dependent tests can
-%besides the synoptic test, and 2 jodatime tests
-affect the results of test selection,
-and all 29 dependent tests can affect the results
-of test prioritization.
 
 %\noindent
 %\setlength{\tabcolsep}{0.1\tabcolsep}

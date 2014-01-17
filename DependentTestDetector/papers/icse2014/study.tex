@@ -60,7 +60,7 @@ manifestation, root cause, and developer actions.
 
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least \pertange of the dependent
-tests in the study can be manifested by no more than 2 tests.}}
+tests in the study can be manifested by 2 or fewer tests.}}
 A dependent test is manifested if we produce a possibly reordered
 subsequence of the original test suite, such that the test
 produces a different
@@ -345,8 +345,9 @@ apply to arbitrary programs.
 The applications we studied are all written in 
 Java and have JUnit test suites.  
 
-We accepted the developers' judgment regarding which tests are dependent
-and the severity of each test.  We did not intentionally ignore
+We accepted the developers' judgment regarding which tests are dependent,
+the severity of each dependent test, and how many tests are needed
+to manifest the dependence.  We did not intentionally ignore
 any test dependence in the issue tracking system.
 However, a limitation is that the developers might have made a mistake,
 might not have marked a test dependence in a way we found it, and are

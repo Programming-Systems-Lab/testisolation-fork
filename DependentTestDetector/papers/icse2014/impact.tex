@@ -1,0 +1,24 @@
+\subsubsection{The Impact on Test Prioritization}
+\label{sec:impact}
+
+We manually investigated the
+impact of dependent tests on two well-known
+downstream testing techniques: test
+selection and test prioritization.
+We counted the number of dependent tests in the
+4 human-written test suites that can
+theoretically affect the results of these two techniques.
+For test selection, we manually checked whether
+there exists a subsequence of tests
+that do not return the same results
+when executed in the \textit{same} order
+as in the original test suite. 
+For test prioritization, we manually check whether
+there exists a possibly-\textit{reordered}
+subsequence of tests that do not return the
+same results as in the original test suite.
+As a result, 26 out of 29 dependent tests can
+%besides the synoptic test, and 2 jodatime tests
+affect the results of test selection,
+and all 29 dependent tests can affect the results
+of test prioritization.
