@@ -61,11 +61,12 @@ manifestation, root cause, and developer actions.
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least \pertange of the dependent
 tests in the study can be manifested by 2 or fewer tests.}}
-A dependent test is manifested if we produce a possibly reordered
+A dependent test is manifested if there exists a possibly reordered
 subsequence of the original test suite, such that the test
 produces a different
 result than when run in the original suite.
-We measure the size of the subsequence.
+We measure the size of the reported subsequence 
+in the issue report.
 If the test produces a different result when run
 in isolation, the number of tests to manifest
 the dependent test is 1.

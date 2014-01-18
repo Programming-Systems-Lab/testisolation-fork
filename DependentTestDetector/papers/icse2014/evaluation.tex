@@ -271,7 +271,7 @@ explore all possible test permutations.
 
 %\subsubsection{Developers' Reactions}
 
-\noindent \textbf{Developers' Reactions.}
+\noindent \textbf{Developers' Reactions to Dependent Tests.}
 We sent the identified human-written dependent tests to the
 subject program developers, asking for their feedback.
 
@@ -327,7 +327,10 @@ in other types of tests, such as integration tests.
 Third, due to the computational complexity of the general dependent test
 detection problem, we do not yet have
 empirical data regarding how many dependent
-tests exist in a test suite and \ourtool's recall.  Giving a reasonable estimation is our future work.
+tests exist in a test suite and \ourtool's recall.  Giving a reasonable estimation is our future work. Fourth, we only assessed the
+impact of dependent tests on five test prioritization
+techniques. Using other test prioritization techniques
+might achieve different results.
 
 %\todo{this paper focuses on manifest test dependence, what about
 %potential test dependence, as well as some other cases in the
@@ -345,12 +348,15 @@ test suite.
 studied in Section~\ref{sec:study}, the identified
 dependent tests in our subject programs generally reveal weakness
 in a test suite rather than defects in the tested code.
-\textbf{(3)} 
+\textbf{(3)} Dependent tests can interfere with
+test prioritization techniques and cause unexpected output.
+\textbf{(4)} 
 %\todo{need to figure out a proper english sentence to say like:
 %The dependent test detection problem is inherently
 %complex, a smarter algorithm may not achieve great results.}
-The randomized algorithm is the
-most cost-effective in detecting dependent tests.
+The randomized algorithm is the most cost-effective in
+detecting dependent tests; but it has no guarantee
+of the number of detected dependent tests.
 
 %\todo{Idea:  how about combining the randomized and dependence-aware
 %  algorithms?  That is, generate random orderings that violate dependences;

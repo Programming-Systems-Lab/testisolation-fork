@@ -17,24 +17,28 @@ and implemented three algorithms to identify manifest test dependence
 in a test suite. Our empirical evaluation revealed
 dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
-suites.
+suites; and the revealed dependent tests can interfere with
+existing test prioritization techniques.
 
 Our future work should focus on the following directions:
 
 \vspace{1mm}
 
-\noindent \textbf{{Investigating impact of dependent tests.}}
-Dependent tests can compromise the application of
-testing techniques such as test generation, selection,
-prioritization, and parallelization, since
-most current testing techniques just assume independence and
-make no statement about what happens when this
-assumption is not true. However,
-more comprehensive empirical studies should measure  
-the extent of this impact.
+\noindent \textbf{{Investigating impact of dependent tests
+on other downstream testing techniques.}}
+We have shown that dependent tests can compromise the application of
+five existing test prioritization techniques.
+%assumption is not true. However,
+We plan to conduct more comprehensive empirical studies to
+measure the impact of dependent tests to other
+downstream techniques, such as test selection,
+test parallelization, test factoring, experimental
+debugging techniques, and mutation analysis.
+We are also interested in how to enhance these
+testing techniques to support test dependence.
 %
-Another open question is how
-testing techniques should handle test dependence.
+%Another open question is how
+%testing techniques should handle test dependence.
 One straightforward way 
 might be to augment such techniques to respect a
 defined partial order among tests. This partial order

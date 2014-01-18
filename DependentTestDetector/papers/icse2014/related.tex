@@ -131,9 +131,10 @@ test dependence in practice.
 \subsection{Techniques Assuming Test Independence}
 
 The assumption of test independence lies at the heart of most
-techniques for automated regression test selection,
-test case prioritization, coverage-based
-fault localization, etc. 
+techniques for automated regression test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
+Briand:2009:ART, Zhang:2012:RMT},
+test case prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART}, coverage-based
+fault localization~\cite{Steimann:2013}, etc. 
 
 
 Test prioritization seeks to reorder a test suite to detect
@@ -183,13 +184,14 @@ for the sake of test diversity and efficiency.
 When Randoop generates a nondeterministic test, it can disable the test but
 leave it in the suite where it is executed in order to prevent other tests
 that are dependent on it from beginning to fail~\cite{RobinsonEPAL2011}.
-To the best of our knowledge, only JCrasher~\cite{Csallner:2004}
-provides a mode to clear the environment changes caused
-by a previous test. Such functionality helps eliminate
-potential test dependence, but may make generated
-tests less behaviorally-diverse --- as they cannot be constructed
-on top of previous tests. Exploring how to
-incorporate test dependence into the design of automated
+%I feel test generation should not belong here
+%To the best of our knowledge, only JCrasher~\cite{Csallner:2004}
+%provides a mode to clear the environment changes caused
+%by a previous test. Such functionality helps eliminate
+%potential test dependence, but may make generated
+%tests less behaviorally-diverse --- as they cannot be constructed
+%on top of previous tests.
+Exploring how to incorporate test dependence into the design of automated
 test generator is our future work.
 
 Coverage-based fault localization techniques~\cite{Jones:2002:VTI}
@@ -215,7 +217,9 @@ In a recent evaluation of several coverage-based fault locators,
 
 As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation},
 the test independence assumption often does not hold for either
-human-written or automatically-generated tests. Thus, techniques
+human-written or automatically-generated tests; and the dependent
+tests identified in our subject programs interfere with
+existing test prioritization techniques. Thus, techniques
 that rely on this assumption may need to be reformulated.
 
 \subsection{Tools Supporting Test Dependence}
