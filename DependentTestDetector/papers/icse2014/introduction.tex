@@ -249,9 +249,12 @@ Most of these downstream testing techniques implicitly assume that
 there are no test dependences in the input test suite. Violation of
 this assumption, as we show happens in practice, can cause unexpected
 output. %\todo{change erroneous to different?} 
-As an example, test selection may produce a subsequence of tests that do not
+As an example, test prioritization may produce a reordered sequence
+of tests that do not
 return the same results as they do when executed in
-the default order, as part of the full suite.
+the default order. We provide empirical evidence that
+dependent tests do affect the output of five test prioritization
+techniques in Section~\ref{sec:impact}.
 
 
 \subsection{Contributions}
@@ -291,13 +294,13 @@ This paper makes the following contributions:
   unit tests in \subjnum real-world subject programs.
   % (and even more in automatically-generated tests).
   The developers confirmed all of these as
-  undesired.
+  undesired (Section~\ref{sec:evaluation}).
 
   %\item \textbf{Assessment.} 
-  In addition, we implemented five test prioritization
-  techniques and evaluated them on the \subjnum subject programs
-  that contain dependent tests. Our results show that all the
-  five test prioritization techniques are affected by the dependent tests
+  \item \textbf{Impact Assessment.} We implemented five test prioritization
+  techniques and evaluated them on \subjnum subject programs
+  that contain dependent tests. The results show that all the
+  five test prioritization techniques are affected by dependent tests
   (Section~\ref{sec:evaluation}).
 
   % \textit{every} subject program we studied, from both  and automatically-generated

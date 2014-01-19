@@ -329,8 +329,11 @@ detection problem, we do not yet have
 empirical data regarding how many dependent
 tests exist in a test suite and \ourtool's recall.  Giving a reasonable estimation is our future work. Fourth, we only assessed the
 impact of dependent tests on five test prioritization
-techniques. Using other test prioritization techniques
-might achieve different results.
+techniques, and we only evaluated the impact of dependent
+tests on prioritizing unit tests.
+Using other test prioritization techniques and
+other types of tests (e.g., integration tests
+or system tests) might achieve different results. 
 
 %\todo{this paper focuses on manifest test dependence, what about
 %potential test dependence, as well as some other cases in the
@@ -339,7 +342,7 @@ might achieve different results.
 \vspace{1mm}
 
 \noindent \textbf{Experimental Conclusions}
-We have three chief findings. \textbf{(1)}
+We have four chief findings. \textbf{(1)}
 Dependent tests do exist in practice.
 An automatically-generated test suite can contain
 substantially more dependent tests than a human-written
@@ -356,7 +359,7 @@ test prioritization techniques and cause unexpected output.
 %complex, a smarter algorithm may not achieve great results.}
 The randomized algorithm is the most cost-effective in
 detecting dependent tests; but it has no guarantee
-of the number of detected dependent tests.
+of the number of dependent tests it can detect.
 
 %\todo{Idea:  how about combining the randomized and dependence-aware
 %  algorithms?  That is, generate random orderings that violate dependences;
