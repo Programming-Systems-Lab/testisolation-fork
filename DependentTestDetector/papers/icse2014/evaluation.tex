@@ -164,9 +164,11 @@ so there are relatively more dependent tests detected in them.
 
 The randomized algorithm is surprisingly effective in
 detecting dependent tests. In our experiments, when run \trialnum times,
-it identifies \textit{more} dependent tests than the other
-two algorithms can find. For the human-written
-test suites, the randomized algorithm detects 4 more dependent
+it identifies \textit{more} dependent tests, and the
+dependent tests found by the randomized algorithm are a
+superset of those detected by the other two algorithms.
+For the human-written
+test suites, the randomized algorithm detects 2 more dependent
 tests in \jt. These two tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and \dependenceaware{} $k$-bounded
