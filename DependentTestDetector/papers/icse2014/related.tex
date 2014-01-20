@@ -185,10 +185,22 @@ When Randoop generates a nondeterministic test, it can disable the test but
 leave it in the suite where it is executed in order to prevent other tests
 that are dependent on it from beginning to fail~\cite{RobinsonEPAL2011}.
 %I feel test generation should not belong here
-%To the best of our knowledge, only JCrasher~\cite{Csallner:2004}
-%provides a mode to clear the environment changes caused
-%by a previous test. Such functionality helps eliminate
-%potential test dependence, but may make generated
+JCrasher~\cite{Csallner:2004}
+provides a mode to clear the environment changes caused
+by a previous test before generating a new one. Such functionality may happen to eliminate
+potential test dependence, but requires a tester to
+run each generated test in a separate JVM.
+Executing each test in a separate JVM is prohibitively expensive
+and might be useful when executing
+a test is much more expensive than re-initializing the environment.
+However, as shown in
+our experiments (Table~\ref{tab:results}), both human-written and automatically-generated
+unit tests are cheap to execute in a single JVM (see the ``Analysis Cost (seconds) | Randomized'' column), while
+executing each test separately in a fresh JVM introduces a 130X runtime overhead
+(see the ``Analysis Cost (seconds) | Exhaustive | $k$=1'' column). Such an overhead 
+may not be acceptable in practice.
+%introduce 130X overhead
+%may make generated
 %tests less behaviorally-diverse --- as they cannot be constructed
 %on top of previous tests.
 Exploring how to incorporate test dependence into the design of automated
