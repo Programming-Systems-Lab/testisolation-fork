@@ -116,7 +116,16 @@ $S_1, S_2 \in$ permutations($T$):
 %test $t' \in S$ such that $t' \in T$ and $t' \neq t$.}
 \end{definition}
 
-
+It would be possible to consider a tests dependent if reordering could
+affect any internal computation or heap value (non-manifest dependence);
+but these internal details, such as order of elements in a hash table,
+might never affect any test result: they could be false dependences.
+Another alternative would be to ask
+whether it is possible to write a new dependent test for an existing
+test suite; but the answer to this question is trivially ``yes''.
+This paper focuses on manifest dependence and works with real, existing
+test suites to determine the practical impact and prevalence of dependent
+tests.
 
 
 \subsection{The Dependent Test Detection Problem}

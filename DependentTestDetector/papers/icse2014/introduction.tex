@@ -84,25 +84,19 @@ We adopt the results of the default
 % , usually implicit,
 order of execution of a test suite as the
 expected results; these are the results that a developer sees when running
-the suite in the standard way. A test is dependent when there is a possibly
+the suite in the standard way. A test is dependent when there exists a possibly
 reordered subsequence of the original test suite, in which
 the test's result (determined by its existing testing
 oracles) differs from its expected result in the
 original test suite.
-
+%
 That is, manifest test dependence
 %we focus on a \emph{manifest} perspective of test dependence,
 requires a concrete order of the test suite that
 produces {different} results than expected.  
 %
-We work with real, existing test suites to determine the practical impact
-and prevalence of dependent tests.
 %
-(One alternative would be to consider dependent tests if reordering could
-affect any internal computation or heap value; but these internal details
-may not affect the test result.  Another alternative would be to ask
-whether it is possible to write a new dependent test for an existing
-test suite; but the answer to this question is trivially ``yes''.)
+
 
 
 This paper uses \textit{dependent test} as a shorthand for
