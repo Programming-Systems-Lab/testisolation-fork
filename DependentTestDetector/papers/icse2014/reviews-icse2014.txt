@@ -1,0 +1,236 @@
+*=--=*=--=*=--=*=--= Discussion summary by PB member *=--=*=--=*=--=*=--=*=
+
+According to the reviewers, this paper does not meet the criteria for the
+"Perspectives" category and does not make a significant contribution in any
+other category. The results of the study are well known in the community and
+the proposed approach does not help solve the problem; it can at most detect it.
+
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=
+
+First reviewer's review:
+
+          >>> Summary of the submission <<<
+
+A general requirement for unit testing is that each test is independent and
+tests in a test suite can be run in any order. However, in practice this does
+not hold. This paper validates that claim by empirically studying he existence
+of dependent tests in open source systems in two ways. First it aggregates data
+from bug reports to characterize dependent bugs that have been reported. It
+then evaluates three different algorithms to detect such dependencies, and runs
+these on a different set of applications finding different test outcomes due to
+reordering. The authors conclude that test dependency is a real problem and
+determine that their random algorithm is the most efficient at finding
+dependent test cases. This paper was submitted as a perspectives paper.
+
+          >>> Evaluation <<<
+
+I appreciate the studies performed in this paper, and I think some people will
+find the data interesting - I did. But in the end I struggled with the takeaway
+from this paper. First, the definition of dependent tests is narrow (you are
+not examining state - only test results which means you may miss many real
+dependencies) and second, you have not shown us that the method used by a
+system such as JCrasher, that simply resets the environment before each test,
+is worse than running tests in a way that will allow dependencies to be
+manifested. Finally, I believe that if you had provided a solution to the
+problem - i.e. an automated way to remove dependency this paper would be much
+stronger, because all we know now is that there are dependent test cases (and
+based on the cited literature this is a known issue), but we don't have a good
+way to fix them.
+
+
+For:
+- Provides data from several open source systems that characterize the
+dependent test problem which some will find useful
+- Provides algorithms to detect previously unknown dependent tests that appear
+to be effective
+- As a perspectives paper I think it is useful to highlight this issue with
+data to support it.
+
+
+Against:
+- How does this really help the tester? What do we do with the dependent tests
+that we find?
+
+- I don't think the problem has been well enough defined and scoped.
+
+Other comments:
+- I don't' really like the title that much. I think it can be misleading. In
+fact at first I thought - well there is an obvious answer to question (of
+course order can impact test results if tests are not properly written) so it
+took away from your paper's value. Once I read the paper more thoroughly, I
+realized that the paper is really about studying how often these exist in
+practice and how to detect them. You might think about a new title to more
+accurately reflect that.
+
+- One issue that I have is that you discuss this as a broad testing problem,
+particularly with respect to prioritization and selection. I believe you need
+to be careful here. In much of the work on prioritization and selection, system
+tests are used and test harnesses in these cases will reset the application and
+its environment between test cases. In fact, most of the SIR applications (ones
+not written as Junit) do this and many studies have been performed for
+prioritization and selection on that data. There is an implication in this
+paper that the research in that area is somehow flawed because of unknown
+dependence, and I think that is an unfair conclusion some could make. So you
+need to clearly scope and define this problem to make it understood that this
+is particular to Junit testing where the application is kept running (perhaps
+incorrectly) between tests and relies on the setup and shutdown.
+
+- Section 2.1 - how many reports did you study and of those how many fell into
+the dependent test category and how many were thrown out? This would be useful
+data. I would also like to know how many total issues there are in the bug
+databases (i.e. are dependent tests a small or a large problem)
+
+- 2.2.1 - 'can be manifested by no more than 2 tests' - do you mean by 2 or
+fewer tests? I think that would be a more precise way to say it since if you
+have three tests it may still be manifested (just isn't necessary)
+
+- section 2.2.1 - the writing is not clear in this paragraph. You say that you
+measure the size of the subsequence, and if the tests produce different result
+s... but as far as I can tell you are not actually running these - you are
+using the reported results. The way this is written is somewhat misleading. I
+would modify this to make it clearer
+
+- section 4.3 - parmutation - permutation
+
+- Table 4 and writing in section 6.3.1 - do you mean that Joda-Time finds 4
+more tests? There are 6 listed for the randomized and only 2 for the other
+algorithms.
+
+- Section 6.4 - I do not understand what you did to assess the impact on
+prioritization or selection. To explain this you need to provide the exact
+technique/method used. There are so many factors that you could have varied to
+get this. I would remove this section from the paper.
+
+- Section 7.3 - In this section you discuss JCrasher, which clears the
+environment and prevents dependent tests. Yet you argue that you don't want to
+do this because it makes tests less behaviorally diverse - but isn't that test
+dependence? If one test modifies the environment of another test then there is
+potential to give different results if run in a different order. It seems to me
+that the JCrasher mode is a purer way of handling dependence. See my comment
+earlier - I think you should evaluate the tradeoffs between real independence
+and running tests in a way that could allow dependence.
+
+- A threat to validity is that you didn't re-execute the tests in the first
+study - you based your data on reading reports which may not tell the whole
+story.
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*
+
+Second reviewer's review:
+
+          >>> Summary of the submission <<<
+
+This paper examines the problem of tests that are dependent on other tests,
+thus
+creating different test results depending on the order in which the tests are
+executed.
+The paper describes a study of 96 real-world dependent tests upon which a
+formal test dependence
+notion is defined in terms of test suites as ordered test cases and execution
+environments of the tests.
+Three algorithms for detecting dependent tests are presented with evaluation of
+those algorithms
+as a prototype tool called DTDetector.
+
+          >>> Evaluation <<<
+
+This paper was submitted under the Perspectives category.
+As such, it should include assessments of the current state of the art and
+achievements, systematic literature reviews, framing of an important problem,
+forward-looking thought pieces, connections to other disciplines, and
+historical perspectives. Such a contribution must, in a highly convincing
+manner, clearly articulate the vision, novelty, and potential impact.
+
+While this study may be the first to be written up as a specific study, its
+findings are already known to the
+database testing and web testing communities. Testing that deals with test
+cases accessing persistent state are most likely
+going to have dependences. This is true for databases, server state,
+cookies,... Capture-replay testing has to deal with this issue also. These are
+not new reflections.
+
+I see the main contribution of this paper as generalizing the notion of test
+dependence across different domains of programming
+that deal with persistent state and test dependence due to persistent changes
+made during the execution of tests.
+While particular domains such as database testing and web application testing
+have established algorithms for dealing with
+ordering tests, re-establshing environment state between tests, this paper
+contributes general algorithms to establish test dependence across domains.
+
+Unfortunately, the proposed algorithms are expensive and random actually finds
+more test dependences. This leads me to believe that
+domain-specific test dependence approaches may be effective, instead of using
+general algorithms for across domains.
+
+in favour:
+- The paper is well written
+- The study and evaluation are technically sound with real-world projects.
+- The tool is available to the public.
+against:
+- Given the domain-specific work in testing that deals with test case replay
+and ordering in the context of persistent
+state, the work in this paper does not seem so "perspectives" driven. That is,
+test dependence is a well known problem
+that people in those communities deal with. This formalization and these
+general algorithms do not appear to be very
+promising.
+- The results of the study are what is already known in the community.
+- Thus, I did not see a significant contribution in this paper in terms of
+vision, novelty, and potential impact.
+
+*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*=--=*
+
+Third reviewer's review:
+
+          >>> Summary of the submission <<<
+
+This paper visited a frequently used assumption in software testing, namely,
+test independence. By test independence, it means that test cases of a test
+suite are said to be independent if their execution order will not affect the
+test results. This paper investigated the characteristics of 96 real life
+test-dependent test suites. The investigation has provided many interesting
+observations and analyses. The authors proposed a formalization framework for
+test dependence in order to facilitate the research into this area. They also
+proposed three algorithms for the detection of test dependence and implemented
+them a prototype. Note that these algorithms are actually approximate
+algorithms. An empirical study has been conducted on four subject programs,.
+This paper did provide new perspectives on this commonly used assumption in
+software testing.
+
+          >>> Evaluation <<<
+
+Strengths:
+Section 1.2 Causes and Repercussions gives a very good introduction to this
+problem.
+A comprehensive analysis of the characteristics of test-dependent test suites
+is given in Section 2 Real-World Dependent Tests.
+Interesting to know that dependent test is frequently related to faults in the
+test code rather than then program under test.
+An important observation of their empirical evaluation is that improper access
+to static fields is the core problem for all detected test-dependent test
+suites.
+The results of this study have great impact on some previous studies of test
+case selection or test case prioritization, in the sense that their conclusions
+may need to be rewritten. Bear in mind of their observation that "26 out of 29
+dependent tests can affect the results of test selection, and all 29 dependent
+tests can affect the results of test prioritization" (in Section 6.4
+Discussion).
+A slightly surprising but important result is that randomized detection
+algorithm is found to be the most cost-effective method amongst the three
+proposed test-dependence detection methods.
+
+Weaknesses:
+This paper assumes the test results of the "default order" of execution as the
+reference result. Since the reference results will affect the determination on
+whether test dependence exists or not, it is interesting to know whether there
+a better "order" to be used as the reference result.
+The formalization framework appears to be over complicated. It may be
+simplified by omitting some intermediate definitions. I am not sure about
+whether the tests in Definitions 2 and 3 mean the same thing. It looks like
+test in Definition 3 means a test case. If that is not the case, tests in
+Definition 3 may be duplicated. Then, the operation of "without repetition" in
+Figure 4 needs to be further explained.
+A slight concern is on the use of only 4 subject programs in the empirical
+evaluation.
