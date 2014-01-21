@@ -132,9 +132,9 @@ test dependence in practice.
 
 The assumption of test independence lies at the heart of most
 techniques for automated regression test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
-Briand:2009:ART, Zhang:2012:RMT},
-test case prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART}, coverage-based
-fault localization~\cite{Steimann:2013}, etc. 
+Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP},
+test case prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART}, 
+and coverage-based fault localization~\cite{Steimann:2013, Zhang:2013:IMF, Jones:2002:VTI}, etc. 
 
 
 Test prioritization seeks to reorder a test suite to detect
@@ -145,7 +145,8 @@ laid the foundation for the most commonly used problem definition:
 consider the set of all permutations of a test suite and find the best
 award value for an objective function over that
 set~\cite{Elbaum:2000:PTC:347324.348910}.  The most common objective
-functions favor permutations where more faults in the underlying
+functions favor permutations where higher code coverage
+is achieved and more faults in the underlying
 program  are found with running fewer tests.
 Test independence is often explicitly asserted as a
 requirement for most test selection and prioritization work (e.g.,~\cite[p.~1500]{Rummel:2005:TPR:1066677.1067016}).
@@ -158,7 +159,9 @@ requirement for most test selection and prioritization work (e.g.,~\cite[p.~1500
 Evaluations of selection and prioritization techniques~\cite[\emph{et alia}]{Rothermel:1999:TCP:519621.853398,Do:2010:ETC:1907658.1908088}
 are based in part on the test independence
 assumption as well as the assumption that the set of faults in the underlying
-program is known beforehand; the possibility that test dependence may unmask additional faults in the program is not studied.
+program is known beforehand; the possibility that test dependence may
+interfere with these techniques is not studied.
+%unmask additional faults in the program is not studied.
 
 %\begin{quote}
 %A test suite contains a tuple of tests \suite{T_1 $\ldots$ T_R} that execute in a specified order.  We require that each test is
@@ -235,9 +238,9 @@ beyond the scope of any framework, although the latest release of JUnit
 supports executing tests in lexicographic order by test method name~\cite{junitordering}.
 
 
-Only a few tools explicitly consider test dependence, by
-allowing developers to annotate dependent tests and
-provide supporting mechanisms to ensure that the test execution framework
+Only a few tools explicitly 
+allows developers to annotate dependent tests and
+provides supporting mechanisms to ensure that the test execution framework
 respects those annotations.  DepUnit~\cite{depunit}
 allows developers to define soft and hard dependences. Soft dependences control
 test ordering, while hard dependences in addition control whether specific tests are
@@ -262,17 +265,18 @@ Further, as indicated by our study and experiments, most dependent
 tests reveal weakness in the test code rather than bugs in the program. Thus,
 using test dependence may not achieve a high return in bug finding.
 
-Another possible way to eliminate test dependence is
-completely re-initializing the environment before executing a test (or
+A possible way to eliminate test dependence is
+completely re-initializing the environment (e.g., global variables,
+heaps, files, operating system services, etc.) before executing a test (or
 generating a new test in a test generator~\cite{Csallner:2004}).
 However, such an approach can be prohibitively expensive
-and becomes less useful in practice, since a unit test is often small
-and its execution cost is often much cheaper than re-initializing the envrioment.
+and thus becomes less useful in practice, since a unit test is often small
+and its execution cost is much cheaper than the cost of envrioment initialization.
 As shown in our experiments (Table~\ref{tab:results}), 
-executing each test separately in a fresh JVM 
+executing each test separately in a separate JVM 
 (see the ``Analysis Cost (seconds) | Exhaustive | $k$=1'' column) 
-introduces a 130X runtime overhead than executing all tests
-in a single JVM (see the ``Analysis Cost (seconds) | Randomized'' column).
+can introduce as much as 130X runtime overhead than executing each test
+in a shared JVM (see the ``Analysis Cost (seconds) | Randomized'' column).
 
 %Such an overhead 
 %may not be acceptable in practice.
