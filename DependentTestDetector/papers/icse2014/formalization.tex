@@ -57,10 +57,10 @@ Let\/ \alltests\ be the set of all possible
 tests and\/ \environs\ the set of all possible
 environments.
 The function\/ $\execfunc: \alltests \times \environs \rightarrow
-\environs$ is called test
+\environs$ represents test
 execution. $\execfunc$ maps the execution of a test\/ $ t \in
 \alltests$ 
-in an environment\/ $\env \in \environs$ to a new (potentially updated)
+and an environment\/ $\env \in \environs$ to a new (potentially updated)
 environment\/ $\env' \in \environs$.
 
 Given a test suite\/ $T = \suite{t_1, t_2, \dots, t_n}$,
@@ -103,7 +103,7 @@ than in the execution $\exec{S_2}{\env_0}$.
 
 \begin{definition}[Manifest Order-Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
-manifest order-dependent test if $\exists$ two test suites
+manifest order-dependent test in $T$ if $\exists$ two test suites
 $S_1, S_2 \in$ permutations($T$):
 \result{S_1}{\env_0}[$t$] $\neq$
 \result{S_2}{\env_0}[$t$].
@@ -152,11 +152,11 @@ Together these two parts prove that the Dependent Test Detection Problem is NP-c
 
 \begin{theorem}
 The problem of determining whether a test is a dependent test for
-a test suite is NP-hard.
+a test suite is NP-complete.
 \end{theorem}
 
 \begin{proof}
-Due to space limits, we omit the NP-hard proof. Interested
+Due to space limits, we omit the NP-complete proof. Interested
 readers can refer to~\cite{testdependence} for details.
 \end{proof}
 

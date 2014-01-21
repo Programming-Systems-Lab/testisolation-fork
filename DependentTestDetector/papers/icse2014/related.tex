@@ -12,7 +12,8 @@ to Howden~\cite[p.~554]{howden:ToC:1975} and remains common in the literature.
 The execution order of tests in a suite is usually not considered:
 %or informally, suggesting that the potential of executing a given test
 %in different contexts is immaterial to those results: 
-that is, test independence is assumed. We next discuss some
+that is, test independence is assumed. Nonetheless,
+some research has considered it. We next discuss some
 existing definitions of test dependence, techniques that
 assume test dependence, and tools that support specifying
 test dependence.
@@ -23,8 +24,8 @@ test dependence.
 Definitions in the testing literature are generally clear that the
 conditions under which a test is executed may affect its result. 
 The
-importance of context in testing has been explored in some depth in
-some domains including databases~\cite{Gray:1994:QGB:191843.191886,Chays:2000:FTD:347324.348954,
+importance of context in testing has been explored 
+in databases~\cite{Gray:1994:QGB:191843.191886,Chays:2000:FTD:347324.348954,
 kapfhammeretal:FSE:2003}, with results about test
 generation, test adequacy criteria, etc., and mobile
 applications~\cite{Wang:2007:AGC}.
@@ -148,8 +149,9 @@ set~\cite{Elbaum:2000:PTC:347324.348910}.  The most common objective
 functions favor permutations where higher code coverage
 is achieved and more faults in the underlying
 program  are found with running fewer tests.
-Test independence is often explicitly asserted as a
-requirement for most test selection and prioritization work (e.g.,~\cite[p.~1500]{Rummel:2005:TPR:1066677.1067016}).
+Test independence is
+%often explicitly asserted as
+a requirement for most test selection and prioritization work (e.g.,~\cite[p.~1500]{Rummel:2005:TPR:1066677.1067016}).
 %For some test selection and prioritization work,
 %test independence is even explicitly asserted as a requirement.
 %For example, Rummel et al.\ states in
@@ -174,6 +176,30 @@ interfere with these techniques is not studied.
 %state.
 %\end{quote}
 
+
+Coverage-based fault localization techniques~\cite{Jones:2002:VTI}
+often treat a test suite as a collection of test cases
+whose result is \textit{independent} of the order of their
+execution. They can also be impacted by test dependence.
+In a recent evaluation of several coverage-based fault locators,
+ Steimann et al.\ found fault locators' accuracy has been 
+ affected by tests failed due to the violation of the test
+ independence assumption~\cite{Steimann:2013}. 
+ %For example, if a test depends on a static field whose value is set by
+ %previous test cases. 
+ Compared to our work, Steimann et al.'s
+ work focuses on identifying possible threats to validity
+ in evaluating coverage-based fault locators, and does
+ not present any formalism, study, or detection algorithms
+ for dependent tests.
+
+As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation},
+the test independence assumption often does not hold for either
+human-written or automatically-generated tests; and the dependent
+tests identified in our subject programs interfere with
+existing test prioritization techniques. Thus, techniques
+that rely on this assumption may need to be reformulated.
+
 Most automated test generation
 techniques~\cite{PachecoLET2007, Wang:2007:AGC,
 ZhangSBE2011} do not take test dependence
@@ -192,36 +218,13 @@ that are dependent on it from beginning to fail~\cite{RobinsonEPAL2011}.
 %may make generated
 %tests less behaviorally-diverse --- as they cannot be constructed
 %on top of previous tests.
-Exploring how to incorporate test dependence into the design of automated
-test generator is our future work.
-
-Coverage-based fault localization techniques~\cite{Jones:2002:VTI}
-often treat a test suite as a collection of test cases
-whose result is \textit{independent} of the order of their
-execution. They can also be impacted by test dependence.
-In a recent evaluation of several coverage-based fault locators,
- Steimann et al.\ found fault locators' accuracy has been 
- affected by tests failed due to the violation of the test
- independence assumption~\cite{Steimann:2013}. 
- %For example, if a test depends on a static field whose value is set by
- %previous test cases. 
- Compared to our work, Steimann et al.'s
- work focuses on identifying possible threats to validity
- in evaluating coverage-based fault locators, and does
- not present any formalism, study, or detection algorithms
- for dependent tests.
-
+Exploring how to incorporate test dependence into the design of an automated
+test generator is future work.
 
 %define a test suite as a
 %collection of test cases whose result is \textit{independent}
 %of the order of their execution~\cite{Steimann:2013}.
 
-As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation},
-the test independence assumption often does not hold for either
-human-written or automatically-generated tests; and the dependent
-tests identified in our subject programs interfere with
-existing test prioritization techniques. Thus, techniques
-that rely on this assumption may need to be reformulated.
 
 \subsection{Tools Supporting Test Dependence}
 \label{sec:supporting}
@@ -231,12 +234,13 @@ for developers to define the context for tests.
 JUnit, for example, provides means to
 automatically execute setup and clean-up tasks
 (\code{setUp()} and \code{tearDown()} in JUnit
-3.x, and methods annotated with \code{@Before} and \code{@After} in
-JUnit 4.x). Ensuring that these mechanisms are used properly, however, is
-beyond the scope of any framework, although the latest release of JUnit
-(version 4.11, Nov.~2012)
-supports executing tests in lexicographic order by test method name~\cite{junitordering}.
-
+3.x, and annotations \code{@Before} and \code{@After} in
+JUnit 4.x). The latest release 4.11 of JUnit supports
+executing tests in lexicographic order by test method name~\cite{junitordering}.
+However, ensuring that these mechanisms are used properly is
+beyond the scope and capability of any framework. 
+Further, our experimental results show that programmers often do not
+use them properly and introduce dependent tests. 
 
 Only a few tools explicitly 
 allows developers to annotate dependent tests and
@@ -265,12 +269,12 @@ Further, as indicated by our study and experiments, most dependent
 tests reveal weakness in the test code rather than bugs in the program. Thus,
 using test dependence may not achieve a high return in bug finding.
 
-A possible way to eliminate test dependence is
+A simple way to eliminate test dependence is
 completely re-initializing the environment (e.g., global variables,
-heaps, files, operating system services, etc.) before executing a test (or
+heaps, files, etc.) before executing a test (or
 generating a new test in a test generator~\cite{Csallner:2004}).
-However, such an approach can be prohibitively expensive
-and thus becomes less useful in practice, since a unit test is often small
+However, such an approach can be computationally expensive
+and become less useful in practice, since a unit test is often small
 and its execution cost is much cheaper than the cost of envrioment initialization.
 As shown in our experiments (Table~\ref{tab:results}), 
 executing each test separately in a separate JVM 

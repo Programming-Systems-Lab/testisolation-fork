@@ -29,15 +29,16 @@ on a \ourtool-instrumented program.
 %Both field and file access information are recorded
 %in a trace file after executing a \ourtool-instrumented test.
 
-\ourtool does not perform any sophisticated points-to or shape
-analyses. It uses the side-effect annotations
-provided by Javari~\cite{QuinonezTE2008} to determine the immutable
-classes.  Then, it conservatively treats both read
+\ourtool conservatively treats both read
 and write to a mutable static field as a write effect,
 since a read access to a static field may mutate objects
 reachable from the field in the heap.
 \ourtool assumes that the JDK is stateless,
 and thus does not track field access in JDK classes. 
+\ourtool does not perform any sophisticated points-to or shape
+analyses. It uses the side-effect annotations
+provided by Javari~\cite{QuinonezTE2008} to determine the immutable
+classes.
 
 
 %\ourtool does not instrument JDK classes.

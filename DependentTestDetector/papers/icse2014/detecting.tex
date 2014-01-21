@@ -30,7 +30,8 @@ static fields that each test
 reads or writes, and uses the collected information to reduce the search space.
 All three algorithms are \textit{sound} but \textit{incomplete}:
 every dependent test they find is real, but they do not
-guarantee to find every dependent test.
+guarantee to find every dependent test (unless the bound is $n$,
+the size of the test suite).
 
 
 \begin{figure}[t]
@@ -88,16 +89,20 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \subsection{Randomized Algorithm}
 \label{sec:randomized}
 
-Figure~\ref{fig:basealgorithm} shows the base algorithm, and
-Figure~\ref{fig:randalgorithm} instantiates it for the randomized algorithm.
+Figure~\ref{fig:basealgorithm} shows the base algorithm.
+%, and
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the base algorithm
 first executes $T$ with its default order
 to obtain the \emph{expected result} of each test (line 2).
-It chooses some set of test suites (in this case, randomizations of the original
-test execution order (line 3), and then executes each test suite
+It chooses some set of test suites (line 3), and then executes each test suite
 to observe its results (line 4). The algorithm checks
 whether the result of any test differs from the
 expected result (lines 5--9). 
+
+Figure~\ref{fig:randalgorithm} instantiates it for the
+randomized algorithm by randomizing the original test execution order (line 2).
+%(in this case, randomizations of the original
+%test execution order 
 
 %In our implementation, this algorithm repeatedly
 %shuffles the test suite, and executes each test 
@@ -163,12 +168,12 @@ to $O(n^k)$, which is tractable for small $k$ and $n$.
 
 
 Figure~\ref{fig:exhaustivealgorithm} shows the algorithm.
-Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the
-algorithm executes every $k$-permutation of tests,
-and checks whether the result of any test differs
-from the expected result. Finally, the algorithm returns the set
-of all tests $t_i \in T$
-that exhibit different results.
+%Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the
+%algorithm executes every $k$-permutation of tests,
+%and checks whether the result of any test differs
+%from the expected result. Finally, the algorithm returns the set
+%of all tests $t_i \in T$
+%that exhibit different results.
 
 
 
@@ -294,12 +299,11 @@ We give two cases for the algorithm:  an optimized version for $k$=1, and
 a general version for $k$$\ge$2.
 
 In the case of $k$=1, the algorithm executes all tests in the default order
-within the same JVM, and discards tests that do \textit{not}
+within the same JVM. Any test that does \textit{not}
 access (including read and write) any global fields or
-other external resources such as a file. Then,
-the algorithm executes each of the remaining tests in isolation (i.e., in a
-fresh JVM\footnote{The JVM startup time is the main cost in the
-  dependent test detection algorithms.})
+other external resources such as a file is not a dependent test. 
+The algorithm executes each of the remaining tests in isolation (i.e., in a
+fresh JVM)
 and reports the tests whose results are different than when executed in
 the default order.
 
@@ -320,18 +324,19 @@ It uses the isolation execution result
 of each test as a comparison baseline.
 When generating all possible test permutations
 of length $k$, the algorithm checks whether
-\textit{all} global fields in \textit{each} test (in the generated permutation)
+\textit{all} global fields that \textit{each} test (in the generated permutation)
 may read are not written by \textit{any} test executed before it (lines 6--10).
 If so, all tests in the permutation
 must produce the same results as executed in isolation,
 and the algorithm can safely discard this permutation without
 executing it. Otherwise, the algorithm adds the generated
-permutation to the result set (line 9), and runs the algorithm in Figure~\ref{fig:basealgorithm}
-to identify dependent tests. %among it.
+permutation to the result set (line 9), and the algorithm in Figure~\ref{fig:basealgorithm}
+identifies dependent tests. %among it.
 
-Due to space limits, we omit the proof of the correctness
-of the \dependenceaware{} $k$-bounded algorithm. Interested
-readers can refer to~\cite{proof-dependence-aware} for proof.
+%Due to space limits, we omit the proof of the correctness
+We have proved the \dependenceaware{} $k$-bounded algorithm to be
+correct. Interested
+readers can refer to~\cite{proof-dependence-aware} for the proof.
 
 The given algorithm uses isolated execution results as a baseline and
 avoids executing permutations that are redundant with them.  It would be
@@ -350,7 +355,7 @@ the global fields each test may access.
 
 \begin{figure}[t]
 \textbf{Auxiliary methods}:\\
-recordFieldAccess($\mathit{t}$): executes a test $\mathit{t}$ in
+recordFieldAccess($\mathit{t}$): executes test $\mathit{t}$ in
 a fresh JVM and returns the fields it reads and writes.\\
 %by a test $t$. \\% in an ordered sequence of tests $\mathit{ts}$. \\
 

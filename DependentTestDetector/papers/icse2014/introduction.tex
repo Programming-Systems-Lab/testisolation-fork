@@ -17,7 +17,7 @@ whether it runs after \code{B} or not.
 
 
 
-In a unit test suite, all the test cases should be independent:
+In a test suite, all the test cases should be independent:
 no test should affect any other test's result, and
 running the tests in any order should produce the same test results.
 %Practitioners are well aware of test dependence:  coding
@@ -49,16 +49,16 @@ running the tests in any order should produce the same test results.
 The assumption of of test independence 
 is important so that tests behave consistently
 as designed. In addition, 
-many downstream testing techniques, such as test
+many techniques assume test independence, including test
 prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
 test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
 Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP, hsu09may},
 test execution~\cite{Kim:2013:OUT, Misailovic:2007},
 test factoring~\cite{Saff:2005, Wu:2010:LRV}, test carving~\cite{Elbaum:2006},
 and experimental debugging techniques~\cite{Zeller:2002,
-Steimann:2013, Zhang:2013:IMF},
-often implicitly assume no test dependences in
-a test suite. 
+Steimann:2013, Zhang:2013:IMF}.
+%often implicitly assume no test dependences in
+%a test suite. 
 However, this critical assumption is
 rarely questioned or investigated.
 We wish to investigate the validity of this unverified conventional wisdom,
@@ -134,14 +134,14 @@ environment in a way that invalidates those assumptions.
 Why does this happen?
 %As
 %suggested by the principle of unit testing~\cite{Greiler:2013:SAT, Massol:2003},
-Each unit test ought to initialize (or mock) the execution environment
+Each test ought to initialize (or mock) the execution environment
 and/or any resources it will use.
 Likewise, after test execution, it should reset the
 execution environment and external resources
 to avoid affecting other tests' execution.
-However, in practice,
-developers are as likely
-to make mistakes when writing tests as when they are writing other code.
+However, developers sometimes
+%are as likely to
+make mistakes when writing tests as when they are writing other code.
 Even though frameworks such as
 JUnit provide ways to set up the environment for a test execution and clean
 up the environment afterward,
@@ -249,9 +249,10 @@ output. %\todo{change erroneous to different?}
 As an example, test prioritization may produce a reordered sequence
 of tests that do not
 return the same results as they do when executed in
-the default order. We provide empirical evidence to show that
+the default order. Section~\ref{sec:impact}
+provides empirical evidence to show that
 dependent tests do affect the output of five test prioritization
-techniques in Section~\ref{sec:impact}.
+techniques.
 
 
 \subsection{Contributions}
@@ -277,12 +278,12 @@ This paper makes the following contributions:
   problem (Section~\ref{sec:formalism}).
 
   \item \textbf{Algorithms.} We present three algorithms
-  to detect dependent tests (Section~\ref{sec:detecting}):
+  to detect dependent tests:
   one randomized, one exhaustive bounded, and one that prunes the search
   space using dynamic analyses.
   All three algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
-  do not guarantee to find all dependent tests. 
+  do not guarantee to find all dependent tests (Section~\ref{sec:detecting}). 
   %\edit{check above when the algorithm section is written}
 
   \item \textbf{Evaluation.} We implemented our algorithms in a prototype
@@ -296,7 +297,7 @@ This paper makes the following contributions:
   %\item \textbf{Assessment.} 
   \item \textbf{Impact Assessment.} We implemented five test prioritization
   techniques and evaluated them on \subjnum subject programs
-  that contain dependent tests. The results show that all the
+  that contain dependent tests. The results show that all
   five test prioritization techniques are affected by dependent tests
   (Section~\ref{sec:evaluation}).
 

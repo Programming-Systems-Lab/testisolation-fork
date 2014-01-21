@@ -8,8 +8,9 @@
 \newcommand{\unfixed}{{{58}}\xspace}
 
 
-Dependent tests are known to occur in practice, but little is known about
-their characteristics.  This section qualitatively studies
+% are known to occur in practice, but
+Little is known about the characteristics of dependent tests.
+This section qualitatively studies
 concrete examples of test dependence found in
 well-known open source software. 
 
@@ -40,7 +41,7 @@ at least two people and the whole process consisted of several
 rounds of (re-)study and cross checking. We ignored reports
 that are described vaguely, and we excluded tests whose results are
 affected by non-determinism (e.g., multi-threading).
-In total, we have examined the first 450 matched reports, in which 53
+In total, we examined the first 450 matched reports, of which 53
 reports are about test dependence (some reports contain multiple
 dependent tests).
 All collected dependent tests are publicly available 
@@ -234,8 +235,8 @@ However, this bug report was spurious and was
 caused by undocumented test dependence.
 All 49 failing tests are dependent tests with the same
 root cause: in SWT, only one global \code{Display}
-object is allowed; the tests that the user tried to run,
-create, but do not dispose of a \code{Display} object, while
+object is allowed; the user ran tests that
+create but do not dispose of a \code{Display} object, while
 the tests in \code{TestDisplay} attempt to create
 a new \code{Display} object, which fails, as one
 is already created. This is the desired behavior of SWT,
@@ -257,8 +258,8 @@ a test should fail but passes due to the dependence.
 
 \input{clicode}
 
-We found two dependent tests in
-the Apache CLI library~\cite{cli} for this category.
+We found two such dependent tests in
+the Apache CLI library~\cite{cli}.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
 code. The fault is due to improper initialization of the static variable
 \CodeIn{argName}. The static variable \CodeIn{argName} should be set
@@ -297,7 +298,7 @@ calls \CodeIn{reset()} in class \CodeIn{OptionBuilder}.
 We summarize the main implications of our findings.
 
 \noindent \textbf{{Dependent tests exist in practice, but
-they are not obvious to identify.}}
+they are not easy to identify.}}
 None of the dependent tests we studied can be identified by
 running the existing test suite in the default order. 
 Every dependent test was reported when the
@@ -352,7 +353,8 @@ the severity of each dependent test, and how many tests are needed
 to manifest the dependence.  We did not intentionally ignore
 any test dependence in the issue tracking system.
 However, a limitation is that the developers might have made a mistake,
-might not have marked a test dependence in a way we found it, and are
+might not have marked a test dependence in a way we found it
+(different search terms might discover additional dependent tests), and are
 unlikely to have found all the dependent tests in those projects. 
 
 

@@ -8,10 +8,10 @@
 \textbf{Label} & \textbf{Technique Description} \\
 \hline
 T1 & Randomized ordering \\
-T2 & Prioritize on coverage of statements \\
-T3 & Prioritize on coverage of statements not yet covered\\
-T4 & Prioritize on coverage of methods\\
-T5 & Prioritize on coverage of functions not yet covered \\
+T3 & Prioritize on coverage of statements \\
+T4 & Prioritize on coverage of statements not yet covered\\
+T5 & Prioritize on coverage of methods\\
+T7 & Prioritize on coverage of functions not yet covered \\
 %\bottomrule
 \hline
 %\textbf{Total}& &  & &  \\ 
@@ -20,7 +20,8 @@ T5 & Prioritize on coverage of functions not yet covered \\
 \caption{Five test prioritization techniques used
 to assess the impact of dependent tests. These five
 techniques are introduced in Table 1
-of~\cite{Elbaum:2000:PTC:347324.348910}. (We did not
+of~\cite{Elbaum:2000:PTC:347324.348910}. (We use
+the same labels as in~\cite{Elbaum:2000:PTC:347324.348910}. We did not
 implement the other 9 test prioritization techniques
 introduced in~\cite{Elbaum:2000:PTC:347324.348910}, since
 these techniques require a fault history that is not
@@ -37,7 +38,7 @@ available for our subject programs.)
 \begin{tabular}{|l|l|l|l|l|l|}
 %\toprule
 \hline
-\textbf{Subject Program} & T1 & T2 & T3 & T4 & T5 \\
+\textbf{Subject Program} & T1 & T3 & T4 & T5 & T7 \\
 \hline
 \jt& 0 & 0 & 0 & 0 & 0\\
 XML Security& 0 & 0 & 0 & 0 & 0 \\

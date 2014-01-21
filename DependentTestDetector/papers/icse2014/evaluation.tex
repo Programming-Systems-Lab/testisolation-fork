@@ -200,7 +200,8 @@ to finish 1000 runs,  for \jt's human-written test
 suite (\jodatimetests tests).
  
 The time cost of running the exhaustive $k$-bounded algorithm
-is prohibitive. The exhaustive algorithm failed to
+is prohibitive. The JVM initialization time is the main cost.
+The exhaustive algorithm failed to
 scale to one human-written test suite and all four automatically-generated
 test suites when $k$=2, and failed to scale to all test suites
 when $k$=3. The primary reason is the large
@@ -221,14 +222,15 @@ per permutation. Then, we multiple
 the average cost by the total number of permutations to estimate
 the time cost.
 
-The \dependenceaware{} $k$-bounded algorithm substantially improves
-the efficiency of the exhaustive $k$-bounded algorithm. On average,
-it took 3.3$\times$ and 1.1$\times$ less time to run all
-human-written tests and automatically-generated tests, respectively, when $k$=1.
-The \dependenceaware{} algorithm took an order of magnitude
-less time to run both human-written tests and automatically-generated tests,
-when $k$=2.
-The speedups are largely determined by performance on Joda-Time.
+The \dependenceaware{} $k$-bounded algorithm ran about
+an order of magnitude faster
+than the exhaustive $k$-bounded algorithm,  when $k$=2.
+%On average,
+%it took 3.3$\times$ and 1.1$\times$ less time to run all
+%human-written tests and automatically-generated tests, respectively, when $k$=1.
+%The \dependenceaware{} algorithm took an order of magnitude
+%less time to run both human-written tests and automatically-generated tests,
+%The speedups are largely determined by performance on Joda-Time.
 The \dependenceaware{} algorithm helps most when there are relatively many
 tests, each one of them relatively small.
 
@@ -244,7 +246,7 @@ detects the most dependent tests in our subject programs,
 it has several limitations. First, there is no guarantee of how many
 dependent tests the randomized algorithm can detect. A randomized
 algorithm might even produce different results across different runs.
-Second, more importantly, there is no clear stopping criterion
+Second, there is no clear stopping criterion
 for running the randomized algorithm in practice.
 Thus, it can be hard for users
 to know how many runs would be enough to find all dependent tests in a test suite.
@@ -321,20 +323,24 @@ First, the \subjnum open-source
 programs and their test suites may not be
 representative enough. Thus, we cannot claim the results
 can be generalized to an arbitrary program.
+However, these are the first \subjnum subject programs
+we tried, and the fact that we found dependent tests
+in all of them is suggestive.
 Second, in this evaluation, we focus specifically on
 the {manifest dependence} between \textit{unit tests}.
 We did not investigate possible test dependence that may arise
 in other types of tests, such as integration tests.
 Third, due to the computational complexity of the general dependent test
 detection problem, we do not yet have
-empirical data regarding how many dependent
-tests exist in a test suite and \ourtool's recall.  Giving a reasonable estimation is our future work. Fourth, we only assessed the
+empirical data regarding \ourtool's recall and how many dependent
+tests exist in a test suite. 
+Fourth, we only assessed the
 impact of dependent tests on five test prioritization
-techniques, and we only evaluated the impact of dependent
-tests on prioritizing unit tests.
-Using other test prioritization techniques and
-other types of tests (e.g., integration tests
-or system tests) might achieve different results. 
+techniques.
+%, and we only evaluated the impact of dependent
+%tests on prioritizing unit tests.
+Using other test prioritization techniques
+might achieve different results. 
 
 %\todo{this paper focuses on manifest test dependence, what about
 %potential test dependence, as well as some other cases in the
@@ -344,10 +350,10 @@ or system tests) might achieve different results.
 
 \noindent \textbf{Experimental Conclusions}
 We have four chief findings. \textbf{(1)}
-Dependent tests do exist in practice.
-An automatically-generated test suite can contain
-substantially more dependent tests than a human-written
-test suite.
+Dependent tests do exist in practice, both in
+human-written and automatically-generated test suites.
+%can contain substantially more dependent tests than a human-written
+%test suite.
 \textbf{(2)} Like the dependent tests
 studied in Section~\ref{sec:study}, the identified
 dependent tests in our subject programs generally reveal weakness
@@ -360,8 +366,9 @@ test prioritization techniques and cause unexpected output.
 %complex, a smarter algorithm may not achieve great results.}
 The randomized algorithm is the most cost-effective in
 detecting dependent tests, although it has no guarantee
-of the number of dependent tests it can detect. Testers
-can use this simple yet effective algorithm in practice.
+of the number of dependent tests it can detect.
+%Testers
+%can use this simple yet effective algorithm in practice.
 
 %\todo{Idea:  how about combining the randomized and dependence-aware
 %  algorithms?  That is, generate random orderings that violate dependences;

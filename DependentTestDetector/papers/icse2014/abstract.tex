@@ -1,12 +1,13 @@
 \begin{abstract}
 
-In a unit test suite, all the test cases should be independent:  no test
+In a test suite, all the test cases should be independent:  no test
 should affect any other test's result, and running the tests in any order
 should produce the same test results.
 Test independence is important so that tests behave consistently as intended by the developers.
 In addition, techniques such as test %selection and
-prioritization assume that the tests in a suite are independent.
-Test dependence is a well-known but little-studied phenomenon.
+prioritization assume that the tests in a suite are independent,
+but they do not justify that assumption.
+Test dependence is a little-studied phenomenon.
 This paper presents five results related to test dependence.
 
 First, we characterize the test dependence that arises in practice.
@@ -26,8 +27,8 @@ We formulate the problem
 of detecting dependent tests and prove that a useful special
 case is NP-complete. 
 
-Third, guided by the study of real-world dependent tests, we propose three
-algorithms to detect
+Third, guided by the study of real-world dependent tests, we
+propose and compare three algorithms to detect
 dependent tests in a test suite. 
 
 Fourth, we applied our dependent test detection algorithms
@@ -39,7 +40,7 @@ and automatically-generated test suite.
 Fifth, we empirically assessed the impact of
 dependent tests on five test prioritization techniques
 and found that dependent tests affect the output 
-of \textit{all} the five techniques.
+of \textit{all} five techniques.
 
 %the follwoing claim might be too strong
 %Our tool revealed a large number of previously-unknown dependent tests.
