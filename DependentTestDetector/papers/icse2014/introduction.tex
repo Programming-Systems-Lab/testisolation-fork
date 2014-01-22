@@ -53,14 +53,31 @@ many techniques assume test independence, including test
 prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
 test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
 Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP, hsu09may},
-test execution~\cite{Kim:2013:OUT, Misailovic:2007},
+test execution~\cite{Kim:2013:OUT, Misailovic:2007, SPLAT},
 test factoring~\cite{Saff:2005, Wu:2010:LRV}, test carving~\cite{Elbaum:2006},
 and experimental debugging techniques~\cite{Zeller:2002,
 Steimann:2013, Zhang:2013:IMF}.
 %often implicitly assume no test dependences in
 %a test suite. 
+\todo{check the following sentencee, people may ask
+is the above paper list representative enough? be aware.}
 However, this critical assumption is
-rarely questioned or investigated.
+rarely questioned, investigated, or even mentioned:
+in the above paper list,
+4 papers explicitly assumed test independence~\cite{Rummel:2005:TPR:1066677.1067016, Orso:2004:SRT, harroldetal:OOPSLA:2001, Steimann:2013},
+14 papers did not mention but implicitly
+assumed test independence~\cite{Elbaum:2000:PTC:347324.348910,
+Jiang:2009:ART, Srivastava:2002:EPT:566172.566187,
+Zhang:2012:RMT, Misailovic:2007, Elbaum:2006, Saff:2005,
+Zeller:2002, Briand:2009:ART, Wu:2010:LRV, Kim:2013:OUT,
+Zhang:2013:IMF, Nanda:2011:RTP, hsu09may 
+},
+1 paper considered violation of the test independence
+assumption as a threat to validity~\cite{SPLAT},
+and 1 paper acknowledged the potential dependences
+between tests~\cite{Kim:2002:HTP:581339.581357}. 
+Anecdotally, researchers have told us that test dependence
+is not a significant concern.
 We wish to investigate the validity of this unverified conventional wisdom,
 in order to understand whether test dependence arises in practice, 
 the repercussions of dependent tests, and how to 

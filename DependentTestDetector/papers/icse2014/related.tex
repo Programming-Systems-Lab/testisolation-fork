@@ -79,7 +79,7 @@ executing the sequence \suite{t_1, t_2} in the same context may fail.
 However, they do not provide any empirical evidence of
 test dependence nor any detection algorithms.
 
-Practitioners acknowledge test dependence as undesirable~\cite{unit-test-def}:
+The C2 wiki acknowledges test dependence as undesirable~\cite{unit-test-def}:
 %a possible, albeit low probability, event:
 \vspace{-1mm}
 \begin{quote}
@@ -269,6 +269,7 @@ Further, as indicated by our study and experiments, most dependent
 tests reveal weakness in the test code rather than bugs in the program. Thus,
 using test dependence may not achieve a high return in bug finding.
 
+\todo{check the following paragraph.}
 A simple way to eliminate test dependence is
 completely re-initializing the environment (e.g., global variables,
 heaps, files, etc.) before executing a test (or
