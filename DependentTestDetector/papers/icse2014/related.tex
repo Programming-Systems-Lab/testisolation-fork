@@ -269,19 +269,17 @@ Further, as indicated by our study and experiments, most dependent
 tests reveal weakness in the test code rather than bugs in the program. Thus,
 using test dependence may not achieve a high return in bug finding.
 
-\todo{check the following paragraph.}
 A simple way to eliminate test dependence is
-completely re-initializing the environment (e.g., global variables,
-heaps, files, etc.) before executing a test (or
-generating a new test in a test generator~\cite{Csallner:2004}).
-However, such an approach can be computationally expensive
-and become less useful in practice, since a unit test is often small
-and its execution cost is much cheaper than the cost of envrioment initialization.
-As shown in our experiments (Table~\ref{tab:results}), 
-executing each test separately in a separate JVM 
-(see the ``Analysis Cost (seconds) | Exhaustive | $k$=1'' column) 
-can introduce as much as 130X runtime overhead than executing each test
-in a shared JVM (see the ``Analysis Cost (seconds) | Randomized'' column).
+starting a new process or otherwise completely re-initializing the environment (variables,
+heap, files, etc.)\ before executing each test~\cite{Csallner:2004}.
+\todo{Check the math.}
+However, such an approach is computationally expensive:
+Table~\ref{tab:results} shows that executing each test in a
+separate JVM introduces 16--240$\times$ slowdown (compare the 
+``Exhaustive $k=1$'' column to 1/10 of the ``Randomized 10'' column).
+
+% (let ((ratios (list (/ 1265 57 .1) (/ 106 65 .1) (/ 106 14 .1) (/ 166 14 .1) (/ 25 7 .1) (/ 133 50 .1) (/ 2477 103 .1) (/ 454 81 .1)))) (list (apply #'min ratios) (apply #'max ratios)))
+
 
 %Such an overhead 
 %may not be acceptable in practice.

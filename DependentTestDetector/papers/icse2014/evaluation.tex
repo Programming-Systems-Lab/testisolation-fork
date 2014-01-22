@@ -70,6 +70,8 @@ pro-actively examines developers' code and
 identifies textual, compilation, and behavioral conflicts.
 Synoptic~\cite{synoptic} is a tool to mine a finite state
 machine model representation of a system from logs.
+All of the subject programs' test suites are designed to be executed in
+a single JVM, rather than requiring separate processes per test case~\cite{vmvm}.
 
 Given the increasing importance of automated test generation
 tools~\cite{PachecoLET2007, ZhangSBE2011, Csallner:2004, fraseretal:ISSTA:2011},
@@ -112,10 +114,6 @@ pairwise execution ($k = 2$). The choice of $k$ is
 based on the results of our empirical
 study (Section~\ref{sec:study}) that a small $k$
 can find most realistic dependent tests.
-\todo{here we need to mention, each test suite in our
-subject programs is designed to be executed in
-a single JVM. In some projects, two tests may be required
-to executed in two different processes by design, see~\cite{vmvm}.}
 
 We provided \ourtool with a list of 39 ``dependence-free'' fields
 for the 4 subject programs. This manual step cost
