@@ -271,7 +271,8 @@ using test dependence may not achieve a high return in bug finding.
 
 A simple way to eliminate test dependence is
 starting a new process or otherwise completely re-initializing the environment (variables,
-heap, files, etc.)\ before executing each test~\cite{Csallner:2004}.
+heap, files, etc.)\ before executing each test;
+JCrasher~\cite{Csallner:2004} does this, as do some SIR applications.
 \todo{Check the math.}
 However, such an approach is computationally expensive:
 Table~\ref{tab:results} shows that executing each test in a
