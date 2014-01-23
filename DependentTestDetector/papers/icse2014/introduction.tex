@@ -59,30 +59,28 @@ and experimental debugging techniques~\cite{Zeller:2002,
 Steimann:2013, Zhang:2013:IMF}.
 %often implicitly assume no test dependences in
 %a test suite. 
-\todo{check the following sentencee, people may ask
-is the above paper list representative enough? be aware.}
-\todo{I think it would be more compelling for this section to only cite
-  papers that do not mention but implicitly assume test independence.  The
-  current writing sounds like you might be cherry-picking:  why this set of
-  papers?  Are the ratios representative?  But if you just give a list (as
-  long as possible) of papers that don't assume it, then that makes the
-  point you want to, and no one will misinterpret the list as trying to be
-  representative.}
+%\todo{check the following sentencee, people may ask
+%is the above paper list representative enough? be aware.}
+%\todo{I think it would be more compelling for this section to only cite
+%  papers that do not mention but implicitly assume test independence.  The
+%  current writing sounds like you might be cherry-picking:  why this set of
+%  papers?  Are the ratios representative?  But if you just give a list (as
+%  long as possible) of papers that don't assume it, then that makes the
+%  point you want to, and no one will misinterpret the list as trying to be
+%  representative.}
 However, this critical assumption is
-rarely questioned, investigated, or even mentioned:
-in the above paper list~\cite{alltestprior},
-4 papers explicitly assumed test independence~\cite{Rummel:2005:TPR:1066677.1067016, Orso:2004:SRT, harroldetal:OOPSLA:2001, Steimann:2013},
-14 papers did not mention but implicitly
-assumed test independence~\cite{Elbaum:2000:PTC:347324.348910,
-Jiang:2009:ART, Srivastava:2002:EPT:566172.566187,
-Zhang:2012:RMT, Misailovic:2007, Elbaum:2006, Saff:2005,
-Zeller:2002, Briand:2009:ART, Wu:2010:LRV, Kim:2013:OUT,
-Zhang:2013:IMF, Nanda:2011:RTP, hsu09may 
-},
-1 paper considered violation of the test independence
-assumption as a threat to validity~\cite{SPLAT},
-and 1 paper acknowledged the potential dependences
-between tests~\cite{Kim:2002:HTP:581339.581357}. 
+rarely questioned, investigated, or even mentioned.
+For example, we did a systematic literature survey
+and collected \textit{all} papers~\cite{alltestprior} on test prioritization
+published at five major software engineering conferences
+(i.e., ICSE, FSE, ISSTA, ASE, and ICST) and two major software engineering journals
+(i.e., TOSEM and TSE) from the year 2000. Among the
+23 collected papers, 
+xxx papers explicitly or implicitly assumed test independence,
+xxx papers considered violation of the test independence
+assumption as a threat to validity,
+and only 1 paper acknowledged the potential dependences
+between tests might affect the prioritization output~\cite{Kim:2002:HTP:581339.581357}. 
 Anecdotally, researchers have told us that test dependence
 is not a significant concern.
 We wish to investigate the validity of this unverified conventional wisdom,
