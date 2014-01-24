@@ -260,18 +260,18 @@ to be made explicit and respected during execution, they do not help developers
 with such frameworks by generating annotations for them.
 
 Haidry and Miller~\cite{10.1109/TSE.2012.26} proposed a set of
-test prioritization techniques that consider potential
-test dependencies. However, with a significantly different focus,
+test prioritization techniques that consider
+test dependence. However, with a significantly different focus,
 their work aims to improve existing test prioritization techniques
-and make them produce a test ordering that preserves the test dependencies.
+to make them produce a test ordering that preserves the test dependencies.
 Compared to our work, their work does
-\textit{not} give a formal definition to test dependence nor
-provide evidence whether test dependence arises in practice, rather,
-their work \textit{assumes} the some dependencies between tests
-(i.e., a test should be executed before another) are known.
+\textit{not} give a formal definition to test dependence,
+%provide evidence whether test dependence arises in practice,
+rather, their work \textit{assumes} some dependencies between tests
+(which is represented as partial orderings, such as one test should be executed before another) are known.
 Further, they did not provide any empiricial results
-about the repercussions
-of dependent tests, how to detect dependent tests, and
+to show dependent tests exist in practice,
+the repercussions of dependent tests, how to detect dependent tests, and
 the impact of dependent tests on existing test prioritization techniques.
 
 
