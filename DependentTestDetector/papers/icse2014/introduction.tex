@@ -46,14 +46,15 @@ running the tests in any order should produce the same test results.
 %of a test selection/prioritization technique is decided by whether
 %a test has been selected or not, rather than whether the test should
 %maintain the same resutls or not.}
-The assumption of of test independence 
+The assumption of test independence 
 is important so that tests behave consistently
 as designed. In addition, 
 many techniques assume test independence, including test
-prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
+prioritization~\cite{Elbaum:2000:PTC:347324.348910,
+Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
 test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
 Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP, hsu09may},
-test execution~\cite{Kim:2013:OUT, Misailovic:2007, SPLAT},
+test execution~\cite{Kim:2013:OUT, Misailovic:2007},
 test factoring~\cite{Saff:2005, Wu:2010:LRV}, test carving~\cite{Elbaum:2006},
 and experimental debugging techniques~\cite{Zeller:2002,
 Steimann:2013, Zhang:2013:IMF}.
@@ -69,20 +70,20 @@ Steimann:2013, Zhang:2013:IMF}.
 %  point you want to, and no one will misinterpret the list as trying to be
 %  representative.}
 However, this critical assumption is
-rarely questioned, investigated, or even mentioned.
-For example, we did a systematic literature survey
-and collected \textit{all} papers on
-%proposing and evaluating
-test prioritization 
-(23 papers in total, paper list available at:~\cite{alltestprior}) 
-published at five major software engineering conferences
+rarely questioned, investigated, or even mentioned:
+none of the above papers mentions the assumption
+as a limitation or a threat to validity.
+Further, we did a systematic literature survey
+on \textit{all} test prioritization  papers\footnote{31 papers in total. The paper list is available at:~\cite{alltestprior}.} 
+published on the research track of five major software engineering conferences
 (i.e., ICSE, FSE, ISSTA, ASE, and ICST) and two major software engineering journals
-(i.e., TOSEM and TSE) from 2000 to 2013 (inclusive).
-xxx papers explicitly or implicitly assumed test independence,
-xxx papers considered violation of the test independence
-assumption as a threat to validity,
-and only 1 paper acknowledged (but did not evaluate whether)
-the potential dependences between tests may affect the prioritization output~\cite{Kim:2002:HTP:581339.581357}. 
+(i.e., TOSEM and TSE) between 2000 and 2013.
+27 papers explicitly or implicitly assumed test independence~\cite{alltestprior},
+3 papers acknowledged the potential dependences between tests
+may affect the prioritization output~\cite{Kim:2002:HTP:581339.581357,
+Qu:2008:CRT, Rothermel:2004:TSC},
+and only 1 paper considered test dependence in the design of
+test prioritization algorithms~\cite{10.1109/TSE.2012.26}.
 Anecdotally, researchers have told us that test dependence
 is not a significant concern.
 We wish to investigate the validity of this unverified conventional wisdom,
