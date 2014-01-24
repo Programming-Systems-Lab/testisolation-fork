@@ -28,13 +28,43 @@ Both can learn that test dependence is a real problem that should not be
 ignored any longer, because it leads to false positive and false negative
 test results.
 Practitioners can adjust their practice based on what code patterns most
-often lead to test dependence, and they can use our tools to efficiently
-find many dependent tests.
+often lead to test dependence, and they can use our tool to 
+find dependent tests.
 Researchers are posed important but challenging new problems, such as how
 to adapt testing methodologies to account for dependent tests how to detect
 and correct all dependent tests.
 
+As future work, we plan to study
+the impact of dependent tests on other
+downstream testing techniques, such as test selection and
+test parallelization.
+We also plan to developing
+a general methodology to eliminate dependent tests.
+In addition, we are interested in investigating how to
+prevent dependent tests.
+%
+One possible way is encouraging developers to
+use advanced testing frameworks that support test dependence~\cite{testng},
+so that developers can explicitly specify test
+dependence when writing tests.
+%
+Stylized coding patterns may also be useful. Developers
+should be encouraged to write tests ``defensively'' by
+specifying necessary test execution pre-conditions and
+using less (or properly mocking) global variables or shared resources. 
 
+%There is already some work aiming at automating this
+%process to prevent the potential
+%for dependences by refactoring programs to use
+%less global state~\cite{wlokaetal:FSE:2009}. 
+
+%This question also applies to automated test generators.
+%While there is some work to alleviate
+%this problem~\cite{vmvm, RobinsonEPAL2011,fraseretal:ISSTA:2011}, the question
+%of removing automatically-generated dependent tests
+%still remains open.
+
+\begin{comment}
 Our future work should focus on the following directions:
 
 \vspace{1mm}
@@ -129,6 +159,7 @@ process to prevent the potential
 for dependences by refactoring programs to use
 less global state~\cite{wlokaetal:FSE:2009}. 
 
+\end{comment}
 
 %The source code of our tool implementation is publicly
 %available at: \url{http://testisolation.googlecode.com}.
