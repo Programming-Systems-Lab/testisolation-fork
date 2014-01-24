@@ -270,7 +270,7 @@ Compared to our work, their work does
 \textit{not} give a formal definition to test dependence,
 %provide evidence whether test dependence arises in practice,
 rather, their work \textit{assumes} some dependencies between tests
-(which is represented as partial orderings, such as one test should be executed before another) are known.
+(which are represented as partial orderings, such as one test should be executed before another) are known.
 Further, they did not provide any empiricial results
 to show dependent tests exist in practice,
 the repercussions of dependent tests, how to detect dependent tests, and
@@ -290,7 +290,11 @@ using test dependence may not achieve a high return in bug finding.
 A simple way to eliminate test dependence is
 starting a new process or otherwise completely re-initializing the environment (variables,
 heap, files, etc.)\ before executing each test;
-JCrasher~\cite{Csallner:2004} does this, as do some SIR applications.
+JCrasher~\cite{Csallner:2004} does this, as do
+some SIR applications~\cite{sir} and
+some database testing tools~\cite{kapfhammeretal:FSE:2003,
+Chays:2000:FTD:347324.348954, Gray:1994:QGB:191843.191886
+}.
 %\todo{Check the math.}
 However, such an approach is computationally expensive:
 Table~\ref{tab:results} shows that executing each test in a
