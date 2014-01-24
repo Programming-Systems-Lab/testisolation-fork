@@ -146,7 +146,7 @@
 \headheight 12pt                % Height of box containing running head.
 \headsep 25pt                   % Space between running head and text.
 
-\textheight 666pt       % 9 1/4 column height
+\textheight 676pt       % 9 1/4 column height
 \textwidth 42pc         % Width of text line.
                         % For two-column mode:
 \columnsep 2pc          %    Space between columns
