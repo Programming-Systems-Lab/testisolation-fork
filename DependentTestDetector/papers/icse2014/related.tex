@@ -241,7 +241,8 @@ JUnit 4.x). The latest release 4.11 of JUnit supports
 executing tests in lexicographic order by test method name~\cite{junitordering}.
 However, ensuring that these mechanisms are used properly is
 beyond the scope and capability of any framework. 
-Further, our experimental results show that programmers often do not
+Further, our empirical study and
+experimental results indicate that programmers often do not
 use them properly and introduce dependent tests. 
 
 Only a few tools explicitly 
@@ -272,7 +273,7 @@ Compared to our work, their work does
 rather, their work \textit{assumes} some dependencies between tests
 (which are represented as partial orderings, such as one test should be executed before another) are known.
 Further, they did not provide any empirical results
-to show dependent tests exist in practice,
+to show whether dependent tests exist in practice,
 the repercussions of dependent tests, how to detect dependent tests, and
 the impact of dependent tests on existing test prioritization techniques.
 
@@ -292,7 +293,7 @@ starting a new process or otherwise completely re-initializing the environment (
 heap, files, etc.)\ before executing each test;
 JCrasher~\cite{Csallner:2004} does this, as do
 some SIR applications~\cite{sir} and
-some database testing tools~\cite{kapfhammeretal:FSE:2003,
+some database or GUI testing tools~\cite{kapfhammeretal:FSE:2003,
 Chays:2000:FTD:347324.348954, Gray:1994:QGB:191843.191886
 }.
 %\todo{Check the math.}

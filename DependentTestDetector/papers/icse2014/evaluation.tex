@@ -169,11 +169,11 @@ detecting dependent tests. In our experiments, when run \trialnum times,
 it identifies \textit{more} dependent tests and found all
 dependent tests identified by the other two algorithms.
 For the human-written
-test suites, the randomized algorithm detects 2 more dependent
-tests in \jt. These two tests only
+test suites, the randomized algorithm detects 4 more dependent
+tests in \jt. These tests only
 manifest when a sequence of three tests are run in a specified,
 non-default order. Both exhaustive and \dependenceaware{} $k$-bounded
-algorithms fail to detect these two tests, because
+algorithms fail to detect these tests, because
 they cannot scale to $k$=3 for 
 \jt. Related, the randomized algorithm
 detects more dependent
@@ -367,7 +367,7 @@ test prioritization techniques and cause unexpected output.
 %The dependent test detection problem is inherently
 %complex, a smarter algorithm may not achieve great results.}
 The randomized algorithm is the most cost-effective in
-detecting dependent tests, although it has no guarantee
+detecting dependent tests, but it has no guarantee
 of the number of dependent tests it can detect.
 %Testers
 %can use this simple yet effective algorithm in practice.
