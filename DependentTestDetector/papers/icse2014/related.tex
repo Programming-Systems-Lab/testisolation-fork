@@ -1,7 +1,7 @@
 \section{Related Work}
 \label{sec:related}
 
-\enlargethispage{5pt}
+%\enlargethispage{5pt}
 
 %Denoting a group of test cases as a ``suite of test programs'' began around the
 %mid-1970's~\cite[p.~217]{brown:CSUR:1974}; similar terms include
@@ -267,15 +267,18 @@ test prioritization techniques that consider
 test dependence.  
 Their work aims to improve existing test prioritization techniques
 to make them produce a test ordering that preserves the test dependencies.
-Their work 
+Their work
 assumes that dependencies between tests are known (and are represented as
-partial orderings, such as that one test should be executed before another).
-\todo{Can/should we say that they did not motivate that their techniques
-  are needed in practice, but we have provided evidence of their value?}
+partial orderings, such as that one test should be executed before another)
+without providing any empirical evidence of whether dependent tests
+exist in practice.
+%\todo{Can/should we say that they did not motivate that their techniques
+%  are needed in practice, but we have provided evidence of their value?}
 By contrast, our work formally defines test dependence,
-%provide evidence whether test dependence arises in practice,
+studies the characteristics of real-world test dependence,
 shows how to detect dependent tests,
-and empirically evaluates whether dependent tests exist in practice and
+and empirically evaluates whether dependent tests exist in real-world
+programs and
 their impact on existing test prioritization techniques.
 
 
