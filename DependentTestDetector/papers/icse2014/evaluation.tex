@@ -156,6 +156,11 @@ indicate that the tests are invalid; it may indicate weaknesses, poor
 design, or fragility of the APIs; or it may indicate that the human-written
 tests have failed to exercise some functionality.
 
+%Among the 29 human-written dependent tests, 23 tests
+%can be detected by running in isolation, 2 tests
+%require 2 tests to manifest the dependence, and 4
+%tests require 3 tests to manifest the dependence.
+
 The root cause of all the detected dependent tests is improper access to
 static fields. The XML Security and Crystal developers use more
 static fields in the test code,
