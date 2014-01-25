@@ -246,7 +246,7 @@ experimental results indicate that programmers often do not
 use them properly and introduce dependent tests. 
 
 Only a few tools explicitly 
-allows developers to annotate dependent tests and
+allow developers to annotate dependent tests and
 provides supporting mechanisms to ensure that the test execution framework
 respects those annotations.  DepUnit~\cite{depunit}
 allows developers to define soft and hard dependences. Soft dependences control
@@ -264,18 +264,17 @@ with such frameworks by generating annotations for them.
 
 Haidry and Miller~\cite{10.1109/TSE.2012.26} proposed a set of
 test prioritization techniques that consider
-test dependence. However, with a significantly different focus,
-their work aims to improve existing test prioritization techniques
+test dependence.  
+Their work aims to improve existing test prioritization techniques
 to make them produce a test ordering that preserves the test dependencies.
-Compared to our work, their work does
-\textit{not} give a formal definition to test dependence,
+Their work 
+assumes that dependencies between tests are known (and are represented as
+partial orderings, such as that one test should be executed before another).
+By contrast, our work formally defines test dependence,
 %provide evidence whether test dependence arises in practice,
-rather, their work \textit{assumes} some dependencies between tests
-(which are represented as partial orderings, such as one test should be executed before another) are known.
-Further, they did not provide any empirical results
-to show whether dependent tests exist in practice,
-the repercussions of dependent tests, how to detect dependent tests, and
-the impact of dependent tests on existing test prioritization techniques.
+shows how to detect dependent tests,
+and empirically evaluates whether dependent tests exist in practice and
+their impact on existing test prioritization techniques.
 
 
 Our previous work~\cite{DBLP:conf/sigsoft/MusluSW11} proposed

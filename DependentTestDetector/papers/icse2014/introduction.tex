@@ -73,19 +73,22 @@ However, this critical assumption is
 rarely questioned, investigated, or even mentioned:
 none of the above papers mentions the assumption
 as a limitation or a threat to validity.
-Further, we did a systematic literature survey
-on \textit{all} test prioritization  papers\footnote{31 papers in total. The paper list is available at:~\cite{alltestprior}.} 
-published on the research track of five major software engineering conferences
-(i.e., ICSE, FSE, ISSTA, ASE, and ICST) and two major software engineering journals
-(i.e., TOSEM and TSE) between 2000 and 2013.
-27 papers explicitly or implicitly assumed test independence~\cite{alltestprior},
-3 papers acknowledged the potential dependences between tests
+A total of 31 papers on test prioritization have been  
+published in the research track of five major software engineering conferences
+(ICSE, FSE, ISSTA, ASE, and ICST) or in two major software engineering journals
+(TOSEM and TSE) between 2000 and 2013.~\cite{alltestprior}
+\todo{There is a problem with the URL:  the URL contains the number
+  ``2010'', but that should be changed to ``2000''.  (Move the underlying
+  file, too, of course.)}
+Of these,
+27 papers explicitly or implicitly assumed test independence,
+3 papers acknowledged that the potential dependences between tests
 may affect the prioritization output~\cite{Kim:2002:HTP:581339.581357,
 Qu:2008:CRT, Rothermel:2004:TSC},
 and only 1 paper considered test dependence in the design of
 test prioritization algorithms~\cite{10.1109/TSE.2012.26}.
 Anecdotally, researchers have told us that test dependence
-is not a significant concern.
+is not a significant concern in practice.
 We wish to investigate the validity of this unverified conventional wisdom,
 in order to understand whether test dependence arises in practice, 
 the repercussions of dependent tests, and how to 
