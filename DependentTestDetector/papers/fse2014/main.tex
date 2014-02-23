@@ -1,0 +1,150 @@
+
+\documentclass{sig-alternate-issta}
+\usepackage{multirow}
+\usepackage{fancyheadings}
+\usepackage{algorithmic}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{xspace}
+\usepackage{pslatex}
+\usepackage{microtype}
+\usepackage{subfigure}
+\usepackage{indentfirst}
+\usepackage{listings, algorithm, algorithmic, graphicx, listing}
+\usepackage{relsize}
+\usepackage{fancyvrb}
+
+\usepackage{balance}
+
+%\usepackage{todonotes}
+\input{macros}
+
+%% Comment out one of these two definitions.
+% \newcommand{\todo}[1]{\relax}
+\newcommand{\todo}[1]{{\color{red}\bfseries [[#1]]}}
+
+% Add line between figure and text
+\makeatletter
+\def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+\def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
+\def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+\makeatother
+% If there is a line, you can get away with reducing the separation between
+% figures and text.  Don't do this without the line, though.
+\addtolength{\textfloatsep}{-.5\textfloatsep}
+\addtolength{\dbltextfloatsep}{-.5\dbltextfloatsep}
+\addtolength{\floatsep}{-.5\floatsep}
+\addtolength{\dblfloatsep}{-.5\dblfloatsep}
+
+% At least 80% of every float page must be taken up by
+% floats; there will be no page with more than 20% white space.
+\def\topfraction{.8}
+\def\dbltopfraction{\topfraction}
+\def\floatpagefraction{\topfraction}     % default .5
+\def\dblfloatpagefraction{\topfraction}  % default .5
+\def\textfraction{.2}
+
+% Left and right curly braces in tt font
+\newcommand{\ttlcb}{\texttt{\char "7B}}
+\newcommand{\ttrcb}{\texttt{\char "7D}}
+
+% \|name| or \mathid{name} denotes identifiers and slots in formulas
+\def\|#1|{\mathid{#1}}
+\newcommand{\mathid}[1]{\ensuremath{\mathit{#1}}}
+% \<name> or \codeid{name} denotes computer code identifiers
+\def\<#1>{\codeid{#1}}
+\newcommand{\codeid}[1]{\ifmmode{\mbox{\ttfamily{#1}}}\else{\ttfamily #1}\fi}
+
+
+\newcommand{\smallstep}{\relax}
+\newcommand{\tinystep}{\relax}
+
+\newcommand{\yes}{Yes\xspace}
+
+\newcommand{\no}{No\xspace}
+
+\newcommand{\prevtool}{ConfDiagnoser\xspace}
+\newcommand{\ourtool}{EvolDiagnoser\xspace}
+\newcommand{\missing}{$\bullet$ }
+
+\newcommand{\rest}{REST\xspace}
+
+\newcommand{\errornum}{XXX\xspace}
+\newcommand{\subjnum}{XXX\xspace}
+
+\newcommand{\preitemizespace}{\vspace{-1mm}}
+
+\renewcommand{\captionfont}{\small\bf}
+
+
+
+% Reduce indentation in lists.
+%\setlength{\leftmargini}{.5\leftmargini}
+
+%% Bring items closer together in list environments
+%% This doesn't work with an optional argument to the list environment.
+% Prevent infinite loops
+\let\Itemize =\itemize    
+\let\Enumerate =\enumerate
+\let\Description =\description
+% Zero the vertical spacing parameters
+\def\Nospacing{\itemsep=0pt\topsep=0pt\partopsep=0pt\parskip=0pt\parsep=0pt}
+% Redefine the environments in terms of the original values
+\renewenvironment{itemize}{\Itemize\Nospacing}{\endlist}
+\renewenvironment{enumerate}{\Enumerate\Nospacing}{\endlist}
+\renewenvironment{description}{\Description\Nospacing}{\endlist}
+
+\hyphenation{Wohl-stadt-er}
+
+\begin{document}
+
+\clubpenalty = 10000
+\widowpenalty = 10000
+\displaywidowpenalty = 10000
+
+\title{When Tests Collide: Evaluating and Coping with\\ the Impact of Test Dependence}
+\numberofauthors{1}
+
+\author{
+\alignauthor Wing Lam \quad Sai Zhang \quad Michael D. Ernst\\
+       \affaddr{Department of Computer Science \& Engineering}\\
+       \affaddr{University of Washington}\\
+       \email{\{winglam, szhang, mernst\}@cs.washington.edu}
+}
+
+
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+\input{abstract}
+
+\input{introduction}
+
+\input{downstream}
+
+%\input{implementation}
+
+\input{understandimpact}
+
+\input{copewithimpact}
+
+%\input{experiments}
+
+\input{related}
+
+\input{conclusion}
+
+%\vspace{2mm}
+
+%\balance
+
+\bibliographystyle{abbrv}
+%\small{
+%\bibliography{confdiagnoser}
+\bibliography{references}
+%}
+\end{document}
+
+%  LocalWords:  '12 Multithreaded Hao szhang hlv mernst Manu Sridharan ABB
+%  LocalWords:  CCF

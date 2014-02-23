@@ -1,0 +1,46 @@
+\section{Implementation}
+
+\begin{comment}
+
+Due to how we were unable to find any existing tools out there that provides direct access to statement and function coverage information or can generate test prioritization orders based on the techniques we studied, we decided to develop our own tools.
+
+In order to calculate for each test the number of statements and functions it executes, we implemented a prototype tool called Instrumenter. Instrumenter supports JUnit 3.x/4.x tests. To implement Instrumenter we used Soot[8], a Java optimization framework for analyzing and transforming Java bytecode. Specifically Instrumenter uses Soot to insert Java bytecode into compiled program files so that for each statement and function that is executed, those statements and functions will be saved into a class called Tracer. Tracer is a data class that simply stores information given to it by the instrumented program files and will print the information it stores when the instrumented test files requests it to do so. By inserting try/catch clauses, Instrumenter is also used to transform test files so that each test case is guaranteed to request Tracer to print out the statements and functions it executed. 
+
+The examples below will show how total statement coverage is affected by Instrumenter. 
+
+\textbf{Code examples are omitted here. We need to re-write them}
+
+The most difficult and challenging part in the implementation was generating the test prioritization order following the instrumentation of .class and test files. Regardless of the test prioritization technique one wishes to apply to a test suite, the instrumentation process is the same. In order generate the test prioritization order, we implemented another prototype tool called TestListGenerator. To generate a possible test execution order a user can use Instrumenter to instrument all .class and test files, execute all the tests so that the statements and functions a test executed is saved into Tracer and then specify to TestListGenerator which technique of test prioritization should be applied. Based on the technique specified by the user, TestListGenerator will parse the output of Tracer to generate the priority of each test case and output an order where the test case with the highest priority is first followed by the second and so on. If multiple tests are given the same priority, then those tests will be outputted by the TestListGenerator in an arbitrary order. TestListGenerator currently supports random prioritization, absolute statement coverage, relative statement coverage, absolute function coverage and relative function coverage. 
+
+For relative statement and function coverage once all statements or functions have been covered by the tests that have been executed, we employed a relative coverage heuristic to break ties. Once all coverage elements have been covered, the next highest priority test from the remaining tests that have yet to be executed is defined as the test that when executed will cover the most statements and functions. Essentially we conduct relative statement or function coverage again but this time only on the remaining tests that have yet to be executed. 
+
+In the example below assume there are five coverage elements.
+
+test1 executes coverage elements 3, 4
+
+test2 executes coverage elements 1, 2, 5, 
+
+test3 executes coverage elements 2
+
+test4 executes coverage elements 1, 5
+
+The order generated should be:
+
+test2 $\rightarrow$ test1 $\rightarrow$ test4 $\rightarrow$ test3 
+
+As opposed to the order below which uses an arbitrary order of breaking ties:
+
+test2 $\rightarrow$ test1 $\rightarrow$ test3 $\rightarrow$ test4 
+
+The reason for why test4 should come before test3 is because after test1, test4 now executes the most lines of code assuming lines 1, 2, 3, 4, 5 are no longer covered.
+
+Limitations of our prototype tools include:
+\begin{itemize}
+\item Due to how we were unable to utilize Soot to instrument our test files to insert a finally clause into our bytecode, we instrumented test cases to catch all exceptions it may encounter instead. However because of this, tests whose execution is halted through any other means such as system exits or initialization errors, will be not have the statements and functions it executed printed. In our experiments, one out of the five programs contained nine tests that did not have its statements or functions printed because it encountered a problems with initialization. 
+
+\item TestListGenerator currently supports five coverage-based test prioritization techniques. Additional techniques such as absolute and relative branch coverage are yet to be supported. 
+\end{itemize}
+
+The Instrumenter and TestListGenerator is available at: \url{https://code.google.com/p/dependent-tests-impact/}.
+
+\end{comment}

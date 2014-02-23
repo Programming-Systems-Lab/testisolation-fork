@@ -1,0 +1,195 @@
+\section{Related Work}
+
+This section discusses closely-related work on: (1)
+the definitions of test dependence and its impact, (2)
+existing techniques that assume test independence,
+and (3) techniques to alleviate the impact of test dependence.
+
+\subsection{Test Dependence: Definitions and Impacts}
+
+Test independence is a common assumption in the testing literature.
+Treating test suites explicitly as mathematical sets of tests
+dates at least to Howden~\cite{}.
+The execution order of tests in a suite is
+usually not considered: that is, test independence is assumed.
+
+
+Nonetheless, some research has considered it.
+Definitions in the testing literature are generally clear that
+the conditions under which a test is executed may affect
+its result. The importance of context in testing has been explored
+in databases~\cite{}, with results about test generation,
+test adequacy criteria, etc., and mobile applications~\cite{}. For
+the database domain, Kapfhammer and Soffa formally define
+independent test suites and distinguish them from other
+suites that ``can capture more of an application’s interaction
+with a database while requiring the constant monitoring of
+database state and the potentially frequent re-computations
+of test adequacy''~\cite{}. 
+
+The IEEE Standard for Software and System Test
+Documentation (829-1998) Chapter 11.2.7, ``Intercase Dependencies,''
+says in its entirety: ``List the identifiers of test cases that must
+be executed prior to this test case. Summarize the nature
+of the dependences''~\cite{}. The succeeding version of this
+standard (829-2008) adds a single sentence: ``If test cases are
+documented (in a tool or otherwise) in the order in which
+they need to be executed, the Intercase Dependencies for
+most or all of the cases may not be needed''~\cite{}.
+
+
+Bergelson and Exman characterize a form of test dependence
+informally: given two tests that each pass, the
+composite execution of these tests may still fail~\cite{}.
+That is, if \textit{$t_1$} executed by itself passes and
+\textit{$t_2$} executed by itself passes,
+executing the sequence $\langle$\textit{$t_1$}, \textit{$t_2$}$\rangle$ in
+the same context may fail.
+
+
+In our previous work~\cite{}, we gave a formal definition
+for test dependence based on test execution results.
+Our definition differs from related work (e.g.,
+Kapfhammer and Soffa's work~\cite{}) by considering
+test results rather than program and database states (which
+may not affect the test results). 
+%
+%It would be possible to consider a test dependent if
+%reordering could a?ect any internal computation or heap value
+%(non-manifest dependence); but these internal details, such
+%as order of elements in a hash table, might never a?ect any
+%test result: they could be false dependences
+In this paper, we use the our previous definition and focus
+on the manifest test dependence. \todo{more here}
+
+\subsection{Techniques Assuming Test Independence}
+\todo{much of the related work is copied from the dt paper, needs revise.}
+
+The assumption of test independence lies at the heart of most
+techniques for automated regression test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
+Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP},
+test case prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART}, 
+and coverage-based fault localization~\cite{Steimann:2013, Zhang:2013:IMF, Jones:2002:VTI}, etc. 
+
+
+Test prioritization seeks to reorder a test suite to detect
+software defects more quickly. 
+Early work in test
+prioritization~\cite{Wong:1997:SER:851010.856115,Rothermel:1999:TCP:519621.853398}
+laid the foundation for the most commonly used problem definition:
+consider the set of all permutations of a test suite and find the best
+award value for an objective function over that
+set~\cite{Elbaum:2000:PTC:347324.348910}.  The most common objective
+functions favor permutations where higher code coverage
+is achieved and more faults in the underlying
+program  are found with running fewer tests.
+Test independence is
+%often explicitly asserted as
+a requirement for most test selection and prioritization work (e.g.,~\cite[p.~1500]{Rummel:2005:TPR:1066677.1067016}).
+Evaluations of selection and prioritization techniques~\cite[\emph{et alia}]{Rothermel:1999:TCP:519621.853398,Do:2010:ETC:1907658.1908088}
+are based in part on the test independence
+assumption as well as the assumption that the set of faults in the underlying
+program is known beforehand; the possibility that test dependence may
+interfere with these techniques is not studied.
+
+
+Coverage-based fault localization techniques~\cite{Jones:2002:VTI}
+often treat a test suite as a collection of test cases
+whose result is \textit{independent} of the order of their
+execution. They can also be impacted by test dependence.
+In a recent evaluation of several coverage-based fault locators,
+ Steimann et al.\ found fault locators' accuracy has been 
+ affected by tests failed due to the violation of the test
+ independence assumption~\cite{Steimann:2013}. 
+ Compared to our work, Steimann et al.'s
+ work focuses on identifying possible threats to validity
+ in evaluating coverage-based fault locators, and does
+ not present any formalism, study, or detection algorithms
+ for dependent tests.
+
+As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation},
+the test independence assumption often does not hold for either
+human-written or automatically-generated tests; and the dependent
+tests identified in our subject programs interfere with
+existing test prioritization techniques. Thus, techniques
+that rely on this assumption may need to be reformulated.
+
+Most automated test generation
+techniques~\cite{PachecoLET2007, Wang:2007:AGC,
+ZhangSBE2011} do not take test dependence
+into consideration. As shown in our experiments
+(Section~\ref{sec:evaluation}) and previous work~\cite{RobinsonEPAL2011},
+a large number of tests generated by Randoop are dependent.
+We speculate that these dependences arise because automated
+test generators generally create new tests
+based on the program state after executing the previous test,
+for the sake of test diversity and efficiency. 
+When Randoop generates a nondeterministic test, it can disable the test but
+leave it in the suite where it is executed in order to prevent other tests
+that are dependent on it from beginning to fail~\cite{RobinsonEPAL2011}.
+Exploring how to incorporate test dependence into the design of an automated
+test generator is future work.
+
+
+\subsection{Techniques to Cope with Dependence}
+
+Testing frameworks provide mechanisms
+for developers to define the context for tests.
+JUnit, for example, provides means to
+automatically execute setup and clean-up tasks
+(\CodeIn{setUp()} and \CodeIn{tearDown()} in JUnit
+3.x, and annotations \CodeIn{@Before} and \CodeIn{@After} in
+JUnit 4.x). The latest release 4.11 of JUnit supports
+executing tests in lexicographic order by test method name~\cite{junitordering}.
+However, ensuring that these mechanisms are used properly is
+beyond the scope and capability of any framework. 
+Further, our empirical study and
+experimental results indicate that programmers often do not
+use them properly and introduce dependent tests. 
+
+Only a few tools explicitly 
+allow developers to annotate dependent tests and
+provides supporting mechanisms to ensure that the test execution framework
+respects those annotations.  DepUnit~\cite{depunit}
+allows developers to define soft and hard dependences. Soft dependences control
+test ordering, while hard dependences in addition control whether specific tests are
+run at all.  TestNG~\cite{testng} 
+allows dependence annotations and supports a variety of execution policies
+that respect these dependences
+such as sequential execution
+in a single thread, execution of a single test class per thread, etc.\
+What distinguishes our work from these approaches is that, while they allow dependences
+to be made explicit and respected during execution, they do not help developers
+\emph{identify} dependences.  A tool that finds dependences
+(Section~\ref{sec:impl}) could co-exist
+with such frameworks by generating annotations for them.
+
+Haidry and Miller~\cite{10.1109/TSE.2012.26} proposed a set of
+test prioritization techniques that consider
+test dependence.  
+Their work aims to improve existing test prioritization techniques
+to make them produce a test ordering that preserves the test dependencies.
+Their work
+assumes that dependencies between tests are known (and are represented as
+partial orderings, such as that one test should be executed before another)
+without providing any empirical evidence of whether dependent tests
+exist in practice.
+%\todo{Can/should we say that they did not motivate that their techniques
+%  are needed in practice, but we have provided evidence of their value?}
+By contrast, our work formally defines test dependence,
+studies the characteristics of real-world test dependence,
+shows how to detect dependent tests,
+and empirically evaluates whether dependent tests exist in real-world
+programs and
+their impact on existing test prioritization techniques.
+
+
+Muslu et al.~\cite{DBLP:conf/sigsoft/MusluSW11} proposed
+an algorithm to find bugs by executing each unit
+test in isolation. With a different focus,
+this work investigates the validity of the test independence assumption
+rather than finding new bugs,
+and presents five new results.
+Further, as indicated by our study and experiments, most dependent
+tests reveal weakness in the test code rather than bugs in the program. Thus,
+using test dependence may not achieve a high return in bug finding.

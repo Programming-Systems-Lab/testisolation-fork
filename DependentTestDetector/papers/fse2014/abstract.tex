@@ -1,0 +1,41 @@
+\begin{abstract}
+
+In a test suite, all the test cases should be independent:
+no test should affect any other test's result, and running
+the tests in any order should produce the same test results.
+The assumption of test independence is important so that
+tests behave consistently as designed. In addition, many
+downstream testing techniques assume test independence,
+such as test prioritization, test selection, and test
+parallelization. Our recent work shows this critical
+assumption often does not hold in practice. However, the impact
+of test dependence is still unclear. In this paper, we
+empircally investigates the impact of test dependence
+and described techniques to cope with the impact.
+We present three results.
+
+First, an empirical study of the impact of test dependence
+on 5 test prioritization, 5 test selection, and 3 test parallelization
+algorithms. The study suggests that test dependence
+can affect the results of \textit{all} these downstream
+testing algorithms.
+
+Second, we present two techniques to cope with the impact
+of test dependence. The first technique monitors the
+test execution of a test suite and generates a concise report
+to describe the root cause of test dependence.
+%The report permits developers understand why and how
+%test dependence arises.
+The second technique enhances existing test prioritization,
+test selection, and test parallelization algorithms to ensure
+they respect the test dependence.
+
+Third, we describe an experimental evaluation and a user
+study to show that the proposed techniques for coping with
+the test dependence impact are useful and effective. They
+help developers understand why and how test dependence arises
+and enable downstream techniques output consistent results
+in the presence of test dependence.
+
+\end{abstract}
+

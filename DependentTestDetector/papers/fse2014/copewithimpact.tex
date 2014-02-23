@@ -1,0 +1,69 @@
+\section{Coping With the Impact}
+\label{sec:cope}
+
+Test dependence can cause non-trivial repercussions
+to both developers and downstream testing techniques.
+When test dependence arises, developers should quickly
+identify its root causes and downstream testing techniques
+should respect the potential dependence and keep the
+test execution results consistent.
+
+This section presents a family of techniques to cope with the
+impact of test dependence. First, we present an automated
+technique to identify the root cause of test dependence
+(Section~\ref{sec:coperoot}). Second, to alleviate the
+impact on downstream testing techniques, we present a family
+of techniques to enhance existing test prioritization,
+test selection, and test parallelization techniques (Section~\ref{sec:copeenhance}).
+
+All proposed techniques are empirically evaluated on
+our subject programs (Section~\ref{sec:evaluation}).
+
+\subsection{Automatically Explaining Test Dependence}
+\label{sec:coperoot}
+
+\todo{describe the root causes}
+Explaining the root cause of test dependence requires
+
+The global variables involved are usually buried deep in
+the program code, and the assertions do not directly check
+them, but rather check values that have been computed from
+them. In any non-trivial real-world program, this deep nesting e?ectively hides potential dependencies from developers,
+and they may only become aware of them when a subtle bug
+leads them there.
+
+
+\subsubsection{Explanation Technique}
+
+\begin{itemize}
+\item \textbf{Simplification.}.
+\item \textbf{Instrumentation}.
+\item \textbf{Monitoring}.
+\end{itemize}
+
+
+\subsection{Enhancing Downstream Testing Techniques}
+\label{sec:copeenhance}
+
+\subsubsection{Enhancing Test Prioritization}
+
+\subsubsection{Enhancing Test Selection}
+
+\subsubsection{Enhancing Test Parallelization}
+
+\subsection{Empirical Evaluation}
+\label{sec:evaluation}
+
+\subsubsection{Subject Programs}
+
+use the same subject programs
+
+\subsubsection{Understanding Dependence Root Causes}
+
+\subsubsection{Evaluating Dependance-Aware Test Prioritization, Selection, and Parallelization Techniques}
+
+\subsection{Discussion}
+
+\subsubsection{Threats to Validity}
+
+\subsubsection{Experimental Conclusions}

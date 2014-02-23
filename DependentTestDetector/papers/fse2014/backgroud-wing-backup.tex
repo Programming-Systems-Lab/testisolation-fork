@@ -1,0 +1,35 @@
+
+\begin{comment}
+Regression testing is the process used to provide confidence that newly changed parts of a software system behave as intended and that the unchanged parts of a software have not been adversely affected by the modifications. Because regression testing can be expensive, researchers have proposed techniques to reduce its cost.  
+
+In general these test regression techniques avoid analyzing and instrumenting code components, such as libraries, which are used by the program but have not been modified. Therefore, programs being tested are divided into two parts: one part that is analyzed and the other that is considered as external and is not analyzed. The set of classes that are analyzed and instrumented by test regression techniques are known as internal classes, and those that are not analyzed and instrumented are known as external classes.
+
+The regression testing techniques covered in this paper only analyzes internal classes and makes the following three critical assumptions:
+
+\begin{enumerate}
+\item Reflection is not applied to any internal class or any component of an internal class. 
+\item External code has no knowledge of the internal classes. 
+\item Test cases are deterministic. Meaning they cover the same set of statements and produces the same output each time they are ran on an unmodified program. 
+\end{enumerate}
+
+These assumptions are known as regression bias [5] and allows these techniques to be safe without being too inefficient or too conservative. 
+
+Besides test prioritization another technique that we plan on studying is test selection. Test selection [6] is a technique of regression testing that uses the existing test suite of a program, but applies a selection technique to select an appropriate subset of the test suite to run. If the subset is small enough, significant savings in time are achieved.
+
+There are many possible goals for test selection, for example:
+
+\begin{itemize}
+\item An environment in which nightly builds of the software are performed and a test suite is run on the newly built version of the software. In this case, regression test selection can be used to select a subset of the test suite for use in testing the new version of the software. By selecting a small subset of the test suite developers potentially reduce the time required to perform the testing.
+\item A development environment that has regression-test-selection set up. In this case, when developers modify their software, they can use the regression test selector to select a subset of the test suite to use in testing. With this approach, developers can frequently test their software as they make changes, therefore enabling them to locate errors early in development [8].
+\item When the cost of test cases is high. An example is the regression testing of avionics software. In this case, even the reduction of one test case may save thousands of dollars in testing resources.
+\end{itemize}
+
+Five categories [6] for test selection techniques are:
+\begin{itemize}
+\item Minimization-based regression test selection techniques attempt to select minimal sets of test cases from T that yield coverage of modified or affected portions of P.
+\item Dataflow-coverage-based regression test selection techniques select test cases that exercise data interactions that have been affected by modifications.
+\item Most regression test selection techniques --- minimization and dataflow techniques among them --- are not designed to be safe. Techniques that are not safe can fail to select a test case that would have revealed a fault in the modified program. In contrast, when an explicit set of safety conditions can be satisfied, safe regression test selection techniques guarantee that the selected subset, T', contains all test cases in the original test suite T that can reveal faults in program P'.
+\item When time constraints prohibit the use of a retest-all approach, but no test selection tool is available, developers often select test cases based on hunches, or loose associations of test cases with functionality. Another simple approach is to randomly select a predetermined number of test cases from T.
+\item The retest-all technique simply reuses all existing test cases. To test program P', the technique effectively selects all test cases in T.
+\end{itemize}
+\end{comment}

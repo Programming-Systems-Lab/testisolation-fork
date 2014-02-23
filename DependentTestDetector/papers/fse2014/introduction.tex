@@ -1,0 +1,156 @@
+\section{Introduction}
+
+
+In a test suite, all the test cases should be independent:
+no test should affect any other test's result, and running
+the tests in any order should produce the same test results.
+The assumption of test independence is important so that
+tests behave consistently as designed. However,
+as shown in our previous work~\cite{}, this test independence
+assumption hold does not hold in practice.
+A test's result may depend on whether it runs after
+some other tests. For example, consider 
+a simple test suite containing two tests \CodeIn{A} and \CodeIn{B},
+where running \CodeIn{A} and then \CodeIn{B}
+leads to \CodeIn{A} passing, while running \CodeIn{B} and
+then \CodeIn{A} leads to \CodeIn{A} failing. We call
+\CodeIn{A} a dependent test (in the context of this test suite),
+since its result depends on whether it runs after \CodeIn{B} or not.
+
+
+Test dependence can have non-trivial impacts. First,
+test dependence can \textit{mask faults} in a program.
+Specifically, executing a test suite in the default order does not
+expose the fault, whereas executing the same test suite in
+a different order does. Second, 
+test dependence can lead to spurious bug reports.
+When a test should pass but fails after reordering due to
+the dependence, people who are not aware of the dependence
+can get confused and might report bugs. 
+
+
+
+Our previous work has provide concrete evidence to
+show that dependent tests exist, and they can both lead
+to false alarms and missed alarms. However, it is still
+unclear that whether test dependence can affect the
+results of downstream testing techniques, and if it
+impacts, how should we cope with the impact.
+
+Int this paper, we focus on investigating the impact of
+test dependence to downstream testing techniques, and
+describing techniques to to cope with the impact of test dependence.
+
+\subsection{Evaluating the Impact of Test Dependence}
+
+Test dependence can impact downstream testing
+techniques that change a test suite and thereby change a test's
+execution environment. Examples of such techniques include
+test selection techniques (that identify a subset of the input
+test suite to run during regression testing)~\cite{},
+test prioritization techniques (that reorder the input to
+discover defects sooner)~\cite{}, and test parallelization
+techniques (that schedule the input tests for execution across
+multiple CPUs)~\cite{}.
+
+Most of these downstream testing techniques implicitly
+assume that there are no test dependences in the input test
+suite. Violation of this assumption, as we show happens in
+practice, can cause unexpected output. As an example, test
+prioritization may produce a reordered sequence of tests that
+do not return the same results as they do when executed in
+the default order.
+
+To understand whether and how test dependence can impact
+the downstream testing techniques, we implemented XXX
+test prioritization, XXX test selection, and XXX test parallelization
+techniques, and evalauted each technique
+on XX real-world subject programs containing known dependent tests.
+Our empirical results indicate that the outcome of
+every downstream technique we have evaluated is affected by 
+test dependence. \todo{more details here.}
+
+Our findings also suggest that test dependence should no longer
+be ignored in designing a downstream testing technique that
+may change the original test execution order.
+
+
+
+%\subsection{Evaluating the Impact}
+
+\subsection{Coping with Test Dependence}
+
+When test dependence arises, developers wish to understand
+its root cause and resolve the test dependence quickly, and
+tool users wish to keep the tool outcome consistent.
+
+To address these two problems, we propose two techniques to
+cope with the impact of test dependence.
+
+\begin{enumerate}
+\item To help developers understand the dependence root cause,
+we present a dynamic analysis to explain why the result of
+a test depends on another. The key of our dynamic analysis
+is monitoring the access of memory locations and external
+resources (e.g., files) for each dependent test, and then
+cross-checking the accessing information by other tests.
+\todo{need specific above, need revise below.}
+To make the explanation concise and informative, we further
+augument the field accessing information will the actual
+method-call chains, and condense low-level memory access
+information to the high-level field access information.
+
+\item To enable downstream testing techniques to produce
+consistent results in the presence of test dependence, we
+we present a family of techniques to augument each downstream
+testing technique to respect test dependence. The key of
+our technique is to make each technique be aware of test dependence:
+when a dependent test has been selected to execute, it ensures
+all other tests it depends on will be executed before the
+dependent test.
+
+\end{enumerate}
+
+
+We evalauted both techniques on real-world programs with dependent
+tests. We sent the generated dependence root cause explanation
+to program developers, and got positive feedback. All downstream
+testing techniques produce consistent and correct results
+after being augumented by our technique.
+
+\subsection{Contributions}
+
+This paper makes the following contributions.
+
+\begin{itemize}
+
+\item \textbf{Impact Assessment of Test Dependence.}
+We present an empirical study of the impact of test dependence
+on XXX test prioritization, XXX test selection, and XXX
+test parallelization techniques. We evaluated these downstream
+testing techniques on XXX subject programs containing
+dependent tests. The results show that the results of
+all techniques are affected by test dependence. This also
+suggests that test dependence should no longer be overlooked
+in designing related testing techniques (Section~\ref{sec:impact}).
+
+\item \textbf{Techniques to Cope with Test Dependence.}
+We propose two general ways to cope with test dependence.
+First, we describe a dynamic analysis to localize the dependence
+root cause and generate a concise report to help developers
+understand why the test dependence arises (Section~\ref{sec:coperoot}).
+Second, we describe a technique to enhance existing downstream
+testing techniques and make them respect the test dependence
+(Section~\ref{sec:coperoot}). 
+
+\item \textbf{Empirical Evaluation.} We evalauted the proposed
+techniques on subject programs containing test dependence, and
+showed that (1) the test dependence root cause identified by
+our analysis is concise and accurate; it helps developers
+to understand why test dependence arises; and (2) the enhanced
+downstream testing techniques are aware of test dependence;
+they consistently produce the same results without compromising
+the effectiveness (Section~\ref{sec:evaluation}).
+
+\end{itemize}
+
