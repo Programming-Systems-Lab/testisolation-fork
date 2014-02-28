@@ -22,24 +22,55 @@ our subject programs (Section~\ref{sec:evaluation}).
 \subsection{Automatically Explaining Test Dependence}
 \label{sec:coperoot}
 
-\todo{describe the root causes}
-Explaining the root cause of test dependence requires
 
-The global variables involved are usually buried deep in
+Test dependencies arise largely because of improper access
+to shared global variables or external resources (e.g., files).
+However, realizing the root causes of test dependence is often no
+obvious.
+The global variables or external resources 
+accessed by two tests are usually buried deep in
 the program code, and the assertions do not directly check
 them, but rather check values that have been computed from
-them. In any non-trivial real-world program, this deep nesting e?ectively hides potential dependencies from developers,
+them. In any non-trivial real-world program, this deep
+nesting effectively hides potential dependencies from developers,
 and they may only become aware of them when a subtle bug
-leads them there.
+leads them there. This section presents an automated
+technique that generates a concise report to explain the
+root cause of such test dependence.
 
 
 \subsubsection{Explanation Technique}
 
-\begin{itemize}
-\item \textbf{Simplification.}.
-\item \textbf{Instrumentation}.
-\item \textbf{Monitoring}.
-\end{itemize}
+Our technique, called \dtexplain, contains three steps:
+
+\begin{enumerate}
+\item \textbf{Simplification}. For a dependent test $t$,
+\dtexplain uses Delta Debugging to isolate the shortest test
+execution sequence $T_{seq}$ that if executed before $t$, will lead
+$t$ to exhibit a different result than the result of
+executing $t$ alone.
+
+\item \textbf{Execution with Instrumentation}. \dtexplain instruments
+the tested program, $t$, and all tests in $T_{seq}$ to monitor
+the access to shared global variables and files. \dtexplain 
+executes $t$ and $T_{seq}$ in two different order. \dtexplain
+first executes $t$ alone to observe its accessed variables
+and files. Then, \dtexplain executes $T_{seq}$ before $t$
+and observes variables and files accessed by both $T_{seq}$
+and $t$.
+
+\item \textbf{Summarization}. \dtexplain summarizes the
+variable-accessing information to generate a report to describe
+which fields $t$ and $T_{seq}$ may have improper access.
+If the field access occurs in the library code, \dtexplain
+``bubbles up" it to the application code.
+\dtexplain also presents the method-call sequence
+that leads to the improper field access. The detailed
+algorithm for this step is given in Figure~\ref{fig:summarization}.
+\end{enumerate}
+
+We next explain the algorithm for the thrid step with
+a concrete example in Figure~\ref{fig:dtex}.
 
 
 \subsection{Enhancing Downstream Testing Techniques}
@@ -66,4 +97,22 @@ use the same subject programs
 
 \subsubsection{Threats to Validity}
 
+There are several threats to the validity
+of our experiments. First, \dtexplain 
+only considers test dependencies arised
+from improper field access. It may not
+produce useful results for other types of
+test dependencies~\cite{}. Second,
+\todo{evaluating on the test coverage, no
+bug finding abilities yet.}
+
 \subsubsection{Experimental Conclusions}
+
+We have two chief findings. \textbf{(1)} \dtexplain
+generates concise report to explain why
+test dependence arises, and such report
+helps developers to understand the root cause
+of test dependence. \textbf{(2)} All
+enhanced downstream testing techniques
+output consistent results on test suites
+containing dependent tests.
