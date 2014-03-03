@@ -94,12 +94,52 @@ We discarded the automatically-generated test suite of
 they depend on the current time.
 
 \todo{explain two versions}
+\todo{explain why these subject programs}
 
 \subsection{Methodology}
 
-Each subject program
+We implemented all testing techniques listed
+in Tables~\ref{},~\ref{}, and~\ref{}, and evalaute
+each technique on our subject programs in
+Table~\ref{}.
 
-\todo{explain why these subject programs}
+For each subject program, we first execute its
+test suite in the \textit{default} order and record
+the execution result of each test.
+We adopt the results of the default
+order of execution of a test suite as the expected results; these
+are the results that a developer sees when running the suite
+in the standard way. 
+
+A test prioritization technique outputs a reordered test suite.
+We execute the reordered test suite and count the number
+of dependent tests that return different results
+in the prioritized roder as they do when executed in the
+unprioritized roder.
+
+A test selection technique identifies a subset of the
+input test suite to run during regression testing, but does not
+change the relative order among the test suite. We run execute
+the selected subset and count the number of dependent tests
+that return different results as they do when executed
+in the original test suite. In our experiment, for each
+subject program in Table~\ref{}, we use the next revision
+as the ``new'' program version, and apply the test selection
+technique to select a subset of the test suite that should
+be re-run.
+
+A test parallelization technique divides the input
+test suite into multiple subsets, and schedules each
+subset for execution on a different machine. Similar to
+test selection, test parallelization techniques usually
+do not change the relative order among the test suite.
+We count the number of dependent tests that return different
+results as they do when executed in the original test suite.
+Our experiment focuses on the execution result of each test.
+Due to resource limits, we run all subsets of the test suite
+on a single machine one by one. Before running a subset,
+we completely re-initialize the execution environment and launch
+a new JVM.
 
 \subsection{Results}
 
@@ -148,6 +188,23 @@ in the default, unprioritized order. \todo{revise the number here}
 }
 \label{tab:testprioresult}
 \end{table}
+
+The dependent tests in our subject programs interfere with
+all the XXX test prioritization techniques in Table~\ref{}. This
+is because all these techniques implicitly assume that there
+are no test dependences in the input test suite. Violation of
+this assumption, as happened in real-world unit test suites,
+causes undesired output. Further, test prioritization algorithms
+usually donot take the potential test dependence into
+consideration when reordering the test suite.
+
+\todo{which test prioritization techniques are the most sensitive ones}
+
+\todo{break down the data a bit and how many tests are changing from
+passing to failing? or vice versa}
+
+\todo{give specific examples here}
+
 
 \subsubsection{Impact on Test Selection}
 
@@ -236,6 +293,37 @@ in the original test suite. \todo{revise the number here}
 \subsection{Discussion}
 
 \subsubsection{Root Causes of Test Dependence}
+
+Essentially, test dependence results from
+interactions with other tests, as reflected in
+the execution environment. Tests may make
+implicit assumptions about their execution environment --
+values of global variables, contents of files, etc. A dependent
+test manifests when another alters the execution environment
+in a way that invalidates those assumptions.
+
+Our previous study~\cite{} suggested three common
+root causes of test dependence: (1) improper access
+to shared global variables (i.e., static
+variables in Java), (2) improper access
+to the file systems, and (3) improper access
+to other external resources (e.g., databases,
+networks). Improper access to
+shared global variables is the most common
+root causes, accounting for at least 61\% of 
+all dependent tests we have studied. All dependent
+tests in our experiments arise due to access
+to static Java variables.
+
+The downstream testing techniques we have evaluated
+have indirectly changed the execution environment
+that a test may implicitly assume, such as alternating
+the test execution order (as test prioritization
+does) and selecting a subset of
+test to execute (as test selection and parallelization
+do).
+
+
 
 \subsubsection{Threats to Validity}
 
