@@ -2,7 +2,7 @@ TEX_FILES=$(shell latex-process-inputs -list main.tex)
 
 all: main.pdf embedfont1 cleanmain checkfont
 
-main.pdf: ${TEX_FILES} issta2013.bib
+main.pdf: ${TEX_FILES} references.bib
 	pdflatex main.tex
 	bibtex main
 	pdflatex main.tex
