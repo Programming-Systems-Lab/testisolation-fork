@@ -5,37 +5,46 @@ no test should affect any other test's result, and running
 the tests in any order should produce the same test results.
 The assumption of test independence is important so that
 tests behave consistently as designed. In addition, many
-downstream testing techniques assume test independence,
-such as test prioritization, test selection, and test
-parallelization. Our recent work shows this critical
+downstream testing techniques, including test prioritization,
+test selection, and test parallelization,
+assume test independence.
+Our recent work shows this critical
 assumption often does not hold in practice. However, the impact
 of test dependence is still unclear. In this paper, we
-empircally investigates the impact of test dependence
-and described techniques to cope with the impact.
+empircally investigate the impact of test dependence
+and propose techniques to cope with its impact.
 We present three results.
 
-First, an empirical study of the impact of test dependence
-on 5 test prioritization, 5 test selection, and 3 test parallelization
+First, we describe an empirical study to assess the impact of test dependence
+on \prionum test prioritization, \selnum test selection, and
+\parnum test parallelization
 algorithms. The study suggests that test dependence
-can affect the results of \textit{all} these downstream
+affects the results of \textit{all} evaluated downstream
 testing algorithms.
 
-Second, we present two techniques to cope with the impact
-of test dependence. The first technique monitors the
-test execution of a test suite and generates a concise report
-to describe the root cause of test dependence.
+Second, we present a family of techniques to cope with the impact
+of test dependence by enhancing existing
+test prioritization, selection, and parallelization
+techniques to ensure they respect the test dependence . 
+%The first technique monitors the
+%test execution of a test suite and generates a concise report
+%to describe the root cause of test dependence.
 %The report permits developers understand why and how
 %test dependence arises.
-The second technique enhances existing test prioritization,
-test selection, and test parallelization algorithms to ensure
-they respect the test dependence.
+%The second technique enhances existing test prioritization,
+%test selection, and test parallelization algorithms to ensure
+%they respect the test dependence.
 
-Third, we describe an experimental evaluation and a user
-study to show that the proposed techniques for coping with
-the test dependence impact are useful and effective. They
-help developers understand why and how test dependence arises
-and enable downstream techniques output consistent results
-in the presence of test dependence.
+Third, we describe an experimental evaluation 
+to show that all enhanced testing techniques
+output consistent results in the presence of
+test dependence without compromising their effectiveness.
+
+%techniques for coping with
+%the test dependence impact are useful and effective. They
+%help developers understand why and how test dependence arises
+%and enable downstream techniques output consistent results
+%in the presence of test dependence.
 
 \end{abstract}
 

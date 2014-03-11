@@ -41,7 +41,7 @@ Int this paper, we focus on investigating the impact of
 test dependence to downstream testing techniques, and
 describing techniques to to cope with the impact of test dependence.
 
-\subsection{Evaluating the Impact of Test Dependence}
+\subsection{Evaluating the Impact}
 
 Test dependence can impact downstream testing
 techniques that change a test suite and thereby change a test's
@@ -78,7 +78,7 @@ may change the original test execution order.
 
 %\subsection{Evaluating the Impact}
 
-\subsection{Coping with Test Dependence}
+\subsection{Coping with the Impact}
 
 When test dependence arises, developers wish to understand
 its root cause and resolve the test dependence quickly, and
@@ -125,30 +125,27 @@ This paper makes the following contributions.
 \begin{itemize}
 
 \item \textbf{Impact Assessment of Test Dependence.}
-We present an empirical study of the impact of test dependence
-on XXX test prioritization, XXX test selection, and XXX
-test parallelization techniques. We evaluated these downstream
-testing techniques on XXX subject programs containing
-dependent tests. The results show that the results of
+We present an empirical study to assess the impact of test dependence
+on \prionum test prioritization, \selnum test selection, and \parnum
+test parallelization techniques. We evaluated these 
+testing techniques on \subjnum subject programs with a test suite containing
+dependent tests. The results indicate that the results of
 all techniques are affected by test dependence. This also
 suggests that test dependence should no longer be overlooked
-in designing related testing techniques (Section~\ref{sec:impact}).
+in designing new testing techniques (Section~\ref{sec:impact}).
 
 \item \textbf{Techniques to Cope with Test Dependence.}
-We propose two general ways to cope with test dependence.
-First, we describe a dynamic analysis to localize the dependence
-root cause and generate a concise report to help developers
-understand why the test dependence arises (Section~\ref{sec:coperoot}).
-Second, we describe a technique to enhance existing downstream
-testing techniques and make them respect the test dependence
-(Section~\ref{sec:coperoot}). 
+We propose a family of techniques to cope with test dependence.
+Our techniques enhance existing test prioritization, selection,
+and parallelization techniques to make them respect the test dependence
+(Section~\ref{sec:cope}). 
+%First, we describe a dynamic analysis to localize the dependence
+%root cause and generate a concise report to help developers
+%understand why the test dependence arises (Section~\ref{sec:coperoot}).
 
 \item \textbf{Empirical Evaluation.} We evalauted the proposed
-techniques on subject programs containing test dependence, and
-showed that (1) the test dependence root cause identified by
-our analysis is concise and accurate; it helps developers
-to understand why test dependence arises; and (2) the enhanced
-downstream testing techniques are aware of test dependence;
+techniques on \subjnum subject programs containing test dependence, and
+showed that the enhanced testing techniques are aware of test dependence;
 they consistently produce the same results without compromising
 the effectiveness (Section~\ref{sec:evaluation}).
 
