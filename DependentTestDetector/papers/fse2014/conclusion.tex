@@ -1,20 +1,20 @@
 \section{Conclusion and Future Work}
 
 Test independence is broadly assumed but rarely addressed, and
-test dependence has largely been ignored in previous research
-on software testing. To understand its impact, we described
-one of the first empirical studies on real-world test suites and
-showed that test dependence \textit{does} affect the results
-of popular test prioritization, test selection, and test
+the impact of test dependence has largely been ignored in previous research
+on software testing. This paper describes
+one of the first empirical studies on real-world test suites to
+understand the impact of test dependence. The experimental
+results show that test dependence \textit{does} affect the results
+of many popular test prioritization, test selection, and test
 parallelization techniques. To cope with the impact of test
-dependence, we proposed two techniques to identify
-the its root cause and enhance existing testing
-techniques to respect test dependence.
+dependence, this paper proposes a family of techniques
+to enhance existing testing techniques, making them respect test dependence
+and produce consistent testing results.
 
 
 Our results are suggestive to practitioners and researchers.
-Both can learn that test dependence is a real problem that
-can have non-trivial impact on existing testing techniques, and
+Both can learn that the impact of test dependence 
 should not be ignored any longer. Researchers are posed important
 but challenging problems in design new testing techniques,
 such as how to adapt testing methodologies to account for
@@ -27,16 +27,16 @@ Our future work should focus on the following directions:
 \noindent \textbf{{Investigating impact of dependent tests
 on other downstream testing techniques.}}
 We have shown that dependent tests can compromise the application of
-XXX test prioritization, XXXX test selection,
-and XXXX test parallelization techniques.
+\prionum test prioritization, \selnum test selection,
+and \parnum test parallelization techniques.
 %assumption is not true. However,
-We plan to conduct more comprehensive empirical studies to
-measure the impact of dependent tests to other
-downstream techniques, such as mutation testing,
-test factoring, and experimental
-debugging techniques.
-We are also interested in how to enhance these
-testing techniques to support test dependence.
+We plan to conduct comprehensive empirical studies to
+measure the impact of dependent tests on other
+downstream techniques, such as mutation testing~\cite{},
+test factoring~\cite{}, and experimental
+debugging techniques~\cite{}.
+We are also interested in developing techniques that can enhance these
+testing techniques to respect test dependence.
 
 
 
@@ -51,15 +51,14 @@ execution orders in a configuration file or
 simply merge or remove tests.
 A more flexible and robust methodology for
 dependent test elimination should be developed.
-While our technique proposed in Section~\ref{}
-provides a first step in understanding the root cause
-of test dependence, the question
-of automatically removing dependent tests
-still remains open.
-
-%This question also applies to automated test generators.
-%While there is some work to alleviate
-%this problem~\cite{vmvm, RobinsonEPAL2011,fraseretal:ISSTA:2011}, 
+%While our technique proposed in Section~\ref{}
+%provides a first step in understanding the root cause
+%of test dependence, the question
+%of automatically removing dependent tests
+%still remains open.
+This question also applies to automated test generators,
+and some work has been developed to alleviate
+this problem~\cite{vmvm, RobinsonEPAL2011,fraseretal:ISSTA:2011}.
 
 
 

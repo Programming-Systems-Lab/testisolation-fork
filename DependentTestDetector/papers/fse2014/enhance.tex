@@ -1,5 +1,39 @@
 \subsubsection{Enhancing Test Prioritization}
 
+ffslfjslfj
+
+%http://en.wikibooks.org/wiki/LaTeX/Algorithms
+
+\begin{figure}[t]
+\textbf{Input}: a test suite $\mathit{T}$\\
+\textbf{Output}: a set of dependent tests $\mathit{dependentTests}$\\
+\vspace{-5mm}
+\begin{algorithmic}[1]
+\STATE $\mathit{dependentTests}$ $\leftarrow$ $\emptyset$
+\STATE $\mathit{expectedResults}$ $\leftarrow$ $T{T}{env0}$
+\FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$)}
+\STATE $\mathit{execResults}$ $\leftarrow$ $T{\mathit{ts}}{env0}$
+\FOR{each test $\mathit{t}$ in $\mathit{ts}$}
+\IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
+\STATE $\mathit{dependentTests}$ $\leftarrow$ $\mathit{dependentTests}$ $\cup$ $\mathit{t}$
+\ENDIF
+\ENDFOR
+\ENDFOR
+\RETURN $\mathit{dependentTests}$
+%\ENDWHILE
+\end{algorithmic}
+
+% getPossibleExecOrder($T$, $k$): returns a set of test suites, each of size
+% $\le k$; each suite is composed of tests selected from $T$ without replacement.\\
+
+\vspace{-3mm}
+\caption {An example for reference.
+}
+\label{fig:algorithm}
+\end{figure}
+
+Figure~\ref{fig:algorithm} says something
+
 \subsubsection{Enhancing Test Selection}
 
 \subsubsection{Enhancing Test Parallelization}
