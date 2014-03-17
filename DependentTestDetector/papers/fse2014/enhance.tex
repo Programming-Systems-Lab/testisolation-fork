@@ -1,39 +1,99 @@
-\subsubsection{Enhancing Test Prioritization}
-
-ffslfjslfj
-
-%http://en.wikibooks.org/wiki/LaTeX/Algorithms
-
 \begin{figure}[t]
-\textbf{Input}: a test suite $\mathit{T}$\\
-\textbf{Output}: a set of dependent tests $\mathit{dependentTests}$\\
-\vspace{-5mm}
-\begin{algorithmic}[1]
-\STATE $\mathit{dependentTests}$ $\leftarrow$ $\emptyset$
-\STATE $\mathit{expectedResults}$ $\leftarrow$ $T{T}{env0}$
-\FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$)}
-\STATE $\mathit{execResults}$ $\leftarrow$ $T{\mathit{ts}}{env0}$
-\FOR{each test $\mathit{t}$ in $\mathit{ts}$}
-\IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
-\STATE $\mathit{dependentTests}$ $\leftarrow$ $\mathit{dependentTests}$ $\cup$ $\mathit{t}$
-\ENDIF
-\ENDFOR
-\ENDFOR
-\RETURN $\mathit{dependentTests}$
-%\ENDWHILE
-\end{algorithmic}
+	processDependentTests($\mathit{T}):$\\
+	\textbf{Input}: a ranked set of tests $\mathit{T}$\\
+	\textbf{Output}: a ranked set of dependent-free tests $\mathit{dtFreeTests}$\\
+	\vspace{-5mm}
+	\begin{algorithmic}[1]
+		\STATE $\mathit{dtFreeTests}$ $\leftarrow$ $\emptyset$
+		\FOR{each $\mathit{t}$ in $\mathit{T}$}
+			\STATE addDependentTest($\mathit{dtFreeTests}$, $\mathit{t}$)	
+		\ENDFOR
+		\RETURN $\mathit{dtFreeTests}$
+	\end{algorithmic}
 
-% getPossibleExecOrder($T$, $k$): returns a set of test suites, each of size
-% $\le k$; each suite is composed of tests selected from $T$ without replacement.\\
-
-\vspace{-3mm}
-\caption {An example for reference.
-}
-\label{fig:algorithm}
+	addDependentTest($\mathit{dtFreeTests}$, $\mathit{t}):$\\
+	\textbf{Input}: a ranked set of dependent-free tests $\mathit{dtFreeTests}$, a test $\mathit{t}$\\
+	\vspace{-5mm}
+	\begin{algorithmic}[1]
+		\IF{$\neg$($\mathit{t}$ $\in$ $\mathit{dtFreeTests}$)}
+			\STATE $\mathit{afterTests}$ $\leftarrow$ $\mathit{getDependentAfterTests}$($\mathit{t}$)
+			\FOR{each $\mathit{ts}$ in $\mathit{afterTests}$}
+				\STATE addDependentTest($\mathit{dtFreeTests}$, $\mathit{ts}$)
+			\ENDFOR
+			\STATE $\mathit{dtFreeTests}$ $\leftarrow$ $\mathit{dtFreeTests}$ $\cup$ $\mathit{t}$
+			\STATE $\mathit{beforeTests}$ $\leftarrow$ $\mathit{getDependentBeforeTests}$($\mathit{t}$)
+			\FOR{each $\mathit{ts}$ in $\mathit{beforeTests}$}
+				\STATE addDependentTest($\mathit{dtFreeTests}$, $\mathit{ts}$)
+			\ENDFOR
+		\ENDIF
+	\end{algorithmic}
+	\vspace{-3mm}
+	\caption {
+		The base algorithm to process a set of test's dependent tests. The processDependentTests function is utilized by various downstream testing techniques. The function generates a new order for the tests within $\mathit{T}$ to ensure that dependent tests will not have its execution result be affected by the ranking of tests. 
+	}
+	\label{fig:detectingDT}
 \end{figure}
+This section presents three approximate algorithms to generate test prioritization, selection and parallelization orders. The execution results of the orders generated are guaranteed to not be affected by dependent tests as long as all dependent tests are known. The three algorithms utilizes the function processDependentTests to reorder its dependent tests as shown in Figure~\ref{fig:detectingDT}. The processDependentTests function creates a new empty set (line 1) then goes through each test in $\mathit{T}$ and tries to add each test to the new set (line 2-4), taking into account its dependences when adding a test. 
 
-Figure~\ref{fig:algorithm} says something
+In order to add a test to the new set, processDependentTests calls addDependentTest. addDependentTest first checks whether the test being added is already contained in the new set, if it is then the test will be ignored (line 1). Otherwise the function retrieves all tests that when executed after this test will cause this test to be dependent (line 2) and adds all of those tests to the new set first by recursively calling this method with them (line 3-5). Once all the tests that needs to come before this test has been added to the new set, the test itself is added to the set (line 6). The function concludes by recursively adding all tests that when executed before this test will cause it to be dependent to the new set (line 7-9).     
+
+\subsubsection{Enhancing Test Prioritization}
+\begin{figure}[t]
+	getPrioritizationTests($\mathit{T}$, $\mathit{coverage}$, $\mathit{order}):$\\
+	\textbf{Input}: a set of tests $\mathit{T}$, coverage to consider when ranking tests $\mathit{coverage}$, order to consider when ranking tests $\mathit{order}$\\
+	\textbf{Output}: a ranked set of dependent-free tests\\
+	 \begin{algorithmic}[1]
+	 	\vspace{-5mm}
+		\STATE $\mathit{rankedTests}$ $\leftarrow$ rankTests($\mathit{T}$, $\mathit{coverage}$, $\mathit{order}$)
+		\RETURN processDependentTests($\mathit{rankedTests}$)
+	\end{algorithmic}
+	\vspace{-3mm}
+	\caption {
+		The algorithm to generate a ranked list of tests. The rankTests function ranks a test suite's tests based on the specified coverage and order. The processDependentTests function is shown in Figure~\ref{fig:detectingDT}.
+	}
+	\label{fig:prioritization}
+\end{figure}
+As shown in Figure~\ref{fig:prioritization} this algorithm generates a ranked set of tests by calling the functions rankTests followed by processDependentTests. rankTests takes a set of tests and ranks them based on the coverage and order specified. Coverages used in our experiments are statement and function level. Orders used in our experiments are absolute, relative and random. For more information regarding how the coverage and order affects the ranking of tests refer to Section 2. Once the tests has been ranked the dependent tests contained in the ranked set of tests is processed by processDependentTests (Figure~\ref{fig:detectingDT}).
 
 \subsubsection{Enhancing Test Selection}
+\begin{figure}[t]
+	getSelectionTests($\mathit{T}$, $\mathit{coverage}$, $\mathit{order}):$\\
+	\textbf{Input}: a set of tests $\mathit{T}$, coverage to consider when ranking tests $\mathit{coverage}$, order to consider when ranking tests $\mathit{order}$\\
+	\textbf{Output}: a selected, ranked set of dependent-free tests\\
+	 \begin{algorithmic}[1]
+	 	\vspace{-5mm}
+	 	\STATE $\mathit{changedTests}$ $\leftarrow$ getChangedTests($\mathit{T}$, $\mathit{coverage}$)
+		\STATE $\mathit{rankedTests}$ $\leftarrow$ rankTests($\mathit{changedTests}$, $\mathit{coverage}$, $\mathit{order}$)
+		\RETURN processDependentTests($\mathit{rankedTests}$)
+	\end{algorithmic}
+	\vspace{-3mm}
+	\caption {
+		The algorithm to generate a selected, ranked list of tests. The getChangedTests function returns tests within a test suite that has had its coverage elements changed. The rankTests function ranks a test suite's tests based on the specified coverage and order. The processDependentTests function is shown in Figure~\ref{fig:detectingDT}.
+	}
+	\label{fig:selection}
+\end{figure}
+As shown in Figure~\ref{fig:selection} this algorithm generates a selected, ranked list of tests by calling the functions getChangedTests, rankTests and processDependentTests. getChangedTests returns a set of tests containing tests that have its coverage elements changed. In test selection these are the tests that are worth executing to determine if the changed coverage elements of these tests will reveal different execution results. Similar to Section 4.1.1 rankTests takes the set of changed tests and ranks them based on the coverage and order specified. For more information regarding coverage, order and processDependentTests refer back to Section 4.1.1.
 
 \subsubsection{Enhancing Test Parallelization}
+\begin{figure}[t]
+	getParallelizationTests($\mathit{T}$, $\mathit{buckets}$, $\mathit{coverage}$, $\mathit{order}):$\\
+	\textbf{Input}: a set of tests $\mathit{T}$, buckets to distribute tests to $\mathit{buckets}$, coverage to consider when ranking tests $\mathit{coverage}$, order to consider when ranking tests $\mathit{order}$\\
+	\textbf{Output}: a set of ranked set of dependent-free tests\\
+	 \begin{algorithmic}[1]
+	 	\vspace{-5mm}
+		\STATE $\mathit{rankedTests}$ $\leftarrow$ rankTests($\mathit{T}$, $\mathit{coverage}$, $\mathit{order}$)
+		\FOR{each $\mathit{t}$ in $\mathit{rankedTests}$}
+			\STATE getLowestBucket($\mathit{buckets}$) $\leftarrow$ getLowestBucket($\mathit{buckets}$) $\cup$ $\mathit{t}$
+		\ENDFOR
+		\FOR{each $\mathit{bucket}$ in $\mathit{buckets}$}
+			\STATE processDependentTests($\mathit{bucket}$)
+		\ENDFOR
+		\RETURN $\mathit{buckets}$
+	\end{algorithmic}
+	\vspace{-3mm}
+	\caption {
+		The algorithm to generate a set of ranked set of tests. The getLowestBucket function returns the set of ranked tests within $\mathit{buckets}$ that has the least amount of coverage elements. The rankTests function ranks a test suite's tests based on the specified coverage and order. The processDependentTests function is shown in Figure~\ref{fig:detectingDT}. Our experiments used $\mathit{buckets}$ with size of 2, 4, 6, 8 and 16.
+	}
+	\label{fig:parallelization}
+\end{figure}
+As shown in Figure~\ref{fig:parallelization} this algorithm generates a set of ranked set of tests by calling the functions rankTests, getLowestBucket and processDependentTests. The function starts out by ranking the tests with rankTests (line 1). For more information regarding rankTests, coverage, order and processDependentTests refer back to Section 4.1.1. Afterwards starting from the test with the highest number of coverage elements to the test with the lowest number of coverage elements, the function makes repeated calls to getLowestBucket. This is to retrieve the current bucket with the lowest number of coverage elements and add the current test $\mathit{t}$ to the bucket (lines 2-4). Once all the ranked tests have been distributed to a bucket, each bucket is called with processDependentTests to ensure that the reordering of tests into buckets do not expose the test suite's dependent tests (lines 5-7). 
