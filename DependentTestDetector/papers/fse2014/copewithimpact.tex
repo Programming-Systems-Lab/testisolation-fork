@@ -18,7 +18,7 @@ test suite, correspondingly.
 
 
 The three algorithms utilizes the function processDependentTests
-to reorder its dependent tests as shown in Figure~\ref{fig:detectingDT}.
+to reorder its dependent tests as shown in Figure~\ref{fig:processDT}.
 The processDependentTests function creates a new empty set (line 1)
 then goes through each test in $\mathit{T}$ and tries to add each
 test to the new set (line 2-4), taking into account its dependences
@@ -36,6 +36,7 @@ the tests that needs to come before this test has been added to
 the new set, the test itself is added to the set (line 6). The
 function concludes by recursively adding all tests that when executed
 before this test will cause it to be dependent to the new set (line 7-9).     
+
 
 %First, we present an automated
 %technique to identify the root cause of test dependence
