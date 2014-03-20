@@ -6,11 +6,13 @@ no test should affect any other test's result, and running
 the tests in any order should produce the same test results.
 The assumption of test independence is important so that
 tests behave consistently as designed. However,
-as shown in our previous work~\cite{}, this test independence
-assumption hold does not hold in practice.
+as shown in our previous work~\cite{testdependence}, the test independence
+assumption does not always hold in practice.
 A test's result may depend on whether it runs after
-some other tests. For example, consider 
-a simple test suite containing two tests \CodeIn{A} and \CodeIn{B},
+some other tests. 
+
+As a simple example, consider 
+a test suite containing two tests \CodeIn{A} and \CodeIn{B},
 where running \CodeIn{A} and then \CodeIn{B}
 leads to \CodeIn{A} passing, while running \CodeIn{B} and
 then \CodeIn{A} leads to \CodeIn{A} failing. We call
@@ -18,28 +20,30 @@ then \CodeIn{A} leads to \CodeIn{A} failing. We call
 since its result depends on whether it runs after \CodeIn{B} or not.
 
 
-Test dependence can have non-trivial impacts. First,
-test dependence can \textit{mask faults} in a program.
+Besides causing inconsistent test results across different runs,
+test dependence can have some non-trivial impacts~\cite{testdependence}. First,
+it leads to \textit{missed alarms} by masking faults in a program.
 Specifically, executing a test suite in the default order does not
 expose the fault, whereas executing the same test suite in
-a different order does. Second, 
-test dependence can lead to spurious bug reports.
+a different order does~\cite{clibug}. Second, 
+it leads to \textit{false alarms}.
 When a test should pass but fails after reordering due to
 the dependence, people who are not aware of the dependence
-can get confused and might report bugs. 
+can get confused and might report bugs~\cite{eclipsebug}. 
 
 
 
 Our previous work has provide concrete evidence to
 show that dependent tests exist, and they can both lead
-to false alarms and missed alarms. However, it is still
-unclear that whether test dependence can affect the
+to false alarms and missed alarms~\cite{testdependence}.
+However, it is still unclear about whether test dependence can affect the
 results of downstream testing techniques, and if it
-impacts, how should we cope with the impact.
+impacts, how is the impact, and how should we cope with the impact.
 
-Int this paper, we focus on investigating the impact of
-test dependence to downstream testing techniques, and
-describing techniques to to cope with the impact of test dependence.
+This paper answers the above questions by empirically
+investigating the impact of test dependence to
+\prionum + \selnum + \parnum popular downstream testing techniques
+and describing techniques to cope with its impact.
 
 \subsection{Evaluating the Impact}
 
@@ -47,11 +51,14 @@ Test dependence can impact downstream testing
 techniques that change a test suite and thereby change a test's
 execution environment. Examples of such techniques include
 test selection techniques (that identify a subset of the input
-test suite to run during regression testing)~\cite{},
+test suite to run during regression testing)~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
+Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP, hsu09may},
 test prioritization techniques (that reorder the input to
-discover defects sooner)~\cite{}, and test parallelization
+discover defects sooner)~\cite{Elbaum:2000:PTC:347324.348910,
+Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
+and test parallelization
 techniques (that schedule the input tests for execution across
-multiple CPUs)~\cite{}.
+multiple CPUs)~\cite{Misailovic:2007, Kim:2013:OUT}.
 
 Most of these downstream testing techniques implicitly
 assume that there are no test dependences in the input test
@@ -62,61 +69,96 @@ do not return the same results as they do when executed in
 the default order.
 
 To understand whether and how test dependence can impact
-the downstream testing techniques, we implemented XXX
-test prioritization, XXX test selection, and XXX test parallelization
+the downstream testing techniques, we implemented \prionum
+test prioritization, \selnum test selection, and \parnum test parallelization
 techniques, and evalauted each technique
-on XX real-world subject programs containing known dependent tests.
+on \subjnum real-world subject programs containing known dependent tests.
 Our empirical results indicate that the outcome of
 every downstream technique we have evaluated is affected by 
-test dependence. \todo{more details here.}
+test dependence. For some
+techniques, the impacts are non-trivial. For example,
+\todo{more details}
 
-Our findings also suggest that test dependence should no longer
+Our findings suggest that test dependence should no longer
 be ignored in designing a downstream testing technique that
 may change the original test execution order.
 
 
 
-%\subsection{Evaluating the Impact}
-
 \subsection{Coping with the Impact}
 
-When test dependence arises, developers wish to understand
-its root cause and resolve the test dependence quickly, and
-tool users wish to keep the tool outcome consistent.
 
-To address these two problems, we propose two techniques to
-cope with the impact of test dependence.
+Test dependence results from interactions with other tests,
+as reflected in the execution environment. Tests may make
+implicit assumptions about their execution environment --
+values of global variables, contents of files, etc. A dependent
+test manifests when another alters the execution environment
+in a way that invalidates those assumptions.
+When writing tests, developers sometimes
+make mistakes as when they are writing
+other code. Even though frameworks such as JUnit provide
+ways to set up the environment for a test execution and clean
+up the environment afterward, they cannot ensure that it is
+done properly. This means that tests, like other code, will
+have unintended and unexpected behaviors in some cases.
 
-\begin{enumerate}
-\item To help developers understand the dependence root cause,
-we present a dynamic analysis to explain why the result of
-a test depends on another. The key of our dynamic analysis
-is monitoring the access of memory locations and external
-resources (e.g., files) for each dependent test, and then
-cross-checking the accessing information by other tests.
-\todo{need specific above, need revise below.}
-To make the explanation concise and informative, we further
-augument the field accessing information will the actual
-method-call chains, and condense low-level memory access
-information to the high-level field access information.
+Test dependence can be detected by systematically
+executing a test suite in different orders, as implemented
+in our tool DTDetector~\cite{testdependence}.
+When test dependence arises, testing tools should
+respect the dependence and keep the results consistent. 
 
-\item To enable downstream testing techniques to produce
-consistent results in the presence of test dependence, we
-we present a family of techniques to augument each downstream
-testing technique to respect test dependence. The key of
-our technique is to make each technique be aware of test dependence:
-when a dependent test has been selected to execute, it ensures
-all other tests it depends on will be executed before the
-dependent test.
+To cope with the impacts of test dependence on downstream
+testing techniques, this paper presents a family of
+techniques to make existing testing techniques dependence-aware.
 
-\end{enumerate}
+%\begin{enumerate}
+%\item To help developers understand the dependence root cause,
+%we present a dynamic analysis to explain why the result of
+%a test depends on another. The key of our dynamic analysis
+%is monitoring the access of memory locations and external
+%resources (e.g., files) for each dependent test, and then
+%cross-checking the accessing information by other tests.
+%\todo{need specific above, need revise below.}
+%To make the explanation concise and informative, we further
+%augument the field accessing information will the actual
+%method-call chains, and condense low-level memory access
+%information to the high-level field access information.
 
+The enhanced techniques take a test suite and the known
+test dependence (possibly detected by a tool like DTDetector~\cite{testdependence}) as input. When producing a different test
+execution order, our techniques enforce the test dependence
+on the fly. For each dependent test, it ensures
+that all other tests it depends on will be executed
+before the dependent. Take test prioritization
+as an example, given
+a test suite in which test \CodeIn{A} depends on test \CodeIn{B},
+when generating the prioritized order, our techniques check
+whether test \CodeIn{B} has been executed when test \CodeIn{A}
+is selected to be executed next. If not, our techniques
+will first execute test \CodeIn{A} and then \CodeIn{B}.
 
-We evalauted both techniques on real-world programs with dependent
-tests. We sent the generated dependence root cause explanation
-to program developers, and got positive feedback. All downstream
-testing techniques produce consistent and correct results
-after being augumented by our technique.
+%The key idea of our techniques is maintaining and c
+%To enable downstream testing techniques to produce
+%consistent results in the presence of test dependence, we
+%we present a family of techniques to augument each downstream
+%testing technique to respect test dependence. The key of
+%our technique is to make each technique be aware of test dependence:
+%when a dependent test has been selected to execute, it ensures
+%all other tests it depends on will be executed before the
+%dependent test.
+
+%\end{enumerate}
+
+For each evaluated downstream testing technique, we enhanced it
+to form a dependence-aware technique. Each dependence-aware
+testing technique is evaluated on real-world programs with dependent
+tests. 
+%We sent the generated dependence root cause explanation
+%to program developers, and got positive feedback.
+All enhanced techniques produce consistent and correct results without
+compromising their effectiveness. Some techniques even produce
+better results than its original forms.
 
 \subsection{Contributions}
 

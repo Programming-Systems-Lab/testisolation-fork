@@ -7,13 +7,17 @@ The assumption of test independence is important so that
 tests behave consistently as designed. In addition, many
 downstream testing techniques, including test prioritization,
 test selection, and test parallelization,
-assume test independence.
-Our recent work shows this critical
-assumption often does not hold in practice. However, the impact
-of test dependence is still unclear. In this paper, we
-empircally investigate the impact of test dependence
-and propose techniques to cope with its impact.
-We present three results.
+assume test independence. However, our recent work shows this critical
+assumption often does not hold in practice. 
+%the impact
+%of test dependence is still unclear.
+
+%This paper addresses the following question: how is the impact
+%of test dependence on downstream testing techniques?
+%We 
+This paper empirically investigates the impact of test dependence
+and propose techniques to cope with such impact.
+It presents three results.
 
 First, we describe an empirical study to assess the impact of test dependence
 on \prionum test prioritization, \selnum test selection, and
@@ -22,10 +26,11 @@ algorithms. The study suggests that test dependence
 affects the results of \textit{all} evaluated downstream
 testing algorithms.
 
-Second, we present a family of techniques to cope with the impact
-of test dependence by enhancing existing
-test prioritization, selection, and parallelization
-techniques to ensure they respect the test dependence . 
+Second, we present a family of techniques to 
+enhance each test prioritization, selection, and parallelization
+technique to respect test dependence.
+%, ensuring they output
+%consistent results.
 %The first technique monitors the
 %test execution of a test suite and generates a concise report
 %to describe the root cause of test dependence.
@@ -35,8 +40,9 @@ techniques to ensure they respect the test dependence .
 %test selection, and test parallelization algorithms to ensure
 %they respect the test dependence.
 
-Third, we describe an experimental evaluation 
-to show that all enhanced testing techniques
+Third, we evaluate all enhanced testing techniques and
+show that they %describe an experimental evaluation 
+%to show that all enhanced testing techniques
 output consistent results in the presence of
 test dependence without compromising their effectiveness.
 

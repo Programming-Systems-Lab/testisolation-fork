@@ -1,3 +1,46 @@
-\section{Empricial Experiments}
+%\section{Empricial Experiments}
 
-\subsection{}
+\section{Evaluating Enhanced Techniques}
+\label{sec:evaluation}
+
+All proposed techniques are empirically evaluated on
+our subject programs (Section~\ref{sec:evaluation}).
+
+\subsection{Subject Programs}
+
+use the same subject programs
+
+\subsection{Methodology}
+
+%\subsubsection{Understanding Dependence Root Causes}
+
+\subsection{Dependance-Aware Test Prioritization}
+
+\subsection{Dependance-Aware Test Selection}
+
+\subsection{Dependance-Aware Test Parallelization}
+
+
+\subsection{Discussion}
+
+\subsubsection{Threats to Validity}
+
+There are several threats to the validity
+of our experiments. First, \dtexplain 
+only considers test dependencies arised
+from improper field access. It may not
+produce useful results for other types of
+test dependencies~\cite{}. Second,
+\todo{evaluating on the test coverage, no
+bug finding abilities yet.}
+
+\subsubsection{Experimental Conclusions}
+
+We have two chief findings. \textbf{(1)} \dtexplain
+generates concise report to explain why
+test dependence arises, and such report
+helps developers to understand the root cause
+of test dependence. \textbf{(2)} All
+enhanced downstream testing techniques
+output consistent results on test suites
+containing dependent tests.

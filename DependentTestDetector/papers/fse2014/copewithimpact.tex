@@ -3,68 +3,74 @@
 
 Test dependence can cause non-trivial repercussions
 to both developers and downstream testing techniques.
-When test dependence arises, developers should quickly
-identify its root causes and downstream testing techniques
+When test dependence arises, test prioritization,
+selection, and parallelization techniques
 should respect the potential dependence and keep the
 test execution results consistent.
 
-This section presents a family of techniques to cope with the
-impact of test dependence. First, we present an automated
-technique to identify the root cause of test dependence
-(Section~\ref{sec:coperoot}). Second, to alleviate the
-impact on downstream testing techniques, we present a family
-of techniques to enhance existing test prioritization,
-test selection, and test parallelization techniques (Section~\ref{sec:copeenhance}).
-
-All proposed techniques are empirically evaluated on
-our subject programs (Section~\ref{sec:evaluation}).
+This section presents a family of techniques to alleviate the
+impact of test dependence on test prioritization, test
+selection, and test parallelization techniques. All algorithms
+take a test suite and known test dependence as input, and
+generate test prioritization, selection, and parallelization orders
+that reveal the same results as in the original
+test suite, correspondingly.
 
 
-\subsection{Enhancing Downstream Testing Techniques}
-\label{sec:copeenhance}
+The three algorithms utilizes the function processDependentTests
+to reorder its dependent tests as shown in Figure~\ref{fig:detectingDT}.
+The processDependentTests function creates a new empty set (line 1)
+then goes through each test in $\mathit{T}$ and tries to add each
+test to the new set (line 2-4), taking into account its dependences
+when adding a test. 
+
+
+In order to add a test to the new set, processDependentTests calls
+addDependentTest. addDependentTest first checks whether the test
+being added is already contained in the new set, if it is then the
+test will be ignored (line 1). Otherwise the function retrieves all
+tests that when executed after this test will cause this test to be
+dependent (line 2) and adds all of those tests to the new set first
+by recursively calling this method with them (line 3-5). Once all
+the tests that needs to come before this test has been added to
+the new set, the test itself is added to the set (line 6). The
+function concludes by recursively adding all tests that when executed
+before this test will cause it to be dependent to the new set (line 7-9).     
+
+%First, we present an automated
+%technique to identify the root cause of test dependence
+%(Section~\ref{sec:coperoot}). 
+%Second, to alleviate the
+%impact on downstream testing techniques, we present a family
+%of techniques to enhance existing test prioritization,
+%test selection, and test parallelization techniques (Section~\ref{sec:copeenhance}).
+
+
+
+%\subsection{Enhancing Downstream Testing Techniques}
+%\label{sec:copeenhance}
 
 \input{enhance}
 
 
-\subsection{Evaluating Enhanced Testing Techniques}
+%\subsection{Evaluating Enhanced Testing Techniques}
 
-\label{sec:evaluation}
+%\label{sec:evaluation}
 
-\subsubsection{Subject Programs}
+%\subsubsection{Subject Programs}
 
-use the same subject programs
+%use the same subject programs
 
-\subsubsection{Methodology}
+%\subsubsection{Methodology}
 
 %\subsubsection{Understanding Dependence Root Causes}
 
-\subsubsection{Dependance-Aware Test Prioritization}
+%\subsubsection{Dependance-Aware Test Prioritization}
 
-\subsubsection{Dependance-Aware Test Selection}
+%\subsubsection{Dependance-Aware Test Selection}
 
-\subsubsection{Dependance-Aware Test Parallelization}
+%\subsubsection{Dependance-Aware Test Parallelization}
 
 
 \subsection{Discussion}
 
-\subsubsection{Threats to Validity}
-
-There are several threats to the validity
-of our experiments. First, \dtexplain 
-only considers test dependencies arised
-from improper field access. It may not
-produce useful results for other types of
-test dependencies~\cite{}. Second,
-\todo{evaluating on the test coverage, no
-bug finding abilities yet.}
-
-\subsubsection{Experimental Conclusions}
-
-We have two chief findings. \textbf{(1)} \dtexplain
-generates concise report to explain why
-test dependence arises, and such report
-helps developers to understand the root cause
-of test dependence. \textbf{(2)} All
-enhanced downstream testing techniques
-output consistent results on test suites
-containing dependent tests.
