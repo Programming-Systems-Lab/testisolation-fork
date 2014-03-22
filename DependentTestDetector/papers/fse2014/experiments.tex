@@ -50,7 +50,79 @@ our evaluation subject programs. \todo{explain why some is missing} }
 
 \subsection{Dependance-Aware Test Selection}
 
+\begin{table}
+\centering
+\setlength{\tabcolsep}{1.25\tabcolsep}
+\begin{tabular}{|l|c|c|}
+%\toprule
+\hline
+\textbf{Subject Program} & S1 (statement-level) & S2 (method-level)  \\
+\hline
+\multicolumn{3}{|l|}{}  \\
+\multicolumn{3}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
+\hline
+\jt& 332 $\rightarrow$ 335 & 3233 $\rightarrow$ 3233 \\
+XML Security& 70 $\rightarrow$ 83 & 71 $\rightarrow$ 84  \\
+%\bottomrule
+\hline
+\textbf{Total} & 402 $\rightarrow$ 418 & 3304 $\rightarrow$ 3317 \\
+\hline
+%\textbf{Total}& &  & &  \\ 
+%\hline
+\end{tabular}
+\caption{Results of evaluating the \selnum test selection techniques
+in Table~\ref{tab:enhancetestsel} on four human-written unit test suites.
+Each cell shows the number of selected tests.
+}
+\label{tab:testselresult}
+\end{table}
+
+
 \subsection{Dependance-Aware Test Parallelization}
+
+\begin{table*}
+\centering
+\setlength{\tabcolsep}{1.25\tabcolsep}
+\begin{tabular}{|l| l|l|l|l| l|l|l|l| l|l|l|l|}
+%\toprule
+\hline
+\textbf{Subject Program} & \multicolumn{4}{|l|}{P1 (Original Order Parallelization)} &  \multicolumn{4}{|l|}{P2 (Random Parallelization)} & \multicolumn{4}{|l|}{P3 (Time-Minimized Parallelization)}\\
+\cline{2-13}
+& k=2 & k=4 & k=8 & k=16 & k=2 &k=4& k=8& k=16 & k=2 &k=4& k=8& k=16\\
+\hline
+\multicolumn{13}{|l|}{}  \\
+\multicolumn{13}{|l|}{\textbf{Human-written Test Suites}}  \\
+\hline
+\jt&  &  &  &  &  &  &  &  &  &  &  & \\
+XML Security&  &  &  &  &   &  &  & &  &  & & \\
+Crystal&  &  &   &  &  &&  & &  & & & \\
+Synoptic&  &  &  &  &  &  &  &  &  &  & & \\
+JFreechart&  &  &  &  &  & &  & &  &  &  & \\
+%\bottomrule
+\hline
+\textbf{Total} &  &  &   &  & & & & & & & & \\
+\hline
+\multicolumn{13}{|l|}{}  \\
+\multicolumn{13}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
+\hline
+\jt&  &  &  &  &  &  &  & &  &  &  & \\
+XML Security&  &  &  &  &  &  &  & &  &  &  & \\
+Crystal&   &  &  &  &  &  &  & &  &  &  & \\
+Synoptic&  &  &  &  &  &  &  & &  &  &  &  \\
+JFreechart&  &  &  &  &  &  &  &  &  &  &  & \\
+%\bottomrule
+\hline
+\textbf{Total} &  &   &   &  &  &  & &  & & & & \\
+\hline
+%\textbf{Total}& &  & &  \\ 
+%\hline
+\end{tabular}
+\caption{Results of evaluating the enhanced test parallelization techniques
+on the subject programs.
+\todo{show the slow }
+}
+\label{tab:testparresult}
+\end{table*}
 
 
 \subsection{Discussion}
