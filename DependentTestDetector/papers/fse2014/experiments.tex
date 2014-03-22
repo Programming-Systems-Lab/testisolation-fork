@@ -3,8 +3,9 @@
 \section{Evaluating Enhanced Techniques}
 \label{sec:evaluation}
 
-All proposed techniques are empirically evaluated on
-our subject programs (Section~\ref{sec:evaluation}).
+This section evaluates the enhanced downstream
+testing techniques on real-world subject programs
+that contain test dependence.
 
 \subsection{Subject Programs}
 
@@ -13,6 +14,37 @@ use the same subject programs
 \subsection{Methodology}
 
 %\subsubsection{Understanding Dependence Root Causes}
+
+%results
+\begin{figure}[t]
+%\hspace{0.5cm}
+\begin{minipage}[b]{\linewidth}
+\centering
+\includegraphics[scale=0.46]{jodatime-coverage-figure}
+Jodatime
+%\caption{replace} \label{fig:p2}
+\end{minipage}
+\begin{minipage}[b]{\linewidth}
+\centering
+\includegraphics[scale=0.46]{jfreechart-coverage-figure}
+JFreechart
+%\caption{schedule} \label{fig:p3}
+\end{minipage}
+\begin{minipage}[b]{\linewidth}
+\centering
+\includegraphics[scale=0.35]{crystal-coverage-figure}
+{Crystal}
+%\caption{tcas} \label{fig:p1}
+\end{minipage}
+\vspace{-6mm}
+\caption{
+    \label{fig:results}
+Statement coverage results by each test prioritization technique on
+our evaluation subject programs. \todo{explain why some is missing} }
+\end{figure}
+
+
+
 
 \subsection{Dependance-Aware Test Prioritization}
 
