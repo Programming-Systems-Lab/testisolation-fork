@@ -215,34 +215,34 @@ passing to failing? or vice versa}
 \begin{table}
 \centering
 \setlength{\tabcolsep}{1.25\tabcolsep}
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|l|c|c|}
 %\toprule
 \hline
-\textbf{Subject Program} & T1 & T3 & T4 & T5 & T7 \\
+\textbf{Subject Program} & S1 (statement-level) & S2 (method-level)  \\
 \hline
-\multicolumn{6}{|l|}{}  \\
-\multicolumn{6}{|l|}{\textbf{Human-written Test Suites}}  \\
+\multicolumn{3}{|l|}{}  \\
+\multicolumn{3}{|l|}{\textbf{Human-written Test Suites}}  \\
 \hline
-\jt& 0 & 0 & 0 & 0 & 0\\
-XML Security& 0 & 0 & 0 & 0 & 0 \\
-Crystal&  & 0 &  &  &  \\
-Synoptic& 0 &  & 0 & 0 & 0 \\
-JFreechart& 0 &  & 0 & 0 & 0 \\
+\jt& 0 & 0 \\
+XML Security& 0 & 0 \\
+Crystal& 0 & 0\\
+Synoptic& 0 & 0  \\
+JFreechart& 0 & 0  \\
 %\bottomrule
 \hline
-\textbf{Total} &  &  &  &  & \\
+\textbf{Total} & 0 & 0  \\
 \hline
-\multicolumn{6}{|l|}{}  \\
-\multicolumn{6}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
+\multicolumn{3}{|l|}{}  \\
+\multicolumn{3}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
 \hline
-\jt& 0 & 0 & 0 & 0 & 0\\
-XML Security& 0 & 0 & 0 & 0 & 0 \\
-Crystal&  & 0 &  &  & 1 \\
-Synoptic& 0 & 1 & 0 & 0 & 0 \\
-JFreechart& 0 & 1 & 0 & 0 & 0 \\
+\jt& 64 & 261 \\
+XML Security& 24 & 24  \\
+Crystal& 0 & 0  \\
+Synoptic& 0 & 0  \\
+JFreechart& 0 & 3  \\
 %\bottomrule
 \hline
-\textbf{Total} &  &  &  &  & 1\\
+\textbf{Total} & 88 & 288 \\
 \hline
 %\textbf{Total}& &  & &  \\ 
 %\hline
@@ -258,37 +258,39 @@ in the original test suite. \todo{revise the number here}
 
 \subsubsection{Impact on Test Parallelization}
 
-\begin{table}
+\begin{table*}
 \centering
 \setlength{\tabcolsep}{1.25\tabcolsep}
-\begin{tabular}{|l|l|l|l|l|l|}
+\begin{tabular}{|l| l|l|l|l| l|l|l|l| l|l|l|l|}
 %\toprule
 \hline
-\textbf{Subject Program} & P1 & P2 & P3 & P4 & T7 \\
+\textbf{Subject Program} & \multicolumn{4}{|l|}{P1 (Original Order Parallelization)} &  \multicolumn{4}{|l|}{P2 (Random Parallelization)} & \multicolumn{4}{|l|}{P3 (Time-Minimized Parallelization)}\\
+\cline{2-13}
+& k=2 & k=4 & k=8 & k=16 & k=2 &k=4& k=8& k=16 & k=2 &k=4& k=8& k=16\\
 \hline
-\multicolumn{6}{|l|}{}  \\
-\multicolumn{6}{|l|}{\textbf{Human-written Test Suites}}  \\
+\multicolumn{13}{|l|}{}  \\
+\multicolumn{13}{|l|}{\textbf{Human-written Test Suites}}  \\
 \hline
-\jt& 0 & 0 & 0 & 0 & 0\\
-XML Security& 0 & 0 & 0 & 0 & 0 \\
-Crystal&  & 0 &  &  &  \\
-Synoptic& 0 &  & 0 & 0 & 0 \\
-JFreechart& 0 &  & 0 & 0 & 0 \\
+\jt& 0 & 0 & 0 & 0 & 1 & 1 & 1 & 1 & 3 & 1 & 0 & 1\\
+XML Security& 0 & 0 & 4 & 4 & 0  & 0 & 0 & 2& 2 & 4 & 4& 4\\
+Crystal& 8 & 8 & 18  & 15 & 17 &16& 18 & 18& 9 & 16& 15& 18\\
+Synoptic& 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0& 0\\
+JFreechart& 0 & 0 & 0 & 0 & 1 &1 & 0 & 0& 2 & 0 & 1 & 1\\
 %\bottomrule
 \hline
-\textbf{Total} &  &  &  &  & \\
+\textbf{Total} & 8 & 8 & 22  & 19  & 19 & 18& 19& 21& 16& 21& 20& 24\\
 \hline
-\multicolumn{6}{|l|}{}  \\
-\multicolumn{6}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
+\multicolumn{13}{|l|}{}  \\
+\multicolumn{13}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
 \hline
-\jt& 0 & 0 & 0 & 0 & 0\\
-XML Security& 0 & 0 & 0 & 0 & 0 \\
-Crystal&  & 0 &  &  & 1 \\
-Synoptic& 0 & 1 & 0 & 0 & 0 \\
-JFreechart& 0 & 1 & 0 & 0 & 0 \\
+\jt& 22 & 48 & 201 & 236 & 324 & 267 & 300 & 324& 354 & 268 & 305 & 307\\
+XML Security& 66 & 78 & 104 & 111 & 91 & 103 & 111 & 116& 73 & 115 & 113 & 116\\
+Crystal& 0  & 0 & 1 & 4 & 93 & 86 & 81 & 91& 88 & 88 & 86 & 102\\
+Synoptic& 1 & 1 & 2 & 2 & 2 & 1 & 2 & 1& 2 & 2 & 2 & 2 \\
+JFreechart& 1 & 3 & 3 & 3 & 2 & 4 & 3 & 3 & 2 & 2 & 2 & 3\\
 %\bottomrule
 \hline
-\textbf{Total} &  &  &  &  & 1\\
+\textbf{Total} & 90 & 130  & 311  & 356 & 512 & 461 & 497& 535 & 519& 475& 508& 530\\
 \hline
 %\textbf{Total}& &  & &  \\ 
 %\hline
@@ -300,7 +302,7 @@ that do not return the same results as they do when executed
 in the original test suite. \todo{revise the number here}
 }
 \label{tab:testparresult}
-\end{table}
+\end{table*}
 
 \subsection{Discussion}
 

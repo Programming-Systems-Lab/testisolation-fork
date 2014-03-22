@@ -208,19 +208,21 @@ results.
 \hline
 \textbf{Label} & \textbf{Technique Description} \\
 \hline
-P1 & Random parallelization\\
-P2 & Round-Robin parallelization\\
+P1 & Parallelize on test id\\
+P2 & Random parallelization\\
 P3 & Parallelize on test execution time\\
-P4 & Parallelize on statement coverage\\
 %\bottomrule
 \hline
 %\textbf{Total}& &  & &  \\ 
 %\hline
 \end{tabular}
-\caption{Two test parallelization techniques used
+\caption{Three test parallelization techniques used
 to assess the impact of dependent tests. These
 techniques are supported in industrial-strength
 tools~\cite{}. \todo{explain each technique here.}
+Each parallelization technique parameterized
+by the number of available machines: $k$. We evaluate
+each technique with $k$ = 2, 4, 8, and 16.
 }
 \label{tab:testpar}
 \end{table}
