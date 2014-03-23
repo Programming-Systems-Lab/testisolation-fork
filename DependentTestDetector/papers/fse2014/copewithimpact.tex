@@ -9,24 +9,42 @@ should respect the potential dependence and keep the
 test execution results consistent.
 
 This section presents a family of techniques to alleviate the
-impact of test dependence on test prioritization, test
-selection, and test parallelization techniques. All algorithms
-take a test suite and known test dependence as input, and
-generate test prioritization, selection, and parallelization orders
-that reveal the same results as in the original
-test suite, correspondingly.
+impact of test dependence on test prioritization, selection,
+and parallelization techniques. All algorithms take a test suite and
+coverage and order information as input and generate
+test prioritization, selection, and parallelization orders that reveal
+the same results as in the original test suite.
 
 
-The three algorithms utilizes the function processDependentTests
-to reorder its dependent tests as shown in Figure~\ref{fig:processDT}.
-The processDependentTests function creates a new empty set (line 1)
+The three algorithms start out by ordering the tests into a set 
+based on the coverage and order passed to the algorithm.
+Coverages used in our experiments are statement
+and function level while orders used in our experiments are absolute,
+relative, random, original order and time order. The set is ordered
+in that the tests with the highest number of coverage elements
+is ordered to be the first element of the set followed by the test with
+the second highest number of coverage elements as the second
+element of the set and so on. For more information regarding how the coverage
+and order affects the ordering of tests refer to section~\ref{sec:background}.
+The three algorithms then utilizes the function processDependentTests
+with the ordered set of tests to reorder its dependent tests.
+The function is shown in Figure~\ref{fig:processDT}.
+The processDependentTests function creates a empty set (line 1)
 then goes through each test in $\mathit{T}$ and tries to add each
 test to the new set (line 2-4), taking into account its dependences
-when adding a test. 
+when adding a test. This newly generated set has the first test
+that is added to it as the first element of the set followed by the
+test that is added after the first test as the second element of the set
+and so on.
 
 
 In order to add a test to the new set, processDependentTests calls
-addDependentTest. addDependentTest first checks whether the test
+the recursive function, addDependentTest. The function is recursive
+because test $\mathit{a}$ may depend on test $\mathit{b}$ and test
+$\mathit{b}$ may depend on test $\mathit{c}$... Since it's
+undetermined how many tests may need to be added before or after
+test $\mathit{a}$, we solved this problem by making addDependentTest
+a recursive function. addDependentTest first checks whether the test
 being added is already contained in the new set, if it is then the
 test will be ignored (line 1). Otherwise the function retrieves all
 tests that when executed after this test will cause this test to be
