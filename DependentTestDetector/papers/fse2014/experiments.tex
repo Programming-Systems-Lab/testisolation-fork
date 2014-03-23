@@ -59,7 +59,7 @@ our evaluation subject programs. \todo{explain why some is missing} }
 \textbf{Subject Program} & S1 (statement-level) & S2 (method-level)  \\
 \hline
 \multicolumn{3}{|l|}{}  \\
-\multicolumn{3}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
+\multicolumn{3}{|l|}{\textbf{Human-written Test Suites}}  \\
 \hline
 \jt& 332 $\rightarrow$ 335 & 3233 $\rightarrow$ 3233 \\
 XML Security& 70 $\rightarrow$ 83 & 71 $\rightarrow$ 84  \\
@@ -93,33 +93,20 @@ Each cell shows the number of selected tests.
 \multicolumn{13}{|l|}{}  \\
 \multicolumn{13}{|l|}{\textbf{Human-written Test Suites}}  \\
 \hline
-\jt&  &  &  &  &  &  &  &  &  &  &  & \\
-XML Security&  &  &  &  &   &  &  & &  &  & & \\
-Crystal&  &  &   &  &  &&  & &  & & & \\
-Synoptic&  &  &  &  &  &  &  &  &  &  & & \\
-JFreechart&  &  &  &  &  & &  & &  &  &  & \\
+\jt& 3.47 & 1.97 & 1.84 & 1.80 & 2.83 & 2.61 & 1.92 & 1.80 & 2.20 & 2.11 & 1.38  & 1.79\\
+XML Security& 1.45 & 1.89 & 2.48 & 5.72 & 1.56  & 2.35 & 4.02  & 4.25 & 2.56 & 2.82  & 4.38 & 6.00 \\
+Crystal& 1.72  & 1.84  & 1.24  & 1.48  & 1.72 & 2.16& 1.72 & 1.04 & 2.12 & 1.34 & 1.33& 1.26\\
+JFreechart&  1.33 & 1.26 & 1.15  & 1.27  & 1.44 & 1.28 & 1.30 & 1.22 & 1.46 & 1.31 & 1.31 & 1.40\\
 %\bottomrule
 \hline
-\textbf{Total} &  &  &   &  & & & & & & & & \\
-\hline
-\multicolumn{13}{|l|}{}  \\
-\multicolumn{13}{|l|}{\textbf{Automatically-generated Test Suites}}  \\
-\hline
-\jt&  &  &  &  &  &  &  & &  &  &  & \\
-XML Security&  &  &  &  &  &  &  & &  &  &  & \\
-Crystal&   &  &  &  &  &  &  & &  &  &  & \\
-Synoptic&  &  &  &  &  &  &  & &  &  &  &  \\
-JFreechart&  &  &  &  &  &  &  &  &  &  &  & \\
-%\bottomrule
-\hline
-\textbf{Total} &  &   &   &  &  &  & &  & & & & \\
+\textbf{Average} & 1.99  & 1.74 & 1.67  & 2.57 & 1.89 & 2.10& 2.24 & 2.08 & 2.09 & 1.89 & 2.10 & 2.61\\
 \hline
 %\textbf{Total}& &  & &  \\ 
 %\hline
 \end{tabular}
 \caption{Results of evaluating the enhanced test parallelization techniques
 on the subject programs.
-\todo{show the slow }
+\todo{show the slow, explain why synoptic does not work}
 }
 \label{tab:testparresult}
 \end{table*}
