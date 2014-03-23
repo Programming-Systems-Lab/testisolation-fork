@@ -9,9 +9,30 @@ that contain test dependence.
 
 \subsection{Subject Programs}
 
-use the same subject programs
+We use the same subject programs and their test suites
+to evaluate each of the enhanced testing techniques.
+The subject program characteristics are shown
+in Section~\ref{sec:subj}.
 
 \subsection{Methodology}
+
+We evaluate each testing technique in two aspects:
+\begin{enumerate}
+\item We apply each technique to all test suites containing
+test dependence, and then check whether the test dependence
+has been properly handled, i.e., no test in the output
+reveals different results than being executed in the original
+test suite in the default order.
+\item We analyze the outcome of each enhanced,
+dependence-aware testing technique, and check whether
+the technique effectiveness has been compromised or not.
+Specifically, for test prioritization techniques, we measure
+the test coverage of the prioritized test suite. For test
+selection techniques, we measure the size of the selected
+test subset. For test parallelization techniques, we measure
+the execution time for the whole test suite.
+
+\end{enumerate}
 
 %\subsubsection{Understanding Dependence Root Causes}
 
@@ -38,7 +59,7 @@ JFreechart
 \end{minipage}
 \vspace{-6mm}
 \caption{
-    \label{fig:results}
+    \label{fig:priocoverage}
 Statement coverage results by each test prioritization technique on
 our evaluation subject programs. \todo{explain why some is missing} }
 \end{figure}
@@ -46,9 +67,24 @@ our evaluation subject programs. \todo{explain why some is missing} }
 
 
 
-\subsection{Dependance-Aware Test Prioritization}
+\subsection{Dependence-Aware Test Prioritization}
 
-\subsection{Dependance-Aware Test Selection}
+All tests reveal the same results as being executed
+in the default, unprioritized test suite in the prioritized
+order produced by all enhanced, dependence-aware test
+prioritization techniques. This is because when prioritizing
+a test, the enhanced technique always checks whether
+its depending tests have been executed before it or not. Thus,
+the test dependence is preserved in the prioritized order.
+
+We evaluate the effectiveness of the prioritized test suite
+by measuring its coverage. Figure~\ref{fig:priocoverage}
+shows the results. The test order produced by the enhanced
+test prioritization techniques achieves \textit{higher}
+coverage \textit{faster} than the unprioritized test suite.
+\todo{please describe the reason here}
+
+\subsection{Dependence-Aware Test Selection}
 
 \begin{table}
 \centering
@@ -74,11 +110,24 @@ XML Security& 70 $\rightarrow$ 83 & 71 $\rightarrow$ 84  \\
 in Table~\ref{tab:enhancetestsel} on four human-written unit test suites.
 Each cell shows the number of selected tests.
 }
-\label{tab:testselresult}
+\label{tab:enhancedselresult}
 \end{table}
 
+All tests in the test subset selected by all test selection
+techniques reveal the same result as in the default
+test suite. Similar to the enhanced test prioritization
+techniques, when selecting an affected test,
+each enhanced test selection technique also checks whether
+its depending tests have been selected and executed
+before it in the selected test subset. Therefore,
+the test dependence is always preserved.
 
-\subsection{Dependance-Aware Test Parallelization}
+We measure the size of the selected subset.  Table~\ref{tab:enhancedselresult}
+shows the results. The enhanced techniques 
+slightly increase the selected test subset by
+less than  1\%.
+
+\subsection{Dependence-Aware Test Parallelization}
 
 \begin{table*}
 \centering
@@ -108,8 +157,21 @@ JFreechart&  1.33 & 1.26 & 1.15  & 1.27  & 1.44 & 1.28 & 1.30 & 1.22 & 1.46 & 1.
 on the subject programs.
 \todo{show the slow, explain why synoptic does not work}
 }
-\label{tab:testparresult}
+\label{tab:enhancedparresult}
 \end{table*}
+
+By using the enhanced test parallelization techniques,
+all tests scheduled on different machines reveal the
+same results as being executed in the original test suite.
+
+The major purpose of using test parallelization techniques is
+to shorten the total test execution time. We measure the total
+test execution time by recording the time taken by the slowest
+machine. Table~\ref{tab:enhancedparresult} shows the
+slowdown of each enhanced parallelization technique.
+The slowdown varies across different techniques and test suites,
+ranging from 1.67 to 2.61, on average.
+\todo{explain here}
 
 
 \subsection{Discussion}
@@ -117,21 +179,35 @@ on the subject programs.
 \subsubsection{Threats to Validity}
 
 There are several threats to the validity
-of our experiments. First, \dtexplain 
-only considers test dependencies arised
-from improper field access. It may not
-produce useful results for other types of
-test dependencies~\cite{}. Second,
+of our experiments. 
+%First, \dtexplain 
+%only considers test dependencies arised
+%from improper field access. It may not
+%produce useful results for other types of
+%test dependencies~\cite{}. 
+First, the subject programs and the test suites
+used to evaluate the enhanced testing techniques may
+not be representative enough. We donot claim
+our findings can be generalized to any subject
+programs or test suites. Second,
+when measuring the effectiveness of each enhanced
+testing technique, we measure the test coverage
+result, the size of the selected subset, and
+the test execution time. We did not measure
+Second,
 \todo{evaluating on the test coverage, no
 bug finding abilities yet.}
 
 \subsubsection{Experimental Conclusions}
 
-We have two chief findings. \textbf{(1)} \dtexplain
-generates concise report to explain why
-test dependence arises, and such report
-helps developers to understand the root cause
-of test dependence. \textbf{(2)} All
-enhanced downstream testing techniques
+We have two chief findings. 
+%\textbf{(1)} \dtexplain
+%generates concise report to explain why
+%test dependence arises, and such report
+%helps developers to understand the root cause
+%of test dependence.
+\textbf{(1)} All enhanced downstream testing techniques
 output consistent results on test suites
-containing dependent tests.
+containing dependent tests. And \textbf{(2)}
+The enhanced testing techniques have
+little impact on the testing effectiveness.
