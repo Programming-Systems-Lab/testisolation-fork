@@ -18,7 +18,7 @@
 	\textbf{Output}: a set of tests $\mathit{dtFreeTests}$\\
 	\vspace{-5mm}
 	\begin{algorithmic}[1]
-		\IF{$\neg$($\mathit{t}$ $\in$ $\mathit{dtFreeTests}$)}
+		\IF{$\mathit{t}$ $\notin$ $\mathit{dtFreeTests}$}
 			\STATE $\mathit{afterTests}$ $\leftarrow$
 			$\mathit{getDependentAfterTests}$($\mathit{t}$)
 			\FOR{each $\mathit{at}$ in $\mathit{afterTests}$}
@@ -75,7 +75,7 @@ the coverage and order specified. Once the tests has been
 ordered, the dependent tests contained in the ordered set of tests is processed by
 processDependentTests (Figure~\ref{fig:processDT}). For more information
 regarding coverage, order and test prioritization refer back to
-section~\ref{sec:backgroundprio}.
+Section~\ref{sec:backgroundprio}.
 
 \subsection{Enhancing Test Selection}
 \label{sec:enhancesel}
@@ -107,10 +107,10 @@ set of tests by calling the functions getChangedTests, orderTests and
 processDependentTests. getChangedTests returns a set containing tests
 that have its coverage elements changed. In test selection these are the tests
 that are worth executing to determine if the changed coverage elements of these
-tests will reveal different execution results. Similar to section~\ref{sec:enhanceprio}
+tests will reveal different execution results. Similar to Section~\ref{sec:enhanceprio}
 orderTests takes the set of changed tests and orders them based on the coverage
 and order specified. For more information regarding coverage, order,
-processDependentTests and test selection refer back to sections~\ref{sec:backgroundsel}
+processDependentTests and test selection refer back to Sections~\ref{sec:backgroundsel}
 and ~\ref{sec:enhanceprio}.
 
 \subsection{Enhancing Test Parallelization}
@@ -151,7 +151,7 @@ As shown in Figure~\ref{fig:parallelization} this algorithm generates a set of
 set of tests by calling the functions orderTests, getLowestBucket and
 processDependentTests. The function starts out by ordering the tests with
 orderTests (line 1). For more information regarding orderTests, coverage, order,
-processDependentTests and test parallelization refer back to sections
+processDependentTests and test parallelization refer back to Sections
  ~\ref{sec:backgroundpar} and ~\ref{sec:enhanceprio}. Afterwards, starting from
 the test with the highest number of coverage elements to the test with the
 lowest number of coverage elements, the function makes repeated calls to

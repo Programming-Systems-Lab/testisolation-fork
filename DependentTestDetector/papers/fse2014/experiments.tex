@@ -5,12 +5,14 @@
 
 This section evaluates the enhanced downstream
 testing techniques on real-world subject programs
-that contain test dependence.
+that contains test dependence.
 
 \subsection{Subject Programs}
 
-We use the same subject programs and their test suites
-to evaluate each of the enhanced testing techniques.
+For each of the downstream testing techniques we studied,
+we only applied our enhanced version of the technique
+if the subject program and its corresponding test suite revealed
+dependent tests in its nonenhanced orders. 
 The subject program characteristics are shown
 in Section~\ref{sec:subj}.
 
@@ -61,7 +63,11 @@ JFreechart
 \caption{
     \label{fig:priocoverage}
 Statement coverage results by each test prioritization technique on
-our evaluation subject programs. \todo{explain why some is missing} }
+our evaluation subject programs.
+As shown in Table~\ref{tab:testprioresult}, the subject programs Synoptic
+and XML-Security were omitted because none of the orders from their
+nonenhanced orders revealed any dependent tests.
+}
 \end{figure}
 
 
@@ -75,14 +81,28 @@ order produced by all enhanced, dependence-aware test
 prioritization techniques. This is because when prioritizing
 a test, the enhanced technique always checks whether
 its depending tests have been executed before it or not. Thus,
-the test dependence is preserved in the prioritized order.
+the test dependence is preserved in the enhanced prioritized order.
 
-We evaluate the effectiveness of the prioritized test suite
+We evaluate the effectiveness of the enhanced prioritized test suite
 by measuring its coverage. Figure~\ref{fig:priocoverage}
-shows the results. The test order produced by the enhanced
+shows the results. The test orders produced by the enhanced
 test prioritization techniques achieves \textit{higher}
-coverage \textit{faster} than the unprioritized test suite.
-\todo{please describe the reason here}
+coverage \textit{faster} than the unenhanced test orders.
+This was surprising because we expected a test order to achieve higher
+coverage slower when we have to reorder it to preserve test dependence.
+Yet the results we collected contradicted that.
+Unlike the enhanced orders, dependent tests in the unenhanced orders
+actually do not provide the coverage it does in the unprioritized test suite.
+As an example, test $\mathit{a}$ may covers 50 statements when
+executed in the unprioritized test suite. However because test
+$\mathit{a}$ is dependent on test $\mathit{b}$ running before it,
+if a test prioritization order does not have test $\mathit{b}$
+running before test $\mathit{a}$, then test $\mathit{a}$ may only
+cover a subset of the 50 statements it is expected to cover.
+Common reasons for why our dependent tests achieved higher
+coverage slower in our unenhanced orders was because of the
+occurrences of events that disrupts the normal flow of
+instructions and the different paths of execution taken for branches. 
 
 \subsection{Dependence-Aware Test Selection}
 
@@ -109,6 +129,9 @@ XML Security& 70 $\rightarrow$ 83 & 71 $\rightarrow$ 84  \\
 \caption{Results of evaluating the \selnum test selection techniques
 in Table~\ref{tab:enhancetestsel} on four human-written unit test suites.
 Each cell shows the number of selected tests.
+As shown in Table~\ref{tab:testselresult}, the subject programs Crystal,
+JFreeChart and Synoptic were omitted because none of the orders from their
+nonenhanced orders revealed any dependent tests.
 }
 \label{tab:enhancedselresult}
 \end{table}
@@ -153,9 +176,15 @@ JFreechart&  1.33 & 1.26 & 1.15  & 1.27  & 1.44 & 1.28 & 1.30 & 1.22 & 1.46 & 1.
 %\textbf{Total}& &  & &  \\ 
 %\hline
 \end{tabular}
-\caption{Results of evaluating the enhanced test parallelization techniques
-on the subject programs.
-\todo{show the slow, explain why synoptic does not work}
+\caption{
+Results of evaluating the enhanced test parallelization techniques
+on the subject programs. The numbers displayed in the table are
+calculated from dividing the time cost to execute the enhanced
+order by the time cost to execute the nonenhanced order.
+As shown in Table~\ref{tab:testparresult}, the subject program Synoptic was
+omitted because none of the orders from its nonenhanced orders revealed
+any dependent tests.
+\todo{show the slow}
 }
 \label{tab:enhancedparresult}
 \end{table*}
@@ -170,8 +199,14 @@ test execution time by recording the time taken by the slowest
 machine. Table~\ref{tab:enhancedparresult} shows the
 slowdown of each enhanced parallelization technique.
 The slowdown varies across different techniques and test suites,
-ranging from 1.67 to 2.61, on average.
-\todo{explain here}
+ranging from 1.67 to 2.61, on average. The slowdown is a result
+of the increased amount of tests machines have to execute in
+order to preserve test dependence. To elaborate, say test $\mathit{a}$
+depends on test $\mathit{b}$ yet they were both scheduled
+to be executed in different machines. In order for test $\mathit{a}$ to exhibit
+the same behavior as it did in the unparallelized test suite, whichever
+machine test $\mathit{a}$ is contained in will  have to have test
+$\mathit{b}$ be added to it.
 
 
 \subsection{Discussion}
