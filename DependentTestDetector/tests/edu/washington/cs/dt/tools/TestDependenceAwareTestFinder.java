@@ -132,4 +132,30 @@ public class TestDependenceAwareTestFinder extends TestCase {
 		}
 	}
 	
+	public static void main(String[] args) {
+		TestDependenceAwareTestFinder finder = new TestDependenceAwareTestFinder();
+		
+		//evalaute manual tests
+		finder.testJodatimeIsolation_manual();
+//		finder.testx
+		finder.testCrystalIsolation_manual();
+		finder.testSynopticIsolation_manual();
+		
+		finder.testJodatimePairwise_manual();
+		finder.testXMLSecurityPairwise_manual();
+		finder.testCrystalPairwise_manual();
+		finder.testSynopticPairwise_manual();
+		
+		//evalaute auto tests
+		finder.testJodatime_1_auto();
+		finder.testXMLSecurity_1_auto();
+		finder.testCrystal_1_auto();
+//		finder.testsy
+		
+		finder.testJodatime_2_sample_auto();
+		finder.testXMLSecurity_2_auto();
+		finder.testCrystal_2_sample_auto();
+		finder.testSynoptic_2_auto_sample();
+	}
+	
 }

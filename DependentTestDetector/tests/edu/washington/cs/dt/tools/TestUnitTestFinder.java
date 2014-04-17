@@ -29,6 +29,18 @@ public class TestUnitTestFinder extends TestCase {
 		finder.saveToFile(allTests);
 	}
 	
+	public void testFindTests() throws ClassNotFoundException, ZipException, IOException {
+		UnitTestFinder.pathOrJarFile = "E:\\eclipse-4.2.1-workspace-dt\\jopt-simple\\bin";
+		UnitTestFinder.junit3and4 = true;
+		UnitTestFinder finder = new UnitTestFinder();
+		List<String> allTests = finder.findAllTests();
+//		finder.saveToFile(allTests);
+		System.out.println("===");
+		for(String t : allTests) {
+			System.out.println(t);
+		}
+	}
+	
 	public void testArgs1() throws ZipException, ClassNotFoundException, IOException {
 		UnitTestFinder.main(new String[]{"--help"});
 	}

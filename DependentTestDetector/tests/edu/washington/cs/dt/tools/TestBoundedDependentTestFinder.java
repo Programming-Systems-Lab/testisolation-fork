@@ -18,17 +18,17 @@ public class TestBoundedDependentTestFinder extends TestCase {
 	
 	public void testJFreeChart_manual() {
 		this.runTests(TestRandomizedDependentTestFinder.jfreechart_manual, 
-				"./bounded_1_jfreechart_manualtxt", 1);
+				"./bounded_1_jfreechart_manual.txt", 1);
 	}
 	
 	public void testJFreeChart_manual_2() {
 		this.runTests(TestRandomizedDependentTestFinder.jfreechart_manual, 
-				"./bounded_2_jfreechart_manualtxt", 2);
+				"./bounded_2_jfreechart_manual.txt", 2);
 	}
 	
 	public void testXMLSecurity_manual() {
 		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_manual, 
-				"./bounded_1_xmlsecurity_manualtxt", 1);
+				"./bounded_1_xmlsecurity_manual.txt", 1);
 		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_manual,
 				"./bounded_2_xmlsecurity_manual.txt", 2);
 //		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_manual,
@@ -37,7 +37,7 @@ public class TestBoundedDependentTestFinder extends TestCase {
 	
 	public void testXMLSecurity_manual_safe() {
 		this.runTests("./tests/edu/washington/cs/dt/tools/xml-security-safe-manual-tests.txt", 
-				"./bounded_1_xmlsecurity_safe_manualtxt", 1);
+				"./bounded_1_xmlsecurity_safe_manual.txt", 1);
 		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_manual,
 				"./bounded_2_xmlsecurity_safe_manual.txt", 2);
 //		this.runTests(TestRandomizedDependentTestFinder.xmlSecurityFile_manual,
@@ -46,14 +46,14 @@ public class TestBoundedDependentTestFinder extends TestCase {
 	
 	public void testCrystal_manual() {
 		this.runTests(TestRandomizedDependentTestFinder.crystalFile_manual, 
-				"./bounded_1_crystal_manualtxt", 1);
+				"./bounded_1_crystal_manual.txt", 1);
 		this.runTests(TestRandomizedDependentTestFinder.crystalFile_manual,
 				"./bounded_2_crystal_manual.txt", 2);
 	}
 	
 	public void testJodatime_manual() {
 		this.runTests(TestRandomizedDependentTestFinder.jodatimeFile_manual, 
-				"./bounded_1_jodatime_manualtxt", 1);
+				"./bounded_1_jodatime_manual.txt", 1);
 	}
 	
 	public void testJodatime_manual_sample_2() {
@@ -72,7 +72,9 @@ public class TestBoundedDependentTestFinder extends TestCase {
 	//run
 	public void testSynoptic_manual_sampled() {
 		this.runTests(TestRandomizedDependentTestFinder.synopticFile_manual, 
-				"./bounded_1_synoptic_manualtxt", 1);
+				"./bounded_1_synoptic_manual.txt", 1);
+		this.runTests(TestRandomizedDependentTestFinder.synopticFile_manual, 
+				"./bounded_2_synoptic_manual.txt", 2);
 	}
 	
 	
@@ -145,5 +147,21 @@ public class TestBoundedDependentTestFinder extends TestCase {
 		for(String t : dts) {
 			System.out.println("    " + t);
 		}
+	}
+	
+	public static void main(String[] args) {
+		TestBoundedDependentTestFinder finder = new TestBoundedDependentTestFinder();
+		
+		//for manual tests
+		finder.testJodatime_manual();  //k = 1
+		finder.testXMLSecurity_manual(); //k = 1, k = 2
+		finder.testCrystal_manual(); //k = 1, k = 2
+		finder.testSynoptic_manual_sampled(); //k=1, k = 2
+		
+		//for auto tests
+		finder.testJodatime_auto();
+		finder.testXMLSecurity_auto();
+		finder.testCrystal_auto();
+		finder.testSynoptic_auto_test();
 	}
 }
