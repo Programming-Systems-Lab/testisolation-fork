@@ -17,6 +17,11 @@
 \usepackage{subfigure}
 \usepackage{bold-extra}
 \usepackage{bm, array}
+\usepackage{balance}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+%\usepackage[tableposition=top]{caption}
 
 \newcolumntype{C}{>{\centering\arraybackslash}p{2em}}
 
@@ -32,10 +37,10 @@
 %\newcommand{\CodeIn}[1]{{\small\texttt{#1}}}
 \newcommand{\code}[1]{{\small\texttt{#1}}}
  % Add line between figure and text
-\makeatletter
-\def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
-\def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
-\def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+%\makeatletter
+%\def\topfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
+%\def\botfigrule{\kern-3\p@ \hrule \kern 2.6\p@} % the \hrule is .4pt high
+%\def\dblfigrule{\kern3\p@ \hrule \kern -3.4\p@} % the \hrule is .4pt high
 \makeatother
  % If there is a line, you can get away with reducing the separation between
  % figures and text.  Don't do this without the line, though.
@@ -99,7 +104,12 @@ Mu{\c{s}}lu, Wing Lam, \\ Michael D. Ernst, David Notkin\\
 %\subtitle{Understanding and Detecting Dependent Tests}
 
 \begin{document}
+\conferenceinfo{ISSTA}{'14, July 21–25, 2014, San Jose, CA, USA}
+\CopyrightYear{2014}
+\crdata{978-1-4503-2645-2/14/07}
 \maketitle
+
+
 
 \input{abstract}
 
@@ -128,17 +138,18 @@ Mu{\c{s}}lu, Wing Lam, \\ Michael D. Ernst, David Notkin\\
 
 \input{conclusions}
 
-%\balance
+\balance
 
-\begin{comment}
-\subsection*{Acknowledgments} Bilge Soran was a participant in the project
+%\begin{comment}
+\section{Acknowledgments}
+ Bilge Soran was a participant in the project
 that led to the initial result.  Yuriy Brun and Colin Gordon provided advice about
 the formal notation.  Reid Holmes and Laura Inozemtseva identified the initial \jodatime dependence.  Cheng Zhang suggested exploring software issue tracking systems
 to study dependent tests. Mark Grechanik, Adam Porter, Michal
 Young, and Reid Holmes provided timely and insightful comments on a draft.
 This work was supported in part by NSF grants
-CCF-1016701 and CCF-0963757
-\end{comment}
+CCF-1016701 and CCF-0963757. 
+%\end{comment}
 
 \bibliographystyle{abbrv}
 \bibliography{references}

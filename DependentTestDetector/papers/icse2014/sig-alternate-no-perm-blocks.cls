@@ -1,10 +1,10 @@
-% SIG-ALTERNATE.CLS - VERSION 2.5
+% SIG-ALTERNATE.CLS - VERSION 2.4
 % "COMPATIBLE" WITH THE "ACM_PROC_ARTICLE-SP.CLS" V3.2SP
-% Gerald Murray - May 23rd 2012
+% Gerald Murray - April 22nd. 2009
 %
 % ---- Start of 'updates'  ----
-% Changed $10 fee to $15 -- May 2012  --  Gerry
-% Changed $5 fee to $10 --  April 2009 -- Gerry
+%
+% Changed $5 fee to $10 - Gerry
 % April 22nd. 2009 - Fixed 'Natbib' incompatibility problem - Gerry
 % April 22nd. 2009 - Fixed 'Babel' incompatibility problem - Gerry
 % April 22nd. 2009 - Inserted various bug-fixes and improvements - Gerry
@@ -42,9 +42,9 @@
 %
 % ---- End of 'updates' ----
 %
-\def\fileversion{v2.5}          % for ACM's tracking purposes
-\def\filedate{May 23, 2012}    % Gerry Murray's tracking data
-\def\docdate {Wednesday 23rd. May 2012} % Gerry Murray (with deltas to doc}
+\def\fileversion{v2.4}          % for ACM's tracking purposes
+\def\filedate{April 22, 2009}    % Gerry Murray's tracking data
+\def\docdate {Wednesday 22nd. April 2009} % Gerry Murray (with deltas to doc}
 \usepackage{epsfig}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -113,7 +113,7 @@
 %%% You may turn this hackery off via the -e option:
 %%%     dvips -e 0 foo.dvi >foo.ps
 %%%
-\typeout{Document Class 'sig-alternate' <23rd. May '12>.  Modified by G.K.M. Tobin/Gerry Murray}
+\typeout{Document Class 'sig-alternate' <22nd. April '09>.  Modified by G.K.M. Tobin/Gerry Murray}
 \typeout{Based in part upon document Style `acmconf' <22 May 89>. Hacked 4/91 by}
 \typeout{shivers@cs.cmu.edu, 4/93 by theobald@cs.mcgill.ca}
 \typeout{Excerpts were taken from (Journal Style) 'esub2acm.cls'.}
@@ -146,7 +146,7 @@
 \headheight 12pt                % Height of box containing running head.
 \headsep 25pt                   % Space between running head and text.
 
-\textheight 666pt       % 9 1/4 column height
+\textheight 675pt       % 9 1/4 column height  was 666
 \textwidth 42pc         % Width of text line.
                         % For two-column mode:
 \columnsep 2pc          %    Space between columns
@@ -538,23 +538,11 @@
 \def\dbltopfraction{.7}
 \def\dblfloatpagefraction{.5}
 
-%
-\long\def\@makecaption#1#2{
-   \vskip \baselineskip
-   \setbox\@tempboxa\hbox{\textbf{#1: #2}}
-   \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
-       \textbf{#1: #2}\par               %   THEN set as ordinary paragraph.
-     \else                      %   ELSE  center.
-       \hbox to\hsize{\hfil\box\@tempboxa\hfil}\par
-   \fi}
-
-%
-
 \long\def\@makecaption#1#2{
    \vskip 10pt
-   \setbox\@tempboxa\hbox{\textbf{#1: #2}}
+   \setbox\@tempboxa\hbox{{\small #1: #2\strut}}
    \ifdim \wd\@tempboxa >\hsize % IF longer than one line:
-       \textbf{#1: #2}\par                %   THEN set as ordinary paragraph.
+       {\small\parbox{\hsize}{#1: #2\strut}}\par               %   THEN set as ordinary paragraph.
      \else                      %   ELSE  center.
        \hbox to\hsize{\hfil\box\@tempboxa\hfil}
    \fi}
@@ -598,7 +586,8 @@
  \let\maketitle\relax
  \let\@maketitle\relax
  \gdef\@thanks{}\gdef\@author{}\gdef\@title{}\gdef\@subtitle{}\let\thanks\relax
- \@copyrightspace}
+ %\@copyrightspace
+ }
 
 %% CHANGES ON NEXT LINES
 \newif\if@ll % to record which version of LaTeX is in use
@@ -610,7 +599,7 @@
 
 \if@ll
   \NeedsTeXFormat{LaTeX2e}
-  \ProvidesClass{sig-alternate} [2012/05/23 - V2.5 - based on acmproc.cls V1.3 <Nov. 30 '99>]
+  \ProvidesClass{sig-alternate} [2009/04/22 - V2.4 - based on acmproc.cls V1.3 <Nov. 30 '99>]
   \RequirePackage{latexsym}% QUERY: are these two really needed?
   \let\dooptions\ProcessOptions
 \else
@@ -1260,7 +1249,7 @@
 }
 
 \def\@citenormal{%
-    \@ifnextchar [{\@tempswatrue\@citex;}%
+    \@ifnextchar [{\@tempswatrue\@citex}%
 % original                 {\@tempswafalse\@citex,[]}% was ; Gerry 2/24/00
 {\@tempswafalse\@citex[]}%  	% GERRY FIX FOR BABEL 3/20/2009
 }
@@ -1430,7 +1419,7 @@
 %
 \global\boilerplate={Permission to make digital or hard copies of all or part of this work for personal or classroom use is granted without fee provided that copies are not made or distributed for profit or commercial advantage and that copies bear this notice and the full citation on the first page.  To copy otherwise, to republish, to post on servers or to redistribute to lists, requires prior specific permission and/or a fee.}
 \newtoks\copyrightetc
-\global\copyrightetc{Copyright \the\copyrtyr\ ACM \the\acmcopyr\ ...\$15.00} % Gerry changed to 15 May 2012
+\global\copyrightetc{Copyright \the\copyrtyr\ ACM \the\acmcopyr\ ...\$10.00}
 \toappear{\the\boilerplate\par
 {\confname{\the\conf}} \the\confinfo\par \the\copyrightetc.}
 %\DeclareFixedFont{\altcrnotice}{OT1}{tmr}{m}{n}{8}  % << patch needed for accenting e.g. Montreal - Gerry, May 2007
