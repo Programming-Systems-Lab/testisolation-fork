@@ -302,11 +302,12 @@ This paper makes the following contributions:
   as well as a proof that finding manifest dependent tests is an NP-complete
   problem (Section~\ref{sec:formalism}).
 
-  \item \textbf{Algorithms.} We present three algorithms
-  to detect dependent tests:
+  \todo{I edited the following paragraph, adding the heuristic algorithm}
+  \item \textbf{Algorithms.} We present four algorithms
+  to detect dependent tests: one heuristic,
   one randomized, one exhaustive bounded, and one that prunes the search
   space using dynamic analyses.
-  All three algorithms are \emph{sound} but \emph{incomplete}:
+  All four algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
   do not guarantee to find all dependent tests (Section~\ref{sec:detecting}). 
   %\edit{check above when the algorithm section is written}
@@ -334,6 +335,20 @@ This paper makes the following contributions:
   %Finally, we discuss a set of open questions and other possible impacts of dependent
   %tests in Section~\ref{sec:discussion}.
 \end{itemize}
+\vspace{-4mm}
+\paragraph{Implications}
+\todo{I move the implications from conclusions to here}
+Our findings are of utility to practitioners and researchers.
+Both can learn that test dependence is a real problem that should not be
+ignored any longer, because it leads to false positive and false negative
+test results.
+Practitioners can adjust their practice based on what code patterns most
+often lead to test dependence, and they can use our tool to 
+find dependent tests.
+Researchers are posed important but challenging new problems, such as how
+to adapt testing methodologies to account for dependent tests how to detect
+and correct all dependent tests.
+
 
 
 %  LocalWords:  Kapfhammer Soffa subsequence SWT CLI NUM dependences

@@ -13,7 +13,7 @@ test dependence \textit{does} arise in practice, and could
 have non-trivial repercussions. We also
 formalized the dependent test detection
 problem. To detect dependent tests, we designed
-and implemented three algorithms to identify manifest test dependence
+and implemented four algorithms to identify manifest test dependence
 in a test suite. Our experiments revealed
 dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
@@ -22,17 +22,6 @@ five existing test prioritization techniques.
 Our tool is publicly available at
 \url{https://testisolation.googlecode.com/}.
 % \todo{XXX}.
-
-Our findings are of utility to practitioners and researchers.
-Both can learn that test dependence is a real problem that should not be
-ignored any longer, because it leads to false positive and false negative
-test results.
-Practitioners can adjust their practice based on what code patterns most
-often lead to test dependence, and they can use our tool to 
-find dependent tests.
-Researchers are posed important but challenging new problems, such as how
-to adapt testing methodologies to account for dependent tests how to detect
-and correct all dependent tests.
 
 %\enlargethispage{5pt}
 
