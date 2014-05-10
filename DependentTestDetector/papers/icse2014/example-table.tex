@@ -11,7 +11,7 @@
 \textbf{Subject} & \textbf{\#} & \multicolumn{8}{|c|}{\textbf{\#Detected Dependent Tests}} & \multicolumn{8}{|c|}{\textbf{Analysis Cost (seconds)}}\\
 %\midrule
 \cline{3-18}
-\textbf{Programs} & \textbf{Tests} & \textbf{Heuristic} & \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{2}{|c|}{\textbf{Exhaustive }} & \multicolumn{2}{|c|}{\textbf{Dep-Aware}} & \textbf{Heuristic}& \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{2}{|c|}{\textbf{Exhaustive }} & \multicolumn{2}{|c|}{\textbf{Dep-Aware}} \\
+\textbf{Programs} & \textbf{Tests} & \textbf{Heu} & \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{2}{|c|}{\textbf{Exhaustive }} & \multicolumn{2}{|c|}{\textbf{Dep-Aware}} & \textbf{Heu}& \multicolumn{3}{|c|}{\textbf{Randomized}} & \multicolumn{2}{|c|}{\textbf{Exhaustive }} & \multicolumn{2}{|c|}{\textbf{Dep-Aware}} \\
 %\cline{3-8}\cline{10-15}
 & & & \smalltrialnum & \mediumtrialnum & \trialnum& \; $k$=1 & $k$=2 & \quad $k$=1 \;\; \quad & $k$=2 && \smalltrialnum & \mediumtrialnum & \trialnum & \; $k$=1 & $k$=2 &  \quad $k$=1 \quad \quad & $k$=2  \\
 \hline
@@ -21,31 +21,31 @@
 \hline
 %JFreechart & \jfreecharttests & 6 & 8 & 8 & 0 & $\ge$0 * & 0 & $\ge$0 * &  66  & 625 & 6097 & 694 & 2$\times$$10^6$ *  &310  &  1$\times$$10^6$ *\\
 %the data of jfreechart is above, MUST update the total column
-\jt & \jodatimetests & & 1 & 1 & 6 & 2 & $\ge$2 * & 2& $\ge$2 * &&   57 & 528 & 5538 &1265& 4$\times$$10^6$ * & 291 & 5$\times$$10^5$ *  \\
-XML Security& \xmlsecuritytests & & 1 & 4 & 4 &4 &4 & 4 & 4  &&65 & 594 & 5977 & 106 &  11927 & 93 & 3322  \\
-Crystal & \crystaltests & & 18 & 18 & 18 &17&18& 17 & 18 &&14& 131 & 1304 & 166 & 7323 & 95  & 4155 \\
-Synoptic & \synoptictests & & 1 &1  & 1 & 0 &1 & 0 & 1 &&  7 & 67 & 760& 25 & 3372& 24 & 1797 \\
+\jt & \jodatimetests & 2 & 1 & 1 & 6 & 2 & $\ge$2 * & 2& $\ge$2 * & 18&   57 & 528 & 5538 &1265& 4$\times$$10^6$ * & 291 & 5$\times$$10^5$ *  \\
+XML Security& \xmlsecuritytests & 0 & 1 & 4 & 4 &4 &4 & 4 & 4  & 18&65 & 594 & 5977 & 106 &  11927 & 93 & 3322  \\
+Crystal & \crystaltests & 18 & 18 & 18 & 18 &17&18& 17 & 18 & 3 &14& 131 & 1304 & 166 & 7323 & 95  & 4155 \\
+Synoptic & \synoptictests & 1 & 1 &1  & 1 & 0 &1 & 0 & 1 & 2 &  7 & 67 & 760& 25 & 3372& 24 & 1797 \\
 \hline
-\textbf{Total} & \totaltests & & 21&24&\textbf{29}& 23 & $\ge$24 & 23 & $\ge$25 &&  143 & 1320 & 13579 &1562&  4$\times$$10^6$ *& 503  & 5$\times$$10^5$ *\\
+\textbf{Total} & \totaltests & 21 & 21&24&\textbf{29}& 23 & $\ge$24 & 23 & $\ge$25 &41&  143 & 1320 & 13579 &1562&  4$\times$$10^6$ *& 503  & 5$\times$$10^5$ *\\
 \hline
 \multicolumn{18}{|l|}{ }\\
 \multicolumn{18}{|l|}{\textbf{Automatically-generated unit tests} }\\
 \hline
 %JFreechart & \jfreechartautotests& \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore &  \ignore \\
-\jt & \jodatimeautotests && \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore && \ignore & \ignore & \ignore & \ignore & \ignore & \ignore &  \ignore \\
-XML Security& \xmlsecurityautotests&& 167 & 171 & 171 & 129 & $\ge$129 * & 128  & $\ge$128 *   && 50 & 430 & 4174 & 133 & 1$\times$$10^5$ * & 128 & 5$\times$$10^4$ * \\
-Crystal & \crystalautotests && 159 & 162 & 164 & 55 & $\ge$55 * & 55 & $\ge$55 *  && 103 & 949& 9436  & 2477 & 8$\times$$10^6$ *& 2297 & 1$\times$$10^6$ * \\
-Synoptic & \synopticautotests && 3 & 7 & 10 &2& $\ge$2 * & 2 & $\ge$2 *   &&81& 770  & 6311 & 454 & 1$\times$$10^6$ *& 454 & 2$\times$$10^4$ * \\
+\jt & \jodatimeautotests &\ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore & \ignore &  \ignore \\
+XML Security& \xmlsecurityautotests&138& 167 & 171 & 171 & 129 & $\ge$129 * & 128  & $\ge$128 *   & 7& 50 & 430 & 4174 & 133 & 1$\times$$10^5$ * & 128 & 5$\times$$10^4$ * \\
+Crystal & \crystalautotests & 75 & 159 & 162 & 164 & 55 & $\ge$55 * & 55 & $\ge$55 *  & 22 & 103 & 949& 9436  & 2477 & 8$\times$$10^6$ *& 2297 & 1$\times$$10^6$ * \\
+Synoptic & \synopticautotests &3 & 3 & 7 & 10 &2& $\ge$2 * & 2 & $\ge$2 *   & 13 &81& 770  & 6311 & 454 & 1$\times$$10^6$ *& 454 & 2$\times$$10^4$ * \\
 \hline
-\textbf{Total} & \totalautotests &&329 &340 & \textbf{345} & 186 & $\ge$186  & 185 & $\ge$185  &&234&2149& 19921& 3064 & 1$\times$$10^7$ *& 2879& 1$\times$$10^6$ * \\
+\textbf{Total} & \totalautotests &216 &329 &340 & \textbf{345} & 186 & $\ge$186  & 185 & $\ge$185  &42&234&2149& 19921& 3064 & 1$\times$$10^7$ *& 2879& 1$\times$$10^6$ * \\
 \hline
 \end{tabular}
 \caption{Experimental results. \todo{I add a column for the heuristic algorithm} Column ``\#Tests'' shows the total number
 of tests, taken from Table~\ref{tab:subjects}. Column ``\#Detected Dependent Tests''
 shows the number of detected dependent tests in each test suite.
-%Columns ``Randomized'', ``Exhaustive'' and ``Dependence-Aware'' show the results
-%of applying the randomized algorithm, the exhaustive $k$-bounded algorithm, and the \dependenceaware{}
-$k$-bounded algorithm, respectively. 
+Columns ``Heu'', ``Randomized'', ``Exhaustive'' and ``Dep-Aware'' show the results
+of applying the heuristic algorithm, randomized algorithm, the exhaustive $k$-bounded algorithm, and the \dependenceaware{}, respectively.
+%$k$-bounded algorithm, respectively. 
 When evaluating the randomized algorithm, we used $numtrials$ =
 $\smalltrialnum, \mediumtrialnum, \trialnum$ (Figure~\ref{fig:randalgorithm}).
 %``\unknown'' means the technique does not scale to the test
