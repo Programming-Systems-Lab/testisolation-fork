@@ -60,11 +60,10 @@ of them includes a well-written unit test suite.
 \jt~\cite{jodatime} is an open source
 date and time library. It is a mature project that
 has been under active development
-for ten years. XML Security~\cite{xmlsecurity}
+for ten years. XML Security~\cite{xmlsecurity},
+included in the SIR repository~\cite{sir},
 is a component library implementing XML signature and encryption
-standards. XML Security is included in
-the SIR repository~\cite{sir} and has been used widely
-as a subject program in the software testing community.
+standards. 
 Crystal~\cite{crystal} is a tool that
 pro-actively examines developers' code and
 identifies textual, compilation, and behavioral conflicts.
@@ -77,9 +76,9 @@ Given the increasing importance of automated test generation
 tools~\cite{PachecoLET2007, ZhangSBE2011, Csallner:2004, fraseretal:ISSTA:2011},
 we also want to investigate dependent tests in automatically-generated
 test suites. For each subject program, we use
-Randoop~\cite{PachecoLET2007}, a state-of-the-art automated
+Randoop~\cite{PachecoLET2007}, an automated
 test generation tool, to create a suite of 5,000 tests.
-Randoop automatically drops textually-redundant tests 
+Randoop automatically drops lexically-redundant tests~\cite[Sec.~III.E]{RobinsonEPAL2011}
 and outputs a subset of the generated tests as
 shown in Table~\ref{tab:subjects}.
 
@@ -335,8 +334,9 @@ without dependency on other tests, and characterized that as
 There are several threats to the validity of our evaluation.
 First, the \subjnum open-source
 programs and their test suites may not be
-representative enough. Thus, we cannot claim the results
-can be generalized to an arbitrary program.
+representative enough. 
+%Thus, we cannot claim the results
+%can be generalized to an arbitrary program.
 However, these are the first \subjnum subject programs
 we tried, and the fact that we found dependent tests
 in all of them is suggestive.
@@ -370,7 +370,7 @@ human-written and automatically-generated test suites.
 %test suite.
 \textbf{(2)} Like the dependent tests
 studied in Section~\ref{sec:study}, the identified
-dependent tests in our subject programs generally reveal weakness
+dependent tests in our subject programs reveal weakness
 in a test suite rather than defects in the tested code.
 \textbf{(3)} Dependent tests can interfere with
 test prioritization techniques and cause unexpected output.
@@ -379,8 +379,9 @@ test prioritization techniques and cause unexpected output.
 %The dependent test detection problem is inherently
 %complex, a smarter algorithm may not achieve great results.}
 The randomized algorithm is the most cost-effective in
-detecting dependent tests, but it has no guarantee
-of the number of dependent tests it can detect.
+detecting dependent tests.
+%, but it has no guarantee
+%of the number of dependent tests it can detect.
 %Testers
 %can use this simple yet effective algorithm in practice.
 

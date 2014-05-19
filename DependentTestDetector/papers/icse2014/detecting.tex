@@ -80,8 +80,9 @@ getPossibleExecOrder($T$):\\
 \caption {The heuristic algorithm to detect dependent tests.
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm},
 defining the getPossibleExecOrder function.
-Our experiments use $\mathit{numtrials} = \smalltrialnum,
-\mediumtrialnum, \trialnum$.}
+%Our experiments use $\mathit{numtrials} = \smalltrialnum,
+%\mediumtrialnum, \trialnum$.
+}
 \label{fig:heuristicalgorithm}
 \end{figure}
 
@@ -371,12 +372,14 @@ correct. Interested
 readers can refer to~\cite{proof-dependence-aware} for the proof.
 
 The given algorithm uses isolated execution results as a baseline and
-avoids executing permutations that are redundant with them.  It would be
-possible to optimize the algorithm by adding each executed permutation to
-the baseline and avoiding all redundant executions.  Such an algorithm is
-more complex and we do not show it.
-
-The \dependenceaware{} $k$-bounded algorithm has two major benefits.
+avoids executing permutations that are redundant with them.
+%It would be
+%possible to optimize the algorithm by adding each executed permutation to
+%the baseline and avoiding all redundant executions.  Such an algorithm is
+%more complex and we do not show it.
+%
+%The \dependenceaware{} $k$-bounded algorithm
+It has two major benefits.
 First, it clusters tests by the fields they
 read and write. Only tests reading or writing
 the same global field(s), rather than \textit{all} tests

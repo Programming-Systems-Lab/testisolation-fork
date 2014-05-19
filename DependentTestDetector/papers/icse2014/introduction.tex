@@ -258,8 +258,10 @@ regression testing)~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
 Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP, hsu09may},
 test prioritization techniques (that reorder the
 input to discover defects sooner)~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
-test parallelization techniques (that schedule the input tests for execution across multiple
-CPUs)~\cite{Misailovic:2007}, test execution techniques~\cite{Kim:2013:OUT},
+%test parallelization techniques (that schedule the input
+%tests for execution across multiple
+%CPUs)~\cite{Misailovic:2007},
+test execution techniques~\cite{Kim:2013:OUT},
 test factoring~\cite{Saff:2005, Wu:2010:LRV} and test carving~\cite{Elbaum:2006} (which
 convert large system tests into smaller unit tests),
 %test generation (which re-executes suites as it builds them up)~\cite{PachecoE2005,RobinsonEPAL2011},
@@ -267,7 +269,7 @@ experimental debugging techniques (such as Delta
 Debugging~\cite{Zeller:2002, Steimann:2013, Zhang:2013:IMF} and mutation
 analysis~\cite{Zhang:2012:RMT, Schuler:2009:EMT, Zhang:2013:FMT},
 which run a set of tests repeatedly), etc. 
-Most of these downstream testing techniques implicitly assume that
+Most of these techniques implicitly assume that
 there are no test dependences in the input test suite. Violation of
 this assumption, as we show happens in practice, can cause unexpected
 output. %\todo{change erroneous to different?} 

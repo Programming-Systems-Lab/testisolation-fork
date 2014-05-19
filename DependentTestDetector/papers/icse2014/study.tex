@@ -259,7 +259,7 @@ a test should fail but passes due to the dependence.
 \input{clicode}
 
 We found two such dependent tests in
-the Apache CLI library~\cite{cli}.
+the Apache CLI library~\cite{cli, DBLP:conf/sigsoft/MusluSW11}.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
 code. The fault is due to improper initialization of the static variable
 \CodeIn{argName}. The static variable \CodeIn{argName} should be set
@@ -269,7 +269,7 @@ default value remains \CodeIn{null} and should \emph{not} be
 used in creating an \CodeIn{OptionBuilder} object.
 In CLI, two test cases 
 \code{Bugs\-Test.test13666} and \code{Bugs\-Test.test27635}
-can reveal this potential fault by directly initializing
+can reveal this fault by directly initializing
 a \CodeIn{OptionBuilder} object without calling \CodeIn{reset()}.
 These two tests fail when run in isolation,
 but both pass when run in the default order. This is because
@@ -319,7 +319,7 @@ most dependent tests can be manifested by executing
 no more than 2 tests together. Thus, a practical technique
 can focus on running only short subsequences (whose
 length is bounded by a parameter $k$)
-of a test suite. This will reduce the number of permutations
+of a test suite. This reduces the permutation number 
 to $O(n^k)$, which is tractable for small $k$ and $n$.
 
 \vspace{1mm}
