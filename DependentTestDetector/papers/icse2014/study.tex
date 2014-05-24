@@ -62,6 +62,13 @@ Table~\ref{tab:studyresults} summarizes the dependent tests.
 We summarize three characteristics of dependent tests:
 manifestation, root cause, and developer actions.
 
+\todo{It's confusing that there is a paragraph about ``manifestation'' here,
+  but also Section~\ref{sec:repercussion} is titled ``manifestation''; the
+  reader will not be able to easily understand the distinction between
+  them.  This suggests that you need to think about what information is
+  being conveyed, what the conceptual organization should be, whether that
+  is the current one, and what words should be used to name the concepts.}
+
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least \pertange of the dependent
 tests in the study can be manifested by 2 or fewer tests.}}
@@ -70,7 +77,10 @@ subsequence of the original test suite, such that the test
 produces a different
 result than when run in the original suite.
 We measure the size of the reported subsequence 
-in the issue report.
+in the issue report.\todo{Why is the size of the reported sequence
+  important?  The person making the report might not have minimized the
+  sequence, so this might not be an accurate measure of how many tests are
+  required for minimization.}
 If the test produces a different result when run
 in isolation, the number of tests to manifest
 the dependent test is 1.
@@ -107,14 +117,22 @@ makes test \emph{t} fail''.
 %\todo{Discuss the ``unknown'' column.  What happened?  Could we not
 %  reproduce it at all?  Why not?}
 
+\todo{In the following text, replace ``improper'' and ``inappropriate'' by
+  more specific and concrete terms that do not make value judgments.  One
+  suggestion is to replace ``improper'' by ``side-effecting'' and remove
+  all occurrences of ``inappropriate''.}
+
 \vspace{1mm}
 \noindent \textbf{{Root cause: at least \svratio\% of the dependent tests
 in the study arise because of improper access to shared static
-variables.}} Among \dtnum dependent tests, \svnum (\svratio\%) of them
+variables.}} Among \dtnum dependent tests:
+\svnum (\svratio\%) of them
 arise due to inappropriate access to
-shared static variables; 4 (4\%) of them arise
-due to inappropriate access to the file system, and 10 (10\%) of them arise
-due to inappropriate access to a database.
+shared static variables;
+10 (10\%) of them arise
+due to inappropriate access to a database; and
+4 (4\%) of them arise
+due to inappropriate access to the file system.
 The root cause for the remaining 23 (25\%) tests is not apparent
 in the issue tracking system.
 
@@ -151,7 +169,7 @@ only 16\% of the code fixes (6 out of 38) are
 on the program code.
 In all 6 cases, the developers changed
 code that performs static variable initialization, which ensures that
-each dependent test will not read an undesired value.
+the tests will not read an uninitialized value.
 Section~\ref{sec:repercussion} gives an example.
 The other 32 code fixes were in the test code:
 28 (87\%) of the dependent tests were fixed by manually specifying
@@ -223,7 +241,9 @@ If the dependence is not documented clearly and
 correctly, it can take a considerable amount of time to work out that
 these reported failures are spurious. 
 The Eclipse issue tracking system contains at least
-49 such dependent tests.
+49 such dependent tests.\todo{An issue tracking system does not contain
+  tests.  It may contain reports of test dependence, or reports that are
+  manifestations of or caused by test dependence.}
 %Or worse, the developers may try
 %to fix a bug that is not there.
 In September 2003, a user filed a
@@ -258,18 +278,23 @@ a test should fail but passes due to the dependence.
 
 \input{clicode}
 
+\todo{The following paragraph is a candidate for shortening.}
+
 We found two such dependent tests in
 the Apache CLI library~\cite{cli, DBLP:conf/sigsoft/MusluSW11}.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
 code. The fault is due to improper initialization of the static variable
 \CodeIn{argName}. The static variable \CodeIn{argName} should be set
-to its default value \CodeIn{"arg"} by CLI's clients via calling
+to its default value \CodeIn{"arg"}\todo{I'm confused by this terminology.
+  According to Java language semantics, the default value of the static
+  variable is null.  Should the field initializer have been changed or removed?} by CLI's clients via calling
 method \CodeIn{reset()}. Otherwise, \CodeIn{argName}'s
-default value remains \CodeIn{null} and should \emph{not} be
+value remains \CodeIn{null} and should \emph{not} be
 used in creating an \CodeIn{OptionBuilder} object.
 In CLI, two test cases 
 \code{Bugs\-Test.test13666} and \code{Bugs\-Test.test27635}
-can reveal this fault by directly initializing
+can reveal this fault by directly initializing\todo{I don't understand
+  ``directly initializing''.  Should that be replaced by ``intantiating''?}
 a \CodeIn{OptionBuilder} object without calling \CodeIn{reset()}.
 These two tests fail when run in isolation,
 but both pass when run in the default order. This is because

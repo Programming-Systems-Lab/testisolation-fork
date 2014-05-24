@@ -20,7 +20,7 @@ all dependent tests.
 %In this section we present two algorithms to detect dependent
 %tests. 
 \todo{I added the following sentence}
-Section~\ref{sec:heuristic} describes a heuristic algorithm
+Section~\ref{sec:reversing} describes a heuristic algorithm
 that executes all the tests of a suite in a reverse order.
 Section~\ref{sec:randomized} describes a randomized algorithm
 that repeatedly executes all the tests of a suite in random order.
@@ -63,7 +63,7 @@ the size of the test suite).
 \caption {The base algorithm to detect dependent tests.
 The getPossibleExecOrder function is instantiated
 by different algorithms in
-Figures~\ref{fig:heuristicalgorithm},~\ref{fig:randalgorithm},~\ref{fig:exhaustivealgorithm},
+Figures~\ref{fig:reversingalgorithm},~\ref{fig:randalgorithm},~\ref{fig:exhaustivealgorithm},
 and~\ref{fig:impralg}.
 }
 \label{fig:basealgorithm}
@@ -77,13 +77,13 @@ getPossibleExecOrder($T$):\\
 \end{algorithmic}
 
 \vspace{-3mm}
-\caption {The heuristic algorithm to detect dependent tests.
+\caption {The reversing algorithm to detect dependent tests.
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm},
 defining the getPossibleExecOrder function.
 %Our experiments use $\mathit{numtrials} = \smalltrialnum,
 %\mediumtrialnum, \trialnum$.
 }
-\label{fig:heuristicalgorithm}
+\label{fig:reversingalgorithm}
 \end{figure}
 
 
@@ -105,8 +105,8 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \end{figure}
 
 \todo{I added the following section}
-\subsection{Heuristic Algorithm}
-\label{sec:heuristic}
+\subsection{Reversing Algorithm}
+\label{sec:reversing}
 
 
 Figure~\ref{fig:basealgorithm} shows the base algorithm.
@@ -120,9 +120,9 @@ to observe its results (line 4). The algorithm checks
 whether the result of any test differs from the
 expected result (lines 5--9). 
 
-Figure~\ref{fig:heuristicalgorithm} instantiates the
+Figure~\ref{fig:reversingalgorithm} instantiates the
 base algorithm (Figure~\ref{fig:basealgorithm}) for the
-heuristic algorithm by reversing the original test execution
+heuristic algorithm that reverses the original test execution
 order.
 
 

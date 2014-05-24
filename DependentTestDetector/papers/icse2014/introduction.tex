@@ -47,9 +47,15 @@ running the tests in any order should produce the same test results.
 %a test has been selected or not, rather than whether the test should
 %maintain the same resutls or not.}
 The assumption of test independence 
-is important so that tests behave consistently
-as designed. In addition, 
-many techniques assume test independence, including test
+is important so that testing techniques behave
+as designed.
+Consider a test prioritization or selection algorithm.  By design, if its
+input is a passing test suite, then its output should be a passing test
+suite.  If the suite contains an order-dependent test, then prioritization
+or selection can introduce test failures, which violates the design
+requirement.
+
+Many techniques assume test independence, including test
 prioritization~\cite{Elbaum:2000:PTC:347324.348910,
 Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
 test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
@@ -73,18 +79,19 @@ However, this critical assumption is
 rarely questioned, investigated, or even mentioned:
 none of the above papers explicitly mentions the assumption
 as a limitation or a threat to validity.
-A total of 31 papers on test prioritization have been  
-published in the research track of five major software engineering conferences
-(ICSE, FSE, ISSTA, ASE, and ICST) or in two major software engineering journals
-(TOSEM and TSE) between 2000 and 2013~\cite{alltestprior}.
+Between 2000 and 2013, 31 papers on test prioritization were
+published in the research track of
+ICSE, FSE, ISSTA, ASE, and ICST or in
+TOSEM and TSE~\cite{alltestprior}.
 Of these,
 27 papers explicitly or implicitly assumed test independence,
 3 papers acknowledged that the potential dependences between tests
-may affect the prioritization output~\cite{Kim:2002:HTP:581339.581357,
+may affect\todo{in what way?  be specific} the prioritization output~\cite{Kim:2002:HTP:581339.581357,
 Qu:2008:CRT, Rothermel:2004:TSC},
 and only 1 paper considered test dependence in the design of
 test prioritization algorithms~\cite{10.1109/TSE.2012.26}.
-Anecdotally, researchers have told us that test dependence
+
+Anecdotally, a number of researchers have told us that they believe test dependence
 is not a significant concern in practice.
 We wish to investigate the validity of this unverified conventional wisdom,
 in order to understand whether test dependence arises in practice, 
@@ -147,9 +154,9 @@ distributed through the test.
 Test dependence results from interactions with other tests,
 as reflected in the execution environment.
 Tests may make \textit{implicit} assumptions about their
-execution environment -- values of global variables,
+execution environment --- values of global variables,
 contents of files, etc. A dependent test
-manifests when another alters the execution
+manifests when another test alters the execution
 environment in a way that invalidates those assumptions.
 
 %A test has the potential to yield
@@ -166,13 +173,13 @@ execution environment and external resources
 to avoid affecting other tests' execution.
 However, developers sometimes
 %are as likely to
-make mistakes when writing tests as when they are writing other code.
+make mistakes when writing tests.
 Even though frameworks such as
 JUnit provide ways to set up the environment for a test execution and clean
 up the environment afterward,
 they cannot ensure that it is done
 properly. This means that tests, like other code,
-will have unintended and unexpected behaviors in some cases.
+sometimes have unintended and unexpected behaviors.
 %And
 %as programs increase in complexity, so may tests, which may
 %increase the frequency of such problems in tests, which may
@@ -223,7 +230,7 @@ a weakness in the test
 suite (such as failure to perform proper initialization) rather than a bug
 in the program. 
 When a test should pass but
-fails after reordering due to the dependence,
+it fails after reordering due to the dependence,
 people who are not aware of the dependence can get confused
 and might report bugs.
 % about the failing test,
@@ -252,13 +259,13 @@ ran tests in a different order).
 Dependent tests can \textit{interfere with downstream testing
 techniques} that change a test suite and thereby change a test's execution environment.
 Examples of such techniques include
-test selection techniques (that identify a subset of
+test selection techniques (which identify a subset of
 the input test suite to run during
 regression testing)~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
 Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP, hsu09may},
-test prioritization techniques (that reorder the
+test prioritization techniques (which reorder the
 input to discover defects sooner)~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART},
-%test parallelization techniques (that schedule the input
+%test parallelization techniques (which schedule the input
 %tests for execution across multiple
 %CPUs)~\cite{Misailovic:2007},
 test execution techniques~\cite{Kim:2013:OUT},
@@ -306,7 +313,7 @@ This paper makes the following contributions:
 
   \todo{I edited the following paragraph, adding the heuristic algorithm}
   \item \textbf{Algorithms.} We present four algorithms
-  to detect dependent tests: one heuristic,
+  to detect dependent tests: one reversing,
   one randomized, one exhaustive bounded, and one that prunes the search
   space using dynamic analyses.
   All four algorithms are \emph{sound} but \emph{incomplete}:
@@ -326,7 +333,8 @@ This paper makes the following contributions:
   \item \textbf{Impact Assessment.} We implemented five test prioritization
   techniques and evaluated them on \subjnum subject programs
   that contain dependent tests. The results show that all
-  five test prioritization techniques are affected by dependent tests
+  five test prioritization techniques are affected by\todo{be more specific
+    about what the effect is} dependent tests
   (Section~\ref{sec:evaluation}).
 
   % \textit{every} subject program we studied, from both  and automatically-generated
@@ -348,7 +356,7 @@ Practitioners can adjust their practice based on what code patterns most
 often lead to test dependence, and they can use our tool to 
 find dependent tests.
 Researchers are posed important but challenging new problems, such as how
-to adapt testing methodologies to account for dependent tests how to detect
+to adapt testing methodologies to account for dependent tests and how to detect
 and correct all dependent tests.
 
 

@@ -3,9 +3,8 @@
 In a test suite, all the test cases should be independent:  no test
 should affect any other test's result, and running the tests in any order
 should produce the same test results.
-Test independence is important so that tests behave consistently as intended by the developers.
-In addition, techniques such as test %selection and
-prioritization assume that the tests in a suite are independent.
+Techniques such as test %selection and
+prioritization generally assume that the tests in a suite are independent.
 %but they do not justify that assumption.
 Test dependence is a little-studied phenomenon.
 This paper presents five results related to test dependence.
@@ -40,7 +39,8 @@ and automatically-generated test suite.
 Fifth, we empirically assessed the impact of
 dependent tests on five test prioritization techniques
 and found that dependent tests affect the output 
-of \textit{all} five techniques.
+of all five techniques; that is, the reordered suite 
+fails even though the original suite did not.
 
 %the follwoing claim might be too strong
 %Our tool revealed a large number of previously-unknown dependent tests.
