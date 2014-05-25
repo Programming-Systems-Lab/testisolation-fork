@@ -271,7 +271,7 @@ dependent tests can hide a fault in the
 program, \emph{exactly} when the test suite is executed in its default
 order. Masking occurs when a test case $t$ \emph{should}
 reveal a fault, but tests executed before $t$ in a test suite always
-generate environments in which $t$ passes accidently and
+generate environments in which $t$ passes accidentally and
 does not reveal the fault. 
 Tests in this category result in \textit{missed alarms} ---
 a test should fail but passes due to the dependence.
@@ -294,7 +294,7 @@ used in creating an \CodeIn{OptionBuilder} object.
 In CLI, two test cases 
 \code{Bugs\-Test.test13666} and \code{Bugs\-Test.test27635}
 can reveal this fault by directly initializing\todo{I don't understand
-  ``directly initializing''.  Should that be replaced by ``intantiating''?}
+  ``directly initializing''.  Should that be replaced by ``instantiating''?}
 a \CodeIn{OptionBuilder} object without calling \CodeIn{reset()}.
 These two tests fail when run in isolation,
 but both pass when run in the default order. This is because
@@ -384,4 +384,5 @@ unlikely to have found all the dependent tests in those projects.
 
 
 %  LocalWords:  JBoss Codehaus reproducibility multi dependences SWT CLI
-%  LocalWords:  TestDisplay test13666 subsequences subsuite
+%  LocalWords:  TestDisplay test13666 subsequences subsuite whittakeretal
+%%  LocalWords:  argName arg CLI's OptionBuilder test27635
