@@ -352,11 +352,11 @@ to $O(n^k)$, which is tractable for small $k$ and $n$.
 should focus on analyzing accesses to global variables.}
 Dependent tests can result from many
 interactions with the execution environment, including
-global variables, file systems, databases, network, etc.
+global variables, databases, the file system, network, etc.
 However, as reflected by our study, more than half of the
 real-world dependent tests are caused
 by improper static variable accesses. This implies that a technique
-may achieve a high return by focusing on global variables.
+may achieve a high return\todo{I'm not sure what ``achieve a high return'' means} by focusing on global variables.
 
 
 %\vspace{1mm}
@@ -377,9 +377,9 @@ We accepted the developers' judgment regarding which tests are dependent,
 the severity of each dependent test, and how many tests are needed
 to manifest the dependence.  We did not intentionally ignore
 any test dependence in the issue tracking system.
-However, a limitation is that the developers might have made a mistake,
+However, a limitation is that the developers might have made a mistake or
 might not have marked a test dependence in a way we found it
-(different search terms might discover additional dependent tests), and are
+(different search terms might discover additional dependent tests).  We are
 unlikely to have found all the dependent tests in those projects. 
 
 
