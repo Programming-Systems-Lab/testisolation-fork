@@ -14,31 +14,31 @@ When comparing the observed result of
 a test in a permutation with its expected result,
 \ourtool considers two JUnit test results to be the same when the
 tests either both pass, or exhibit exactly the same exception
-(from the same line of code) or assertion violation.
+or assertion violation, from the same line of code.
 
 To implement the \dependenceaware{} $k$-bounded
 algorithm, \ourtool uses ASM~\cite{asm} to perform load-time bytecode
 instrumentation. \ourtool inserts code to monitor each
 static field access (including read and write), and
 monitors each file access by
-installing a Java \code{SecurityManager} which provides 
+installing a Java \code{SecurityManager} that provides 
 file-level read/write information.
 Each test produces a trace file containing both
-field and file access information, after being executed
+field and file access information\todo{used how?}, after being executed
 on a \ourtool-instrumented program.
 %Both field and file access information are recorded
 %in a trace file after executing a \ourtool-instrumented test.
 
 \ourtool conservatively treats both read
 and write to a mutable static field as a write effect,
-since a read access to a static field may mutate objects
+since \todo{The remainder of this sentence is not clear:}a read access to a static field may mutate objects
 reachable from the field in the heap.
 \ourtool assumes that the JDK is stateless,
 and thus does not track field access in JDK classes. 
 \ourtool does not perform any sophisticated points-to or shape
 analyses. It uses the side-effect annotations
 provided by Javari~\cite{QuinonezTE2008} to determine the immutable
-classes.
+classes.\todo{How is that immutability information used?}
 
 
 %\ourtool does not instrument JDK classes.
@@ -51,9 +51,11 @@ classes.
 %Javarifier's annotations, \ourtool assumes these classes (and their object
 %instances) are stateless. 
 
-Optionally, users can also specify a
-list of ``dependence-free'' fields (e.g., a static field for
-logging or counting), which can never be the root cause of manifest test dependence.
+Optionally, a user can specify a
+list of ``dependence-free''\todo{Try to think of a better (more descriptive
+  or informative) name for these} fields (e.g., a static field for
+logging or counting), which can never be the root cause of manifest test
+dependence.\todo{Explain or reword ``can never be the root cause''.}
 \ourtool ignores accesses to these fields.
 
 %In order to make the problem tractable, it was assumed that objects reachable from the static fields do not alias one another. 

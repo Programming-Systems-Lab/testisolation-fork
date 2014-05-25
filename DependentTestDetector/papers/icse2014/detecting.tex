@@ -20,8 +20,8 @@ all dependent tests.
 %In this section we present two algorithms to detect dependent
 %tests. 
 \todo{I added the following sentence}
-Section~\ref{sec:reversing} describes a heuristic algorithm
-that executes all the tests of a suite in a reverse order.
+Section~\ref{sec:reversal} describes a heuristic algorithm
+that executes all the tests of a suite in the reverse order.
 Section~\ref{sec:randomized} describes a randomized algorithm
 that repeatedly executes all the tests of a suite in random order.
 Section~\ref{sec:basic} describes an exhaustive bounded algorithm that
@@ -63,7 +63,7 @@ the size of the test suite).
 \caption {The base algorithm to detect dependent tests.
 $\!$The getPossibleExecOrder function is instantiated
 by different algorithms in
-Figures~\ref{fig:reversingalgorithm},~$\!$\ref{fig:randalgorithm},~$\!$\ref{fig:exhaustivealgorithm},
+Figures~\ref{fig:reversal-algorithm},~$\!$\ref{fig:randalgorithm},~$\!$\ref{fig:exhaustivealgorithm},
 and~\ref{fig:impralg}.
 }
 \label{fig:basealgorithm}
@@ -77,13 +77,13 @@ getPossibleExecOrder($T$):\\
 \end{algorithmic}
 
 \vspace{-3mm}
-\caption {The reversing algorithm to detect dependent tests.
+\caption {The reversal algorithm to detect dependent tests.
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm},
 defining the getPossibleExecOrder function.
-%Our experiments use $\mathit{numtrials} = \smalltrialnum,
-%\mediumtrialnum, \trialnum$.
+\todo{This algorithm is wrong.  getPossibleExecOrder is supposed to return
+  a set of suites, whereas this implementation returns a single suite.}
 }
-\label{fig:reversingalgorithm}
+\label{fig:reversal-algorithm}
 \end{figure}
 
 
@@ -105,8 +105,8 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \end{figure}
 
 \todo{I added the following section}
-\subsection{Reversing Algorithm}
-\label{sec:reversing}
+\subsection{Reversal Algorithm}
+\label{sec:reversal}
 
 
 Figure~\ref{fig:basealgorithm} shows the base algorithm.
@@ -120,9 +120,9 @@ to observe its results (line 4). The algorithm checks
 whether the result of any test differs from the
 expected result (lines 5--9). 
 
-Figure~\ref{fig:reversingalgorithm} instantiates the
-base algorithm (Figure~\ref{fig:basealgorithm}) for the
-heuristic algorithm that reverses the original test execution
+Figure~\ref{fig:reversal-algorithm} instantiates the
+base algorithm (Figure~\ref{fig:basealgorithm})
+by reversing the original test execution
 order.
 
 
@@ -130,8 +130,8 @@ order.
 \label{sec:randomized}
 
 Figure~\ref{fig:randalgorithm} instantiates the
-base algorithm (Figure~\ref{fig:basealgorithm}) for the
-randomized algorithm by randomizing the original test execution
+base algorithm (Figure~\ref{fig:basealgorithm})
+by randomizing the original test execution
 order (line 2).
 %(in this case, randomizations of the original
 %test execution order 
@@ -176,7 +176,8 @@ getPossibleExecOrder($T$):\\
 \caption {The exhaustive $k$-bounded algorithm to detect dependent tests.
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
 getPossibleExecOrder function.
-%Our experiments use $k=1$ and $k=2$ to bound the length of
+Our experiments use $k=1$ and $k=2$.
+%to bound the length of
 %test execution. 
 } 
 \label{fig:exhaustivealgorithm}
@@ -209,7 +210,11 @@ Figure~\ref{fig:exhaustivealgorithm} shows the algorithm.
 %that exhibit different results.
 
 
-
+An advantage of this algorithm is that it produces the shortest possbile
+test suite as a witness that a specific test is dependent.  By contrast,
+the reversal and randomized algorithms produce a large test suite, which
+the user must inspect and/or minimize in order to understand why a specific
+test is dependent.
 
 
 \subsection{Dependence-Aware Bounded Algorithm}
@@ -295,7 +300,11 @@ Figure~\ref{fig:exhaustivealgorithm} shows the algorithm.
 
 
 The \dependenceaware{} $k$-bounded algorithm
-detects the same number of dependent tests
+detects the same number\todo{I don't think that is true if a dependence is
+  database- or filesystem-carried.  In that case, the \dependenceaware{}
+  algorithm is unsound.  That should be discussed, or the way it is made
+  sound should be mentioned.}
+of dependent tests
 as the exhaustive $k$-bounded algorithm does (when using the same $k$),
 but it uses dynamic analyses to prune the search space.
 %Information obtained from shorter permutations is used to avoid running lonnger permutations; 
@@ -304,15 +313,18 @@ but it uses dynamic analyses to prune the search space.
 %The algorithm first obtained the result of
 %each test when executed in isolation.
 
-Its key idea is to estimate which tests can interact through which fields
-and to only run permutations in which the interactions may be different.
-The algorithm determines, for every field read by a test, which test
-previously wrote that field.
+Its key idea is to avoid permutations that cannot reveal a dependent test.
+Suppose that all tests in suite $S_1$ pass.  The algorithm determines, for
+every field read by a test in $S_1$, which test previously wrote that field.
 %(or that the field's value is unchanged from the
 %initial environment).
-If, in a permutation, all of those relationships are unchanged from the default
-test order, then all the tests in that permutation give the same result as in the
-default order (and, therefore, that permutation need not be run).  As a
+If suite $S_2$ has the same relationships, then suite $S_2$ also passes
+(and, therefore, it need not be run).
+
+
+
+\todo{Cut this whole paragraph.}
+As a
 special case, suppose that for each test,
 \textit{every global field} (and other 
 resources from the execution environment) it reads
@@ -328,22 +340,81 @@ can be cheaply detected.
 %the can be cheaply checked.). 
 Thus, the permutation can be safely ignored. 
 
-We give two cases for the algorithm:  an optimized version for $k$=1, and
-a general version for $k$$\ge$2.
+We give two cases for the algorithm:  an optimized version for $k$=1 (using
+the original suite as $S_1$, and
+a general version for $k$$\ge$2 using isolated
+execution (one test at a time) as $S_1$.
 
 In the case of $k$=1, the algorithm executes all tests in the default order
-within the same JVM. Any test that does \textit{not}
-access (including read and write) any global fields or
-other external resources such as a file is not a dependent test. 
+within the same JVM\@.  Any test that does \textit{not}
+access (read or write) any global fields or
+other external resources such as a file\todo{Is that implemented?  If so,
+  this is too late as a first mention.} is not a dependent test. 
 The algorithm executes each of the remaining tests in isolation (i.e., in a
-fresh JVM)
-and reports the tests whose results are different than when executed in
-the default order.
+fresh JVM); a test is dependent if its result is different than when
+executed in the default order.
+
+\begin{figure}[t]
+\textbf{Auxiliary methods}:\\
+recordFieldAccess($\mathit{t}$): executes test $\mathit{t}$ in
+a fresh JVM and returns the fields it reads and writes.\\
+%by a test $t$. \\% in an ordered sequence of tests $\mathit{ts}$. \\
+
+
+\vspace{-2mm}
+
+getPossibleExecOrder($T$):\\
+\vspace{-5mm}
+\begin{algorithmic}[1]
+\FOR { each $\mathit{t}$ in $\mathit{T}$ }
+\STATE $\langle \mathit{reads}_t, \mathit{writes}_t\rangle$ $\leftarrow$ recordFieldAccess($\mathit{t}$)\\ 
+\ENDFOR
+
+\STATE $\mathit{result}$ $\leftarrow$ $\emptyset$ \\
+\FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
+	\FOR {each $\mathit{t_i}$ in $\mathit{ts}$ \{ $\mathit{i}$ is the index of $\mathit{t_i}$ in $\mathit{ts}$ \}} 
+		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{writes}_{t_j} $ \\
+		\IF {$\mathit{previousWrites} \cap \mathit{reads}_{t_i} \neq \emptyset$}
+			\STATE $\mathit{result} \leftarrow \mathit{result} \cup \mathit{ts}$
+		\ENDIF
+	\ENDFOR
+
+\ENDFOR
+\RETURN $\mathit{result}$
+\end{algorithmic}
+
+\vspace{-3mm}
+\caption {The \dependenceaware{} $k$-bounded algorithm to detect dependent tests,
+  for $k$$\ge$2.
+It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
+getPossibleExecOrder function.
+For $k$=1, see Section~\ref{sec:advalgorithm}.
+%Our experiments uses $k=1$, \todo{experiment setting, how
+%large k it can scale to.}. 
+} 
+\label{fig:impralg}
+\todo{On line 2, it's not clear how $\langle \mathit{reads}_t,
+  \mathit{writes}_t \rangle$ is stored.  It would be better to first declare
+  $\mathit{reads}$ and $\mathit{writes}$ (maybe as arrays, in which case
+  you could use $\mathit{reads}[t]$ instead?).}
+\todo{On line 6, curly braces are very strange comment syntax.  I wouldn't
+  use that, even if it is the \LaTeX\ package's default.  But, why isn't
+  that line ``for i in 1..k'' and then you can use $ts[i]$ everywhere that
+  $t_i$ is currently used.}
+\end{figure}
 
 In the case of $k$$\ge$2, the algorithm first runs the case of $k$=1 (described above)
 to find all dependent tests that exhibit different results
 when executed in the default order and when executed in isolation.
-Then, it runs the algorithm shown in Figure~\ref{fig:impralg}.
+\todo{What does it do with them?  Neither the text nor
+  Figure~\ref{fig:impralg} say anything about that.}
+Then, it runs the algorithm shown in Figure~\ref{fig:impralg}.\todo{What is
+  the argument $T$?  All tests?  All non-dependent tests?  The claim in the
+  caption of Figure~\ref{fig:impralg} that it instantiates the algorithm of
+  Figure~\ref{fig:basealgorithm} seems to be incorrect, since other work is
+  happening as well.  Figure~\ref{fig:impralg} should stand alone, or you
+  should elsewhere show exactly how Figure~\ref{fig:basealgorithm} is
+  instantiated.}
 %
 %\todo{Darioush, check the above,
 %how could this permutation be safely ignored, if the result
@@ -385,49 +456,11 @@ read and write. Only tests reading or writing
 the same global field(s), rather than \textit{all} tests
 in a suite, are treated as potentially dependent.
 Second, for tests reading or writing the same global
-field(s), some permutations can be ignored by checking
+field(s), some permutations can be ignored by checking\todo{What does
+  ``check'' mean?  Also, is it implemented?  Change ``can'' to ``is'' or
+  ``could be''.}
 the global fields each test may access. 
 
-\begin{figure}[t]
-\textbf{Auxiliary methods}:\\
-recordFieldAccess($\mathit{t}$): executes test $\mathit{t}$ in
-a fresh JVM and returns the fields it reads and writes.\\
-%by a test $t$. \\% in an ordered sequence of tests $\mathit{ts}$. \\
-
-
-\vspace{-2mm}
-
-getPossibleExecOrder($T$):\\
-\vspace{-5mm}
-\begin{algorithmic}[1]
-\FOR { each $\mathit{t}$ in $\mathit{T}$ }
-\STATE $\langle \mathit{reads}_t, \mathit{writes}_t\rangle$ $\leftarrow$ recordFieldAccess($\mathit{t}$)\\ 
-\ENDFOR
-
-\STATE $\mathit{result}$ $\leftarrow$ $\emptyset$ \\
-\FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
-	\FOR {each $\mathit{t_i}$ in $\mathit{ts}$ \{ $\mathit{i}$ is the index of $\mathit{t_i}$ in $\mathit{ts}$ \}} 
-		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{writes}_{t_j} $ \\
-		\IF {$\mathit{previousWrites} \cap \mathit{reads}_{t_i} \neq \emptyset$}
-			\STATE $\mathit{result} \leftarrow \mathit{results} \cup \mathit{ts}$
-		\ENDIF
-	\ENDFOR
-
-\ENDFOR
-\RETURN $\mathit{result}$
-\end{algorithmic}
-
-\vspace{-3mm}
-\caption {The \dependenceaware{} $k$-bounded algorithm to detect dependent tests,
-  for $k$$\ge$2.
-It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
-getPossibleExecOrder function.
-For $k$=1, see Section~\ref{sec:advalgorithm}.
-%Our experiments uses $k=1$, \todo{experiment setting, how
-%large k it can scale to.}. 
-} 
-\label{fig:impralg}
-\end{figure}
 
 
 %in which every test must

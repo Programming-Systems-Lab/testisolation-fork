@@ -5,20 +5,20 @@
 \label{sec:questions}
 
 
-Test independence is broadly assumed but rarely addressed, and
+Test independence is widely assumed but rarely addressed, and
 test dependence has largely been ignored in previous
 research on software testing. 
-To understand dependent tests, we described one of the first studies on
-real-world dependent tests. We showed that 
-test dependence \textit{does} arise in practice, and could 
-have non-trivial repercussions. We also
+We also
 formalized the dependent test detection
 problem. To detect dependent tests, we designed
 and implemented four algorithms to identify manifest test dependence
-in a test suite. Our experiments revealed
+in a test suite.
+We showed that 
+test dependence \textit{does} arise in practice:  our experiments revealed
 dependent tests in every subject program
 we studied, from both human-written and automatically-generated test
-suites. The revealed dependent tests interfere with
+suites.
+The dependent tests cause real-world prioritized test suites to fail, for
 five existing test prioritization techniques.
 Our tool is publicly available at
 \url{https://testisolation.googlecode.com/}.

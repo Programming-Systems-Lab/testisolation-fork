@@ -37,8 +37,8 @@ available for our subject programs.)
 
 \begin{table}
 \centering
-\setlength{\tabcolsep}{1.25\tabcolsep}
-\begin{tabular}{|l|l|l|l|l|l|}
+% \setlength{\tabcolsep}{1.25\tabcolsep}
+\begin{tabular}{|l|c|c|c|c|c|}
 %\toprule
 \hline
 \textbf{Subject Program} & T1 & T3 & T4 & T5 & T7 \\
@@ -54,9 +54,9 @@ Synoptic& 0 & 1 & 0 & 0 & 0 \\
 %\textbf{Total}& &  & &  \\ 
 %\hline
 \end{tabular}
-\caption{Results of evaluating the five test prioritization techniques
-in Table~\ref{tab:testprio} on four human-written unit test suites.
-Each cell shows the number of dependent tests
+\caption{Differences in test results between original and prioritized
+  human-written unit test suites.
+Each cell shows the number of tests
 that do not return the same results as they do when executed
 in the default, unprioritized order.
 }
@@ -71,12 +71,12 @@ in the default, unprioritized order.
 \label{sec:impact}
 
 We implemented five test prioritization techniques~\cite{Elbaum:2000:PTC:347324.348910} (summarized in Table~\ref{tab:testprio}) and
-evaluated them on the human-written test suites of our subject programs.
+applied them to the human-written test suites of our subject programs.
 
 
 For each test prioritization algorithm, we counted the number
-of dependent tests that return different results in
-the prioritized order as they do when executed in the
+of dependent tests that return different results (pass or fail) in
+the prioritized order than they do when executed in the
 unprioritized order. Table~\ref{tab:testprioresult} summarizes
 the results.
 
@@ -88,7 +88,8 @@ Table~\ref{tab:testprio}.
 This is because all these techniques
 implicitly assume that there are no test dependences in
 the input test suite. Violation of this assumption, as
-happened in real-world unit test suites, causes undesired output.
+happened in real-world test suites, causes the prioritized suite to fail
+even though the original suite passed.
 
 %One possible to remedy this problem is to 
 

@@ -311,11 +311,10 @@ This paper makes the following contributions:
   as well as a proof that finding manifest dependent tests is an NP-complete
   problem (Section~\ref{sec:formalism}).
 
-  \todo{I edited the following paragraph, adding the heuristic algorithm}
   \item \textbf{Algorithms.} We present four algorithms
-  to detect dependent tests: one reversing,
-  one randomized, one exhaustive bounded, and one that prunes the search
-  space using dynamic analyses.
+  to detect dependent tests: reversal,
+  randomized, exhaustive bounded, and \dependenceaware{} exhaustive bounded.
+  % one that prunes the search space using dynamic analyses
   All four algorithms are \emph{sound} but \emph{incomplete}:
   every dependent test they identify is real, but the algorithms
   do not guarantee to find all dependent tests (Section~\ref{sec:detecting}). 

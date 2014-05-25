@@ -75,9 +75,11 @@ all of the cases may not be needed''~\cite{IEEE:829-2008}.
 Bergelson and Exman characterize a form of test dependence informally:
 given two tests that each pass, the composite
 execution of these tests may still
-fail~\cite[p.~38]{bergelsonetal:EEE:2006}.  That is, if 
-$t_1$ executed by itself passes and $t_2$ executed by itself passes,
-executing the sequence \suite{t_1, t_2} in the same context may fail.
+fail~\cite[p.~38]{bergelsonetal:EEE:2006}.
+%% Cut for space
+% That is, if 
+% $t_1$ executed by itself passes and $t_2$ executed by itself passes,
+% executing the sequence \suite{t_1, t_2} in the same context may fail.
 However, they do not provide any empirical evidence of
 test dependence nor any detection algorithms.
 
@@ -137,7 +139,7 @@ The assumption of test independence lies at the heart of most
 techniques for automated regression test selection~\cite{harroldetal:OOPSLA:2001, Orso:2004:SRT,
 Briand:2009:ART, Zhang:2012:RMT, Nanda:2011:RTP},
 test case prioritization~\cite{Elbaum:2000:PTC:347324.348910, Kim:2002:HTP:581339.581357, Rummel:2005:TPR:1066677.1067016, Srivastava:2002:EPT:566172.566187, Jiang:2009:ART}, 
-and coverage-based fault localization~\cite{Steimann:2013, Zhang:2013:IMF, Jones:2002:VTI}, etc. 
+coverage-based fault localization~\cite{Steimann:2013, Zhang:2013:IMF, Jones:2002:VTI}, etc. 
 
 
 Test prioritization seeks to reorder a test suite to detect
@@ -184,8 +186,8 @@ often treat a test suite as a collection of test cases
 whose result is \textit{independent} of the order of their
 execution. They can also be impacted by test dependence.
 In a recent evaluation of several coverage-based fault locators,
- Steimann et al.\ found fault locators' accuracy has been 
- affected by tests failed due to the violation of the test
+ Steimann et al.\ found that fault locators' accuracy is
+ affected by tests that fail due to violation of the test
  independence assumption~\cite{Steimann:2013}. 
  %For example, if a test depends on a static field whose value is set by
  %previous test cases. 
@@ -233,6 +235,8 @@ test generator is future work.
 \subsection{Tools Supporting Test Dependence}
 \label{sec:supporting}
 
+\todo{This section can probably be shortened.}
+
 Testing frameworks provide mechanisms
 for developers to define the context for tests.
 JUnit, for example, provides means to
@@ -249,7 +253,7 @@ use them properly and introduce dependent tests.
 
 Only a few tools explicitly 
 allow developers to annotate dependent tests and
-provides supporting mechanisms to ensure that the test execution framework
+provide supporting mechanisms to ensure that the test execution framework
 respects those annotations.  DepUnit~\cite{depunit}
 allows developers to define soft and hard dependences. Soft dependences control
 test ordering, while hard dependences in addition control whether specific tests are
@@ -318,7 +322,7 @@ separate JVM introduces 16--240$\times$ slowdown (compare the
 %provides a mode to clear the environment changes caused
 %by a previous test before generating a new one. Such functionality may happen to eliminate
 %potential test dependence, but requires a tester to
-%run each generated test in a separate JVM.
+%run each generated test in a separate JVM\@.
 %Executing each test in a separate JVM is prohibitively expensive
 %and might be useful when executing
 %a test is much more expensive than re-initializing the environment.

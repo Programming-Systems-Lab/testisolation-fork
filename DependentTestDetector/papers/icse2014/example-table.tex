@@ -43,11 +43,11 @@ Synoptic & \synopticautotests &3 & 3 & 7 & 10 &2& $\ge$2 * & 2 & $\ge$2 *   & 13
 \caption{Experimental results.  Column ``\#Tests'' shows the total number
 of tests, taken from Table~\ref{tab:subjects}. Column ``\#Detected Dependent Tests''
 shows the number of detected dependent tests in each test suite.
-Columns ``Rev'', ``Randomized'', ``Exhaustive'' and ``Dep-Aware'' show the results
-of applying the reversing algorithm, randomized algorithm, the exhaustive $k$-bounded algorithm, and the \dependenceaware{}, respectively.
+% Columns ``Rev'', ``Randomized'', ``Exhaustive'' and ``Dep-Aware'' show the results
+% of applying the reversal algorithm, randomized algorithm, exhaustive $k$-bounded algorithm, and the \dependenceaware{}, respectively.
 %$k$-bounded algorithm, respectively. 
 When evaluating the randomized algorithm, we used $numtrials$ =
-$\smalltrialnum, \mediumtrialnum, \trialnum$ (Figure~\ref{fig:randalgorithm}).
+$\smalltrialnum$, $\mediumtrialnum$, and $\trialnum$ (Figure~\ref{fig:randalgorithm}).
 %``\unknown'' means the technique does not scale to the test
 %suite (i.e., requiring more than 1 day to execute all test permutations),
 %and thus the exact number of dependent tests is unknown.
@@ -55,7 +55,7 @@ $\smalltrialnum, \mediumtrialnum, \trialnum$ (Figure~\ref{fig:randalgorithm}).
 %Column ``Analysis Cost''
 %shows the time cost of each algorithm.
 An asterisk (*) means the algorithm did not finish
-(i.e., requiring more than 1 day to execute all test permutations):  
+within 1 day:
 the number of dependent tests is those discovered before timing out, and 
 the time estimation methodology is described in Section~\ref{sec:performance}.
 \vspace{1mm}
