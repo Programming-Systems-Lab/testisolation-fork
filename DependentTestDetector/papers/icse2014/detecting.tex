@@ -19,7 +19,7 @@ presents four approximate algorithms that find a \textit{subset} of
 all dependent tests.
 %In this section we present two algorithms to detect dependent
 %tests. 
-\todo{I added the following sentence}
+%\todo{I added the following sentence}
 Section~\ref{sec:reversal} describes a heuristic algorithm
 that executes all the tests of a suite in the reverse order.
 Section~\ref{sec:randomized} describes a randomized algorithm
@@ -73,15 +73,15 @@ and~\ref{fig:impralg}.
 getPossibleExecOrder($T$):\\
 \vspace{-5mm}
 \begin{algorithmic}[1]
-\STATE \textbf{return} reverse($T$)
+\STATE \textbf{return} \{reverse($T$)\}
 \end{algorithmic}
 
 \vspace{-3mm}
 \caption {The reversal algorithm to detect dependent tests.
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm},
 defining the getPossibleExecOrder function.
-\todo{This algorithm is wrong.  getPossibleExecOrder is supposed to return
-  a set of suites, whereas this implementation returns a single suite.}
+%\todo{This algorithm is wrong.  getPossibleExecOrder is supposed to return
+%  a set of suites, whereas this implementation returns a single suite.}
 }
 \label{fig:reversal-algorithm}
 \end{figure}
@@ -104,7 +104,7 @@ Our experiments use $\mathit{numtrials} = \smalltrialnum,
 \label{fig:randalgorithm}
 \end{figure}
 
-\todo{I added the following section}
+%\todo{I added the following section}
 \subsection{Reversal Algorithm}
 \label{sec:reversal}
 

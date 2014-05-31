@@ -235,22 +235,23 @@ test generator is future work.
 \subsection{Tools Supporting Test Dependence}
 \label{sec:supporting}
 
-\todo{This section can probably be shortened.}
+%\todo{This section can probably be shortened.}
 
 Testing frameworks provide mechanisms
 for developers to define the context for tests.
-JUnit, for example, provides means to
-automatically execute setup and clean-up tasks
-(\code{setUp()} and \code{tearDown()} in JUnit
-3.x, and annotations \code{@Before} and \code{@After} in
-JUnit 4.x). The latest release 4.11 of JUnit supports
+%JUnit, for example, provides means to
+%automatically execute setup and clean-up tasks
+%(\code{setUp()} and \code{tearDown()} in JUnit
+%3.x, and annotations \code{@Before} and \code{@After} in
+%JUnit 4.x). 
+The latest release 4.11 of JUnit supports
 executing tests in lexicographic order by test method name~\cite{junitordering}.
-However, ensuring that these mechanisms are used properly is
-beyond the scope and capability of any framework. 
-Further, our empirical study and
-experimental results indicate that programmers often do not
-use them properly and introduce dependent tests. 
-
+%However, ensuring that these mechanisms are used properly is
+%beyond the scope and capability of any framework. 
+%Further, our empirical study and
+%experimental results indicate that programmers often do not
+%use them properly and introduce dependent tests. 
+%
 Only a few tools explicitly 
 allow developers to annotate dependent tests and
 provide supporting mechanisms to ensure that the test execution framework
@@ -264,20 +265,23 @@ such as sequential execution
 in a single thread, execution of a single test class per thread, etc.\
 What distinguishes our work from these approaches is that, while they allow dependences
 to be made explicit and respected during execution, they do not help developers
-\emph{identify} dependences.  A tool that finds dependences
-(Section~\ref{sec:impl}) could co-exist
-with such frameworks by generating annotations for them.
+\emph{identify} dependences.  
+%A tool that finds dependences
+%(Section~\ref{sec:impl}) could co-exist
+%with such frameworks by generating annotations for them.
 
 Haidry and Miller~\cite{10.1109/TSE.2012.26} proposed a set of
 test prioritization techniques that consider
 test dependence.  
-Their work aims to improve existing test prioritization techniques
+Their work assumes that dependencies between tests are
+known, and
+aims to improve existing test prioritization techniques
 to make them produce a test ordering that preserves the test dependencies.
-Their work
-assumes that dependencies between tests are known (and are represented as
-partial orderings, such as that one test should be executed before another)
-without providing any empirical evidence of whether dependent tests
-exist in practice.
+%Their work
+%assumes that dependencies between tests are known (and are represented as
+%partial orderings, such as that one test should be executed before another)
+%without providing any empirical evidence of whether dependent tests
+%exist in practice.
 %\todo{Can/should we say that they did not motivate that their techniques
 %  are needed in practice, but we have provided evidence of their value?}
 By contrast, our work formally defines test dependence,

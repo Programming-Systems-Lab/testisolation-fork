@@ -28,9 +28,9 @@ Our evaluation answers the following research questions:
 
 \vspace{-1mm}
 
-\todo{It's inconsistent that item 1 uses ``each detection
-algorithm'' and item 2 uses ``each algorithm in \ourtool''.  Is there a
-difference?  If not, use a single consistent term to refer to the concept.}
+%\todo{It's inconsistent that item 1 uses ``each detection
+%algorithm'' and item 2 uses ``each algorithm in \ourtool''.  Is there a
+%difference?  If not, use a single consistent term to refer to the concept.}
 
 \begin{enumerate}
 \vspace{-1mm}
@@ -38,7 +38,7 @@ difference?  If not, use a single consistent term to refer to the concept.}
 algorithm detect in
 real-world programs (Section~\ref{sec:detectedtests})?
 
-\item How long does each algorithm in \ourtool take to detect dependent
+\item How long does each algorithm take to detect dependent
 tests (Section~\ref{sec:performance})?
 
 \item Can dependent tests interfere with downstream testing techniques
@@ -50,21 +50,22 @@ such as test prioritization (Section~\ref{sec:impact})?
 
 
 Table~\ref{tab:subjects} lists the programs and
-tests used in our evaluation. We used these subject
-programs because\todo{I don't see how this is relevant to our work at all.
-  Why bother to mention it?  ``they have been developed for
-a considerable amount of time (3--10 years) and''} each
-of them includes a well-written unit test suite.
+tests used in our evaluation.
+%We used these subject
+%programs because\todo{I don't see how this is relevant to our work at all.
+%  Why bother to mention it?  ``they have been developed for
+%a considerable amount of time (3--10 years) and''}
+Each of the programs includes a well-written unit test suite.
 
-\jt~\cite{jodatime} is a mature open source
+\jt~\cite{jodatime} is an open source
 date and time library.  XML Security~\cite{xmlsecurity}
 is a component library implementing XML signature and encryption
 standards. 
-\todo{I would add citations to the Crystal and Synoptic papers, too.}
-Crystal~\cite{crystal} is a tool that
+%\todo{I would add citations to the Crystal and Synoptic papers, too.}
+Crystal~\cite{Brun:2011:PDC, crystal} is a tool that
 pro-actively examines developers' code and
 identifies textual, compilation, and behavioral conflicts.
-Synoptic~\cite{synoptic} is a tool to mine a finite state
+Synoptic~\cite{synoptic, Beschastnikh:2011:LEI} is a tool to mine a finite state
 machine model representation of a system from logs.
 All of the subject programs' test suites are designed to be executed in
 a single JVM, rather than requiring separate processes per test case~\cite{vmvm}.
@@ -139,7 +140,8 @@ in \ourtool.
 
 \ourtool detected 29 human-written dependent tests (among which 27
 dependent tests were previously unknown) and 1311
-automatically-generated dependent tests.  A larger percentage (15\% vs.\ \todo{XXX}\%) of
+automatically-generated dependent tests.  A larger percentage
+(20\% vs.\ 0.7\%) of
 automatically-generated tests are dependent.  Developers' understanding of
 the code, and their goals when writing the tests, help them build
 well-structured tests that carefully initialize and destroy the shared
@@ -179,11 +181,12 @@ detects more dependent
 tests in the automatically-generated test suites.
 
 The \dependenceaware{} bounded algorithm found the same
-number of dependent tests as the exhaustive bounded algorithm\todo{Write
-  Javari annotations for the \CodeIn{java.security} package, and re-run the
-  experiment so that all of the rest of this paragraph can be cut from the
-  camera-ready version of the paper.}, except
-that it missed one dependent test in XML Security's
+number of dependent tests as the exhaustive bounded algorithm
+%\todo{Write
+%  Javari annotations for the \CodeIn{java.security} package, and re-run the
+%  experiment so that all of the rest of this paragraph can be cut from the
+%  camera-ready version of the paper.},
+except that it missed one dependent test in XML Security's
 automatically-generated test suite.
 The dependent test was missed because \ourtool
 did not track static field accesses in the \CodeIn{java.security} package
@@ -264,8 +267,9 @@ The Crystal developers confirmed that all dependent tests
 found in Crystal were unintentional and happened because of dependence
 through global variables. The developers considered the
 dependent tests undesirable and opened a bug report for
-this issue~\cite{crystalbugreport}.\todo{Did it get fixed?  Can you ask
-  them to do so, so that you can report that?}
+this issue~\cite{crystalbugreport}.
+%\todo{Did it get fixed?  Can you ask
+%  them to do so, so that you can report that?}
 %
 The dependent test in Synoptic was previously known.
 The developers merged two related tests to fix
