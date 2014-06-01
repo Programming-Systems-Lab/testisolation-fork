@@ -57,17 +57,17 @@ Table~\ref{tab:studyresults} summarizes the dependent tests.
 
 
 \subsubsection{Characteristics}
-
+\label{sec:characteristics}
 
 We summarize three characteristics of dependent tests:
 manifestation, root cause, and developer actions.
 
-\todo{It's confusing that there is a paragraph about ``manifestation'' here,
-  but also Section~\ref{sec:repercussion} is titled ``manifestation''; the
-  reader will not be able to easily understand the distinction between
-  them.  This suggests that you need to think about what information is
-  being conveyed, what the conceptual organization should be, whether that
-  is the current one, and what words should be used to name the concepts.}
+%\todo{It's confusing that there is a paragraph about ``manifestation'' here,
+%  but also Section~\ref{sec:repercussion} is titled ``manifestation''; the
+%  reader will not be able to easily understand the distinction between
+%  them.  This suggests that you need to think about what information is
+%  being conveyed, what the conceptual organization should be, whether that
+%  is the current one, and what words should be used to name the concepts.}
 
 \vspace{1mm}
 \noindent \textbf{{Manifestation: at least \pertange of the dependent
@@ -77,10 +77,11 @@ subsequence of the original test suite, such that the test
 produces a different
 result than when run in the original suite.
 We measure the size of the reported subsequence 
-in the issue report.\todo{Why is the size of the reported sequence
-  important?  The person making the report might not have minimized the
-  sequence, so this might not be an accurate measure of how many tests are
-  required for minimization.}
+in the issue report.
+%\todo{Why is the size of the reported sequence
+%  important?  The person making the report might not have minimized the
+%  sequence, so this might not be an accurate measure of how many tests are
+%  required for minimization.}
 If the test produces a different result when run
 in isolation, the number of tests to manifest
 the dependent test is 1.
@@ -117,22 +118,22 @@ makes test \emph{t} fail''.
 %\todo{Discuss the ``unknown'' column.  What happened?  Could we not
 %  reproduce it at all?  Why not?}
 
-\todo{In the following text, replace ``improper'' and ``inappropriate'' by
-  more specific and concrete terms that do not make value judgments.  One
-  suggestion is to replace ``improper'' by ``side-effecting'' and remove
-  all occurrences of ``inappropriate''.}
+%\todo{In the following text, replace ``improper'' and ``inappropriate'' by
+%  more specific and concrete terms that do not make value judgments.  One
+%  suggestion is to replace ``improper'' by ``side-effecting'' and remove
+%  all occurrences of ``inappropriate''.}
 
 \vspace{1mm}
 \noindent \textbf{{Root cause: at least \svratio\% of the dependent tests
-in the study arise because of improper access to shared static
+in the study arise because of side-effecting access to shared static
 variables.}} Among \dtnum dependent tests:
 \svnum (\svratio\%) of them
-arise due to inappropriate access to
+arise due to access to
 shared static variables;
 10 (10\%) of them arise
-due to inappropriate access to a database; and
+due to access to a database; and
 4 (4\%) of them arise
-due to inappropriate access to the file system.
+due to access to the file system.
 The root cause for the remaining 23 (25\%) tests is not apparent
 in the issue tracking system.
 
@@ -193,7 +194,7 @@ initializing test.
 
 
 
-\subsubsection{Manifestation of Dependent Tests}
+\subsubsection{Repercussions of Dependent Tests}
 \label{sec:repercussion}
 
 \input{categorytable}
@@ -240,10 +241,11 @@ even though this is exactly the intended behavior.
 If the dependence is not documented clearly and
 correctly, it can take a considerable amount of time to work out that
 these reported failures are spurious. 
-The Eclipse issue tracking system contains at least
-49 such dependent tests.\todo{An issue tracking system does not contain
-  tests.  It may contain reports of test dependence, or reports that are
-  manifestations of or caused by test dependence.}
+The Eclipse project contains at least
+49 such dependent tests.
+%\todo{An issue tracking system does not contain
+%  tests.  It may contain reports of test dependence, or reports that are
+%  manifestations of or caused by test dependence.}
 %Or worse, the developers may try
 %to fix a bug that is not there.
 In September 2003, a user filed a
@@ -278,23 +280,24 @@ a test should fail but passes due to the dependence.
 
 \input{clicode}
 
-\todo{The following paragraph is a candidate for shortening.}
-
 We found two such dependent tests in
 the Apache CLI library~\cite{cli, DBLP:conf/sigsoft/MusluSW11}.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
-code. The fault is due to improper initialization of the static variable
+code. The fault is due to side-effecting initialization of the static variable
 \CodeIn{argName}. The static variable \CodeIn{argName} should be set
-to its default value \CodeIn{"arg"}\todo{I'm confused by this terminology.
-  According to Java language semantics, the default value of the static
-  variable is null.  Should the field initializer have been changed or removed?} by CLI's clients via calling
-method \CodeIn{reset()}. Otherwise, \CodeIn{argName}'s
+to value \CodeIn{"arg"}
+%\todo{I'm confused by this terminology.
+%  According to Java language semantics, the default value of the static
+%  variable is null.  Should the field initializer
+% have been changed or removed?}
+by CLI's clients via calling method \CodeIn{reset()}. Otherwise, \CodeIn{argName}'s
 value remains \CodeIn{null} and should \emph{not} be
 used in creating an \CodeIn{OptionBuilder} object.
 In CLI, two test cases 
 \code{Bugs\-Test.test13666} and \code{Bugs\-Test.test27635}
-can reveal this fault by directly initializing\todo{I don't understand
-  ``directly initializing''.  Should that be replaced by ``instantiating''?}
+can reveal this fault by directly instantiating
+%\todo{I don't understand
+%  ``directly initializing''.  Should that be replaced by ``instantiating''?}
 a \CodeIn{OptionBuilder} object without calling \CodeIn{reset()}.
 These two tests fail when run in isolation,
 but both pass when run in the default order. This is because
@@ -341,7 +344,8 @@ all $n!$ permutations of a $n$-sized
 test suite to detect all dependent tests. This is
 not feasible for realistic $n$.  Our study shows that
 most dependent tests can be manifested by executing
-no more than 2 tests together. Thus, a practical technique
+no more than 2 tests together (Section~\ref{sec:characteristics}).
+Thus, a practical technique
 can focus on running only short subsequences (whose
 length is bounded by a parameter $k$)
 of a test suite. This reduces the permutation number 
@@ -355,7 +359,7 @@ interactions with the execution environment, including
 global variables, databases, the file system, network, etc.
 However, as reflected by our study, more than half of the
 real-world dependent tests are caused
-by improper static variable accesses. This implies that a dependent
+by side-effecting static variable accesses. This implies that a dependent
 test detection technique may find more dependent tests
 by focusing on global variables.
 %achieve a high return\todo{I'm not sure what ``achieve a high return'' means} by focusing on global variables.
