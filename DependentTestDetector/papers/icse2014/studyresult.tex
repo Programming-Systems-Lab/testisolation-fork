@@ -5,10 +5,10 @@
 \begin{tabular}{|c||c|c|c|c||c|c|c|c|c||c|c|c|c|c||c|c|c|c|}
 \hline
 %1&2&3&4&5&6&7&8&9&10&11&12&13&14\\
-{\textbf{Issue}}&\multicolumn{4}{|c||}{\textbf{Dependent Tests}}&\multicolumn{5}{|c||}{\textbf{\# Involved Tests for}}&\multicolumn{5}{|c||}{\textbf{Resolution}}&\multicolumn{4}{|c|}{\textbf{Root Cause}}\\
+{\textbf{Issue}}&\multicolumn{4}{c||}{\textbf{Dependent Tests}}&\multicolumn{5}{c||}{\textbf{\# Involved Tests for}}&\multicolumn{5}{|c||}{\textbf{Resolution}}&\multicolumn{4}{c|}{\textbf{Root Cause}}\\
 \cline{2-5}\cline{11-19}
-{\textbf{Tracking}} &Total&\multicolumn{3}{|c||}{Severity}&\multicolumn{5}{|c||}{\textbf{Manifestation}}&
-&\multicolumn{4}{|c||}{Patch Location}&Static&File & Data-& Un-\\
+{\textbf{Tracking}} &Total&\multicolumn{3}{c||}{Severity}&\multicolumn{5}{c||}{\textbf{Manifestation}}&
+&\multicolumn{4}{c||}{Patch Location}&Static&File & Data-& Un-\\
 \cline{3-10}\cline{12-15}
 {\textbf{System}}&number&Major&Minor&Trivial& Self &1 test&2 tests&3 tests & Unknown&Days&Code&Test&Doc&Unfixed&variable&system& base &known\\
 \hline
@@ -28,12 +28,6 @@ Codehaus&2&2&0&0&1&1&0&0&0&3&0&1&0&1&0&1&0 &1\\
 \end{tabular}
 }
 \vspace{-1mm}
-\todo{The weight of the vertical bars is sometimes bold and sometimes not.
-  In the ``total number'' column, note that the vertical bar to the right
-  of ``total'' is bold but the vertical par to the right of ``number'' is
-  not.  I'm not sure why (it seems to have to do with multicolumn in
-  Table~\ref{tab:results}, which has the same problem), but
-  please make it consistent, throughout all tables.}
 \caption{{\label{tab:studyresults}
 Real-world dependent tests.
 %Column ``Total Number'' shows the total number of identified dependent tests.

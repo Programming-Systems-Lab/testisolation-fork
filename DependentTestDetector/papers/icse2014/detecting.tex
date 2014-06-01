@@ -299,45 +299,41 @@ test is dependent.
 %in Joda-Time's test suite (3875 tests, Table~\ref{tab:subjects}).
 
 
-The \dependenceaware{} $k$-bounded algorithm
-detects the same number\todo{I don't think that is true if a dependence is
-  database- or filesystem-carried.  In that case, the \dependenceaware{}
-  algorithm is unsound.  That should be discussed, or the way it is made
-  sound should be mentioned.}
-of dependent tests
-as the exhaustive $k$-bounded algorithm does (when using the same $k$),
-but it uses dynamic analyses to prune the search space.
 %Information obtained from shorter permutations is used to avoid running lonnger permutations; 
 %The algorithm first identifies all dependent tests
 %that can be detected by running
 %The algorithm first obtained the result of
 %each test when executed in isolation.
 
-Its key idea is to avoid permutations that cannot reveal a dependent test.
+The key idea of the \dependenceaware{} $k$-bounded algorithm
+is to avoid permutations that cannot reveal a dependent test.
 Suppose that all tests in suite $S_1$ pass.  The algorithm determines, for
-every field read by a test in $S_1$, which test previously wrote that field.
+every field (or other external resources such as a file)
+read by a test in $S_1$, which test previously wrote that field.
 %(or that the field's value is unchanged from the
 %initial environment).
 If suite $S_2$ has the same relationships, then suite $S_2$ also passes
 (and, therefore, it need not be run).
+Thus, the \dependenceaware{} $k$-bounded algorithm
+detects the same number of dependent tests
+as the exhaustive $k$-bounded algorithm does (when using the same $k$),
+but it prunes the search space.
 
 
 
-\todo{Cut this whole paragraph.}
-As a
-special case, suppose that for each test,
+As a special case, suppose that for each test,
 \textit{every global field} (and other 
 resources from the execution environment) it reads
 is \textit{not} written by any test executed before it; then
 each test in the permutation produces
 the same result as when executed in isolation.
-% (since each
-% test does not interfere with any other tests).
+%% (since each
+%% test does not interfere with any other tests).
 Dependent tests whose isolation execution results
 are different from the results in the default execution order
 can be cheaply detected.
-%and whether the isolation result is the same as
-%the can be cheaply checked.). 
+%%and whether the isolation result is the same as
+%t%he can be cheaply checked.). 
 Thus, the permutation can be safely ignored. 
 
 We give two cases for the algorithm:  an optimized version for $k$=1 (using
@@ -348,8 +344,9 @@ execution (one test at a time) as $S_1$.
 In the case of $k$=1, the algorithm executes all tests in the default order
 within the same JVM\@.  Any test that does \textit{not}
 access (read or write) any global fields or
-other external resources such as a file\todo{Is that implemented?  If so,
-  this is too late as a first mention.} is not a dependent test. 
+other external resources such as a file
+%\todo{Is that implemented?  If so, this is too late as a first mention.}
+is not a dependent test. 
 The algorithm executes each of the remaining tests in isolation (i.e., in a
 fresh JVM); a test is dependent if its result is different than when
 executed in the default order.
@@ -372,14 +369,16 @@ getPossibleExecOrder($T$):\\
 
 \STATE $\mathit{result}$ $\leftarrow$ $\emptyset$ \\
 \FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
-	\FOR {each $\mathit{t_i}$ in $\mathit{ts}$ \{ $\mathit{i}$ is the index of $\mathit{t_i}$ in $\mathit{ts}$ \}} 
-		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{writes}_{t_j} $ \\
-		\IF {$\mathit{previousWrites} \cap \mathit{reads}_{t_i} \neq \emptyset$}
+	%\FOR {each $\mathit{t_i}$ in $\mathit{ts}$ \{ $\mathit{i}$ is the index of $\mathit{t_i}$ in $\mathit{ts}$ \}} 
+	\FOR {$\mathit{i}$ in 1 ... $\mathit{k}$ } 
+		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{writes}_{ts[j]} $ \\
+		\IF {$\mathit{previousWrites} \cap \mathit{reads}_{ts[i]} \neq \emptyset$}
 			\STATE $\mathit{result} \leftarrow \mathit{result} \cup \mathit{ts}$
 		\ENDIF
 	\ENDFOR
 
 \ENDFOR
+\STATE $\mathit{result}$ $\leftarrow$ $\mathit{result}$ $\cup$ kPermutations($\mathit{T}$, 1)\\
 \RETURN $\mathit{result}$
 \end{algorithmic}
 
@@ -389,32 +388,34 @@ getPossibleExecOrder($T$):\\
 It instantiates the algorithm of Figure~\ref{fig:basealgorithm}, defining the
 getPossibleExecOrder function.
 For $k$=1, see Section~\ref{sec:advalgorithm}.
+The kPermutations auxiliary method is defined in Figure~\ref{fig:exhaustivealgorithm}.
 %Our experiments uses $k=1$, \todo{experiment setting, how
 %large k it can scale to.}. 
 } 
 \label{fig:impralg}
-\todo{On line 2, it's not clear how $\langle \mathit{reads}_t,
-  \mathit{writes}_t \rangle$ is stored.  It would be better to first declare
-  $\mathit{reads}$ and $\mathit{writes}$ (maybe as arrays, in which case
-  you could use $\mathit{reads}[t]$ instead?).}
-\todo{On line 6, curly braces are very strange comment syntax.  I wouldn't
-  use that, even if it is the \LaTeX\ package's default.  But, why isn't
-  that line ``for i in 1..k'' and then you can use $ts[i]$ everywhere that
-  $t_i$ is currently used.}
+%\todo{On line 2, it's not clear how $\langle \mathit{reads}_t,
+%  \mathit{writes}_t \rangle$ is stored.  It would be better to first declare
+%  $\mathit{reads}$ and $\mathit{writes}$ (maybe as arrays, in which case
+%  you could use $\mathit{reads}[t]$ instead?).}
+%\todo{On line 6, curly braces are very strange comment syntax.  I wouldn't
+%  use that, even if it is the \LaTeX\ package's default.  But, why isn't
+%  that line ``for i in 1..k'' and then you can use $ts[i]$ everywhere that
+%  $t_i$ is currently used.}
 \end{figure}
 
-In the case of $k$$\ge$2, the algorithm first runs the case of $k$=1 (described above)
-to find all dependent tests that exhibit different results
-when executed in the default order and when executed in isolation.
-\todo{What does it do with them?  Neither the text nor
-  Figure~\ref{fig:impralg} say anything about that.}
-Then, it runs the algorithm shown in Figure~\ref{fig:impralg}.\todo{What is
-  the argument $T$?  All tests?  All non-dependent tests?  The claim in the
-  caption of Figure~\ref{fig:impralg} that it instantiates the algorithm of
-  Figure~\ref{fig:basealgorithm} seems to be incorrect, since other work is
-  happening as well.  Figure~\ref{fig:impralg} should stand alone, or you
-  should elsewhere show exactly how Figure~\ref{fig:basealgorithm} is
-  instantiated.}
+In the case of $k$$\ge$2, the algorithm
+is shown in Figure~\ref{fig:impralg}.
+%first runs the case of $k$=1 (described above)
+%to find all dependent tests that exhibit different results
+%when executed in the default order and when executed in isolation.
+%Then, it runs the algorithm 
+%\todo{What is
+%  the argument $T$?  All tests?  All non-dependent tests?  The claim in the
+%  caption of Figure~\ref{fig:impralg} that it instantiates the algorithm of
+%  Figure~\ref{fig:basealgorithm} seems to be incorrect, since other work is
+%  happening as well.  Figure~\ref{fig:impralg} should stand alone, or you
+%  should elsewhere show exactly how Figure~\ref{fig:basealgorithm} is
+%  instantiated.}
 %
 %\todo{Darioush, check the above,
 %how could this permutation be safely ignored, if the result
@@ -429,13 +430,21 @@ of each test as a comparison baseline.
 When generating all possible test permutations
 of length $k$, the algorithm checks whether
 \textit{all} global fields that \textit{each} test (in the generated permutation)
-may read are not written by \textit{any} test executed before it (lines 6--10).
+may read are not written by \textit{any} test executed before it (lines 6--11).
 If so, all tests in the permutation
 must produce the same results as executed in isolation,
 and the algorithm can safely discard this permutation without
 executing it. Otherwise, the algorithm adds the generated
-permutation to the result set (line 9), and the algorithm in Figure~\ref{fig:basealgorithm}
-identifies dependent tests. %among it.
+permutation to the result set (line 9).
+Finally, the algorithm adds all 1-permutations to
+the result set (line 13)
+to find all dependent tests that exhibit different results
+when executed in the default order and when executed in isolation.
+%first runs the case of $k$=1 (described above)
+%to find all dependent tests that exhibit different results
+%when executed in the default order and when executed in isolation.
+The algorithm in Figure~\ref{fig:basealgorithm} takes the
+returned result set (line 14) and identifies dependent tests. %among it.
 
 %Due to space limits, we omit the proof of the correctness
 We have proved the \dependenceaware{} $k$-bounded algorithm to be
@@ -456,10 +465,9 @@ read and write. Only tests reading or writing
 the same global field(s), rather than \textit{all} tests
 in a suite, are treated as potentially dependent.
 Second, for tests reading or writing the same global
-field(s), some permutations can be ignored by checking\todo{What does
-  ``check'' mean?  Also, is it implemented?  Change ``can'' to ``is'' or
-  ``could be''.}
-the global fields each test may access. 
+field(s), some permutations are ignored by checking
+the global fields each test may access (lines 6--10 in
+Figure~\ref{fig:impralg}) . 
 
 
 

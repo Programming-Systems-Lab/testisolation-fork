@@ -24,21 +24,22 @@ monitors each file access by
 installing a Java \code{SecurityManager} that provides 
 file-level read/write information.
 Each test produces a trace file containing both
-field and file access information\todo{used how?}, after being executed
-on a \ourtool-instrumented program.
+field and file access information, after being executed
+on a \ourtool-instrumented program. \ourtool uses
+the recorded read/write information to detect
+test dependence (Figure~\ref{fig:impralg}).
 %Both field and file access information are recorded
 %in a trace file after executing a \ourtool-instrumented test.
 
 \ourtool conservatively treats both read
-and write to a mutable static field as a write effect,
-since \todo{The remainder of this sentence is not clear:}a read access to a static field may mutate objects
-reachable from the field in the heap.
+and write to a mutable static field as a write effect.
 \ourtool assumes that the JDK is stateless,
 and thus does not track field access in JDK classes. 
 \ourtool does not perform any sophisticated points-to or shape
 analyses. It uses the side-effect annotations
 provided by Javari~\cite{QuinonezTE2008} to determine the immutable
-classes.\todo{How is that immutability information used?}
+classes. That is, if a method is annotated as side-effect-free
+in Javari, \ourtool ignores all fields accessed by this method.
 
 
 %\ourtool does not instrument JDK classes.
@@ -52,11 +53,13 @@ classes.\todo{How is that immutability information used?}
 %instances) are stateless. 
 
 Optionally, a user can specify a
-list of ``dependence-free''\todo{Try to think of a better (more descriptive
-  or informative) name for these} fields (e.g., a static field for
-logging or counting), which can never be the root cause of manifest test
-dependence.\todo{Explain or reword ``can never be the root cause''.}
-\ourtool ignores accesses to these fields.
+list of ``dependence-free''
+fields (e.g., a static field for
+logging or counting), which will not be considered
+as the root cause of manifest test
+dependence by \ourtool.
+%\todo{Explain or reword ``can never be the root cause''.}
+%\ourtool ignores accesses to these fields.
 
 %In order to make the problem tractable, it was assumed that objects reachable from the static fields do not alias one another. 
 
