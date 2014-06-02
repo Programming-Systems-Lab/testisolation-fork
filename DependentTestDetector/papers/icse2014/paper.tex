@@ -19,6 +19,8 @@
 \usepackage{bm, array}
 \usepackage{balance}
 \usepackage{float}
+\usepackage{caption}
+\captionsetup[table]{font=bf}
 \floatstyle{plaintop}
 \restylefloat{table}
 %\usepackage[tableposition=top]{caption}
@@ -28,6 +30,12 @@
 \usepackage{color}
 \input{macros.tex}
 %\newcommand{\CodeIn}[1]{{\small\texttt{#1}}}
+\newcommand{\tinyrelax}{\vspace{1mm}}
+\newcommand{\smallrelax}{\vspace{2mm}}
+
+\newcommand{\tinysqueeze}{\vspace{-1mm}}
+\newcommand{\smallsqueeze}{\vspace{-2mm}}
+\newcommand{\bigsqueeze}{\vspace{-5mm}}
 
 \newcommand{\todo}[1]{{\color{red}\bfseries [[{#1}]]}}
 \newcommand{\edit}[1]{{\color{blue}\bfseries [[{#1}]]}}
@@ -59,7 +67,7 @@
 \newcommand{\subjnum}{{{4}}\xspace}
 \newcommand{\ourtool}{DTDetector\xspace}
 \newcommand{\jodatime}{Joda-Time\xspace}
-\newcommand{\pertange}{82\%\xspace}
+\newcommand{\dtrate}{82\%\xspace}
 
 % commands for formalization
 \newcommand{\suites}[0]{\ensuremath{\mathcal{S}\xspace}}

@@ -69,8 +69,8 @@ manifestation, root cause, and developer actions.
 %  being conveyed, what the conceptual organization should be, whether that
 %  is the current one, and what words should be used to name the concepts.}
 
-\vspace{1mm}
-\noindent \textbf{{Manifestation: at least \pertange of the dependent
+\tinyrelax
+\noindent \textbf{{Manifestation: at least \dtrate of the dependent
 tests in the study can be manifested by 2 or fewer tests.}}
 A dependent test is manifested if there exists a possibly reordered
 subsequence of the original test suite, such that the test
@@ -123,7 +123,7 @@ makes test \emph{t} fail''.
 %  suggestion is to replace ``improper'' by ``side-effecting'' and remove
 %  all occurrences of ``inappropriate''.}
 
-\vspace{1mm}
+\tinyrelax
 \noindent \textbf{{Root cause: at least \svratio\% of the dependent tests
 in the study arise because of side-effecting access to shared static
 variables.}} Among \dtnum dependent tests:
@@ -137,7 +137,7 @@ due to access to the file system.
 The root cause for the remaining 23 (25\%) tests is not apparent
 in the issue tracking system.
 
-\vspace{1mm}
+\tinyrelax
 \noindent \textbf{{Developer actions: dependent tests
 often indicate flaws in the test code, and developers usually
 modify the test code to remove them.}}
@@ -202,8 +202,7 @@ initializing test.
 A dependent test may manifest as a false alarm or a missed alarm
 (Table~\ref{tab:reper}).
 
-\vspace{1mm}
-
+\tinyrelax
 \noindent \textbf{False alarm.} Most of
 the dependent tests (94 out of \dtnum) 
 result in false alarms:
@@ -227,7 +226,6 @@ after other tests.
 %inconsequential until and unless the flawed test is reordered, either manually or by
 %a downstream tool, to execute before any other initializing test.
 
-%\vspace{1mm}
 
 Sometimes developers introduce dependent tests intentionally because it is
 more efficient or convenient~\cite{kapfhammeretal:FSE:2003, whittakeretal:2012}.
@@ -266,8 +264,7 @@ and points to a weakness in the test suite.
 % rather
 %than the code.
 
-\vspace{1mm}
-
+\tinyrelax
 \noindent \textbf{Missed alarm}. In rare cases,
 dependent tests can hide a fault in the
 program, \emph{exactly} when the test suite is executed in its default
@@ -336,7 +333,7 @@ for a tool to detect dependent tests.
 %dependent test detection techniques should
 %explicitly search for such dependent tests.
 
-\vspace{1mm}
+\tinyrelax
 \noindent \textbf{Dependent test detection techniques
 can bound the search space to a small number of tests.}
 In theory, a technique needs to exhaustively execute
@@ -351,7 +348,7 @@ length is bounded by a parameter $k$)
 of a test suite. This reduces the permutation number 
 to $O(n^k)$, which is tractable for small $k$ and $n$.
 
-\vspace{1mm}
+\tinyrelax
 \noindent \textbf{Dependent test detection techniques
 should focus on analyzing accesses to global variables.}
 Dependent tests can result from many
@@ -365,7 +362,6 @@ by focusing on global variables.
 %achieve a high return\todo{I'm not sure what ``achieve a high return'' means} by focusing on global variables.
 
 
-%\vspace{1mm}
 %\noindent \textbf{Dependent test fixing tool
 %Test dependence reveals flaws in the test code.}
 %This indicates that a potential dependent test fixing tool should target
