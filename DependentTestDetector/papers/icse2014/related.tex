@@ -272,18 +272,19 @@ executing tests in lexicographic order by test method name~\cite{junitordering}.
 %experimental results indicate that programmers often do not
 %use them properly and introduce dependent tests. 
 %
-Only a few tools explicitly 
-allow developers to annotate dependent tests and
-provide supporting mechanisms to ensure that the test execution framework
-respects those annotations.  DepUnit~\cite{depunit}
-allows developers to define soft and hard dependences. Soft dependences control
-test ordering, while hard dependences in addition control whether specific tests are
-run at all.  TestNG~\cite{testng} 
+%Only a few tools explicitly 
+%allow developers to annotate dependent tests and
+%provide supporting mechanisms to ensure that the test execution framework
+%respects those annotations. 
+DepUnit~\cite{depunit} allows developers to define
+dependences between two unit tests.
+%Soft dependences control test ordering, while hard dependences in addition control whether specific tests are run at all.  
+TestNG~\cite{testng} 
 allows dependence annotations and supports a variety of execution policies
-that respect these dependences
-such as sequential execution
-in a single thread, execution of a single test class per thread, etc.\
-What distinguishes our work from these approaches is that, while they allow dependences
+that respect these dependences.
+% such as sequential execution
+%in a single thread, execution of a single test class per thread, etc.\
+What distinguishes our work from these testing frameworks is that, while they allow dependences
 to be made explicit and respected during execution, they do not help developers
 \emph{identify} dependences.  
 %A tool that finds dependences
@@ -294,8 +295,7 @@ Haidry and Miller~\cite{10.1109/TSE.2012.26} proposed a set of
 test prioritization techniques that consider
 test dependence.  
 Their work assumes that dependencies between tests are
-known, and
-aims to improve existing test prioritization techniques
+known, and improves existing test prioritization techniques
 to make them produce a test ordering that preserves the test dependencies.
 %Their work
 %assumes that dependencies between tests are known (and are represented as
@@ -316,7 +316,7 @@ Our previous work~\cite{DBLP:conf/sigsoft/MusluSW11} proposed
 an algorithm to find bugs by executing each unit
 test in isolation. With a different focus,
 this work investigates the validity of the test independence assumption
-rather than finding new bugs,
+rather than finding new bugs.
 and presents five new results.
 Further, as indicated by our study and experiments, most dependent
 tests reveal weakness in the test code rather than bugs in the program. Thus,
