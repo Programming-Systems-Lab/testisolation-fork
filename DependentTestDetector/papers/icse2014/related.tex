@@ -197,6 +197,28 @@ In a recent evaluation of several coverage-based fault locators,
  not present any formalism, study, or detection algorithms
  for dependent tests.
 
+Test independence is different than determinism.
+%
+Non-determinism does not imply dependence:  a program may execute
+non-deterministically, but its tests may deterministically succeed.
+Further, a test may non-deterministically succeed/fail without being
+affected by any other test, including its own previous executions.
+%
+Determinism does not imply independence:  a program may have no sources of
+nondeterminism, but two of its tests can be dependent.
+%
+The testing community sometimes mentions determinism (such as
+multithreading) and execution environment (such as library
+versions)~\cite{Orso:2004:SRT}, without considering test dependence.
+%
+A stronger assumption than determinism is the Controlled Regression
+Testing Assumption~\cite{Rothermel}.  It forbids porting to another system,
+nondeterminism, time-dependencies, and interactions with the external
+environment.  It also forbids test dependence, though the authors did not
+mention it explicitly.  The authors state that the assumption is ``not
+necessarily impossible'' to employ.  We have a practical focus on the
+often-overlooked issue of test dependence.
+
 As shown in Sections~\ref{sec:study} and~\ref{sec:evaluation},
 the test independence assumption often does not hold for either
 human-written or automatically-generated tests; and the dependent
@@ -332,6 +354,7 @@ separate JVM introduces 16--240$\times$ slowdown (compare the
 %a test is much more expensive than re-initializing the environment.
 %However, 
 
-%  LocalWords:  Howden Kapfhammer Soffa dependences Intercase Bergelson
+%  LocalWords:  Howden Kapfhammer Soffa dependences Intercase Bergelson C2
 %  LocalWords:  Exman JCrasher Steimann setUp tearDown DepUnit TestNG
-%%  LocalWords:  locators
+%%  LocalWords:  locators nondeterminism multithreading nondeterministic
+%  LocalWords:  Haidry

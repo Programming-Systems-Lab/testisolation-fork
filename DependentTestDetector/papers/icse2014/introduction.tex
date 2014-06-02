@@ -19,7 +19,12 @@ whether it runs after \code{B} or not.
 
 In a test suite, all the test cases should be independent:
 no test should affect any other test's result, and
-running the tests in any order should produce the same test results.
+running the tests in any order should produce the same test results.\footnote{Test dependence is
+undesirable in the context of regression testing.  On the other hand, for
+tasks like generating test cases or bug-finding, code fragments with
+dependences between them can be useful.  By combining such fragments, new
+behaviors of a system can be exercised.  Such behaviors can be encapsulated
+into independent tests to be included in a regression test suite.}
 %Practitioners are well aware of test dependence:  coding
 %guidelines~\cite{unit-test-def,Massol:2003} and
 %standards~\cite{IEEE:829-1998,IEEE:829-2008} say to avoid or document it,
@@ -361,4 +366,4 @@ and correct all dependent tests.
 
 %  LocalWords:  Kapfhammer Soffa subsequence SWT CLI NUM dependences ICST
 
-%  LocalWords:  teardown TSE
+%  LocalWords:  teardown TSE Anecdotally
