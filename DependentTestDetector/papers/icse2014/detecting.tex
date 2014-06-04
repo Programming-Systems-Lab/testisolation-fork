@@ -284,8 +284,8 @@ getPossibleExecOrder($T$):\\
 \FOR{each $\mathit{ts}$ in kPermutations($\mathit{T}$, $\mathit{k}$)}
 	%\FOR {each $\mathit{t_i}$ in $\mathit{ts}$ \{ $\mathit{i}$ is the index of $\mathit{t_i}$ in $\mathit{ts}$ \}} 
 	\FOR {$\mathit{i}$ in 1 ... $\mathit{k}$ } 
-		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{writes}_{ts[j]} $ \\
-		\IF {$\mathit{previousWrites} \cap \mathit{reads}_{ts[i]} \neq \emptyset$}
+		\STATE $\mathit{previousWrites}$ $\leftarrow$ $\bigcup_{\mathit{j} < \mathit{i}}  \mathit{writes}_{\mathit{ts}[j]} $ \\
+		\IF {$\mathit{previousWrites} \cap \mathit{reads}_{\mathit{ts}[i]} \neq \emptyset$}
 			\STATE $\mathit{result} \leftarrow \mathit{result} \cup \mathit{ts}$
 		\ENDIF
 	\ENDFOR
