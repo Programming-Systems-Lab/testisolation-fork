@@ -26,9 +26,9 @@
 \restylefloat{table}
 %\usepackage[tableposition=top]{caption}
 
-\makeatletter
-\def\footnotesize{\@setsize\footnotesize{8pt}\viipt\@viipt}
-\makeatother
+%\makeatletter
+%\def\footnotesize{\@setsize\footnotesize{9pt}\viipt\@viipt}
+%\makeatother
 
 \newcolumntype{C}{>{\centering\arraybackslash}p{2em}}
 
@@ -117,8 +117,7 @@ keywordstyle=\color{red}}
 \author{
 Sai Zhang, Darioush Jalali, Jochen Wuttke, K{\i}van{\c{c}}
 Mu{\c{s}}lu, Wing Lam, \\ Michael D. Ernst, David Notkin\\ 
-\affaddr{Department of Computer Science \& Engineering}\\ 
-\affaddr{University of Washington, Seattle, USA} \\ 
+\affaddr{Department of Computer Science \& Engineering, University of Washington, Seattle, USA} \\ 
 \email{\{szhang, darioush, wuttke, kivanc, winglam, mernst\}@cs.washington.edu}
 }
 
@@ -161,6 +160,7 @@ Mu{\c{s}}lu, Wing Lam, \\ Michael D. Ernst, David Notkin\\
 
 \input{related}
 
+\tinysqueeze
 \input{conclusions}
 
 \balance
@@ -169,9 +169,9 @@ Mu{\c{s}}lu, Wing Lam, \\ Michael D. Ernst, David Notkin\\
 \tinysqueeze
 \section{Acknowledgments}
  Bilge Soran participated in the project
-that led to the initial result.  Yuriy Brun and Colin Gordon provided advice about
-the formal notation.  Reid Holmes and Laura Inozemtseva identified a \jodatime dependence.  Cheng Zhang suggested exploring software issue tracking systems
-to study dependent tests. Mark Grechanik, Adam Porter, Michal
+that led to the initial result.  
+Reid Holmes and Laura Inozemtseva identified a \jodatime dependence.  Cheng Zhang suggested exploring software issue tracking systems
+to study dependent tests. Yuriy Brun, Colin Gordon, Mark Grechanik, Adam Porter, Michal
 Young, Reid Holmes, and anonymous reviewers provided timely and insightful comments on a draft.
 This work was supported in part by NSF grants
 CCF-1016701 and CCF-0963757. 
