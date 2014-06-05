@@ -88,8 +88,13 @@ Table~\ref{tab:testprio}.
 This is because all these techniques
 implicitly assume that there are no test dependences in
 the input test suite. Violation of this assumption, as
-happened in real-world test suites, causes the prioritized suite to fail
+happened in real-world test suites, can cause the prioritized suite to fail
 even though the original suite passed.
+
+We did not evaluate the effect of test dependence on metrics such as 
+APFD~\cite{Rothermel:1999:TCP:519621.853398}; there is no point optimizing
+such a metric at the cost of false positives or false negatives.
+
 
 %One possible to remedy this problem is to 
 

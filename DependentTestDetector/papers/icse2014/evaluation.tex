@@ -312,8 +312,10 @@ we tried, and the fact that we found dependent tests
 in all of them is suggestive.
 Second, in this evaluation, we focus specifically on
 the {manifest dependence} between \textit{unit tests}.
-We did not investigate possible test dependence that may arise
-in other types of tests, such as integration tests.
+JUnit executes many unit tests in a single JVM\@.
+Integration or system tests, or tests written using a different testing
+framework, might have less dependence if
+each one is run in its own environment.
 Third, due to the computational complexity of the general dependent test
 detection problem, we do not yet have
 empirical data regarding \ourtool's recall and how many dependent

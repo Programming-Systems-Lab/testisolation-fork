@@ -69,6 +69,9 @@ $\exec{T}{\env}$ for $\exec{t_n}{\exec{t_{n-1}}{{\dots \exec{t_1}
 {\env} \dots }}}$, to represent its execution.
 \end{definition}
 
+Tests call into a program, but our definitions leave the program implicit,
+since it is always clear from context.
+
 \begin{definition}[Test Result]
 The result of a test $t$ executed in an environment\/ $\env$,
 denoted\/ \result{t}{\env}, is defined by the test's oracle
@@ -103,8 +106,8 @@ than in the execution $\exec{S_2}{\env_0}$.
 
 \begin{definition}[Manifest Order-Dependent Test] \label{def:manifest}
 Given a test suite\/ $T$, a test $t \in T$ is a
-manifest order-dependent test in $T$ if $\exists$ two test suites
-$S_1, S_2 \in$ permutations($T$):
+manifest order-de\-pen\-dent test in $T$ if $\exists$ two test suites
+$S_1, S_2 \in \mbox{permutations}(T)$:
 $\result{S_1}{\env_0}[t] \neq
 \result{S_2}{\env_0}[t]$.
 %

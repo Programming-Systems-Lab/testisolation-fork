@@ -44,7 +44,7 @@ the size of the test suite).
 \begin{algorithmic}[1]
 \STATE $\mathit{dependentTests}$ $\leftarrow$ $\emptyset$
 \STATE $\mathit{expectedResults}$ $\leftarrow$ $\result{T}{\env_0}$
-\FOR{each $\mathit{ts}$ in getPossibleExecOrder($\mathit{T}$)}
+\FOR{each $\mathit{ts}$ in $\mbox{getPossibleExecOrder}(T)$}
 \STATE $\mathit{execResults}$ $\leftarrow$ $\result{\mathit{ts}}{\env_0}$
 \FOR{each test $\mathit{t}$ in $\mathit{ts}$}
 \IF{$\mathit{execResults}$[$\mathit{t}$] $\neq$ $\mathit{expectedResults}$[$\mathit{t}$]}
@@ -379,7 +379,7 @@ in a suite, are treated as potentially dependent.
 Second, for tests reading or writing the same global
 field(s), some permutations are ignored by checking
 the global fields each test may access (lines 6--10 in
-Figure~\ref{fig:impralg}) . 
+Figure~\ref{fig:impralg}). 
 
 
 

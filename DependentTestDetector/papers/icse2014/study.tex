@@ -28,6 +28,8 @@ Each issue tracking system serves tens of projects.
 % holds thousands of bug reports, feature requests, improvement
 % suggestions, etc.
 
+\input{studyresult}
+
 For each issue tracking system, we searched for four phrases
 (``dependent test'', ``test dependence'', ``test execution order'',
 ``different test outcome'') and manually examined the matched results. For each match, we read the
@@ -50,8 +52,6 @@ at: \url{http://homes.cs.washington.edu/~szhang/dependent\_tests.html}
 
 \subsection{Findings}
 \label{sec:studyfindings}
-
-\input{studyresult}
 
 Table~\ref{tab:studyresults} summarizes the dependent tests.
 
@@ -307,7 +307,7 @@ the value of \CodeIn{argName} and masks the fault.
 %accidentally. 
 
 %Such dependent tests have a non-trivial impact in practice.
-This fault was reported in the bug database several times~\cite{clibug},
+This fault was reported in the bug database several times \cite{clibug},
 starting on March 13, 2004 (CLI-26). The report was marked as resolved
 \emph{three years} later on March 15, 2007 when developers
 realized the test dependence. The developers fixed this
