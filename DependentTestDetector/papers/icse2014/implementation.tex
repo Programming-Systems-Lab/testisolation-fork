@@ -12,8 +12,8 @@ when executing a test permutation, and after a run it resets resources,
 such as deleting any temporary files that were created.
 When comparing the observed result of
 a test in a permutation with its expected result,
-\ourtool considers two JUnit test results to be the same when the
-tests either both pass, or exhibit exactly the same exception
+\ourtool considers two JUnit test results to be the same when both
+tests pass, or when both tests exhibit exactly the same exception
 or assertion violation, from the same line of code.
 
 To implement the \dependenceaware{} $k$-bounded
@@ -25,8 +25,8 @@ installing a Java \code{SecurityManager} that provides
 file-level read/write information.
 Each test produces a trace file containing both
 field and file access information, after being executed
-on a \ourtool-instrumented program. \ourtool uses
-the recorded read/write information to detect
+on a \ourtool-instrumented program. The \dependenceaware{} $k$-bounded
+algorithm uses the recorded read/write information to detect
 test dependence (Figure~\ref{fig:impralg}).
 %Both field and file access information are recorded
 %in a trace file after executing a \ourtool-instrumented test.

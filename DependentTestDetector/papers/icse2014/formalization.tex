@@ -24,9 +24,6 @@ A test is a sequence of executable program statements and an oracle
 decides whether the test passes or fails.
 \end{definition}
 
-For simplicity, our definition does not consider non-deter\-min\-istic
-tests, non-terminating tests, and tests aborting the JVM\@.
-
 
 \begin{definition}[Test Suite]
 A test suite\/ $T$ is an $n$-tuple (i.e., ordered sequence) of tests
@@ -58,9 +55,9 @@ tests and\/ \environs\ the set of all possible
 environments.
 The function\/ $\execfunc: \alltests \times \environs \rightarrow
 \environs$ represents test
-execution. $\execfunc$ maps the execution of a test\/ $ t \in
+execution. $\execfunc$ maps a test\/ $ t \in
 \alltests$ 
-and an environment\/ $\env \in \environs$ to a new (potentially updated)
+and an environment\/ $\env \in \environs$ to a (potentially updated)
 environment\/ $\env' \in \environs$.
 
 Given a test suite\/ $T = \suite{t_1, t_2, \dots, t_n}$,
@@ -80,7 +77,7 @@ and is either \pass or \fail.
 The result of a test suite\/ $T$ = \suite{t_1,\dots,t_n}, executed in an
 environment\/ \env, denoted\/ \result{\suite{t_1,\dots,t_n}}{\env}, is a
 sequence of results\/ \suite{o_1,\dots,o_n} with $o_i \in \{\pass,\fail\}$.
-We use $\result{T}{\env}[t]$ to denote the result of a test $t \in T$.
+We use $\result{T}{\env}[t]$ to denote the result of a specific test $t \in T$.
 
 %For test outcomes of sequences where all individual outcomes are
 %either \pass or \fail, we use the notation $(\pass^*)$ and $(\fail^*)$,
@@ -139,7 +136,7 @@ We prove that the problem of detecting dependent tests
 
 \begin{definition}[Dependent Test Detection Problem]
 Given a set suite\/ $T = \suite{t_1, \dots, t_n}$ and an initial environment\/
-$\env_0$, is $t \in T$ a dependent test for $T$?
+$\env_0$, is $t \in T$ a dependent test in $T$?
 %there a test suite\/ $S
 %\subseteq T$ that manifests a test dependence involving\/ $t_i$? 
 \end{definition}
@@ -168,7 +165,10 @@ readers can refer to~\cite{testdependence} for details.
 \subsection{Discussion}
 \label{sec:formaldiscussion}
 
-For the sake of simplicity, our formalism only
+For the sake of simplicity, 
+our definition does not consider non-deter\-min\-istic
+tests, non-terminating tests, and tests aborting the JVM\@.
+Our formalism only
 considers deterministic tests,
 and excludes tests whose results might be affected by
 non-determinism such as thread scheduling

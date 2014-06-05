@@ -97,7 +97,7 @@ test prioritization algorithms~\cite{10.1109/TSE.2012.26}.
 
 Anecdotally, a number of researchers have told us that they believe test dependence
 is not a significant concern in practice.
-We wish to investigate the validity of this unverified conventional wisdom,
+We investigated the validity of this unverified conventional wisdom,
 in order to understand whether test dependence arises in practice, 
 the repercussions of dependent tests, and how to 
 detect dependent tests.
@@ -124,7 +124,7 @@ order of execution of a test suite as the
 expected results; these are the results that a developer sees when running
 the suite in the standard way. A test is dependent when there exists a possibly
 reordered subsequence of the original test suite, in which
-the test's result (determined by its existing testing
+the test's pass/fail result (determined by its existing testing
 oracles) differs from its expected result in the
 original test suite.
 %
@@ -325,8 +325,8 @@ This paper makes the following contributions:
   do not guarantee to find all dependent tests (Section~\ref{sec:detecting}). 
   %\edit{check above when the algorithm section is written}
 
-  \item \textbf{Evaluation.} We implemented our algorithms in a prototype
-  tool, called \ourtool (Section~\ref{sec:impl})\footnote{\ourtool ``exceeded
+  \item \textbf{Evaluation.} We implemented our algorithms in a 
+  tool called \ourtool (Section~\ref{sec:impl})\footnote{\ourtool ``exceeded
   expectations'' of the ISSTA 2014 artifact evaluation committee.}.
   \ourtool detected 27 previously-unknown dependent tests in human-written
   unit tests in \subjnum real-world subject programs.

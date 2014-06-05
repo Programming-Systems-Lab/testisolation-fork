@@ -129,9 +129,9 @@ in the study arise because of side-effecting access to shared static
 variables.}} Among \dtnum dependent tests:
 \svnum (\svratio\%) of them
 arise due to access to
-shared static variables;
+shared static variables,
 10 (10\%) of them arise
-due to access to a database; and
+due to access to a database, and
 4 (4\%) of them arise
 due to access to the file system.
 The root cause for the remaining 23 (25\%) tests is not apparent
@@ -234,7 +234,7 @@ Even though the developers are aware of these dependences
 when they create tests, this knowledge can get lost.
 Other people who are not aware of these dependences can get confused 
 when they run a subset of the test suite that manifests the
-dependent tests, and might report bugs about the failing tests,
+dependence, so they might report bugs about the failing tests
 even though this is exactly the intended behavior. 
 If the dependence is not documented clearly and
 correctly, it can take a considerable amount of time to work out that
@@ -267,7 +267,7 @@ and points to a weakness in the test suite.
 \tinyrelax
 \noindent \textbf{Missed alarm}. In rare cases,
 dependent tests can hide a fault in the
-program, \emph{exactly} when the test suite is executed in its default
+program, {exactly} when the test suite is executed in its default
 order. Masking occurs when a test case $t$ \emph{should}
 reveal a fault, but tests executed before $t$ in a test suite always
 generate environments in which $t$ passes accidentally and
@@ -281,15 +281,14 @@ We found two such dependent tests in
 the Apache CLI library~\cite{cli, DBLP:conf/sigsoft/MusluSW11}.
 Figure~\ref{fig:option_builder} shows the simplified fault-related
 code. The fault is due to side-effecting initialization of the static variable
-\CodeIn{argName}. The static variable \CodeIn{argName} should be set
-to value \CodeIn{"arg"}
-%\todo{I'm confused by this terminology.
-%  According to Java language semantics, the default value of the static
-%  variable is null.  Should the field initializer
-% have been changed or removed?}
-by CLI's clients via calling method \CodeIn{reset()}. Otherwise, \CodeIn{argName}'s
-value remains \CodeIn{null} and should \emph{not} be
-used in creating an \CodeIn{OptionBuilder} object.
+\CodeIn{argName}. CLI should set value \CodeIn{"arg"} to
+the static variable \CodeIn{argName} before
+its clients instantiate an \CodeIn{OptionBuilder} object.
+However, the CLI implementation in Figure~\ref{fig:option_builder} only sets the value
+after the clients call method \CodeIn{reset()}. 
+%Otherwise, \CodeIn{argName}'s
+%value remains \CodeIn{null} and should \emph{not} be
+%used in creating an \CodeIn{OptionBuilder} object.
 In CLI, two test cases 
 \code{Bugs\-Test.test13666} and \code{Bugs\-Test.test27635}
 can reveal this fault by directly instantiating
@@ -354,10 +353,10 @@ should focus on analyzing accesses to global variables.}
 Dependent tests can result from many
 interactions with the execution environment, including
 global variables, databases, the file system, network, etc.
-However, as reflected by our study, more than half of the
+However, in our study, most of the
 real-world dependent tests are caused
 by side-effecting static variable accesses. This implies that a dependent
-test detection technique may find more dependent tests
+test detection technique may find most dependent tests
 by focusing on global variables.
 %achieve a high return\todo{I'm not sure what ``achieve a high return'' means} by focusing on global variables.
 
@@ -377,12 +376,13 @@ Java and have JUnit test suites.
 
 We accepted the developers' judgment regarding which tests are dependent,
 the severity of each dependent test, and how many tests are needed
-to manifest the dependence.  We did not intentionally ignore
+to manifest the dependence.
+We are unlikely to have found all the dependent tests in those projects. 
+We did not intentionally ignore
 any test dependence in the issue tracking system.
 However, a limitation is that the developers might have made a mistake or
 might not have marked a test dependence in a way we found it
-(different search terms might discover additional dependent tests).  We are
-unlikely to have found all the dependent tests in those projects. 
+(different search terms might discover additional dependent tests).
 
 
 %  LocalWords:  JBoss Codehaus reproducibility multi dependences SWT CLI

@@ -12,10 +12,11 @@
 %permutations of the test suite to detect dependent tests.
 %However, this is not feasible for realistic $n$.
 Since the general form of the dependent test detection problem is
-NP-complete, we do not expect to find an efficient algorithm for it.
+NP-complete, we do not expect to find an efficient algorithm
+that fully solves it.
 
 To approximate the exact solution, this section
-presents four approximate algorithms that find a \textit{subset} of
+presents four algorithms that find a \textit{subset} of
 all dependent tests.
 %In this section we present two algorithms to detect dependent
 %tests. 
@@ -73,7 +74,7 @@ and~\ref{fig:impralg}.
 getPossibleExecOrder($T$):\\
 \bigsqueeze
 \begin{algorithmic}[1]
-\STATE \textbf{return} \{reverse($T$)\}
+\STATE \textbf{yield} reverse($T$)
 \end{algorithmic}
 
 \caption {The reversal algorithm to detect dependent tests.
@@ -112,7 +113,7 @@ Figure~\ref{fig:basealgorithm} shows the base algorithm.
 Given a test suite $T = \suite{t_1, t_2, \ldots, t_n}$, the base algorithm
 first executes $T$ with its default order
 to obtain the \emph{expected result} of each test (line 2).
-It chooses some set of test suites (line 3), and then executes
+It chooses some set of test suites (line 3) and then executes
 each test suite
 to observe its results (line 4). The algorithm checks
 whether the result of any test differs from the
@@ -187,8 +188,8 @@ This algorithm uses the findings of our study
 (Section~\ref{sec:study})
 that most dependent tests can be found by running only short
 subsequences of test suites. For example,
-in our study, \dtrate of the real-world dependent tests
-can be found by running no more than 2 tests together.
+in our study, at least \dtrate of the real-world dependent tests
+can be found by running no more than 2 distinct tests together.
 Instead of executing all permutations of the
 whole test suite, our algorithm (Figure~\ref{fig:exhaustivealgorithm})
 executes all $k$-permutations for a bounding
@@ -221,7 +222,7 @@ test is dependent.
 The key idea of the \dependenceaware{} $k$-bounded algorithm
 is to avoid permutations that cannot reveal a dependent test.
 Suppose that all tests in suite $S_1$ pass.  The algorithm determines, for
-every field (or other external resources such as a file)
+every field (or other external resource such as a file)
 read by a test in $S_1$, which test previously wrote that field.
 %(or that the field's value is unchanged from the
 %initial environment).
@@ -235,7 +236,7 @@ but it prunes the search space.
 
 
 As a special case, suppose that for each test,
-\textit{every global field} (and other 
+{every global field} (and other 
 resources from the execution environment) it reads
 is \textit{not} written by any test executed before it; then
 each test in the permutation produces
@@ -249,8 +250,8 @@ can be cheaply detected.
 %t%he can be cheaply checked.). 
 Thus, the permutation can be safely ignored. 
 
-We give two cases for the algorithm:  an optimized version for $k$=1 (using
-the original suite as $S_1$, and
+We give two cases for the algorithm:  an optimized version for $k$=1
+using the original suite as $S_1$, and
 a general version for $k$$\ge$2 using isolated
 execution (one test at a time) as $S_1$.
 

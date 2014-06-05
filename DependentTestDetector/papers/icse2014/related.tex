@@ -199,7 +199,7 @@ Test independence is different than determinism.
 %
 Non-determinism does not imply dependence:  a program may execute
 non-deterministically, but its tests may deterministically succeed.
-Further, a test may non-deterministically succeed/fail without being
+Further, a test may non-deterministically pass/fail without being
 affected by any other test, including its own previous executions.
 %
 Determinism does not imply independence:  a program may have no sources of
@@ -207,13 +207,13 @@ nondeterminism, but two of its tests can be dependent.
 %
 The testing community sometimes mentions determinism (such as
 multithreading) and execution environment (such as library
-versions)~\cite{Orso:2004:SRT}, without considering test dependence.
+versions), without considering test dependence~\cite{Orso:2004:SRT}.
 %
 A stronger assumption than determinism is the Controlled Regression
-Testing Assumption~\cite{Rothermel:1996:ART}.  It forbids porting to another system,
+Testing Assumption (CRTA)~\cite{Rothermel:1996:ART}.  It forbids porting to another system,
 nondeterminism, time-dependencies, and interactions with the external
 environment.  It also forbids test dependence, though the authors did not
-mention it explicitly.  The authors state that the assumption is ``not
+mention test dependence explicitly.  The authors state that CRTA is ``not
 necessarily impossible'' to employ.  We have a practical focus on the
 often-overlooked issue of test dependence.
 
@@ -264,7 +264,7 @@ for developers to define the context for tests.
 %(\code{setUp()} and \code{tearDown()} in JUnit
 %3.x, and annotations \code{@Before} and \code{@After} in
 %JUnit 4.x). 
-The latest release 4.11 of JUnit supports
+JUnit 4.11 supports
 executing tests in lexicographic order by test method name~\cite{junitordering}.
 %However, ensuring that these mechanisms are used properly is
 %beyond the scope and capability of any framework. 
@@ -316,8 +316,8 @@ Our previous work~\cite{DBLP:conf/sigsoft/MusluSW11} proposed
 an algorithm to find bugs by executing each unit
 test in isolation. With a different focus,
 this work investigates the validity of the test independence assumption
-rather than finding new bugs.
-and presents five new results.
+rather than finding new bugs,
+and it presents five new results.
 Further, as indicated by our study and experiments, most dependent
 tests reveal weakness in the test code rather than bugs in the program. Thus,
 using test dependence may not achieve a high return in bug finding.

@@ -77,7 +77,8 @@ test suites. For each subject program, we used
 Randoop~\cite{PachecoLET2007}, an automated
 test generation tool, to create a suite of 5,000 tests.
 Randoop discards redundant tests~\cite[\S III.E]{RobinsonEPAL2011};
-Table~\ref{tab:subjects} shows how many tests it output.
+Table~\ref{tab:subjects} shows how many non-redundant
+tests Randoop output.
 
 We discarded the automatically-generated test suite of
 \jt, since many tests in it are non-deterministic ---
@@ -173,7 +174,7 @@ it found every
 dependent test identified by the other algorithms, plus 
 4 more human-written dependent
 tests in \jt. These 4 tests only
-manifest when a sequence of three tests is run in a specified,
+manifest when a sequence of 3 tests is run in a specified,
 non-default order. Both exhaustive and \dependenceaware{} $k$-bounded
 algorithms fail to detect these tests, because
 they cannot scale to $k$=3 for 
@@ -280,7 +281,7 @@ the dependent test.
 The SIR~\cite{sir} maintainers confirmed our reported dependent
 tests in XML-Security, and accepted our
 suggested patch to fix them. They also highlighted the practice
-that tests should \textit{always} ``stand alone''
+that tests should {always} ``stand alone''
 without dependency on other tests, and characterized that as
 ``test engineering 101''. 
 %They also accepted our suggested
@@ -326,7 +327,7 @@ techniques.
 %, and we only evaluated the impact of dependent
 %tests on prioritizing unit tests.
 Using other test prioritization techniques
-might achieve different results. 
+might yield different results. 
 
 %\todo{this paper focuses on manifest test dependence, what about
 %potential test dependence, as well as some other cases in the
