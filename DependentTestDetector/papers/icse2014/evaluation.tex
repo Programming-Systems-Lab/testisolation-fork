@@ -191,9 +191,8 @@ number of dependent tests as the exhaustive bounded algorithm
 except that it missed one dependent test in XML Security's
 automatically-generated test suite.
 The dependent test was missed because \ourtool
-did not track static field accesses in the \CodeIn{java.security} package
-of the JDK, and Javari did not provide annotations for APIs
-in that package.
+did not track static field accesses in dynamically-loaded
+classes.
 
 
 \subsubsection{Performance of \ourtool}
