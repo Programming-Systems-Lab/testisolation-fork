@@ -21,6 +21,11 @@ static int[] org.bouncycastle.crypto.engines.DESEngine.SP2
 static java.util.Hashtable org.apache.xpath.compiler.Keywords.m_axisnames
 static java.util.Hashtable org.apache.xpath.compiler.Keywords.m_nodetypes
 static java.util.Hashtable org.apache.xpath.compiler.Keywords.m_functions
+private static org.apache.log4j.spi.RepositorySelector org.apache.log4j.LogManager.repositorySelector
+protected static boolean org.apache.log4j.helpers.LogLog.debugEnabled
+private static boolean org.apache.log4j.helpers.Loader.java1
+/home/darioush/workspace/DependentTestDetector2/bin/log4j.xml
+/home/darioush/workspace/DependentTestDetector2/experiments-subjects-new/xml-security/bin/log4j.xml
 #public static org.apache.xpath.compiler.FuncLoader[] org.apache.xpath.compiler.FunctionTable.m_functions
 #static java.util.Map org.apache.xml.security.c14n.Canonicalizer._canonicalizerHash
 #static org.apache.xerces.dom.DOMImplementationImpl org.apache.xerces.dom.DOMImplementationImpl.singleton
