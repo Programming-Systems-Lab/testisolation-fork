@@ -54,6 +54,8 @@ public class MyTestListener extends RunListener {
 		} else {
 			InstrumentSwitch.start();
 		}
+		result = RESULT.PASS.name();
+		fullStackTrace = TestExecUtils.noStackTrace;	
 	}
 	
 	private boolean isFirst() {
