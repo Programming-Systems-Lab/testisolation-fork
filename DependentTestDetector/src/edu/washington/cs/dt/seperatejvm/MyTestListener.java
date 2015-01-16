@@ -42,11 +42,11 @@ public class MyTestListener extends RunListener {
 		this.testNames.add(singleTestName);
 	}
 	
-	
+	boolean thisTestPrinted = false;
 	@Override
 	public void testStarted(Description description) throws Exception {
 		this.startTime = System.currentTimeMillis();
-		
+		this.thisTestPrinted = false;
 		if (TestRunner.instrumentSetups) {
 			if (!isFirst()) {
 				InstrumentSwitch.start();
@@ -66,7 +66,8 @@ public class MyTestListener extends RunListener {
 	
 	@Override
 	public void testFinished(Description description) throws Exception {
-		
+		if(this.thisTestPrinted)
+			return;
 		if (! description.isTest()) {
 			return;
 		}
@@ -109,6 +110,7 @@ public class MyTestListener extends RunListener {
 
 	@Override
 	public void testFailure(Failure failure) throws Exception {
+		this.thisTestPrinted = true;
 	      Throwable excep = failure.getException();
           if(isJUnitAssertionFailure(excep)) {
           	result = RESULT.FAILURE.name();
@@ -117,6 +119,32 @@ public class MyTestListener extends RunListener {
           } 
           stackTrace = flatStackTrace(excep);           //get the stack trace
           fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(excep));
+      	StringBuffer sb = new StringBuffer();
+		sb.append(Globals.stdoutPrefix);
+		sb.append(testNames.get(counter));
+		sb.append(TestExecUtils.testResultSep);
+		sb.append(result);
+		sb.append(TestExecUtils.testResultSep);
+		sb.append(System.currentTimeMillis() - this.startTime);			
+		sb.append(TestExecUtils.resultExcepSep);
+		//sb.append(stackTrace);
+		sb.append(fullStackTrace);
+		sb.append(Globals.lineSep);
+		
+
+		this.lastResult = sb.toString();
+		
+		if (TestRunner.instrumentSetups) {
+			if (!isLast()) {
+				InstrumentSwitch.stop(this.lastResult);
+			}
+		} else {
+			InstrumentSwitch.stop(this.lastResult);
+		}
+		
+		
+		
+		++this.counter;
 	}
 	
 	public static String flatStackTrace(Throwable exception) {

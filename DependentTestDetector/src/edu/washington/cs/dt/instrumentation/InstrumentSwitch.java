@@ -12,7 +12,7 @@ public class InstrumentSwitch {
 			OurSecurityManager.testing = true;
 		}
 	}
-	
+	static String lastPrinted = null;
 	public static void stop(String lastResult) {
 		if (instrument) {
 			OurTracer.testing = false;
@@ -20,7 +20,11 @@ public class InstrumentSwitch {
 			OurSecurityManager.testing = false;
 			OurSecurityManager.output();
 		}
-		
-		System.out.println(lastResult);
+		if(lastPrinted != lastResult)
+		{
+			lastPrinted = lastResult;
+			System.out.println(lastResult);
+
+		}
 	}
 }
