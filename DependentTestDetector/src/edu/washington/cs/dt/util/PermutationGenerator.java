@@ -3,6 +3,7 @@
  */
 package edu.washington.cs.dt.util;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -75,7 +76,7 @@ public class PermutationGenerator {
 	}
 	
 	private List<int[]> computeAllPermutations(int k, int[] pool) {
-		List<int[]> all = new LinkedList<int[]>();
+		List<int[]> all = new ArrayList<int[]>();
 		if(k == 1) {
 			for(int n : pool) {
 				all.add(new int[]{n});
