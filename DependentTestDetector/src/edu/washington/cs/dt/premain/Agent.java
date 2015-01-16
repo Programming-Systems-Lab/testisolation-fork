@@ -7,13 +7,22 @@ import edu.washington.cs.dt.util.Globals;
 
 public class Agent {
 	
+	
 	public static String fileDir = "." + Globals.fileSep + "output";
 	
+	static
+	{
+		String outputDir = System.getProperty("outputDir");
+		if(outputDir != null)
+		{
+			fileDir = outputDir;
+		}
+	}
 	public static void premain(String agentArgs, Instrumentation inst) {
-		//final StaticFieldAccessInstrumenter instrumenter = new StaticFieldAccessInstrumenter();
-	    //inst.addTransformer(instrumenter);
-		final Instrumenter instrumenter = new Instrumenter();
+		final StaticFieldAccessInstrumenter instrumenter = new StaticFieldAccessInstrumenter();
 	    inst.addTransformer(instrumenter);
+//		final Instrumenter instrumenter = new Instrumenter();
+//	    inst.addTransformer(instrumenter);
 
 	    
 	    String writeFileName = agentArgs != null ? agentArgs : null;
