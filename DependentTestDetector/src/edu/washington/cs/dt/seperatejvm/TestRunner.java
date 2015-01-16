@@ -45,35 +45,38 @@ public class TestRunner {
 		
 		JunitWrapper junit = new JunitWrapper(core, new TestRepFactory(), env, listener);
 		TestBundle junit4Bundle = new TestBundle();
-
-		while (s.hasNextLine()) {
-			String line = s.nextLine();
-			if (isJunit3Suite(line)) {
-				junit4Bundle = junit4Bundle.runAndNew(junit);
-				junit.run3InSuite(line);
-			} else if (isJunit3NoSuite(line)) {
-				junit4Bundle = junit4Bundle.runAndNew(junit);
-				junit.runMethodRequest(line);
-			} else if (isJunit4(line)) {
-				if (tearDownAll) {
+		try {
+			while (s.hasNextLine()) {
+				String line = s.nextLine();
+				if (isJunit3Suite(line)) {
+					junit4Bundle = junit4Bundle.runAndNew(junit);
+					junit.run3InSuite(line);
+				} else if (isJunit3NoSuite(line)) {
+					junit4Bundle = junit4Bundle.runAndNew(junit);
 					junit.runMethodRequest(line);
-				} else {
-					if (junit4Bundle.canAdd(line)) {
-						junit4Bundle.add(line);
+				} else if (isJunit4(line)) {
+					if (tearDownAll) {
+						junit.runMethodRequest(line);
 					} else {
-						junit4Bundle = junit4Bundle.runAndNew(junit);
-						junit4Bundle.add(line);
+						if (junit4Bundle.canAdd(line)) {
+							junit4Bundle.add(line);
+						} else {
+							junit4Bundle = junit4Bundle.runAndNew(junit);
+							junit4Bundle.add(line);
+						}
 					}
+				} else {
+					s.close();
+					throw new RuntimeException("Unexpected line");
 				}
-			} else {
-				s.close();
-				throw new RuntimeException("Unexpected line");
 			}
+		} catch (StringIndexOutOfBoundsException ex) {
+			s.close();
 		}
-		
 		junit4Bundle.runAndNew(junit);
 		env.popAll();
 		s.close();
+		System.exit(0);
 	}
 
 	private static void parseArgs(String[] args) {

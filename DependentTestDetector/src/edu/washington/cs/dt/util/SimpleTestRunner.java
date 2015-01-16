@@ -19,12 +19,14 @@ public class SimpleTestRunner {
 				JUnitTestExecutor executor = new JUnitTestExecutor(fullTestName);
 				executor.executeWithJUnit4Runner();
 				System.out.println("executing: ? " + fullTestName + ", successfully? " + executor.getResult());
+				System.exit(0);
 			} else {
 				try {
 					String[] junitArgs = new String[]{"-m", fullTestName};
 					// System.out.println(Utils.convertArrayToFlatString(junitArgs));
 					TestResult r = aTestRunner.start(junitArgs);
 					System.out.println("executing: ? " + fullTestName + ", successfully? " + r.wasSuccessful());
+					System.exit(0);
 				} catch (Exception e) {
 					e.printStackTrace();
 					throw new RuntimeException(e);
