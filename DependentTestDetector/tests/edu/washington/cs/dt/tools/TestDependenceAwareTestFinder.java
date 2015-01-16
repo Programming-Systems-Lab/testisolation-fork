@@ -120,6 +120,7 @@ public class TestDependenceAwareTestFinder extends TestCase {
 			System.out.println("    " + t);
 		}
 	}
+	
 
 	public void runTests(String testFile, String folderName, String logFileName, int k) {
 		Log.logConfig(logFileName);
@@ -132,30 +133,41 @@ public class TestDependenceAwareTestFinder extends TestCase {
 		}
 	}
 	
+	
 	public static void main(String[] args) {
 		TestDependenceAwareTestFinder finder = new TestDependenceAwareTestFinder();
-		
+	/*
+	 * String logFileName = "./dependence-aware_jodatime_1_manual.txt";
+		String testFile = TestRandomizedDependentTestFinder.jodatimeFile_manual;
+		int k = 1;
+		String safeFile = "./tests/edu/washington/cs/dt/tools/joda-time-manual-safetests.txt";
+		this.runWithSafeTests(logFileName, testFile, safeFile, k);	
+	 */
+		String logFileName = args[0];
+		String testsFile = args[1];
+		int k = Integer.valueOf(args[2]);
+		finder.runTests(testsFile, args[3], logFileName, k);
 		//evalaute manual tests
-		finder.testJodatimeIsolation_manual();
+//		finder.testJodatimeIsolation_manual();
 //		finder.testx
-		finder.testCrystalIsolation_manual();
-		finder.testSynopticIsolation_manual();
-		
-		finder.testJodatimePairwise_manual();
-		finder.testXMLSecurityPairwise_manual();
-		finder.testCrystalPairwise_manual();
-		finder.testSynopticPairwise_manual();
-		
-		//evalaute auto tests
-		finder.testJodatime_1_auto();
-		finder.testXMLSecurity_1_auto();
-		finder.testCrystal_1_auto();
-//		finder.testsy
-		
-		finder.testJodatime_2_sample_auto();
-		finder.testXMLSecurity_2_auto();
-		finder.testCrystal_2_sample_auto();
-		finder.testSynoptic_2_auto_sample();
+//		finder.testCrystalIsolation_manual();
+//		finder.testSynopticIsolation_manual();
+//		
+//		finder.testJodatimePairwise_manual();
+//		finder.testXMLSecurityPairwise_manual();
+//		finder.testCrystalPairwise_manual();
+//		finder.testSynopticPairwise_manual();
+//		
+//		//evalaute auto tests
+//		finder.testJodatime_1_auto();
+//		finder.testXMLSecurity_1_auto();
+//		finder.testCrystal_1_auto();
+////		finder.testsy
+//		
+//		finder.testJodatime_2_sample_auto();
+//		finder.testXMLSecurity_2_auto();
+//		finder.testCrystal_2_sample_auto();
+//		finder.testSynoptic_2_auto_sample();
 	}
 	
 }

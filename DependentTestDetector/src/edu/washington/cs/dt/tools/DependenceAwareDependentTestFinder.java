@@ -1,8 +1,10 @@
 package edu.washington.cs.dt.tools;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -35,7 +37,14 @@ public class DependenceAwareDependentTestFinder {
 		//read all tests
 		this.defaultTestList = Files.readWholeNoExp(defaultOrderFileName);
 		//get all cluster tests
-		this.candidateTestClusters = TestReader.readTestsFromAllFiles(folderName, k);
+		this.candidateTestClusters = new HashSet<>();
+		for(String s : Files.readWholeNoExp(folderName))
+		{
+			List<String> l = new LinkedList<String>();
+			for(String _s : s.split(","))
+				l.add(_s);
+			this.candidateTestClusters.add(l);
+		}
 		int count = 0;
 		for(List<String> testList : candidateTestClusters) {
 			count +=  testList.size();
@@ -49,6 +58,7 @@ public class DependenceAwareDependentTestFinder {
 		
 		//use linked hash set to keep the original order
 		Set<String> depTests = new LinkedHashSet<String>();
+		System.out.println("Starting to run in the original order");
 		FixedOrderRunner fixedRunner = new FixedOrderRunner(this.defaultTestList);
 		TestExecResults expected_results = fixedRunner.run();
 		Utils.checkTrue(expected_results.getExecutionRecords().size() == 1,
