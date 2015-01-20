@@ -146,7 +146,7 @@ public abstract class AbstractTransformer {
 
   public byte[] treeAPITransform(ClassReader cr) {
     ClassNode cn = new ClassNode();
-    cr.accept(cn, ClassReader.SKIP_FRAMES);
+    cr.accept(cn, 0);
     transformClassNode(cn);
     ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
     cn.accept(cw);
