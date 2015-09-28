@@ -229,5 +229,10 @@ public class Command {
     return exitVal;
   }
 
+public static void exec(String[] args, MonitoringPrintStream ps) {
+	// TODO Auto-generated method stub
+	
+}
+
 
 }

@@ -5,16 +5,15 @@ import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 import java.util.List;
 
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.AbstractInsnNode;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.tree.FieldInsnNode;
-import org.objectweb.asm.tree.InsnList;
-import org.objectweb.asm.tree.InsnNode;
-import org.objectweb.asm.tree.LdcInsnNode;
-import org.objectweb.asm.tree.MethodInsnNode;
-import org.objectweb.asm.tree.MethodNode;
-
+import edu.washington.cs.dt.org.objectweb.asm.Opcodes;
+import edu.washington.cs.dt.org.objectweb.asm.tree.AbstractInsnNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.ClassNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.FieldInsnNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.InsnList;
+import edu.washington.cs.dt.org.objectweb.asm.tree.InsnNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.LdcInsnNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.MethodInsnNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.MethodNode;
 import edu.washington.cs.dt.util.Log;
 
 public class Instrumenter extends AbstractTransformer implements ClassFileTransformer, Opcodes {

@@ -1,12 +1,10 @@
 package edu.washington.cs.dt.premain;
 
 import junit.framework.TestCase;
-
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.tree.ClassNode;
-import org.objectweb.asm.util.CheckClassAdapter;
-
+import edu.washington.cs.dt.org.objectweb.asm.ClassReader;
+import edu.washington.cs.dt.org.objectweb.asm.ClassWriter;
+import edu.washington.cs.dt.org.objectweb.asm.tree.ClassNode;
+import edu.washington.cs.dt.org.objectweb.asm.util.CheckClassAdapter;
 import edu.washington.cs.dt.util.Utils;
 
 import java.io.File;

@@ -43,8 +43,14 @@ public class TestAccessingFieldsCollector {
 			System.out.println("executing test: " + test);
 			
 			List<String> commandList = new LinkedList<String>();
-			commandList.add("java");
+			commandList.add("/usr/bin/timeout");
+			commandList.add("--kill-after=10s");
+			commandList.add("--signal=30");
+			commandList.add("30m");
+			commandList.add("/data/jdk1.8.0_40_openjdk/bin/java");
+			commandList.add("-Xmx2G");
 			commandList.add("-javaagent:" + agentjar + "=" + test);
+			commandList.add("-DoutputDir=" + outputDir);
 			commandList.add("-cp");
 			commandList.add(classPath);
 			commandList.add("edu.washington.cs.dt.util.SimpleTestRunner");

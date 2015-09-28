@@ -9,6 +9,6 @@ public class ExhaustiveCrystal {
 		TestBoundedDependentTestFinder finder = new TestBoundedDependentTestFinder();
 		//for manual tests
 		finder.testCrystal_manual(); //k = 1, k = 2
-		finder.testCrystal_auto();
+//		finder.testCrystal_auto();
 	}
 }

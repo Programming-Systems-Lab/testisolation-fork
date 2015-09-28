@@ -44,6 +44,11 @@ public class ClusterAnalyzer {
 		ignoredStaticFields.add("java.lang.System.out");
 		ignoredStaticFields.add("java.lang.System.err");
 		ignoredStaticFields.add("java.lang.Void.TYPE");
+		ignoredStaticFields.add("edu.washington.cs.dt.premain.Tracer.accessedFields");
+		ignoredStaticFields.add("java.util.concurrent.TimeUnit.MILLISECONDS");
+		ignoredStaticFields.add("java.util.concurrent.TimeUnit.NANOSECONDS");
+		ignoredStaticFields.add("org.junit.runner.Description.METHOD_AND_CLASS_NAME_PATTERN");
+		ignoredStaticFields.add("java.lang.Long.TYPE");
 		ignoredStaticFields.add("junit.runner.BaseTestRunner.fPreferences");
 	}
 	
@@ -55,8 +60,9 @@ public class ClusterAnalyzer {
 			Utils.checkTrue(!accessedFields.containsKey(file), "already contained? " + file);
 			Set<String> content = new LinkedHashSet<String>();
 			content.addAll(Files.readWholeNoExp(file));
+			String testName = file.substring(file.lastIndexOf('/') + 1).replace(".txt", "");
 			content.removeAll(ignoredStaticFields);
-			accessedFields.put(file.substring(file.lastIndexOf('/') + 1).replace(".txt", ""), content);
+			accessedFields.put(testName, content);
 		}
 		
 		//perform clustering
@@ -125,7 +131,7 @@ public class ClusterAnalyzer {
 //		outputDir.mkdir();
 		int i = 0;
 		PrintWriter pw = new PrintWriter(new FileWriter(args[1]),false);
-
+HashSet<String> printed = new HashSet<String>();
 		for(Set<String> s : clusters)
 		{
 			if(s.size() <= 1)
@@ -136,8 +142,12 @@ public class ClusterAnalyzer {
 			while(generator.hasNext()) {
 				/* get a list of test to run */
 				int[] testIndices = generator.getNext();
-				pw.println(tests.get(testIndices[0])+","+tests.get(testIndices[1]));
-				i++;
+				String ss = tests.get(testIndices[0]) + "," + tests.get(testIndices[1]);
+				if (!printed.contains(ss)) {
+					pw.println(ss);
+					i++;
+					printed.add(ss);
+				}
 				if(i % 10000 == 0)
 				{
 //					System.out.println("Processed: "+ i);

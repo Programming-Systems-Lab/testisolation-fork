@@ -35,8 +35,11 @@ public class TestRunnerWrapper {
 		/*create a test runner*/
 		TestRunner aTestRunner= new TestRunner();
 		for(String fullTestName : tests) {
+			String firstTestName = fullTestName;
+			if (firstTestName.contains(" "))
+				firstTestName = firstTestName.substring(0, firstTestName.indexOf(' '));
 			long start = System.currentTimeMillis();
-			boolean useJUnit4 = CodeUtils.useJUnit4(fullTestName);
+			boolean useJUnit4 = CodeUtils.useJUnit4(firstTestName);
 			/*check the results*/
 			String result = null;
 			String fullStackTrace = TestExecUtils.noStackTrace;
@@ -49,7 +52,12 @@ public class TestRunnerWrapper {
 				fullStackTrace = executor.getFullStackTrace();
 			} else {
 				try {
-					String[] junitArgs = new String[]{"-m", fullTestName};
+					String[] junitArgs = null;
+					int ntest = fullTestName.split(" ").length;
+					if(fullTestName.contains(" "))
+						junitArgs = new String[]{firstTestName.substring(0, firstTestName.lastIndexOf('.'))};
+					else
+						junitArgs = new String[]{"-m", fullTestName};
 					TestResult r = aTestRunner.start(junitArgs);
 					System.out.println(Globals.stdoutProgressPrefix);
 					System.out.flush();	
@@ -57,16 +65,16 @@ public class TestRunnerWrapper {
 						result = RESULT.PASS.name();
 					} else {
 						if (r.errorCount() > 0) {
-							Utils.checkTrue(r.errorCount() == 1,
-									"Only execute 1 test: " + fullTestName + ", two errors: "
+							Utils.checkTrue(r.errorCount() <= ntest,
+									"Only execute "+ntest+" test: " + fullTestName + ", "+r.errorCount()+" errors: "
 											+ CodeUtils.flattenFailrues(r.errors()));
 							result = RESULT.ERROR.name();
 							TestFailure failure = r.errors().nextElement();
 							fullStackTrace = TestExecUtils.flatStrings(TestExecUtils.extractStackTraces(failure.thrownException()));
 						}
 						if (r.failureCount() > 0) {
-							Utils.checkTrue(r.failureCount() == 1,
-									"Only execute 1 test: " + fullTestName + ", two failures: "
+							Utils.checkTrue(r.failureCount() <= ntest,
+									"Only execute "+ntest+" test: " + fullTestName + ", "+r.failureCount()+" failures: "
 											+ CodeUtils.flattenFailrues(r.failures()));
 							result = RESULT.FAILURE.name();
 							TestFailure failure = r.failures().nextElement();
@@ -75,6 +83,7 @@ public class TestRunnerWrapper {
 						}
 					}
 				} catch (Exception e) {
+					System.err.println("!!!!!BAILING!!!!");
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
@@ -89,7 +98,22 @@ public class TestRunnerWrapper {
 			sb.append(TestExecUtils.resultExcepSep);
 			sb.append(fullStackTrace);
 			sb.append(Globals.lineSep);
+//			System.out.println("OK done with " + fullTestName);
 		}
+		//if not exist, create it
+		File f = new File(outputFile);
+		if(!f.exists()) {
+			File dir = f.getParentFile();
+			boolean created = true;
+			if(!dir.exists()) {
+				created = dir.mkdirs();
+			}
+			created = created & f.createNewFile();
+			if(!created) {
+				throw new RuntimeException("Cannot create: " + outputFile);
+			}
+		}
+		Files.writeToFile(sb.toString(), outputFile);
 		System.out.println(sb.toString());
 	}
 }

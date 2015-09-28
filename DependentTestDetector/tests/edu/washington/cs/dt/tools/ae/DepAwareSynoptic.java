@@ -12,6 +12,6 @@ public class DepAwareSynoptic {
 		finder.testSynopticPairwise_manual();
 		
 		//evalaute auto tests
-		finder.testSynoptic_2_auto_sample();
+//		finder.testSynoptic_2_auto_sample();
 	}
 }

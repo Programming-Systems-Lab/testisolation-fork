@@ -9,7 +9,7 @@ public class DepAwareCrystal {
 		//evalaute manual tests
 		finder.testCrystalIsolation_manual();
 		finder.testCrystalPairwise_manual();
-		finder.testCrystal_1_auto();
-		finder.testCrystal_2_sample_auto();
+//		finder.testCrystal_1_auto();
+//		finder.testCrystal_2_sample_auto();
 	}
 }

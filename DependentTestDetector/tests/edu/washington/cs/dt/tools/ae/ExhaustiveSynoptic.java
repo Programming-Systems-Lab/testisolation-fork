@@ -8,6 +8,6 @@ public class ExhaustiveSynoptic {
     	TestBoundedDependentTestFinder finder = new TestBoundedDependentTestFinder();
 		
 		finder.testSynoptic_manual_sampled(); //k=1, k = 2
-		finder.testSynoptic_auto_test();
+//		finder.testSynoptic_auto_test();
 	}
 }

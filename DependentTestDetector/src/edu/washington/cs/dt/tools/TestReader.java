@@ -14,24 +14,24 @@ import edu.washington.cs.dt.util.Utils;
 
 public class TestReader {
 	
-	public static String xml_manual_pairwise = "E:\\testisolation\\dependence-aware-folder\\xml_security_manual_pairwise\\";
-    public static String jodatime_manual_pairwise = "E:\\testisolation\\dependence-aware-folder\\sampled_jodatime_pairwise\\";
-	public static String crystal_manual_pairwise = "E:\\testisolation\\dependence-aware-folder\\crystal_manual_pairwise\\";
-    public static String synotpic_manual_pairwise = "E:\\testisolation\\dependence-aware-folder\\synoptic_manual_pairwise\\";
+	public static String xml_manual_pairwise = "/data/dependence-aware/xml_security_manual_pairwise/";
+    public static String jodatime_manual_pairwise = "/data/dependence-aware/sampled_jodatime_pairwise/";
+	public static String crystal_manual_pairwise = "/data/dependence-aware/crystal_manual_pairwise/";
+    public static String synotpic_manual_pairwise = "/data/dependence-aware/synoptic_manual_pairwise/";
 	
-    public static String xmlsecurity_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\xml-security-auto-pairwise\\";
-    public static String synoptic_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\synoptic-auto-pairwise\\";
-    public static String jodatime_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\joda-time-auto-pairwise\\";
-    public static String crystal_auto_pairwise_folder = "E:\\testisolation\\dependence-aware-folder\\crystal-auto-pairwise\\";
+    public static String xmlsecurity_auto_pairwise_folder = "/data/dependence-aware/xml-security-auto-pairwise/";
+    public static String synoptic_auto_pairwise_folder = "/data/dependence-aware/synoptic-auto-pairwise/";
+    public static String jodatime_auto_pairwise_folder = "/data/dependence-aware/joda-time-auto-pairwise/";
+    public static String crystal_auto_pairwise_folder = "/data/dependence-aware/crystal-auto-pairwise/";
     
-	public static String jodattime_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\exec_pairwise";
-	public static String crystal_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\crystal_execute_pairwise";
-	public static String synoptic_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\synoptic_execute_pairwise";
+	public static String jodattime_pairwisefile = "/data/dependence-aware/exec_pairwise";
+	public static String crystal_pairwisefile = "/data/dependence-aware/crystal_execute_pairwise";
+	public static String synoptic_pairwisefile = "/data/dependence-aware/synoptic_execute_pairwise";
 	
-	public static String xmlsecurity_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\xmlsecurity_auto_exec_pairwise\\";
-	public static String synoptic_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\synoptic_auto_execute_pairwise\\";
-	public static String jodatime_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\jodatime_auto_exec_pairwise\\";
-	public static String crystal_auto_pairwisefile = "E:\\testisolation\\dependence-aware-folder\\crystal_auto_execute_pairwise\\";
+	public static String xmlsecurity_auto_pairwisefile = "/data/dependence-aware/xmlsecurity_auto_exec_pairwise/";
+	public static String synoptic_auto_pairwisefile = "/data/dependence-aware/synoptic_auto_execute_pairwise/";
+	public static String jodatime_auto_pairwisefile = "/data/dependence-aware/jodatime_auto_exec_pairwise/";
+	public static String crystal_auto_pairwisefile = "/data/dependence-aware/crystal_auto_execute_pairwise/";
 	
 	public static Set<List<String>>  readTestsFromAllFiles(String folderName, int numPerFile) {
 		Set<List<String>> tests = new LinkedHashSet<List<String>>();

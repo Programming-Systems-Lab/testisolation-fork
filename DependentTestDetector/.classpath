@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry excluding="experiments/|src/|tests/|tests/|agent/|lib/|pluginfiles/|resources/|resources/scripts/|resources/scripts/tests/|script/" kind="src" path=""/>
 	<classpathentry kind="src" path="experiments"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="tests"/>
-	<classpathentry kind="lib" path="lib/asm-all-3.1.jar"/>
 	<classpathentry kind="lib" path="lib/guava-14.0.1.jar"/>
 	<classpathentry kind="lib" path="lib/plume.jar"/>
+	<classpathentry kind="lib" path="subjects/crystalib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="subjects/crystalib/hgKit-279.jar"/>
+	<classpathentry kind="lib" path="subjects/crystalib/jdom-1.1.jar"/>
+	<classpathentry kind="lib" path="subjects/crystalib/junit-4.8.1.jar"/>
+	<classpathentry kind="lib" path="subjects/crystalib/log4j-1.2.15.jar" sourcepath="/Users/jon/.m2/repository/log4j/log4j/1.2.15/log4j-1.2.15-sources.jar"/>
+	<classpathentry kind="lib" path="subjects/crystal.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/PollDetConnector"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,6 +1,8 @@
 package edu.washington.cs.dt.premain;
 
 import java.lang.instrument.Instrumentation;
+import java.util.Collection;
+import java.util.LinkedList;
 
 import edu.washington.cs.dt.util.Files;
 import edu.washington.cs.dt.util.Globals;
@@ -18,6 +20,7 @@ public class Agent {
 			fileDir = outputDir;
 		}
 	}
+	public static Thread shutdownHook;
 	public static void premain(String agentArgs, Instrumentation inst) {
 		final StaticFieldAccessInstrumenter instrumenter = new StaticFieldAccessInstrumenter();
 	    inst.addTransformer(instrumenter);
@@ -29,14 +32,17 @@ public class Agent {
 	    final String writeFileFullPath = fileDir + Globals.fileSep + writeFileName + ".txt";
 	    
 	    //add the shut down hook
-	    Runtime.getRuntime().addShutdownHook(new Thread() {
+	    shutdownHook = (new Thread() {
 	                @Override
 	                public void run() {
 	                       if(writeFileFullPath != null) {
 	                    	   Files.createIfNotExistNoExp(writeFileFullPath);
-	                    	   Files.writeToFileWithNoExp(Tracer.getAccessedFields(), writeFileFullPath);
+	                    	   Collection<String> fields = Tracer.getAccessedFields();
+	                    	   Tracer.accessedFields = new LinkedList<String>();
+	                    	   Files.writeToFileWithNoExp(fields, writeFileFullPath);
 	                       }
 	                }
 	        });
+	    Runtime.getRuntime().addShutdownHook(shutdownHook);
 	}
 }

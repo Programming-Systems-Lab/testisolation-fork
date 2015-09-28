@@ -3,7 +3,7 @@ package edu.washington.cs.dt.premain;
 import java.util.Arrays;
 import java.util.List;
 
-import org.objectweb.asm.tree.MethodNode;
+import edu.washington.cs.dt.org.objectweb.asm.tree.MethodNode;
 
 public class InstrumentUtils {
 	/**
@@ -22,6 +22,7 @@ public class InstrumentUtils {
 	    	  "plume/",
 	//          "org/junit/",
 	//          "junit/",
+	    	  "org/apache/maven",
 	          "org/eclipse/jdt/internal/",
 	          "org/objectweb/asm/",
 	          "org/xmlpull/"

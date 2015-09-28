@@ -1,8 +1,7 @@
 Manifest-Version: 1.0
 Created-By: 1.6.0_06 (Sun Microsystems Inc.)
-Main-Class: com.electriccloud.junit.dependency.Instrumenter
-Premain-Class: edu.columbia.cs.psl.phosphor.PreMain
-X-Comment: Agent-Class: edu.columbia.cs.psl.phosphor.PreMain
+Premain-Class: edu.washington.cs.dt.premain.Agent
+X-Comment: Agent-Class: edu.washington.cs.dt.premain.Agent
 X-Comment: Can-Redefine-Classes: true
 X-Comment: Can-Retransform-Classes: true
 

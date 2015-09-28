@@ -133,10 +133,14 @@ public final class Files {
 
   public static void writeToFileWithNoExp(Collection<String> list, String fileName) {
 	  StringBuilder sb = new StringBuilder();
-	  for(String t : list) {
-		  sb.append(t);
-		  sb.append(Globals.lineSep);
-	  }
+		try {
+			for (String t : list) {
+				sb.append(t);
+				sb.append(Globals.lineSep);
+			}
+		} catch (NullPointerException ex) {
+			ex.printStackTrace();
+		}
 	  try {
 		writeToFile(sb.toString(), fileName);
 	} catch (IOException e) {

@@ -9,9 +9,9 @@ public class DepAwareJodatime {
 		
 		//evalaute manual tests
 		finder.testJodatimeIsolation_manual();
-		finder.testJodatimePairwise_manual();
+//		finder.testJodatimePairwise_manual();
 		//evalaute auto tests
-		finder.testJodatime_1_auto();
-		finder.testJodatime_2_sample_auto();
+//		finder.testJodatime_1_auto();
+//		finder.testJodatime_2_sample_auto();
 	}
 }

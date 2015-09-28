@@ -2,6 +2,7 @@ package edu.washington.cs.dt.tools;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -33,11 +34,31 @@ public class BoundedDependentTestFinder {
 	
 	private Set<String> safeTests = new HashSet<String>();
 	
+	public static boolean CLASS_LEVEL = Boolean.valueOf(System.getProperty("CLASS_LEVEL","false"));
+
 	public BoundedDependentTestFinder(List<String> tests, int k) {
 		Utils.checkNull(tests, "Should not be null");
 		Utils.checkTrue(k >= 1, "Invalid k value: " + k);
 		this.defaultTestList = new ArrayList<String>();
-		this.defaultTestList.addAll(tests);
+		if(CLASS_LEVEL)
+		{
+			System.out.println("Class level combs.");
+		HashMap<String, String> groupedTests = new HashMap<String, String>();
+			for(String test: tests)
+			{
+				String clazz = test.substring(0, test.lastIndexOf("."));
+				if(!groupedTests.containsKey(clazz))
+					groupedTests.put(clazz, test);
+				else
+					groupedTests.put(clazz, groupedTests.get(clazz)+ " "+test);
+			}
+			this.defaultTestList.addAll(groupedTests.values());
+		}
+		else
+		{
+			System.out.println("No class combs");
+			this.defaultTestList.addAll(tests);
+		}
 		this.k = k;
 	}
 	
@@ -172,6 +193,8 @@ public class BoundedDependentTestFinder {
 	}
 	
 	private boolean sameResults(OneTestExecResult r1, OneTestExecResult r2) {
+		if(CLASS_LEVEL)
+			return true;
 		if(only_compare_outcome) {
 			return r1.result.equals(r2.result);
 		} else {

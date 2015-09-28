@@ -37,14 +37,107 @@ public class TestExecUtils {
 			List<String> tests, ProgressCallback progressCallback) {
 		
 		List<String> commandList = new LinkedList<String>();
+//		commandList.add("/usr/bin/timeout");
+//		commandList.add("--kill-after=10s");
+//		commandList.add("--signal=30");
+//		commandList.add("30m");
 		commandList.add("java");
 		commandList.add("-cp");
 		commandList.add(classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
 		commandList.add("-Xmx2G");
 		commandList.add("edu.washington.cs.dt.seperatejvm.TestRunner");
-		
+
+		System.out.println(commandList);
 		String[] args = commandList.toArray(new String[0]);
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MonitoringPrintStream ps   = new MonitoringPrintStream(out, true);
+		ps.setCallback(progressCallback);
+		String input = "";
+		for (String test : tests) {
+			input += test  + "\n";
+		}
+		Command.exec(args, ps, input);
+		ps.close();
+
+		try {
+			out.close();
+			Files.createAndWriteFile(new File(outputFile), ps.getFilteredLines());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Map<String, OneTestExecResult> testResults = parseTestResults(outputFile);
+		System.out.println(tests.size() +  " vs " + testResults.size());
+		Utils.checkTrue(tests.size() == testResults.size(), "Test num not equal.");
 		
+		return testResults;
+	}
+
+	public static Map<String, OneTestExecResult> executeTestsInFreshJVMAndLogSFs(String classPath, String outputFile,
+			List<String> tests, ProgressCallback progressCallback) {
+		
+		List<String> commandList = new LinkedList<String>();
+//		commandList.add("/usr/bin/timeout");
+//		commandList.add("--kill-after=10s");
+//		commandList.add("--signal=30");
+//		commandList.add("30m");
+		commandList.add("java");
+		commandList.add("-cp");
+		commandList.add(classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
+		commandList.add("-Xmx2G");
+		commandList.add("edu.washington.cs.dt.seperatejvm.TestRunner");
+		commandList.add("--useSingleTestRecorder=true");
+
+		System.out.println(commandList);
+		String[] args = commandList.toArray(new String[0]);
+
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MonitoringPrintStream ps   = new MonitoringPrintStream(out, true);
+		ps.setCallback(progressCallback);
+		String input = "";
+		for (String test : tests) {
+			input += test  + "\n";
+		}
+		Command.exec(args, ps, input);
+		ps.close();
+
+		try {
+			out.close();
+			Files.createAndWriteFile(new File(outputFile), ps.getFilteredLines());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Map<String, OneTestExecResult> testResults = parseTestResults(outputFile);
+		System.out.println(tests.size() +  " vs " + testResults.size());
+		if(tests.size() != testResults.size())
+			System.err.println("Test num not equal. Test was " + tests.toString());
+		
+		return testResults;
+	}
+
+	
+	public static Map<String, OneTestExecResult> executeTestsInFreshJVMElectricCB(String classPath, String outputFile,
+			List<String> tests, ProgressCallback progressCallback) {
+		
+		List<String> commandList = new LinkedList<String>();
+//		commandList.add("/usr/bin/timeout");
+//		commandList.add("--kill-after=10s");
+//		commandList.add("--signal=30");
+//		commandList.add("30m");
+//		commandList.add("/data/jdk1.8.0_40_openjdk/bin/java");
+		commandList.add("/Users/jon/Documents/PSL/Projects/testdependencies/detector/experiments/jre-inst/bin/java");
+		commandList.add("-Dwhitelist=crystal.whitelist");
+		commandList.add("-agentpath:/Users/jon/Documents/PSL/Projects/testdependencies/JVMTIAgent/libdeptracker.dylib");
+		commandList.add("-Xbootclasspath/p:/Users/jon/.m2/repository/edu/columbia/cs/psl/testdepends/DependencyDetector/0.0.1-SNAPSHOT/DependencyDetector-0.0.1-SNAPSHOT.jar");
+		commandList.add("-javaagent:/Users/jon/.m2/repository/edu/columbia/cs/psl/testdepends/DependencyDetector/0.0.1-SNAPSHOT/DependencyDetector-0.0.1-SNAPSHOT.jar");
+		commandList.add("-cp");
+		commandList.add(classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
+		commandList.add("-Xmx2G");
+		commandList.add("edu.washington.cs.dt.seperatejvm.TestRunner");
+		commandList.add("--useElectricDepends=true");
+		String[] args = commandList.toArray(new String[0]);
+
+		System.out.println(commandList);
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		MonitoringPrintStream ps   = new MonitoringPrintStream(out, true);
 		ps.setCallback(progressCallback);
@@ -68,6 +161,56 @@ public class TestExecUtils {
 		return testResults;
 	}
 	
+	private static final String pollDetFile = "/Users/jon/Desktop/PollDet/4.12-diaper/junit-4.12-diaper.jar";
+	private static boolean pollDetOK = false;
+	static
+	{
+		File f = new File(pollDetFile);
+		if(f.exists())
+			pollDetOK = true;
+	}
+	public static Map<String, OneTestExecResult> executeTestsInFreshJVMPollDet(String classPath, String outputFile,
+			List<String> tests, ProgressCallback progressCallback) {
+		if(!pollDetOK)
+			throw new RuntimeException("Please configure pollDetFile to point to the jar of poll det in TestExecUtils.java");
+		List<String> commandList = new LinkedList<String>();
+		commandList.add("java");
+		commandList.add("-cp");
+		commandList.add(pollDetFile + Globals.pathSep + classPath + Globals.pathSep + System.getProperties().getProperty("java.class.path", null));
+		commandList.add("-Xmx2G");
+		commandList.add("edu.washington.cs.dt.seperatejvm.TestRunner");
+		commandList.add("--usePollDet=true");
+		String[] args = commandList.toArray(new String[0]);
+
+		for(String s : commandList)
+		{
+			System.out.print(s+" ");
+		}
+		System.out.println();
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		MonitoringPrintStream ps   = new MonitoringPrintStream(out, true);
+		ps.setCallback(progressCallback);
+		String input = "";
+		for (String test : tests) {
+			input += test  + "\n";
+		}
+		Command.exec(args, ps, input);
+		ps.close();
+
+		try {
+			out.close();
+			Files.createAndWriteFile(new File(outputFile), ps.getFilteredLines());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		Map<String, OneTestExecResult> testResults = parseTestResults(outputFile);
+		
+//		System.out.println("Got "  + tests.size() + " " + testResults.size());
+		Utils.checkTrue(tests.size() == testResults.size(), "Test num not equal.");
+		
+		return testResults;
+	}
+	
 	static Map<String, OneTestExecResult> parseTestResults(String outputFile) {
 		Map<String, OneTestExecResult> ret = new LinkedHashMap<String, OneTestExecResult>();
 		
@@ -75,7 +218,9 @@ public class TestExecUtils {
 		Pattern p = Pattern.compile( ("(.*)" + testResultSep + "(\\w+)" + testResultSep + "(\\d+)" + resultExcepSep + "(.*)"));
 		for(String line : lines) {
 			Matcher m = p.matcher(line);
-			Utils.checkTrue(m.find(), "Line did not match format");
+			if(!m.find())
+				continue;
+//			Utils.checkTrue(m.find(), "Line did not match format");
 		
 			String testCase = m.group(1);
 			String result = m.group(2);

@@ -30,15 +30,30 @@ class JUnitTestExecutor {
 	
 	//package.class.method
 	public JUnitTestExecutor(String fullMethodName) {
-		this.fullMethodName = fullMethodName;
-		String className = this.fullMethodName.substring(0, this.fullMethodName.lastIndexOf("."));
-		try {
-			Class<?> clzName = Class.forName(className);
-			this.junitTest = clzName;
-		} catch (Throwable e) {
-			throw new RuntimeException(e);
+		if(fullMethodName.contains(" "))
+		{
+			this.fullMethodName = null;
+			String className = fullMethodName.substring(0, fullMethodName.substring(0, fullMethodName.indexOf(' ')).lastIndexOf('.'));
+			try {
+				Class<?> clzName = Class.forName(className);
+				this.junitTest = clzName;
+			} catch (Throwable e) {
+				throw new RuntimeException(e);
+			}
+			this.junitMethod = null;
 		}
-		this.junitMethod = this.fullMethodName.substring(this.fullMethodName.lastIndexOf(".") + 1);
+		else
+		{
+			this.fullMethodName = fullMethodName;
+			String className = this.fullMethodName.substring(0, this.fullMethodName.lastIndexOf("."));
+			try {
+				Class<?> clzName = Class.forName(className);
+				this.junitTest = clzName;
+			} catch (Throwable e) {
+				throw new RuntimeException(e);
+			}
+			this.junitMethod = this.fullMethodName.substring(this.fullMethodName.lastIndexOf(".") + 1);
+		}
 	}
 	
 	public JUnitTestExecutor(String className, String junitMethod) {
@@ -60,7 +75,11 @@ class JUnitTestExecutor {
 	
 	public void executeWithJUnit4Runner() {
         JUnitCore core = new JUnitCore();
-		Request r = Request.method(this.junitTest, this.junitMethod);
+		Request r = null;
+		if(this.junitMethod == null)
+			r = Request.aClass(this.junitTest);
+		else
+			r = Request.method(this.junitTest, this.junitMethod);
 		Result re = core.run(r);
 		//FIXME the run count can be > 1, e.g., testLazy in hibernate
 		if(re.getRunCount() > 1) {

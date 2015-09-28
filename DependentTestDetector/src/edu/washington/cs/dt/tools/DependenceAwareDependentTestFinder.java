@@ -29,6 +29,7 @@ public class DependenceAwareDependentTestFinder {
 	
 	public static boolean only_compare_outcome = true;
 	
+	
 	public DependenceAwareDependentTestFinder(String defaultOrderFileName, String folderName, int k) {
 		Utils.checkNull(defaultOrderFileName, "Should not be null");
 		Utils.checkNull(folderName, "Should not be null");

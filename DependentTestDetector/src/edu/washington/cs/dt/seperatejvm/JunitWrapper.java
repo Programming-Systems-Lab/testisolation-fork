@@ -3,6 +3,8 @@ package edu.washington.cs.dt.seperatejvm;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import junit.textui.ResultPrinter;
+
 import org.junit.runner.JUnitCore;
 import org.junit.runner.Request;
 
@@ -50,13 +52,16 @@ public class JunitWrapper {
 	}
 
 	public void runMethodRequest(String line) {
-		Request req = Request.method(CodeUtils.forName(CodeUtils.getClassNameFromMethodName(line)), 
+		Request req  = null;
+		if(line.contains(" "))
+			req = Request.aClass(CodeUtils.forName(line.substring(0, line.substring(0, line.indexOf(" ")).lastIndexOf('.'))));
+		else
+			req = Request.method(CodeUtils.forName(CodeUtils.getClassNameFromMethodName(line)), 
 				CodeUtils.getMethodNameFromMethodName(line));
 		listener.addTest(line);
 		if (TestRunner.instrumentSetups) {
 			InstrumentSwitch.start();
 		}
-		
 		junit.run(req);
 		if (TestRunner.instrumentSetups) {
 			InstrumentSwitch.stop(listener.getLastResult());

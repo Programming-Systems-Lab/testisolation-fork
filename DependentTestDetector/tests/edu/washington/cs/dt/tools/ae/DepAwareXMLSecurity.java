@@ -9,8 +9,8 @@ public class DepAwareXMLSecurity {
 		
 		//evalaute manual tests
 		finder.testXMLSecurityPairwise_manual();
-		finder.testXMLSecurity_1_auto();
-		finder.testXMLSecurity_2_auto();
+//		finder.testXMLSecurity_1_auto();
+//		finder.testXMLSecurity_2_auto();
 	}
 	
 }
